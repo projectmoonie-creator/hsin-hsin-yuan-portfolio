@@ -267,7 +267,8 @@ function renderContactLinks(links = []) {
 export function renderPage({ lang, site, works }) {
   const copy = site.site[lang];
   const switchLang = otherLang(lang);
-  const heroRoles = copy.heroRoles.map((role) => `<span>${escapeHtml(role)}</span>`).join('<span class="slash">/</span>');
+  const heroTitleLines = (copy.heroTitleLines || [copy.heroTitle]).map((line) => `<span>${escapeHtml(line)}</span>`).join("");
+  const heroRoles = (copy.heroRoleLines || copy.heroRoles).map((role) => `<span>${escapeHtml(role)}</span>`).join("");
   const navItems = [
     { href: "#about", label: copy.aboutTitle },
     { href: "#works", label: lang === "en" ? "Works" : "作品" },
@@ -303,7 +304,7 @@ export function renderPage({ lang, site, works }) {
           <div class="hero-media" aria-hidden="true"></div>
           <div class="hero-content">
             <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
-            <h1>${escapeHtml(copy.heroTitle)}</h1>
+            <h1 aria-label="${escapeHtml(copy.heroTitle)}">${heroTitleLines}</h1>
             <div class="hero-roles">${heroRoles}</div>
             <p class="hero-subcopy">${escapeHtml(copy.heroSubcopy)}</p>
             <div class="hero-actions">

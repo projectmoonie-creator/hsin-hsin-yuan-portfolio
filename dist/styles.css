@@ -151,14 +151,16 @@ a {
   letter-spacing: 0;
   line-height: 0.86;
   margin: 0;
-  max-width: 8ch;
   text-transform: uppercase;
 }
 
+.hero h1 span {
+  display: block;
+}
+
 .hero-roles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem 0.7rem;
+  display: grid;
+  gap: 0.25rem;
   margin-top: 1.2rem;
   max-width: 860px;
 }
@@ -167,10 +169,6 @@ a {
   color: var(--ink);
   font-size: clamp(1rem, 2vw, 1.6rem);
   font-weight: 800;
-}
-
-.hero-roles .slash {
-  color: var(--acid);
 }
 
 .hero-subcopy {
@@ -715,7 +713,6 @@ a {
 
   .hero h1 {
     font-size: clamp(3.4rem, 18vw, 6.5rem);
-    max-width: 7ch;
     overflow-wrap: anywhere;
   }
 
@@ -741,16 +738,7 @@ a {
     max-width: 100%;
   }
 
-  .hero-roles {
-    display: block;
-  }
-
-  .hero-roles .slash {
-    display: none;
-  }
-
   .hero-roles span {
-    display: block;
     margin-bottom: 0.25rem;
   }
 

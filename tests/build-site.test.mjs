@@ -64,6 +64,9 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   const html = renderPage({ lang: "en", site, works });
 
   assert.match(html, /for artists, culture, and technology stories/i);
+  assert.match(html, /<span>Hsin-Hsin<\/span><span>Yuan<\/span>/);
+  assert.match(html, /Documentary Director \/ Writer \/ Producer/);
+  assert.match(html, /\/ Cross-Cultural Storyteller/);
   assert.match(html, /AI-Language Creative/);
   assert.match(html, /About/);
   assert.match(html, /Work With Me/);
