@@ -569,6 +569,10 @@ a {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.collab-section-early {
+  padding-top: clamp(1rem, 3vw, 2rem);
+}
+
 .collab-item {
   align-items: center;
   color: var(--ink);

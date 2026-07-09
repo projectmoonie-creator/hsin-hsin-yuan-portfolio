@@ -313,6 +313,11 @@ export function renderPage({ lang, site, works }) {
           </div>
         </section>
 
+        <section class="section collab-section collab-section-early">
+          <h2 class="section-title">${escapeHtml(copy.collabTitle)}</h2>
+          <div class="collab-grid">${collaborations}</div>
+        </section>
+
         <section class="section about-section" id="about">
           <div class="section-intro">
             <h2 class="section-title">${escapeHtml(copy.aboutTitle)}</h2>
@@ -377,11 +382,6 @@ export function renderPage({ lang, site, works }) {
             <p>${escapeHtml(copy.archiveSubcopy)}</p>
           </div>
           <div class="archive-list">${renderArchive(site.archive, lang)}</div>
-        </section>
-
-        <section class="section">
-          <h2 class="section-title">${escapeHtml(copy.collabTitle)}</h2>
-          <div class="collab-grid">${collaborations}</div>
         </section>
 
         <section class="section contact" id="contact">
