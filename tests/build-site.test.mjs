@@ -93,6 +93,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.equal(existsSync(join(root, "dist/main.js")), true);
 
   const zh = readFileSync(join(root, "dist/zh/index.html"), "utf8");
+  const css = readFileSync(join(root, "dist/styles.css"), "utf8");
   assert.match(zh, /紀錄片導演/);
   assert.match(zh, /關於我/);
   assert.match(zh, /住宅、室內設計與空間品牌影像/);
@@ -103,4 +104,6 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /我如何處理/);
   assert.match(zh, /AI \/ Language Lab/);
   assert.match(zh, /精選舊作/);
+  assert.match(css, /grid-auto-columns: clamp\(320px, 31vw, 460px\)/);
+  assert.match(css, /grid-template-rows: auto 1fr/);
 });
