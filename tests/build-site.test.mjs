@@ -79,6 +79,9 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.match(html, /fact-checked bilingual script workflow/i);
   assert.match(html, /Selected Archive/);
   assert.match(html, /contact-links/);
+  assert.match(html, /partner-logo/);
+  assert.match(html, /\/assets\/logos\/taiwanplus.svg/);
+  assert.match(html, /Happy Space/);
   assert.match(html, /works-track/);
   assert.match(html, /My Art, My Voice/);
   assert.match(html, /Tech Dreamers/);

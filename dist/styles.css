@@ -513,8 +513,7 @@ a {
   padding: clamp(1rem, 3vw, 1.6rem);
 }
 
-.service-card h3,
-.collab-item {
+.service-card h3 {
   font-size: clamp(1.35rem, 3vw, 2.4rem);
   letter-spacing: 0;
   line-height: 1;
@@ -567,12 +566,47 @@ a {
 }
 
 .collab-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .collab-item {
+  align-items: center;
+  color: var(--ink);
+  display: grid;
+  gap: 0.8rem;
+  justify-items: center;
   min-height: 150px;
   padding: clamp(1rem, 3vw, 1.6rem);
+  text-align: center;
+  text-decoration: none;
+}
+
+.partner-logo {
+  display: block;
+  filter: grayscale(1) brightness(1.85) contrast(0.85);
+  max-height: 46px;
+  max-width: min(180px, 82%);
+  object-fit: contain;
+  opacity: 0.86;
+}
+
+.partner-wordmark {
+  color: var(--ink);
+  display: block;
+  font-size: clamp(1.15rem, 2.5vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.95;
+}
+
+.partner-name {
+  color: var(--muted);
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
 .contact {

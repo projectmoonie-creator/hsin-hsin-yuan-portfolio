@@ -239,6 +239,25 @@ function renderInfoCards(items = []) {
     .join("");
 }
 
+function renderCollaborations(items = []) {
+  return items
+    .map((item) => {
+      const content = item.logo
+        ? `<img class="partner-logo" src="${escapeHtml(item.logo)}" alt="${escapeHtml(item.name)} logo" loading="lazy">`
+        : `<span class="partner-wordmark">${escapeHtml(item.label || item.name)}</span>`;
+      const tag = item.url ? "a" : "div";
+      const href = item.url ? ` href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer"` : "";
+
+      return `
+        <${tag} class="collab-item"${href} aria-label="${escapeHtml(item.name)}">
+          ${content}
+          <span class="partner-name">${escapeHtml(item.name)}</span>
+        </${tag}>
+      `;
+    })
+    .join("");
+}
+
 function renderContactLinks(links = []) {
   return links
     .map((link) => `<a href="${escapeHtml(link.href)}" target="${link.href.startsWith("mailto:") ? "_self" : "_blank"}" rel="noreferrer">${escapeHtml(link.label)}</a>`)
@@ -256,7 +275,7 @@ export function renderPage({ lang, site, works }) {
   ];
   const services = renderInfoCards(copy.services);
   const workModes = renderInfoCards(copy.workModes);
-  const collaborations = site.collaborations.map((item) => `<div class="collab-item">${escapeHtml(item)}</div>`).join("");
+  const collaborations = renderCollaborations(site.collaborations);
 
   return `<!doctype html>
 <html lang="${escapeHtml(lang)}">

@@ -1,9 +1,37 @@
 [
-  "TaiwanPlus",
-  "Public Television Service Taiwan",
-  "Dragon TV",
-  "Women Make Waves Film Festival",
-  "Taiwan International Children's Film Festival",
-  "ScreenHouse"
+  {
+    "name": "TaiwanPlus",
+    "label": "TaiwanPlus",
+    "logo": "/assets/logos/taiwanplus.svg",
+    "url": "https://www.taiwanplus.com/"
+  },
+  {
+    "name": "Public Television Service Taiwan",
+    "label": "PTS",
+    "url": "https://www.pts.org.tw/"
+  },
+  {
+    "name": "Dragon TV",
+    "label": "DRAGON TV",
+    "url": "https://www.dragontv.cn/"
+  },
+  {
+    "name": "Women Make Waves Film Festival",
+    "label": "WMW",
+    "url": "https://www.wmw.org.tw/"
+  },
+  {
+    "name": "Taiwan International Children's Film Festival",
+    "label": "TICFF",
+    "url": "https://www.ticff.org.tw/"
+  },
+  {
+    "name": "ScreenHouse",
+    "label": "ScreenHouse"
+  },
+  {
+    "name": "Happy Space",
+    "label": "幸福空間",
+    "url": "https://www.hhh.com.tw/"
+  }
 ]
-
