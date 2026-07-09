@@ -117,5 +117,6 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.collab-item \{\n  align-items: center;\n  background: transparent;\n  border: 0;/);
   assert.match(css, /\.partner-name \{\n  display: none;/);
   assert.match(css, /\.hero h1 span \{\n  display: block;\n  white-space: nowrap;/);
-  assert.match(css, /\.role-slash \{\n  color: var\(--acid\);/);
+  assert.match(css, /\.hero-roles \.role-slash \{\n  color: var\(--acid\);/);
+  assert.match(css, /@media \(max-width: 460px\) \{\n  \.hero h1 \{\n    font-size: clamp\(2\.65rem, 14vw, 3\.45rem\);/);
 });
