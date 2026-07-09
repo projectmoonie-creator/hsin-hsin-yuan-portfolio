@@ -50,6 +50,7 @@ a {
 }
 
 .brand,
+.nav-links a,
 .language-switch,
 .eyebrow,
 .section-title,
@@ -64,6 +65,21 @@ a {
 .brand {
   max-width: 22rem;
   min-width: 0;
+}
+
+.nav-links {
+  align-items: center;
+  display: flex;
+  gap: clamp(0.8rem, 2vw, 1.45rem);
+}
+
+.nav-links a {
+  color: rgba(247, 242, 232, 0.82);
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: var(--ink);
 }
 
 .language-switch {
@@ -118,7 +134,7 @@ a {
 .hero-content {
   align-self: center;
   justify-self: end;
-  max-width: 690px;
+  max-width: 650px;
   position: relative;
   z-index: 1;
 }
@@ -298,7 +314,7 @@ a {
 .works-track {
   display: grid;
   gap: clamp(1rem, 3vw, 2rem);
-  grid-auto-columns: minmax(82vw, 1120px);
+  grid-auto-columns: minmax(82vw, 1160px);
   grid-auto-flow: column;
   overflow-x: auto;
   padding-bottom: 1rem;
@@ -312,7 +328,7 @@ a {
   border-radius: 8px;
   display: grid;
   gap: clamp(1rem, 3vw, 2rem);
-  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.82fr);
+  grid-template-columns: minmax(0, 1.22fr) minmax(320px, 0.95fr);
   min-height: min(72svh, 760px);
   overflow: hidden;
   padding: clamp(1rem, 2vw, 1.4rem);
@@ -366,7 +382,7 @@ a {
 }
 
 .work-copy h3 {
-  font-size: clamp(2.3rem, 5vw, 5.4rem);
+  font-size: clamp(2.3rem, 4.3vw, 4.8rem);
   letter-spacing: 0;
   line-height: 0.9;
   margin: 0 0 1rem;
@@ -395,6 +411,34 @@ a {
   font-size: 0.72rem;
   margin: 0 0.35rem 0.6rem 0;
   padding: 0.35rem 0.55rem;
+}
+
+.case-study {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0.5rem 0 1.15rem;
+}
+
+.case-study-item {
+  border-top: 1px solid var(--line);
+  padding-top: 0.55rem;
+}
+
+.case-study-item span {
+  color: var(--acid);
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.case-study-item p {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.35;
+  margin: 0;
 }
 
 .mini-metrics {
@@ -436,6 +480,18 @@ a {
 .button-link-muted {
   border-color: var(--line);
   color: var(--muted);
+}
+
+.status-badge {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  padding: 0.42rem 0.62rem;
+  text-transform: uppercase;
 }
 
 .services-grid,
@@ -606,6 +662,10 @@ a {
     position: fixed;
     right: 1rem;
     top: 1rem;
+  }
+
+  .nav-links > a:not(.language-switch) {
+    display: none;
   }
 
   .brand {

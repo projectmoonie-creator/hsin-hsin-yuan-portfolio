@@ -63,13 +63,18 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   const works = loadWorks(join(root, "content/works"));
   const html = renderPage({ lang: "en", site, works });
 
-  assert.match(html, /Documentary Director/);
+  assert.match(html, /for artists, culture, and technology stories/i);
   assert.match(html, /AI-Language Creative/);
   assert.match(html, /About/);
   assert.match(html, /Work With Me/);
-  assert.match(html, /Creative development/);
+  assert.match(html, /For Artists &amp; Cultural Institutions/);
+  assert.match(html, /For Documentary \/ Factual Producers/);
+  assert.match(html, /Challenge/);
+  assert.match(html, /What I shaped/);
+  assert.match(html, /Best for/);
   assert.match(html, /impact-grid/);
   assert.match(html, /AI \/ Language Lab/);
+  assert.match(html, /fact-checked bilingual script workflow/i);
   assert.match(html, /Selected Archive/);
   assert.match(html, /contact-links/);
   assert.match(html, /works-track/);
@@ -88,7 +93,10 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   const zh = readFileSync(join(root, "dist/zh/index.html"), "utf8");
   assert.match(zh, /紀錄片導演/);
   assert.match(zh, /關於我/);
-  assert.match(zh, /合作方式/);
+  assert.match(zh, /藝術家與文化單位/);
+  assert.match(zh, /紀實製作人/);
+  assert.match(zh, /挑戰/);
+  assert.match(zh, /我如何處理/);
   assert.match(zh, /AI \/ Language Lab/);
   assert.match(zh, /精選舊作/);
 });

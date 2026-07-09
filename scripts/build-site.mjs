@@ -81,6 +81,10 @@ function localize(value, lang) {
   return value ?? "";
 }
 
+function cleanHtml(html) {
+  return html.replace(/[ \t]+$/gm, "");
+}
+
 function renderTags(tags = []) {
   return tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
 }
@@ -100,6 +104,25 @@ function renderMetrics(metrics = [], lang) {
             <div class="mini-metric">
               <strong>${escapeHtml(metric.value)}</strong>
               <span>${escapeHtml(localize(metric.label, lang))}</span>
+            </div>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderCaseStudy(items = [], lang) {
+  if (!items.length) return "";
+
+  return `
+    <div class="case-study">
+      ${items
+        .map(
+          (item) => `
+            <div class="case-study-item">
+              <span>${escapeHtml(localize(item.label, lang))}</span>
+              <p>${escapeHtml(localize(item.text, lang))}</p>
             </div>
           `,
         )
@@ -140,7 +163,7 @@ function renderWork(work, lang, copy) {
   const role = work.role[lang];
   const action = work.watchUrl
     ? `<a class="button-link" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer">${escapeHtml(copy.watchLabel)}</a>`
-    : `<span class="button-link">${escapeHtml(copy.comingLabel)}</span>`;
+    : `<span class="status-badge">${escapeHtml(copy.comingLabel)}</span>`;
 
   return `
     <article class="work-panel" id="${escapeHtml(work.slug)}">
@@ -152,6 +175,7 @@ function renderWork(work, lang, copy) {
         <p class="work-description">${escapeHtml(description)}</p>
         ${renderTags(work.tags)}
         ${renderMetrics(work.metrics, lang)}
+        ${renderCaseStudy(work.caseStudy, lang)}
         ${action}
       </div>
     </article>
@@ -225,6 +249,11 @@ export function renderPage({ lang, site, works }) {
   const copy = site.site[lang];
   const switchLang = otherLang(lang);
   const heroRoles = copy.heroRoles.map((role) => `<span>${escapeHtml(role)}</span>`).join('<span class="slash">/</span>');
+  const navItems = [
+    { href: "#about", label: copy.aboutTitle },
+    { href: "#works", label: lang === "en" ? "Works" : "作品" },
+    { href: "#contact", label: lang === "en" ? "Contact" : "聯絡" },
+  ];
   const services = renderInfoCards(copy.services);
   const workModes = renderInfoCards(copy.workModes);
   const collaborations = site.collaborations.map((item) => `<div class="collab-item">${escapeHtml(item)}</div>`).join("");
@@ -244,7 +273,10 @@ export function renderPage({ lang, site, works }) {
     <div class="site-shell">
       <header class="topbar">
         <div class="brand">${escapeHtml(copy.navName)}</div>
-        <a class="language-switch" href="/${switchLang}/">${switchLang === "en" ? "EN" : "中"}</a>
+        <nav class="nav-links" aria-label="Primary">
+          ${navItems.map((item) => `<a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`).join("")}
+          <a class="language-switch" href="/${switchLang}/">${switchLang === "en" ? "EN" : "中"}</a>
+        </nav>
       </header>
 
       <main>
@@ -356,8 +388,8 @@ function build() {
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
 
-  writeFileSync(join(dist, "en/index.html"), renderPage({ lang: "en", site, works }));
-  writeFileSync(join(dist, "zh/index.html"), renderPage({ lang: "zh", site, works }));
+  writeFileSync(join(dist, "en/index.html"), cleanHtml(renderPage({ lang: "en", site, works })));
+  writeFileSync(join(dist, "zh/index.html"), cleanHtml(renderPage({ lang: "zh", site, works })));
   writeFileSync(join(dist, "index.html"), '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=/en/">');
   cpSync(join(root, "src/styles.css"), join(dist, "styles.css"));
   cpSync(join(root, "src/main.js"), join(dist, "main.js"));
