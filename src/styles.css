@@ -491,15 +491,13 @@ a {
   text-transform: uppercase;
 }
 
-.services-grid,
-.collab-grid {
+.services-grid {
   display: grid;
   gap: 1px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .service-card,
-.collab-item,
 .lab-card,
 .archive-item {
   background: var(--panel);
@@ -564,7 +562,11 @@ a {
 }
 
 .collab-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 5vw, 4.2rem);
+  justify-content: space-between;
 }
 
 .collab-section-early {
@@ -573,42 +575,38 @@ a {
 
 .collab-item {
   align-items: center;
-  color: var(--ink);
-  display: grid;
-  gap: 0.8rem;
+  background: transparent;
+  border: 0;
+  color: rgba(247, 242, 232, 0.58);
+  display: inline-grid;
+  flex: 0 1 auto;
+  gap: 0.45rem;
   justify-items: center;
-  min-height: 150px;
-  padding: clamp(1rem, 3vw, 1.6rem);
+  min-height: auto;
+  padding: 0;
   text-align: center;
   text-decoration: none;
 }
 
 .partner-logo {
   display: block;
-  filter: grayscale(1) brightness(1.85) contrast(0.85);
-  max-height: 46px;
-  max-width: min(180px, 82%);
+  filter: grayscale(1) brightness(1.9) opacity(0.58);
+  max-height: 34px;
+  max-width: min(150px, 24vw);
   object-fit: contain;
-  opacity: 0.86;
 }
 
 .partner-wordmark {
-  color: var(--ink);
+  color: currentColor;
   display: block;
-  font-size: clamp(1.15rem, 2.5vw, 2rem);
+  font-size: clamp(1rem, 1.8vw, 1.45rem);
   font-weight: 900;
   letter-spacing: 0;
   line-height: 0.95;
 }
 
 .partner-name {
-  color: var(--muted);
-  display: block;
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  line-height: 1.2;
-  text-transform: uppercase;
+  display: none;
 }
 
 .contact {
@@ -655,8 +653,7 @@ a {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .services-grid,
-  .collab-grid {
+  .services-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -768,17 +765,19 @@ a {
   }
 
   .services-grid,
-  .collab-grid,
   .lab-grid {
     grid-template-columns: 1fr;
+  }
+
+  .collab-grid {
+    justify-content: center;
   }
 
   .archive-item {
     grid-template-columns: 1fr;
   }
 
-  .service-card,
-  .collab-item {
+  .service-card {
     min-height: 120px;
   }
 

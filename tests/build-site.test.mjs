@@ -113,4 +113,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /精選舊作/);
   assert.match(css, /grid-auto-columns: clamp\(320px, 31vw, 460px\)/);
   assert.match(css, /grid-template-rows: auto 1fr/);
+  assert.match(css, /\.collab-grid \{\n  align-items: center;\n  display: flex;/);
+  assert.match(css, /\.collab-item \{\n  align-items: center;\n  background: transparent;\n  border: 0;/);
+  assert.match(css, /\.partner-name \{\n  display: none;/);
 });
