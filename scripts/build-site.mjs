@@ -1,0 +1,321 @@
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const root = join(__dirname, "..");
+
+export function parseFrontmatter(source) {
+  const match = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  if (!match) {
+    throw new Error("Markdown file is missing JSON frontmatter");
+  }
+
+  return {
+    data: JSON.parse(match[1]),
+    body: match[2],
+  };
+}
+
+export function loadWorks(dir) {
+  return readdirSync(dir)
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => {
+      const source = readFileSync(join(dir, file), "utf8");
+      const parsed = parseFrontmatter(source);
+      return {
+        ...parsed.data,
+        body: parsed.body.trim(),
+      };
+    })
+    .filter((work) => work.featured)
+    .sort((a, b) => a.order - b.order);
+}
+
+export function loadMarkdownCollection(dir) {
+  if (!existsSync(dir)) return [];
+
+  return readdirSync(dir)
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => {
+      const source = readFileSync(join(dir, file), "utf8");
+      const parsed = parseFrontmatter(source);
+      return {
+        ...parsed.data,
+        body: parsed.body.trim(),
+      };
+    })
+    .sort((a, b) => a.order - b.order);
+}
+
+export function loadImpact(file) {
+  return JSON.parse(readFileSync(file, "utf8")).sort((a, b) => a.order - b.order);
+}
+
+export function loadSiteData(baseDir = root) {
+  return {
+    site: JSON.parse(readFileSync(join(baseDir, "data/site.json"), "utf8")),
+    collaborations: JSON.parse(readFileSync(join(baseDir, "data/collaborations.json"), "utf8")),
+    impact: loadImpact(join(baseDir, "data/impact.json")),
+    archive: loadMarkdownCollection(join(baseDir, "content/archive")),
+    lab: loadMarkdownCollection(join(baseDir, "content/lab")),
+  };
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function otherLang(lang) {
+  return lang === "en" ? "zh" : "en";
+}
+
+function localize(value, lang) {
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    return value[lang] ?? value.en ?? "";
+  }
+  return value ?? "";
+}
+
+function renderTags(tags = []) {
+  return tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
+}
+
+function renderMetrics(metrics = [], lang) {
+  if (!metrics.length) return "";
+
+  return `
+    <div class="mini-metrics">
+      ${metrics
+        .map(
+          (metric) => `
+            <div class="mini-metric">
+              <strong>${escapeHtml(metric.value)}</strong>
+              <span>${escapeHtml(localize(metric.label, lang))}</span>
+            </div>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function mediaFrame(work, copy) {
+  if (work.status === "available" && work.videoEmbedUrl) {
+    return `
+      <div class="media-frame">
+        <iframe src="${escapeHtml(work.videoEmbedUrl)}" title="${escapeHtml(work.title.en)}" allowfullscreen loading="lazy"></iframe>
+      </div>
+    `;
+  }
+
+  if (work.posterImage) {
+    return `
+      <div class="media-frame" style="background-image: linear-gradient(135deg, rgba(9,9,10,.2), rgba(9,9,10,.78)), url('${escapeHtml(work.posterImage)}'); background-size: cover; background-position: center;">
+        <div class="media-label">${escapeHtml(work.title.en)}</div>
+      </div>
+    `;
+  }
+
+  const label = work.status === "coming-soon" ? copy.comingLabel : work.title.en;
+  return `
+    <div class="media-frame media-${escapeHtml(work.accent || "default")}">
+      <div class="media-label">${escapeHtml(label)}</div>
+    </div>
+  `;
+}
+
+function renderWork(work, lang, copy) {
+  const title = work.title[lang];
+  const tagline = work.tagline[lang];
+  const description = work.description[lang];
+  const role = work.role[lang];
+  const action = work.watchUrl
+    ? `<a class="button-link" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer">${escapeHtml(copy.watchLabel)}</a>`
+    : `<span class="button-link">${escapeHtml(copy.comingLabel)}</span>`;
+
+  return `
+    <article class="work-panel" id="${escapeHtml(work.slug)}">
+      ${mediaFrame(work, copy)}
+      <div class="work-copy">
+        <div class="work-meta">${escapeHtml(work.year)} / ${escapeHtml(role)} / ${escapeHtml(work.platform)}</div>
+        <h3>${escapeHtml(title)}</h3>
+        <p class="work-tagline">${escapeHtml(tagline)}</p>
+        <p class="work-description">${escapeHtml(description)}</p>
+        ${renderTags(work.tags)}
+        ${renderMetrics(work.metrics, lang)}
+        ${action}
+      </div>
+    </article>
+  `;
+}
+
+function renderImpact(impact, lang) {
+  return impact
+    .map(
+      (item) => `
+        <article class="impact-item">
+          <strong>${escapeHtml(item.value)}</strong>
+          <span>${escapeHtml(localize(item.label, lang))}</span>
+          <p>${escapeHtml(localize(item.detail, lang))}</p>
+        </article>
+      `,
+    )
+    .join("");
+}
+
+function renderLab(lab, lang) {
+  return lab
+    .map(
+      (item) => `
+        <article class="lab-card">
+          <p class="card-kicker">${escapeHtml(localize(item.kicker, lang))}</p>
+          <h3>${escapeHtml(localize(item.title, lang))}</h3>
+          <p>${escapeHtml(localize(item.summary, lang))}</p>
+        </article>
+      `,
+    )
+    .join("");
+}
+
+function renderArchive(archive, lang) {
+  return archive
+    .map(
+      (item) => `
+        <article class="archive-item">
+          <div>
+            <p class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(localize(item.role, lang))} / ${escapeHtml(item.platform)}</p>
+            <h3>${escapeHtml(localize(item.title, lang))}</h3>
+          </div>
+          ${renderMetrics(item.metrics, lang)}
+        </article>
+      `,
+    )
+    .join("");
+}
+
+export function renderPage({ lang, site, works }) {
+  const copy = site.site[lang];
+  const switchLang = otherLang(lang);
+  const heroRoles = copy.heroRoles.map((role) => `<span>${escapeHtml(role)}</span>`).join('<span class="slash">/</span>');
+  const services = copy.services
+    .map(
+      (service) => `
+        <article class="service-card">
+          <h3>${escapeHtml(service.title)}</h3>
+          <p>${escapeHtml(service.line)}</p>
+        </article>
+      `,
+    )
+    .join("");
+  const collaborations = site.collaborations.map((item) => `<div class="collab-item">${escapeHtml(item)}</div>`).join("");
+
+  return `<!doctype html>
+<html lang="${escapeHtml(lang)}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="${escapeHtml(copy.metaDescription)}">
+    <title>${escapeHtml(copy.metaTitle)}</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script type="module" src="/main.js"></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <div class="brand">${escapeHtml(copy.navName)}</div>
+        <a class="language-switch" href="/${switchLang}/">${switchLang === "en" ? "EN" : "中"}</a>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="hero-media" aria-hidden="true"></div>
+          <div class="hero-content">
+            <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
+            <h1>${escapeHtml(copy.heroTitle)}</h1>
+            <div class="hero-roles">${heroRoles}</div>
+            <p class="hero-subcopy">${escapeHtml(copy.heroSubcopy)}</p>
+          </div>
+        </section>
+
+        <section class="section impact-section">
+          <h2 class="section-title">${escapeHtml(copy.impactLabel)}</h2>
+          <div class="impact-grid">${renderImpact(site.impact, lang)}</div>
+        </section>
+
+        <section class="section works-section" data-horizontal-scroll>
+          <div class="works-head">
+            <h2 class="section-title">${escapeHtml(copy.worksLabel)}</h2>
+            <div class="works-hint">${escapeHtml(copy.worksHint)}</div>
+          </div>
+          <div class="works-track">
+            ${works.map((work) => renderWork(work, lang, copy)).join("")}
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">${escapeHtml(copy.createTitle)}</h2>
+          <div class="services-grid">${services}</div>
+        </section>
+
+        <section class="section lab-section">
+          <div class="section-intro">
+            <h2 class="section-title">${escapeHtml(copy.labTitle)}</h2>
+            <p>${escapeHtml(copy.labSubcopy)}</p>
+          </div>
+          <div class="lab-grid">${renderLab(site.lab, lang)}</div>
+        </section>
+
+        <section class="section archive-section">
+          <div class="section-intro">
+            <h2 class="section-title">${escapeHtml(copy.archiveTitle)}</h2>
+            <p>${escapeHtml(copy.archiveSubcopy)}</p>
+          </div>
+          <div class="archive-list">${renderArchive(site.archive, lang)}</div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">${escapeHtml(copy.collabTitle)}</h2>
+          <div class="collab-grid">${collaborations}</div>
+        </section>
+
+        <section class="section contact">
+          <div class="contact-content">
+            <h2>${escapeHtml(copy.contactTitle)}</h2>
+            <p>${escapeHtml(copy.contactSubcopy)}</p>
+            <a class="button-link" href="mailto:${escapeHtml(copy.email)}">${escapeHtml(copy.contactCta)}</a>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>`;
+}
+
+function build() {
+  const dist = join(root, "dist");
+  rmSync(dist, { force: true, recursive: true });
+  mkdirSync(join(dist, "en"), { recursive: true });
+  mkdirSync(join(dist, "zh"), { recursive: true });
+
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+
+  writeFileSync(join(dist, "en/index.html"), renderPage({ lang: "en", site, works }));
+  writeFileSync(join(dist, "zh/index.html"), renderPage({ lang: "zh", site, works }));
+  writeFileSync(join(dist, "index.html"), '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=/en/">');
+  cpSync(join(root, "src/styles.css"), join(dist, "styles.css"));
+  cpSync(join(root, "src/main.js"), join(dist, "main.js"));
+
+  if (existsSync(join(root, "public"))) {
+    cpSync(join(root, "public"), dist, { recursive: true });
+  }
+}
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  build();
+}
