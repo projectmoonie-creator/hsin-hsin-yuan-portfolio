@@ -365,7 +365,7 @@ export function renderPage({ lang, site, works }) {
           <div class="collab-grid">${collaborations}</div>
         </section>
 
-        <section class="section contact">
+        <section class="section contact" id="contact">
           <div class="contact-content">
             <h2>${escapeHtml(copy.contactTitle)}</h2>
             <p>${escapeHtml(copy.contactSubcopy)}</p>
