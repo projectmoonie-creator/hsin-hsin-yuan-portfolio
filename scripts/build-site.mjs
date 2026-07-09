@@ -5,6 +5,8 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
+const SITE_ORIGIN = "https://hsin-hsin-yuan-portfolio.vercel.app";
+
 export function parseFrontmatter(source) {
   const match = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
   if (!match) {
@@ -289,7 +291,20 @@ export function renderPage({ lang, site, works }) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="${escapeHtml(copy.metaDescription)}">
     <title>${escapeHtml(copy.metaTitle)}</title>
+    <link rel="canonical" href="${SITE_ORIGIN}/${lang}/">
+    <link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/">
+    <link rel="alternate" hreflang="zh-Hant" href="${SITE_ORIGIN}/zh/">
+    <link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}/en/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Hsin-Hsin Yuan">
+    <meta property="og:title" content="${escapeHtml(copy.metaTitle)}">
+    <meta property="og:description" content="${escapeHtml(copy.metaDescription)}">
+    <meta property="og:url" content="${SITE_ORIGIN}/${lang}/">
+    <meta property="og:image" content="${SITE_ORIGIN}/assets/og-image.jpg">
+    <meta property="og:locale" content="${lang === "en" ? "en_US" : "zh_TW"}">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preload" as="image" href="/assets/portfolio/hsin-working-white-space.jpg">
     <link rel="stylesheet" href="/styles.css">
     <script type="module" src="/main.js"></script>
   </head>
