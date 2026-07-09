@@ -8,7 +8,19 @@
     "heroTitle": "Hsin-Hsin Yuan",
     "heroRoles": ["Documentary Director", "Cross-Cultural Storyteller", "AI-Language Creative"],
     "heroSubcopy": "I build human stories across documentary, culture, technology, and language. My work moves between film sets, interviews, platforms, and AI-assisted creative workflows.",
+    "heroPrimaryCta": "Work with me",
+    "heroSecondaryCta": "See works",
     "impactLabel": "Selected Impact",
+    "aboutTitle": "About",
+    "aboutLead": "I am a Taiwan-born documentary director and creative producer working across factual entertainment, cultural projects, branded stories, and AI-assisted language workflows.",
+    "aboutBody": "My work often begins with research and listening: finding the human signal inside a complicated topic, shaping it for an international audience, and building the production structure that helps it travel. I am especially interested in stories where culture, technology, language, and lived experience meet.",
+    "aboutNotes": [
+      "Available for documentary, branded factual, cultural, and AI-language collaborations.",
+      "Experienced across Taiwan, Shanghai, Europe, and international production teams.",
+      "Bilingual editorial judgment in English and Chinese."
+    ],
+    "availabilityLabel": "Available for",
+    "availability": ["Creative development", "Directing", "Research", "Bilingual scripts", "AI workflow design"],
     "worksLabel": "Featured Works",
     "worksHint": "Swipe or scroll",
     "watchLabel": "Watch",
@@ -19,17 +31,30 @@
     "archiveTitle": "Selected Archive",
     "archiveSubcopy": "Earlier television, scripted, factual, and international collaboration work with platform performance and funding context.",
     "createTitle": "What I Build",
+    "createSubcopy": "A practical menu for collaborators, brands, producers, studios, and teams looking for story-driven work with cultural and technical fluency.",
     "services": [
       {"title": "Documentary films", "line": "Human stories with cultural and emotional precision."},
       {"title": "Cross-cultural production", "line": "Taiwan, Shanghai, Europe, and international teams."},
       {"title": "Technology stories", "line": "Founders, AI, deep tech, and the people behind systems."},
       {"title": "AI-language workflows", "line": "Scripts, prompts, skills, and judgment systems."}
     ],
+    "workWithMeTitle": "Work With Me",
+    "workWithMeSubcopy": "I can join early development, sharpen a story, direct interviews, build research-backed short-form formats, or design AI-assisted writing workflows for teams.",
+    "workModes": [
+      {"title": "Story development", "line": "Research, treatment, pitch framing, and narrative structure for factual and cultural projects."},
+      {"title": "Production direction", "line": "Interview-led directing, field production, and cross-cultural creative coordination."},
+      {"title": "Branded factual content", "line": "Short-form series, campaign stories, founder profiles, and educational content with verification built in."},
+      {"title": "AI creative systems", "line": "Codex + Claude assisted workflows for scripts, research checks, language learning, and repeatable content formats."}
+    ],
     "collabTitle": "Platforms & Collaborations",
     "contactTitle": "Let’s build a story with signal.",
-    "contactSubcopy": "For documentary, cultural, branded, AI-language, and cross-cultural production collaborations.",
+    "contactSubcopy": "For documentary, cultural, branded, AI-language, and cross-cultural production collaborations. Send a brief note about the project, timeline, and what kind of partner you need.",
     "contactCta": "Contact Hsin-Hsin",
-    "email": "hsin54@yahoo.com"
+    "email": "hsin54@yahoo.com",
+    "contactLinks": [
+      {"label": "Email", "href": "mailto:hsin54@yahoo.com"},
+      {"label": "GitHub", "href": "https://github.com/projectmoonie-creator"}
+    ]
   },
   "zh": {
     "metaTitle": "袁欣欣 | 紀錄片導演與 AI 語言創作者",
@@ -40,7 +65,19 @@
     "heroTitle": "Hsin-Hsin Yuan",
     "heroRoles": ["紀錄片導演", "跨文化敘事者", "AI-Language Creative"],
     "heroSubcopy": "我創作關於人、文化、科技與語言的故事。工作現場從紀錄片拍攝、訪談、平台內容，到 AI 輔助的創作流程。",
+    "heroPrimaryCta": "合作洽詢",
+    "heroSecondaryCta": "看作品",
     "impactLabel": "代表成績",
+    "aboutTitle": "關於我",
+    "aboutLead": "我是來自台灣的紀錄片導演與創意製作人，工作橫跨紀實娛樂、文化專案、品牌故事，以及 AI 輔助的語言與劇本工作流。",
+    "aboutBody": "我的創作通常從研究與聆聽開始：在複雜題目裡找出人的訊號，整理成能被國際觀眾理解的敘事，並建立讓專案能順利拍攝、溝通與交付的製作結構。我特別關心文化、科技、語言與真實經驗交會的故事。",
+    "aboutNotes": [
+      "開放紀錄片、品牌紀實、文化內容與 AI 語言工作流合作。",
+      "具台灣、上海、歐洲與國際團隊合作經驗。",
+      "可用中文與英文進行研究、採訪、劇本與敘事判斷。"
+    ],
+    "availabilityLabel": "可合作項目",
+    "availability": ["前期開發", "導演", "研究", "雙語劇本", "AI 工作流設計"],
     "worksLabel": "近年代表作",
     "worksHint": "滑動或捲動瀏覽",
     "watchLabel": "觀看作品",
@@ -51,16 +88,29 @@
     "archiveTitle": "精選舊作",
     "archiveSubcopy": "整理早期電視、戲劇、科學節目、國際合作與具平台成績的作品。",
     "createTitle": "我創造什麼",
+    "createSubcopy": "給製作人、品牌、文化單位、內容團隊與需要跨語境故事能力的合作方，一個比較清楚的合作入口。",
     "services": [
       {"title": "紀錄片", "line": "以人為核心，處理文化與情感的細節。"},
       {"title": "跨文化製作", "line": "台灣、上海、歐洲與國際團隊合作經驗。"},
       {"title": "科技故事", "line": "創業者、AI、深科技，以及系統背後的人。"},
       {"title": "AI 語言工作流", "line": "劇本、prompt、skill 與判斷系統。"}
     ],
+    "workWithMeTitle": "合作方式",
+    "workWithMeSubcopy": "我可以加入前期開發、協助故事定位、執導訪談與拍攝、設計資料驗證型短影音格式，或替團隊建立 AI 輔助寫作流程。",
+    "workModes": [
+      {"title": "故事開發", "line": "研究、企劃、pitch framing、敘事架構與紀實題材整理。"},
+      {"title": "拍攝與導演", "line": "訪談導向的導演工作、現場製作與跨文化創意協調。"},
+      {"title": "品牌紀實內容", "line": "短影音系列、campaign story、創辦人故事、具資料驗證的教育內容。"},
+      {"title": "AI 創作系統", "line": "用 Codex + Claude 建立劇本、查證、語言學習與可重複內容格式的工作流。"}
+    ],
     "collabTitle": "合作與平台",
     "contactTitle": "一起做一個有訊號的故事。",
-    "contactSubcopy": "紀錄片、文化內容、品牌短影音、AI 語言與跨文化製作合作洽詢。",
+    "contactSubcopy": "紀錄片、文化內容、品牌短影音、AI 語言與跨文化製作合作洽詢。來信可以簡單說明專案、時程，以及你需要哪一種合作角色。",
     "contactCta": "聯絡袁欣欣",
-    "email": "hsin54@yahoo.com"
+    "email": "hsin54@yahoo.com",
+    "contactLinks": [
+      {"label": "Email", "href": "mailto:hsin54@yahoo.com"},
+      {"label": "GitHub", "href": "https://github.com/projectmoonie-creator"}
+    ]
   }
 }

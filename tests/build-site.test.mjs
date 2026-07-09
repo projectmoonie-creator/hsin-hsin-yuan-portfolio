@@ -65,9 +65,13 @@ test("renderPage creates bilingual page with horizontal works and video fallback
 
   assert.match(html, /Documentary Director/);
   assert.match(html, /AI-Language Creative/);
+  assert.match(html, /About/);
+  assert.match(html, /Work With Me/);
+  assert.match(html, /Creative development/);
   assert.match(html, /impact-grid/);
   assert.match(html, /AI \/ Language Lab/);
   assert.match(html, /Selected Archive/);
+  assert.match(html, /contact-links/);
   assert.match(html, /works-track/);
   assert.match(html, /My Art, My Voice/);
   assert.match(html, /Tech Dreamers/);
@@ -83,6 +87,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
 
   const zh = readFileSync(join(root, "dist/zh/index.html"), "utf8");
   assert.match(zh, /紀錄片導演/);
+  assert.match(zh, /關於我/);
+  assert.match(zh, /合作方式/);
   assert.match(zh, /AI \/ Language Lab/);
   assert.match(zh, /精選舊作/);
 });

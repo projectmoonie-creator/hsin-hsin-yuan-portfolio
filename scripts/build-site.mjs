@@ -85,6 +85,10 @@ function renderTags(tags = []) {
   return tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
 }
 
+function renderPills(items = []) {
+  return items.map((item) => `<span class="pill">${escapeHtml(item)}</span>`).join("");
+}
+
 function renderMetrics(metrics = [], lang) {
   if (!metrics.length) return "";
 
@@ -198,20 +202,31 @@ function renderArchive(archive, lang) {
     .join("");
 }
 
-export function renderPage({ lang, site, works }) {
-  const copy = site.site[lang];
-  const switchLang = otherLang(lang);
-  const heroRoles = copy.heroRoles.map((role) => `<span>${escapeHtml(role)}</span>`).join('<span class="slash">/</span>');
-  const services = copy.services
+function renderInfoCards(items = []) {
+  return items
     .map(
-      (service) => `
+      (item) => `
         <article class="service-card">
-          <h3>${escapeHtml(service.title)}</h3>
-          <p>${escapeHtml(service.line)}</p>
+          <h3>${escapeHtml(item.title)}</h3>
+          <p>${escapeHtml(item.line)}</p>
         </article>
       `,
     )
     .join("");
+}
+
+function renderContactLinks(links = []) {
+  return links
+    .map((link) => `<a href="${escapeHtml(link.href)}" target="${link.href.startsWith("mailto:") ? "_self" : "_blank"}" rel="noreferrer">${escapeHtml(link.label)}</a>`)
+    .join("");
+}
+
+export function renderPage({ lang, site, works }) {
+  const copy = site.site[lang];
+  const switchLang = otherLang(lang);
+  const heroRoles = copy.heroRoles.map((role) => `<span>${escapeHtml(role)}</span>`).join('<span class="slash">/</span>');
+  const services = renderInfoCards(copy.services);
+  const workModes = renderInfoCards(copy.workModes);
   const collaborations = site.collaborations.map((item) => `<div class="collab-item">${escapeHtml(item)}</div>`).join("");
 
   return `<!doctype html>
@@ -240,6 +255,29 @@ export function renderPage({ lang, site, works }) {
             <h1>${escapeHtml(copy.heroTitle)}</h1>
             <div class="hero-roles">${heroRoles}</div>
             <p class="hero-subcopy">${escapeHtml(copy.heroSubcopy)}</p>
+            <div class="hero-actions">
+              <a class="button-link" href="mailto:${escapeHtml(copy.email)}">${escapeHtml(copy.heroPrimaryCta)}</a>
+              <a class="button-link button-link-muted" href="#works">${escapeHtml(copy.heroSecondaryCta)}</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section about-section" id="about">
+          <div class="section-intro">
+            <h2 class="section-title">${escapeHtml(copy.aboutTitle)}</h2>
+            <p>${escapeHtml(copy.aboutLead)}</p>
+          </div>
+          <div class="about-grid">
+            <div class="about-copy">
+              <p>${escapeHtml(copy.aboutBody)}</p>
+              <ul>
+                ${copy.aboutNotes.map((note) => `<li>${escapeHtml(note)}</li>`).join("")}
+              </ul>
+            </div>
+            <aside class="availability-card">
+              <p class="card-kicker">${escapeHtml(copy.availabilityLabel)}</p>
+              <div class="pill-row">${renderPills(copy.availability)}</div>
+            </aside>
           </div>
         </section>
 
@@ -248,7 +286,7 @@ export function renderPage({ lang, site, works }) {
           <div class="impact-grid">${renderImpact(site.impact, lang)}</div>
         </section>
 
-        <section class="section works-section" data-horizontal-scroll>
+        <section class="section works-section" id="works" data-horizontal-scroll>
           <div class="works-head">
             <h2 class="section-title">${escapeHtml(copy.worksLabel)}</h2>
             <div class="works-hint">${escapeHtml(copy.worksHint)}</div>
@@ -259,8 +297,19 @@ export function renderPage({ lang, site, works }) {
         </section>
 
         <section class="section">
-          <h2 class="section-title">${escapeHtml(copy.createTitle)}</h2>
+          <div class="section-intro">
+            <h2 class="section-title">${escapeHtml(copy.createTitle)}</h2>
+            <p>${escapeHtml(copy.createSubcopy)}</p>
+          </div>
           <div class="services-grid">${services}</div>
+        </section>
+
+        <section class="section work-with-me">
+          <div class="section-intro">
+            <h2 class="section-title">${escapeHtml(copy.workWithMeTitle)}</h2>
+            <p>${escapeHtml(copy.workWithMeSubcopy)}</p>
+          </div>
+          <div class="services-grid">${workModes}</div>
         </section>
 
         <section class="section lab-section">
@@ -289,6 +338,7 @@ export function renderPage({ lang, site, works }) {
             <h2>${escapeHtml(copy.contactTitle)}</h2>
             <p>${escapeHtml(copy.contactSubcopy)}</p>
             <a class="button-link" href="mailto:${escapeHtml(copy.email)}">${escapeHtml(copy.contactCta)}</a>
+            <div class="contact-links">${renderContactLinks(copy.contactLinks)}</div>
           </div>
         </section>
       </main>
