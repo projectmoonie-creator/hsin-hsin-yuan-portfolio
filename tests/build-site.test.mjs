@@ -64,10 +64,10 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   const html = renderPage({ lang: "en", site, works });
 
   assert.match(html, /for artists, culture, and technology stories/i);
-  assert.match(html, /<span>Hsin-Hsin<\/span><span>Yuan<\/span>/);
-  assert.match(html, /Documentary Director \/ Writer \/ Producer/);
-  assert.match(html, /\/ Cross-Cultural Storyteller/);
-  assert.match(html, /AI-Language Creative/);
+  assert.match(html, /<span>HSIN-HSIN<\/span><span>YUAN<\/span>/);
+  assert.match(html, /Documentary Director <span class="role-slash">\/<\/span> Writer <span class="role-slash">\/<\/span> Producer/);
+  assert.match(html, /<span><span class="role-slash">\/<\/span> Cross-Cultural Storyteller<\/span>/);
+  assert.doesNotMatch(html, /<div class="hero-roles">.*AI-Language Creative.*<\/div>/s);
   assert.match(html, /About/);
   assert.match(html, /Work With Me/);
   assert.match(html, /interior design, residential, and spatial-brand videos/i);
@@ -116,4 +116,6 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.collab-grid \{\n  align-items: center;\n  display: flex;/);
   assert.match(css, /\.collab-item \{\n  align-items: center;\n  background: transparent;\n  border: 0;/);
   assert.match(css, /\.partner-name \{\n  display: none;/);
+  assert.match(css, /\.hero h1 span \{\n  display: block;\n  white-space: nowrap;/);
+  assert.match(css, /\.role-slash \{\n  color: var\(--acid\);/);
 });

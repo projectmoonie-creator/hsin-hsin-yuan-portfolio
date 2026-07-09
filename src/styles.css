@@ -156,6 +156,7 @@ a {
 
 .hero h1 span {
   display: block;
+  white-space: nowrap;
 }
 
 .hero-roles {
@@ -169,6 +170,10 @@ a {
   color: var(--ink);
   font-size: clamp(1rem, 2vw, 1.6rem);
   font-weight: 800;
+}
+
+.role-slash {
+  color: var(--acid);
 }
 
 .hero-subcopy {

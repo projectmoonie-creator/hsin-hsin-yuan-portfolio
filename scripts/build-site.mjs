@@ -264,11 +264,15 @@ function renderContactLinks(links = []) {
     .join("");
 }
 
+function renderHeroRoleLine(role) {
+  return escapeHtml(role).replaceAll("/", `<span class="role-slash">/</span>`);
+}
+
 export function renderPage({ lang, site, works }) {
   const copy = site.site[lang];
   const switchLang = otherLang(lang);
   const heroTitleLines = (copy.heroTitleLines || [copy.heroTitle]).map((line) => `<span>${escapeHtml(line)}</span>`).join("");
-  const heroRoles = (copy.heroRoleLines || copy.heroRoles).map((role) => `<span>${escapeHtml(role)}</span>`).join("");
+  const heroRoles = (copy.heroRoleLines || copy.heroRoles).map((role) => `<span>${renderHeroRoleLine(role)}</span>`).join("");
   const navItems = [
     { href: "#about", label: copy.aboutTitle },
     { href: "#works", label: lang === "en" ? "Works" : "作品" },
