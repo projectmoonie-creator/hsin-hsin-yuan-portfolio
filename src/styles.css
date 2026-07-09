@@ -76,22 +76,30 @@ a {
 }
 
 .hero {
-  align-items: stretch;
+  align-items: center;
   display: grid;
-  gap: clamp(1rem, 4vw, 4rem);
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
-  min-height: 100svh;
+  gap: clamp(1.5rem, 4vw, 4.5rem);
+  grid-template-columns: minmax(340px, 0.96fr) minmax(360px, 0.82fr);
+  min-height: 94svh;
   overflow: hidden;
-  padding: 6rem clamp(1rem, 5vw, 4rem) 2rem;
+  padding: 6rem clamp(1rem, 5vw, 4rem) clamp(2.5rem, 5vw, 4rem);
   position: relative;
 }
 
 .hero-media {
-  background:
+  background-image:
     linear-gradient(180deg, rgba(11, 11, 12, 0.02), rgba(11, 11, 12, 0.45)),
-    url("/assets/portfolio/hsin-working-white-space.jpg") center / cover;
+    url("/assets/portfolio/hsin-working-white-space.jpg");
+  background-position:
+    center,
+    38% 78%;
+  background-repeat: no-repeat;
+  background-size:
+    cover,
+    auto 142%;
   border-radius: 8px;
-  min-height: 70svh;
+  aspect-ratio: 5 / 4.2;
+  min-height: min(68svh, 690px);
   overflow: hidden;
   position: relative;
 }
@@ -110,7 +118,7 @@ a {
 .hero-content {
   align-self: center;
   justify-self: end;
-  max-width: 760px;
+  max-width: 690px;
   position: relative;
   z-index: 1;
 }
@@ -123,9 +131,9 @@ a {
 }
 
 .hero h1 {
-  font-size: clamp(4.1rem, 11vw, 10rem);
+  font-size: clamp(3.7rem, 8.4vw, 8.6rem);
   letter-spacing: 0;
-  line-height: 0.84;
+  line-height: 0.86;
   margin: 0;
   max-width: 8ch;
   text-transform: uppercase;
@@ -151,9 +159,9 @@ a {
 
 .hero-subcopy {
   color: var(--ink);
-  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-size: clamp(1rem, 1.7vw, 1.24rem);
   line-height: 1.45;
-  max-width: 680px;
+  max-width: 620px;
 }
 
 .hero-actions {
@@ -571,7 +579,14 @@ a {
   }
 
   .hero-media {
-    min-height: 58svh;
+    aspect-ratio: 16 / 10.4;
+    background-position:
+      center,
+      38% 77%;
+    background-size:
+      cover,
+      auto 132%;
+    min-height: auto;
   }
 
   .about-grid {
@@ -615,8 +630,14 @@ a {
   }
 
   .hero-media {
-    background-position: 36% center;
-    min-height: 50svh;
+    aspect-ratio: 1 / 0.94;
+    background-position:
+      center,
+      38% 78%;
+    background-size:
+      cover,
+      auto 136%;
+    min-height: auto;
   }
 
   .hero-content {
