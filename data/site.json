@@ -13,7 +13,7 @@
     "impactLabel": "Selected Impact",
     "aboutTitle": "About",
     "aboutLead": "I am a Taiwan-born documentary director and creative producer for artists, cultural institutions, factual producers, and technology teams that need stories shaped with research, empathy, and cross-cultural judgment.",
-    "aboutBody": "My work often begins before the camera: listening, researching, structuring interviews, and translating a complicated subject into a story that can move across languages and audiences. I am especially useful when a project needs both intimacy and clarity: artists explaining their practice, founders explaining their vision, or teams turning research into human-facing video.",
+    "aboutBody": "My work often begins before the camera: listening, researching, structuring interviews, and translating a complicated subject into a story that can move across languages and audiences. I am especially useful when a project needs both intimacy and clarity: artists explaining their practice, founders explaining their vision, or teams turning research into human-facing video. Post-pandemic, I also spent three years producing and shooting interior design, residential, and spatial-brand videos, shaping designed environments into visual stories about taste, atmosphere, craft, and everyday life.",
     "aboutNotes": [
       "Available for documentary, branded factual, cultural, and AI-language collaborations.",
       "Experienced across Taiwan, Shanghai, Europe, and international production teams.",
@@ -43,7 +43,7 @@
     "workModes": [
       {"title": "Story development", "line": "Research, treatment, pitch framing, and narrative structure for factual and cultural projects."},
       {"title": "Production direction", "line": "Interview-led directing, field production, and cross-cultural creative coordination."},
-      {"title": "Branded factual content", "line": "Short-form series, campaign stories, founder profiles, and educational content with verification built in."},
+      {"title": "Branded factual content", "line": "Short-form series, campaign stories, founder profiles, interior design films, and spatial-brand videos with verification and taste built in."},
       {"title": "AI creative systems", "line": "Codex + Claude assisted workflows for scripts, research checks, language learning, and repeatable content formats."}
     ],
     "collabTitle": "Platforms & Collaborations",
@@ -70,7 +70,7 @@
     "impactLabel": "代表成績",
     "aboutTitle": "關於我",
     "aboutLead": "我是來自台灣的紀錄片導演與創意製作人，適合需要研究、訪談、跨文化判斷與雙語敘事能力的藝術、文化、紀實、科技與品牌專案。",
-    "aboutBody": "我的工作常常在拍攝前就開始：聆聽、研究、整理訪談問題，並把複雜題目轉化成能跨語言與跨觀眾流動的故事。我特別適合處理需要親密感與清晰度並存的題目，例如藝術家如何談自己的創作、創業者如何說明願景，或團隊如何把研究變成有人的影像。",
+    "aboutBody": "我的工作常常在拍攝前就開始：聆聽、研究、整理訪談問題，並把複雜題目轉化成能跨語言與跨觀眾流動的故事。我特別適合處理需要親密感與清晰度並存的題目，例如藝術家如何談自己的創作、創業者如何說明願景，或團隊如何把研究變成有人的影像。疫情後，我也有約三年住宅、室內設計與空間品牌影像的拍攝與製作經驗，擅長把設計師作品、材質、動線、生活感與品牌氣質整理成有敘事感的影像。",
     "aboutNotes": [
       "開放紀錄片、品牌紀實、文化內容與 AI 語言工作流合作。",
       "具台灣、上海、歐洲與國際團隊合作經驗。",
@@ -100,7 +100,7 @@
     "workModes": [
       {"title": "故事開發", "line": "研究、企劃、pitch framing、敘事架構與紀實題材整理。"},
       {"title": "拍攝與導演", "line": "訪談導向的導演工作、現場製作與跨文化創意協調。"},
-      {"title": "品牌紀實內容", "line": "短影音系列、campaign story、創辦人故事、具資料驗證的教育內容。"},
+      {"title": "品牌紀實內容", "line": "短影音系列、campaign story、創辦人故事、室內設計影片與空間品牌影像。"},
       {"title": "AI 創作系統", "line": "用 Codex + Claude 建立劇本、查證、語言學習與可重複內容格式的工作流。"}
     ],
     "collabTitle": "合作與平台",
