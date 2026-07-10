@@ -14,7 +14,7 @@
   "platform": "CTV / CTi TV",
   "metrics": [
     {"value": "NT$6M", "label": {"en": "HD television grant", "zh": "高畫質電視節目補助"}},
-    {"value": "US$180K", "label": {"en": "grant equivalent in old English CV", "zh": "舊英文履歷補助約當"}}
+    {"value": "US$180K", "label": {"en": "grant equivalent", "zh": "補助約當金額"}}
   ],
   "sourceNote": "袁欣欣 简历.docx; Hsin hsin Yuan CV.docx"
 }

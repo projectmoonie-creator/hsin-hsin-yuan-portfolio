@@ -46,6 +46,8 @@ test("loadImpact returns ordered bilingual proof points", () => {
   assert.equal(impact[0].value, "200M");
   assert.match(impact[0].label.en, /viewers/i);
   assert.match(impact[1].detail.zh, /0.81/);
+  assert.doesNotMatch(impact.map((item) => item.detail.en).join(" "), /Earlier English CV|source materials/i);
+  assert.doesNotMatch(impact.map((item) => item.detail.zh).join(" "), /舊.*履歷/);
 });
 
 test("loadMarkdownCollection returns ordered archive and lab entries", () => {
@@ -82,13 +84,14 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.match(html, /fact-checked bilingual script workflow/i);
   assert.match(html, /Selected Archive/);
   assert.match(html, /contact-links/);
-  assert.match(html, /partner-logo/);
-  assert.match(html, /\/assets\/logos\/taiwanplus.svg/);
+  assert.match(html, /partner-wordmark/);
+  assert.doesNotMatch(html, /\/assets\/logos\/taiwanplus.svg/);
   assert.match(html, /Happy Space/);
   assert.ok(html.indexOf("collab-grid") < html.indexOf("about-section"));
   assert.match(html, /works-track/);
   assert.match(html, /My Art, My Voice/);
   assert.match(html, /Tech Dreamers/);
+  assert.doesNotMatch(html, /old English CV|source materials/i);
 });
 
 test("build generates English, Chinese, CSS, and JS assets", () => {
@@ -111,8 +114,13 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /我如何處理/);
   assert.match(zh, /AI \/ Language Lab/);
   assert.match(zh, /精選舊作/);
+  assert.doesNotMatch(zh, /舊.*履歷/);
   assert.match(css, /grid-auto-columns: clamp\(320px, 31vw, 460px\)/);
   assert.match(css, /grid-template-rows: auto 1fr/);
+  assert.match(css, /\.hero h1 \{\n  font-size: clamp\(3\.5rem, 7\.2vw, 7\.2rem\);/);
+  assert.match(css, /\.hero-media \{[\s\S]*?min-height: auto;/);
+  assert.match(css, /@media \(max-width: 1280px\) \{\n  \.hero \{\n    grid-template-columns: 1fr;/);
+  assert.match(css, /\.impact-item strong \{\n  color: var\(--acid\);\n  display: block;\n  font-size: clamp\(2rem, 3\.2vw, 3\.4rem\);/);
   assert.match(css, /\.collab-grid \{\n  align-items: center;\n  display: flex;/);
   assert.match(css, /\.collab-item \{\n  align-items: center;\n  background: transparent;\n  border: 0;/);
   assert.match(css, /\.partner-name \{\n  display: none;/);

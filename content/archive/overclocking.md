@@ -15,7 +15,7 @@
   "metrics": [
     {"value": "NT$6M", "label": {"en": "science program funding", "zh": "國科會節目補助"}},
     {"value": "600K", "label": {"en": "South India viewers", "zh": "印度南部觀眾"}},
-    {"value": "66%", "label": {"en": "reported rating", "zh": "舊履歷記載收視率"}}
+    {"value": "66%", "label": {"en": "reported rating", "zh": "地區收視表現"}}
   ],
   "sourceNote": "袁欣欣 简历.docx; Hsin hsin Yuan CV.docx"
 }

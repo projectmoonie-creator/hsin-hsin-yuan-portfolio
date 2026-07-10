@@ -115,7 +115,7 @@ a {
     auto 142%;
   border-radius: 8px;
   aspect-ratio: 5 / 4.2;
-  min-height: min(68svh, 690px);
+  min-height: auto;
   overflow: hidden;
   position: relative;
 }
@@ -147,7 +147,7 @@ a {
 }
 
 .hero h1 {
-  font-size: clamp(3.7rem, 8.4vw, 8.6rem);
+  font-size: clamp(3.5rem, 7.2vw, 7.2rem);
   letter-spacing: 0;
   line-height: 0.86;
   margin: 0;
@@ -280,7 +280,7 @@ a {
 .impact-item strong {
   color: var(--acid);
   display: block;
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(2rem, 3.2vw, 3.4rem);
   letter-spacing: 0;
   line-height: 0.9;
 }
@@ -653,15 +653,7 @@ a {
   text-transform: uppercase;
 }
 
-@media (max-width: 980px) {
-  .impact-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .services-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
+@media (max-width: 1280px) {
   .hero {
     grid-template-columns: 1fr;
     min-height: auto;
@@ -680,6 +672,16 @@ a {
       cover,
       auto 132%;
     min-height: auto;
+  }
+}
+
+@media (max-width: 980px) {
+  .impact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .about-grid {
