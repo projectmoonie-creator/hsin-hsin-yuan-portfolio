@@ -26,44 +26,35 @@ if (!prefersReducedMotion) {
   });
 }
 
-const showreelOpen = document.querySelector("[data-showreel-open]");
-const showreelModal = document.querySelector("[data-showreel-modal]");
-const showreelClose = document.querySelector("[data-showreel-close]");
-const showreelVideo = showreelModal?.querySelector("video");
+const showreelMedia = document.querySelector("#showreel");
+const showreelPlay = document.querySelector("[data-showreel-play]");
+const showreelVideo = document.querySelector("[data-showreel-video]");
 
-function closeShowreel() {
-  if (!showreelModal) return;
+function playShowreel() {
+  if (!showreelVideo) return;
 
-  showreelVideo?.pause();
-  if (showreelVideo) showreelVideo.currentTime = 0;
-
-  if (typeof showreelModal.close === "function" && showreelModal.open) {
-    showreelModal.close();
-  } else {
-    showreelModal.removeAttribute("open");
-  }
-}
-
-showreelOpen?.addEventListener("click", () => {
-  if (!showreelModal) return;
-
-  if (typeof showreelModal.showModal === "function") {
-    showreelModal.showModal();
-  } else {
-    showreelModal.setAttribute("open", "");
-  }
-
-  showreelVideo?.play().catch(() => {
+  showreelVideo.controls = true;
+  showreelVideo.play().catch(() => {
     // Browser autoplay policies can block play; controls remain available.
   });
+}
+
+showreelPlay?.addEventListener("click", (event) => {
+  event.stopPropagation();
+  playShowreel();
 });
 
-showreelClose?.addEventListener("click", closeShowreel);
-
-showreelModal?.addEventListener("click", (event) => {
-  if (event.target === showreelModal) closeShowreel();
+showreelMedia?.addEventListener("click", (event) => {
+  if (event.target === showreelPlay || showreelPlay?.contains(event.target)) return;
+  if (!showreelVideo?.paused) return;
+  playShowreel();
 });
 
-showreelModal?.addEventListener("close", () => {
-  showreelVideo?.pause();
+showreelVideo?.addEventListener("play", () => {
+  showreelMedia?.classList.add("is-playing");
+});
+
+showreelVideo?.addEventListener("ended", () => {
+  showreelMedia?.classList.remove("is-playing");
+  showreelVideo.currentTime = 0;
 });

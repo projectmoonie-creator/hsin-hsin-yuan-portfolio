@@ -70,12 +70,12 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.match(html, /Documentary Director <span class="role-slash">\/<\/span> Writer <span class="role-slash">\/<\/span> Producer/);
   assert.match(html, /<span><span class="role-slash">\/<\/span> Cross-Cultural Storyteller<\/span>/);
   assert.doesNotMatch(html, /<div class="hero-roles">.*AI-Language Creative.*<\/div>/s);
-  assert.match(html, /<button class="hero-media" id="showreel" type="button" data-showreel-open/);
-  assert.match(html, /Watch reel/);
-  assert.match(html, /<dialog class="showreel-modal" data-showreel-modal/);
-  assert.match(html, /<video[\s\S]*class="showreel-player"/);
+  assert.match(html, /<div class="hero-media" id="showreel">/);
+  assert.match(html, /<video[\s\S]*class="hero-showreel-video"[\s\S]*data-showreel-video/);
   assert.match(html, /poster="\/assets\/portfolio\/hsin-working-white-space\.jpg"/);
+  assert.match(html, /Watch reel/);
   assert.match(html, /<source src="\/assets\/showreel\/website-visual-reel\.mp4" type="video\/mp4">/);
+  assert.doesNotMatch(html, /showreel-modal/);
   assert.doesNotMatch(html, /showreel-section/);
   assert.ok(html.indexOf('id="showreel"') < html.indexOf("collab-section-early"));
   assert.match(html, /About/);
@@ -133,7 +133,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /@media \(max-width: 1280px\) \{\n  \.hero \{\n    grid-template-columns: 1fr;/);
   assert.match(css, /\.impact-item strong \{\n  color: var\(--acid\);\n  display: block;\n  font-size: clamp\(2rem, 3\.2vw, 3\.4rem\);/);
   assert.match(css, /\.hero-play-button \{/);
-  assert.match(css, /\.showreel-player \{\n  aspect-ratio: 16 \/ 9;/);
+  assert.match(css, /\.hero-showreel-video \{/);
+  assert.doesNotMatch(css, /showreel-modal/);
   assert.match(css, /\.collab-grid \{\n  align-items: center;\n  display: flex;/);
   assert.match(css, /\.collab-item \{\n  align-items: center;\n  background: transparent;\n  border: 0;/);
   assert.match(css, /\.partner-name \{\n  display: none;/);

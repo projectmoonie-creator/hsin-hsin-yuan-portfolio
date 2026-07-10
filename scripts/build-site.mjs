@@ -321,15 +321,26 @@ export function renderPage({ lang, site, works }) {
 
       <main>
         <section class="hero">
-          <button class="hero-media" id="showreel" type="button" data-showreel-open aria-label="${escapeHtml(copy.showreelCta)}">
-            <span class="hero-play-button" aria-hidden="true">
+          <div class="hero-media" id="showreel">
+            <video
+              class="hero-showreel-video"
+              data-showreel-video
+              controls
+              playsinline
+              preload="metadata"
+              poster="/assets/portfolio/hsin-working-white-space.jpg"
+              aria-label="${escapeHtml(copy.showreelTitle)}"
+            >
+              <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
+            </video>
+            <button class="hero-play-button" type="button" data-showreel-play aria-label="${escapeHtml(copy.showreelCta)}">
               <span class="hero-play-icon"></span>
-            </span>
+            </button>
             <span class="hero-media-caption">
               <span>${escapeHtml(copy.showreelEyebrow)}</span>
               <strong>${escapeHtml(copy.showreelCta)}</strong>
             </span>
-          </button>
+          </div>
           <div class="hero-content">
             <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
             <h1 aria-label="${escapeHtml(copy.heroTitle)}">${heroTitleLines}</h1>
@@ -423,20 +434,6 @@ export function renderPage({ lang, site, works }) {
         </section>
       </main>
 
-      <dialog class="showreel-modal" data-showreel-modal aria-label="${escapeHtml(copy.showreelTitle)}">
-        <div class="showreel-modal-panel">
-          <button class="showreel-close" type="button" data-showreel-close aria-label="${lang === "en" ? "Close showreel" : "關閉 showreel"}">×</button>
-          <video
-            class="showreel-player"
-            controls
-            playsinline
-            preload="metadata"
-            poster="/assets/portfolio/hsin-working-white-space.jpg"
-          >
-            <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
-          </video>
-        </div>
-      </dialog>
     </div>
   </body>
 </html>`;

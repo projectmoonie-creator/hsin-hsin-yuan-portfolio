@@ -34,15 +34,26 @@
 
       <main>
         <section class="hero">
-          <button class="hero-media" id="showreel" type="button" data-showreel-open aria-label="Watch reel">
-            <span class="hero-play-button" aria-hidden="true">
+          <div class="hero-media" id="showreel">
+            <video
+              class="hero-showreel-video"
+              data-showreel-video
+              controls
+              playsinline
+              preload="metadata"
+              poster="/assets/portfolio/hsin-working-white-space.jpg"
+              aria-label="Website Visual Reel"
+            >
+              <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
+            </video>
+            <button class="hero-play-button" type="button" data-showreel-play aria-label="Watch reel">
               <span class="hero-play-icon"></span>
-            </span>
+            </button>
             <span class="hero-media-caption">
               <span>30-second portfolio reel</span>
               <strong>Watch reel</strong>
             </span>
-          </button>
+          </div>
           <div class="hero-content">
             <p class="eyebrow">Documentary direction for artists, culture, and technology stories</p>
             <h1 aria-label="Hsin-Hsin Yuan"><span>HSIN-HSIN</span><span>YUAN</span></h1>
@@ -488,20 +499,6 @@
         </section>
       </main>
 
-      <dialog class="showreel-modal" data-showreel-modal aria-label="Website Visual Reel">
-        <div class="showreel-modal-panel">
-          <button class="showreel-close" type="button" data-showreel-close aria-label="Close showreel">×</button>
-          <video
-            class="showreel-player"
-            controls
-            playsinline
-            preload="metadata"
-            poster="/assets/portfolio/hsin-working-white-space.jpg"
-          >
-            <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
-          </video>
-        </div>
-      </dialog>
     </div>
   </body>
 </html>

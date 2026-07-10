@@ -103,29 +103,12 @@ a {
 }
 
 .hero-media {
-  background-image:
-    linear-gradient(180deg, rgba(11, 11, 12, 0.02), rgba(11, 11, 12, 0.45)),
-    url("/assets/portfolio/hsin-working-white-space.jpg");
-  background-position:
-    center,
-    38% 78%;
-  background-repeat: no-repeat;
-  background-size:
-    cover,
-    auto 142%;
   border-radius: 8px;
   aspect-ratio: 5 / 4.2;
-  border: 0;
-  color: inherit;
-  cursor: pointer;
-  display: block;
-  font: inherit;
+  background: #050506;
   min-height: auto;
   overflow: hidden;
-  padding: 0;
   position: relative;
-  text-align: left;
-  width: 100%;
 }
 
 .hero-media::after {
@@ -141,18 +124,42 @@ a {
   outline-offset: 6px;
 }
 
+.hero-media.is-playing::after,
+.hero-media.is-playing .hero-play-button,
+.hero-media.is-playing .hero-media-caption {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero-showreel-video {
+  background: #050506;
+  display: block;
+  height: 100%;
+  object-position: 38% 78%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.hero-media.is-playing .hero-showreel-video {
+  object-fit: contain;
+  object-position: center;
+}
+
 .hero-play-button {
   align-items: center;
   background: rgba(216, 255, 62, 0.92);
+  border: 0;
   border-radius: 999px;
   bottom: 1.25rem;
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+  cursor: pointer;
   display: flex;
   height: clamp(3.7rem, 7vw, 5.2rem);
   justify-content: center;
   left: 1.25rem;
   position: absolute;
   transition:
+    opacity 180ms ease,
     transform 180ms ease,
     background 180ms ease;
   width: clamp(3.7rem, 7vw, 5.2rem);
@@ -175,6 +182,7 @@ a {
   gap: 0.2rem;
   left: clamp(5.8rem, 9vw, 7.4rem);
   position: absolute;
+  transition: opacity 180ms ease;
   z-index: 2;
 }
 
@@ -375,59 +383,6 @@ a {
 .impact-item p {
   color: var(--muted);
   line-height: 1.45;
-}
-
-.showreel-player {
-  aspect-ratio: 16 / 9;
-  background: #050506;
-  border: 0;
-  border-radius: 6px;
-  display: block;
-  width: 100%;
-}
-
-.showreel-modal {
-  background: transparent;
-  border: 0;
-  color: var(--ink);
-  max-height: none;
-  max-width: none;
-  padding: 0;
-  width: min(92vw, 1280px);
-}
-
-.showreel-modal::backdrop {
-  background: rgba(5, 5, 6, 0.86);
-  backdrop-filter: blur(10px);
-}
-
-.showreel-modal-panel {
-  background:
-    radial-gradient(circle at 72% 24%, rgba(216, 255, 62, 0.16), transparent 14rem),
-    var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: clamp(0.6rem, 1.4vw, 1rem);
-  position: relative;
-}
-
-.showreel-close {
-  align-items: center;
-  background: var(--ink);
-  border: 0;
-  border-radius: 999px;
-  color: var(--bg);
-  cursor: pointer;
-  display: flex;
-  font-size: 1.8rem;
-  height: 2.7rem;
-  justify-content: center;
-  line-height: 1;
-  position: absolute;
-  right: -0.8rem;
-  top: -0.8rem;
-  width: 2.7rem;
-  z-index: 2;
 }
 
 .works-section {
