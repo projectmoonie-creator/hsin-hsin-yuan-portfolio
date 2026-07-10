@@ -115,9 +115,88 @@ a {
     auto 142%;
   border-radius: 8px;
   aspect-ratio: 5 / 4.2;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  font: inherit;
   min-height: auto;
   overflow: hidden;
+  padding: 0;
   position: relative;
+  text-align: left;
+  width: 100%;
+}
+
+.hero-media::after {
+  background: linear-gradient(180deg, transparent 40%, rgba(11, 11, 12, 0.68));
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.hero-media:focus-visible {
+  outline: 2px solid var(--acid);
+  outline-offset: 6px;
+}
+
+.hero-play-button {
+  align-items: center;
+  background: rgba(216, 255, 62, 0.92);
+  border-radius: 999px;
+  bottom: 1.25rem;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.34);
+  display: flex;
+  height: clamp(3.7rem, 7vw, 5.2rem);
+  justify-content: center;
+  left: 1.25rem;
+  position: absolute;
+  transition:
+    transform 180ms ease,
+    background 180ms ease;
+  width: clamp(3.7rem, 7vw, 5.2rem);
+  z-index: 2;
+}
+
+.hero-play-icon {
+  border-bottom: 0.72rem solid transparent;
+  border-left: 1.05rem solid var(--bg);
+  border-top: 0.72rem solid transparent;
+  display: block;
+  height: 0;
+  margin-left: 0.25rem;
+  width: 0;
+}
+
+.hero-media-caption {
+  bottom: 1.45rem;
+  display: grid;
+  gap: 0.2rem;
+  left: clamp(5.8rem, 9vw, 7.4rem);
+  position: absolute;
+  z-index: 2;
+}
+
+.hero-media-caption span,
+.hero-media-caption strong {
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero-media-caption span {
+  color: var(--muted);
+}
+
+.hero-media-caption strong {
+  color: var(--ink);
+}
+
+.hero-media:hover .hero-play-button {
+  background: var(--ink);
+  transform: scale(1.04);
 }
 
 .hero::after {
@@ -298,45 +377,6 @@ a {
   line-height: 1.45;
 }
 
-.showreel-section {
-  padding-top: clamp(2rem, 5vw, 4rem);
-}
-
-.showreel-grid {
-  align-items: center;
-  display: grid;
-  gap: clamp(1.5rem, 5vw, 4.5rem);
-  grid-template-columns: minmax(280px, 0.45fr) minmax(420px, 1fr);
-}
-
-.showreel-copy {
-  max-width: 520px;
-}
-
-.showreel-copy h2 {
-  font-size: clamp(2.8rem, 7vw, 6.8rem);
-  letter-spacing: 0;
-  line-height: 0.88;
-  margin: 0 0 1rem;
-  text-transform: uppercase;
-}
-
-.showreel-copy p:not(.section-title) {
-  color: var(--muted);
-  font-size: clamp(1rem, 1.6vw, 1.2rem);
-  line-height: 1.5;
-  margin: 0 0 1.4rem;
-}
-
-.showreel-player-wrap {
-  background:
-    radial-gradient(circle at 72% 24%, rgba(216, 255, 62, 0.18), transparent 14rem),
-    var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: clamp(0.6rem, 1.4vw, 1rem);
-}
-
 .showreel-player {
   aspect-ratio: 16 / 9;
   background: #050506;
@@ -344,6 +384,50 @@ a {
   border-radius: 6px;
   display: block;
   width: 100%;
+}
+
+.showreel-modal {
+  background: transparent;
+  border: 0;
+  color: var(--ink);
+  max-height: none;
+  max-width: none;
+  padding: 0;
+  width: min(92vw, 1280px);
+}
+
+.showreel-modal::backdrop {
+  background: rgba(5, 5, 6, 0.86);
+  backdrop-filter: blur(10px);
+}
+
+.showreel-modal-panel {
+  background:
+    radial-gradient(circle at 72% 24%, rgba(216, 255, 62, 0.16), transparent 14rem),
+    var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: clamp(0.6rem, 1.4vw, 1rem);
+  position: relative;
+}
+
+.showreel-close {
+  align-items: center;
+  background: var(--ink);
+  border: 0;
+  border-radius: 999px;
+  color: var(--bg);
+  cursor: pointer;
+  display: flex;
+  font-size: 1.8rem;
+  height: 2.7rem;
+  justify-content: center;
+  line-height: 1;
+  position: absolute;
+  right: -0.8rem;
+  top: -0.8rem;
+  width: 2.7rem;
+  z-index: 2;
 }
 
 .works-section {
@@ -736,13 +820,6 @@ a {
     grid-template-columns: 1fr;
   }
 
-  .showreel-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .showreel-copy {
-    max-width: 720px;
-  }
 }
 
 @media (max-width: 820px) {
@@ -844,13 +921,9 @@ a {
     min-height: 120px;
   }
 
-  .showreel-section {
-    padding-top: 2.25rem;
-  }
-
-  .showreel-player-wrap {
-    margin-left: calc(clamp(1rem, 5vw, 4rem) * -0.35);
-    margin-right: calc(clamp(1rem, 5vw, 4rem) * -0.35);
+  .hero-media-caption {
+    left: 5.7rem;
+    max-width: calc(100% - 7rem);
   }
 
   .about-copy p {
@@ -874,8 +947,6 @@ a {
   .work-panel,
   .service-card,
   .availability-card,
-  .showreel-copy,
-  .showreel-player-wrap,
   .lab-card,
   .archive-item,
   .collab-item,

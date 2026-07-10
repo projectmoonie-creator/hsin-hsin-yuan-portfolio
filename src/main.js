@@ -26,3 +26,44 @@ if (!prefersReducedMotion) {
   });
 }
 
+const showreelOpen = document.querySelector("[data-showreel-open]");
+const showreelModal = document.querySelector("[data-showreel-modal]");
+const showreelClose = document.querySelector("[data-showreel-close]");
+const showreelVideo = showreelModal?.querySelector("video");
+
+function closeShowreel() {
+  if (!showreelModal) return;
+
+  showreelVideo?.pause();
+  if (showreelVideo) showreelVideo.currentTime = 0;
+
+  if (typeof showreelModal.close === "function" && showreelModal.open) {
+    showreelModal.close();
+  } else {
+    showreelModal.removeAttribute("open");
+  }
+}
+
+showreelOpen?.addEventListener("click", () => {
+  if (!showreelModal) return;
+
+  if (typeof showreelModal.showModal === "function") {
+    showreelModal.showModal();
+  } else {
+    showreelModal.setAttribute("open", "");
+  }
+
+  showreelVideo?.play().catch(() => {
+    // Browser autoplay policies can block play; controls remain available.
+  });
+});
+
+showreelClose?.addEventListener("click", closeShowreel);
+
+showreelModal?.addEventListener("click", (event) => {
+  if (event.target === showreelModal) closeShowreel();
+});
+
+showreelModal?.addEventListener("close", () => {
+  showreelVideo?.pause();
+});

@@ -321,7 +321,15 @@ export function renderPage({ lang, site, works }) {
 
       <main>
         <section class="hero">
-          <div class="hero-media" aria-hidden="true"></div>
+          <button class="hero-media" id="showreel" type="button" data-showreel-open aria-label="${escapeHtml(copy.showreelCta)}">
+            <span class="hero-play-button" aria-hidden="true">
+              <span class="hero-play-icon"></span>
+            </span>
+            <span class="hero-media-caption">
+              <span>${escapeHtml(copy.showreelEyebrow)}</span>
+              <strong>${escapeHtml(copy.showreelCta)}</strong>
+            </span>
+          </button>
           <div class="hero-content">
             <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
             <h1 aria-label="${escapeHtml(copy.heroTitle)}">${heroTitleLines}</h1>
@@ -330,29 +338,6 @@ export function renderPage({ lang, site, works }) {
             <div class="hero-actions">
               <a class="button-link" href="mailto:${escapeHtml(copy.email)}">${escapeHtml(copy.heroPrimaryCta)}</a>
               <a class="button-link button-link-muted" href="#works">${escapeHtml(copy.heroSecondaryCta)}</a>
-            </div>
-          </div>
-        </section>
-
-        <section class="section showreel-section" id="showreel">
-          <div class="showreel-grid">
-            <div class="showreel-copy">
-              <p class="section-title">${escapeHtml(copy.showreelEyebrow)}</p>
-              <h2>${escapeHtml(copy.showreelTitle)}</h2>
-              <p>${escapeHtml(copy.showreelSubcopy)}</p>
-              <a class="button-link button-link-muted" href="/assets/showreel/website-visual-reel.mp4">${escapeHtml(copy.showreelCta)}</a>
-            </div>
-            <div class="showreel-player-wrap">
-              <video
-                class="showreel-player"
-                controls
-                playsinline
-                preload="metadata"
-                poster="/assets/showreel/website-visual-reel-poster.png"
-                aria-label="${escapeHtml(copy.showreelTitle)}"
-              >
-                <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
-              </video>
             </div>
           </div>
         </section>
@@ -437,6 +422,21 @@ export function renderPage({ lang, site, works }) {
           </div>
         </section>
       </main>
+
+      <dialog class="showreel-modal" data-showreel-modal aria-label="${escapeHtml(copy.showreelTitle)}">
+        <div class="showreel-modal-panel">
+          <button class="showreel-close" type="button" data-showreel-close aria-label="${lang === "en" ? "Close showreel" : "關閉 showreel"}">×</button>
+          <video
+            class="showreel-player"
+            controls
+            playsinline
+            preload="metadata"
+            poster="/assets/portfolio/hsin-working-white-space.jpg"
+          >
+            <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
+          </video>
+        </div>
+      </dialog>
     </div>
   </body>
 </html>`;

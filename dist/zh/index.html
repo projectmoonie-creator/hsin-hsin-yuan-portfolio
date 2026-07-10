@@ -34,7 +34,15 @@
 
       <main>
         <section class="hero">
-          <div class="hero-media" aria-hidden="true"></div>
+          <button class="hero-media" id="showreel" type="button" data-showreel-open aria-label="觀看 showreel">
+            <span class="hero-play-button" aria-hidden="true">
+              <span class="hero-play-icon"></span>
+            </span>
+            <span class="hero-media-caption">
+              <span>30 秒作品集動態版</span>
+              <strong>觀看 showreel</strong>
+            </span>
+          </button>
           <div class="hero-content">
             <p class="eyebrow">為藝術、文化、科技與人的故事做紀錄片導演與敘事開發</p>
             <h1 aria-label="Hsin-Hsin Yuan"><span>HSIN-HSIN</span><span>YUAN</span></h1>
@@ -43,29 +51,6 @@
             <div class="hero-actions">
               <a class="button-link" href="mailto:hsin54@yahoo.com">合作洽詢</a>
               <a class="button-link button-link-muted" href="#works">看作品</a>
-            </div>
-          </div>
-        </section>
-
-        <section class="section showreel-section" id="showreel">
-          <div class="showreel-grid">
-            <div class="showreel-copy">
-              <p class="section-title">30 秒作品集動態版</p>
-              <h2>網站視覺 Showreel</h2>
-              <p>先用目前網站素材做出的第一版動態作品入口：紀錄片、文化、科技、舊作數據與合作方向。之後可以直接替換成正式影片版。</p>
-              <a class="button-link button-link-muted" href="/assets/showreel/website-visual-reel.mp4">觀看 showreel</a>
-            </div>
-            <div class="showreel-player-wrap">
-              <video
-                class="showreel-player"
-                controls
-                playsinline
-                preload="metadata"
-                poster="/assets/showreel/website-visual-reel-poster.png"
-                aria-label="網站視覺 Showreel"
-              >
-                <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
-              </video>
             </div>
           </div>
         </section>
@@ -502,6 +487,21 @@
           </div>
         </section>
       </main>
+
+      <dialog class="showreel-modal" data-showreel-modal aria-label="網站視覺 Showreel">
+        <div class="showreel-modal-panel">
+          <button class="showreel-close" type="button" data-showreel-close aria-label="關閉 showreel">×</button>
+          <video
+            class="showreel-player"
+            controls
+            playsinline
+            preload="metadata"
+            poster="/assets/portfolio/hsin-working-white-space.jpg"
+          >
+            <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
+          </video>
+        </div>
+      </dialog>
     </div>
   </body>
 </html>
