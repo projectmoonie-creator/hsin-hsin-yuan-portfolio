@@ -72,7 +72,8 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.doesNotMatch(html, /<div class="hero-roles">.*AI-Language Creative.*<\/div>/s);
   assert.match(html, /<div class="hero-media" id="showreel">/);
   assert.match(html, /<video[\s\S]*class="hero-showreel-video"[\s\S]*data-showreel-video/);
-  assert.match(html, /poster="\/assets\/portfolio\/hsin-working-white-space\.jpg"/);
+  assert.match(html, /preload="none"/);
+  assert.doesNotMatch(html, /<video[\s\S]*controls[\s\S]*data-showreel-video/);
   assert.match(html, /Watch reel/);
   assert.match(html, /<source src="\/assets\/showreel\/website-visual-reel\.mp4" type="video\/mp4">/);
   assert.doesNotMatch(html, /showreel-modal/);
@@ -132,6 +133,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.hero-media \{[\s\S]*?min-height: auto;/);
   assert.match(css, /@media \(max-width: 1280px\) \{\n  \.hero \{\n    grid-template-columns: 1fr;/);
   assert.match(css, /\.impact-item strong \{\n  color: var\(--acid\);\n  display: block;\n  font-size: clamp\(2rem, 3\.2vw, 3\.4rem\);/);
+  assert.match(css, /url\(\"\/assets\/portfolio\/hsin-working-white-space\.jpg\"\)/);
   assert.match(css, /\.hero-play-button \{/);
   assert.match(css, /\.hero-showreel-video \{/);
   assert.doesNotMatch(css, /showreel-modal/);

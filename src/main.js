@@ -34,7 +34,10 @@ function playShowreel() {
   if (!showreelVideo) return;
 
   showreelVideo.controls = true;
+  showreelMedia?.classList.add("is-playing");
   showreelVideo.play().catch(() => {
+    showreelMedia?.classList.remove("is-playing");
+    showreelVideo.controls = false;
     // Browser autoplay policies can block play; controls remain available.
   });
 }
@@ -54,7 +57,14 @@ showreelVideo?.addEventListener("play", () => {
   showreelMedia?.classList.add("is-playing");
 });
 
+showreelVideo?.addEventListener("pause", () => {
+  if (showreelVideo.currentTime === 0 || showreelVideo.ended) {
+    showreelMedia?.classList.remove("is-playing");
+  }
+});
+
 showreelVideo?.addEventListener("ended", () => {
   showreelMedia?.classList.remove("is-playing");
   showreelVideo.currentTime = 0;
+  showreelVideo.controls = false;
 });

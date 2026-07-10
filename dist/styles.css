@@ -103,9 +103,18 @@ a {
 }
 
 .hero-media {
+  background-image:
+    linear-gradient(180deg, rgba(11, 11, 12, 0.02), rgba(11, 11, 12, 0.45)),
+    url("/assets/portfolio/hsin-working-white-space.jpg");
+  background-position:
+    center,
+    38% 78%;
+  background-repeat: no-repeat;
+  background-size:
+    cover,
+    auto 142%;
   border-radius: 8px;
   aspect-ratio: 5 / 4.2;
-  background: #050506;
   min-height: auto;
   overflow: hidden;
   position: relative;
@@ -135,14 +144,21 @@ a {
   background: #050506;
   display: block;
   height: 100%;
+  inset: 0;
   object-position: 38% 78%;
   object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity 180ms ease;
   width: 100%;
 }
 
 .hero-media.is-playing .hero-showreel-video {
   object-fit: contain;
   object-position: center;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .hero-play-button {

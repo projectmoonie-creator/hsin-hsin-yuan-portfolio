@@ -325,10 +325,8 @@ export function renderPage({ lang, site, works }) {
             <video
               class="hero-showreel-video"
               data-showreel-video
-              controls
               playsinline
-              preload="metadata"
-              poster="/assets/portfolio/hsin-working-white-space.jpg"
+              preload="none"
               aria-label="${escapeHtml(copy.showreelTitle)}"
             >
               <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
