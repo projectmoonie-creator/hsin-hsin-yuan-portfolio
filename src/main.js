@@ -33,12 +33,12 @@ const showreelVideo = document.querySelector("[data-showreel-video]");
 function playShowreel() {
   if (!showreelVideo) return;
 
+  showreelVideo.muted = true;
+  showreelVideo.defaultMuted = true;
   showreelVideo.controls = true;
   showreelMedia?.classList.add("is-playing");
   showreelVideo.play().catch(() => {
-    showreelMedia?.classList.remove("is-playing");
-    showreelVideo.controls = false;
-    // Browser autoplay policies can block play; controls remain available.
+    // Browser policies can still block scripted play; keep native controls visible.
   });
 }
 

@@ -325,7 +325,9 @@ export function renderPage({ lang, site, works }) {
             <video
               class="hero-showreel-video"
               data-showreel-video
+              muted
               playsinline
+              webkit-playsinline
               preload="none"
               aria-label="${escapeHtml(copy.showreelTitle)}"
             >

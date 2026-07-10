@@ -72,6 +72,8 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.doesNotMatch(html, /<div class="hero-roles">.*AI-Language Creative.*<\/div>/s);
   assert.match(html, /<div class="hero-media" id="showreel">/);
   assert.match(html, /<video[\s\S]*class="hero-showreel-video"[\s\S]*data-showreel-video/);
+  assert.match(html, /muted/);
+  assert.match(html, /webkit-playsinline/);
   assert.match(html, /preload="none"/);
   assert.doesNotMatch(html, /<video[\s\S]*controls[\s\S]*data-showreel-video/);
   assert.match(html, /Watch reel/);
