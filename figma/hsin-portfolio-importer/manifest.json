@@ -1,0 +1,12 @@
+{
+  "name": "Hsin Portfolio Importer",
+  "id": "hsin-portfolio-importer",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": ["https://hsin-hsin-yuan-portfolio.vercel.app"],
+    "reasoning": "The importer loads the current production portfolio images and SVG logos as editable Figma image fills."
+  }
+}
