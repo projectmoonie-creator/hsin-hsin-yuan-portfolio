@@ -2,3 +2,6 @@
 node_modules/
 .vercel/
 npm-debug.log*
+showreel/**/.thumbnails/
+showreel/**/renders/
+showreel/**/snapshots/

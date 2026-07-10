@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #0b0b0c;
+      }
+
+      body {
+        color: #f7f2e8;
+        font-family: "Montserrat", Arial, sans-serif;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 78% 20%, rgba(216, 255, 62, 0.15), transparent 28%),
+          radial-gradient(circle at 14% 86%, rgba(124, 199, 255, 0.14), transparent 28%),
+          #0b0b0c;
+      }
+
+      .clip {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+        padding: 76px 92px;
+        overflow: hidden;
+      }
+
+      .noise {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.18;
+        background-image:
+          linear-gradient(rgba(247, 242, 232, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(247, 242, 232, 0.035) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: radial-gradient(circle at center, black, transparent 78%);
+      }
+
+      .ghost {
+        position: absolute;
+        color: rgba(247, 242, 232, 0.08);
+        font-family: "League Gothic", sans-serif;
+        font-size: 260px;
+        line-height: 0.86;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      .kicker,
+      .mono {
+        font-family: "JetBrains Mono", monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .kicker {
+        color: #d8ff3e;
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .display {
+        margin: 0;
+        font-family: "League Gothic", sans-serif;
+        font-size: 184px;
+        line-height: 0.84;
+        letter-spacing: 0.018em;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+
+      .title {
+        margin: 0;
+        font-family: "League Gothic", sans-serif;
+        font-size: 136px;
+        line-height: 0.9;
+        letter-spacing: 0.015em;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+
+      .body {
+        margin: 0;
+        color: #b8b0a3;
+        font-size: 34px;
+        line-height: 1.25;
+        font-weight: 400;
+        max-width: 760px;
+      }
+
+      .small {
+        color: #b8b0a3;
+        font-size: 24px;
+        line-height: 1.35;
+      }
+
+      .slash {
+        color: #d8ff3e;
+      }
+
+      .rule {
+        height: 3px;
+        background: #d8ff3e;
+        transform-origin: left center;
+      }
+
+      .hairline {
+        height: 2px;
+        background: rgba(247, 242, 232, 0.28);
+        transform-origin: left center;
+      }
+
+      .image-frame {
+        position: absolute;
+        overflow: hidden;
+        border: 2px solid rgba(247, 242, 232, 0.22);
+        box-shadow: 0 36px 90px rgba(0, 0, 0, 0.38);
+        background: #19191b;
+      }
+
+      .image-frame img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(0.88) contrast(1.06);
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 0 18px;
+        border: 2px solid rgba(247, 242, 232, 0.24);
+        color: #f7f2e8;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+
+      .panel {
+        border: 2px solid rgba(247, 242, 232, 0.2);
+        background: rgba(247, 242, 232, 0.055);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+      }
+
+      .topline {
+        position: absolute;
+        left: 92px;
+        right: 92px;
+        top: 58px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: rgba(247, 242, 232, 0.58);
+        font-size: 18px;
+        z-index: 8;
+      }
+
+      .corner {
+        position: absolute;
+        width: 74px;
+        height: 74px;
+        border-color: rgba(216, 255, 62, 0.75);
+        z-index: 8;
+      }
+
+      .corner.tl {
+        left: 40px;
+        top: 40px;
+        border-left: 3px solid;
+        border-top: 3px solid;
+      }
+
+      .corner.br {
+        right: 40px;
+        bottom: 40px;
+        border-right: 3px solid;
+        border-bottom: 3px solid;
+      }
+
+      .scene-1 .hero-copy {
+        position: absolute;
+        left: 90px;
+        top: 180px;
+        z-index: 4;
+      }
+
+      .scene-1 .display {
+        width: 930px;
+      }
+
+      .scene-1 .roles {
+        margin-top: 34px;
+        font-size: 36px;
+        line-height: 1.35;
+        color: #f7f2e8;
+      }
+
+      .scene-1 .hero-image {
+        right: 96px;
+        top: 128px;
+        width: 690px;
+        height: 780px;
+      }
+
+      .scene-1 .rule {
+        width: 720px;
+        margin-top: 44px;
+      }
+
+      .hero-copy .display,
+      .copy .title,
+      .cta .display {
+        margin-top: 34px;
+      }
+
+      .scene-2 .main-image {
+        left: 92px;
+        top: 132px;
+        width: 980px;
+        height: 720px;
+      }
+
+      .scene-2 .copy {
+        position: absolute;
+        right: 92px;
+        top: 184px;
+        width: 650px;
+      }
+
+      .scene-2 .meta-row,
+      .scene-3 .meta-row,
+      .scene-4 .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 34px;
+      }
+
+      .scene-3 .image-a {
+        left: 92px;
+        top: 156px;
+        width: 650px;
+        height: 744px;
+      }
+
+      .scene-3 .image-b {
+        left: 650px;
+        top: 88px;
+        width: 450px;
+        height: 390px;
+      }
+
+      .scene-3 .copy {
+        position: absolute;
+        right: 112px;
+        top: 218px;
+        width: 620px;
+      }
+
+      .scene-4 .copy {
+        position: absolute;
+        left: 92px;
+        top: 170px;
+        width: 760px;
+      }
+
+      .scene-4 .image-a {
+        right: 92px;
+        top: 120px;
+        width: 710px;
+        height: 390px;
+      }
+
+      .scene-4 .image-b {
+        right: 248px;
+        bottom: 112px;
+        width: 560px;
+        height: 330px;
+      }
+
+      .scene-5 .stats {
+        position: absolute;
+        left: 92px;
+        right: 92px;
+        top: 214px;
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr 0.85fr 0.9fr;
+        gap: 24px;
+      }
+
+      .stat-card {
+        min-height: 420px;
+        padding: 38px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .stat-value {
+        color: #d8ff3e;
+        font-family: "League Gothic", sans-serif;
+        font-size: 150px;
+        line-height: 0.85;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .stat-label {
+        color: #f7f2e8;
+        font-size: 30px;
+        line-height: 1.12;
+      }
+
+      .stat-detail {
+        color: #b8b0a3;
+        font-size: 21px;
+        line-height: 1.3;
+      }
+
+      .scene-6 .cta {
+        position: absolute;
+        left: 92px;
+        top: 154px;
+        width: 980px;
+      }
+
+      .scene-6 .contact-panel {
+        position: absolute;
+        right: 92px;
+        top: 180px;
+        width: 610px;
+        min-height: 620px;
+        padding: 44px;
+      }
+
+      .scene-6 .modes {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+        margin-top: 46px;
+      }
+
+      .mode {
+        min-height: 96px;
+        padding: 20px;
+        border: 2px solid rgba(247, 242, 232, 0.18);
+        color: #f7f2e8;
+        font-size: 22px;
+        line-height: 1.15;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-j7pz" id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1920" data-height="1080">
+      <div data-hf-id="hf-6so6" class="noise"></div>
+      <div data-hf-id="hf-9co5" class="corner tl"></div>
+      <div data-hf-id="hf-34pp" class="corner br"></div>
+      <div data-hf-id="hf-r99o" class="topline mono">
+        <span data-hf-id="hf-bdk0">HSIN-HSIN YUAN / PORTFOLIO REEL</span>
+        <span data-hf-id="hf-65s6">DOCUMENTARY / CULTURE / TECHNOLOGY</span>
+      </div>
+
+      <section data-hf-id="hf-fr0t" id="scene-1" class="clip scene scene-1" data-start="0" data-duration="4.4" data-track-index="1">
+        <div data-hf-id="hf-55s2" class="ghost" data-layout-ignore="" style="left: 640px; top: 732px">LISTENING</div>
+        <div data-hf-id="hf-yohs" class="image-frame hero-image" data-layout-allow-overflow="">
+          <img data-hf-id="hf-5pcv" src="assets/my-art-my-voice-performance-2.jpg" alt="">
+        </div>
+        <div data-hf-id="hf-jloi" class="hero-copy">
+          <div data-hf-id="hf-s3gk" class="kicker">Documentary direction for stories that travel</div>
+          <h1 data-hf-id="hf-su74" class="display">
+            <span data-hf-id="hf-zci8">HSIN-HSIN</span>
+            <span data-hf-id="hf-862c">YUAN</span>
+          </h1>
+          <div data-hf-id="hf-5n0t" class="roles">
+            Documentary Director <span data-hf-id="hf-xpsd" class="slash">/</span> Writer <span data-hf-id="hf-3fgh" class="slash">/</span> Producer
+            <div data-hf-id="hf-emrg"><span data-hf-id="hf-4mdk" class="slash">/</span> Cross-Cultural Storyteller</div>
+          </div>
+          <div data-hf-id="hf-a46i" class="rule"></div>
+        </div>
+      </section>
+
+      <section data-hf-id="hf-3ghs" id="scene-2" class="clip scene scene-2" data-start="4.4" data-duration="5.2" data-track-index="1">
+        <div data-hf-id="hf-h9cx" class="ghost" data-layout-ignore="" style="left: 720px; top: 746px">ARTISTS</div>
+        <div data-hf-id="hf-2kwf" class="image-frame main-image" data-layout-allow-overflow="">
+          <img data-hf-id="hf-jr61" src="assets/my-art-my-voice-interview.jpg" alt="">
+        </div>
+        <div data-hf-id="hf-bdx3" class="copy">
+          <div data-hf-id="hf-pdbi" class="kicker">TaiwanPlus / 2024-2025</div>
+          <h2 data-hf-id="hf-y5lw" class="title">My Art, My Voice</h2>
+          <p data-hf-id="hf-jf0i" class="body">Artists, identity, and Taiwan on the world stage. Directed as an intimate documentary spine for international viewers.</p>
+          <div data-hf-id="hf-gxgs" class="meta-row">
+            <span data-hf-id="hf-dean" class="tag">Lead Director</span>
+            <span data-hf-id="hf-q55g" class="tag">24 Artist Groups</span>
+            <span data-hf-id="hf-iwff" class="tag">Paris Cultural Olympiad</span>
+          </div>
+        </div>
+      </section>
+
+      <section data-hf-id="hf-210s" id="scene-3" class="clip scene scene-3" data-start="9.6" data-duration="4.8" data-track-index="1">
+        <div data-hf-id="hf-mtxz" class="ghost" data-layout-ignore="" style="left: 770px; top: 718px">FUTURES</div>
+        <div data-hf-id="hf-l56v" class="image-frame image-a" data-layout-allow-overflow="">
+          <img data-hf-id="hf-ed86" src="assets/hsin-working-white-space.jpg" alt="">
+        </div>
+        <div data-hf-id="hf-wyik" class="image-frame image-b" data-layout-allow-overflow="">
+          <img data-hf-id="hf-ve4j" src="assets/paris-cultural-olympiad-team-context.jpg" alt="">
+        </div>
+        <div data-hf-id="hf-r8s7" class="copy">
+          <div data-hf-id="hf-jzrp" class="kicker">Technology / Founders / AI</div>
+          <h2 data-hf-id="hf-zp3o" class="title">Tech Dreamers</h2>
+          <p data-hf-id="hf-wf1k" class="body">Human-centered stories for technical teams, founders, and ideas that need clarity without losing the people inside the system.</p>
+          <div data-hf-id="hf-eosk" class="meta-row">
+            <span data-hf-id="hf-1gez" class="tag">Interview Direction</span>
+            <span data-hf-id="hf-433t" class="tag">Story Structure</span>
+          </div>
+        </div>
+      </section>
+
+      <section data-hf-id="hf-zkqo" id="scene-4" class="clip scene scene-4" data-start="14.4" data-duration="4.8" data-track-index="1">
+        <div data-hf-id="hf-1y3e" class="ghost" data-layout-ignore="" style="left: 690px; top: 742px">CONTEXT</div>
+        <div data-hf-id="hf-quh6" class="copy">
+          <div data-hf-id="hf-3wno" class="kicker">Taiwan / Shanghai / Europe</div>
+          <h2 data-hf-id="hf-b5jo" class="title">Cross-cultural production with editorial judgment.</h2>
+          <p data-hf-id="hf-s1ti" class="body">Documentary listening, bilingual scripts, spatial-brand films, and stories that help complex subjects become cinematic and clear.</p>
+          <div data-hf-id="hf-dhvh" class="meta-row">
+            <span data-hf-id="hf-ygf4" class="tag">Documentary</span>
+            <span data-hf-id="hf-v9sd" class="tag">Branded Factual</span>
+            <span data-hf-id="hf-xz9c" class="tag">Interior Design Films</span>
+          </div>
+        </div>
+        <div data-hf-id="hf-qld3" class="image-frame image-a" data-layout-allow-overflow="">
+          <img data-hf-id="hf-dlah" src="assets/paris-cultural-olympiad-team.jpg" alt="">
+        </div>
+        <div data-hf-id="hf-tvsk" class="image-frame image-b" data-layout-allow-overflow="">
+          <img data-hf-id="hf-csd0" src="assets/top-gear-uk-special-car.jpg" alt="">
+        </div>
+      </section>
+
+      <section data-hf-id="hf-lnn2" id="scene-5" class="clip scene scene-5" data-start="19.2" data-duration="5.4" data-track-index="1">
+        <div data-hf-id="hf-pvzs" class="ghost" data-layout-ignore="" style="left: 430px; top: 732px">PROOF</div>
+        <div data-hf-id="hf-0o81" class="kicker" style="position: absolute; left: 92px; top: 142px">Selected impact from broadcast and cultural work</div>
+        <div data-hf-id="hf-rhep" class="stats">
+          <article data-hf-id="hf-6044" class="panel stat-card">
+            <div data-hf-id="hf-s9sr" class="stat-value">200M</div>
+            <div data-hf-id="hf-eoer" class="stat-label">viewers for Top Gear China S02E05</div>
+            <div data-hf-id="hf-2smi" class="stat-detail">A broadcast-scale proof point from earlier television work.</div>
+          </article>
+          <article data-hf-id="hf-fay4" class="panel stat-card">
+            <div data-hf-id="hf-tgz6" class="stat-value">#1</div>
+            <div data-hf-id="hf-60ku" class="stat-label">variety rating slot</div>
+            <div data-hf-id="hf-mrb3" class="stat-detail">UK special set a series rating record.</div>
+          </article>
+          <article data-hf-id="hf-e411" class="panel stat-card">
+            <div data-hf-id="hf-hf5l" class="stat-value">600K</div>
+            <div data-hf-id="hf-u4mo" class="stat-label">South India viewers</div>
+            <div data-hf-id="hf-6wcb" class="stat-detail">Tamil-language version of Overclocking.</div>
+          </article>
+          <article data-hf-id="hf-eic2" class="panel stat-card">
+            <div data-hf-id="hf-u47p" class="stat-value">NT$6M</div>
+            <div data-hf-id="hf-z9ao" class="stat-label">public funding secured</div>
+            <div data-hf-id="hf-rfot" class="stat-detail">Funding context across factual and scripted work.</div>
+          </article>
+        </div>
+      </section>
+
+      <section data-hf-id="hf-6boi" id="scene-6" class="clip scene scene-6" data-start="24.6" data-duration="5.4" data-track-index="1">
+        <div data-hf-id="hf-3zuu" class="ghost" data-layout-ignore="" style="left: 545px; top: 720px">CONTACT</div>
+        <div data-hf-id="hf-apeu" class="cta">
+          <div data-hf-id="hf-mzts" class="kicker">Available for collaboration</div>
+          <h2 data-hf-id="hf-grw4" class="display">Let’s build a story with signal.</h2>
+          <div data-hf-id="hf-d4u0" class="modes">
+            <div data-hf-id="hf-1jef" class="mode">Artists and cultural institutions</div>
+            <div data-hf-id="hf-ava4" class="mode">Documentary and factual producers</div>
+            <div data-hf-id="hf-zos7" class="mode">Tech and brand teams</div>
+            <div data-hf-id="hf-kk5b" class="mode">AI-language editorial workflows</div>
+          </div>
+        </div>
+        <aside data-hf-id="hf-h8zi" class="panel contact-panel">
+          <div data-hf-id="hf-xtol" class="kicker">Contact</div>
+          <p data-hf-id="hf-m247" class="body" style="margin-top: 52px">Documentary, cultural, branded, AI-language, and cross-cultural production collaborations.</p>
+          <div data-hf-id="hf-gv9u" class="hairline" style="width: 100%; margin-top: 72px"></div>
+          <p data-hf-id="hf-w3rb" class="mono" style="margin-top: 46px; color: #d8ff3e; font-size: 28px">hsin54@yahoo.com</p>
+          <p data-hf-id="hf-oelp" class="mono" style="margin-top: 24px; color: #b8b0a3; font-size: 22px">hsin-hsin-yuan-portfolio.vercel.app</p>
+        </aside>
+      </section>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      const sceneStarts = [0, 4.4, 9.6, 14.4, 19.2, 24.6];
+
+      function fromTo(selector, fromVars, toVars, at) {
+        if (!document.querySelectorAll(selector).length) {
+          return;
+        }
+        tl.fromTo(selector, fromVars, { ...toVars, immediateRender: false }, at);
+      }
+
+      function introScene(scene, at) {
+        fromTo(`${scene} .kicker`, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, at + 0.16);
+        fromTo(`${scene} .title, ${scene} .display`, { opacity: 0, x: -62 }, { opacity: 1, x: 0, duration: 0.7, ease: "expo.out" }, at + 0.28);
+        fromTo(`${scene} .body, ${scene} .roles`, { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.56, ease: "power2.out" }, at + 0.54);
+        fromTo(`${scene} .tag, ${scene} .mode`, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.42, ease: "back.out(1.3)", stagger: 0.05 }, at + 0.78);
+        fromTo(`${scene} .image-frame`, { opacity: 0, y: 48, scale: 0.985 }, { opacity: 1, y: 0, scale: 1, duration: 0.72, ease: "power3.out", stagger: 0.08 }, at + 0.18);
+        fromTo(`${scene} .rule, ${scene} .hairline`, { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.62, ease: "power4.out" }, at + 0.86);
+      }
+
+      introScene("#scene-1", sceneStarts[0]);
+      introScene("#scene-2", sceneStarts[1]);
+      introScene("#scene-3", sceneStarts[2]);
+      introScene("#scene-4", sceneStarts[3]);
+      introScene("#scene-6", sceneStarts[5]);
+
+      fromTo("#scene-1 .hero-image img", { scale: 1.0 }, { scale: 1.055, duration: 4.3, ease: "none" }, 0);
+      fromTo("#scene-2 .main-image img", { scale: 1.04, x: -24 }, { scale: 1.0, x: 0, duration: 5.1, ease: "none" }, 4.4);
+      fromTo("#scene-3 .image-a img", { scale: 1.0, y: -18 }, { scale: 1.045, y: 0, duration: 4.7, ease: "none" }, 9.6);
+      fromTo("#scene-3 .image-b img", { scale: 1.06, x: 18 }, { scale: 1.0, x: 0, duration: 4.7, ease: "none" }, 9.7);
+      fromTo("#scene-4 .image-a img", { scale: 1.0, x: -18 }, { scale: 1.04, x: 0, duration: 4.6, ease: "none" }, 14.4);
+      fromTo("#scene-4 .image-b img", { scale: 1.045, y: 18 }, { scale: 1.0, y: 0, duration: 4.6, ease: "none" }, 14.55);
+
+      fromTo("#scene-5 .kicker", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, 19.35);
+      fromTo("#scene-5 .stat-card", { opacity: 0, y: 60, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.68, ease: "back.out(1.2)", stagger: 0.09 }, 19.7);
+      fromTo("#scene-5 .stat-value", { opacity: 0, y: 46 }, { opacity: 1, y: 0, duration: 0.42, ease: "power4.out", stagger: 0.07 }, 20.05);
+
+      fromTo(".corner.tl", { opacity: 0.25, x: -8, y: -8 }, { opacity: 0.9, x: 0, y: 0, duration: 1.2, ease: "sine.inOut", repeat: 24, yoyo: true }, 0);
+      fromTo(".corner.br", { opacity: 0.2, x: 8, y: 8 }, { opacity: 0.72, x: 0, y: 0, duration: 1.4, ease: "sine.inOut", repeat: 21, yoyo: true }, 0);
+      fromTo(".ghost", { opacity: 0, x: 70 }, { opacity: 1, x: 0, duration: 0.75, ease: "power2.out", stagger: 0.08 }, 0.3);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

@@ -70,6 +70,12 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.match(html, /Documentary Director <span class="role-slash">\/<\/span> Writer <span class="role-slash">\/<\/span> Producer/);
   assert.match(html, /<span><span class="role-slash">\/<\/span> Cross-Cultural Storyteller<\/span>/);
   assert.doesNotMatch(html, /<div class="hero-roles">.*AI-Language Creative.*<\/div>/s);
+  assert.match(html, /id="showreel"/);
+  assert.match(html, /Website Visual Reel/);
+  assert.match(html, /<video[\s\S]*class="showreel-player"/);
+  assert.match(html, /poster="\/assets\/showreel\/website-visual-reel-poster\.png"/);
+  assert.match(html, /<source src="\/assets\/showreel\/website-visual-reel\.mp4" type="video\/mp4">/);
+  assert.ok(html.indexOf("showreel-section") < html.indexOf("collab-section-early"));
   assert.match(html, /About/);
   assert.match(html, /Work With Me/);
   assert.match(html, /interior design, residential, and spatial-brand videos/i);
@@ -101,10 +107,14 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.equal(existsSync(join(root, "dist/zh/index.html")), true);
   assert.equal(existsSync(join(root, "dist/styles.css")), true);
   assert.equal(existsSync(join(root, "dist/main.js")), true);
+  assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel.mp4")), true);
+  assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel-poster.png")), true);
 
   const zh = readFileSync(join(root, "dist/zh/index.html"), "utf8");
   const css = readFileSync(join(root, "dist/styles.css"), "utf8");
   assert.match(zh, /紀錄片導演/);
+  assert.match(zh, /網站視覺 Showreel/);
+  assert.match(zh, /觀看 showreel/);
   assert.match(zh, /關於我/);
   assert.match(zh, /住宅、室內設計與空間品牌影像/);
   assert.match(zh, /材質、動線、生活感與品牌氣質/);
@@ -121,6 +131,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.hero-media \{[\s\S]*?min-height: auto;/);
   assert.match(css, /@media \(max-width: 1280px\) \{\n  \.hero \{\n    grid-template-columns: 1fr;/);
   assert.match(css, /\.impact-item strong \{\n  color: var\(--acid\);\n  display: block;\n  font-size: clamp\(2rem, 3\.2vw, 3\.4rem\);/);
+  assert.match(css, /\.showreel-grid \{\n  align-items: center;\n  display: grid;/);
+  assert.match(css, /\.showreel-player \{\n  aspect-ratio: 16 \/ 9;/);
   assert.match(css, /\.collab-grid \{\n  align-items: center;\n  display: flex;/);
   assert.match(css, /\.collab-item \{\n  align-items: center;\n  background: transparent;\n  border: 0;/);
   assert.match(css, /\.partner-name \{\n  display: none;/);

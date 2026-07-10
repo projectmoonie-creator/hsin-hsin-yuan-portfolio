@@ -276,6 +276,7 @@ export function renderPage({ lang, site, works }) {
   const heroTitleLines = (copy.heroTitleLines || [copy.heroTitle]).map((line) => `<span>${escapeHtml(line)}</span>`).join("");
   const heroRoles = (copy.heroRoleLines || copy.heroRoles).map((role) => `<span>${renderHeroRoleLine(role)}</span>`).join("");
   const navItems = [
+    { href: "#showreel", label: lang === "en" ? "Reel" : "影片" },
     { href: "#about", label: copy.aboutTitle },
     { href: "#works", label: lang === "en" ? "Works" : "作品" },
     { href: "#contact", label: lang === "en" ? "Contact" : "聯絡" },
@@ -329,6 +330,29 @@ export function renderPage({ lang, site, works }) {
             <div class="hero-actions">
               <a class="button-link" href="mailto:${escapeHtml(copy.email)}">${escapeHtml(copy.heroPrimaryCta)}</a>
               <a class="button-link button-link-muted" href="#works">${escapeHtml(copy.heroSecondaryCta)}</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section showreel-section" id="showreel">
+          <div class="showreel-grid">
+            <div class="showreel-copy">
+              <p class="section-title">${escapeHtml(copy.showreelEyebrow)}</p>
+              <h2>${escapeHtml(copy.showreelTitle)}</h2>
+              <p>${escapeHtml(copy.showreelSubcopy)}</p>
+              <a class="button-link button-link-muted" href="/assets/showreel/website-visual-reel.mp4">${escapeHtml(copy.showreelCta)}</a>
+            </div>
+            <div class="showreel-player-wrap">
+              <video
+                class="showreel-player"
+                controls
+                playsinline
+                preload="metadata"
+                poster="/assets/showreel/website-visual-reel-poster.png"
+                aria-label="${escapeHtml(copy.showreelTitle)}"
+              >
+                <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
+              </video>
             </div>
           </div>
         </section>
