@@ -332,12 +332,34 @@ First-pass source: Yahoo Mail search result list for `幸福空間`, read from v
 | 2023-12-15 | 2023-12-08 / 2023-12-13 | 百科 | 新傑創網路百科 | 台北 | 無-欣欣+吉哥+A | 幸福空間-Nini | Likely | Visible snippet names 洪榮森設計師. |
 | 2023-12-05 | 2023-12-04 | 百科 | 拾真網路百科 | 員林 | 無-欣欣+吉哥+A | 幸福空間-Nini | Likely | Visible snippet names 李真真總監 and homeowner. |
 | 2023-12-04 | 2023-12-01 | 達人 | 今城達人 | 土城 | 無-欣欣+吉哥+A | 幸福空間-Nini | Likely | First-pass candidate from visible result list. |
+| 2023-12-07 | 2023-12-01 | 達人 | 微自然達人 | 新竹 | 無-欣欣+吉哥+A | 幸福空間-Nini | Likely | Found via `欣欣+吉哥`; visible snippet names 徐以倫. |
+| 2023-11-28 | 2023-11-23 | 達人 | 墐桐達人 | 桃園 | 無-欣欣+吉哥+花 | 幸福空間-Nini | Likely | Likely related to public 墐桐 / 鄧維如 works; needs public video matching. |
+| 2023-10-30 | 2023-10-26 | 百科 | 艾美幸福網路百科 | 龜山 | 無-欣欣+吉哥+花 | 幸福空間-Nini | Likely | Likely related to public 艾美幸福 / 許捷甯 works; needs public video matching. |
+
+### Longmei / Lungmei Curtains Search
+
+User memory: 龍美窗簾 was one of the earliest clients, likely the first video in this category. Yahoo Mail results use the spelling `隆美窗簾` / `隆美窗飾`, so both spellings should be retained for future search.
+
+Search term used: `龍美窗簾`
+
+| Shoot date | Evidence date | Type | Project / company from subject | Location hint | Visible crew marker | Producer / sender | Confidence | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2021-12-17 | 2021-12-09 | 網路影音 | 隆美窗簾5M網路影音 | 板橋 | 花花 | 幸福空間-Irene | Possible | Script email; no explicit `欣欣` visible in first-pass result. |
+| 2021-11-26 | 2021-11-18 / 2021-11-19 | 網路影音 | 隆美窗簾5M網路影音 | 板橋 | 花花 | 幸福空間-Irene | Possible | One result notes delayed shoot; no explicit `欣欣` visible in first-pass result. |
+| 2021-09-30 | 2021-09-24 | 網路影音 | 隆美窗簾5M網路影音 | 新竹 | 芳瑜-欣欣導+吉哥 | 幸福空間-Irene | Confirmed | Strong evidence: visible subject includes `欣欣導+吉哥`. |
+| 2021-03-15 | 2021-03-11 | 網路影音 | 隆美窗簾5M網路影音 | 內湖 | 無-欣欣導 | 幸福空間-Irene | Confirmed | Strong evidence: visible subject includes `欣欣導`. |
+| 2020-09-29 | 2020-08-27 | Branded shoot | 隆美 + 曲艾玲拍攝 | unknown | not visible | 幸福空間-Jimmy | Possible | Strong client memory match and email subject; needs role confirmation. |
+| unknown, 2020 | 2020-08-07 | Shoot notice | 台南隆美拍攝通知 | 台南 | not visible | 幸福空間-Kiki_lai | Possible | Strong client memory match; snippet includes old forwarded thread unrelated to this project, so keep conservative. |
+| unknown | 2020-09-25 | Asset / logo | 隆美窗簾 LOGO | n/a | n/a | Vincent | Possible | Likely production asset support, not a shoot by itself. |
 
 Next useful searches:
 - `欣欣+吉哥`
+- `欣欣導`
 - `百科拍攝通知 欣欣`
 - `達人拍攝通知 欣欣`
 - `腳本如附件 欣欣`
+- `隆美窗簾`
+- `隆美窗飾`
 - `LG 幸福空間 欣欣`
 - `SAMSUNG 幸福空間 欣欣`
 - `太平洋廚電 幸福空間 欣欣`
