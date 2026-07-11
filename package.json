@@ -10,6 +10,7 @@
     "serve": "python3 -m http.server 4173 -d dist"
   },
   "dependencies": {
-    "animejs": "^4.5.0"
+    "animejs": "^4.5.0",
+    "ogl": "^1.0.11"
   }
 }

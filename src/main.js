@@ -1,9 +1,11 @@
 import { animate } from "./vendor/anime.esm.min.js";
+import { initStrandsLayer } from "./strands.js";
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (!prefersReducedMotion) {
   const sections = Array.from(document.querySelectorAll(".section"));
+  initStrandsLayer(document.querySelector(".light-beam-layer"));
   const lightState = {
     x: 56,
     y: 24,

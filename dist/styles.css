@@ -63,6 +63,14 @@ body::before {
   z-index: 0;
 }
 
+.strands-canvas {
+  height: 100%;
+  inset: 0;
+  opacity: 0.74;
+  position: absolute;
+  width: 100%;
+}
+
 .light-beam {
   filter: blur(42px);
   height: 80vh;
@@ -71,6 +79,10 @@ body::before {
   top: var(--beam-y);
   width: 60vw;
   will-change: opacity, transform;
+}
+
+.has-strands .light-beam {
+  opacity: calc(var(--beam-opacity) * 0.32);
 }
 
 .light-beam::before {

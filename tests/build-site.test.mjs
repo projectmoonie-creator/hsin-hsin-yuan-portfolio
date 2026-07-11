@@ -136,7 +136,9 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.equal(existsSync(join(root, "dist/zh/index.html")), true);
   assert.equal(existsSync(join(root, "dist/styles.css")), true);
   assert.equal(existsSync(join(root, "dist/main.js")), true);
+  assert.equal(existsSync(join(root, "dist/strands.js")), true);
   assert.equal(existsSync(join(root, "dist/vendor/anime.esm.min.js")), true);
+  assert.equal(existsSync(join(root, "dist/vendor/ogl/src/index.js")), true);
   assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel.mp4")), true);
   assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel-poster.png")), true);
 
