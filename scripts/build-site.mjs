@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
 const SITE_ORIGIN = "https://hsin-hsin-yuan-portfolio.vercel.app";
-const ASSET_VERSION = "20260711-watch-loop";
+const ASSET_VERSION = "20260711-ambient-rays";
 
 export function parseFrontmatter(source) {
   const match = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
@@ -610,7 +610,7 @@ function build() {
   writeFileSync(join(dist, "index.html"), '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=/en/">');
   cpSync(join(root, "src/styles.css"), join(dist, "styles.css"));
   cpSync(join(root, "src/main.js"), join(dist, "main.js"));
-  cpSync(join(root, "src/strands.js"), join(dist, "strands.js"));
+  cpSync(join(root, "src/ambient-background.js"), join(dist, "ambient-background.js"));
   mkdirSync(join(dist, "vendor"), { recursive: true });
   cpSync(join(root, "node_modules/animejs/dist/bundles/anime.esm.min.js"), join(dist, "vendor/anime.esm.min.js"));
   cpSync(join(root, "node_modules/ogl/src"), join(dist, "vendor/ogl/src"), { recursive: true });

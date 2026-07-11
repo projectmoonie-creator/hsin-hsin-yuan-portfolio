@@ -64,10 +64,11 @@ body::before {
   z-index: 0;
 }
 
-.strands-canvas {
+.ambient-canvas {
   height: 100%;
   inset: 0;
-  opacity: 0.74;
+  mix-blend-mode: screen;
+  opacity: 0.82;
   position: absolute;
   width: 100%;
 }
@@ -82,8 +83,8 @@ body::before {
   will-change: opacity, transform;
 }
 
-.has-strands .light-beam {
-  opacity: calc(var(--beam-opacity) * 0.32);
+.has-ambient-background .light-beam {
+  opacity: calc(var(--beam-opacity) * 0.18);
 }
 
 .light-beam::before {

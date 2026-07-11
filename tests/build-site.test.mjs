@@ -140,7 +140,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.equal(existsSync(join(root, "dist/zh/index.html")), true);
   assert.equal(existsSync(join(root, "dist/styles.css")), true);
   assert.equal(existsSync(join(root, "dist/main.js")), true);
-  assert.equal(existsSync(join(root, "dist/strands.js")), true);
+  assert.equal(existsSync(join(root, "dist/ambient-background.js")), true);
   assert.equal(existsSync(join(root, "dist/vendor/anime.esm.min.js")), true);
   assert.equal(existsSync(join(root, "dist/vendor/ogl/src/index.js")), true);
   assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel.mp4")), true);
@@ -191,11 +191,14 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.hero-roles \.role-slash \{\n  color: var\(--acid\);/);
   assert.match(css, /\.edge-light/);
   assert.match(css, /--edge-proximity/);
+  assert.match(css, /\.ambient-canvas \{/);
+  assert.match(css, /\.has-ambient-background \.light-beam/);
   assert.match(css, /--page-pad: clamp/);
   assert.match(css, /\.watch-loop-card \{/);
   assert.match(css, /\.watch-loop-viewport::before/);
   assert.match(js, /getEdgeProximity/);
   assert.match(js, /pointermove/);
+  assert.match(js, /initAmbientBackground/);
   assert.match(js, /data-watch-loop/);
   assert.match(js, /syncLoopCopies/);
   assert.match(js, /startLoop/);
