@@ -298,8 +298,7 @@ a {
 
 .hero-media.is-playing::after,
 .hero-media.is-playing::before,
-.hero-media.is-playing .hero-play-button,
-.hero-media.is-playing .hero-media-caption {
+.hero-media.is-playing .hero-play-button {
   opacity: 0;
   pointer-events: none;
 }
@@ -354,32 +353,6 @@ a {
   height: 0;
   margin-left: 0.25rem;
   width: 0;
-}
-
-.hero-media-caption {
-  bottom: 1.45rem;
-  display: grid;
-  gap: 0.2rem;
-  left: clamp(5.8rem, 9vw, 7.4rem);
-  position: absolute;
-  transition: opacity 180ms ease;
-  z-index: 2;
-}
-
-.hero-media-caption span,
-.hero-media-caption strong {
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.hero-media-caption span {
-  color: var(--muted);
-}
-
-.hero-media-caption strong {
-  color: var(--ink);
 }
 
 .hero-media:hover .hero-play-button {
@@ -450,39 +423,6 @@ a {
   max-width: 620px;
 }
 
-.hero-actions {
-  align-items: center;
-  backdrop-filter: blur(18px);
-  background:
-    linear-gradient(135deg, rgba(247, 242, 232, 0.08), rgba(247, 242, 232, 0.025)),
-    radial-gradient(circle at 18% 50%, rgba(216, 255, 62, 0.13), transparent 12rem);
-  border: 1px solid rgba(247, 242, 232, 0.16);
-  border-radius: 999px;
-  box-shadow:
-    0 0 0 1px rgba(216, 255, 62, 0.035),
-    0 18px 58px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(247, 242, 232, 0.12);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  max-width: max-content;
-  margin-top: 1.6rem;
-  padding: 0.42rem;
-  position: relative;
-}
-
-.hero-actions::before {
-  background: linear-gradient(90deg, transparent, rgba(216, 255, 62, 0.28), transparent);
-  content: "";
-  height: 1px;
-  left: 16%;
-  opacity: 0.55;
-  pointer-events: none;
-  position: absolute;
-  right: 16%;
-  top: 0;
-}
-
 .section {
   padding: clamp(3.5rem, 9vw, 7rem) clamp(1rem, 5vw, 4rem);
   position: relative;
@@ -512,9 +452,7 @@ a {
 }
 
 .section.is-lit .section-title,
-.section.is-lit .about-tab.is-active,
-.section.is-guided .section-title,
-.section.is-guided .about-tab.is-active {
+.section.is-guided .section-title {
   text-shadow: 0 0 24px rgba(216, 255, 62, 0.28);
 }
 
@@ -540,49 +478,13 @@ a {
   padding-bottom: clamp(2.8rem, 7vw, 5.5rem);
 }
 
-.about-tabs {
+.about-simple {
   max-width: 980px;
 }
 
-.about-tablist {
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  gap: clamp(1rem, 4vw, 2.5rem);
-  margin-bottom: clamp(1.8rem, 4vw, 3rem);
-}
-
-.about-tab {
-  appearance: none;
-  background: transparent;
-  border: 0;
-  border-bottom: 2px solid transparent;
-  color: var(--muted);
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.78rem;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  padding: 0 0 0.85rem;
-  text-transform: uppercase;
-}
-
-.about-tab:hover,
-.about-tab:focus-visible,
-.about-tab.is-active {
+.about-simple .section-title {
   color: var(--acid);
-}
-
-.about-tab:focus-visible {
-  outline: 2px solid var(--acid);
-  outline-offset: 5px;
-}
-
-.about-tab.is-active {
-  border-color: var(--acid);
-}
-
-.about-panel[hidden] {
-  display: none;
+  margin-bottom: clamp(1.35rem, 3vw, 2rem);
 }
 
 .about-copy {
@@ -611,35 +513,6 @@ a {
 .about-copy li {
   border-top: 1px solid var(--line);
   padding-top: 0.75rem;
-}
-
-.available-list {
-  display: grid;
-  gap: 1px;
-  max-width: 900px;
-}
-
-.available-line {
-  border-top: 1px solid var(--line);
-  display: grid;
-  gap: clamp(0.65rem, 3vw, 1.5rem);
-  grid-template-columns: minmax(12rem, 0.34fr) minmax(0, 1fr);
-  padding: 1rem 0;
-}
-
-.available-line span {
-  color: var(--acid);
-  font-size: 0.78rem;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  line-height: 1.35;
-  text-transform: uppercase;
-}
-
-.available-line p {
-  color: var(--muted);
-  line-height: 1.55;
-  margin: 0;
 }
 
 .pill-row {
@@ -1608,24 +1481,8 @@ a {
     min-height: 120px;
   }
 
-  .hero-media-caption {
-    left: 5.7rem;
-    max-width: calc(100% - 7rem);
-  }
-
   .about-copy p {
     font-size: clamp(1.25rem, 7vw, 2rem);
-  }
-
-  .about-tablist {
-    gap: 1.25rem;
-    justify-content: flex-start;
-    overflow-x: auto;
-  }
-
-  .available-line {
-    grid-template-columns: 1fr;
-    padding: 1rem 0 1.1rem;
   }
 
   .works-section.is-lit::after {

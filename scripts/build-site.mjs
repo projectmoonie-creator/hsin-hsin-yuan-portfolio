@@ -96,19 +96,6 @@ function renderPills(items = []) {
   return items.map((item) => `<span class="pill">${escapeHtml(item)}</span>`).join("");
 }
 
-function renderAvailabilityDetails(items = []) {
-  return items
-    .map(
-      (item) => `
-        <div class="available-line">
-          <span>${escapeHtml(item.title)}</span>
-          <p>${escapeHtml(item.line)}</p>
-        </div>
-      `,
-    )
-    .join("");
-}
-
 function renderMetrics(metrics = [], lang) {
   if (!metrics.length) return "";
 
@@ -419,7 +406,6 @@ export function renderPage({ lang, site, works }) {
   const heroTitleLines = (copy.heroTitleLines || [copy.heroTitle]).map((line) => `<span>${escapeHtml(line)}</span>`).join("");
   const heroRoles = (copy.heroRoleLines || copy.heroRoles).map((role) => `<span>${renderHeroRoleLine(role)}</span>`).join("");
   const navItems = [
-    { href: "#showreel", label: lang === "en" ? "Reel" : "影片" },
     { href: "#about", label: copy.aboutTitle },
     { href: "#works", label: lang === "en" ? "Works" : "作品" },
     { href: "#contact", label: lang === "en" ? "Contact" : "聯絡" },
@@ -483,20 +469,12 @@ export function renderPage({ lang, site, works }) {
             <button class="hero-play-button" type="button" data-showreel-play aria-label="${escapeHtml(copy.showreelCta)}">
               <span class="hero-play-icon"></span>
             </button>
-            <span class="hero-media-caption">
-              <span>${escapeHtml(copy.showreelEyebrow)}</span>
-              <strong>${escapeHtml(copy.showreelCta)}</strong>
-            </span>
           </div>
           <div class="hero-content">
             <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
             <h1 aria-label="${escapeHtml(copy.heroTitle)}">${heroTitleLines}</h1>
             <div class="hero-roles">${heroRoles}</div>
             <p class="hero-subcopy">${escapeHtml(copy.heroSubcopy)}</p>
-            <div class="hero-actions">
-              <a class="button-link" href="#contact">${escapeHtml(copy.heroPrimaryCta)}</a>
-              <a class="button-link button-link-muted" href="#works">${escapeHtml(copy.heroSecondaryCta)}</a>
-            </div>
           </div>
         </section>
 
@@ -506,29 +484,16 @@ export function renderPage({ lang, site, works }) {
         </section>
 
         <section class="section about-section" id="about">
-          <div class="about-tabs" data-about-tabs>
-            <div class="about-tablist" role="tablist" aria-label="${escapeHtml(copy.aboutTitle)}">
-              <button class="about-tab is-active" type="button" role="tab" id="tab-about-${lang}" aria-controls="panel-about-${lang}" aria-selected="true" data-about-tab="about">${escapeHtml(copy.aboutTitle)}</button>
-              <button class="about-tab" type="button" role="tab" id="tab-available-${lang}" aria-controls="panel-available-${lang}" aria-selected="false" data-about-tab="available">${escapeHtml(copy.availabilityLabel)}</button>
+          <div class="about-simple">
+            <h2 class="section-title">${escapeHtml(copy.aboutTitle)}</h2>
+            <div class="section-intro">
+              <p>${escapeHtml(copy.aboutLead)}</p>
             </div>
-            <div class="about-panel is-active" role="tabpanel" id="panel-about-${lang}" aria-labelledby="tab-about-${lang}" data-about-panel="about">
-              <div class="section-intro">
-                <p>${escapeHtml(copy.aboutLead)}</p>
-              </div>
-              <div class="about-copy">
-                ${copy.aboutBody ? `<p>${escapeHtml(copy.aboutBody)}</p>` : ""}
-                <ul>
-                  ${copy.aboutNotes.map((note) => `<li>${escapeHtml(note)}</li>`).join("")}
-                </ul>
-              </div>
-            </div>
-            <div class="about-panel" role="tabpanel" id="panel-available-${lang}" aria-labelledby="tab-available-${lang}" data-about-panel="available" hidden>
-              <div class="section-intro">
-                <p>${escapeHtml(copy.workWithMeSubcopy)}</p>
-              </div>
-              <div class="available-list">
-                ${renderAvailabilityDetails(copy.availabilityDetails)}
-              </div>
+            <div class="about-copy">
+              ${copy.aboutBody ? `<p>${escapeHtml(copy.aboutBody)}</p>` : ""}
+              <ul>
+                ${copy.aboutNotes.map((note) => `<li>${escapeHtml(note)}</li>`).join("")}
+              </ul>
             </div>
           </div>
         </section>
