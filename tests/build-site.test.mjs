@@ -82,8 +82,14 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.doesNotMatch(html, /showreel-section/);
   assert.ok(html.indexOf('id="showreel"') < html.indexOf("collab-section-early"));
   assert.match(html, /About/);
+  assert.match(html, /data-about-tabs/);
+  assert.match(html, /role="tablist"/);
+  assert.match(html, /data-about-tab="available"/);
+  assert.match(html, /data-about-panel="available" hidden/);
+  assert.match(html, /class="available-line"/);
   assert.match(html, /Work With Me/);
   assert.match(html, /Taiwan-born documentary director and creative producer/i);
+  assert.match(html, /Research, treatments, pitch framing, and narrative structure/i);
   assert.doesNotMatch(html, /I partner with artists, cultural teams, producers, and technology companies/i);
   assert.doesNotMatch(html, /interior design and spatial-brand films/i);
   assert.match(html, /For Artists &amp; Cultural Institutions/);
@@ -105,6 +111,8 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.doesNotMatch(html, /\/assets\/logos\/taiwanplus.svg/);
   assert.match(html, /Happy Space/);
   assert.ok(html.indexOf("collab-grid") < html.indexOf("about-section"));
+  assert.ok(html.indexOf("about-section") < html.indexOf("works-section"));
+  assert.ok(html.indexOf("works-section") < html.indexOf("impact-section"));
   assert.match(html, /works-track/);
   assert.match(html, /My Art, My Voice/);
   assert.match(html, /Tech Dreamers/);

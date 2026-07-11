@@ -95,6 +95,19 @@ function renderPills(items = []) {
   return items.map((item) => `<span class="pill">${escapeHtml(item)}</span>`).join("");
 }
 
+function renderAvailabilityDetails(items = []) {
+  return items
+    .map(
+      (item) => `
+        <div class="available-line">
+          <span>${escapeHtml(item.title)}</span>
+          <p>${escapeHtml(item.line)}</p>
+        </div>
+      `,
+    )
+    .join("");
+}
+
 function renderMetrics(metrics = [], lang) {
   if (!metrics.length) return "";
 
@@ -444,27 +457,31 @@ export function renderPage({ lang, site, works }) {
         </section>
 
         <section class="section about-section" id="about">
-          <div class="section-intro">
-            <h2 class="section-title">${escapeHtml(copy.aboutTitle)}</h2>
-            <p>${escapeHtml(copy.aboutLead)}</p>
-          </div>
-          <div class="about-grid">
-            <div class="about-copy">
-              ${copy.aboutBody ? `<p>${escapeHtml(copy.aboutBody)}</p>` : ""}
-              <ul>
-                ${copy.aboutNotes.map((note) => `<li>${escapeHtml(note)}</li>`).join("")}
-              </ul>
+          <div class="about-tabs" data-about-tabs>
+            <div class="about-tablist" role="tablist" aria-label="${escapeHtml(copy.aboutTitle)}">
+              <button class="about-tab is-active" type="button" role="tab" id="tab-about-${lang}" aria-controls="panel-about-${lang}" aria-selected="true" data-about-tab="about">${escapeHtml(copy.aboutTitle)}</button>
+              <button class="about-tab" type="button" role="tab" id="tab-available-${lang}" aria-controls="panel-available-${lang}" aria-selected="false" data-about-tab="available">${escapeHtml(copy.availabilityLabel)}</button>
             </div>
-            <aside class="availability-card">
-              <p class="card-kicker">${escapeHtml(copy.availabilityLabel)}</p>
-              <div class="pill-row">${renderPills(copy.availability)}</div>
-            </aside>
+            <div class="about-panel is-active" role="tabpanel" id="panel-about-${lang}" aria-labelledby="tab-about-${lang}" data-about-panel="about">
+              <div class="section-intro">
+                <p>${escapeHtml(copy.aboutLead)}</p>
+              </div>
+              <div class="about-copy">
+                ${copy.aboutBody ? `<p>${escapeHtml(copy.aboutBody)}</p>` : ""}
+                <ul>
+                  ${copy.aboutNotes.map((note) => `<li>${escapeHtml(note)}</li>`).join("")}
+                </ul>
+              </div>
+            </div>
+            <div class="about-panel" role="tabpanel" id="panel-available-${lang}" aria-labelledby="tab-available-${lang}" data-about-panel="available" hidden>
+              <div class="section-intro">
+                <p>${escapeHtml(copy.workWithMeSubcopy)}</p>
+              </div>
+              <div class="available-list">
+                ${renderAvailabilityDetails(copy.availabilityDetails)}
+              </div>
+            </div>
           </div>
-        </section>
-
-        <section class="section impact-section">
-          <h2 class="section-title">${escapeHtml(copy.impactLabel)}</h2>
-          <div class="impact-grid">${renderImpact(site.impact, lang)}</div>
         </section>
 
         <section class="section works-section" id="works" data-horizontal-scroll>
@@ -475,6 +492,11 @@ export function renderPage({ lang, site, works }) {
           <div class="works-track">
             ${works.map((work) => renderWork(work, lang, copy)).join("")}
           </div>
+        </section>
+
+        <section class="section impact-section">
+          <h2 class="section-title">${escapeHtml(copy.impactLabel)}</h2>
+          <div class="impact-grid">${renderImpact(site.impact, lang)}</div>
         </section>
 
         <section class="section">

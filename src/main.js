@@ -69,6 +69,40 @@ showreelVideo?.addEventListener("ended", () => {
   showreelVideo.controls = false;
 });
 
+document.querySelectorAll("[data-about-tabs]").forEach((tabs) => {
+  const buttons = Array.from(tabs.querySelectorAll("[data-about-tab]"));
+  const panels = Array.from(tabs.querySelectorAll("[data-about-panel]"));
+
+  function activateTab(target) {
+    buttons.forEach((button) => {
+      const isActive = button.dataset.aboutTab === target;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-selected", String(isActive));
+    });
+
+    panels.forEach((panel) => {
+      const isActive = panel.dataset.aboutPanel === target;
+      panel.classList.toggle("is-active", isActive);
+      panel.hidden = !isActive;
+    });
+  }
+
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      activateTab(button.dataset.aboutTab);
+    });
+
+    button.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+      event.preventDefault();
+      const direction = event.key === "ArrowRight" ? 1 : -1;
+      const next = buttons[(index + direction + buttons.length) % buttons.length];
+      next.focus();
+      activateTab(next.dataset.aboutTab);
+    });
+  });
+});
+
 document.querySelectorAll("[data-contact-form]").forEach((form) => {
   const startedAt = form.querySelector("[data-contact-started-at]");
   const status = form.querySelector("[data-contact-status]");

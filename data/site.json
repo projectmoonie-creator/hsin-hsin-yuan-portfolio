@@ -27,6 +27,13 @@
     ],
     "availabilityLabel": "Available for",
     "availability": ["Creative development", "Directing", "Research", "Bilingual scripts", "AI workflow design"],
+    "availabilityDetails": [
+      {"title": "Creative development", "line": "Research, treatments, pitch framing, and narrative structure for factual and cultural projects."},
+      {"title": "Directing", "line": "Interview-led documentary direction, field production, and cross-cultural creative coordination."},
+      {"title": "Research", "line": "Context-building, source checking, and story maps for layered subjects that need clarity before production."},
+      {"title": "Bilingual scripts", "line": "English and Chinese scripts, narration, interview questions, and cultural translation with editorial judgment."},
+      {"title": "AI workflow design", "line": "Codex + Claude assisted systems for fact-checked scripts, language learning formats, and repeatable editorial work."}
+    ],
     "worksLabel": "Featured Works",
     "worksHint": "Swipe or scroll",
     "watchLabel": "Watch",
@@ -98,6 +105,13 @@
     ],
     "availabilityLabel": "可合作項目",
     "availability": ["前期開發", "導演", "研究", "雙語劇本", "AI 工作流設計"],
+    "availabilityDetails": [
+      {"title": "前期開發", "line": "研究、企劃、pitch framing、敘事架構，以及紀實與文化題材的前期整理。"},
+      {"title": "導演", "line": "訪談導向的紀錄片導演、現場製作與跨文化創意協調。"},
+      {"title": "研究", "line": "為複雜題目建立脈絡、查證資料、整理故事地圖，讓製作前期更清楚。"},
+      {"title": "雙語劇本", "line": "中文與英文腳本、旁白、訪綱與文化語境轉譯。"},
+      {"title": "AI 工作流設計", "line": "用 Codex + Claude 建立資料驗證型劇本、語言學習格式與可重複的編輯流程。"}
+    ],
     "worksLabel": "近年代表作",
     "worksHint": "滑動或捲動瀏覽",
     "watchLabel": "觀看作品",

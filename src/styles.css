@@ -315,14 +315,57 @@ a {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
-.about-grid {
-  display: grid;
-  gap: clamp(1rem, 4vw, 4rem);
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
+.about-section {
+  padding-bottom: clamp(2.8rem, 7vw, 5.5rem);
+}
+
+.about-tabs {
+  max-width: 980px;
+}
+
+.about-tablist {
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: clamp(1rem, 4vw, 2.5rem);
+  margin-bottom: clamp(1.8rem, 4vw, 3rem);
+}
+
+.about-tab {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  padding: 0 0 0.85rem;
+  text-transform: uppercase;
+}
+
+.about-tab:hover,
+.about-tab:focus-visible,
+.about-tab.is-active {
+  color: var(--acid);
+}
+
+.about-tab:focus-visible {
+  outline: 2px solid var(--acid);
+  outline-offset: 5px;
+}
+
+.about-tab.is-active {
+  border-color: var(--acid);
+}
+
+.about-panel[hidden] {
+  display: none;
 }
 
 .about-copy {
-  max-width: 880px;
+  max-width: 760px;
 }
 
 .about-copy p {
@@ -349,12 +392,33 @@ a {
   padding-top: 0.75rem;
 }
 
-.availability-card {
-  align-self: start;
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: clamp(1rem, 3vw, 1.6rem);
+.available-list {
+  display: grid;
+  gap: 1px;
+  max-width: 900px;
+}
+
+.available-line {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: clamp(0.65rem, 3vw, 1.5rem);
+  grid-template-columns: minmax(12rem, 0.34fr) minmax(0, 1fr);
+  padding: 1rem 0;
+}
+
+.available-line span {
+  color: var(--acid);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.available-line p {
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0;
 }
 
 .pill-row {
@@ -942,10 +1006,6 @@ a {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-
 }
 
 @media (max-width: 820px) {
@@ -1059,6 +1119,17 @@ a {
   .about-copy p {
     font-size: clamp(1.25rem, 7vw, 2rem);
   }
+
+  .about-tablist {
+    gap: 1.25rem;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  .available-line {
+    grid-template-columns: 1fr;
+    padding: 1rem 0 1.1rem;
+  }
 }
 
 @media (max-width: 460px) {
@@ -1076,8 +1147,7 @@ a {
   .impact-item,
   .work-panel,
   .service-card,
-  .availability-card,
-  .lab-card,
+    .lab-card,
   .archive-item,
   .collab-item,
   .contact-content {

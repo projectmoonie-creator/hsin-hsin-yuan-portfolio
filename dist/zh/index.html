@@ -107,57 +107,56 @@
         </section>
 
         <section class="section about-section" id="about">
-          <div class="section-intro">
-            <h2 class="section-title">關於我</h2>
-            <p>我是來自台灣的紀錄片導演與創意製作人，適合需要研究、訪談、跨文化判斷與雙語敘事能力的藝術、文化、紀實、科技與品牌專案。</p>
-          </div>
-          <div class="about-grid">
-            <div class="about-copy">
-
-              <ul>
-                <li>開放紀錄片、品牌紀實、文化內容與 AI 語言工作流合作。</li><li>具台灣、上海、歐洲與國際團隊合作經驗。</li><li>可用中文與英文進行研究、採訪、劇本與敘事判斷。</li>
-              </ul>
+          <div class="about-tabs" data-about-tabs>
+            <div class="about-tablist" role="tablist" aria-label="關於我">
+              <button class="about-tab is-active" type="button" role="tab" id="tab-about-zh" aria-controls="panel-about-zh" aria-selected="true" data-about-tab="about">關於我</button>
+              <button class="about-tab" type="button" role="tab" id="tab-available-zh" aria-controls="panel-available-zh" aria-selected="false" data-about-tab="available">可合作項目</button>
             </div>
-            <aside class="availability-card">
-              <p class="card-kicker">可合作項目</p>
-              <div class="pill-row"><span class="pill">前期開發</span><span class="pill">導演</span><span class="pill">研究</span><span class="pill">雙語劇本</span><span class="pill">AI 工作流設計</span></div>
-            </aside>
+            <div class="about-panel is-active" role="tabpanel" id="panel-about-zh" aria-labelledby="tab-about-zh" data-about-panel="about">
+              <div class="section-intro">
+                <p>我是來自台灣的紀錄片導演與創意製作人，適合需要研究、訪談、跨文化判斷與雙語敘事能力的藝術、文化、紀實、科技與品牌專案。</p>
+              </div>
+              <div class="about-copy">
+
+                <ul>
+                  <li>開放紀錄片、品牌紀實、文化內容與 AI 語言工作流合作。</li><li>具台灣、上海、歐洲與國際團隊合作經驗。</li><li>可用中文與英文進行研究、採訪、劇本與敘事判斷。</li>
+                </ul>
+              </div>
+            </div>
+            <div class="about-panel" role="tabpanel" id="panel-available-zh" aria-labelledby="tab-available-zh" data-about-panel="available" hidden>
+              <div class="section-intro">
+                <p>我可以在前期作為故事夥伴加入，也可以在製作階段擔任導演，或替團隊建立可重複使用的紀實短影音與編輯流程。</p>
+              </div>
+              <div class="available-list">
+
+        <div class="available-line">
+          <span>前期開發</span>
+          <p>研究、企劃、pitch framing、敘事架構，以及紀實與文化題材的前期整理。</p>
+        </div>
+
+        <div class="available-line">
+          <span>導演</span>
+          <p>訪談導向的紀錄片導演、現場製作與跨文化創意協調。</p>
+        </div>
+
+        <div class="available-line">
+          <span>研究</span>
+          <p>為複雜題目建立脈絡、查證資料、整理故事地圖，讓製作前期更清楚。</p>
+        </div>
+
+        <div class="available-line">
+          <span>雙語劇本</span>
+          <p>中文與英文腳本、旁白、訪綱與文化語境轉譯。</p>
+        </div>
+
+        <div class="available-line">
+          <span>AI 工作流設計</span>
+          <p>用 Codex + Claude 建立資料驗證型劇本、語言學習格式與可重複的編輯流程。</p>
+        </div>
+
+              </div>
+            </div>
           </div>
-        </section>
-
-        <section class="section impact-section">
-          <h2 class="section-title">代表成績</h2>
-          <div class="impact-grid">
-        <article class="impact-item">
-          <strong>200M</strong>
-          <span>《巔峰拍檔》中國版第二季第五集觀眾</span>
-          <p>該集觀眾規模大幅超越系列過往平均。</p>
-        </article>
-
-        <article class="impact-item">
-          <strong>#1</strong>
-          <span>同時段綜藝類收視冠軍</span>
-          <p>英國篇創下系列收視紀錄 0.81。</p>
-        </article>
-
-        <article class="impact-item">
-          <strong>600K</strong>
-          <span>印度南部觀眾</span>
-          <p>《Overclocking》印度語版本於印度南部播出，並取得具規模的地區收視。</p>
-        </article>
-
-        <article class="impact-item">
-          <strong>NT$6M</strong>
-          <span>公共補助與國際合作資金</span>
-          <p>包含《謊言遊戲》高畫質電視節目補助與《Overclocking》國科會節目補助。</p>
-        </article>
-
-        <article class="impact-item">
-          <strong>24</strong>
-          <span>巴黎文化奧運表演團隊與藝術家</span>
-          <p>《My Art, My Voice》與《Taiwan in Motion》記錄台灣參與 2024 巴黎文化奧運。</p>
-        </article>
-      </div>
         </section>
 
         <section class="section works-section" id="works" data-horizontal-scroll>
@@ -319,6 +318,41 @@
     </article>
 
           </div>
+        </section>
+
+        <section class="section impact-section">
+          <h2 class="section-title">代表成績</h2>
+          <div class="impact-grid">
+        <article class="impact-item">
+          <strong>200M</strong>
+          <span>《巔峰拍檔》中國版第二季第五集觀眾</span>
+          <p>該集觀眾規模大幅超越系列過往平均。</p>
+        </article>
+
+        <article class="impact-item">
+          <strong>#1</strong>
+          <span>同時段綜藝類收視冠軍</span>
+          <p>英國篇創下系列收視紀錄 0.81。</p>
+        </article>
+
+        <article class="impact-item">
+          <strong>600K</strong>
+          <span>印度南部觀眾</span>
+          <p>《Overclocking》印度語版本於印度南部播出，並取得具規模的地區收視。</p>
+        </article>
+
+        <article class="impact-item">
+          <strong>NT$6M</strong>
+          <span>公共補助與國際合作資金</span>
+          <p>包含《謊言遊戲》高畫質電視節目補助與《Overclocking》國科會節目補助。</p>
+        </article>
+
+        <article class="impact-item">
+          <strong>24</strong>
+          <span>巴黎文化奧運表演團隊與藝術家</span>
+          <p>《My Art, My Voice》與《Taiwan in Motion》記錄台灣參與 2024 巴黎文化奧運。</p>
+        </article>
+      </div>
         </section>
 
         <section class="section">
