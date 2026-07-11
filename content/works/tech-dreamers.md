@@ -45,6 +45,7 @@
       }
     }
   ],
+  "watchMode": "series",
   "watchUrl": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
   "videoEmbedUrl": "",
   "posterImage": "/assets/portfolio/hsin-working-white-space.jpg",

@@ -158,13 +158,26 @@ function mediaFrame(work, copy) {
   `;
 }
 
+function watchActionLabel(work, lang, copy) {
+  if (!work.watchUrl) return copy.comingLabel;
+
+  const labels = {
+    single: { en: "Watch the full episode", zh: "觀看完整單集" },
+    series: { en: "Watch the series", zh: "觀看完整系列" },
+    collection: { en: "Watch selected films", zh: "觀看精選影片" },
+  };
+
+  return labels[work.watchMode]?.[lang] ?? copy.watchLabel;
+}
+
 function renderWork(work, lang, copy) {
   const title = work.title[lang];
   const tagline = work.tagline[lang];
   const description = work.description[lang];
   const role = work.role[lang];
+  const actionLabel = watchActionLabel(work, lang, copy);
   const action = work.watchUrl
-    ? `<a class="button-link" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer">${escapeHtml(copy.watchLabel)}</a>`
+    ? `<a class="button-link" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer">${escapeHtml(actionLabel)}</a>`
     : `<span class="status-badge">${escapeHtml(copy.comingLabel)}</span>`;
 
   return `

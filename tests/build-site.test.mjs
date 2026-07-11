@@ -103,6 +103,8 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.match(html, /works-track/);
   assert.match(html, /My Art, My Voice/);
   assert.match(html, /Tech Dreamers/);
+  assert.match(html, /Watch the full episode/);
+  assert.match(html, /Watch the series/);
   assert.doesNotMatch(html, /old English CV|source materials/i);
 });
 
@@ -130,6 +132,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /我如何處理/);
   assert.match(zh, /AI \/ Language Lab/);
   assert.match(zh, /精選舊作/);
+  assert.match(zh, /觀看完整單集/);
+  assert.match(zh, /觀看完整系列/);
   assert.doesNotMatch(zh, /舊.*履歷/);
   assert.match(css, /grid-auto-columns: clamp\(320px, 31vw, 460px\)/);
   assert.match(css, /grid-template-rows: auto 1fr/);
