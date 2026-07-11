@@ -120,6 +120,186 @@ Default credit for this group:
 - Website use candidate: yes, useful to show range from luxury homes to practical small-space renovation
 - Showreel candidate: possible; review for before/after clarity, small-space transformation, and practical lifestyle details
 
+### 時尚潮男的「水夢想」！？他還有這「3招」，教你打造不會後悔的夢想家！！
+
+- Status: confirmed public YouTube source
+- Role: Director / Editor
+- Publisher: 幸福空間
+- Design team / person listed in title: 禾熙室內裝修設計 / 謝張志昇
+- YouTube: https://www.youtube.com/watch?v=aypjI5AxcbA
+- Thumbnail: https://i.ytimg.com/vi/aypjI5AxcbA/hqdefault.jpg
+- Category: designer-led residential design / practical home advice
+- Useful positioning: personality-led home story, dream-home framing, bathroom/water-related design feature inferred from title
+- Client / business contribution: supports a design studio's public-facing authority and turns design advice into approachable video content
+- Website use candidate: yes as part of the broader interior design directing/editing body of work
+- Showreel candidate: possible; review for personality, practical tips, and lifestyle detail
+
+### 五感呼吸綠建材 以愛之名量身打造修復宅
+
+- Status: confirmed public YouTube source
+- Role: Director / Editor
+- Publisher: 幸福空間
+- Design team / person listed in title: 艾美幸福設計 / 許捷甯
+- YouTube: https://www.youtube.com/watch?v=MMj-qvrdYpk
+- Thumbnail: https://i.ytimg.com/vi/MMj-qvrdYpk/hqdefault.jpg
+- Category: designer-led residential design / green materials / renovation story
+- Useful positioning: wellness, green materials, restorative home, emotional residential narrative
+- Client / business contribution: frames a designer's material choices and value proposition as a human-centered home story
+- Website use candidate: yes, especially for showing softer emotional/lifestyle storytelling within interiors
+- Showreel candidate: possible; review for material close-ups, daylight, tactile detail, and restorative atmosphere
+
+### 不是寵物是家人 毛小孩專屬智能宅
+
+- Status: confirmed public YouTube source
+- Role: Director / Editor
+- Publisher: 幸福空間
+- Design team / person listed in title: 艾美幸福設計 / 許捷甯
+- YouTube: https://www.youtube.com/watch?v=IIV2ZvIojc4
+- User-provided start reference: 18s
+- Thumbnail: https://i.ytimg.com/vi/IIV2ZvIojc4/hqdefault.jpg
+- Category: designer-led residential design / smart home / pet-family lifestyle
+- Useful positioning: smart home, pet-centered planning, family lifestyle, design problem-solving
+- Client / business contribution: translates a niche lifestyle need into a clear design story that can appeal to homeowners with pets
+- Website use candidate: yes, useful for showing audience-friendly story angles
+- Showreel candidate: strong if there are warm family/pet details and smart-home reveal moments
+
+### 12坪居然有雙客廳！？次廳還能變成餐廳、客房與視聽室，怎麼辦到的？？
+
+- Status: confirmed public YouTube source
+- Role: Director / Editor
+- Publisher: 幸福空間
+- Design team / person listed in title: 艾美幸福設計 / 許捷甯
+- YouTube: https://www.youtube.com/watch?v=0zkXVU3m7Jc
+- Thumbnail: https://i.ytimg.com/vi/0zkXVU3m7Jc/hqdefault.jpg
+- Category: small-space renovation / multifunctional layout / practical design explanation
+- Useful positioning: small-space transformation, compact home logic, flexible room use, service journalism angle
+- Client / business contribution: turns a design constraint into a shareable hook and helps viewers understand the designer's spatial strategy
+- Website use candidate: yes, especially for showing accessible, problem-solving content
+- Showreel candidate: strong for before/after, layout transitions, and compact-space reveal
+
+### 30年老屋翻新 老宅搖身一變網美宅
+
+- Status: confirmed public YouTube source
+- Role: Director / Editor
+- Publisher: 幸福空間
+- Design team / person listed in title: 京彩室內設計 / 王立崧
+- YouTube: https://www.youtube.com/watch?v=B0G7IH7vQA0
+- Thumbnail: https://i.ytimg.com/vi/B0G7IH7vQA0/hqdefault.jpg
+- Category: old-house renovation / social-friendly residential makeover
+- Useful positioning: 30-year home renovation, visual transformation, social-media-ready home aesthetics
+- Client / business contribution: packages renovation value as a clear visual transformation with consumer appeal
+- Website use candidate: yes as proof of old-house renovation storytelling
+- Showreel candidate: strong if footage includes before/after contrast, reveal moments, and polished lifestyle visuals
+
+### 34坪 老屋翻新｜狹小黑暗的40年眷村老房子！翻新後屋主驚呼連連 居然這麼open !!!
+
+- Status: confirmed public YouTube source
+- Role: Director / Editor
+- Publisher: 幸福空間
+- Design team / person listed in title: 墐桐空間美學 / 鄧維如
+- YouTube: https://www.youtube.com/watch?v=-64_T9ms6kM
+- User-provided start reference: 106s
+- Thumbnail: https://i.ytimg.com/vi/-64_T9ms6kM/hqdefault.jpg
+- Category: old-house renovation / transformation story / homeowner reaction
+- Useful positioning: 40-year military-village home, dark-to-open transformation, homeowner emotional response
+- Client / business contribution: dramatizes design impact through transformation and client reaction, useful for trust-building and sales
+- Website use candidate: yes, particularly if one interior example is needed to show emotional transformation
+- Showreel candidate: strong; review around 01:46 for reaction or transformation sequence
+
+### 光影動線減負空間 細節成就享受生活
+
+- Status: confirmed public YouTube source
+- Role: Director / Editor
+- Publisher: 幸福空間
+- Design team / person listed in title: 墐桐空間美學 / 鄧維如
+- YouTube: https://www.youtube.com/watch?v=2rp3EdzdBa4
+- Thumbnail: https://i.ytimg.com/vi/2rp3EdzdBa4/hqdefault.jpg
+- Category: designer-led residential design / light, circulation, detail
+- Useful positioning: light and movement, reduced visual burden, detail-driven lifestyle
+- Client / business contribution: communicates intangible design value such as circulation, comfort, and livability through visual rhythm
+- Website use candidate: yes as a quieter, more refined spatial example
+- Showreel candidate: possible; review for light, camera movement, and clean spatial rhythm
+
+### 煮在家 吃在家 愛在家 都市山居精緻生活 絕配首選
+
+- Status: confirmed public YouTube source
+- Role: Director / Editor
+- Publisher: 幸福空間
+- Brand / partner context: 太平洋廚電 X 朱玉芬
+- YouTube: https://www.youtube.com/watch?v=wiG0h7wofnw
+- User-provided start reference: 3s
+- Thumbnail: https://i.ytimg.com/vi/wiG0h7wofnw/hqdefault.jpg
+- Category: branded content / kitchen appliance / lifestyle home story
+- Useful positioning: cooking at home, refined urban lifestyle, kitchen appliance integration, designer or expert collaboration
+- Client / business contribution: integrates product, home lifestyle, and spatial aspiration without separating the brand from lived use
+- Website use candidate: strong, because it shows brand-content experience within interiors
+- Showreel candidate: strong; review for product-in-use, kitchen atmosphere, hands, food, and lifestyle warmth
+
+### 超越傳統非典型油機 時尚廚房必備選項
+
+- Status: confirmed public YouTube source
+- Role: Director / Editor
+- Publisher: 幸福空間
+- Brand / partner context: 太平洋廚電
+- YouTube: https://www.youtube.com/watch?v=qnpUYsmslP4
+- Thumbnail: https://i.ytimg.com/vi/qnpUYsmslP4/hqdefault.jpg
+- Category: branded content / kitchen appliance / product-led spatial film
+- Useful positioning: product feature, kitchen design, appliance-as-lifestyle object
+- Client / business contribution: makes a functional product legible through spatial use, visual styling, and lifestyle framing
+- Website use candidate: yes, especially if summarizing commercial/vendor content experience
+- Showreel candidate: possible; likely useful for product detail shots and branded pacing
+
+## Contribution Summary
+
+This interior / spatial-brand body of work shows three overlapping contributions:
+
+1. Designer and studio storytelling
+   - Helped interior designers and studios translate completed spaces into public-facing video narratives.
+   - Made spatial decisions legible to viewers: layout, light, circulation, materials, storage, greenery, compact-space solutions, and lifestyle details.
+   - Supported designers' credibility by turning portfolio cases into watchable, audience-friendly stories rather than static case photos.
+
+2. Brand and vendor integration
+   - Directed and edited branded spatial videos where products needed to live inside a real home story, not appear as isolated ads.
+   - Examples include LG, SAMSUNG The Frame TV, and Pacific Kitchen Appliance / 太平洋廚電.
+   - The contribution is the bridge between product value, spatial taste, daily use, and viewer desire.
+
+3. Platform and sales-support content
+   - Produced videos for a high-volume interior/lifestyle platform environment, where each film had to serve viewers, designers, brands, and business development at once.
+   - The work supported lead generation, designer exposure, branded collaboration, and platform programming.
+   - The strongest portfolio framing is not "I shot many interior videos," but "I shaped design, product, and lifestyle material into short-form stories that could support client trust and commercial use."
+
+Potential resume / website phrasing:
+
+English:
+Across approximately three years of interior and spatial-brand production, I directed and edited short-form films for residential design, home renovation, designer portfolios, and branded lifestyle campaigns. The work supported interior designers, platform programming, and vendor collaborations by translating spaces, products, and client needs into watchable stories about taste, function, atmosphere, and everyday life.
+
+Chinese:
+疫情後約三年，我為住宅設計、老屋翻新、設計師作品、居家品牌與廚電業配內容擔任導演 / 剪輯。這批作品不只是拍攝空間，也協助設計師、平台與品牌把設計價值、產品使用情境、生活風格與業務需求轉化成觀眾看得懂、也願意停留的短影音故事。
+
+## One-Reel Strategy
+
+Current priority: keep all links as a source archive, but only cut one concise reel later.
+
+Recommended reel length:
+- 45-60 seconds if used as a portfolio support clip.
+- 30 seconds if it will be placed near the top of the website or embedded in the existing homepage reel flow.
+
+Suggested structure:
+- 0-5s: strongest spatial hook, preferably greenery / transformation / luxury or brand moment.
+- 5-15s: elegant movement through rooms, light, materials, and details.
+- 15-25s: human/lifestyle moments: cooking, pets, homeowners, designer presence, hands, daily use.
+- 25-38s: renovation/problem-solving: small spaces, old-house transformation, before/after logic.
+- 38-50s: branded/product integration: LG, SAMSUNG, 太平洋廚電.
+- Final 5-8s: title card framing this as Interior / Spatial Brand Films - Director / Editor.
+
+Best candidates to review first:
+- https://www.youtube.com/watch?v=Gz9HV2XtXzM - visual hook / greenery / workspace atmosphere
+- https://www.youtube.com/watch?v=d5icTKIbL9E - SAMSUNG branded spatial lifestyle
+- https://www.youtube.com/watch?v=wiG0h7wofnw - kitchen appliance lifestyle warmth
+- https://www.youtube.com/watch?v=-64_T9ms6kM&t=106s - old-house transformation / emotional response
+- https://www.youtube.com/watch?v=0zkXVU3m7Jc - small-space problem solving
+- https://www.youtube.com/watch?v=me4KutyUoT4&t=111s - LG x Sunny branded home transformation
+
 ## Website Positioning Draft
 
 English:
