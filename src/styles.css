@@ -11,6 +11,13 @@
   --blue: #7cc7ff;
   --light-x: 50%;
   --light-y: 30%;
+  --beam-opacity: 0;
+  --beam-left-x: -10vw;
+  --beam-right-x: 58vw;
+  --beam-y: -20vh;
+  --beam-rotate-left: 20deg;
+  --beam-rotate-right: -20deg;
+  --beam-scale: 1;
 }
 
 * {
@@ -33,19 +40,59 @@ body {
 
 body::before {
   background:
-    radial-gradient(circle at var(--light-x) var(--light-y), rgba(216, 255, 62, 0.2), rgba(216, 255, 62, 0.07) 16rem, transparent 28rem),
-    radial-gradient(circle at calc(var(--light-x) + 22%) calc(var(--light-y) - 12%), rgba(124, 199, 255, 0.11), transparent 22rem),
-    linear-gradient(115deg, transparent 12%, rgba(247, 242, 232, 0.055) 44%, transparent 68%);
+    radial-gradient(circle at var(--light-x) var(--light-y), rgba(216, 255, 62, 0.13), rgba(216, 255, 62, 0.05) 16rem, transparent 28rem),
+    radial-gradient(circle at calc(var(--light-x) + 22%) calc(var(--light-y) - 12%), rgba(124, 199, 255, 0.08), transparent 22rem),
+    linear-gradient(115deg, transparent 12%, rgba(247, 242, 232, 0.04) 44%, transparent 68%);
   content: "";
   filter: blur(1px);
   inset: 0;
-  opacity: 0.68;
+  opacity: 0.5;
   pointer-events: none;
   position: fixed;
   transition:
     background-position 900ms ease,
     opacity 500ms ease;
   z-index: 0;
+}
+
+.light-beam-layer {
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: fixed;
+  z-index: 0;
+}
+
+.light-beam {
+  filter: blur(42px);
+  height: 80vh;
+  opacity: var(--beam-opacity);
+  position: absolute;
+  top: var(--beam-y);
+  width: 60vw;
+  will-change: opacity, transform;
+}
+
+.light-beam::before {
+  background:
+    radial-gradient(ellipse at top, rgba(216, 255, 62, 0.45), rgba(124, 199, 255, 0.18) 42%, transparent 76%),
+    linear-gradient(180deg, rgba(247, 242, 232, 0.08), transparent 72%);
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.light-beam-left {
+  left: var(--beam-left-x);
+  transform: rotate(var(--beam-rotate-left)) scale(var(--beam-scale));
+  transform-origin: 0 0;
+}
+
+.light-beam-right {
+  right: auto;
+  left: var(--beam-right-x);
+  transform: rotate(var(--beam-rotate-right)) scale(var(--beam-scale));
+  transform-origin: 100% 0;
 }
 
 a {
@@ -1429,6 +1476,7 @@ a {
 
 @media (prefers-reduced-motion: reduce) {
   body::before,
+  .light-beam-layer,
   .hero-media::before,
   .section::before,
   .works-section::after {

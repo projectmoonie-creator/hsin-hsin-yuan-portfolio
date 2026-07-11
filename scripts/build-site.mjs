@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
 const SITE_ORIGIN = "https://hsin-hsin-yuan-portfolio.vercel.app";
-const ASSET_VERSION = "20260711-guided-light";
+const ASSET_VERSION = "20260711-anime-beams";
 
 export function parseFrontmatter(source) {
   const match = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
@@ -409,6 +409,10 @@ export function renderPage({ lang, site, works }) {
     <script type="module" src="/main.js?v=${ASSET_VERSION}"></script>
   </head>
   <body>
+    <div class="light-beam-layer" aria-hidden="true">
+      <span class="light-beam light-beam-left"></span>
+      <span class="light-beam light-beam-right"></span>
+    </div>
     <div class="site-shell">
       <header class="topbar">
         <div class="brand">${escapeHtml(copy.navName)}</div>
@@ -561,6 +565,8 @@ function build() {
   writeFileSync(join(dist, "index.html"), '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=/en/">');
   cpSync(join(root, "src/styles.css"), join(dist, "styles.css"));
   cpSync(join(root, "src/main.js"), join(dist, "main.js"));
+  mkdirSync(join(dist, "vendor"), { recursive: true });
+  cpSync(join(root, "node_modules/animejs/dist/bundles/anime.esm.min.js"), join(dist, "vendor/anime.esm.min.js"));
 
   if (existsSync(join(root, "public"))) {
     cpSync(join(root, "public"), dist, { recursive: true });

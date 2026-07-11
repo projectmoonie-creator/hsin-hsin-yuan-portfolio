@@ -1,7 +1,44 @@
+import { animate } from "./vendor/anime.esm.min.js";
+
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (!prefersReducedMotion) {
   const sections = Array.from(document.querySelectorAll(".section"));
+  const lightState = {
+    x: 56,
+    y: 24,
+    beamOpacity: 0,
+    beamLeftX: -10,
+    beamRightX: 58,
+    beamY: -20,
+    beamScale: 1,
+  };
+  let lightAnimation;
+
+  function renderLightState() {
+    const rootStyle = document.documentElement.style;
+    rootStyle.setProperty("--light-x", `${lightState.x}%`);
+    rootStyle.setProperty("--light-y", `${lightState.y}%`);
+    rootStyle.setProperty("--beam-opacity", String(lightState.beamOpacity));
+    rootStyle.setProperty("--beam-left-x", `${lightState.beamLeftX}vw`);
+    rootStyle.setProperty("--beam-right-x", `${lightState.beamRightX}vw`);
+    rootStyle.setProperty("--beam-y", `${lightState.beamY}vh`);
+    rootStyle.setProperty("--beam-scale", String(lightState.beamScale));
+  }
+
+  function animateLightState(target, duration = 1200) {
+    lightAnimation?.pause();
+    lightAnimation = animate(lightState, {
+      ...target,
+      duration,
+      ease: "outCubic",
+      onUpdate: renderLightState,
+    });
+  }
+
+  window.setTimeout(() => {
+    animateLightState({ beamOpacity: 0.72, beamY: -13, beamScale: 1.03 }, 1800);
+  }, 500);
 
   document.querySelectorAll("[data-horizontal-scroll]").forEach((section) => {
     const track = section.querySelector(".works-track");
@@ -69,13 +106,24 @@ if (!prefersReducedMotion) {
     const activeIndex = Math.max(0, sections.indexOf(activeSection));
     const lightY = Math.min(76, Math.max(22, 24 + activeIndex * 8));
     const lightX = activeSection.classList.contains("works-section") ? 82 : 56;
+    const isWorks = activeSection.classList.contains("works-section");
 
     sections.forEach((section) => {
       section.classList.toggle("is-guided", section === activeSection);
     });
     activeSection.classList.add("is-lit");
-    document.documentElement.style.setProperty("--light-x", `${lightX}%`);
-    document.documentElement.style.setProperty("--light-y", `${lightY}%`);
+    animateLightState(
+      {
+        x: lightX,
+        y: lightY,
+        beamOpacity: isWorks ? 0.82 : 0.7,
+        beamLeftX: isWorks ? -18 : -10,
+        beamRightX: isWorks ? 52 : 58,
+        beamY: isWorks ? -8 : -13,
+        beamScale: isWorks ? 1.08 : 1.03,
+      },
+      950,
+    );
   }
 
   let lightFrame = 0;

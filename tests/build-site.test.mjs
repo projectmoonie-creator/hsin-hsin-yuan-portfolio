@@ -71,6 +71,9 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.match(html, /<span><span class="role-slash">\/<\/span> Cross-Cultural Storyteller<\/span>/);
   assert.doesNotMatch(html, /<div class="hero-roles">.*AI-Language Creative.*<\/div>/s);
   assert.match(html, /<div class="hero-media" id="showreel">/);
+  assert.match(html, /class="light-beam-layer"/);
+  assert.match(html, /light-beam-left/);
+  assert.match(html, /light-beam-right/);
   assert.match(html, /<video[\s\S]*class="hero-showreel-video"[\s\S]*data-showreel-video/);
   assert.match(html, /muted/);
   assert.match(html, /webkit-playsinline/);
@@ -133,6 +136,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.equal(existsSync(join(root, "dist/zh/index.html")), true);
   assert.equal(existsSync(join(root, "dist/styles.css")), true);
   assert.equal(existsSync(join(root, "dist/main.js")), true);
+  assert.equal(existsSync(join(root, "dist/vendor/anime.esm.min.js")), true);
   assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel.mp4")), true);
   assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel-poster.png")), true);
 
