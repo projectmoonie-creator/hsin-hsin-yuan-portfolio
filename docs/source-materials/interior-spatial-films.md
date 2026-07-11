@@ -352,6 +352,79 @@ Search term used: `龍美窗簾`
 | unknown, 2020 | 2020-08-07 | Shoot notice | 台南隆美拍攝通知 | 台南 | not visible | 幸福空間-Kiki_lai | Possible | Strong client memory match; snippet includes old forwarded thread unrelated to this project, so keep conservative. |
 | unknown | 2020-09-25 | Asset / logo | 隆美窗簾 LOGO | n/a | n/a | Vincent | Possible | Likely production asset support, not a shoot by itself. |
 
+### Additional `欣欣導` Search Results
+
+Search term used: `欣欣導`
+
+| Shoot date | Evidence date | Type | Project / company from subject | Location hint | Visible crew marker | Producer / sender | Confidence | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2023-10-18 | 2023-10-12 | 百科 | 巧將電視百科 | 台中 | 無-欣欣+吉哥+A | 幸福空間-Nini | Likely | Adds another 2023 design-company candidate. |
+| 2022-12-19 | 2022-12-16 | 百科 | 林內 x 浮見月網路百科 | 板橋 | 芳瑜-欣欣+吉哥+A | 幸福空間-Nini | Likely | Branded / vendor-integrated spatial content; good for collaboration list. |
+| 2021-11-10 | 2021-11-04 | 百科 | 為騏網路百科 | 苗栗 | not visible in subject | 幸福空間-Irene | Possible | Found under `欣欣導`, but visible subject line did not show the crew marker; needs verification. |
+| 2021-08-13 | 2021-08-09 | 5M百科 | 太平洋廚電5M電視百科 | 外雙溪 | 欣欣導+吉哥攝影班 | 幸福空間-Irene | Confirmed | Strong evidence and matches public 太平洋廚電 category. |
+| 2021-08-05 | 2021-07-29 / 2021-08-02 | 電視百科 | 澄境百科 | 文山區 | 欣欣導+小蔣攝影班 | 幸福空間-Irene | Confirmed | Strong evidence: visible subject includes `欣欣導`. |
+| 2021-08-04 | 2021-07-29 / 2021-07-30 | 達人 | 奧立佛達人 | 高雄 | 花花-欣欣導+小蔣攝影班 | 幸福空間-Irene | Confirmed | Strong evidence: visible subject includes `欣欣導`. |
+| 2021-08-03 | 2021-07-29 / 2021-07-30 | 達人 | 豐聚達人 | 台中 | 王心恬-欣欣導+吉哥攝影班 | 幸福空間-Irene | Confirmed | Strong evidence: visible subject includes `欣欣導`. |
+| 2021-05-12 | 2021-05-05 / 2021-05-10 | 網路百科 | 存果網路百科 | 桃園 | 欣欣導+吉哥攝影班 | 幸福空間-Irene | Confirmed | Strong evidence: visible subject includes `欣欣導`. |
+
+### Collaboration Company Pool
+
+This list is for internal consolidation only. It combines public video links, visible email evidence, and user memory. Use only selected/confirmed items publicly.
+
+Confirmed or likely production/client/company names so far:
+- 幸福空間 Gorgeous Space
+- 隆美窗簾 / 隆美窗飾
+- 大同
+- 子境室內裝修設計
+- 菓子空間室內設計
+- 方澤設計
+- 安藤國際室內裝修
+- 蘭庭設計
+- 大衛麥可室內設計
+- 新傑創室內設計
+- 拾真空間設計
+- 今城
+- 微自然室內裝修設計
+- 墐桐空間美學
+- 艾美幸福設計
+- 巧將設計
+- 林內
+- 浮見月
+- 太平洋廚電
+- 澄境
+- 奧立佛
+- 豐聚室內裝修設計
+- 存果
+- 舒杰室內裝修設計 / Dj + PLUS Design
+- SAMSUNG The Frame TV
+- LG
+- 禾郅室內裝修
+- 禾熙室內裝修設計
+- 京彩室內設計
+- 亞舍生活室內裝修
+
+Current public-facing experience framing:
+
+English:
+2020-2024 / Director & Editor, Interior Design and Branded Spatial Content. Directed and edited short-form films for interior design studios, home renovation cases, platform programming, and home/lifestyle brand collaborations, translating spaces, products, and design value into audience-facing stories.
+
+Chinese:
+2020-2024 / 室內設計與空間品牌影像導演、剪輯。為室內設計公司、住宅改造案、平台節目與居家生活品牌合作內容擔任導演 / 剪輯，將空間、產品與設計價值整理成觀眾看得懂的短影音故事。
+
+## Additional Secondary Credits
+
+### 無事坐巴士
+
+- Status: user-provided credit; source check pending against CV/email.
+- Platform: 公視台語台
+- Role: 企劃編劇
+- Positioning: secondary but meaningful public-broadcast credit; better placed in Selected Archive or Additional Experience, not among the main featured visual works.
+- Public context found so far: the program is associated with 公視台語台 and has been described publicly as a travel / local culture program built around bus journeys. Search results indicate it began in 2019 and received Golden Bell nominations, but this credit should be verified against CV or email before public website copy is finalized.
+
+Potential website phrasing:
+- EN: Planning Writer, "Bô-sū Tsē Bá-suh" / No Trouble Taking the Bus, PTS Taigi.
+- ZH: 公視台語台《無事坐巴士》企劃編劇。
+
 Next useful searches:
 - `欣欣+吉哥`
 - `欣欣導`
