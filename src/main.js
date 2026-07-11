@@ -1,6 +1,8 @@
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (!prefersReducedMotion) {
+  const sections = Array.from(document.querySelectorAll(".section"));
+
   document.querySelectorAll("[data-horizontal-scroll]").forEach((section) => {
     const track = section.querySelector(".works-track");
     if (!track) return;
@@ -38,14 +40,56 @@ if (!prefersReducedMotion) {
       },
     );
 
-    document.querySelectorAll(".section").forEach((section) => {
+    sections.forEach((section) => {
       lightObserver.observe(section);
     });
   } else {
-    document.querySelectorAll(".section").forEach((section) => {
+    sections.forEach((section) => {
       section.classList.add("is-lit");
     });
   }
+
+  function updateGuidingLight() {
+    if (!sections.length) return;
+
+    const viewportCenter = window.innerHeight * 0.48;
+    let activeSection = sections[0];
+    let closestDistance = Infinity;
+
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      const sectionCenter = rect.top + rect.height * 0.38;
+      const distance = Math.abs(sectionCenter - viewportCenter);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        activeSection = section;
+      }
+    });
+
+    const activeIndex = Math.max(0, sections.indexOf(activeSection));
+    const lightY = Math.min(76, Math.max(22, 24 + activeIndex * 8));
+    const lightX = activeSection.classList.contains("works-section") ? 82 : 56;
+
+    sections.forEach((section) => {
+      section.classList.toggle("is-guided", section === activeSection);
+    });
+    activeSection.classList.add("is-lit");
+    document.documentElement.style.setProperty("--light-x", `${lightX}%`);
+    document.documentElement.style.setProperty("--light-y", `${lightY}%`);
+  }
+
+  let lightFrame = 0;
+  function scheduleGuidingLight() {
+    if (lightFrame) return;
+    lightFrame = window.requestAnimationFrame(() => {
+      lightFrame = 0;
+      updateGuidingLight();
+    });
+  }
+
+  updateGuidingLight();
+  window.addEventListener("scroll", scheduleGuidingLight, { passive: true });
+  window.addEventListener("resize", scheduleGuidingLight);
 }
 
 const showreelMedia = document.querySelector("#showreel");

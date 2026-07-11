@@ -9,6 +9,8 @@
   --acid-soft: rgba(216, 255, 62, 0.22);
   --heat: #ff4d1f;
   --blue: #7cc7ff;
+  --light-x: 50%;
+  --light-y: 30%;
 }
 
 * {
@@ -30,18 +32,19 @@ body {
 }
 
 body::before {
-  animation: ambientReflection 26s ease-in-out infinite alternate;
   background:
-    radial-gradient(circle at 18% 24%, rgba(216, 255, 62, 0.08), transparent 18rem),
-    radial-gradient(circle at 84% 18%, rgba(124, 199, 255, 0.07), transparent 20rem),
-    linear-gradient(115deg, transparent 18%, rgba(247, 242, 232, 0.035) 44%, transparent 62%);
+    radial-gradient(circle at var(--light-x) var(--light-y), rgba(216, 255, 62, 0.2), rgba(216, 255, 62, 0.07) 16rem, transparent 28rem),
+    radial-gradient(circle at calc(var(--light-x) + 22%) calc(var(--light-y) - 12%), rgba(124, 199, 255, 0.11), transparent 22rem),
+    linear-gradient(115deg, transparent 12%, rgba(247, 242, 232, 0.055) 44%, transparent 68%);
   content: "";
-  filter: blur(2px);
+  filter: blur(1px);
   inset: 0;
-  opacity: 0.46;
+  opacity: 0.68;
   pointer-events: none;
   position: fixed;
-  transform: translate3d(0, 0, 0);
+  transition:
+    background-position 900ms ease,
+    opacity 500ms ease;
   z-index: 0;
 }
 
@@ -140,12 +143,12 @@ a {
 }
 
 .hero-media::before {
-  animation: frameReflection 9s ease-in-out infinite;
-  background: linear-gradient(115deg, transparent 4%, transparent 36%, rgba(216, 255, 62, 0.45) 47%, rgba(247, 242, 232, 0.16) 50%, transparent 62%, transparent 100%);
+  animation: frameReflection 7.5s ease-in-out infinite;
+  background: linear-gradient(115deg, transparent 4%, transparent 30%, rgba(216, 255, 62, 0.6) 46%, rgba(247, 242, 232, 0.22) 50%, transparent 66%, transparent 100%);
   border-radius: inherit;
   content: "";
   inset: 0;
-  opacity: 0.36;
+  opacity: 0.5;
   padding: 1px;
   pointer-events: none;
   position: absolute;
@@ -367,9 +370,9 @@ a {
 }
 
 .section::before {
-  background: linear-gradient(90deg, transparent, rgba(216, 255, 62, 0.34), rgba(247, 242, 232, 0.13), transparent);
+  background: linear-gradient(90deg, transparent, rgba(216, 255, 62, 0.58), rgba(247, 242, 232, 0.22), transparent);
   content: "";
-  height: 1px;
+  height: 2px;
   left: clamp(1rem, 5vw, 4rem);
   opacity: 0;
   pointer-events: none;
@@ -380,12 +383,20 @@ a {
 }
 
 .section.is-lit::before {
-  animation: sectionReflection 1500ms ease both;
+  animation: sectionReflection 1800ms ease both;
+}
+
+.section.is-guided::before {
+  box-shadow: 0 0 24px rgba(216, 255, 62, 0.12);
+  opacity: 0.4;
+  transform: translateX(0);
 }
 
 .section.is-lit .section-title,
-.section.is-lit .about-tab.is-active {
-  text-shadow: 0 0 18px rgba(216, 255, 62, 0.18);
+.section.is-lit .about-tab.is-active,
+.section.is-guided .section-title,
+.section.is-guided .about-tab.is-active {
+  text-shadow: 0 0 24px rgba(216, 255, 62, 0.28);
 }
 
 .section-intro {
@@ -562,24 +573,29 @@ a {
 }
 
 .works-section::after {
-  background: radial-gradient(ellipse at center, rgba(216, 255, 62, 0.18), rgba(216, 255, 62, 0.06) 38%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(216, 255, 62, 0.34), rgba(216, 255, 62, 0.12) 38%, transparent 72%);
   content: "";
-  filter: blur(8px);
+  filter: blur(10px);
   height: 70%;
   opacity: 0;
   pointer-events: none;
   position: absolute;
-  right: -5rem;
+  right: -4rem;
   top: 18%;
   transform: translateX(1.5rem);
   transition:
     opacity 900ms ease,
     transform 900ms ease;
-  width: 12rem;
+  width: 15rem;
 }
 
 .works-section.is-lit::after {
-  opacity: 0.42;
+  opacity: 0.72;
+  transform: translateX(0);
+}
+
+.works-section.is-guided::after {
+  opacity: 0.86;
   transform: translateX(0);
 }
 
@@ -628,7 +644,11 @@ a {
 }
 
 .works-section.is-lit .work-panel:first-child {
-  box-shadow: 0 0 0 1px rgba(216, 255, 62, 0.08), 0 24px 90px rgba(216, 255, 62, 0.035);
+  box-shadow: 0 0 0 1px rgba(216, 255, 62, 0.14), 0 24px 90px rgba(216, 255, 62, 0.07);
+}
+
+.works-section.is-guided .work-panel:first-child {
+  box-shadow: 0 0 0 1px rgba(216, 255, 62, 0.18), 0 24px 90px rgba(216, 255, 62, 0.1);
 }
 
 .media-frame {
@@ -1318,7 +1338,11 @@ a {
   }
 
   .works-section.is-lit::after {
-    opacity: 0.25;
+    opacity: 0.48;
+  }
+
+  .works-section.is-guided::after {
+    opacity: 0.62;
   }
 }
 
