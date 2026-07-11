@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
 const SITE_ORIGIN = "https://hsin-hsin-yuan-portfolio.vercel.app";
-const ASSET_VERSION = "20260711-light";
+const ASSET_VERSION = "20260711-composer";
 
 export function parseFrontmatter(source) {
   const match = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
