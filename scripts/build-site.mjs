@@ -6,6 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
 const SITE_ORIGIN = "https://hsin-hsin-yuan-portfolio.vercel.app";
+const ASSET_VERSION = "20260711-tabs";
 
 export function parseFrontmatter(source) {
   const match = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
@@ -404,8 +405,8 @@ export function renderPage({ lang, site, works }) {
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="preload" as="image" href="/assets/portfolio/hsin-working-white-space.jpg">
-    <link rel="stylesheet" href="/styles.css">
-    <script type="module" src="/main.js"></script>
+    <link rel="stylesheet" href="/styles.css?v=${ASSET_VERSION}">
+    <script type="module" src="/main.js?v=${ASSET_VERSION}"></script>
   </head>
   <body>
     <div class="site-shell">
