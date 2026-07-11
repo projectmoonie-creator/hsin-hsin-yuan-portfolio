@@ -142,6 +142,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
 
   const zh = readFileSync(join(root, "dist/zh/index.html"), "utf8");
   const css = readFileSync(join(root, "dist/styles.css"), "utf8");
+  const js = readFileSync(join(root, "dist/main.js"), "utf8");
   assert.match(zh, /紀錄片導演/);
   assert.match(zh, /觀看 showreel/);
   assert.match(zh, /關於我/);
@@ -180,5 +181,9 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.partner-name \{\n  display: none;/);
   assert.match(css, /\.hero h1 span \{\n  display: block;\n  white-space: nowrap;/);
   assert.match(css, /\.hero-roles \.role-slash \{\n  color: var\(--acid\);/);
+  assert.match(css, /\.edge-light/);
+  assert.match(css, /--edge-proximity/);
+  assert.match(js, /getEdgeProximity/);
+  assert.match(js, /pointermove/);
   assert.match(css, /@media \(max-width: 460px\) \{\n  \.hero h1 \{\n    font-size: clamp\(2\.65rem, 14vw, 3\.45rem\);/);
 });

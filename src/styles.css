@@ -99,6 +99,64 @@ a {
   color: inherit;
 }
 
+.edge-glow-card {
+  --edge-proximity: 0;
+  --cursor-angle: 120deg;
+  --edge-glow-radius: 42px;
+  --edge-glow-intensity: 0.72;
+  isolation: isolate;
+}
+
+.edge-glow-card > :not(.edge-light) {
+  position: relative;
+  z-index: 1;
+}
+
+.edge-light {
+  background:
+    conic-gradient(
+      from calc(var(--cursor-angle) - 28deg),
+      transparent 0deg,
+      rgba(216, 255, 62, 0.02) 10deg,
+      rgba(216, 255, 62, calc(0.54 * var(--edge-glow-intensity))) 23deg,
+      rgba(124, 199, 255, calc(0.2 * var(--edge-glow-intensity))) 33deg,
+      transparent 58deg,
+      transparent 360deg
+    );
+  border-radius: inherit;
+  content: "";
+  filter: blur(calc(var(--edge-glow-radius) * 0.25));
+  inset: 0;
+  opacity: calc(var(--edge-proximity) / 100);
+  padding: 1px;
+  pointer-events: none;
+  position: absolute;
+  z-index: 3;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.hero-media.edge-glow-card {
+  --edge-glow-radius: 54px;
+  --edge-glow-intensity: 0.86;
+}
+
+.work-panel.edge-glow-card {
+  --edge-glow-radius: 34px;
+  --edge-glow-intensity: 0.58;
+}
+
+.contact-form.edge-glow-card {
+  --edge-glow-radius: 48px;
+  --edge-glow-intensity: 0.72;
+}
+
 .site-shell {
   overflow: hidden;
   position: relative;

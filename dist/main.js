@@ -138,6 +138,69 @@ if (!prefersReducedMotion) {
   updateGuidingLight();
   window.addEventListener("scroll", scheduleGuidingLight, { passive: true });
   window.addEventListener("resize", scheduleGuidingLight);
+
+  const supportsPointerGlow = window.matchMedia("(pointer: fine)").matches;
+  if (supportsPointerGlow) {
+    const glowTargets = Array.from(document.querySelectorAll(".hero-media, .work-panel, .contact-form"));
+
+    function getEdgeProximity(element, x, y) {
+      const { width, height } = element.getBoundingClientRect();
+      const cx = width / 2;
+      const cy = height / 2;
+      const dx = x - cx;
+      const dy = y - cy;
+      const kx = dx === 0 ? Infinity : cx / Math.abs(dx);
+      const ky = dy === 0 ? Infinity : cy / Math.abs(dy);
+      return Math.min(Math.max(1 / Math.min(kx, ky), 0), 1);
+    }
+
+    function getCursorAngle(element, x, y) {
+      const { width, height } = element.getBoundingClientRect();
+      const dx = x - width / 2;
+      const dy = y - height / 2;
+      if (dx === 0 && dy === 0) return 0;
+      const degrees = (Math.atan2(dy, dx) * 180) / Math.PI + 90;
+      return degrees < 0 ? degrees + 360 : degrees;
+    }
+
+    glowTargets.forEach((target) => {
+      target.classList.add("edge-glow-card");
+      target.style.setProperty("--edge-proximity", "0");
+      target.style.setProperty("--cursor-angle", "120deg");
+      if (!target.querySelector(":scope > .edge-light")) {
+        const light = document.createElement("span");
+        light.className = "edge-light";
+        light.setAttribute("aria-hidden", "true");
+        target.append(light);
+      }
+
+      let edgeFade;
+      target.addEventListener("pointermove", (event) => {
+        const rect = target.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        const edge = getEdgeProximity(target, x, y);
+        const angle = getCursorAngle(target, x, y);
+        edgeFade?.pause();
+        target.style.setProperty("--edge-proximity", `${(edge * 100).toFixed(3)}`);
+        target.style.setProperty("--cursor-angle", `${angle.toFixed(3)}deg`);
+      });
+
+      target.addEventListener("pointerleave", () => {
+        const state = {
+          edge: Number.parseFloat(target.style.getPropertyValue("--edge-proximity")) || 0,
+        };
+        edgeFade = animate(state, {
+          edge: 0,
+          duration: 520,
+          ease: "outCubic",
+          onUpdate: () => {
+            target.style.setProperty("--edge-proximity", state.edge.toFixed(3));
+          },
+        });
+      });
+    });
+  }
 }
 
 const showreelMedia = document.querySelector("#showreel");
