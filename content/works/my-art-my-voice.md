@@ -77,11 +77,11 @@
     {
       "type": {"en": "Interview", "zh": "訪談"},
       "title": {
-        "en": "Director interview",
-        "zh": "導演訪談"
+        "en": "Director interview: walking into the sea of creation",
+        "zh": "真誠地往前走，走進創作的大海"
       },
-      "source": {"en": "Link pending", "zh": "待補連結"},
-      "url": "",
+      "source": {"en": "Very Mulan", "zh": "非常木蘭"},
+      "url": "https://www.verymulan.com/story/真誠地往前走，走進創作的大海：專訪巴黎文化奧運紀錄片導演袁欣欣-15241.html",
       "image": "/assets/portfolio/my-art-my-voice-interview.jpg"
     }
   ],
