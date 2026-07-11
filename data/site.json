@@ -55,10 +55,18 @@
     "collabTitle": "Platforms & Collaborations",
     "contactTitle": "Let’s build a story with signal.",
     "contactSubcopy": "For documentary, cultural, branded, AI-language, and cross-cultural production collaborations. Send a brief note about the project, timeline, and what kind of partner you need.",
-    "contactCta": "Contact Hsin-Hsin",
-    "email": "hsin54@yahoo.com",
+    "contactCta": "Send inquiry",
+    "contactForm": {
+      "name": "Name",
+      "email": "Email",
+      "projectType": "Project type",
+      "message": "Message",
+      "link": "Optional link",
+      "submit": "Send inquiry",
+      "success": "Thank you. Your note has been sent.",
+      "error": "Something went wrong. Please try again later."
+    },
     "contactLinks": [
-      {"label": "Email", "href": "mailto:hsin54@yahoo.com"},
       {"label": "GitHub", "href": "https://github.com/projectmoonie-creator"}
     ]
   },
@@ -118,10 +126,18 @@
     "collabTitle": "合作與平台",
     "contactTitle": "一起做一個有訊號的故事。",
     "contactSubcopy": "紀錄片、文化內容、品牌短影音、AI 語言與跨文化製作合作洽詢。來信可以簡單說明專案、時程，以及你需要哪一種合作角色。",
-    "contactCta": "聯絡袁欣欣",
-    "email": "hsin54@yahoo.com",
+    "contactCta": "送出洽詢",
+    "contactForm": {
+      "name": "姓名",
+      "email": "回覆信箱",
+      "projectType": "合作類型",
+      "message": "訊息",
+      "link": "參考連結（選填）",
+      "submit": "送出洽詢",
+      "success": "謝謝，訊息已送出。",
+      "error": "送出時發生問題，請稍後再試。"
+    },
     "contactLinks": [
-      {"label": "Email", "href": "mailto:hsin54@yahoo.com"},
       {"label": "GitHub", "href": "https://github.com/projectmoonie-creator"}
     ]
   }

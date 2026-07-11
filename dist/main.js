@@ -68,3 +68,45 @@ showreelVideo?.addEventListener("ended", () => {
   showreelVideo.currentTime = 0;
   showreelVideo.controls = false;
 });
+
+document.querySelectorAll("[data-contact-form]").forEach((form) => {
+  const startedAt = form.querySelector("[data-contact-started-at]");
+  const status = form.querySelector("[data-contact-status]");
+  if (startedAt) startedAt.value = String(Date.now());
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const submit = form.querySelector("[type='submit']");
+    const formData = new FormData(form);
+
+    submit?.setAttribute("disabled", "disabled");
+    if (status) {
+      status.textContent = "";
+      status.dataset.state = "pending";
+    }
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new URLSearchParams(formData),
+      });
+      const result = await response.json().catch(() => ({ ok: false }));
+      if (!response.ok || !result.ok) throw new Error("Contact request failed");
+
+      form.reset();
+      if (startedAt) startedAt.value = String(Date.now());
+      if (status) {
+        status.textContent = status.dataset.success || "Sent.";
+        status.dataset.state = "success";
+      }
+    } catch {
+      if (status) {
+        status.textContent = status.dataset.error || "Please try again later.";
+        status.dataset.state = "error";
+      }
+    } finally {
+      submit?.removeAttribute("disabled");
+    }
+  });
+});

@@ -95,7 +95,12 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.match(html, /AI \/ Language Lab/);
   assert.match(html, /fact-checked bilingual script workflow/i);
   assert.match(html, /Selected Archive/);
-  assert.match(html, /contact-links/);
+  assert.match(html, /<form class="contact-form" action="\/api\/contact" method="post" data-contact-form>/);
+  assert.match(html, /name="startedAt"/);
+  assert.match(html, /name="website"/);
+  assert.match(html, /Project type/);
+  assert.match(html, /Send inquiry/);
+  assert.doesNotMatch(html, /mailto:/);
   assert.match(html, /partner-wordmark/);
   assert.doesNotMatch(html, /\/assets\/logos\/taiwanplus.svg/);
   assert.match(html, /Happy Space/);
@@ -134,6 +139,9 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /精選舊作/);
   assert.match(zh, /觀看完整單集/);
   assert.match(zh, /觀看完整系列/);
+  assert.match(zh, /合作類型/);
+  assert.match(zh, /送出洽詢/);
+  assert.doesNotMatch(zh, /mailto:/);
   assert.doesNotMatch(zh, /舊.*履歷/);
   assert.match(css, /grid-auto-columns: clamp\(320px, 31vw, 460px\)/);
   assert.match(css, /grid-template-rows: auto 1fr/);

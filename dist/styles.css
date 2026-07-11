@@ -723,6 +723,10 @@ a {
   place-items: center start;
 }
 
+.contact-content {
+  width: min(100%, 980px);
+}
+
 .contact h2 {
   font-size: clamp(3rem, 9vw, 8rem);
   letter-spacing: 0;
@@ -736,6 +740,89 @@ a {
   font-size: clamp(1rem, 2vw, 1.35rem);
   line-height: 1.45;
   max-width: 44rem;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  max-width: 58rem;
+}
+
+.contact-field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.contact-field span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contact-field input,
+.contact-field textarea {
+  background: rgba(247, 242, 232, 0.05);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  color: var(--ink);
+  font: inherit;
+  min-width: 0;
+  padding: 0.9rem 1rem;
+}
+
+.contact-field textarea {
+  resize: vertical;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  border-color: var(--acid);
+  outline: 1px solid var(--acid);
+  outline-offset: 2px;
+}
+
+.contact-field-wide,
+.contact-submit,
+.contact-status {
+  grid-column: 1 / -1;
+}
+
+.contact-submit {
+  background: transparent;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  color: var(--ink);
+  cursor: pointer;
+  justify-self: start;
+}
+
+.contact-submit:disabled {
+  color: var(--muted);
+  cursor: wait;
+}
+
+.contact-status {
+  font-size: 0.95rem;
+  margin: 0;
+  min-height: 1.4rem;
+}
+
+.contact-status[data-state="success"] {
+  color: var(--acid);
+}
+
+.contact-status[data-state="error"] {
+  color: var(--heat);
+}
+
+.contact-field-hidden {
+  left: -9999px;
+  position: absolute;
 }
 
 .contact-links {
@@ -877,6 +964,10 @@ a {
 
   .services-grid,
   .lab-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form {
     grid-template-columns: 1fr;
   }
 

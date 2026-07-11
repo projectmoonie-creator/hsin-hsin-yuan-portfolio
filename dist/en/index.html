@@ -60,7 +60,7 @@
             <div class="hero-roles"><span>Documentary Director <span class="role-slash">/</span> Writer <span class="role-slash">/</span> Producer</span><span><span class="role-slash">/</span> Cross-Cultural Storyteller</span></div>
             <p class="hero-subcopy">I direct and develop documentary stories for artists, culture, and technology teams working across Taiwan and international contexts. I help complex subjects become human, cinematic, and clear enough to travel.</p>
             <div class="hero-actions">
-              <a class="button-link" href="mailto:hsin54@yahoo.com">Work with me</a>
+              <a class="button-link" href="#contact">Work with me</a>
               <a class="button-link button-link-muted" href="#works">See works</a>
             </div>
           </div>
@@ -493,8 +493,38 @@
           <div class="contact-content">
             <h2>Let’s build a story with signal.</h2>
             <p>For documentary, cultural, branded, AI-language, and cross-cultural production collaborations. Send a brief note about the project, timeline, and what kind of partner you need.</p>
-            <a class="button-link" href="mailto:hsin54@yahoo.com">Contact Hsin-Hsin</a>
-            <div class="contact-links"><a href="mailto:hsin54@yahoo.com" target="_self" rel="noreferrer">Email</a><a href="https://github.com/projectmoonie-creator" target="_blank" rel="noreferrer">GitHub</a></div>
+
+    <form class="contact-form" action="/api/contact" method="post" data-contact-form>
+      <input type="hidden" name="startedAt" value="" data-contact-started-at>
+      <label class="contact-field contact-field-hidden" aria-hidden="true">
+        <span>Website</span>
+        <input name="website" tabindex="-1" autocomplete="off">
+      </label>
+      <label class="contact-field">
+        <span>Name</span>
+        <input name="name" type="text" autocomplete="name" required>
+      </label>
+      <label class="contact-field">
+        <span>Email</span>
+        <input name="email" type="email" autocomplete="email" required>
+      </label>
+      <label class="contact-field">
+        <span>Project type</span>
+        <input name="projectType" type="text" required>
+      </label>
+      <label class="contact-field">
+        <span>Optional link</span>
+        <input name="link" type="url" inputmode="url">
+      </label>
+      <label class="contact-field contact-field-wide">
+        <span>Message</span>
+        <textarea name="message" rows="6" required></textarea>
+      </label>
+      <button class="button-link contact-submit" type="submit">Send inquiry</button>
+      <p class="contact-status" data-contact-status aria-live="polite" data-success="Thank you. Your note has been sent." data-error="Something went wrong. Please try again later."></p>
+    </form>
+
+            <div class="contact-links"><a href="https://github.com/projectmoonie-creator" target="_blank" rel="noreferrer">GitHub</a></div>
           </div>
         </section>
       </main>

@@ -275,12 +275,48 @@ function renderCollaborations(items = []) {
 
 function renderContactLinks(links = []) {
   return links
-    .map((link) => `<a href="${escapeHtml(link.href)}" target="${link.href.startsWith("mailto:") ? "_self" : "_blank"}" rel="noreferrer">${escapeHtml(link.label)}</a>`)
+    .map((link) => `<a href="${escapeHtml(link.href)}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>`)
     .join("");
 }
 
 function renderHeroRoleLine(role) {
   return escapeHtml(role).replaceAll("/", `<span class="role-slash">/</span>`);
+}
+
+function renderContactForm(copy) {
+  const form = copy.contactForm;
+
+  return `
+    <form class="contact-form" action="/api/contact" method="post" data-contact-form>
+      <input type="hidden" name="startedAt" value="" data-contact-started-at>
+      <label class="contact-field contact-field-hidden" aria-hidden="true">
+        <span>Website</span>
+        <input name="website" tabindex="-1" autocomplete="off">
+      </label>
+      <label class="contact-field">
+        <span>${escapeHtml(form.name)}</span>
+        <input name="name" type="text" autocomplete="name" required>
+      </label>
+      <label class="contact-field">
+        <span>${escapeHtml(form.email)}</span>
+        <input name="email" type="email" autocomplete="email" required>
+      </label>
+      <label class="contact-field">
+        <span>${escapeHtml(form.projectType)}</span>
+        <input name="projectType" type="text" required>
+      </label>
+      <label class="contact-field">
+        <span>${escapeHtml(form.link)}</span>
+        <input name="link" type="url" inputmode="url">
+      </label>
+      <label class="contact-field contact-field-wide">
+        <span>${escapeHtml(form.message)}</span>
+        <textarea name="message" rows="6" required></textarea>
+      </label>
+      <button class="button-link contact-submit" type="submit">${escapeHtml(form.submit)}</button>
+      <p class="contact-status" data-contact-status aria-live="polite" data-success="${escapeHtml(form.success)}" data-error="${escapeHtml(form.error)}"></p>
+    </form>
+  `;
 }
 
 export function renderPage({ lang, site, works }) {
@@ -360,7 +396,7 @@ export function renderPage({ lang, site, works }) {
             <div class="hero-roles">${heroRoles}</div>
             <p class="hero-subcopy">${escapeHtml(copy.heroSubcopy)}</p>
             <div class="hero-actions">
-              <a class="button-link" href="mailto:${escapeHtml(copy.email)}">${escapeHtml(copy.heroPrimaryCta)}</a>
+              <a class="button-link" href="#contact">${escapeHtml(copy.heroPrimaryCta)}</a>
               <a class="button-link button-link-muted" href="#works">${escapeHtml(copy.heroSecondaryCta)}</a>
             </div>
           </div>
@@ -441,7 +477,7 @@ export function renderPage({ lang, site, works }) {
           <div class="contact-content">
             <h2>${escapeHtml(copy.contactTitle)}</h2>
             <p>${escapeHtml(copy.contactSubcopy)}</p>
-            <a class="button-link" href="mailto:${escapeHtml(copy.email)}">${escapeHtml(copy.contactCta)}</a>
+            ${renderContactForm(copy)}
             <div class="contact-links">${renderContactLinks(copy.contactLinks)}</div>
           </div>
         </section>
