@@ -42,29 +42,42 @@ if (!prefersReducedMotion) {
     animateLightState({ beamOpacity: 0.72, beamY: -13, beamScale: 1.03 }, 1800);
   }, 500);
 
-  document.querySelectorAll("[data-horizontal-scroll]").forEach((section) => {
-    const track = section.querySelector(".works-track");
-    if (!track) return;
+  const stackMedia = window.matchMedia("(min-width: 861px)");
+  const scrollStacks = Array.from(document.querySelectorAll("[data-scroll-stack]"));
 
-    section.addEventListener(
-      "wheel",
-      (event) => {
-        const canScrollHorizontally = track.scrollWidth > track.clientWidth;
-        if (!canScrollHorizontally) return;
+  function updateScrollStacks() {
+    if (!stackMedia.matches) {
+      scrollStacks.forEach((stack) => {
+        stack.querySelectorAll(".work-panel").forEach((panel) => {
+          panel.style.removeProperty("--stack-progress");
+        });
+      });
+      return;
+    }
 
-        const atStart = track.scrollLeft <= 0;
-        const atEnd = Math.ceil(track.scrollLeft + track.clientWidth) >= track.scrollWidth;
-        const goingLeft = event.deltaY < 0;
-        const goingRight = event.deltaY > 0;
+    const viewportAnchor = window.innerHeight * 0.18;
+    scrollStacks.forEach((stack) => {
+      stack.querySelectorAll(".work-panel").forEach((panel) => {
+        const rect = panel.getBoundingClientRect();
+        const progress = Math.min(1, Math.max(0, (viewportAnchor - rect.top) / Math.max(rect.height * 0.7, 1)));
+        panel.style.setProperty("--stack-progress", progress.toFixed(3));
+      });
+    });
+  }
 
-        if ((goingLeft && atStart) || (goingRight && atEnd)) return;
+  let stackFrame = 0;
+  function scheduleScrollStackUpdate() {
+    if (stackFrame) return;
+    stackFrame = window.requestAnimationFrame(() => {
+      stackFrame = 0;
+      updateScrollStacks();
+    });
+  }
 
-        event.preventDefault();
-        track.scrollLeft += event.deltaY;
-      },
-      { passive: false },
-    );
-  });
+  updateScrollStacks();
+  window.addEventListener("scroll", scheduleScrollStackUpdate, { passive: true });
+  window.addEventListener("resize", scheduleScrollStackUpdate);
+  stackMedia.addEventListener?.("change", scheduleScrollStackUpdate);
 
   document.querySelectorAll("[data-watch-loop]").forEach((loop) => {
     const viewport = loop.querySelector(".watch-loop-viewport");

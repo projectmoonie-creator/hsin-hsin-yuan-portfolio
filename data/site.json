@@ -35,7 +35,7 @@
       {"title": "AI workflow design", "line": "Codex + Claude assisted systems for fact-checked scripts, language learning formats, and repeatable editorial work."}
     ],
     "worksLabel": "Featured Works",
-    "worksHint": "Swipe or scroll",
+    "worksHint": "Scroll to explore",
     "watchLabel": "Watch",
     "watchShelfKicker": "Screening strip",
     "watchShelfTitle": "Watch Selected Films",
@@ -117,7 +117,7 @@
       {"title": "AI 工作流設計", "line": "用 Codex + Claude 建立資料驗證型劇本、語言學習格式與可重複的編輯流程。"}
     ],
     "worksLabel": "近年代表作",
-    "worksHint": "滑動或捲動瀏覽",
+    "worksHint": "向下瀏覽",
     "watchLabel": "觀看作品",
     "watchShelfKicker": "Screening strip",
     "watchShelfTitle": "觀看精選影片",

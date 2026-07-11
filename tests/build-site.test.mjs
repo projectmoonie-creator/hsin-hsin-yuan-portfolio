@@ -60,7 +60,7 @@ test("loadMarkdownCollection returns ordered archive and lab entries", () => {
   assert.match(lab[0].title.en, /Script/i);
 });
 
-test("renderPage creates bilingual page with horizontal works and video fallbacks", () => {
+test("renderPage creates bilingual page with scroll-stack works and video fallbacks", () => {
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
   const html = renderPage({ lang: "en", site, works });
@@ -120,7 +120,9 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.ok(html.indexOf("collab-grid") < html.indexOf("about-section"));
   assert.ok(html.indexOf("about-section") < html.indexOf("works-section"));
   assert.ok(html.indexOf("works-section") < html.indexOf("impact-section"));
-  assert.match(html, /works-track/);
+  assert.match(html, /works-stack/);
+  assert.match(html, /data-scroll-stack/);
+  assert.doesNotMatch(html, /data-horizontal-scroll/);
   assert.match(html, /data-watch-loop/);
   assert.match(html, /Watch Selected Films/);
   assert.match(html, /Screening strip/);
@@ -180,8 +182,10 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /送出洽詢/);
   assert.doesNotMatch(zh, /mailto:/);
   assert.doesNotMatch(zh, /舊.*履歷/);
-  assert.match(css, /grid-auto-columns: clamp\(320px, 31vw, 460px\)/);
-  assert.match(css, /grid-template-rows: auto 1fr/);
+  assert.match(css, /\.works-stack \{/);
+  assert.match(css, /position: sticky;/);
+  assert.match(css, /grid-template-columns: minmax\(18rem, 0\.9fr\) minmax\(0, 1fr\)/);
+  assert.match(css, /transform: translate3d\(0, calc\(var\(--stack-progress\) \* -0\.45rem\), 0\) scale\(calc\(1 - var\(--stack-progress\) \* 0\.035\)\)/);
   assert.match(css, /\.hero h1 \{\n  font-size: clamp\(3\.5rem, 7\.2vw, 7\.2rem\);/);
   assert.match(css, /\.hero-media \{[\s\S]*?min-height: auto;/);
   assert.match(css, /@media \(max-width: 1280px\) \{\n  \.hero \{\n    grid-template-columns: 1fr;/);

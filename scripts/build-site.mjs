@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
 const SITE_ORIGIN = "https://hsin-hsin-yuan-portfolio.vercel.app";
-const ASSET_VERSION = "20260711-ambient-rays";
+const ASSET_VERSION = "20260711-scroll-stack";
 
 export function parseFrontmatter(source) {
   const match = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
@@ -498,12 +498,12 @@ export function renderPage({ lang, site, works }) {
           </div>
         </section>
 
-        <section class="section works-section" id="works" data-horizontal-scroll>
+        <section class="section works-section" id="works">
           <div class="works-head">
             <h2 class="section-title">${escapeHtml(copy.worksLabel)}</h2>
             <div class="works-hint">${escapeHtml(copy.worksHint)}</div>
           </div>
-          <div class="works-track">
+          <div class="works-stack" data-scroll-stack>
             ${works.map((work) => renderWork(work, lang, copy)).join("")}
           </div>
           ${renderWatchLoop(works, lang, copy)}
