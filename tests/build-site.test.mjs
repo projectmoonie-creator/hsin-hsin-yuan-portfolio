@@ -83,7 +83,8 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.ok(html.indexOf('id="showreel"') < html.indexOf("collab-section-early"));
   assert.match(html, /About/);
   assert.match(html, /Work With Me/);
-  assert.match(html, /clear story partner/i);
+  assert.match(html, /I partner with artists, cultural teams, producers, and technology companies/i);
+  assert.match(html, /documentary listening/i);
   assert.match(html, /interior design and spatial-brand films/i);
   assert.match(html, /For Artists &amp; Cultural Institutions/);
   assert.match(html, /For Documentary \/ Factual Producers/);
@@ -120,7 +121,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /紀錄片導演/);
   assert.match(zh, /觀看 showreel/);
   assert.match(zh, /關於我/);
-  assert.match(zh, /需要清楚敘事夥伴的專案/);
+  assert.match(zh, /情感質地/);
+  assert.match(zh, /溫柔但準確地轉譯/);
   assert.match(zh, /住宅與室內設計影像、空間品牌影片/);
   assert.match(zh, /藝術家與文化單位/);
   assert.match(zh, /紀實製作人/);
