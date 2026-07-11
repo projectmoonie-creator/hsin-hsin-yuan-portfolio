@@ -450,7 +450,7 @@ export function renderPage({ lang, site, works }) {
           </div>
           <div class="about-grid">
             <div class="about-copy">
-              <p>${escapeHtml(copy.aboutBody)}</p>
+              ${copy.aboutBody ? `<p>${escapeHtml(copy.aboutBody)}</p>` : ""}
               <ul>
                 ${copy.aboutNotes.map((note) => `<li>${escapeHtml(note)}</li>`).join("")}
               </ul>
