@@ -110,6 +110,10 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.match(html, /Tech Dreamers/);
   assert.match(html, /Watch the full episode/);
   assert.match(html, /Watch the series/);
+  assert.match(html, /Press &amp; Interviews/);
+  assert.match(html, /Official program page/);
+  assert.match(html, /Director interview/);
+  assert.match(html, /press-preview-card/);
   assert.doesNotMatch(html, /old English CV|source materials/i);
 });
 
@@ -139,6 +143,9 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /精選舊作/);
   assert.match(zh, /觀看完整單集/);
   assert.match(zh, /觀看完整系列/);
+  assert.match(zh, /媒體報導與訪談/);
+  assert.match(zh, /官方節目頁/);
+  assert.match(zh, /導演訪談/);
   assert.match(zh, /合作類型/);
   assert.match(zh, /送出洽詢/);
   assert.doesNotMatch(zh, /mailto:/);

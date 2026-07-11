@@ -53,6 +53,38 @@
   "metrics": [
     {"value": "24", "label": {"en": "artist groups", "zh": "表演團隊與藝術家"}}
   ],
+  "press": [
+    {
+      "type": {"en": "Official page", "zh": "官方節目頁"},
+      "title": {
+        "en": "Official program page",
+        "zh": "官方節目頁"
+      },
+      "source": "TaiwanPlus",
+      "url": "https://www.taiwanplus.com/shows/documentary/arts/410/my-art-my-voice/250220001/whats-the-vibe-in-taiwan-my-art-my-voice",
+      "image": "/assets/portfolio/my-art-my-voice-performance-2.jpg"
+    },
+    {
+      "type": {"en": "Project press", "zh": "專案報導"},
+      "title": {
+        "en": "Taiwan at the Paris Cultural Olympiad",
+        "zh": "台灣參與巴黎文化奧運"
+      },
+      "source": {"en": "Link pending", "zh": "待補連結"},
+      "url": "",
+      "image": "/assets/portfolio/paris-cultural-olympiad-team.jpg"
+    },
+    {
+      "type": {"en": "Interview", "zh": "訪談"},
+      "title": {
+        "en": "Director interview",
+        "zh": "導演訪談"
+      },
+      "source": {"en": "Link pending", "zh": "待補連結"},
+      "url": "",
+      "image": "/assets/portfolio/my-art-my-voice-interview.jpg"
+    }
+  ],
   "accent": "violet"
 }
 ---

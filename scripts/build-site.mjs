@@ -133,6 +133,41 @@ function renderCaseStudy(items = [], lang) {
   `;
 }
 
+function renderPress(items = [], lang) {
+  if (!items.length) return "";
+
+  const label = lang === "en" ? "Press & Interviews" : "媒體報導與訪談";
+
+  return `
+    <div class="press-preview">
+      <p class="press-preview-title">${escapeHtml(label)}</p>
+      <div class="press-preview-grid">
+        ${items
+          .map((item) => {
+            const image = item.image
+              ? `<span class="press-preview-image" style="background-image: url('${escapeHtml(item.image)}')"></span>`
+              : "";
+            const body = `
+              ${image}
+              <span class="press-preview-copy">
+                <span class="press-preview-type">${escapeHtml(localize(item.type, lang))}</span>
+                <strong>${escapeHtml(localize(item.title, lang))}</strong>
+                <span>${escapeHtml(localize(item.source, lang))}</span>
+              </span>
+            `;
+
+            if (item.url) {
+              return `<a class="press-preview-card" href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${body}</a>`;
+            }
+
+            return `<div class="press-preview-card press-preview-card-muted">${body}</div>`;
+          })
+          .join("")}
+      </div>
+    </div>
+  `;
+}
+
 function mediaFrame(work, copy) {
   if (work.status === "available" && work.videoEmbedUrl) {
     return `
@@ -191,6 +226,7 @@ function renderWork(work, lang, copy) {
         ${renderTags(work.tags)}
         ${renderMetrics(work.metrics, lang)}
         ${renderCaseStudy(work.caseStudy, lang)}
+        ${renderPress(work.press, lang)}
         ${action}
       </div>
     </article>
