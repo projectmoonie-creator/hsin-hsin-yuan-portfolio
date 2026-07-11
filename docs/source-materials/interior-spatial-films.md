@@ -300,6 +300,49 @@ Best candidates to review first:
 - https://www.youtube.com/watch?v=0zkXVU3m7Jc - small-space problem solving
 - https://www.youtube.com/watch?v=me4KutyUoT4&t=111s - LG x Sunny branded home transformation
 
+## Email Evidence Search
+
+Yahoo Mail search can help reconstruct the broader body of work, but it should be treated as evidence gathering rather than automatic public credit.
+
+Search approach:
+- Start with `幸福空間`.
+- Prioritize subjects that include `拍攝通知`, `百科拍攝通知`, `達人拍攝通知`, `腳本如附件`, and the crew marker `欣欣+吉哥`.
+- Save only production metadata: shoot date, project/company name, category, producer/contact name if useful.
+- Do not store private addresses, phone numbers, or full recipient lists in this repo.
+- Public-facing use should stay conservative: only confirmed or selected items should appear on the website; possible/likely items can remain in this internal archive.
+
+Confidence rules:
+- Confirmed: email subject or visible snippet clearly includes a shoot notice and `欣欣`, and the project can be matched to a public video or known deliverable.
+- Likely: email subject clearly includes a shoot notice and `欣欣`, but no public video has been matched yet.
+- Possible: related company/person appears in email search, but the connection to a shoot is not explicit.
+
+### Candidate Shoot Notices Found In Yahoo Mail Search
+
+First-pass source: Yahoo Mail search result list for `幸福空間`, read from visible search results only. No individual messages were opened in this pass.
+
+| Shoot date | Evidence date | Type | Project / company from subject | Location hint | Visible crew marker | Producer / sender | Confidence | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2024-03-19 | 2024-03-14 / 2024-03-18 | 百科 / shorts | 大同網路百科 | 淡水 | 李至正-欣欣+吉哥+花, shorts*3 | 幸福空間-Denny | Likely | Brand/vendor-style web encyclopedia shoot; possible shorts package. |
+| 2024-03-12 | 2024-03-06 / 2024-03-12 | 百科 | 子境網路百科 | 彰化 | 無-欣欣+吉哥+花 | 幸福空間-Denny | Likely | Design company listed as 子境室內裝修設計 in visible snippet. |
+| 2024-03-05 | 2024-02-27 | 百科 | 菓子網路百科 | 新竹 | 無-欣欣+吉哥+花 | 幸福空間-Nini | Likely | Design company listed as 菓子空間室內設計; visible snippet names 林慧珊總監. |
+| 2024-02-27 | 2024-02-21 / 2024-02-23 | 百科 | 方澤網路百科 | 竹北 | 無-欣欣+吉哥+花 | 幸福空間-Nini | Likely | Visible snippet names Patsy Liao / 廖珮君. |
+| 2024-02-06 | 2024-01-31 / 2024-02-02 / 2024-02-05 | 百科 | 安藤設計網路百科 | 林口 | 無-欣欣+吉哥+A or 妙可 | 幸福空間-Nini | Likely | Multiple update/script emails; visible snippet names 吳宗憲設計師. |
+| 2024-02-02 | 2024-01-24 / 2024-01-29 | 百科 | 蘭庭網路百科 | 台中 | 芳瑜-欣欣+吉哥+花 | 幸福空間-Nini | Likely | Visible snippet names 曹議庭總監 / 主持人芳瑜. |
+| 2024-01-25 | 2024-01-17 / 2024-01-23 | 達人 | 大衛麥可達人 | 新店 | 無-欣欣+吉哥+花 | 幸福空間-Nini | Likely | Visible snippet names 張紫嫺總監. |
+| 2023-12-15 | 2023-12-08 / 2023-12-13 | 百科 | 新傑創網路百科 | 台北 | 無-欣欣+吉哥+A | 幸福空間-Nini | Likely | Visible snippet names 洪榮森設計師. |
+| 2023-12-05 | 2023-12-04 | 百科 | 拾真網路百科 | 員林 | 無-欣欣+吉哥+A | 幸福空間-Nini | Likely | Visible snippet names 李真真總監 and homeowner. |
+| 2023-12-04 | 2023-12-01 | 達人 | 今城達人 | 土城 | 無-欣欣+吉哥+A | 幸福空間-Nini | Likely | First-pass candidate from visible result list. |
+
+Next useful searches:
+- `欣欣+吉哥`
+- `百科拍攝通知 欣欣`
+- `達人拍攝通知 欣欣`
+- `腳本如附件 欣欣`
+- `LG 幸福空間 欣欣`
+- `SAMSUNG 幸福空間 欣欣`
+- `太平洋廚電 幸福空間 欣欣`
+- Names from public video list: `陳琬婷`, `許捷甯`, `鄧維如`, `朱玉芬`, `王立崧`, `謝張志昇`, `亞舍`
+
 ## Website Positioning Draft
 
 English:
