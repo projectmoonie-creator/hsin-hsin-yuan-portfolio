@@ -117,6 +117,10 @@ test("renderPage creates bilingual page with horizontal works and video fallback
   assert.ok(html.indexOf("about-section") < html.indexOf("works-section"));
   assert.ok(html.indexOf("works-section") < html.indexOf("impact-section"));
   assert.match(html, /works-track/);
+  assert.match(html, /data-watch-loop/);
+  assert.match(html, /Watch Selected Films/);
+  assert.match(html, /Screening strip/);
+  assert.match(html, /watch-loop-card/);
   assert.match(html, /My Art, My Voice/);
   assert.match(html, /Tech Dreamers/);
   assert.match(html, /Watch the full episode/);
@@ -160,6 +164,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /精選舊作/);
   assert.match(zh, /觀看完整單集/);
   assert.match(zh, /觀看完整系列/);
+  assert.match(zh, /觀看精選影片/);
+  assert.match(zh, /有公開影片連結的代表作品/);
   assert.match(zh, /媒體報導與訪談/);
   assert.match(zh, /官方節目頁/);
   assert.match(zh, /真誠地往前走，走進創作的大海/);
@@ -185,7 +191,14 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.hero-roles \.role-slash \{\n  color: var\(--acid\);/);
   assert.match(css, /\.edge-light/);
   assert.match(css, /--edge-proximity/);
+  assert.match(css, /--page-pad: clamp/);
+  assert.match(css, /\.watch-loop-card \{/);
+  assert.match(css, /\.watch-loop-viewport::before/);
   assert.match(js, /getEdgeProximity/);
   assert.match(js, /pointermove/);
+  assert.match(js, /data-watch-loop/);
+  assert.match(js, /syncLoopCopies/);
+  assert.match(js, /startLoop/);
+  assert.match(js, /pointerdown/);
   assert.match(css, /@media \(max-width: 460px\) \{\n  \.hero h1 \{\n    font-size: clamp\(2\.65rem, 14vw, 3\.45rem\);/);
 });

@@ -66,6 +66,137 @@ if (!prefersReducedMotion) {
     );
   });
 
+  document.querySelectorAll("[data-watch-loop]").forEach((loop) => {
+    const viewport = loop.querySelector(".watch-loop-viewport");
+    const track = loop.querySelector("[data-watch-loop-track]");
+    const sequence = loop.querySelector("[data-watch-loop-sequence]");
+    if (!viewport || !track || !sequence) return;
+
+    let sequenceWidth = 0;
+    let offset = 0;
+    let velocity = Number(loop.dataset.speed || 32);
+    let lastTime = 0;
+    let isInteracting = false;
+    let animationFrame = 0;
+    let isVisible = false;
+
+    function syncLoopCopies() {
+      const copies = Array.from(track.querySelectorAll("[data-watch-loop-sequence]"));
+      copies.slice(1).forEach((copy) => copy.remove());
+      sequenceWidth = sequence.getBoundingClientRect().width;
+      if (!sequenceWidth) return;
+
+      const targetWidth = Math.max(viewport.clientWidth * 2.5, sequenceWidth * 2);
+      let renderedWidth = sequenceWidth;
+      while (renderedWidth < targetWidth) {
+        const clone = sequence.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        clone.querySelectorAll("a").forEach((link) => {
+          link.tabIndex = -1;
+        });
+        track.append(clone);
+        renderedWidth += sequenceWidth;
+      }
+    }
+
+    function tick(time) {
+      if (!lastTime) lastTime = time;
+      const deltaSeconds = Math.min((time - lastTime) / 1000, 0.08);
+      lastTime = time;
+
+      const hasFocus = document.activeElement?.closest("[data-watch-loop]") === loop;
+      const targetVelocity = isInteracting || hasFocus ? 0 : Number(loop.dataset.speed || 32);
+      velocity = targetVelocity === 0 ? 0 : velocity + (targetVelocity - velocity) * Math.min(1, deltaSeconds * 5);
+
+      if (sequenceWidth > 0) {
+        offset = (offset + velocity * deltaSeconds) % sequenceWidth;
+        track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+      }
+
+      animationFrame = window.requestAnimationFrame(tick);
+    }
+
+    function startLoop() {
+      if (animationFrame) return;
+      lastTime = 0;
+      animationFrame = window.requestAnimationFrame(tick);
+    }
+
+    function stopLoop() {
+      if (!animationFrame) return;
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+    }
+
+    loop.addEventListener("mouseenter", () => {
+      isInteracting = true;
+    });
+
+    loop.addEventListener("mouseleave", () => {
+      isInteracting = false;
+    });
+
+    loop.addEventListener("focusin", () => {
+      isInteracting = true;
+    });
+
+    loop.addEventListener("focusout", () => {
+      isInteracting = false;
+    });
+
+    viewport.addEventListener("pointerdown", () => {
+      isInteracting = true;
+    });
+
+    viewport.addEventListener("pointerup", () => {
+      isInteracting = false;
+    });
+
+    viewport.addEventListener("pointercancel", () => {
+      isInteracting = false;
+    });
+
+    const resizeObserver =
+      "ResizeObserver" in window
+        ? new ResizeObserver(() => {
+            syncLoopCopies();
+          })
+        : null;
+    resizeObserver?.observe(viewport);
+    syncLoopCopies();
+
+    if ("IntersectionObserver" in window) {
+      const loopObserver = new IntersectionObserver(
+        (entries) => {
+          isVisible = entries.some((entry) => entry.isIntersecting);
+          if (isVisible) {
+            startLoop();
+          } else {
+            stopLoop();
+          }
+        },
+        { rootMargin: "20% 0px", threshold: 0.01 },
+      );
+      loopObserver.observe(loop);
+
+      window.addEventListener("pagehide", () => {
+        stopLoop();
+        loopObserver.disconnect();
+        resizeObserver?.disconnect();
+      });
+    } else {
+      isVisible = true;
+      startLoop();
+
+      window.addEventListener("pagehide", () => {
+        stopLoop();
+        resizeObserver?.disconnect();
+      });
+    }
+
+    if (isVisible) startLoop();
+  });
+
   if ("IntersectionObserver" in window) {
     const lightObserver = new IntersectionObserver(
       (entries) => {

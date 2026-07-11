@@ -2,6 +2,7 @@
   --bg: #0b0b0c;
   --ink: #f7f2e8;
   --muted: #b8b0a3;
+  --page-pad: clamp(1.2rem, 4vw, 3rem);
   --line: rgba(247, 242, 232, 0.18);
   --panel: rgba(255, 255, 255, 0.055);
   --panel-strong: rgba(255, 255, 255, 0.095);
@@ -739,6 +740,163 @@ a {
   scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
 }
 
+.watch-loop {
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  position: relative;
+}
+
+.watch-loop-head {
+  align-items: end;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 0.9rem;
+}
+
+.watch-loop-head h3 {
+  font-size: clamp(1.25rem, 2.3vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  margin: 0.1rem 0 0;
+}
+
+.watch-loop-head > span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+.watch-loop-viewport {
+  -webkit-overflow-scrolling: touch;
+  margin-inline: calc(var(--page-pad) * -1);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.35rem var(--page-pad) 0.9rem;
+  position: relative;
+  scrollbar-color: rgba(255, 255, 255, 0.28) transparent;
+}
+
+.watch-loop-viewport::before,
+.watch-loop-viewport::after {
+  content: "";
+  inset-block: 0;
+  pointer-events: none;
+  position: absolute;
+  width: min(8rem, 12vw);
+  z-index: 2;
+}
+
+.watch-loop-viewport::before {
+  background: linear-gradient(90deg, var(--bg), transparent);
+  left: 0;
+}
+
+.watch-loop-viewport::after {
+  background: linear-gradient(270deg, var(--bg), transparent);
+  right: 0;
+}
+
+.watch-loop-track,
+.watch-loop-sequence {
+  align-items: stretch;
+  display: flex;
+  gap: clamp(0.75rem, 1.4vw, 1rem);
+  width: max-content;
+}
+
+.watch-loop-card {
+  aspect-ratio: 16 / 10;
+  background:
+    linear-gradient(180deg, rgba(8, 8, 9, 0.12), rgba(8, 8, 9, 0.82)),
+    radial-gradient(circle at 18% 12%, rgba(216, 255, 62, 0.18), transparent 12rem),
+    rgba(255, 255, 255, 0.045);
+  background-position: center;
+  background-size: cover;
+  border: 1px solid rgba(247, 242, 232, 0.16);
+  border-radius: 8px;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 190px;
+  overflow: hidden;
+  padding: 1rem;
+  position: relative;
+  text-decoration: none;
+  transition:
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    transform 300ms ease;
+  width: clamp(260px, 25vw, 340px);
+}
+
+.watch-loop-card::before {
+  background: linear-gradient(115deg, transparent 0 38%, rgba(216, 255, 62, 0.18) 48%, transparent 58% 100%);
+  content: "";
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-38%);
+  transition:
+    opacity 320ms ease,
+    transform 520ms ease;
+}
+
+.watch-loop-card:hover,
+.watch-loop-card:focus-visible {
+  border-color: rgba(216, 255, 62, 0.42);
+  box-shadow: 0 18px 70px rgba(216, 255, 62, 0.1);
+  transform: translateY(-2px);
+}
+
+.watch-loop-card:hover::before,
+.watch-loop-card:focus-visible::before {
+  opacity: 1;
+  transform: translateX(38%);
+}
+
+.watch-loop-meta,
+.watch-loop-role,
+.watch-loop-tagline,
+.watch-loop-action {
+  position: relative;
+  z-index: 1;
+}
+
+.watch-loop-meta,
+.watch-loop-role {
+  color: rgba(247, 242, 232, 0.66);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.watch-loop-card strong {
+  font-size: clamp(1.2rem, 2vw, 1.75rem);
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 0.98;
+  margin: 0.35rem 0 0.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.watch-loop-tagline {
+  color: rgba(247, 242, 232, 0.78);
+  font-size: 0.88rem;
+  line-height: 1.35;
+  margin-top: 0.45rem;
+  max-width: 18rem;
+}
+
+.watch-loop-action {
+  color: var(--acid);
+  font-size: 0.78rem;
+  font-weight: 650;
+  margin-top: 0.85rem;
+  text-transform: uppercase;
+}
+
 .work-panel {
   background: var(--panel);
   border: 1px solid var(--line);
@@ -1404,6 +1562,21 @@ a {
     grid-auto-columns: minmax(88vw, 1fr);
   }
 
+  .watch-loop-head {
+    align-items: start;
+    display: block;
+  }
+
+  .watch-loop-head > span {
+    display: block;
+    margin-top: 0.45rem;
+  }
+
+  .watch-loop-card {
+    min-height: 176px;
+    width: min(78vw, 320px);
+  }
+
   .work-panel {
     display: block;
     min-height: auto;
@@ -1549,8 +1722,13 @@ a {
   .light-beam-layer,
   .hero-media::before,
   .section::before,
-  .works-section::after {
+  .works-section::after,
+  .watch-loop-card::before {
     animation: none;
     opacity: 0;
+  }
+
+  .watch-loop-track {
+    transform: none !important;
   }
 }

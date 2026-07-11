@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
 const SITE_ORIGIN = "https://hsin-hsin-yuan-portfolio.vercel.app";
-const ASSET_VERSION = "20260711-ogl-strands";
+const ASSET_VERSION = "20260711-watch-loop";
 
 export function parseFrontmatter(source) {
   const match = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
@@ -244,6 +244,50 @@ function renderWork(work, lang, copy) {
         ${action}
       </div>
     </article>
+  `;
+}
+
+function renderWatchLoopItem(work, lang, copy) {
+  const title = localize(work.title, lang);
+  const role = localize(work.role, lang);
+  const tagline = localize(work.tagline, lang);
+  const actionLabel = watchActionLabel(work, lang, copy);
+  const image = work.posterImage
+    ? `style="background-image: linear-gradient(180deg, rgba(8,8,9,.12), rgba(8,8,9,.78)), url('${escapeHtml(work.posterImage)}')"`
+    : "";
+
+  return `
+    <a class="watch-loop-card" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer" ${image}>
+      <span class="watch-loop-meta">${escapeHtml(work.platform)} / ${escapeHtml(work.year)}</span>
+      <strong>${escapeHtml(title)}</strong>
+      <span class="watch-loop-role">${escapeHtml(role)}</span>
+      <span class="watch-loop-tagline">${escapeHtml(tagline)}</span>
+      <span class="watch-loop-action">${escapeHtml(actionLabel)}</span>
+    </a>
+  `;
+}
+
+function renderWatchLoop(works, lang, copy) {
+  const watchableWorks = works.filter((work) => work.watchUrl);
+  if (!watchableWorks.length) return "";
+
+  return `
+    <div class="watch-loop" data-watch-loop data-speed="34" role="region" aria-label="${escapeHtml(copy.watchShelfAria)}">
+      <div class="watch-loop-head">
+        <div>
+          <p class="card-kicker">${escapeHtml(copy.watchShelfKicker)}</p>
+          <h3>${escapeHtml(copy.watchShelfTitle)}</h3>
+        </div>
+        <span>${escapeHtml(copy.watchShelfHint)}</span>
+      </div>
+      <div class="watch-loop-viewport">
+        <div class="watch-loop-track" data-watch-loop-track>
+          <div class="watch-loop-sequence" data-watch-loop-sequence>
+            ${watchableWorks.map((work) => renderWatchLoopItem(work, lang, copy)).join("")}
+          </div>
+        </div>
+      </div>
+    </div>
   `;
 }
 
@@ -497,6 +541,7 @@ export function renderPage({ lang, site, works }) {
           <div class="works-track">
             ${works.map((work) => renderWork(work, lang, copy)).join("")}
           </div>
+          ${renderWatchLoop(works, lang, copy)}
         </section>
 
         <section class="section impact-section">
