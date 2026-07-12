@@ -142,6 +142,9 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Watch the series/);
   assert.match(html, /Press &amp; Interviews/);
   assert.match(html, /Official program page/);
+  assert.match(html, /Cultural Olympiad documentary My Art, My Voice/);
+  assert.match(html, /Mirror Media/);
+  assert.match(html, /00f85da2-db1d-4c46-9b3d-a7359d911e52-w1600\.png/);
   assert.match(html, /Director interview: walking into the sea of creation/);
   assert.match(html, /Very Mulan/);
   assert.match(html, /press-preview-card/);
@@ -187,6 +190,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /有公開影片連結的代表作品/);
   assert.match(zh, /媒體報導與訪談/);
   assert.match(zh, /官方節目頁/);
+  assert.match(zh, /文化奧運紀錄片《My Art, My Voice》　台法藝術家跨國對話/);
+  assert.match(zh, /鏡週刊 Mirror Media/);
   assert.match(zh, /真誠地往前走，走進創作的大海/);
   assert.match(zh, /非常木蘭/);
   assert.match(zh, /合作類型/);

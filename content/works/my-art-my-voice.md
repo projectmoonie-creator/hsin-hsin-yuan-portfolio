@@ -67,12 +67,12 @@
     {
       "type": {"en": "Project press", "zh": "專案報導"},
       "title": {
-        "en": "Taiwan at the Paris Cultural Olympiad",
-        "zh": "台灣參與巴黎文化奧運"
+        "en": "Cultural Olympiad documentary My Art, My Voice: Taiwan-France artist dialogue",
+        "zh": "文化奧運紀錄片《My Art, My Voice》　台法藝術家跨國對話"
       },
-      "source": {"en": "Link pending", "zh": "待補連結"},
-      "url": "",
-      "image": "/assets/portfolio/paris-cultural-olympiad-team.jpg"
+      "source": {"en": "Mirror Media", "zh": "鏡週刊 Mirror Media"},
+      "url": "https://www.mirrormedia.mg/story/20250224insight002",
+      "image": "https://v3-statics.mirrormedia.mg/images/00f85da2-db1d-4c46-9b3d-a7359d911e52-w1600.png"
     },
     {
       "type": {"en": "Interview", "zh": "訪談"},
