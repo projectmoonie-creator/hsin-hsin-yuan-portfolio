@@ -44,18 +44,18 @@ const WORKS = [
     image: ASSETS.myArt,
   },
   {
+    title: "Slow Steps",
+    meta: "2026 / Director / Editor / Producer / Independent Travel Documentary",
+    tagline: "A quiet travel documentary shaped through observation, time, and becoming.",
+    description: "A poetic personal work that follows travel as a way of paying attention.",
+    image: "",
+  },
+  {
     title: "Tech Dreamers",
-    meta: "2025 / Director / TaiwanPlus",
+    meta: "2025 / Director / Editor / Producer / TaiwanPlus",
     tagline: "Taiwanese founders building the future.",
     description: "From AI to deep tech, stories of people turning ideas into tomorrow.",
     image: ASSETS.tech,
-  },
-  {
-    title: "Slow Steps",
-    meta: "2026 / Director / Upcoming",
-    tagline: "Slow steps. A closer look at becoming.",
-    description: "An upcoming work about movement, time, and becoming.",
-    image: "",
   },
 ];
 

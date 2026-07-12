@@ -26,8 +26,8 @@
     {
       "label": {"en": "Challenge", "zh": "挑戰"},
       "text": {
-        "en": "Translate 24 artist groups and the cultural stakes of Taiwan's Paris Cultural Olympiad presence into an intimate story for international viewers.",
-        "zh": "把 24 組藝術家與台灣參與巴黎文化奧運的文化意義，轉化成國際觀眾能靠近的親密故事。"
+        "en": "Translate the artists and cultural stakes of Taiwan's Paris Cultural Olympiad presence into an intimate story for international viewers.",
+        "zh": "把藝術家與台灣參與巴黎文化奧運的文化意義，轉化成國際觀眾能靠近的親密故事。"
       }
     },
     {
@@ -36,13 +36,6 @@
         "en": "Directed the documentary spine: artist interviews, emotional through-lines, cultural context, and the voice of performance beyond event coverage.",
         "zh": "執導整體紀錄片主線：藝術家訪談、情感線、文化脈絡，以及超越活動紀錄的表演者聲音。"
       }
-    },
-    {
-      "label": {"en": "Best for", "zh": "適合合作"},
-      "text": {
-        "en": "Artists, cultural institutions, festivals, and teams that need a project translated for audiences beyond its original context.",
-        "zh": "適合藝術家、文化單位、影展或需要把專案轉譯給跨語境觀眾的團隊。"
-      }
     }
   ],
   "watchMode": "single",
@@ -50,9 +43,7 @@
   "videoEmbedUrl": "",
   "posterImage": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
   "tags": ["documentary", "arts", "identity", "Paris Cultural Olympiad"],
-  "metrics": [
-    {"value": "24", "label": {"en": "artist groups", "zh": "表演團隊與藝術家"}}
-  ],
+  "metrics": [],
   "press": [
     {
       "type": {"en": "Official page", "zh": "官方節目頁"},

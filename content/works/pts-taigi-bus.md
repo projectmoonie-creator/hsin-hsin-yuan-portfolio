@@ -36,13 +36,6 @@
         "en": "Developed episode-planning and script structure for selected routes, keeping the credit compact here until the full episode list is confirmed.",
         "zh": "參與特定路線的單集企劃與腳本結構；目前先以精簡作品卡呈現，待完整集數確認後再展開。"
       }
-    },
-    {
-      "label": {"en": "Best for", "zh": "適合合作"},
-      "text": {
-        "en": "Public-media programs, travel-factual formats, local culture stories, and multilingual or dialect-sensitive production.",
-        "zh": "適合公共媒體節目、行旅紀實格式、地方文化故事，以及需要語言敏感度的製作。"
-      }
     }
   ],
   "watchMode": "sample",

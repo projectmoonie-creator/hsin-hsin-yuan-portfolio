@@ -184,7 +184,7 @@ Content fields:
 - Description
 - Tags
 - Metrics
-- Case study: Challenge / What I shaped / Best for
+- Case study: Challenge / What I shaped
 - CTA
 
 ### `Info Card`

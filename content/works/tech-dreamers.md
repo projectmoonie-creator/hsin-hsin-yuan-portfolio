@@ -10,8 +10,8 @@
     "zh": "Tech Dreamers"
   },
   "role": {
-    "en": "Director",
-    "zh": "導演"
+    "en": "Director / Editor / Producer",
+    "zh": "導演 / 剪輯 / 製作"
   },
   "platform": "TaiwanPlus",
   "tagline": {
@@ -35,13 +35,6 @@
       "text": {
         "en": "Directed interviews and story structure around motivation, risk, and the human reason a technology matters.",
         "zh": "以動機、風險與科技為何重要的人性理由，設計訪談與故事結構。"
-      }
-    },
-    {
-      "label": {"en": "Best for", "zh": "適合合作"},
-      "text": {
-        "en": "Tech teams, founders, and brands that need complex work explained through documentary storytelling.",
-        "zh": "適合需要用紀錄片敘事說清楚複雜工作的科技團隊、創辦人與品牌。"
       }
     }
   ],

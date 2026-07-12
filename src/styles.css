@@ -1481,6 +1481,10 @@ a {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .hero-media {
+    animation: heroStillPush 18s ease-in-out infinite alternate;
+  }
+
   .hero-content,
   .work-panel,
   .service-card,
@@ -1535,6 +1539,25 @@ a {
     }
   }
 
+  @keyframes heroStillPush {
+    from {
+      background-position:
+        center,
+        38% 78%;
+      background-size:
+        cover,
+        auto 140%;
+    }
+    to {
+      background-position:
+        center,
+        42% 74%;
+      background-size:
+        cover,
+        auto 148%;
+    }
+  }
+
   @keyframes sectionReflection {
     0% {
       opacity: 0;
@@ -1551,6 +1574,10 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-media {
+    animation: none;
+  }
+
   body::before,
   .light-beam-layer,
   .hero-media::before,

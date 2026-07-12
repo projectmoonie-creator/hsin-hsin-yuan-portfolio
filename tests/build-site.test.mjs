@@ -38,11 +38,17 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     ],
   );
   assert.equal(works[0].title.en, "Slow Steps");
-  assert.equal(works[0].status, "coming-soon");
+  assert.equal(works[0].status, "external-only");
+  assert.equal(works[0].role.en, "Director / Editor / Producer");
+  assert.equal(works[1].role.en, "Director / Editor / Producer");
   assert.equal(works[3].role.en, "Director / Editor");
   assert.equal(works[4].platform, "PTS Taigi / 公視台語台");
   assert.equal(works[5].role.en, "China-side Director");
   assert.equal(works[0].posterImage, "");
+  assert.equal(works[0].platform, "Independent / Travel Documentary");
+  assert.deepEqual(works[0].tags, ["documentary", "travel"]);
+  assert.equal(works[0].metrics.length, 0);
+  assert.equal(works[2].metrics.length, 0);
 });
 
 test("featured press entries carry audit metadata", () => {
@@ -150,7 +156,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /For Documentary \/ Factual Producers/);
   assert.match(html, /Challenge/);
   assert.match(html, /What I shaped/);
-  assert.match(html, /Best for/);
+  assert.doesNotMatch(html, /Best for/);
   assert.doesNotMatch(html, /Selected Impact/);
   assert.doesNotMatch(html, /impact-grid/);
   assert.doesNotMatch(html, /impact-section/);
@@ -181,6 +187,8 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Screening strip/);
   assert.doesNotMatch(html, /Swipe to explore/);
   assert.match(html, /watch-loop-card/);
+  assert.match(html, /href="#slow-steps"/);
+  assert.ok(html.indexOf('href="#slow-steps"') < html.indexOf('href="#tech-dreamers"'));
   assert.match(html, /href="#my-art-my-voice"/);
   assert.doesNotMatch(html, /View in featured works/);
   assert.doesNotMatch(html, /Scroll to explore/);
@@ -188,10 +196,16 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Tech Dreamers/);
   assert.match(html, /Slow Steps/);
   assert.doesNotMatch(html, /slow-steps[\s\S]*?paris-cultural-olympiad-team\.jpg/);
+  assert.doesNotMatch(html, /Slow Steps[\s\S]*?Upcoming/);
+  assert.doesNotMatch(html, /Slow Steps[\s\S]*?Coming 2026/);
+  assert.doesNotMatch(html, /Slow Steps[\s\S]*?Movement/i);
+  assert.match(html, /Slow Steps[\s\S]*?Director \/ Editor \/ Producer/);
+  assert.match(html, /Slow Steps[\s\S]*?Travel/);
   assert.match(html, /Interior \/ Spatial Brand Films/);
   assert.match(html, /Gorgeous Space \/ 幸福空間/);
   assert.match(html, /Director \/ Editor/);
   assert.match(html, /Showreel in progress/);
+  assert.doesNotMatch(html, /3 yrs/);
   assert.doesNotMatch(html, /Interior \/ Spatial Brand Films[\s\S]*?Coming 2026/);
   assert.match(html, /PTS Taigi - Bus Travel Factual Episodes/);
   assert.match(html, /Planning \/ Script/);
@@ -208,6 +222,8 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Watch the series/);
   assert.match(html, /Press &amp; Interviews/);
   assert.match(html, /Official program page/);
+  assert.doesNotMatch(html, /24 artist groups/);
+  assert.doesNotMatch(html, />24<\/span>/);
   assert.match(html, /data-metadata-checked-at="2026-07-12"/);
   assert.match(html, /data-image-source="owned project still; official page exception"/);
   assert.match(html, /Cultural Olympiad documentary My Art, My Voice/);
@@ -299,6 +315,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /剪輯/);
   assert.match(zh, /挑戰/);
   assert.match(zh, /我如何處理/);
+  assert.doesNotMatch(zh, /適合合作/);
   assert.doesNotMatch(zh, /代表成績/);
   assert.doesNotMatch(zh, /impact-grid/);
   assert.match(zh, /AI \/ Language Lab/);
@@ -309,13 +326,14 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /觀看代表片段/);
   assert.match(zh, /幸福空間與室內設計影像/);
   assert.match(zh, /導演 \/ 剪輯/);
+  assert.doesNotMatch(zh, /3 yrs|三年間|約三年/);
   assert.match(zh, /公視台語台《無事坐巴士》/);
   assert.match(zh, /企劃 \/ 企編/);
   assert.match(zh, /《巔峰拍檔》中國版：英國篇/);
   assert.match(zh, /中方導演/);
   assert.match(zh, /同時段綜藝類冠軍/);
   assert.doesNotMatch(zh, /觀看精選影片/);
-  assert.match(zh, /有公開影片連結的代表作品/);
+  assert.match(zh, /代表影像作品/);
   assert.match(zh, /媒體報導與訪談/);
   assert.match(zh, /官方節目頁/);
   assert.match(zh, /文化奧運紀錄片《My Art, My Voice》　台法藝術家跨國對話/);
@@ -349,6 +367,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.collab-item \{\n  align-items: center;\n  background: transparent;\n  border: 0;/);
   assert.match(css, /\.partner-name \{\n  display: none;/);
   assert.match(css, /\.hero h1 span \{\n  display: block;\n  white-space: nowrap;/);
+  assert.match(css, /@keyframes heroStillPush/);
+  assert.match(css, /\.hero-media \{\n    animation: heroStillPush/);
   assert.match(css, /\.hero-roles \.role-slash \{\n  color: var\(--acid\);/);
   assert.match(css, /\.edge-light/);
   assert.match(css, /--edge-proximity/);
@@ -364,6 +384,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(js, /pointermove/);
   assert.match(js, /initAmbientBackground/);
   assert.match(js, /scrollRestoration = "manual"/);
+  assert.match(js, /clearInitialHash/);
+  assert.match(js, /replaceState/);
   assert.match(js, /data-watch-loop/);
   assert.match(js, /syncLoopCopies/);
   assert.match(js, /offset %= sequenceWidth/);

@@ -288,7 +288,7 @@ function renderWatchLoopItem(work, lang, copy) {
 }
 
 function renderWatchLoop(works, lang, copy) {
-  const watchableWorks = works.filter((work) => work.watchUrl);
+  const watchableWorks = works.filter((work) => work.watchUrl || work.status === "external-only");
   if (!watchableWorks.length) return "";
 
   return `

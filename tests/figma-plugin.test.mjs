@@ -35,6 +35,10 @@ test("Figma importer creates editable portfolio layers", () => {
   assert.match(code, /Mobile \/ Portfolio/);
   assert.match(code, /my-art-my-voice-performance-2\.jpg/);
   assert.match(code, /color\/accent-acid/);
+  assert.match(code, /Slow Steps/);
+  assert.match(code, /Tech Dreamers/);
+  assert.match(code, /Director \/ Editor \/ Producer/);
+  assert.doesNotMatch(code, /Upcoming/);
   assert.doesNotMatch(code, /Selected Impact/);
   assert.doesNotMatch(code, /paris-cultural-olympiad-team\.jpg/);
 });

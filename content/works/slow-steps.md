@@ -3,24 +3,24 @@
   "slug": "slow-steps",
   "featured": true,
   "order": 1,
-  "status": "coming-soon",
+  "status": "external-only",
   "year": "2026",
   "title": {
     "en": "Slow Steps",
     "zh": "Slow Steps"
   },
   "role": {
-    "en": "Director",
-    "zh": "導演"
+    "en": "Director / Editor / Producer",
+    "zh": "導演 / 剪輯 / 製作"
   },
-  "platform": "Upcoming",
+  "platform": "Independent / Travel Documentary",
   "tagline": {
-    "en": "Slow steps. A closer look at becoming.",
-    "zh": "慢慢前進。靠近變化中的人。"
+    "en": "A quiet travel documentary shaped through observation, time, and becoming.",
+    "zh": "一部以觀察、時間與成為自己為核心的安靜旅行紀錄片。"
   },
   "description": {
-    "en": "An upcoming work about movement, time, and becoming.",
-    "zh": "關於移動、時間與成為自己的影像。"
+    "en": "A poetic personal work that follows travel as a way of paying attention.",
+    "zh": "一部帶有詩意與個人視角的作品，透過旅行靠近人如何觀看與改變。"
   },
   "caseStudy": [
     {
@@ -33,22 +33,15 @@
     {
       "label": {"en": "What I shaped", "zh": "我如何處理"},
       "text": {
-        "en": "A patient visual language for movement, time, and becoming, currently in development for 2026.",
-        "zh": "發展一種關於移動、時間與成為自己的耐心影像語言，預計 2026 完成。"
-      }
-    },
-    {
-      "label": {"en": "Best for", "zh": "適合合作"},
-      "text": {
-        "en": "Longer-form documentary, artist-led moving-image work, and projects that need a sensitive directorial eye.",
-        "zh": "適合長片紀錄、藝術家影像作品，以及需要細膩導演視角的專案。"
+        "en": "Directed, edited, and produced a patient visual language for travel, time, and becoming.",
+        "zh": "以導演、剪輯與製作工作，整理關於旅行、時間與成為自己的耐心影像語言。"
       }
     }
   ],
   "watchUrl": "",
   "videoEmbedUrl": "",
   "posterImage": "",
-  "tags": ["documentary", "upcoming", "movement"],
+  "tags": ["documentary", "travel"],
   "metrics": [],
   "accent": "rose"
 }

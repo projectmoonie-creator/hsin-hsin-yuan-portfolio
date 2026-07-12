@@ -36,13 +36,6 @@
         "en": "Led the China-side directing work for the UK special, coordinating local production needs with the original UK Top Gear team and the broadcaster-facing episode structure.",
         "zh": "負責英國篇中方導演工作，協調中國製作需求、英國原版 Top Gear 團隊合作，以及面向播出的單集結構。"
       }
-    },
-    {
-      "label": {"en": "Best for", "zh": "適合合作"},
-      "text": {
-        "en": "International formats, broadcaster collaborations, factual entertainment, and high-pressure shoots that need cross-cultural production judgment.",
-        "zh": "適合國際節目格式、電視台合作、紀實娛樂，以及需要跨文化製作判斷的高壓拍攝。"
-      }
     }
   ],
   "watchMode": "single",

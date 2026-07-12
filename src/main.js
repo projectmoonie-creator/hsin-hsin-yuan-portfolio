@@ -5,9 +5,24 @@ if ("scrollRestoration" in window.history) {
   window.history.scrollRestoration = "manual";
 }
 
+function scrollToTopInstant() {
+  window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+}
+
+function clearInitialHash() {
+  if (!window.location.hash) return false;
+  window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+  return true;
+}
+
+const hadInitialHash = clearInitialHash();
+
 window.addEventListener("pageshow", (event) => {
-  if (!event.persisted && !window.location.hash) {
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  if (!event.persisted) {
+    scrollToTopInstant();
+    if (hadInitialHash) {
+      window.requestAnimationFrame(scrollToTopInstant);
+    }
   }
 });
 
