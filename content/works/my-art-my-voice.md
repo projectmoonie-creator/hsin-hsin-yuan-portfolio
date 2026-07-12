@@ -2,9 +2,9 @@
 {
   "slug": "my-art-my-voice",
   "featured": true,
-  "order": 1,
+  "order": 3,
   "status": "external-only",
-  "year": "2024-2025",
+  "year": "2025",
   "title": {
     "en": "My Art, My Voice",
     "zh": "My Art, My Voice"

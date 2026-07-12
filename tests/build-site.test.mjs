@@ -29,12 +29,20 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
 
   assert.deepEqual(
     works.map((work) => work.slug),
-    ["my-art-my-voice", "tech-dreamers", "top-gear-china-uk-special", "slow-steps"],
+    [
+      "slow-steps",
+      "tech-dreamers",
+      "my-art-my-voice",
+      "interior-spatial-brand-films",
+      "pts-taigi-bus",
+      "top-gear-china-uk-special",
+    ],
   );
-  assert.equal(works[0].title.en, "My Art, My Voice");
-  assert.equal(works[0].title.zh, "My Art, My Voice");
-  assert.equal(works[2].role.en, "China-side Director");
-  assert.equal(works[3].status, "coming-soon");
+  assert.equal(works[0].title.en, "Slow Steps");
+  assert.equal(works[0].status, "coming-soon");
+  assert.equal(works[3].role.en, "Director / Editor");
+  assert.equal(works[4].platform, "PTS Taigi / 公視台語台");
+  assert.equal(works[5].role.en, "China-side Director");
 });
 
 test("loadImpact returns ordered bilingual proof points", () => {
@@ -139,12 +147,20 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Scroll to explore/);
   assert.match(html, /My Art, My Voice/);
   assert.match(html, /Tech Dreamers/);
+  assert.match(html, /Slow Steps/);
+  assert.match(html, /Interior \/ Spatial Brand Films/);
+  assert.match(html, /Gorgeous Space \/ 幸福空間/);
+  assert.match(html, /Director \/ Editor/);
+  assert.match(html, /PTS Taigi - Bus Travel Factual Episodes/);
+  assert.match(html, /Planning \/ Script/);
   assert.match(html, /Top Gear China: UK Special/);
   assert.match(html, /China-side Director/);
   assert.match(html, /200M/);
   assert.match(html, /previous series average/);
   assert.match(html, /0\.81/);
   assert.match(html, /href="#top-gear-china-uk-special"/);
+  assert.match(html, /href="#pts-taigi-bus"/);
+  assert.doesNotMatch(html, /href="#interior-spatial-brand-films"/);
   assert.match(html, /https:\/\/youtu\.be\/M_eXe9HRD9Y\?si=YZ_3JZ7FJY4vVcZv/);
   assert.match(html, /Watch the full episode/);
   assert.match(html, /Watch the series/);
@@ -195,6 +211,11 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /精選舊作/);
   assert.match(zh, /觀看完整單集/);
   assert.match(zh, /觀看完整系列/);
+  assert.match(zh, /觀看代表片段/);
+  assert.match(zh, /幸福空間與室內設計影像/);
+  assert.match(zh, /導演 \/ 剪輯/);
+  assert.match(zh, /公視台語台《無事坐巴士》/);
+  assert.match(zh, /企劃 \/ 企編/);
   assert.match(zh, /《巔峰拍檔》中國版：英國篇/);
   assert.match(zh, /中方導演/);
   assert.match(zh, /同時段綜藝類冠軍/);

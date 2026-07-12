@@ -205,6 +205,7 @@ function watchActionLabel(work, lang, copy) {
     single: { en: "Watch the full episode", zh: "觀看完整單集" },
     series: { en: "Watch the series", zh: "觀看完整系列" },
     collection: { en: "Watch selected films", zh: "觀看精選影片" },
+    sample: { en: "Watch representative segment", zh: "觀看代表片段" },
   };
 
   return labels[work.watchMode]?.[lang] ?? copy.watchLabel;
