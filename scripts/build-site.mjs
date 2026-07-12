@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
 const SITE_ORIGIN = "https://hsin-hsin-yuan-portfolio.vercel.app";
-const ASSET_VERSION = "20260712-light-strip";
+const ASSET_VERSION = "20260712-strip-first";
 
 export function parseFrontmatter(source) {
   const match = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
@@ -96,17 +96,8 @@ function renderPills(items = []) {
   return items.map((item) => `<span class="pill">${escapeHtml(item)}</span>`).join("");
 }
 
-function renderAvailabilityDetails(items = []) {
-  return items
-    .map(
-      (item) => `
-        <div class="available-line">
-          <span>${escapeHtml(item.title)}</span>
-          <p>${escapeHtml(item.line)}</p>
-        </div>
-      `,
-    )
-    .join("");
+function renderAvailabilityPills(items = []) {
+  return items.map((item) => `<span>${escapeHtml(item)}</span>`).join("");
 }
 
 function renderMetrics(metrics = [], lang) {
@@ -251,7 +242,6 @@ function renderWatchLoopItem(work, lang, copy) {
   const title = localize(work.title, lang);
   const role = localize(work.role, lang);
   const tagline = localize(work.tagline, lang);
-  const actionLabel = copy.watchShelfAction ?? copy.learnLabel;
   const image = work.posterImage
     ? `style="background-image: linear-gradient(180deg, rgba(8,8,9,.12), rgba(8,8,9,.78)), url('${escapeHtml(work.posterImage)}')"`
     : "";
@@ -262,7 +252,6 @@ function renderWatchLoopItem(work, lang, copy) {
       <strong>${escapeHtml(title)}</strong>
       <span class="watch-loop-role">${escapeHtml(role)}</span>
       <span class="watch-loop-tagline">${escapeHtml(tagline)}</span>
-      <span class="watch-loop-action">${escapeHtml(actionLabel)}</span>
     </a>
   `;
 }
@@ -273,13 +262,6 @@ function renderWatchLoop(works, lang, copy) {
 
   return `
     <section class="section watch-loop-section watch-loop" data-watch-loop data-speed="34" aria-label="${escapeHtml(copy.watchShelfAria)}">
-      <div class="watch-loop-head">
-        <div>
-          <p class="card-kicker">${escapeHtml(copy.watchShelfKicker)}</p>
-          <h3>${escapeHtml(copy.watchShelfTitle)}</h3>
-        </div>
-        <span>${escapeHtml(copy.watchShelfHint)}</span>
-      </div>
       <div class="watch-loop-viewport">
         <div class="watch-loop-track" data-watch-loop-track>
           <div class="watch-loop-sequence" data-watch-loop-sequence>
@@ -494,19 +476,19 @@ export function renderPage({ lang, site, works }) {
           <div class="collab-grid">${collaborations}</div>
         </section>
 
+        ${renderWatchLoop(works, lang, copy)}
+
         <section class="section available-section" id="available">
           <div class="available-simple">
             <h2 class="section-title">${escapeHtml(copy.availabilityLabel)}</h2>
             <div class="section-intro">
               <p>${escapeHtml(copy.workWithMeSubcopy)}</p>
             </div>
-            <div class="available-list">
-              ${renderAvailabilityDetails(copy.availabilityDetails)}
+            <div class="available-pill-list">
+              ${renderAvailabilityPills(copy.availability)}
             </div>
           </div>
         </section>
-
-        ${renderWatchLoop(works, lang, copy)}
 
         <section class="section works-section" id="works">
           <div class="works-head">

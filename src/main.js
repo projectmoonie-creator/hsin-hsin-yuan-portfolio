@@ -106,6 +106,8 @@ if (!prefersReducedMotion) {
       copies.slice(1).forEach((copy) => copy.remove());
       sequenceWidth = sequence.getBoundingClientRect().width;
       if (!sequenceWidth) return;
+      offset %= sequenceWidth;
+      track.style.transform = `translate3d(${-offset}px, 0, 0)`;
 
       const targetWidth = Math.max(viewport.clientWidth * 2.5, sequenceWidth * 2);
       let renderedWidth = sequenceWidth;

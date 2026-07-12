@@ -26,7 +26,7 @@
       "Bilingual editorial judgment in English and Chinese."
     ],
     "availabilityLabel": "Available for",
-    "availability": ["Creative development", "Directing", "Research", "Bilingual scripts", "AI workflow design"],
+    "availability": ["Creative development", "Directing", "Editing", "Research", "Bilingual scripts", "AI workflow design"],
     "availabilityDetails": [
       {"title": "Creative development", "line": "Research, treatments, pitch framing, and narrative structure for factual and cultural projects."},
       {"title": "Directing", "line": "Interview-led documentary direction, field production, and cross-cultural creative coordination."},
@@ -38,9 +38,9 @@
     "worksHint": "",
     "watchLabel": "Watch",
     "watchShelfKicker": "Screening strip",
-    "watchShelfTitle": "Watch Selected Films",
-    "watchShelfHint": "Swipe to explore",
-    "watchShelfAction": "View in featured works",
+    "watchShelfTitle": "",
+    "watchShelfHint": "",
+    "watchShelfAction": "",
     "watchShelfAria": "Selected works with public video links",
     "learnLabel": "Learn more",
     "comingLabel": "Coming 2026",
@@ -57,7 +57,7 @@
       {"title": "For AI-Language / Editorial Teams", "line": "Fact-checked bilingual scripts, tone judgment, language learning formats, and repeatable editorial workflows."}
     ],
     "workWithMeTitle": "Work With Me",
-    "workWithMeSubcopy": "I can enter a project early as a story partner, join production as a director, or build a repeatable editorial workflow for short-form factual content.",
+    "workWithMeSubcopy": "I can enter a project early as a story partner, direct the shoot, shape the edit, or build repeatable editorial workflows for short-form factual content.",
     "workModes": [
       {"title": "Story development", "line": "Research, treatment, pitch framing, and narrative structure for factual and cultural projects."},
       {"title": "Production direction", "line": "Interview-led directing, field production, and cross-cultural creative coordination."},
@@ -109,7 +109,7 @@
       "可用中文與英文進行研究、採訪、劇本與敘事判斷。"
     ],
     "availabilityLabel": "可合作項目",
-    "availability": ["前期開發", "導演", "研究", "雙語劇本", "AI 工作流設計"],
+    "availability": ["前期開發", "導演", "剪輯", "研究", "雙語劇本", "AI 工作流設計"],
     "availabilityDetails": [
       {"title": "前期開發", "line": "研究、企劃、pitch framing、敘事架構，以及紀實與文化題材的前期整理。"},
       {"title": "導演", "line": "訪談導向的紀錄片導演、現場製作與跨文化創意協調。"},
@@ -121,9 +121,9 @@
     "worksHint": "",
     "watchLabel": "觀看作品",
     "watchShelfKicker": "Screening strip",
-    "watchShelfTitle": "觀看精選影片",
-    "watchShelfHint": "滑動瀏覽",
-    "watchShelfAction": "查看作品說明",
+    "watchShelfTitle": "",
+    "watchShelfHint": "",
+    "watchShelfAction": "",
     "watchShelfAria": "有公開影片連結的代表作品",
     "learnLabel": "了解更多",
     "comingLabel": "2026 待播",
@@ -140,7 +140,7 @@
       {"title": "AI 語言與編輯團隊", "line": "資料驗證型雙語劇本、語氣判斷、語言學習格式與可重複的編輯工作流。"}
     ],
     "workWithMeTitle": "合作方式",
-    "workWithMeSubcopy": "我可以在前期作為故事夥伴加入，也可以在製作階段擔任導演，或替團隊建立可重複使用的紀實短影音與編輯流程。",
+    "workWithMeSubcopy": "我可以在前期作為故事夥伴加入，也可以擔任導演、剪輯，或替團隊建立可重複使用的紀實短影音與編輯流程。",
     "workModes": [
       {"title": "故事開發", "line": "研究、企劃、pitch framing、敘事架構與紀實題材整理。"},
       {"title": "拍攝與導演", "line": "訪談導向的導演工作、現場製作與跨文化創意協調。"},
