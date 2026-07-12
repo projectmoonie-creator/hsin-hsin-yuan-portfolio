@@ -2,7 +2,7 @@
 {
   "slug": "slow-steps",
   "featured": true,
-  "order": 3,
+  "order": 4,
   "status": "coming-soon",
   "year": "2026",
   "title": {

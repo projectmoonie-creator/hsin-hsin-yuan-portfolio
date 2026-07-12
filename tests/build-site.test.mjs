@@ -29,11 +29,12 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
 
   assert.deepEqual(
     works.map((work) => work.slug),
-    ["my-art-my-voice", "tech-dreamers", "slow-steps"],
+    ["my-art-my-voice", "tech-dreamers", "top-gear-china-uk-special", "slow-steps"],
   );
   assert.equal(works[0].title.en, "My Art, My Voice");
   assert.equal(works[0].title.zh, "My Art, My Voice");
-  assert.equal(works[2].status, "coming-soon");
+  assert.equal(works[2].role.en, "China-side Director");
+  assert.equal(works[3].status, "coming-soon");
 });
 
 test("loadImpact returns ordered bilingual proof points", () => {
@@ -54,7 +55,7 @@ test("loadMarkdownCollection returns ordered archive and lab entries", () => {
   const archive = loadMarkdownCollection(join(root, "content/archive"));
   const lab = loadMarkdownCollection(join(root, "content/lab"));
 
-  assert.equal(archive[0].slug, "top-gear-china-uk-special");
+  assert.equal(archive[0].slug, "three-minute-micro-drama");
   assert.equal(archive[0].metrics[0].value, "200M");
   assert.equal(lab[0].slug, "verified-series-script-workflow");
   assert.match(lab[0].title.en, /Script/i);
@@ -138,6 +139,13 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Scroll to explore/);
   assert.match(html, /My Art, My Voice/);
   assert.match(html, /Tech Dreamers/);
+  assert.match(html, /Top Gear China: UK Special/);
+  assert.match(html, /China-side Director/);
+  assert.match(html, /200M/);
+  assert.match(html, /previous series average/);
+  assert.match(html, /0\.81/);
+  assert.match(html, /href="#top-gear-china-uk-special"/);
+  assert.match(html, /https:\/\/youtu\.be\/M_eXe9HRD9Y\?si=YZ_3JZ7FJY4vVcZv/);
   assert.match(html, /Watch the full episode/);
   assert.match(html, /Watch the series/);
   assert.match(html, /Press &amp; Interviews/);
@@ -187,6 +195,9 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /精選舊作/);
   assert.match(zh, /觀看完整單集/);
   assert.match(zh, /觀看完整系列/);
+  assert.match(zh, /《巔峰拍檔》中國版：英國篇/);
+  assert.match(zh, /中方導演/);
+  assert.match(zh, /同時段綜藝類冠軍/);
   assert.doesNotMatch(zh, /觀看精選影片/);
   assert.match(zh, /有公開影片連結的代表作品/);
   assert.match(zh, /媒體報導與訪談/);
