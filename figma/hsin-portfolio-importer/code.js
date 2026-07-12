@@ -30,19 +30,10 @@ const ASSETS = {
   hero: "/assets/portfolio/hsin-working-white-space.jpg",
   myArt: "/assets/portfolio/my-art-my-voice-performance-2.jpg",
   tech: "/assets/portfolio/hsin-working-white-space.jpg",
-  slow: "/assets/portfolio/paris-cultural-olympiad-team.jpg",
   taiwanplus: "/assets/logos/taiwanplus.svg",
 };
 
 const LOGOS = ["TaiwanPlus", "PTS", "DRAGON TV", "WMW", "TICFF", "ScreenHouse", "幸福空間"];
-
-const IMPACT = [
-  ["200M", "viewers for Top Gear China S02E05"],
-  ["#1", "variety rating slot"],
-  ["600K", "viewers in South India"],
-  ["NT$6M", "public funding secured"],
-  ["24", "artist groups documented"],
-];
 
 const WORKS = [
   {
@@ -64,7 +55,7 @@ const WORKS = [
     meta: "2026 / Director / Upcoming",
     tagline: "Slow steps. A closer look at becoming.",
     description: "An upcoming work about movement, time, and becoming.",
-    image: ASSETS.slow,
+    image: "",
   },
 ];
 
@@ -145,6 +136,14 @@ function box(parent, name, width, height, options = {}) {
 
 async function imageBox(parent, name, width, height, assetPath) {
   const rect = box(parent, name, width, height, { fill: "#222225", radius: 8 });
+  if (!assetPath) {
+    text(parent, `${name} / image pending`, "image pending", {
+      size: 12,
+      color: TOKENS.muted.value,
+      width,
+    });
+    return rect;
+  }
   try {
     const image = await figma.createImageAsync(`${SITE_URL}${assetPath}`);
     rect.fills = [
@@ -235,17 +234,6 @@ async function createDesktopPage() {
   sectionTitle(about, "About");
   text(about, "About lead", COPY.aboutLead, { size: 30, style: "Bold", lineHeight: 112, width: 900 });
   text(about, "About body", COPY.aboutBody, { size: 18, lineHeight: 145, color: TOKENS.muted.value, width: 780 });
-
-  const impact = section(desktop, "Selected Impact", 1312);
-  sectionTitle(impact, "Selected Impact");
-  const impactRow = frame(impact, "Impact metric cards", 1312, 210, { fill: TOKENS.bg.value });
-  setAutoLayout(impactRow, "HORIZONTAL", 1, 0);
-  IMPACT.forEach(([value, label]) => {
-    const card = frame(impactRow, `Impact / ${value}`, 260, 200, { fill: TOKENS.panel.value });
-    setAutoLayout(card, "VERTICAL", 14, 20);
-    text(card, "Value", value, { size: 58, style: "Black", color: TOKENS.acid.value });
-    text(card, "Label", label, { size: 16, style: "Bold", width: 200 });
-  });
 
   const works = section(desktop, "Featured Works", 1312);
   sectionTitle(works, "Featured Works");
