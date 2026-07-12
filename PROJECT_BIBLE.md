@@ -37,9 +37,10 @@
 
 ## Private Evidence Boundary
 
-- Private email, inbox search results, client messages, raw screenshots, phone numbers, addresses, and recipient lists must not be committed to this repo or included in `dist/`.
+- Private email, inbox search results, client messages, raw screenshots, phone numbers, addresses, and recipient lists must not be committed to this repo or included in generated output.
 - Private evidence may confirm a publishable fact, but store only a redacted derived fact such as role, approximate date range, client/company name, and confidence.
 - Do not publish a client, company, or credit reconstructed from private evidence until the user has approved the public wording.
+- Treat the repository as public-risk even when it is currently private. Source-material docs and `sourceNote` fields must be redacted enough that an accidental public repo would not expose private messages, addresses, phone numbers, or unapproved credits.
 
 ## Work Navigation
 
@@ -54,8 +55,15 @@
 ## Proof And Metrics
 
 - Treat metrics as canonical proof points. When adding views, reach, screenings, awards, or press, record the source and confidence in the content file or source-material note.
+- Do not create a standalone homepage "Selected Impact" section. Metrics should travel with the work, archive item, press item, or detail page that gives them context.
 - Do not inflate or round metrics beyond the source. If a number is approximate, label it as approximate in the publishable copy.
 - Work cards may use concise proof; longer evidence, uncertain credits, and source trails belong in source-material docs or future detail pages.
+
+## Detail Pages
+
+- Future detail pages should use `/en/works/<slug>/` and `/zh/works/<slug>/` with canonical and hreflang generated from `SITE_ORIGIN`.
+- A work earns a detail page when it has more than two press items, more than one public watch/source link, or enough case-study detail that the homepage card becomes dense.
+- Homepage work cards should keep the role, short description, key metrics, press preview, and one primary watch/status action. Trailers, full episode lists, source trails, extended notes, and dense proof belong on detail pages.
 
 ## Contact And Deployment
 
@@ -64,6 +72,7 @@
 - Contact copy should invite real work inquiries without exposing a direct email address by default.
 - Mobile navigation must keep a path to Contact visible at 820px and below. The portfolio is a hiring supplement, so the conversion route cannot disappear on phones.
 - Canonical URLs, Open Graph URLs, `robots.txt`, and `sitemap.xml` must come from the same `SITE_ORIGIN` build value. Do not keep a second hardcoded sitemap or robots file in `public/`.
+- `dist/` is generated build output for Vercel and must stay ignored by git. Commit source files, not generated pages or copied assets.
 
 ## QA Checklist
 
@@ -71,4 +80,4 @@
 - For visual changes, inspect desktop and mobile widths before pushing.
 - Check that the hero starts at the top on refresh, the showreel plays inline, the screening strip loops without a visible blank gap, and Featured Works remains reachable.
 - Check that press thumbnails come from press metadata or approved replacements.
-- Check that no private source material appears in `dist/`.
+- Check that no private source material appears in generated output.

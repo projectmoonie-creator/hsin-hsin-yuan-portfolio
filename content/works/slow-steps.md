@@ -47,7 +47,7 @@
   ],
   "watchUrl": "",
   "videoEmbedUrl": "",
-  "posterImage": "/assets/portfolio/paris-cultural-olympiad-team.jpg",
+  "posterImage": "",
   "tags": ["documentary", "upcoming", "movement"],
   "metrics": [],
   "accent": "rose"

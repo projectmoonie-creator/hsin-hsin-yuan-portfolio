@@ -80,6 +80,12 @@ function imageData(path) {
 }
 
 function imageLayer({ id, href, x, y, width, height, opacity = 1 }) {
+  if (!href) {
+    return `<g id="${id}" data-source="placeholder">
+    <rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${tokens.panelStrong}"/>
+    <text x="${x + 18}" y="${y + height - 18}" fill="${tokens.ink}" opacity="0.55" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700">image pending</text>
+  </g>`;
+  }
   const filename = basename(href);
   return `<g id="${id}" data-source="${escapeXml(filename)}">
     <rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${tokens.panelStrong}"/>
@@ -129,7 +135,7 @@ function workCard({ work, x, y, width }) {
 
 function buildDesktopHome(site, works, collaborations) {
   const hero = site.en;
-  const featured = works[0];
+  const featured = works.find((work) => work.posterImage) || works[0];
   const logoRow = collaborations
     .slice(0, 7)
     .map((item, index) => logoWordmark({ item, x: 92 + index * 180, y: 690, width: 132 }))

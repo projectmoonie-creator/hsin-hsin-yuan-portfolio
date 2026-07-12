@@ -53,14 +53,13 @@ Map the Figma frames to the current site sections:
 1. `Topbar`
 2. `Hero`
 3. `Platforms & Collaborations`
-4. `About`
-5. `Selected Impact`
+4. `Screening Strip`
+5. `Available For`
 6. `Featured Works`
 7. `Who Should Contact Me`
-8. `Work With Me`
-9. `AI / Language Lab`
-10. `Selected Archive`
-11. `Contact`
+8. `AI / Language Lab`
+9. `Selected Archive`
+10. `Contact`
 
 ## Design Tokens
 
@@ -232,7 +231,7 @@ Fields:
 Figma should not become the source of truth for final text. Final content lives here:
 
 - Site copy: `data/site.json`
-- Impact metrics: `data/impact.json`
+- Metrics live with the work or archive item they explain. There is no standalone Selected Impact section.
 - Collaborations: `data/collaborations.json`
 - Featured works: `content/works/*.md`
 - Archive: `content/archive/*.md`
@@ -273,10 +272,10 @@ Use a dark background, cream text, acid green accent, restrained orange/blue sec
 Create desktop and mobile frames for:
 1. Hero
 2. Logo wall
-3. About
-4. Selected Impact
+3. Screening strip
+4. Available For
 5. Featured Works
-6. Work With Me
+6. Who Should Contact Me
 7. AI / Language Lab
 8. Archive
 9. Contact

@@ -5,7 +5,6 @@ import { join } from "node:path";
 import test from "node:test";
 
 import {
-  loadImpact,
   loadMarkdownCollection,
   loadSiteData,
   loadWorks,
@@ -43,6 +42,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[3].role.en, "Director / Editor");
   assert.equal(works[4].platform, "PTS Taigi / 公視台語台");
   assert.equal(works[5].role.en, "China-side Director");
+  assert.equal(works[0].posterImage, "");
 });
 
 test("featured press entries carry audit metadata", () => {
@@ -58,20 +58,6 @@ test("featured press entries carry audit metadata", () => {
     assert.equal(typeof item.imageSource, "string");
     assert.ok(item.imageSource.length > 4);
   }
-});
-
-test("loadImpact returns ordered bilingual proof points", () => {
-  const impact = loadImpact(join(root, "data/impact.json"));
-
-  assert.deepEqual(
-    impact.map((item) => item.id),
-    ["top-gear-reach", "top-gear-rating", "overclocking-audience", "public-funding", "paris-cultural-olympiad"],
-  );
-  assert.equal(impact[0].value, "200M");
-  assert.match(impact[0].label.en, /viewers/i);
-  assert.match(impact[1].detail.zh, /0.81/);
-  assert.doesNotMatch(impact.map((item) => item.detail.en).join(" "), /Earlier English CV|source materials/i);
-  assert.doesNotMatch(impact.map((item) => item.detail.zh).join(" "), /舊.*履歷/);
 });
 
 test("site copy has no retired section fields in active data", () => {
@@ -93,6 +79,7 @@ test("site copy has no retired section fields in active data", () => {
     "watchShelfTitle",
     "watchShelfHint",
     "watchShelfAction",
+    "impactLabel",
   ];
 
   for (const lang of ["en", "zh"]) {
@@ -110,8 +97,10 @@ test("loadMarkdownCollection returns ordered archive and lab entries", () => {
 
   assert.equal(archive[0].slug, "three-minute-micro-drama");
   assert.equal(archive[0].metrics[0].value, "200M");
+  assert.match(archive[0].body, /Short-form web drama work/);
   assert.equal(lab[0].slug, "verified-series-script-workflow");
   assert.match(lab[0].title.en, /Script/i);
+  assert.match(lab[0].body, /future skill name/);
 });
 
 test("renderPage creates bilingual page with scroll-stack works and video fallbacks", () => {
@@ -162,10 +151,14 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Challenge/);
   assert.match(html, /What I shaped/);
   assert.match(html, /Best for/);
-  assert.match(html, /impact-grid/);
+  assert.doesNotMatch(html, /Selected Impact/);
+  assert.doesNotMatch(html, /impact-grid/);
+  assert.doesNotMatch(html, /impact-section/);
   assert.match(html, /AI \/ Language Lab/);
   assert.match(html, /fact-checked bilingual script workflow/i);
+  assert.match(html, /working home for the future skill name/i);
   assert.match(html, /Selected Archive/);
+  assert.match(html, /Short-form web drama work across food/);
   assert.match(html, /<form class="contact-form" action="\/api\/contact" method="post" data-contact-form>/);
   assert.match(html, /name="startedAt"/);
   assert.match(html, /name="website"/);
@@ -179,7 +172,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.ok(html.indexOf("watch-loop") < html.indexOf("available-section"));
   assert.ok(html.indexOf("watch-loop") < html.indexOf("works-section"));
   assert.ok(html.indexOf("available-section") < html.indexOf("works-section"));
-  assert.ok(html.indexOf("works-section") < html.indexOf("impact-section"));
+  assert.ok(html.indexOf('class="section works-section"') < html.indexOf('class="section lab-section"'));
   assert.match(html, /works-stack/);
   assert.match(html, /data-scroll-stack/);
   assert.doesNotMatch(html, /data-horizontal-scroll/);
@@ -194,6 +187,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /My Art, My Voice/);
   assert.match(html, /Tech Dreamers/);
   assert.match(html, /Slow Steps/);
+  assert.doesNotMatch(html, /slow-steps[\s\S]*?paris-cultural-olympiad-team\.jpg/);
   assert.match(html, /Interior \/ Spatial Brand Films/);
   assert.match(html, /Gorgeous Space \/ 幸福空間/);
   assert.match(html, /Director \/ Editor/);
@@ -227,6 +221,9 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /"@type":"Person"/);
   assert.match(html, /"name":"Hsin-Hsin Yuan"/);
   assert.match(html, /"sameAs":\["https:\/\/github.com\/projectmoonie-creator"/);
+  assert.doesNotMatch(html, /20260712-strip-first/);
+  assert.match(html, /styles\.css\?v=[a-f0-9]{12}/);
+  assert.match(html, /main\.js\?v=[a-f0-9]{12}/);
   assert.doesNotMatch(html, /old English CV|source materials/i);
 });
 
@@ -281,6 +278,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   const sitemap = readFileSync(join(root, "dist/sitemap.xml"), "utf8");
   const css = readFileSync(join(root, "dist/styles.css"), "utf8");
   const js = readFileSync(join(root, "dist/main.js"), "utf8");
+  const gitignore = readFileSync(join(root, ".gitignore"), "utf8");
+  assert.match(gitignore, /^dist\/$/m);
   assert.match(robots, /Sitemap: https:\/\/hsin-hsin-yuan-portfolio\.vercel\.app\/sitemap\.xml/);
   assert.match(sitemap, /<loc>https:\/\/hsin-hsin-yuan-portfolio\.vercel\.app\/en\/<\/loc>/);
   assert.match(sitemap, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
@@ -300,7 +299,10 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /剪輯/);
   assert.match(zh, /挑戰/);
   assert.match(zh, /我如何處理/);
+  assert.doesNotMatch(zh, /代表成績/);
+  assert.doesNotMatch(zh, /impact-grid/);
   assert.match(zh, /AI \/ Language Lab/);
+  assert.match(zh, /future skill name/);
   assert.match(zh, /精選舊作/);
   assert.match(zh, /觀看完整單集/);
   assert.match(zh, /觀看完整系列/);
@@ -331,7 +333,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.hero h1 \{\n  font-size: clamp\(3\.5rem, 7\.2vw, 7\.2rem\);/);
   assert.match(css, /\.hero-media \{[\s\S]*?min-height: auto;/);
   assert.match(css, /@media \(max-width: 1280px\) \{\n  \.hero \{\n    grid-template-columns: 1fr;/);
-  assert.match(css, /\.impact-item strong \{\n  color: var\(--acid\);\n  display: block;\n  font-size: clamp\(2rem, 3\.2vw, 3\.4rem\);/);
+  assert.doesNotMatch(css, /\.impact-grid/);
+  assert.doesNotMatch(css, /\.impact-item/);
   assert.match(css, /url\(\"\/assets\/portfolio\/hsin-working-white-space\.jpg\"\)/);
   assert.match(css, /\.hero-play-button \{/);
   assert.match(css, /\.hero-showreel-video \{/);

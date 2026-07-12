@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -6,7 +7,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
 const SITE_ORIGIN = (process.env.SITE_ORIGIN || "https://hsin-hsin-yuan-portfolio.vercel.app").replace(/\/+$/, "");
-const ASSET_VERSION = "20260712-strip-first";
+const ASSET_VERSION = createHash("sha256")
+  .update(readFileSync(join(root, "src/styles.css")))
+  .update(readFileSync(join(root, "src/main.js")))
+  .digest("hex")
+  .slice(0, 12);
 
 export function parseFrontmatter(source) {
   const match = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
@@ -51,15 +56,10 @@ export function loadMarkdownCollection(dir) {
     .sort((a, b) => a.order - b.order);
 }
 
-export function loadImpact(file) {
-  return JSON.parse(readFileSync(file, "utf8")).sort((a, b) => a.order - b.order);
-}
-
 export function loadSiteData(baseDir = root) {
   return {
     site: JSON.parse(readFileSync(join(baseDir, "data/site.json"), "utf8")),
     collaborations: JSON.parse(readFileSync(join(baseDir, "data/collaborations.json"), "utf8")),
-    impact: loadImpact(join(baseDir, "data/impact.json")),
     archive: loadMarkdownCollection(join(baseDir, "content/archive")),
     lab: loadMarkdownCollection(join(baseDir, "content/lab")),
   };
@@ -304,20 +304,6 @@ function renderWatchLoop(works, lang, copy) {
   `;
 }
 
-function renderImpact(impact, lang) {
-  return impact
-    .map(
-      (item) => `
-        <article class="impact-item">
-          <strong>${escapeHtml(item.value)}</strong>
-          <span>${escapeHtml(localize(item.label, lang))}</span>
-          <p>${escapeHtml(localize(item.detail, lang))}</p>
-        </article>
-      `,
-    )
-    .join("");
-}
-
 function renderLab(lab, lang) {
   return lab
     .map(
@@ -326,6 +312,7 @@ function renderLab(lab, lang) {
           <p class="card-kicker">${escapeHtml(localize(item.kicker, lang))}</p>
           <h3>${escapeHtml(localize(item.title, lang))}</h3>
           <p>${escapeHtml(localize(item.summary, lang))}</p>
+          ${item.body ? `<p class="card-body">${escapeHtml(item.body)}</p>` : ""}
         </article>
       `,
     )
@@ -340,6 +327,7 @@ function renderArchive(archive, lang) {
           <div>
             <p class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(localize(item.role, lang))} / ${escapeHtml(item.platform)}</p>
             <h3>${escapeHtml(localize(item.title, lang))}</h3>
+            ${item.body ? `<p class="archive-body">${escapeHtml(item.body)}</p>` : ""}
           </div>
           ${renderMetrics(item.metrics, lang)}
         </article>
@@ -580,11 +568,6 @@ export function renderPage({ lang, site, works }) {
           <div class="works-stack" data-scroll-stack>
             ${works.map((work) => renderWork(work, lang, copy)).join("")}
           </div>
-        </section>
-
-        <section class="section impact-section">
-          <h2 class="section-title">${escapeHtml(copy.impactLabel)}</h2>
-          <div class="impact-grid">${renderImpact(site.impact, lang)}</div>
         </section>
 
         <section class="section">
