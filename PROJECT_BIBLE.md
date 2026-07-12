@@ -6,6 +6,7 @@
 - Remove content repetition when two sections do the same job. Keep repetition only when it serves a different scanning moment.
 - Homepage copy should be scannable. Put detailed context in work cards, press cards, archive entries, or future detail pages.
 - If a section is removed from the public layout, also remove or clearly mark its unused source fields. Do not leave old copy in data files where a future edit might accidentally revive it.
+- If a section is removed from the website, check every parallel output layer too: generated HTML, source data, CSS/JS, tests, Figma export SVGs, Figma importer plugin code, docs that act as current specs, and review prompts. Historical review/spec files may mention old sections, but active generators must not recreate them.
 - Before adding new copy, run a text consolidation pass: identify what the text proves, who it helps, whether it repeats an existing section, and where it belongs.
 
 ## Bilingual Voice
@@ -56,8 +57,17 @@
 
 - Treat metrics as canonical proof points. When adding views, reach, screenings, awards, or press, record the source and confidence in the content file or source-material note.
 - Do not create a standalone homepage "Selected Impact" section. Metrics should travel with the work, archive item, press item, or detail page that gives them context.
+- Metrics must have context. A number without the project, platform, date range, or role it belongs to reads as loose self-promotion and should not stand alone.
 - Do not inflate or round metrics beyond the source. If a number is approximate, label it as approximate in the publishable copy.
 - Work cards may use concise proof; longer evidence, uncertain credits, and source trails belong in source-material docs or future detail pages.
+
+## Visual Direction
+
+- Before implementing a design reference, translate it into project-specific rules: what to borrow, what to avoid, which parts serve the portfolio goal, and how it should behave on desktop and mobile.
+- Do not copy a reference site's surface style literally when the user's content needs another rhythm. Use references to derive decisions about typography, spacing, motion, image treatment, logo treatment, and section order.
+- Motion should guide attention without becoming a second product. Subtle ambient light is acceptable only when it preserves readability, keeps the site fast, and is verified on mobile.
+- If a work has no approved image, use an explicit placeholder or text-first layout. Do not borrow an unrelated project still just to fill a card or design export.
+- Design-layer artifacts must follow the same content rules as the live site. Figma SVG exports and importer plugins are not allowed to reintroduce removed sections, old metrics, or borrowed images.
 
 ## Detail Pages
 
@@ -74,9 +84,17 @@
 - Canonical URLs, Open Graph URLs, `robots.txt`, and `sitemap.xml` must come from the same `SITE_ORIGIN` build value. Do not keep a second hardcoded sitemap or robots file in `public/`.
 - `dist/` is generated build output for Vercel and must stay ignored by git. Commit source files, not generated pages or copied assets.
 
+## Roadmap Discipline
+
+- Separate the fast prototype from the refined portfolio. A strong first version is allowed to be rough, but every later iteration should declare which layer it is changing: content, IA, visual system, media/showreel, interaction, SEO, contact, deployment, or design handoff.
+- Use work packages instead of open-ended polishing. Each package should have a short goal, affected files, non-goals, validation steps, and a rollback path.
+- Suggested roadmap order for this site: stabilize content and public claims; refine visual system and motion; add work detail pages for dense projects; replace temporary media with approved images/video; improve SEO/social previews; add analytics only when the user wants behavior data; then package the workflow as a reusable skill/service.
+- External reviewers such as Claude Code or Gemini should first produce findings, not edit the repo directly, unless the change scope is mechanical and approved.
+
 ## QA Checklist
 
 - After content or layout changes, run `npm test`.
+- After removing or renaming a public section, run a repo search for the old label, CSS classes, data file names, generator functions, Figma importer code, Figma export files, and tests. Confirm remaining hits are only historical docs or negative regression tests.
 - For visual changes, inspect desktop and mobile widths before pushing.
 - Check that the hero starts at the top on refresh, the showreel plays inline, the screening strip loops without a visible blank gap, and Featured Works remains reachable.
 - Check that press thumbnails come from press metadata or approved replacements.
