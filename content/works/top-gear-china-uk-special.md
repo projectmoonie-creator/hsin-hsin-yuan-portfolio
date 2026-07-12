@@ -10,17 +10,17 @@
     "zh": "《巔峰拍檔》中國版：英國篇"
   },
   "role": {
-    "en": "China-side Director",
-    "zh": "中方導演"
+    "en": "Director",
+    "zh": "導演"
   },
-  "platform": "Dragon TV / Oriental Satellite TV",
+  "platform": "China Dragon TV",
   "tagline": {
-    "en": "A cross-border format shoot with the original UK Top Gear team.",
-    "zh": "與英國原版 Top Gear 團隊合作的跨國節目製作。"
+    "en": "A car show and factual-entertainment shoot with the original UK Top Gear team.",
+    "zh": "與英國原版 Top Gear 團隊合作的汽車節目與紀實娛樂製作。"
   },
   "description": {
-    "en": "Directed the China-side production for S02E05, the UK special of Top Gear China, coordinating format, location, and story needs across Chinese broadcast production and UK-facing material.",
-    "zh": "擔任《巔峰拍檔》中國版第二季第五期英國篇中方導演，協調中國播出端、英國拍攝端與節目格式之間的製作需求。"
+    "en": "Directed the UK shoot for S02E05, the UK special of Top Gear China, coordinating format, location, and story needs across the broadcaster, Chinese production, and the original UK Top Gear team.",
+    "zh": "擔任《巔峰拍檔》中國版第二季第五期英國篇導演，負責英國拍攝內容，協調播出端、中國製作端與英國原版 Top Gear 團隊之間的製作需求。"
   },
   "caseStudy": [
     {
@@ -33,8 +33,8 @@
     {
       "label": {"en": "What I shaped", "zh": "我如何處理"},
       "text": {
-        "en": "Led the China-side directing work for the UK special, coordinating local production needs with the original UK Top Gear team and the broadcaster-facing episode structure.",
-        "zh": "負責英國篇中方導演工作，協調中國製作需求、英國原版 Top Gear 團隊合作，以及面向播出的單集結構。"
+        "en": "Directed the UK special shoot, coordinating production needs with the original UK Top Gear team and the broadcaster-facing episode structure.",
+        "zh": "執導英國篇拍攝，協調英國原版 Top Gear 團隊合作、製作需求，以及面向播出的單集結構。"
       }
     }
   ],
@@ -42,7 +42,7 @@
   "watchUrl": "https://youtu.be/M_eXe9HRD9Y?si=YZ_3JZ7FJY4vVcZv",
   "videoEmbedUrl": "",
   "posterImage": "/assets/portfolio/top-gear-uk-special-car.jpg",
-  "tags": ["factual entertainment", "broadcast", "international format", "UK production"],
+  "tags": ["car show", "factual entertainment", "broadcast", "UK production"],
   "metrics": [
     {"value": "200M", "label": {"en": "viewers", "zh": "觀眾"}},
     {"value": "9M", "label": {"en": "previous series average", "zh": "此前系列平均觀眾"}},

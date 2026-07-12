@@ -45,7 +45,7 @@ const WORKS = [
   },
   {
     title: "Slow Steps",
-    meta: "2026 / Director / Editor / Producer / Independent Travel Documentary",
+    meta: "2026 / Director / Editor / Producer / TaiwanPlus / Travel",
     tagline: "A quiet travel documentary shaped through observation, time, and becoming.",
     description: "A poetic personal work that follows travel as a way of paying attention.",
     image: "",

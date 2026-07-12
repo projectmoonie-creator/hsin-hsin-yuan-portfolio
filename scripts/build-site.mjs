@@ -276,9 +276,10 @@ function renderWatchLoopItem(work, lang, copy) {
   const image = work.posterImage
     ? `style="background-image: linear-gradient(180deg, rgba(8,8,9,.12), rgba(8,8,9,.78)), ${cssUrl(work.posterImage)}"`
     : "";
+  const cardClass = work.posterImage ? "watch-loop-card" : "watch-loop-card watch-loop-card-plain";
 
   return `
-    <a class="watch-loop-card" href="#${escapeHtml(work.slug)}" ${image}>
+    <a class="${cardClass}" href="#${escapeHtml(work.slug)}" ${image}>
       <span class="watch-loop-meta">${escapeHtml(work.platform)} / ${escapeHtml(work.year)}</span>
       <strong>${escapeHtml(title)}</strong>
       <span class="watch-loop-role">${escapeHtml(role)}</span>

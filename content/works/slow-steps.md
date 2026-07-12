@@ -13,7 +13,7 @@
     "en": "Director / Editor / Producer",
     "zh": "導演 / 剪輯 / 製作"
   },
-  "platform": "Independent / Travel Documentary",
+  "platform": "TaiwanPlus / Travel",
   "tagline": {
     "en": "A quiet travel documentary shaped through observation, time, and becoming.",
     "zh": "一部以觀察、時間與成為自己為核心的安靜旅行紀錄片。"

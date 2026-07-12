@@ -43,10 +43,12 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[1].role.en, "Director / Editor / Producer");
   assert.equal(works[3].role.en, "Director / Editor");
   assert.equal(works[4].platform, "PTS Taigi / 公視台語台");
-  assert.equal(works[5].role.en, "China-side Director");
+  assert.equal(works[5].role.en, "Director");
+  assert.equal(works[5].platform, "China Dragon TV");
   assert.equal(works[0].posterImage, "");
-  assert.equal(works[0].platform, "Independent / Travel Documentary");
+  assert.equal(works[0].platform, "TaiwanPlus / Travel");
   assert.deepEqual(works[0].tags, ["documentary", "travel"]);
+  assert.deepEqual(works[5].tags, ["car show", "factual entertainment", "broadcast", "UK production"]);
   assert.equal(works[0].metrics.length, 0);
   assert.equal(works[2].metrics.length, 0);
 });
@@ -188,6 +190,8 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Swipe to explore/);
   assert.match(html, /watch-loop-card/);
   assert.match(html, /href="#slow-steps"/);
+  assert.match(html, /watch-loop-card watch-loop-card-plain/);
+  assert.doesNotMatch(html, /watch-loop-card" href="#slow-steps" style="background-image/);
   assert.ok(html.indexOf('href="#slow-steps"') < html.indexOf('href="#tech-dreamers"'));
   assert.match(html, /href="#my-art-my-voice"/);
   assert.doesNotMatch(html, /View in featured works/);
@@ -210,7 +214,11 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /PTS Taigi - Bus Travel Factual Episodes/);
   assert.match(html, /Planning \/ Script/);
   assert.match(html, /Top Gear China: UK Special/);
-  assert.match(html, /China-side Director/);
+  assert.match(html, /China Dragon TV/);
+  assert.match(html, /Director/);
+  assert.doesNotMatch(html, /China-side Director/);
+  assert.doesNotMatch(html, /Oriental Satellite TV/);
+  assert.match(html, /car show/);
   assert.match(html, /200M/);
   assert.match(html, /previous series average/);
   assert.match(html, /0\.81/);
@@ -330,7 +338,9 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /公視台語台《無事坐巴士》/);
   assert.match(zh, /企劃 \/ 企編/);
   assert.match(zh, /《巔峰拍檔》中國版：英國篇/);
-  assert.match(zh, /中方導演/);
+  assert.match(zh, /China Dragon TV/);
+  assert.match(zh, /汽車節目與紀實娛樂/);
+  assert.doesNotMatch(zh, /中方導演/);
   assert.match(zh, /同時段綜藝類冠軍/);
   assert.doesNotMatch(zh, /觀看精選影片/);
   assert.match(zh, /代表影像作品/);
@@ -377,6 +387,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.doesNotMatch(css, /\.light-beam-left/);
   assert.match(css, /--page-pad: clamp/);
   assert.match(css, /\.watch-loop-card \{/);
+  assert.match(css, /\.watch-loop-card-plain \{/);
+  assert.match(css, /\.watch-loop-card-plain \{[\s\S]*?background: transparent;/);
   assert.match(css, /\.watch-loop-viewport::before/);
   assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\):not\(\[href="#contact"\]\)/);
   assert.doesNotMatch(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\) \{\n    display: none;/);
