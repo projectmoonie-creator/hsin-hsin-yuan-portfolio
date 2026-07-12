@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
 const SITE_ORIGIN = "https://hsin-hsin-yuan-portfolio.vercel.app";
-const ASSET_VERSION = "20260711-scroll-stack";
+const ASSET_VERSION = "20260712-available-for";
 
 export function parseFrontmatter(source) {
   const match = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
@@ -94,6 +94,19 @@ function renderTags(tags = []) {
 
 function renderPills(items = []) {
   return items.map((item) => `<span class="pill">${escapeHtml(item)}</span>`).join("");
+}
+
+function renderAvailabilityDetails(items = []) {
+  return items
+    .map(
+      (item) => `
+        <div class="available-line">
+          <span>${escapeHtml(item.title)}</span>
+          <p>${escapeHtml(item.line)}</p>
+        </div>
+      `,
+    )
+    .join("");
 }
 
 function renderMetrics(metrics = [], lang) {
@@ -406,12 +419,11 @@ export function renderPage({ lang, site, works }) {
   const heroTitleLines = (copy.heroTitleLines || [copy.heroTitle]).map((line) => `<span>${escapeHtml(line)}</span>`).join("");
   const heroRoles = (copy.heroRoleLines || copy.heroRoles).map((role) => `<span>${renderHeroRoleLine(role)}</span>`).join("");
   const navItems = [
-    { href: "#about", label: copy.aboutTitle },
+    { href: "#available", label: copy.availabilityLabel },
     { href: "#works", label: lang === "en" ? "Works" : "作品" },
     { href: "#contact", label: lang === "en" ? "Contact" : "聯絡" },
   ];
   const services = renderInfoCards(copy.services);
-  const workModes = renderInfoCards(copy.workModes);
   const collaborations = renderCollaborations(site.collaborations);
 
   return `<!doctype html>
@@ -483,17 +495,14 @@ export function renderPage({ lang, site, works }) {
           <div class="collab-grid">${collaborations}</div>
         </section>
 
-        <section class="section about-section" id="about">
-          <div class="about-simple">
-            <h2 class="section-title">${escapeHtml(copy.aboutTitle)}</h2>
+        <section class="section available-section" id="available">
+          <div class="available-simple">
+            <h2 class="section-title">${escapeHtml(copy.availabilityLabel)}</h2>
             <div class="section-intro">
-              <p>${escapeHtml(copy.aboutLead)}</p>
+              <p>${escapeHtml(copy.workWithMeSubcopy)}</p>
             </div>
-            <div class="about-copy">
-              ${copy.aboutBody ? `<p>${escapeHtml(copy.aboutBody)}</p>` : ""}
-              <ul>
-                ${copy.aboutNotes.map((note) => `<li>${escapeHtml(note)}</li>`).join("")}
-              </ul>
+            <div class="available-list">
+              ${renderAvailabilityDetails(copy.availabilityDetails)}
             </div>
           </div>
         </section>
@@ -520,14 +529,6 @@ export function renderPage({ lang, site, works }) {
             <p>${escapeHtml(copy.createSubcopy)}</p>
           </div>
           <div class="services-grid">${services}</div>
-        </section>
-
-        <section class="section work-with-me">
-          <div class="section-intro">
-            <h2 class="section-title">${escapeHtml(copy.workWithMeTitle)}</h2>
-            <p>${escapeHtml(copy.workWithMeSubcopy)}</p>
-          </div>
-          <div class="services-grid">${workModes}</div>
         </section>
 
         <section class="section lab-section">
