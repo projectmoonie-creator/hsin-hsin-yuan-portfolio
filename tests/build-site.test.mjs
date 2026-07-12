@@ -59,6 +59,36 @@ test("loadImpact returns ordered bilingual proof points", () => {
   assert.doesNotMatch(impact.map((item) => item.detail.zh).join(" "), /舊.*履歷/);
 });
 
+test("site copy has no retired section fields in active data", () => {
+  const site = loadSiteData(root).site;
+  const retiredFields = [
+    "heroPrimaryCta",
+    "heroSecondaryCta",
+    "aboutTitle",
+    "aboutLead",
+    "aboutBody",
+    "aboutNotes",
+    "availabilityDetails",
+    "workWithMeTitle",
+    "workWithMeSubcopy",
+    "workModes",
+    "showreelEyebrow",
+    "showreelSubcopy",
+    "watchShelfKicker",
+    "watchShelfTitle",
+    "watchShelfHint",
+    "watchShelfAction",
+  ];
+
+  for (const lang of ["en", "zh"]) {
+    assert.equal(typeof site[lang].availabilityIntro, "string");
+    assert.ok(site[lang].availabilityIntro.length > 20);
+    for (const field of retiredFields) {
+      assert.equal(field in site[lang], false, `${field} should not remain in ${lang} site copy`);
+    }
+  }
+});
+
 test("loadMarkdownCollection returns ordered archive and lab entries", () => {
   const archive = loadMarkdownCollection(join(root, "content/archive"));
   const lab = loadMarkdownCollection(join(root, "content/lab"));
@@ -97,6 +127,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /showreel-section/);
   assert.ok(html.indexOf('id="showreel"') < html.indexOf("collab-section-early"));
   assert.match(html, /Available for/);
+  assert.match(html, /I can enter a project early as a story partner/);
   assert.match(html, /available-simple/);
   assert.match(html, /available-pill-list/);
   assert.match(html, /Editing/);
@@ -151,6 +182,8 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Interior \/ Spatial Brand Films/);
   assert.match(html, /Gorgeous Space \/ 幸福空間/);
   assert.match(html, /Director \/ Editor/);
+  assert.match(html, /Showreel in progress/);
+  assert.doesNotMatch(html, /Interior \/ Spatial Brand Films[\s\S]*?Coming 2026/);
   assert.match(html, /PTS Taigi - Bus Travel Factual Episodes/);
   assert.match(html, /Planning \/ Script/);
   assert.match(html, /Top Gear China: UK Special/);
@@ -194,6 +227,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   const js = readFileSync(join(root, "dist/main.js"), "utf8");
   assert.match(zh, /紀錄片導演/);
   assert.match(zh, /觀看 showreel/);
+  assert.match(zh, /Showreel 整理中/);
   assert.doesNotMatch(zh, /data-about-tabs/);
   assert.match(zh, /可合作項目/);
   assert.doesNotMatch(zh, /<h2 class="section-title">關於我<\/h2>/);
@@ -262,6 +296,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /--page-pad: clamp/);
   assert.match(css, /\.watch-loop-card \{/);
   assert.match(css, /\.watch-loop-viewport::before/);
+  assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\):not\(\[href="#contact"\]\)/);
+  assert.doesNotMatch(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\) \{\n    display: none;/);
   assert.match(js, /getEdgeProximity/);
   assert.match(js, /pointermove/);
   assert.match(js, /initAmbientBackground/);

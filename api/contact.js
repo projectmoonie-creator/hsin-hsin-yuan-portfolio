@@ -1,5 +1,7 @@
 const MAX_FIELD_LENGTH = 3000;
 const MIN_SUBMIT_MS = 2500;
+const RATE_LIMIT_MS = 60 * 1000;
+const submissions = new Map();
 
 function json(res, statusCode, body) {
   res.status(statusCode);
@@ -69,6 +71,28 @@ function buildMessage(body) {
   };
 }
 
+function clientIp(req) {
+  const forwarded = req.headers?.["x-forwarded-for"];
+  if (typeof forwarded === "string" && forwarded.trim()) {
+    return forwarded.split(",")[0].trim();
+  }
+  return req.socket?.remoteAddress || "unknown";
+}
+
+function isRateLimited(req, fields) {
+  const now = Date.now();
+  for (const [key, timestamp] of submissions.entries()) {
+    if (now - timestamp > RATE_LIMIT_MS) submissions.delete(key);
+  }
+
+  const key = `${clientIp(req)}:${fields.email.toLowerCase()}`;
+  const previous = submissions.get(key);
+  if (previous && now - previous < RATE_LIMIT_MS) return true;
+
+  submissions.set(key, now);
+  return false;
+}
+
 export default async function contactHandler(req, res) {
   if (req.method === "OPTIONS") return res.status(204).end();
   if (req.method !== "POST") return json(res, 405, { ok: false, error: "Method not allowed." });
@@ -89,20 +113,29 @@ export default async function contactHandler(req, res) {
     return json(res, 503, { ok: false, error: "Contact email is not configured." });
   }
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to,
-      reply_to: fields.email,
-      subject: `Portfolio inquiry: ${fields.projectType}`,
-      text,
-    }),
-  });
+  if (isRateLimited(req, fields)) {
+    return json(res, 429, { ok: false, error: "Too many messages. Please wait before sending another message." });
+  }
+
+  let response;
+  try {
+    response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to,
+        reply_to: fields.email,
+        subject: `Portfolio inquiry: ${fields.projectType}`,
+        text,
+      }),
+    });
+  } catch {
+    return json(res, 502, { ok: false, error: "Unable to send the message." });
+  }
 
   if (!response.ok) {
     return json(res, 502, { ok: false, error: "Unable to send the message." });

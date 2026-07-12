@@ -34,7 +34,7 @@ async function callContact(body, env = {}) {
     if (!(key in env)) delete process.env[key];
   }
 
-  const req = { method: "POST", body };
+  const req = { method: "POST", body, headers: { "x-forwarded-for": "203.0.113.7" } };
   const res = createResponse();
 
   try {
@@ -44,6 +44,24 @@ async function callContact(body, env = {}) {
     process.env = previousEnv;
   }
 }
+
+function validBody(overrides = {}) {
+  return {
+    name: "Producer",
+    email: "producer@example.com",
+    projectType: "Cultural documentary",
+    message: "We are looking for a director for a bilingual project.",
+    link: "https://example.com/brief",
+    startedAt: String(Date.now() - 10_000),
+    ...overrides,
+  };
+}
+
+const mailEnv = {
+  RESEND_API_KEY: "test_key",
+  CONTACT_TO_EMAIL: "inquiries@example.com",
+  CONTACT_FROM_EMAIL: "Portfolio <portfolio@example.com>",
+};
 
 test("contact API rejects spam honeypot submissions before sending email", async () => {
   let fetchCalled = false;
@@ -94,21 +112,7 @@ test("contact API sends a structured email through Resend", async () => {
   };
 
   try {
-    const res = await callContact(
-      {
-        name: "Producer",
-        email: "producer@example.com",
-        projectType: "Cultural documentary",
-        message: "We are looking for a director for a bilingual project.",
-        link: "https://example.com/brief",
-        startedAt: String(Date.now() - 10_000),
-      },
-      {
-        RESEND_API_KEY: "test_key",
-        CONTACT_TO_EMAIL: "inquiries@example.com",
-        CONTACT_FROM_EMAIL: "Portfolio <portfolio@example.com>",
-      },
-    );
+    const res = await callContact(validBody(), mailEnv);
 
     assert.equal(res.statusCode, 200);
     assert.equal(res.body.ok, true);
@@ -123,6 +127,44 @@ test("contact API sends a structured email through Resend", async () => {
     assert.match(payload.subject, /Portfolio inquiry/);
     assert.match(payload.text, /Cultural documentary/);
     assert.doesNotMatch(payload.text, /website/);
+  } finally {
+    global.fetch = originalFetch;
+  }
+});
+
+test("contact API returns friendly JSON when Resend fetch throws", async () => {
+  const originalFetch = global.fetch;
+  global.fetch = async () => {
+    throw new Error("network down");
+  };
+
+  try {
+    const res = await callContact(validBody({ email: "network@example.com" }), mailEnv);
+
+    assert.equal(res.statusCode, 502);
+    assert.deepEqual(res.body, { ok: false, error: "Unable to send the message." });
+  } finally {
+    global.fetch = originalFetch;
+  }
+});
+
+test("contact API applies a basic per-client rate limit before sending email", async () => {
+  const originalFetch = global.fetch;
+  let calls = 0;
+  global.fetch = async () => {
+    calls += 1;
+    return { ok: true, json: async () => ({ id: `email_${calls}` }) };
+  };
+
+  try {
+    const first = await callContact(validBody({ email: "limit@example.com" }), mailEnv);
+    const second = await callContact(validBody({ email: "limit@example.com" }), mailEnv);
+
+    assert.equal(first.statusCode, 200);
+    assert.equal(second.statusCode, 429);
+    assert.equal(second.body.ok, false);
+    assert.match(second.body.error, /too many/i);
+    assert.equal(calls, 1);
   } finally {
     global.fetch = originalFetch;
   }

@@ -4,6 +4,10 @@
   "featured": true,
   "order": 4,
   "status": "in-progress",
+  "statusLabel": {
+    "en": "Showreel in progress",
+    "zh": "Showreel 整理中"
+  },
   "year": "2021-2024",
   "title": {
     "en": "Interior / Spatial Brand Films",

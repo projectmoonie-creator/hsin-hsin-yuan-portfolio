@@ -168,17 +168,15 @@ function buildDesktopHome(site, works, collaborations) {
     </g>
     ${slashLines}
     ${textBlock({ id: "layer-hero-subcopy", x: 772, y: 526, lines: textLines(hero.heroSubcopy, 56).slice(0, 4), size: 18, fill: tokens.muted, lineHeight: 28 })}
-    ${pill({ x: 772, y: 590, width: 132, text: hero.heroPrimaryCta, fill: tokens.acid, stroke: tokens.acid, color: tokens.bg })}
-    ${pill({ x: 920, y: 590, width: 112, text: hero.heroSecondaryCta })}
   </g>
   <g id="layer-logo-wall">
     <text x="72" y="668" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" letter-spacing="1.3">${escapeXml(hero.collabTitle.toUpperCase())}</text>
     ${logoRow}
   </g>
-  <g id="layer-about">
-    <text x="72" y="840" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.4">${escapeXml(hero.aboutTitle.toUpperCase())}</text>
-    ${textBlock({ id: "layer-about-lead", x: 72, y: 896, lines: textLines(hero.aboutLead, 60).slice(0, 4), size: 28, weight: 760, fill: tokens.ink, lineHeight: 38 })}
-    ${textBlock({ id: "layer-about-body", x: 760, y: 888, lines: textLines(hero.aboutBody, 64).slice(0, 8), size: 17, fill: tokens.muted, lineHeight: 27 })}
+  <g id="layer-available">
+    <text x="72" y="840" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.4">${escapeXml(hero.availabilityLabel.toUpperCase())}</text>
+    ${textBlock({ id: "layer-available-intro", x: 72, y: 896, lines: textLines(hero.availabilityIntro, 62).slice(0, 3), size: 26, weight: 760, fill: tokens.ink, lineHeight: 36 })}
+    ${textBlock({ id: "layer-available-list", x: 760, y: 888, lines: hero.availability.slice(0, 6), size: 17, fill: tokens.muted, lineHeight: 30 })}
   </g>`,
   });
 }
@@ -241,15 +239,14 @@ function buildMobileHome(site, works, collaborations) {
     </g>
     <text x="24" y="532" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="650">Documentary Director <tspan fill="${tokens.acid}">/</tspan> Writer <tspan fill="${tokens.acid}">/</tspan> Producer</text>
     <text x="24" y="558" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">/ <tspan fill="${tokens.ink}">Cross-Cultural Storyteller</tspan></text>
-    ${pill({ x: 24, y: 582, width: 132, text: hero.heroPrimaryCta, fill: tokens.acid, stroke: tokens.acid, color: tokens.bg, uppercase: false })}
   </g>
   <g id="layer-logo-wall">
     <text x="24" y="596" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="800" letter-spacing="1.2">${escapeXml(hero.collabTitle.toUpperCase())}</text>
     ${logos}
   </g>
-  <g id="layer-mobile-about">
-    <text x="24" y="748" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="850" letter-spacing="1.2">${escapeXml(hero.aboutTitle.toUpperCase())}</text>
-    ${textBlock({ id: "layer-mobile-about-lead", x: 24, y: 782, lines: textLines(hero.aboutLead, 36).slice(0, 3), size: 18, weight: 760, fill: tokens.ink, lineHeight: 24 })}
+  <g id="layer-mobile-available">
+    <text x="24" y="748" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="850" letter-spacing="1.2">${escapeXml(hero.availabilityLabel.toUpperCase())}</text>
+    ${textBlock({ id: "layer-mobile-available-intro", x: 24, y: 782, lines: textLines(hero.availabilityIntro, 36).slice(0, 3), size: 18, weight: 760, fill: tokens.ink, lineHeight: 24 })}
   </g>`,
   });
 }

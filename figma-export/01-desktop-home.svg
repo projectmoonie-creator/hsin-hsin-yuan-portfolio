@@ -31,14 +31,6 @@
         <text x="794" y="454" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="650">Cross-Cultural Storyteller</text>
       </g>
     <text id="layer-hero-subcopy" x="772" y="526" fill="#B8B0A3" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="500" letter-spacing="0" transform=""><tspan x="772" dy="0">I direct and develop documentary stories for artists,</tspan><tspan x="772" dy="28">culture, and technology teams working across Taiwan and</tspan><tspan x="772" dy="28">international contexts. I help complex subjects become</tspan><tspan x="772" dy="28">human, cinematic, and clear enough to travel.</tspan></text>
-    <g id="pill-work-with-me">
-    <rect x="772" y="590" width="132" height="34" rx="17" fill="#D8FF3E" stroke="#D8FF3E"/>
-    <text x="789" y="612" fill="#0B0B0C" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2">WORK WITH ME</text>
-  </g>
-    <g id="pill-see-works">
-    <rect x="920" y="590" width="112" height="34" rx="17" fill="transparent" stroke="rgba(247, 242, 232, 0.18)"/>
-    <text x="937" y="612" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.2">SEE WORKS</text>
-  </g>
   </g>
   <g id="layer-logo-wall">
     <text x="72" y="668" fill="#B8B0A3" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" letter-spacing="1.3">PLATFORMS &amp; COLLABORATIONS</text>
@@ -78,9 +70,9 @@
     <line x1="1172" y1="718" x2="1304" y2="718" stroke="#F7F2E8" stroke-opacity="0.2"/>
   </g>
   </g>
-  <g id="layer-about">
-    <text x="72" y="840" fill="#D8FF3E" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.4">ABOUT</text>
-    <text id="layer-about-lead" x="72" y="896" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="760" letter-spacing="0" transform=""><tspan x="72" dy="0">I am a Taiwan-born documentary director and creative</tspan><tspan x="72" dy="38">producer for artists, cultural institutions, factual</tspan><tspan x="72" dy="38">producers, and technology teams that need stories shaped</tspan><tspan x="72" dy="38">with research, empathy, and cross-cultural judgment.</tspan></text>
-    <text id="layer-about-body" x="760" y="888" fill="#B8B0A3" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="500" letter-spacing="0" transform=""></text>
+  <g id="layer-available">
+    <text x="72" y="840" fill="#D8FF3E" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.4">AVAILABLE FOR</text>
+    <text id="layer-available-intro" x="72" y="896" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="760" letter-spacing="0" transform=""><tspan x="72" dy="0">I can enter a project early as a story partner, direct the</tspan><tspan x="72" dy="36">shoot, shape the edit, or build repeatable editorial workflows</tspan><tspan x="72" dy="36">for short-form factual content.</tspan></text>
+    <text id="layer-available-list" x="760" y="888" fill="#B8B0A3" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="500" letter-spacing="0" transform=""><tspan x="760" dy="0">Creative development</tspan><tspan x="760" dy="30">Directing</tspan><tspan x="760" dy="30">Editing</tspan><tspan x="760" dy="30">Research</tspan><tspan x="760" dy="30">Bilingual scripts</tspan><tspan x="760" dy="30">AI workflow design</tspan></text>
   </g>
 </svg>

@@ -1373,8 +1373,22 @@ a {
     top: 1rem;
   }
 
-  .nav-links > a:not(.language-switch) {
+  .nav-links {
+    gap: 0.65rem;
+    margin-left: auto;
+    padding-right: 3.25rem;
+  }
+
+  .nav-links > a:not(.language-switch):not([href="#contact"]) {
     display: none;
+  }
+
+  .nav-links a[href="#contact"] {
+    border: 1px solid rgba(247, 242, 232, 0.24);
+    border-radius: 999px;
+    color: var(--ink);
+    display: inline-flex;
+    padding: 0.48rem 0.68rem;
   }
 
   .brand {

@@ -26,10 +26,6 @@
     </g>
     <text x="24" y="532" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="650">Documentary Director <tspan fill="#D8FF3E">/</tspan> Writer <tspan fill="#D8FF3E">/</tspan> Producer</text>
     <text x="24" y="558" fill="#D8FF3E" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">/ <tspan fill="#F7F2E8">Cross-Cultural Storyteller</tspan></text>
-    <g id="pill-work-with-me">
-    <rect x="24" y="582" width="132" height="34" rx="17" fill="#D8FF3E" stroke="#D8FF3E"/>
-    <text x="41" y="604" fill="#0B0B0C" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="0">Work with me</text>
-  </g>
   </g>
   <g id="layer-logo-wall">
     <text x="24" y="596" fill="#B8B0A3" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="800" letter-spacing="1.2">PLATFORMS &amp; COLLABORATIONS</text>
@@ -54,8 +50,8 @@
     <line x1="196" y1="704" x2="314" y2="704" stroke="#F7F2E8" stroke-opacity="0.2"/>
   </g>
   </g>
-  <g id="layer-mobile-about">
-    <text x="24" y="748" fill="#D8FF3E" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="850" letter-spacing="1.2">ABOUT</text>
-    <text id="layer-mobile-about-lead" x="24" y="782" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="760" letter-spacing="0" transform=""><tspan x="24" dy="0">I am a Taiwan-born documentary</tspan><tspan x="24" dy="24">director and creative producer for</tspan><tspan x="24" dy="24">artists, cultural institutions,</tspan></text>
+  <g id="layer-mobile-available">
+    <text x="24" y="748" fill="#D8FF3E" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="850" letter-spacing="1.2">AVAILABLE FOR</text>
+    <text id="layer-mobile-available-intro" x="24" y="782" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="760" letter-spacing="0" transform=""><tspan x="24" dy="0">I can enter a project early as a</tspan><tspan x="24" dy="24">story partner, direct the shoot,</tspan><tspan x="24" dy="24">shape the edit, or build repeatable</tspan></text>
   </g>
 </svg>

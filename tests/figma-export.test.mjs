@@ -51,7 +51,8 @@ test("Figma SVG export keeps portfolio layers editable and named", () => {
 
   assert.match(mobileHome, /id="frame-mobile-home"/);
   assert.match(mobileHome, /viewBox="0 0 390 844"/);
-  assert.match(mobileHome, /Work with me/);
+  assert.match(mobileHome, /id="layer-mobile-available"/);
+  assert.match(mobileHome, /AVAILABLE FOR/i);
 
   assert.match(readme, /Drag the SVG files into Figma/);
   assert.match(readme, /editable text layers/i);
