@@ -82,7 +82,7 @@
       },
       "source": {"en": "Very Mulan", "zh": "非常木蘭"},
       "url": "https://www.verymulan.com/story/真誠地往前走，走進創作的大海：專訪巴黎文化奧運紀錄片導演袁欣欣-15241.html",
-      "image": "/assets/portfolio/my-art-my-voice-interview.jpg"
+      "image": "https://www.verymulan.com/img/upload/articles/2025/05/17472124753d.png"
     }
   ],
   "accent": "violet"

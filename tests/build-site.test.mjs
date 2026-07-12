@@ -147,6 +147,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /00f85da2-db1d-4c46-9b3d-a7359d911e52-w1600\.png/);
   assert.match(html, /Director interview: walking into the sea of creation/);
   assert.match(html, /Very Mulan/);
+  assert.match(html, /17472124753d\.png/);
   assert.match(html, /press-preview-card/);
   assert.doesNotMatch(html, /old English CV|source materials/i);
 });
