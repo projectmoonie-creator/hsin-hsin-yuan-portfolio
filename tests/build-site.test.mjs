@@ -45,6 +45,21 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[5].role.en, "China-side Director");
 });
 
+test("featured press entries carry audit metadata", () => {
+  const works = loadWorks(join(root, "content/works"));
+  const pressEntries = works.flatMap((work) => work.press || []);
+
+  assert.ok(pressEntries.length > 0);
+  for (const item of pressEntries) {
+    assert.match(item.canonicalUrl, /^https:\/\//, "press canonicalUrl should be public HTTPS");
+    assert.match(item.metadataCheckedAt, /^\d{4}-\d{2}-\d{2}$/);
+    assert.equal(typeof item.titleSource, "string");
+    assert.ok(item.titleSource.length > 4);
+    assert.equal(typeof item.imageSource, "string");
+    assert.ok(item.imageSource.length > 4);
+  }
+});
+
 test("loadImpact returns ordered bilingual proof points", () => {
   const impact = loadImpact(join(root, "data/impact.json"));
 
@@ -199,14 +214,51 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Watch the series/);
   assert.match(html, /Press &amp; Interviews/);
   assert.match(html, /Official program page/);
+  assert.match(html, /data-metadata-checked-at="2026-07-12"/);
+  assert.match(html, /data-image-source="owned project still; official page exception"/);
   assert.match(html, /Cultural Olympiad documentary My Art, My Voice/);
   assert.match(html, /Mirror Media/);
-  assert.match(html, /00f85da2-db1d-4c46-9b3d-a7359d911e52-w1600\.png/);
+  assert.match(html, /<img src="https:\/\/v3-statics\.mirrormedia\.mg\/images\/00f85da2-db1d-4c46-9b3d-a7359d911e52-w1600\.png" alt="" loading="lazy" decoding="async" onerror="this\.parentElement\.remove\(\)">/);
   assert.match(html, /Director interview: walking into the sea of creation/);
   assert.match(html, /Very Mulan/);
   assert.match(html, /17472124753d\.png/);
   assert.match(html, /press-preview-card/);
+  assert.match(html, /<script type="application\/ld\+json">/);
+  assert.match(html, /"@type":"Person"/);
+  assert.match(html, /"name":"Hsin-Hsin Yuan"/);
+  assert.match(html, /"sameAs":\["https:\/\/github.com\/projectmoonie-creator"/);
   assert.doesNotMatch(html, /old English CV|source materials/i);
+});
+
+test("renderPage escapes image URLs for inline CSS contexts", () => {
+  const site = loadSiteData(root);
+  const works = [
+    {
+      slug: "css-url-safety",
+      featured: true,
+      order: 1,
+      status: "coming-soon",
+      year: "2026",
+      title: { en: "CSS URL Safety", zh: "CSS URL Safety" },
+      role: { en: "Director", zh: "導演" },
+      platform: "Test",
+      tagline: { en: "Safety", zh: "Safety" },
+      description: { en: "Safety", zh: "Safety" },
+      watchUrl: "https://example.com/watch",
+      watchMode: "single",
+      posterImage: "/assets/poster')bad.jpg",
+      tags: [],
+      metrics: [],
+      caseStudy: [],
+      press: [],
+      accent: "cyan",
+    },
+  ];
+
+  const html = renderPage({ lang: "en", site, works });
+
+  assert.doesNotMatch(html, /url\('\/assets\/poster'\)bad\.jpg'\)/);
+  assert.match(html, /url\(&quot;\/assets\/poster\\'\)bad\.jpg&quot;\)/);
 });
 
 test("build generates English, Chinese, CSS, and JS assets", () => {
@@ -217,14 +269,21 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.equal(existsSync(join(root, "dist/styles.css")), true);
   assert.equal(existsSync(join(root, "dist/main.js")), true);
   assert.equal(existsSync(join(root, "dist/ambient-background.js")), true);
+  assert.equal(existsSync(join(root, "dist/robots.txt")), true);
+  assert.equal(existsSync(join(root, "dist/sitemap.xml")), true);
   assert.equal(existsSync(join(root, "dist/vendor/anime.esm.min.js")), true);
   assert.equal(existsSync(join(root, "dist/vendor/ogl/src/index.js")), true);
   assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel.mp4")), true);
   assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel-poster.png")), true);
 
   const zh = readFileSync(join(root, "dist/zh/index.html"), "utf8");
+  const robots = readFileSync(join(root, "dist/robots.txt"), "utf8");
+  const sitemap = readFileSync(join(root, "dist/sitemap.xml"), "utf8");
   const css = readFileSync(join(root, "dist/styles.css"), "utf8");
   const js = readFileSync(join(root, "dist/main.js"), "utf8");
+  assert.match(robots, /Sitemap: https:\/\/hsin-hsin-yuan-portfolio\.vercel\.app\/sitemap\.xml/);
+  assert.match(sitemap, /<loc>https:\/\/hsin-hsin-yuan-portfolio\.vercel\.app\/en\/<\/loc>/);
+  assert.match(sitemap, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
   assert.match(zh, /紀錄片導演/);
   assert.match(zh, /觀看 showreel/);
   assert.match(zh, /Showreel 整理中/);

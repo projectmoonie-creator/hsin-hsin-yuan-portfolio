@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
-const SITE_ORIGIN = "https://hsin-hsin-yuan-portfolio.vercel.app";
+const SITE_ORIGIN = (process.env.SITE_ORIGIN || "https://hsin-hsin-yuan-portfolio.vercel.app").replace(/\/+$/, "");
 const ASSET_VERSION = "20260712-strip-first";
 
 export function parseFrontmatter(source) {
@@ -71,6 +71,22 @@ function escapeHtml(value) {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
+}
+
+function escapeJsonForHtml(value) {
+  return JSON.stringify(value).replaceAll("<", "\\u003c");
+}
+
+function escapeCssUrl(value) {
+  return String(value ?? "")
+    .replaceAll("\\", "\\\\")
+    .replaceAll("'", "\\'")
+    .replaceAll("\n", "\\A ")
+    .replaceAll("\r", "\\A ");
+}
+
+function cssUrl(value) {
+  return `url(&quot;${escapeHtml(escapeCssUrl(value))}&quot;)`;
 }
 
 function otherLang(lang) {
@@ -150,7 +166,7 @@ function renderPress(items = [], lang) {
         ${items
           .map((item) => {
             const image = item.image
-              ? `<span class="press-preview-image" style="background-image: url('${escapeHtml(item.image)}')"></span>`
+              ? `<span class="press-preview-image"><img src="${escapeHtml(item.image)}" alt="" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></span>`
               : "";
             const body = `
               ${image}
@@ -160,12 +176,17 @@ function renderPress(items = [], lang) {
                 <span>${escapeHtml(localize(item.source, lang))}</span>
               </span>
             `;
+            const auditAttrs = [
+              item.metadataCheckedAt ? ` data-metadata-checked-at="${escapeHtml(item.metadataCheckedAt)}"` : "",
+              item.titleSource ? ` data-title-source="${escapeHtml(item.titleSource)}"` : "",
+              item.imageSource ? ` data-image-source="${escapeHtml(item.imageSource)}"` : "",
+            ].join("");
 
             if (item.url) {
-              return `<a class="press-preview-card" href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${body}</a>`;
+              return `<a class="press-preview-card" href="${escapeHtml(item.canonicalUrl || item.url)}" target="_blank" rel="noreferrer"${auditAttrs}>${body}</a>`;
             }
 
-            return `<div class="press-preview-card press-preview-card-muted">${body}</div>`;
+            return `<div class="press-preview-card press-preview-card-muted"${auditAttrs}>${body}</div>`;
           })
           .join("")}
       </div>
@@ -184,7 +205,7 @@ function mediaFrame(work, copy) {
 
   if (work.posterImage) {
     return `
-      <div class="media-frame" style="background-image: linear-gradient(135deg, rgba(9,9,10,.2), rgba(9,9,10,.78)), url('${escapeHtml(work.posterImage)}'); background-size: cover; background-position: center;">
+      <div class="media-frame" style="background-image: linear-gradient(135deg, rgba(9,9,10,.2), rgba(9,9,10,.78)), ${cssUrl(work.posterImage)}; background-size: cover; background-position: center;">
         <div class="media-label">${escapeHtml(work.title.en)}</div>
       </div>
     `;
@@ -253,7 +274,7 @@ function renderWatchLoopItem(work, lang, copy) {
   const role = localize(work.role, lang);
   const tagline = localize(work.tagline, lang);
   const image = work.posterImage
-    ? `style="background-image: linear-gradient(180deg, rgba(8,8,9,.12), rgba(8,8,9,.78)), url('${escapeHtml(work.posterImage)}')"`
+    ? `style="background-image: linear-gradient(180deg, rgba(8,8,9,.12), rgba(8,8,9,.78)), ${cssUrl(work.posterImage)}"`
     : "";
 
   return `
@@ -405,6 +426,56 @@ function renderContactForm(copy) {
   `;
 }
 
+function renderPersonJsonLd(site) {
+  const en = site.site.en;
+  const sameAs = Array.from(
+    new Set([
+      ...(en.contactLinks || []).map((link) => link.href),
+      "https://www.taiwanplus.com/shows/documentary/arts/410/my-art-my-voice/250220001/whats-the-vibe-in-taiwan-my-art-my-voice",
+      "https://www.mirrormedia.mg/story/20250224insight002",
+      "https://www.verymulan.com/story/真誠地往前走，走進創作的大海：專訪巴黎文化奧運紀錄片導演袁欣欣-15241.html",
+    ]),
+  );
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Hsin-Hsin Yuan",
+    alternateName: "袁欣欣",
+    url: SITE_ORIGIN,
+    jobTitle: ["Documentary Director", "Writer", "Producer", "Cross-Cultural Storyteller"],
+    description: en.metaDescription,
+    sameAs,
+  };
+}
+
+function renderRobots() {
+  return `User-agent: *
+Allow: /
+
+Sitemap: ${SITE_ORIGIN}/sitemap.xml
+`;
+}
+
+function renderSitemap(lastmod = new Date().toISOString().slice(0, 10)) {
+  const alternates = `
+    <xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="${SITE_ORIGIN}/zh/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}/en/"/>`;
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>${SITE_ORIGIN}/en/</loc>
+    <lastmod>${lastmod}</lastmod>${alternates}
+  </url>
+  <url>
+    <loc>${SITE_ORIGIN}/zh/</loc>
+    <lastmod>${lastmod}</lastmod>${alternates}
+  </url>
+</urlset>
+`;
+}
+
 export function renderPage({ lang, site, works }) {
   const copy = site.site[lang];
   const switchLang = otherLang(lang);
@@ -437,6 +508,7 @@ export function renderPage({ lang, site, works }) {
     <meta property="og:image" content="${SITE_ORIGIN}/assets/og-image.jpg">
     <meta property="og:locale" content="${lang === "en" ? "en_US" : "zh_TW"}">
     <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">${escapeJsonForHtml(renderPersonJsonLd(site))}</script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="preload" as="image" href="/assets/portfolio/hsin-working-white-space.jpg">
     <link rel="stylesheet" href="/styles.css?v=${ASSET_VERSION}">
@@ -576,6 +648,9 @@ function build() {
   if (existsSync(join(root, "public"))) {
     cpSync(join(root, "public"), dist, { recursive: true });
   }
+
+  writeFileSync(join(dist, "robots.txt"), renderRobots());
+  writeFileSync(join(dist, "sitemap.xml"), renderSitemap());
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

@@ -23,6 +23,7 @@
 - If the source page has no usable image, leave the card text-only or ask for a screenshot/local image. Do not silently invent or reuse unrelated artwork.
 - Prefer linking to the canonical non-AMP URL when both AMP and canonical URLs exist.
 - When adding press, record enough metadata to audit later: canonical URL, source name, title source, image source, and the date the metadata was checked.
+- Every public press entry must include `canonicalUrl`, `titleSource`, `imageSource`, and `metadataCheckedAt`. Do not add a press card without those audit fields.
 
 ## Media Rights
 
@@ -62,6 +63,7 @@
 - Until a custom domain is confirmed, Vercel's project domain is acceptable. Do not assume a domain purchase is required.
 - Contact copy should invite real work inquiries without exposing a direct email address by default.
 - Mobile navigation must keep a path to Contact visible at 820px and below. The portfolio is a hiring supplement, so the conversion route cannot disappear on phones.
+- Canonical URLs, Open Graph URLs, `robots.txt`, and `sitemap.xml` must come from the same `SITE_ORIGIN` build value. Do not keep a second hardcoded sitemap or robots file in `public/`.
 
 ## QA Checklist
 

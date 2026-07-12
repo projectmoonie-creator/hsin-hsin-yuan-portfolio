@@ -939,10 +939,17 @@ a {
 
 .press-preview-image {
   aspect-ratio: 1 / 1;
-  background-position: center;
-  background-size: cover;
+  background: rgba(247, 242, 232, 0.08);
   display: block;
   min-width: 0;
+  overflow: hidden;
+}
+
+.press-preview-image img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }
 
 .press-preview-copy {

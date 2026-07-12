@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://hsin-hsin-yuan-portfolio.vercel.app/sitemap.xml
