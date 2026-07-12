@@ -72,7 +72,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /<div class="hero-roles">.*AI-Language Creative.*<\/div>/s);
   assert.match(html, /<div class="hero-media" id="showreel">/);
   assert.match(html, /class="light-beam-layer"/);
-  assert.match(html, /light-beam-left/);
+  assert.doesNotMatch(html, /light-beam-left/);
   assert.match(html, /light-beam-right/);
   assert.match(html, /<video[\s\S]*class="hero-showreel-video"[\s\S]*data-showreel-video/);
   assert.match(html, /muted/);
@@ -119,7 +119,8 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /\/assets\/logos\/taiwanplus.svg/);
   assert.match(html, /Happy Space/);
   assert.ok(html.indexOf("collab-grid") < html.indexOf("available-section"));
-  assert.ok(html.indexOf("available-section") < html.indexOf("works-section"));
+  assert.ok(html.indexOf("available-section") < html.indexOf("watch-loop"));
+  assert.ok(html.indexOf("watch-loop") < html.indexOf("works-section"));
   assert.ok(html.indexOf("works-section") < html.indexOf("impact-section"));
   assert.match(html, /works-stack/);
   assert.match(html, /data-scroll-stack/);
@@ -127,7 +128,10 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /data-watch-loop/);
   assert.match(html, /Watch Selected Films/);
   assert.match(html, /Screening strip/);
+  assert.match(html, /Swipe to explore/);
   assert.match(html, /watch-loop-card/);
+  assert.match(html, /href="#my-art-my-voice"/);
+  assert.doesNotMatch(html, /Scroll to explore/);
   assert.match(html, /My Art, My Voice/);
   assert.match(html, /Tech Dreamers/);
   assert.match(html, /Watch the full episode/);
@@ -210,12 +214,14 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /--edge-proximity/);
   assert.match(css, /\.ambient-canvas \{/);
   assert.match(css, /\.has-ambient-background \.light-beam/);
+  assert.doesNotMatch(css, /\.light-beam-left/);
   assert.match(css, /--page-pad: clamp/);
   assert.match(css, /\.watch-loop-card \{/);
   assert.match(css, /\.watch-loop-viewport::before/);
   assert.match(js, /getEdgeProximity/);
   assert.match(js, /pointermove/);
   assert.match(js, /initAmbientBackground/);
+  assert.match(js, /scrollRestoration = "manual"/);
   assert.match(js, /data-watch-loop/);
   assert.match(js, /syncLoopCopies/);
   assert.match(js, /startLoop/);

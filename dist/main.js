@@ -1,6 +1,16 @@
 import { animate } from "./vendor/anime.esm.min.js";
 import { initAmbientBackground } from "./ambient-background.js";
 
+if ("scrollRestoration" in window.history) {
+  window.history.scrollRestoration = "manual";
+}
+
+window.addEventListener("pageshow", (event) => {
+  if (!event.persisted && !window.location.hash) {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }
+});
+
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (!prefersReducedMotion) {
@@ -10,7 +20,6 @@ if (!prefersReducedMotion) {
     x: 56,
     y: 24,
     beamOpacity: 0,
-    beamLeftX: -10,
     beamRightX: 58,
     beamY: -20,
     beamScale: 1,
@@ -22,7 +31,6 @@ if (!prefersReducedMotion) {
     rootStyle.setProperty("--light-x", `${lightState.x}%`);
     rootStyle.setProperty("--light-y", `${lightState.y}%`);
     rootStyle.setProperty("--beam-opacity", String(lightState.beamOpacity));
-    rootStyle.setProperty("--beam-left-x", `${lightState.beamLeftX}vw`);
     rootStyle.setProperty("--beam-right-x", `${lightState.beamRightX}vw`);
     rootStyle.setProperty("--beam-y", `${lightState.beamY}vh`);
     rootStyle.setProperty("--beam-scale", String(lightState.beamScale));
@@ -263,7 +271,6 @@ if (!prefersReducedMotion) {
         x: lightX,
         y: lightY,
         beamOpacity: isWorks ? 0.82 : 0.7,
-        beamLeftX: isWorks ? -18 : -10,
         beamRightX: isWorks ? 52 : 58,
         beamY: isWorks ? -8 : -13,
         beamScale: isWorks ? 1.08 : 1.03,

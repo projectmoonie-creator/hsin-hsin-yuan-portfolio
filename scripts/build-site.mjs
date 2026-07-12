@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
 const SITE_ORIGIN = "https://hsin-hsin-yuan-portfolio.vercel.app";
-const ASSET_VERSION = "20260712-available-for";
+const ASSET_VERSION = "20260712-light-strip";
 
 export function parseFrontmatter(source) {
   const match = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
@@ -251,13 +251,13 @@ function renderWatchLoopItem(work, lang, copy) {
   const title = localize(work.title, lang);
   const role = localize(work.role, lang);
   const tagline = localize(work.tagline, lang);
-  const actionLabel = watchActionLabel(work, lang, copy);
+  const actionLabel = copy.watchShelfAction ?? copy.learnLabel;
   const image = work.posterImage
     ? `style="background-image: linear-gradient(180deg, rgba(8,8,9,.12), rgba(8,8,9,.78)), url('${escapeHtml(work.posterImage)}')"`
     : "";
 
   return `
-    <a class="watch-loop-card" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer" ${image}>
+    <a class="watch-loop-card" href="#${escapeHtml(work.slug)}" ${image}>
       <span class="watch-loop-meta">${escapeHtml(work.platform)} / ${escapeHtml(work.year)}</span>
       <strong>${escapeHtml(title)}</strong>
       <span class="watch-loop-role">${escapeHtml(role)}</span>
@@ -272,7 +272,7 @@ function renderWatchLoop(works, lang, copy) {
   if (!watchableWorks.length) return "";
 
   return `
-    <div class="watch-loop" data-watch-loop data-speed="34" role="region" aria-label="${escapeHtml(copy.watchShelfAria)}">
+    <section class="section watch-loop-section watch-loop" data-watch-loop data-speed="34" aria-label="${escapeHtml(copy.watchShelfAria)}">
       <div class="watch-loop-head">
         <div>
           <p class="card-kicker">${escapeHtml(copy.watchShelfKicker)}</p>
@@ -287,7 +287,7 @@ function renderWatchLoop(works, lang, copy) {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   `;
 }
 
@@ -452,7 +452,6 @@ export function renderPage({ lang, site, works }) {
   </head>
   <body>
     <div class="light-beam-layer" aria-hidden="true">
-      <span class="light-beam light-beam-left"></span>
       <span class="light-beam light-beam-right"></span>
     </div>
     <div class="site-shell">
@@ -507,15 +506,16 @@ export function renderPage({ lang, site, works }) {
           </div>
         </section>
 
+        ${renderWatchLoop(works, lang, copy)}
+
         <section class="section works-section" id="works">
           <div class="works-head">
             <h2 class="section-title">${escapeHtml(copy.worksLabel)}</h2>
-            <div class="works-hint">${escapeHtml(copy.worksHint)}</div>
+            ${copy.worksHint ? `<div class="works-hint">${escapeHtml(copy.worksHint)}</div>` : ""}
           </div>
           <div class="works-stack" data-scroll-stack>
             ${works.map((work) => renderWork(work, lang, copy)).join("")}
           </div>
-          ${renderWatchLoop(works, lang, copy)}
         </section>
 
         <section class="section impact-section">

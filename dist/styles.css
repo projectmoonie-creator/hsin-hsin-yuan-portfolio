@@ -13,10 +13,8 @@
   --light-x: 50%;
   --light-y: 30%;
   --beam-opacity: 0;
-  --beam-left-x: -10vw;
   --beam-right-x: 58vw;
   --beam-y: -20vh;
-  --beam-rotate-left: 20deg;
   --beam-rotate-right: -20deg;
   --beam-scale: 1;
 }
@@ -42,8 +40,7 @@ body {
 body::before {
   background:
     radial-gradient(circle at var(--light-x) var(--light-y), rgba(216, 255, 62, 0.13), rgba(216, 255, 62, 0.05) 16rem, transparent 28rem),
-    radial-gradient(circle at calc(var(--light-x) + 22%) calc(var(--light-y) - 12%), rgba(124, 199, 255, 0.08), transparent 22rem),
-    linear-gradient(115deg, transparent 12%, rgba(247, 242, 232, 0.04) 44%, transparent 68%);
+    radial-gradient(circle at calc(var(--light-x) + 22%) calc(var(--light-y) - 12%), rgba(124, 199, 255, 0.08), transparent 22rem);
   content: "";
   filter: blur(1px);
   inset: 0;
@@ -94,12 +91,6 @@ body::before {
   content: "";
   inset: 0;
   position: absolute;
-}
-
-.light-beam-left {
-  left: var(--beam-left-x);
-  transform: rotate(var(--beam-rotate-left)) scale(var(--beam-scale));
-  transform-origin: 0 0;
 }
 
 .light-beam-right {
@@ -475,11 +466,11 @@ a {
 }
 
 .available-section {
-  padding-bottom: clamp(2.8rem, 7vw, 5.5rem);
+  padding-bottom: clamp(1.4rem, 4vw, 3rem);
 }
 
 .available-simple {
-  max-width: 980px;
+  max-width: 1040px;
 }
 
 .available-simple .section-title {
@@ -489,15 +480,16 @@ a {
 
 .available-list {
   display: grid;
-  max-width: 920px;
+  gap: 1px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 1040px;
 }
 
 .available-line {
   border-top: 1px solid var(--line);
-  display: grid;
-  gap: clamp(0.75rem, 3vw, 1.8rem);
-  grid-template-columns: minmax(11rem, 0.32fr) minmax(0, 1fr);
-  padding: 1.05rem 0 1.15rem;
+  display: block;
+  min-height: 8rem;
+  padding: 0.95rem clamp(0.9rem, 1.6vw, 1.25rem) 1rem 0;
 }
 
 .available-line:last-child {
@@ -515,7 +507,8 @@ a {
 
 .available-line p {
   color: var(--muted);
-  line-height: 1.55;
+  font-size: 0.94rem;
+  line-height: 1.42;
   margin: 0;
 }
 
@@ -646,9 +639,14 @@ a {
 }
 
 .watch-loop {
-  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: 0;
   overflow-x: clip;
   position: relative;
+}
+
+.watch-loop-section {
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
+  padding-top: clamp(1rem, 3vw, 2rem);
 }
 
 .watch-loop-head {
@@ -1519,8 +1517,12 @@ a {
     min-height: 120px;
   }
 
-  .available-line {
+  .available-list {
     grid-template-columns: 1fr;
+  }
+
+  .available-line {
+    min-height: auto;
     padding: 1rem 0 1.1rem;
   }
 

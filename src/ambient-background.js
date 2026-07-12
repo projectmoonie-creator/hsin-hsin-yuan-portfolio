@@ -20,8 +20,6 @@ uniform float uOpacity;
 uniform float uSpeed;
 uniform vec3 uRayColor1;
 uniform vec3 uRayColor2;
-uniform vec3 uLineColor1;
-uniform vec3 uLineColor2;
 
 out vec4 fragColor;
 
@@ -40,16 +38,6 @@ float rayStrength(vec2 source, vec2 direction, vec2 coord, float seedA, float se
                 + 0.24 * cos(-angle * seedB + uTime * speed * 0.42);
   float distanceFade = clamp((uResolution.x * 1.25 - length(sourceToCoord)) / max(uResolution.x, 1.0), 0.0, 1.0);
   return clamp(shimmer, 0.0, 1.0) * pow(distanceFade, 1.55);
-}
-
-float waveLine(vec2 uv, float offset, float phase, float weight) {
-  float time = uTime * uSpeed;
-  float y = sin(uv.x * 1.18 + offset + time * 0.08) * 0.15
-          + sin(uv.x * 2.35 - phase + time * 0.05) * 0.055;
-  float d = abs(uv.y - y);
-  float line = 0.0045 / max(d, 0.004);
-  float fade = smoothstep(-1.1, -0.1, uv.x) * (1.0 - smoothstep(0.6, 1.45, uv.x));
-  return line * fade * weight;
 }
 
 void main() {
@@ -73,28 +61,6 @@ void main() {
   float raysB = rayStrength(topSource, rayDirB, topCoord, 23.1, 15.9, 0.12 + focus * 0.12);
   float sourceGlow = 0.55 / pow(max(length(pixel - vec2(uResolution.x * 1.04, uResolution.y * 1.08)) / max(uResolution.y, 1.0), 0.08), 1.34);
   color += (uRayColor1 * raysA * 0.58 + uRayColor2 * raysB * 0.72) * sourceGlow;
-
-  vec2 lowerSource = vec2(-uResolution.x * 0.22, uResolution.y * 1.08);
-  vec2 lowerCoord = vec2(pixel.x, uResolution.y - pixel.y);
-  vec2 lowerRel = lowerCoord - lowerSource;
-  lowerCoord = rotate2d(radians(10.0)) * lowerRel + lowerSource;
-  vec2 lowerDir = normalize(vec2(cos(-0.8), sin(-0.8)));
-  float lowerRay = rayStrength(lowerSource, lowerDir, lowerCoord, 25.4, 17.3, 0.18);
-  float lowerGlow = 0.38 / pow(max(length(pixel - vec2(-uResolution.x * 0.1, -uResolution.y * 0.05)) / max(uResolution.y, 1.0), 0.1), 1.2);
-  color += uLineColor1 * lowerRay * lowerGlow * 0.36;
-
-  vec2 lineUv = uv;
-  lineUv += vec2(sin(time * 0.05) * 0.08, cos(time * 0.04) * 0.04);
-  lineUv = rotate2d(-0.19) * lineUv;
-
-  for (int i = 0; i < 7; i++) {
-    float fi = float(i);
-    float lane = -0.38 + fi * 0.12;
-    float t = fi / 6.0;
-    vec3 lineColor = mix(uLineColor1, uLineColor2, t);
-    float line = waveLine(lineUv + vec2(fi * 0.065, lane), fi * 0.78, fi * 1.37, 0.028 + focus * 0.028);
-    color += lineColor * line;
-  }
 
   float vignette = smoothstep(1.6, 0.2, length(uv * vec2(0.92, 1.1)));
   float grain = fract(sin(dot(pixel + floor(uTime * 24.0), vec2(12.9898, 78.233))) * 43758.5453);
@@ -150,8 +116,6 @@ export function initAmbientBackground(container) {
       uSpeed: { value: 0.76 },
       uRayColor1: { value: hexToRgb("#d8ff3e") },
       uRayColor2: { value: hexToRgb("#7cc7ff") },
-      uLineColor1: { value: hexToRgb("#f7f2e8") },
-      uLineColor2: { value: hexToRgb("#6bf0d8") },
     },
   });
 
