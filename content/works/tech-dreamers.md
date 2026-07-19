@@ -41,9 +41,40 @@
   "watchMode": "series",
   "watchUrl": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
   "videoEmbedUrl": "",
-  "posterImage": "/assets/portfolio/hsin-working-white-space.jpg",
+  "posterImage": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+  "posterAlt": {
+    "en": "Tech Dreamers official series artwork",
+    "zh": "Tech Dreamers 官方系列主視覺"
+  },
+  "focalPoint": "50% 50%",
+  "posterDimensions": { "width": 1280, "height": 720 },
+  "supportingImages": [],
   "tags": ["technology", "founders", "AI", "interview"],
   "metrics": [],
+  "press": [
+    {
+      "type": {"en": "Official series page", "zh": "官方系列頁"},
+      "title": {"en": "Tech Dreamers", "zh": "Tech Dreamers"},
+      "source": {"en": "TaiwanPlus", "zh": "TaiwanPlus"},
+      "url": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
+      "canonicalUrl": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
+      "image": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+      "metadataCheckedAt": "2026-07-19",
+      "titleSource": "official TaiwanPlus series page",
+      "imageSource": "official TaiwanPlus program image"
+    },
+    {
+      "type": {"en": "Official episode", "zh": "官方單集"},
+      "title": {"en": "Meet the Founder: Battery Testing Startup Liminal Insights", "zh": "Meet the Founder: Battery Testing Startup Liminal Insights"},
+      "source": {"en": "TaiwanPlus", "zh": "TaiwanPlus"},
+      "url": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers/250707010/meet-the-founder-battery-testing-startup-liminal-insights-tech-dreamers-ep-1/",
+      "canonicalUrl": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers/250707010/meet-the-founder-battery-testing-startup-liminal-insights-tech-dreamers-ep-1/",
+      "image": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+      "metadataCheckedAt": "2026-07-19",
+      "titleSource": "official TaiwanPlus episode page",
+      "imageSource": "official TaiwanPlus program image"
+    }
+  ],
   "accent": "cyan"
 }
 ---

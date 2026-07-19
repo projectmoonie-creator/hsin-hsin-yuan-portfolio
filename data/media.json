@@ -1,0 +1,14 @@
+{
+  "hero": {
+    "treatment": "split-showreel",
+    "poster": "/assets/showreel/website-visual-reel-poster.png",
+    "video": "/assets/showreel/website-visual-reel.mp4",
+    "dimensions": { "width": 1920, "height": 1080 },
+    "desktopFocalPoint": "50% 50%",
+    "mobileFocalPoint": "50% 50%",
+    "alt": {
+      "en": "Selected moving-image work by Hsin-Hsin Yuan",
+      "zh": "袁欣欣的精選影像作品"
+    }
+  }
+}

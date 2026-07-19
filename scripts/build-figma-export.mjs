@@ -73,6 +73,7 @@ function pill({ x, y, width, text, fill = "transparent", stroke = tokens.line, c
 }
 
 function imageData(path) {
+  if (/^https?:\/\//.test(path)) return path;
   const fullPath = join(root, "public", path.replace(/^\//, ""));
   const ext = extname(fullPath).toLowerCase();
   const mime = ext === ".png" ? "image/png" : ext === ".svg" ? "image/svg+xml" : "image/jpeg";

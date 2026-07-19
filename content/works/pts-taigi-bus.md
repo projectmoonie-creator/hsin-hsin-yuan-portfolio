@@ -42,6 +42,13 @@
   "watchUrl": "https://youtu.be/q4TMcoOpzKA?si=k5AIjDHuywFRbGiw",
   "videoEmbedUrl": "",
   "posterImage": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+  "posterAlt": {
+    "en": "Bus travel episode still from PTS Taigi",
+    "zh": "公視台語台《無事坐巴士》節目畫面"
+  },
+  "focalPoint": "50% 50%",
+  "posterDimensions": { "width": 480, "height": 360 },
+  "supportingImages": [],
   "tags": ["public media", "travel factual", "Taiwanese language", "local culture"],
   "metrics": [
     {"value": "3+", "label": {"en": "episode leads archived", "zh": "已整理集數線索"}},

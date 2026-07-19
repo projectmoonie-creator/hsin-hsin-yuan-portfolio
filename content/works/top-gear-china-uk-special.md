@@ -42,6 +42,13 @@
   "watchUrl": "https://youtu.be/M_eXe9HRD9Y?si=YZ_3JZ7FJY4vVcZv",
   "videoEmbedUrl": "",
   "posterImage": "/assets/portfolio/top-gear-uk-special-car.jpg",
+  "posterAlt": {
+    "en": "Car filmed for the Top Gear China UK special",
+    "zh": "《巔峰拍檔》中國版英國篇拍攝車輛"
+  },
+  "focalPoint": "50% 50%",
+  "posterDimensions": { "width": 1600, "height": 1066 },
+  "supportingImages": [],
   "tags": ["car show", "factual entertainment", "broadcast", "UK production"],
   "metrics": [
     {"value": "200M", "label": {"en": "viewers", "zh": "觀眾"}},

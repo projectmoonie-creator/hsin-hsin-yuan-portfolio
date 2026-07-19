@@ -42,6 +42,28 @@
   "watchUrl": "https://www.taiwanplus.com/shows/documentary/arts/410/my-art-my-voice/250220001/whats-the-vibe-in-taiwan-my-art-my-voice",
   "videoEmbedUrl": "",
   "posterImage": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+  "posterAlt": {
+    "en": "Performance still from My Art, My Voice",
+    "zh": "《My Art, My Voice》表演畫面"
+  },
+  "focalPoint": "50% 42%",
+  "posterDimensions": { "width": 1600, "height": 900 },
+  "supportingImages": [
+    {
+      "src": "/assets/portfolio/my-art-my-voice-performance-1.jpg",
+      "alt": {
+        "en": "Artist performance filmed for My Art, My Voice",
+        "zh": "《My Art, My Voice》藝術家表演畫面"
+      }
+    },
+    {
+      "src": "/assets/portfolio/my-art-my-voice-interview.jpg",
+      "alt": {
+        "en": "Artist interview filmed for My Art, My Voice",
+        "zh": "《My Art, My Voice》藝術家訪談畫面"
+      }
+    }
+  ],
   "tags": ["documentary", "arts", "identity", "Paris Cultural Olympiad"],
   "metrics": [],
   "press": [

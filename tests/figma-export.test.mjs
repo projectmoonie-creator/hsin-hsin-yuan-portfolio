@@ -40,7 +40,8 @@ test("Figma SVG export keeps portfolio layers editable and named", () => {
   assert.match(desktopHome, /HSIN-HSIN/);
   assert.match(desktopHome, /Documentary Director/);
   assert.match(desktopHome, /#D8FF3E/);
-  assert.match(desktopHome, /hsin-working-white-space\.jpg/);
+  assert.match(desktopHome, /224be7ed-057b-400f-af63-a8582cd80cfb\.webp/);
+  assert.doesNotMatch(desktopHome, /hsin-working-white-space\.jpg/);
   assert.doesNotMatch(desktopHome, /paris-cultural-olympiad-team\.jpg/);
 
   assert.match(worksLogos, /id="layer-logo-wall"/);
