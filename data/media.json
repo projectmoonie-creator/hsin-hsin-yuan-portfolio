@@ -1,12 +1,35 @@
 {
   "hero": {
     "background": "/assets/portfolio/hsin-working-white-space.jpg",
-    "foreground": "",
-    "focalPoint": "38% 72%",
+    "foregroundCutout": "/assets/portfolio/hsin-portrait-foreground.webp",
+    "abstractLayer": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+    "alternatePortraits": [],
+    "desktopFocalPoint": "38% 72%",
+    "mobileFocalPoint": "34% 66%",
     "alt": {
       "en": "Hsin-Hsin Yuan developing a documentary project",
       "zh": "袁欣欣進行紀錄片創作工作"
     },
-    "treatment": "portrait-layered"
-  }
+    "treatment": "portrait-carrier"
+  },
+  "practiceModes": [
+    {
+      "id": "documentary",
+      "signal": "coral",
+      "primary": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+      "supporting": "/assets/portfolio/my-art-my-voice-interview.jpg"
+    },
+    {
+      "id": "cross-cultural",
+      "signal": "cobalt",
+      "primary": "/assets/portfolio/paris-cultural-olympiad-team.jpg",
+      "supporting": "/assets/portfolio/top-gear-uk-special-car.jpg"
+    },
+    {
+      "id": "editorial-systems",
+      "signal": "moss",
+      "primary": "/assets/portfolio/india-overclocking-production.jpg",
+      "supporting": "/assets/portfolio/hsin-working-white-space.jpg"
+    }
+  ]
 }

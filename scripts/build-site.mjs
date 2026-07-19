@@ -58,7 +58,7 @@ export function loadMarkdownCollection(dir) {
 
 export function loadSiteData(baseDir = root) {
   const media = JSON.parse(readFileSync(join(baseDir, "data/media.json"), "utf8"));
-  validateMediaManifest(media);
+  validateMediaManifest(media, join(baseDir, "public"));
   return {
     site: JSON.parse(readFileSync(join(baseDir, "data/site.json"), "utf8")),
     media,
@@ -68,15 +68,54 @@ export function loadSiteData(baseDir = root) {
   };
 }
 
-export function validateMediaManifest(media) {
+export function validateMediaManifest(media, publicDir = "") {
   const hero = media?.hero;
   if (!hero || typeof hero !== "object") throw new Error("media.hero is required");
   if (typeof hero.background !== "string" || !hero.background) throw new Error("media.hero.background is required");
-  if (typeof hero.foreground !== "string") throw new Error("media.hero.foreground must be a string");
-  if (!/^\d{1,3}% \d{1,3}%$/.test(hero.focalPoint || "")) throw new Error("media.hero.focalPoint must use X% Y%");
+  if (typeof hero.foregroundCutout !== "string") throw new Error("media.hero.foregroundCutout must be a string");
+  if (hero.treatment === "portrait-carrier" && !hero.foregroundCutout) {
+    throw new Error("media.hero.foregroundCutout is required for portrait-carrier");
+  }
+  if (typeof hero.abstractLayer !== "string" || !hero.abstractLayer) throw new Error("media.hero.abstractLayer is required");
+  if (!Array.isArray(hero.alternatePortraits)) throw new Error("media.hero.alternatePortraits must be an array");
+  if (!/^\d{1,3}% \d{1,3}%$/.test(hero.desktopFocalPoint || "")) {
+    throw new Error("media.hero.desktopFocalPoint must use X% Y%");
+  }
+  if (!/^\d{1,3}% \d{1,3}%$/.test(hero.mobileFocalPoint || "")) {
+    throw new Error("media.hero.mobileFocalPoint must use X% Y%");
+  }
   if (typeof hero.alt?.en !== "string" || !hero.alt.en.trim()) throw new Error("media.hero.alt.en is required");
   if (typeof hero.alt?.zh !== "string" || !hero.alt.zh.trim()) throw new Error("media.hero.alt.zh is required");
   if (typeof hero.treatment !== "string" || !hero.treatment) throw new Error("media.hero.treatment is required");
+
+  const practiceModes = media?.practiceModes;
+  if (!Array.isArray(practiceModes) || practiceModes.length !== 3) {
+    throw new Error("media.practiceModes must contain exactly three modes");
+  }
+  const expectedModes = ["documentary", "cross-cultural", "editorial-systems"];
+  for (const [index, mode] of practiceModes.entries()) {
+    if (mode?.id !== expectedModes[index]) throw new Error(`media.practiceModes[${index}].id must be ${expectedModes[index]}`);
+    if (typeof mode.primary !== "string" || !mode.primary) throw new Error(`media.practiceModes[${index}].primary is required`);
+    if (typeof mode.supporting !== "string" || !mode.supporting) throw new Error(`media.practiceModes[${index}].supporting is required`);
+  }
+
+  if (publicDir) {
+    const assets = [
+      ["hero.background", hero.background],
+      ["hero.foregroundCutout", hero.foregroundCutout],
+      ["hero.abstractLayer", hero.abstractLayer],
+      ...hero.alternatePortraits.map((asset, index) => [`hero.alternatePortraits[${index}]`, asset]),
+      ...practiceModes.flatMap((mode, index) => [
+        [`practiceModes[${index}].primary`, mode.primary],
+        [`practiceModes[${index}].supporting`, mode.supporting],
+      ]),
+    ];
+    for (const [role, asset] of assets) {
+      if (!asset || /^https?:/.test(asset)) continue;
+      const localPath = join(publicDir, asset.replace(/^\//, ""));
+      if (!existsSync(localPath)) throw new Error(`media.${role} does not exist: ${localPath}`);
+    }
+  }
   return media;
 }
 

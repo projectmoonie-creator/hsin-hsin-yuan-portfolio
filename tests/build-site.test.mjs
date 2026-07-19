@@ -119,8 +119,9 @@ test("media manifest provides a replaceable bilingual hero image", () => {
 
   assert.doesNotThrow(() => validateMediaManifest(media));
   assert.match(media.hero.background, /^\/assets\/portfolio\//);
-  assert.equal(media.hero.foreground, "");
-  assert.match(media.hero.focalPoint, /^\d+% \d+%$/);
+  assert.match(media.hero.foregroundCutout, /^\/assets\/portfolio\//);
+  assert.match(media.hero.desktopFocalPoint, /^\d+% \d+%$/);
+  assert.match(media.hero.mobileFocalPoint, /^\d+% \d+%$/);
   assert.ok(media.hero.alt.en.length > 5);
   assert.ok(media.hero.alt.zh.length > 2);
 });
@@ -131,13 +132,35 @@ test("media manifest rejects a hero without bilingual alt text", () => {
       validateMediaManifest({
         hero: {
           background: "/assets/portfolio/portrait.jpg",
-          foreground: "",
-          focalPoint: "50% 50%",
+          foregroundCutout: "",
+          abstractLayer: "/assets/portfolio/abstract.jpg",
+          alternatePortraits: [],
+          desktopFocalPoint: "50% 50%",
+          mobileFocalPoint: "50% 45%",
           alt: { en: "Portrait", zh: "" },
           treatment: "portrait-layered",
         },
       }),
     /hero\.alt\.zh/,
+  );
+});
+
+test("portrait carrier treatment requires a real foreground cutout", () => {
+  assert.throws(
+    () =>
+      validateMediaManifest({
+        hero: {
+          background: "/assets/portfolio/portrait.jpg",
+          foregroundCutout: "",
+          abstractLayer: "/assets/portfolio/abstract.jpg",
+          alternatePortraits: [],
+          desktopFocalPoint: "50% 50%",
+          mobileFocalPoint: "50% 45%",
+          alt: { en: "Portrait", zh: "人物肖像" },
+          treatment: "portrait-carrier",
+        },
+      }),
+    /foregroundCutout/,
   );
 });
 
