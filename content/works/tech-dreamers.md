@@ -42,6 +42,12 @@
   "watchUrl": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
   "videoEmbedUrl": "",
   "posterImage": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+  "posterAlt": {
+    "en": "Tech Dreamers official series artwork",
+    "zh": "Tech Dreamers 官方系列主視覺"
+  },
+  "focalPoint": "50% 50%",
+  "supportingImages": [],
   "tags": ["technology", "founders", "AI", "interview"],
   "metrics": [],
   "press": [

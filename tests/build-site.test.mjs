@@ -164,16 +164,16 @@ test("portrait carrier treatment requires a real foreground cutout", () => {
   );
 });
 
-test("homepage uses three cinematic work chapters and one practice statement", () => {
+test("homepage uses a portrait carrier, three work scenes, and one practice statement", () => {
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
   const html = renderPage({ lang: "en", site, works });
 
-  assert.match(html, /class="hero-portrait-stage [^"]+"/);
-  assert.match(html, /data-cinematic-hero/);
-  assert.equal((html.match(/class="work-panel/g) || []).length, 3);
-  assert.match(html, /class="section practice-section"/);
-  assert.match(html, /class="section archive-section selected-history"/);
+  assert.match(html, /class="portrait-carrier" data-portrait-carrier/);
+  assert.match(html, /src="\/assets\/portfolio\/hsin-portrait-foreground\.webp"/);
+  assert.equal((html.match(/class="work-scene"/g) || []).length, 3);
+  assert.match(html, /class="editorial-section practice-summary"/);
+  assert.match(html, /class="editorial-section history-section"/);
   assert.doesNotMatch(html, /class="services-grid"/);
   assert.doesNotMatch(html, /class="section lab-section"/);
   assert.doesNotMatch(html, /class="tag"/);
@@ -193,147 +193,51 @@ test("portrait carrier redesign replaces every high-salience legacy fingerprint"
     assert.match(html, /data-practice-mode="cross-cultural"/);
     assert.match(html, /data-practice-mode="editorial-systems"/);
     assert.match(html, /data-work-theatre/);
-    assert.equal((html.match(/class="work-scene/g) || []).length, 3);
+    assert.equal((html.match(/class="work-scene"/g) || []).length, 3);
     assert.doesNotMatch(html, /data-watch-loop|watch-loop-card|work-panel|light-beam-layer/);
   }
 });
 
-test("renderPage creates bilingual page with scroll-stack works and video fallbacks", () => {
+test("renderPage creates a concise bilingual scene narrative with safe fallbacks", () => {
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
-  const html = renderPage({ lang: "en", site, works });
+  const en = renderPage({ lang: "en", site, works });
+  const zh = renderPage({ lang: "zh", site, works });
 
-  assert.match(html, /for artists, culture, and technology stories/i);
-  assert.match(html, /<span>HSIN-HSIN<\/span><span>YUAN<\/span>/);
-  assert.match(html, /Documentary Director <span class="role-slash">\/<\/span> Writer <span class="role-slash">\/<\/span> Producer/);
-  assert.match(html, /<span><span class="role-slash">\/<\/span> Cross-Cultural Storyteller<\/span>/);
-  assert.doesNotMatch(html, /<div class="hero-roles">.*AI-Language Creative.*<\/div>/s);
-  assert.match(html, /<div class="hero-media" id="showreel">/);
-  assert.match(html, /class="light-beam-layer"/);
-  assert.doesNotMatch(html, /light-beam-left/);
-  assert.match(html, /light-beam-right/);
-  assert.match(html, /<video[\s\S]*class="hero-showreel-video"[\s\S]*data-showreel-video/);
-  assert.match(html, /muted/);
-  assert.match(html, /webkit-playsinline/);
-  assert.match(html, /preload="none"/);
-  assert.doesNotMatch(html, /<video[\s\S]*controls[\s\S]*data-showreel-video/);
-  assert.match(html, /aria-label="Watch reel"/);
-  assert.doesNotMatch(html, /<span class="hero-media-caption">/);
-  assert.doesNotMatch(html, /hero-actions/);
-  assert.doesNotMatch(html, /href="#showreel">Reel<\/a>/);
-  assert.match(html, /<source src="\/assets\/showreel\/website-visual-reel\.mp4" type="video\/mp4">/);
-  assert.doesNotMatch(html, /showreel-modal/);
-  assert.doesNotMatch(html, /showreel-section/);
-  assert.ok(html.indexOf('id="showreel"') < html.indexOf("collab-section-early"));
-  assert.match(html, /Available for/);
-  assert.match(html, /I can enter a project early as a story partner/);
-  assert.match(html, /practice-section/);
-  assert.match(html, /available-pill-list/);
-  assert.match(html, /Editing/);
-  assert.doesNotMatch(html, /class="available-line"/);
-  assert.doesNotMatch(html, /data-about-tabs/);
-  assert.doesNotMatch(html, /role="tablist"/);
-  assert.doesNotMatch(html, /data-about-tab="available"/);
-  assert.doesNotMatch(html, /data-about-panel="available"/);
-  assert.doesNotMatch(html, /<h2 class="section-title">About<\/h2>/);
-  assert.doesNotMatch(html, /<h2 class="section-title">Work With Me<\/h2>/);
-  assert.doesNotMatch(html, /Taiwan-born documentary director and creative producer/i);
-  assert.doesNotMatch(html, /Research, treatments, pitch framing, and narrative structure/i);
-  assert.doesNotMatch(html, /I partner with artists, cultural teams, producers, and technology companies/i);
-  assert.doesNotMatch(html, /interior design and spatial-brand films/i);
-  assert.doesNotMatch(html, /For Artists &amp; Cultural Institutions/);
-  assert.doesNotMatch(html, /For Documentary \/ Factual Producers/);
-  assert.match(html, /Challenge/);
-  assert.match(html, /What I shaped/);
-  assert.doesNotMatch(html, /Best for/);
-  assert.doesNotMatch(html, /Selected Impact/);
-  assert.doesNotMatch(html, /impact-grid/);
-  assert.doesNotMatch(html, /impact-section/);
-  assert.doesNotMatch(html, /class="section lab-section"/);
-  assert.match(html, /Selected Archive/);
-  assert.match(html, /Short-form web drama work across food/);
-  assert.match(html, /<form class="contact-form" action="\/api\/contact" method="post" data-contact-form>/);
-  assert.match(html, /name="startedAt"/);
-  assert.match(html, /name="website"/);
-  assert.match(html, /Project type/);
-  assert.match(html, /Send inquiry/);
-  assert.doesNotMatch(html, /mailto:/);
-  assert.match(html, /partner-wordmark/);
-  assert.doesNotMatch(html, /\/assets\/logos\/taiwanplus.svg/);
-  assert.match(html, /Happy Space/);
-  assert.ok(html.indexOf("collab-grid") < html.indexOf("watch-loop"));
-  assert.ok(html.indexOf("watch-loop") < html.indexOf("practice-section"));
-  assert.ok(html.indexOf("watch-loop") < html.indexOf("works-section"));
-  assert.ok(html.indexOf("practice-section") < html.indexOf("works-section"));
-  assert.ok(html.indexOf('class="section works-section"') < html.indexOf('class="section archive-section selected-history"'));
-  assert.match(html, /works-stack/);
-  assert.match(html, /data-scroll-stack/);
-  assert.doesNotMatch(html, /data-horizontal-scroll/);
-  assert.match(html, /data-watch-loop/);
-  assert.doesNotMatch(html, /Watch Selected Films/);
-  assert.doesNotMatch(html, /Screening strip/);
-  assert.doesNotMatch(html, /Swipe to explore/);
-  assert.match(html, /watch-loop-card/);
-  assert.match(html, /href="#slow-steps"/);
-  assert.match(html, /watch-loop-card watch-loop-card-plain/);
-  assert.doesNotMatch(html, /watch-loop-card" href="#slow-steps" style="background-image/);
-  assert.ok(html.indexOf('href="#slow-steps"') < html.indexOf('href="#tech-dreamers"'));
-  assert.match(html, /href="#my-art-my-voice"/);
-  assert.doesNotMatch(html, /View in featured works/);
-  assert.doesNotMatch(html, /Scroll to explore/);
-  assert.match(html, /My Art, My Voice/);
-  assert.match(html, /Tech Dreamers/);
-  assert.match(html, /https:\/\/prod-img\.taiwanplus\.com\/program\/224be7ed-057b-400f-af63-a8582cd80cfb\.webp/);
-  assert.doesNotMatch(html, /Tech Dreamers[\s\S]*?hsin-working-white-space\.jpg/);
-  assert.match(html, /Tech Dreamers[\s\S]*?Official series page/);
-  assert.match(html, /Tech Dreamers[\s\S]*?Meet the Founder: Battery Testing Startup Liminal Insights/);
-  assert.match(html, /https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers\/250707010\/meet-the-founder-battery-testing-startup-liminal-insights-tech-dreamers-ep-1/);
-  assert.match(html, /Slow Steps/);
-  assert.doesNotMatch(html, /slow-steps[\s\S]*?paris-cultural-olympiad-team\.jpg/);
-  assert.doesNotMatch(html, /Slow Steps[\s\S]*?Upcoming/);
-  assert.doesNotMatch(html, /Slow Steps[\s\S]*?Coming 2026/);
-  assert.doesNotMatch(html, /Slow Steps[\s\S]*?Movement/i);
-  assert.match(html, /Slow Steps[\s\S]*?Director \/ Editor \/ Producer/);
-  assert.match(html, /Slow Steps[\s\S]*?Travel/);
-  assert.doesNotMatch(html, /Interior \/ Spatial Brand Films/);
-  assert.doesNotMatch(html, /3 yrs/);
-  assert.match(html, /PTS Taigi - Bus Travel Factual Episodes/);
-  assert.match(html, /Planning \/ Script/);
-  assert.match(html, /Top Gear China: UK Special/);
-  assert.match(html, /China Dragon TV/);
-  assert.match(html, /Director/);
-  assert.doesNotMatch(html, /China-side Director/);
-  assert.doesNotMatch(html, /Oriental Satellite TV/);
-  assert.match(html, /car show/);
-  assert.match(html, /href="#top-gear-china-uk-special"/);
-  assert.match(html, /href="#pts-taigi-bus"/);
-  assert.doesNotMatch(html, /href="#interior-spatial-brand-films"/);
-  assert.doesNotMatch(html, /https:\/\/youtu\.be\/M_eXe9HRD9Y\?si=YZ_3JZ7FJY4vVcZv/);
-  assert.match(html, /Watch the series/);
-  assert.match(html, /Press &amp; Interviews/);
-  assert.match(html, /Official program page/);
-  assert.doesNotMatch(html, /24 artist groups/);
-  assert.doesNotMatch(html, />24<\/span>/);
-  assert.match(html, /data-metadata-checked-at="2026-07-12"/);
-  assert.match(html, /data-image-source="owned project still; official page exception"/);
-  assert.match(html, /Cultural Olympiad documentary My Art, My Voice/);
-  assert.match(html, /Mirror Media/);
-  assert.match(html, /<img src="https:\/\/v3-statics\.mirrormedia\.mg\/images\/00f85da2-db1d-4c46-9b3d-a7359d911e52-w1600\.png" alt="" loading="lazy" decoding="async" onerror="this\.parentElement\.remove\(\)">/);
-  assert.match(html, /Director interview: walking into the sea of creation/);
-  assert.match(html, /Very Mulan/);
-  assert.match(html, /17472124753d\.png/);
-  assert.match(html, /press-preview-card/);
-  assert.match(html, /<script type="application\/ld\+json">/);
-  assert.match(html, /"@type":"Person"/);
-  assert.match(html, /"name":"Hsin-Hsin Yuan"/);
-  assert.match(html, /"sameAs":\["https:\/\/github.com\/projectmoonie-creator"/);
-  assert.doesNotMatch(html, /20260712-strip-first/);
-  assert.match(html, /styles\.css\?v=[a-f0-9]{12}/);
-  assert.match(html, /main\.js\?v=[a-f0-9]{12}/);
-  assert.doesNotMatch(html, /old English CV|source materials/i);
+  assert.match(en, /<h1>Hsin-Hsin Yuan<\/h1>/);
+  assert.match(en, /Documentary director, writer &amp; cross-cultural story partner/);
+  assert.match(en, /Find the human turn/);
+  assert.match(en, /Carry context without flattening it/);
+  assert.match(en, /Make good judgment repeatable/);
+  assert.match(zh, /<h1>袁欣欣<\/h1>/);
+  assert.match(zh, /找到人真正改變的那一刻/);
+  assert.match(zh, /讓脈絡被帶走，而不是被磨平/);
+  assert.match(zh, /讓好的判斷可以被重複/);
+
+  for (const html of [en, zh]) {
+    assert.match(html, /class="portrait-showreel-video"[\s\S]*data-showreel-video/);
+    assert.match(html, /muted/);
+    assert.match(html, /webkit-playsinline/);
+    assert.match(html, /preload="none"/);
+    assert.match(html, /<source src="\/assets\/showreel\/website-visual-reel\.mp4" type="video\/mp4">/);
+    assert.match(html, /class="work-scene-media work-scene-media-text" data-text-led/);
+    assert.doesNotMatch(html, /slow-steps[\s\S]*?paris-cultural-olympiad-team\.jpg/);
+    assert.match(html, /Tech Dreamers/);
+    assert.match(html, /My Art, My Voice/);
+    assert.doesNotMatch(html, /Interior \/ Spatial Brand Films/);
+    assert.match(html, /class="contact-form" action="\/api\/contact" method="post" data-contact-form/);
+    assert.match(html, /name="startedAt"/);
+    assert.match(html, /name="website"/);
+    assert.doesNotMatch(html, /mailto:/);
+    assert.match(html, /<script type="application\/ld\+json">/);
+    assert.match(html, /"@type":"Person"/);
+    assert.match(html, /styles\.css\?v=[a-f0-9]{12}/);
+    assert.match(html, /main\.js\?v=[a-f0-9]{12}/);
+    assert.doesNotMatch(html, /old English CV|source materials/i);
+  }
 });
 
-test("renderPage escapes image URLs for inline CSS contexts", () => {
+test("renderPage escapes image URLs in semantic image markup", () => {
   const site = loadSiteData(root);
   const works = [
     {
@@ -349,7 +253,10 @@ test("renderPage escapes image URLs for inline CSS contexts", () => {
       description: { en: "Safety", zh: "Safety" },
       watchUrl: "https://example.com/watch",
       watchMode: "single",
-      posterImage: "/assets/poster')bad.jpg",
+      posterImage: "/assets/poster\" onerror=\"alert(1).jpg",
+      posterAlt: { en: "Poster", zh: "海報" },
+      focalPoint: "50% 50%",
+      supportingImages: [],
       tags: [],
       metrics: [],
       caseStudy: [],
@@ -360,8 +267,8 @@ test("renderPage escapes image URLs for inline CSS contexts", () => {
 
   const html = renderPage({ lang: "en", site, works });
 
-  assert.doesNotMatch(html, /url\('\/assets\/poster'\)bad\.jpg'\)/);
-  assert.match(html, /url\(&quot;\/assets\/poster\\'\)bad\.jpg&quot;\)/);
+  assert.doesNotMatch(html, /src="\/assets\/poster" onerror=/);
+  assert.match(html, /src="\/assets\/poster&quot; onerror=&quot;alert\(1\)\.jpg"/);
 });
 
 test("build generates English, Chinese, CSS, and JS assets", () => {

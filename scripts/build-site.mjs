@@ -131,18 +131,6 @@ function escapeJsonForHtml(value) {
   return JSON.stringify(value).replaceAll("<", "\\u003c");
 }
 
-function escapeCssUrl(value) {
-  return String(value ?? "")
-    .replaceAll("\\", "\\\\")
-    .replaceAll("'", "\\'")
-    .replaceAll("\n", "\\A ")
-    .replaceAll("\r", "\\A ");
-}
-
-function cssUrl(value) {
-  return `url(&quot;${escapeHtml(escapeCssUrl(value))}&quot;)`;
-}
-
 function otherLang(lang) {
   return lang === "en" ? "zh" : "en";
 }
@@ -158,117 +146,21 @@ function cleanHtml(html) {
   return html.replace(/[ \t]+$/gm, "");
 }
 
-function renderTags(tags = []) {
-  return tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
-}
-
-function renderPills(items = []) {
-  return items.map((item) => `<span class="pill">${escapeHtml(item)}</span>`).join("");
-}
-
-function renderAvailabilityPills(items = []) {
-  return items.map((item) => `<span>${escapeHtml(item)}</span>`).join("");
-}
-
-function renderMetrics(metrics = [], lang) {
+function renderProof(metrics = [], lang) {
   if (!metrics.length) return "";
 
   return `
-    <div class="mini-metrics">
+    <div class="work-proof">
       ${metrics
         .map(
           (metric) => `
-            <div class="mini-metric">
+            <div class="work-proof-item">
               <strong>${escapeHtml(metric.value)}</strong>
               <span>${escapeHtml(localize(metric.label, lang))}</span>
             </div>
           `,
         )
         .join("")}
-    </div>
-  `;
-}
-
-function renderCaseStudy(items = [], lang) {
-  if (!items.length) return "";
-
-  return `
-    <div class="case-study">
-      ${items
-        .map(
-          (item) => `
-            <div class="case-study-item">
-              <span>${escapeHtml(localize(item.label, lang))}</span>
-              <p>${escapeHtml(localize(item.text, lang))}</p>
-            </div>
-          `,
-        )
-        .join("")}
-    </div>
-  `;
-}
-
-function renderPress(items = [], lang) {
-  if (!items.length) return "";
-
-  const label = lang === "en" ? "Press & Interviews" : "媒體報導與訪談";
-
-  return `
-    <div class="press-preview">
-      <p class="press-preview-title">${escapeHtml(label)}</p>
-      <div class="press-preview-grid">
-        ${items
-          .map((item) => {
-            const image = item.image
-              ? `<span class="press-preview-image"><img src="${escapeHtml(item.image)}" alt="" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></span>`
-              : "";
-            const body = `
-              ${image}
-              <span class="press-preview-copy">
-                <span class="press-preview-type">${escapeHtml(localize(item.type, lang))}</span>
-                <strong>${escapeHtml(localize(item.title, lang))}</strong>
-                <span>${escapeHtml(localize(item.source, lang))}</span>
-              </span>
-            `;
-            const auditAttrs = [
-              item.metadataCheckedAt ? ` data-metadata-checked-at="${escapeHtml(item.metadataCheckedAt)}"` : "",
-              item.titleSource ? ` data-title-source="${escapeHtml(item.titleSource)}"` : "",
-              item.imageSource ? ` data-image-source="${escapeHtml(item.imageSource)}"` : "",
-            ].join("");
-
-            if (item.url) {
-              return `<a class="press-preview-card" href="${escapeHtml(item.canonicalUrl || item.url)}" target="_blank" rel="noreferrer"${auditAttrs}>${body}</a>`;
-            }
-
-            return `<div class="press-preview-card press-preview-card-muted"${auditAttrs}>${body}</div>`;
-          })
-          .join("")}
-      </div>
-    </div>
-  `;
-}
-
-function mediaFrame(work, copy) {
-  if (work.status === "available" && work.videoEmbedUrl) {
-    return `
-      <div class="media-frame">
-        <iframe src="${escapeHtml(work.videoEmbedUrl)}" title="${escapeHtml(work.title.en)}" allowfullscreen loading="lazy"></iframe>
-      </div>
-    `;
-  }
-
-  if (work.posterImage) {
-    return `
-      <div class="media-frame" style="background-image: linear-gradient(135deg, rgba(9,9,10,.2), rgba(9,9,10,.78)), ${cssUrl(work.posterImage)}; background-size: cover; background-position: center;">
-        <div class="media-label">${escapeHtml(work.title.en)}</div>
-      </div>
-    `;
-  }
-
-  const label = work.status === "coming-soon" ? copy.comingLabel : work.title.en;
-  return `
-    <div class="media-frame media-${escapeHtml(work.accent || "default")}">
-      <div class="media-label">${escapeHtml(label)}</div>
     </div>
   `;
 }
@@ -293,110 +185,119 @@ function watchActionLabel(work, lang, copy) {
   return labels[work.watchMode]?.[lang] ?? copy.watchLabel;
 }
 
-function renderWork(work, lang, copy) {
-  const title = work.title[lang];
-  const tagline = work.tagline[lang];
-  const description = work.description[lang];
-  const role = work.role[lang];
+function renderWorkMedia(work, lang, copy) {
+  const title = localize(work.title, lang);
+  if (!work.posterImage) {
+    const textLabel = noWatchStatusLabel(work, lang, copy) || (lang === "en" ? "Image in development" : "影像整理中");
+    return `
+      <div class="work-scene-media work-scene-media-text" data-text-led>
+        <span>${escapeHtml(title)}</span>
+        <em>${escapeHtml(textLabel)}</em>
+      </div>
+    `;
+  }
+
+  const supporting = (work.supportingImages || [])
+    .slice(0, 2)
+    .map(
+      (image, index) => `
+        <figure class="work-supporting work-supporting-${index + 1}">
+          <img src="${escapeHtml(image.src)}" alt="${escapeHtml(localize(image.alt, lang))}" loading="lazy" decoding="async">
+        </figure>
+      `,
+    )
+    .join("");
+
+  return `
+    <div class="work-scene-media" style="--work-focal-point:${escapeHtml(work.focalPoint || "50% 50%")}" data-image-led>
+      <figure class="work-primary">
+        <img src="${escapeHtml(work.posterImage)}" alt="${escapeHtml(localize(work.posterAlt, lang) || title)}" loading="lazy" decoding="async">
+      </figure>
+      ${supporting}
+    </div>
+  `;
+}
+
+function renderWorkScene(work, lang, copy, index) {
+  const title = localize(work.title, lang);
+  const tagline = localize(work.tagline, lang);
+  const description = localize(work.description, lang);
+  const role = localize(work.role, lang);
   const actionLabel = watchActionLabel(work, lang, copy);
   const action = work.watchUrl
-    ? `<a class="button-link" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer">${escapeHtml(actionLabel)}</a>`
+    ? `<a class="work-scene-action" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer">${escapeHtml(actionLabel)} <span aria-hidden="true">↗</span></a>`
     : actionLabel
-      ? `<span class="status-badge">${escapeHtml(actionLabel)}</span>`
+      ? `<span class="work-scene-status">${escapeHtml(actionLabel)}</span>`
       : "";
 
   return `
-    <article class="work-panel" id="${escapeHtml(work.slug)}">
-      ${mediaFrame(work, copy)}
-      <div class="work-copy">
-        <div class="work-meta">${escapeHtml(work.year)} / ${escapeHtml(role)} / ${escapeHtml(work.platform)}</div>
+    <article class="work-scene" id="${escapeHtml(work.slug)}" data-work-scene data-scene-index="${index}">
+      <div class="work-scene-canvas">
+        <span class="work-scene-ghost" aria-hidden="true">${escapeHtml(title)}</span>
+        ${renderWorkMedia(work, lang, copy)}
+      </div>
+      <div class="work-scene-copy">
+        <p class="work-scene-meta">${escapeHtml(work.year)} · ${escapeHtml(role)} · ${escapeHtml(work.platform)}</p>
         <h3>${escapeHtml(title)}</h3>
-        <p class="work-tagline">${escapeHtml(tagline)}</p>
-        <p class="work-description">${escapeHtml(description)}</p>
-        ${renderMetrics(work.metrics, lang)}
-        ${renderCaseStudy(work.caseStudy, lang)}
-        ${renderPress(work.press, lang)}
+        <p class="work-scene-tagline">${escapeHtml(tagline)}</p>
+        <p class="work-scene-description">${escapeHtml(description)}</p>
+        ${renderProof(work.metrics, lang)}
         ${action}
       </div>
     </article>
   `;
 }
 
-function renderWatchLoopItem(work, lang, copy) {
-  const title = localize(work.title, lang);
-  const role = localize(work.role, lang);
-  const tagline = localize(work.tagline, lang);
-  const image = work.posterImage
-    ? `style="background-image: linear-gradient(180deg, rgba(8,8,9,.12), rgba(8,8,9,.78)), ${cssUrl(work.posterImage)}"`
-    : "";
-  const cardClass = work.posterImage ? "watch-loop-card" : "watch-loop-card watch-loop-card-plain";
-
-  return `
-    <a class="${cardClass}" href="#${escapeHtml(work.slug)}" ${image}>
-      <span class="watch-loop-meta">${escapeHtml(work.platform)} / ${escapeHtml(work.year)}</span>
-      <strong>${escapeHtml(title)}</strong>
-      <span class="watch-loop-role">${escapeHtml(role)}</span>
-      <span class="watch-loop-tagline">${escapeHtml(tagline)}</span>
-    </a>
-  `;
-}
-
-function renderWatchLoop(works, lang, copy) {
-  const watchableWorks = works.filter((work) => work.watchUrl || work.status === "external-only");
-  if (!watchableWorks.length) return "";
-
-  return `
-    <section class="section watch-loop-section watch-loop" data-watch-loop data-speed="34" aria-label="${escapeHtml(copy.watchShelfAria)}">
-      <div class="watch-loop-viewport">
-        <div class="watch-loop-track" data-watch-loop-track>
-          <div class="watch-loop-sequence" data-watch-loop-sequence>
-            ${watchableWorks.map((work) => renderWatchLoopItem(work, lang, copy)).join("")}
-          </div>
-        </div>
-      </div>
-    </section>
-  `;
-}
-
-function renderLab(lab, lang) {
-  return lab
+function renderPracticeModes(copy, media, lang) {
+  const buttons = copy.practiceModes
     .map(
-      (item) => `
-        <article class="lab-card">
-          <p class="card-kicker">${escapeHtml(localize(item.kicker, lang))}</p>
-          <h3>${escapeHtml(localize(item.title, lang))}</h3>
-          <p>${escapeHtml(localize(item.summary, lang))}</p>
-          ${item.body ? `<p class="card-body">${escapeHtml(item.body)}</p>` : ""}
-        </article>
+      (mode, index) => `
+        <button class="practice-mode${index === 0 ? " is-active" : ""}" type="button" data-practice-mode="${escapeHtml(mode.id)}" aria-pressed="${index === 0 ? "true" : "false"}">
+          <span>${escapeHtml(mode.verb)}</span>
+          ${escapeHtml(mode.label)}
+        </button>
       `,
     )
     .join("");
+
+  const scenes = copy.practiceModes
+    .map((mode, index) => {
+      const modeMedia = media.practiceModes[index];
+      return `
+        <article class="practice-scene${index === 0 ? " is-active" : ""}" data-practice-scene="${escapeHtml(mode.id)}" data-signal="${escapeHtml(modeMedia.signal)}">
+          <div class="practice-scene-copy">
+            <span>${escapeHtml(mode.verb)}</span>
+            <h2>${escapeHtml(mode.title)}</h2>
+            <p>${escapeHtml(mode.body)}</p>
+          </div>
+          <figure class="practice-scene-image practice-scene-image-primary">
+            <img src="${escapeHtml(modeMedia.primary)}" alt="" loading="lazy" decoding="async">
+          </figure>
+          <figure class="practice-scene-image practice-scene-image-supporting">
+            <img src="${escapeHtml(modeMedia.supporting)}" alt="" loading="lazy" decoding="async">
+          </figure>
+        </article>
+      `;
+    })
+    .join("");
+
+  return `
+    <div class="practice-rail" role="group" aria-label="${escapeHtml(copy.practiceRailAria)}">${buttons}</div>
+    <div class="practice-scenes">${scenes}</div>
+  `;
 }
 
 function renderArchive(archive, lang) {
   return archive
     .map(
       (item) => `
-        <article class="archive-item">
+        <article class="history-row">
           <div>
-            <p class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(localize(item.role, lang))} / ${escapeHtml(item.platform)}</p>
+            <p class="history-meta">${escapeHtml(item.year)} · ${escapeHtml(localize(item.role, lang))} · ${escapeHtml(item.platform)}</p>
             <h3>${escapeHtml(localize(item.title, lang))}</h3>
-            ${item.body ? `<p class="archive-body">${escapeHtml(item.body)}</p>` : ""}
+            ${item.body ? `<p class="history-body">${escapeHtml(item.body)}</p>` : ""}
           </div>
-          ${renderMetrics(item.metrics, lang)}
-        </article>
-      `,
-    )
-    .join("");
-}
-
-function renderInfoCards(items = []) {
-  return items
-    .map(
-      (item) => `
-        <article class="service-card">
-          <h3>${escapeHtml(item.title)}</h3>
-          <p>${escapeHtml(item.line)}</p>
+          ${renderProof(item.metrics, lang)}
         </article>
       `,
     )
@@ -407,15 +308,15 @@ function renderCollaborations(items = []) {
   return items
     .map((item) => {
       const content = item.logo
-        ? `<img class="partner-logo" src="${escapeHtml(item.logo)}" alt="${escapeHtml(item.name)} logo" loading="lazy">`
-        : `<span class="partner-wordmark">${escapeHtml(item.label || item.name)}</span>`;
+        ? `<img class="collaboration-logo" src="${escapeHtml(item.logo)}" alt="${escapeHtml(item.name)} logo" loading="lazy">`
+        : `<span class="collaboration-wordmark">${escapeHtml(item.label || item.name)}</span>`;
       const tag = item.url ? "a" : "div";
       const href = item.url ? ` href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer"` : "";
 
       return `
-        <${tag} class="collab-item"${href} aria-label="${escapeHtml(item.name)}">
+        <${tag} class="collaboration-mark"${href} aria-label="${escapeHtml(item.name)}">
           ${content}
-          <span class="partner-name">${escapeHtml(item.name)}</span>
+          <span class="collaboration-name">${escapeHtml(item.name)}</span>
         </${tag}>
       `;
     })
@@ -426,10 +327,6 @@ function renderContactLinks(links = []) {
   return links
     .map((link) => `<a href="${escapeHtml(link.href)}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>`)
     .join("");
-}
-
-function renderHeroRoleLine(role) {
-  return escapeHtml(role).replaceAll("/", `<span class="role-slash">/</span>`);
 }
 
 function renderContactForm(copy) {
@@ -462,7 +359,7 @@ function renderContactForm(copy) {
         <span>${escapeHtml(form.message)}</span>
         <textarea name="message" rows="6" required></textarea>
       </label>
-      <button class="button-link contact-submit" type="submit">${escapeHtml(form.submit)}</button>
+      <button class="contact-submit" type="submit">${escapeHtml(form.submit)} <span aria-hidden="true">↗</span></button>
       <p class="contact-status" data-contact-status aria-live="polite" data-success="${escapeHtml(form.success)}" data-error="${escapeHtml(form.error)}"></p>
     </form>
   `;
@@ -523,17 +420,13 @@ export function renderPage({ lang, site, works }) {
   const heroMedia = site.media.hero;
   const featuredWorks = works.slice(0, 3);
   const switchLang = otherLang(lang);
-  const heroTitleLines = (copy.heroTitleLines || [copy.heroTitle]).map((line) => `<span>${escapeHtml(line)}</span>`).join("");
-  const heroRoles = (copy.heroRoleLines || copy.heroRoles).map((role) => `<span>${renderHeroRoleLine(role)}</span>`).join("");
   const navItems = [
-    { href: "#available", label: copy.availabilityLabel },
     { href: "#works", label: lang === "en" ? "Works" : "作品" },
+    { href: "#practice", label: lang === "en" ? "Practice" : "實踐" },
     { href: "#contact", label: lang === "en" ? "Contact" : "聯絡" },
   ];
   const collaborations = renderCollaborations(site.collaborations);
-  const heroForeground = heroMedia.foreground
-    ? `<img class="hero-portrait-foreground" src="${escapeHtml(heroMedia.foreground)}" alt="" aria-hidden="true">`
-    : "";
+  const portraitStatement = copy.portraitStatement;
 
   return `<!doctype html>
 <html lang="${escapeHtml(lang)}">
@@ -561,85 +454,96 @@ export function renderPage({ lang, site, works }) {
     <script type="module" src="/main.js?v=${ASSET_VERSION}"></script>
   </head>
   <body>
-    <div class="light-beam-layer" aria-hidden="true">
-      <span class="light-beam light-beam-right"></span>
-    </div>
     <div class="site-shell">
       <header class="topbar">
-        <div class="brand">${escapeHtml(copy.navName)}</div>
+        <a class="brand" href="#top" aria-label="${escapeHtml(copy.name)}">${escapeHtml(copy.name)}</a>
         <nav class="nav-links" aria-label="Primary">
           ${navItems.map((item) => `<a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`).join("")}
           <a class="language-switch" href="/${switchLang}/">${switchLang === "en" ? "EN" : "中"}</a>
         </nav>
       </header>
 
-      <main>
-        <section class="hero" data-cinematic-hero>
-          <div class="hero-portrait-stage ${escapeHtml(heroMedia.treatment)}" style="--hero-focal-point:${escapeHtml(heroMedia.focalPoint)}">
-            <img class="hero-portrait-background" src="${escapeHtml(heroMedia.background)}" alt="${escapeHtml(localize(heroMedia.alt, lang))}">
-            ${heroForeground}
-            <div class="hero-media" id="showreel">
-            <video
-              class="hero-showreel-video"
-              data-showreel-video
-              muted
-              playsinline
-              webkit-playsinline
-              preload="none"
-              aria-label="${escapeHtml(copy.showreelTitle)}"
+      <main id="top">
+        <section class="portrait-carrier" data-portrait-carrier data-phase="opening">
+          <div class="portrait-sticky">
+            <div class="portrait-signal" aria-hidden="true"></div>
+            <div class="portrait-frame" id="showreel">
+              <img class="portrait-frame-art" src="${escapeHtml(heroMedia.abstractLayer)}" alt="" aria-hidden="true">
+              <video
+                class="portrait-showreel-video"
+                data-showreel-video
+                muted
+                playsinline
+                webkit-playsinline
+                preload="none"
+                aria-label="${escapeHtml(copy.showreelTitle)}"
+              >
+                <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
+              </video>
+              <button class="portrait-play" type="button" data-showreel-play aria-label="${escapeHtml(copy.showreelCta)}">
+                <span aria-hidden="true">▶</span>
+                ${escapeHtml(copy.showreelCta)}
+              </button>
+            </div>
+            <img
+              class="portrait-foreground"
+              src="${escapeHtml(heroMedia.foregroundCutout)}"
+              alt="${escapeHtml(localize(heroMedia.alt, lang))}"
+              style="--portrait-desktop-focal:${escapeHtml(heroMedia.desktopFocalPoint)};--portrait-mobile-focal:${escapeHtml(heroMedia.mobileFocalPoint)}"
             >
-              <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
-            </video>
-            <button class="hero-play-button" type="button" data-showreel-play aria-label="${escapeHtml(copy.showreelCta)}">
-              <span class="hero-play-icon"></span>
-            </button>
+            <div class="portrait-intro">
+              <p class="portrait-kicker">${lang === "en" ? "Director · Writer · Story partner" : "導演 · 編劇 · 故事夥伴"}</p>
+              <h1>${escapeHtml(copy.name)}</h1>
+              <p class="portrait-role">${escapeHtml(copy.portraitRole)}</p>
+              <p class="portrait-statement">${escapeHtml(portraitStatement)} <em>${escapeHtml(copy.portraitAccent)}</em>.</p>
+              <div class="portrait-actions">
+                <button type="button" data-showreel-trigger>${escapeHtml(copy.showreelCta)}</button>
+                <a href="#contact">${escapeHtml(copy.portraitContactCta)}</a>
+              </div>
+            </div>
+            ${renderPracticeModes(copy, site.media, lang)}
+            <div class="portrait-scroll-cue" aria-hidden="true"><span></span>${lang === "en" ? "Scroll to enter" : "向下進入"}</div>
+          </div>
+        </section>
+
+        <section class="work-theatre" id="works" data-work-theatre>
+          <div class="work-theatre-sticky">
+            <header class="work-theatre-head">
+              <p>${escapeHtml(copy.workTheatreKicker)}</p>
+              <h2>${escapeHtml(copy.workTheatreTitle)}</h2>
+              <div class="work-theatre-count" aria-live="polite"><span data-work-current>01</span><i></i><span>03</span></div>
+            </header>
+            <div class="work-scenes">
+              ${featuredWorks.map((work, index) => renderWorkScene(work, lang, copy, index)).join("")}
             </div>
           </div>
-          <div class="hero-content">
-            <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
-            <h1 aria-label="${escapeHtml(copy.heroTitle)}">${heroTitleLines}</h1>
-            <div class="hero-roles">${heroRoles}</div>
-            <p class="hero-subcopy">${escapeHtml(copy.heroSubcopy)}</p>
-          </div>
         </section>
 
-        <section class="section collab-section collab-section-early">
-          <h2 class="section-title">${escapeHtml(copy.collabTitle)}</h2>
-          <div class="collab-grid">${collaborations}</div>
-        </section>
-
-        ${renderWatchLoop(works, lang, copy)}
-
-        <section class="section practice-section" id="available">
-          <p class="section-title">${escapeHtml(copy.availabilityLabel)}</p>
-          <div class="practice-statement">
+        <section class="editorial-section practice-summary" id="practice">
+          <p class="section-label">${escapeHtml(copy.availabilityLabel)}</p>
+          <div class="practice-summary-copy">
             <h2>${escapeHtml(copy.createTitle)}</h2>
             <p>${escapeHtml(copy.createSubcopy)}</p>
             <p>${escapeHtml(copy.availabilityIntro)}</p>
           </div>
-          <div class="available-pill-list">${renderAvailabilityPills(copy.availability)}</div>
         </section>
 
-        <section class="section works-section" id="works">
-          <div class="works-head">
-            <h2 class="section-title">${escapeHtml(copy.worksLabel)}</h2>
-            ${copy.worksHint ? `<div class="works-hint">${escapeHtml(copy.worksHint)}</div>` : ""}
-          </div>
-          <div class="works-stack" data-scroll-stack>
-            ${featuredWorks.map((work) => renderWork(work, lang, copy)).join("")}
-          </div>
+        <section class="collaboration-band" aria-labelledby="collaboration-title">
+          <h2 id="collaboration-title">${escapeHtml(copy.collabTitle)}</h2>
+          <div class="collaboration-line">${collaborations}</div>
         </section>
 
-        <section class="section archive-section selected-history">
-          <div class="section-intro">
-            <h2 class="section-title">${escapeHtml(copy.archiveTitle)}</h2>
+        <section class="editorial-section history-section">
+          <div class="history-intro">
+            <p class="section-label">${escapeHtml(copy.archiveTitle)}</p>
             <p>${escapeHtml(copy.archiveSubcopy)}</p>
           </div>
-          <div class="archive-list">${renderArchive(site.archive, lang)}</div>
+          <div class="history-list">${renderArchive(site.archive, lang)}</div>
         </section>
 
-        <section class="section contact" id="contact">
+        <section class="contact" id="contact">
           <div class="contact-content">
+            <p class="section-label">${lang === "en" ? "Contact" : "聯絡"}</p>
             <h2>${escapeHtml(copy.contactTitle)}</h2>
             <p>${escapeHtml(copy.contactSubcopy)}</p>
             ${renderContactForm(copy)}
@@ -648,6 +552,11 @@ export function renderPage({ lang, site, works }) {
         </section>
       </main>
 
+      <footer class="site-footer">
+        <p>${escapeHtml(copy.name)}</p>
+        <p>${escapeHtml(copy.portraitRole)}</p>
+        <a href="#top">${lang === "en" ? "Back to top" : "回到頁首"} ↑</a>
+      </footer>
     </div>
   </body>
 </html>`;

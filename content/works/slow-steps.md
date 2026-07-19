@@ -41,6 +41,9 @@
   "watchUrl": "",
   "videoEmbedUrl": "",
   "posterImage": "",
+  "posterAlt": {"en": "", "zh": ""},
+  "focalPoint": "50% 50%",
+  "supportingImages": [],
   "tags": ["documentary", "travel"],
   "metrics": [],
   "accent": "rose"
