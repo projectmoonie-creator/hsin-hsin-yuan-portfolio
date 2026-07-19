@@ -5,15 +5,26 @@ const root = process.cwd();
 const outDir = join(root, "figma-export");
 
 const tokens = {
-  bg: "#0B0B0C",
-  ink: "#F7F2E8",
-  muted: "#B8B0A3",
-  line: "rgba(247, 242, 232, 0.18)",
-  panel: "#19191B",
-  panelStrong: "#242428",
-  acid: "#D8FF3E",
-  heat: "#FF4D1F",
-  blue: "#7CC7FF",
+  stage: "#050807",
+  fog: "#dddcd7",
+  paper: "#f6f4ee",
+  coral: "#f0645a",
+  cobalt: "#4867d9",
+  moss: "#4d9259",
+  stageInk: "#f6f4ee",
+  ink: "#121613",
+  quietInk: "#636660",
+  lineDark: "#2f3430",
+  lineLight: "#b7b8b2",
+};
+
+const exportedTokens = {
+  stage: tokens.stage,
+  fog: tokens.fog,
+  paper: tokens.paper,
+  coral: tokens.coral,
+  cobalt: tokens.cobalt,
+  moss: tokens.moss,
 };
 
 function readJson(path) {
@@ -23,9 +34,7 @@ function readJson(path) {
 function parseFrontmatter(path) {
   const raw = readFileSync(join(root, path), "utf8").trim();
   const match = raw.match(/^---\n([\s\S]*?)\n---/);
-  if (!match) {
-    throw new Error(`Missing JSON frontmatter in ${path}`);
-  }
+  if (!match) throw new Error(`Missing JSON frontmatter in ${path}`);
   return JSON.parse(match[1]);
 }
 
@@ -37,8 +46,12 @@ function escapeXml(value) {
     .replaceAll('"', "&quot;");
 }
 
+function slug(value) {
+  return String(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
 function textLines(text, maxChars) {
-  const words = String(text).split(/\s+/);
+  const words = String(text).split(/\s+/).filter(Boolean);
   const lines = [];
   let line = "";
 
@@ -51,266 +64,395 @@ function textLines(text, maxChars) {
       line = next;
     }
   }
-
   if (line) lines.push(line);
   return lines;
 }
 
-function textBlock({ id, x, y, lines, size = 24, weight = 500, fill = tokens.ink, lineHeight, transform = "", spacing = 0 }) {
+function textBlock({
+  id,
+  x,
+  y,
+  lines,
+  size = 24,
+  weight = 400,
+  fill = tokens.ink,
+  lineHeight,
+  family = "sans",
+  italic = false,
+  spacing = 0,
+  anchor = "start",
+  opacity = 1,
+}) {
   const lh = lineHeight ?? Math.round(size * 1.18);
+  const font = family === "serif"
+    ? "Iowan Old Style, Baskerville, Times New Roman, serif"
+    : "Helvetica Neue, Arial, sans-serif";
   const tspans = lines
     .map((line, index) => `<tspan x="${x}" dy="${index === 0 ? 0 : lh}">${escapeXml(line)}</tspan>`)
     .join("");
-  return `<text id="${id}" x="${x}" y="${y}" fill="${fill}" font-family="Inter, Arial, sans-serif" font-size="${size}" font-weight="${weight}" letter-spacing="${spacing}" transform="${transform}">${tspans}</text>`;
+  return `<text id="${id}" x="${x}" y="${y}" fill="${fill}" opacity="${opacity}" font-family="${font}" font-size="${size}" font-weight="${weight}" font-style="${italic ? "italic" : "normal"}" letter-spacing="${spacing}" text-anchor="${anchor}">${tspans}</text>`;
 }
 
-function pill({ x, y, width, text, fill = "transparent", stroke = tokens.line, color = tokens.ink, uppercase = true }) {
-  const label = uppercase ? text.toUpperCase() : text;
-  return `<g id="pill-${escapeXml(text).toLowerCase().replace(/[^a-z0-9]+/g, "-")}">
-    <rect x="${x}" y="${y}" width="${width}" height="34" rx="17" fill="${fill}" stroke="${stroke}"/>
-    <text x="${x + 17}" y="${y + 22}" fill="${color}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="${uppercase ? 1.2 : 0}">${escapeXml(label)}</text>
+function phaseLabel({ x, y, number, title, fill = tokens.quietInk }) {
+  return `<g id="phase-label-${slug(`${number}-${title}`)}">
+    <circle cx="${x + 5}" cy="${y - 4}" r="5" fill="${fill}"/>
+    <text x="${x + 20}" y="${y}" fill="${fill}" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="500">${escapeXml(`${number} / ${title}`)}</text>
   </g>`;
 }
 
 function imageData(path) {
-  if (/^https?:\/\//.test(path)) return "";
+  if (!path || /^https?:\/\//.test(path)) return "";
   const fullPath = join(root, "public", path.replace(/^\//, ""));
   const ext = extname(fullPath).toLowerCase();
-  const mime = ext === ".png" ? "image/png" : ext === ".svg" ? "image/svg+xml" : "image/jpeg";
+  const mime = {
+    ".png": "image/png",
+    ".svg": "image/svg+xml",
+    ".webp": "image/webp",
+    ".gif": "image/gif",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+  }[ext] || "application/octet-stream";
   return `data:${mime};base64,${readFileSync(fullPath).toString("base64")}`;
 }
 
-function imageLayer({ id, href, x, y, width, height, opacity = 1 }) {
-  if (!href) {
-    return `<g id="${id}" data-source="placeholder">
-    <rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${tokens.panelStrong}"/>
-    <text x="${x + 18}" y="${y + height - 18}" fill="${tokens.ink}" opacity="0.55" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700">image pending</text>
-  </g>`;
-  }
-  const filename = basename(href);
+function imageLayer({ id, href, x, y, width, height, radius = 0, opacity = 1, fit = "slice", position = "xMidYMid" }) {
+  const source = href ? basename(href) : "text-led";
   const embedded = imageData(href);
   if (!embedded) {
-    return `<g id="${id}" data-source="remote:${escapeXml(href)}">
-    <rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${tokens.panelStrong}"/>
-    <text x="${x + 18}" y="${y + height - 18}" fill="${tokens.ink}" opacity="0.55" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700">remote image — replace in Figma</text>
-  </g>`;
+    return `<g id="${id}" data-source="${href ? `remote:${escapeXml(href)}` : "text-led"}">
+      <rect x="${x}" y="${y}" width="${width}" height="${height}" rx="${radius}" fill="${tokens.lineDark}"/>
+      <text x="${x + 18}" y="${y + height - 20}" fill="${tokens.stageInk}" opacity="0.62" font-family="Helvetica Neue, Arial, sans-serif" font-size="12">${href ? "Remote source · replace image fill in Figma" : "Text-led media field"}</text>
+    </g>`;
   }
-  return `<g id="${id}" data-source="${escapeXml(filename)}">
-    <rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${tokens.panelStrong}"/>
-    <image href="${embedded}" x="${x}" y="${y}" width="${width}" height="${height}" preserveAspectRatio="xMidYMid slice" opacity="${opacity}"/>
-    <text x="${x + 18}" y="${y + height - 18}" fill="${tokens.ink}" opacity="0.55" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700">${escapeXml(filename)}</text>
+  return `<g id="${id}" data-source="${escapeXml(source)}">
+    <defs><clipPath id="${id}-clip"><rect x="${x}" y="${y}" width="${width}" height="${height}" rx="${radius}"/></clipPath></defs>
+    <image href="${embedded}" x="${x}" y="${y}" width="${width}" height="${height}" preserveAspectRatio="${position} ${fit}" opacity="${opacity}" clip-path="url(#${id}-clip)"/>
   </g>`;
 }
 
-function svgFrame({ id, width, height, title, body }) {
+function glow({ id, x, y, width, height, color, opacity = 0.58 }) {
+  return `<g id="${id}" opacity="${opacity}">
+    <defs>
+      <radialGradient id="${id}-gradient" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="${color}" stop-opacity="0.8"/>
+        <stop offset="0.55" stop-color="${color}" stop-opacity="0.24"/>
+        <stop offset="1" stop-color="${color}" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="${x + width / 2}" cy="${y + height / 2}" rx="${width / 2}" ry="${height / 2}" fill="url(#${id}-gradient)"/>
+  </g>`;
+}
+
+function svgFrame({ id, width, height, title, background = tokens.paper, body }) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg id="${id}" xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="${id}-title">
   <title id="${id}-title">${escapeXml(title)}</title>
-  <desc>Editable SVG design layer for Hsin-Hsin Yuan portfolio. Import into Figma and ungroup to edit text, shapes, and image layers.</desc>
-  <rect id="token-color-bg" width="${width}" height="${height}" fill="${tokens.bg}"/>
-  <g id="tokens">
-    <rect id="color-accent-acid" x="-100" y="-100" width="10" height="10" fill="${tokens.acid}"/>
-    <rect id="color-accent-heat" x="-120" y="-100" width="10" height="10" fill="${tokens.heat}"/>
-    <rect id="color-accent-blue" x="-140" y="-100" width="10" height="10" fill="${tokens.blue}"/>
+  <desc>Editable scene storyboard for Hsin-Hsin Yuan's portrait-carrier portfolio. Import into Figma and ungroup to edit text, shapes, and media layers.</desc>
+  <rect id="token-page-background" width="${width}" height="${height}" fill="${background}"/>
+  <g id="design-tokens" transform="translate(-200 -200)">
+    ${Object.entries(exportedTokens).map(([name, value], index) => `<rect id="token-${name}" x="${index * 16}" y="0" width="12" height="12" fill="${value}"/>`).join("\n    ")}
   </g>
 ${body}
 </svg>
 `;
 }
 
-function logoWordmark({ item, x, y, width = 150 }) {
-  const display = item.label || item.name;
-  return `<g id="logo-${escapeXml(item.name).toLowerCase().replace(/[^a-z0-9]+/g, "-")}" opacity="0.7">
-    <text x="${x}" y="${y}" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800">${escapeXml(display)}</text>
-    <text x="${x}" y="${y + 18}" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="700">${escapeXml(item.name)}</text>
-    <line x1="${x}" y1="${y + 28}" x2="${x + width}" y2="${y + 28}" stroke="${tokens.ink}" stroke-opacity="0.2"/>
-  </g>`;
-}
-
-function workCard({ work, x, y, width }) {
-  const title = work.title.en;
-  const desc = work.description.en;
-  const safeSlug = work.slug.replace(/[^a-z0-9-]/gi, "-");
-  return `<g id="component-work-card-${safeSlug}">
-    <rect x="${x}" y="${y}" width="${width}" height="410" rx="8" fill="${tokens.panel}" stroke="${tokens.line}"/>
-    ${imageLayer({ id: `image-work-${safeSlug}`, href: work.posterImage, x: x + 14, y: y + 14, width: width - 28, height: 160, opacity: 0.88 })}
-    <text x="${x + 24}" y="${y + 210}" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" letter-spacing="1.3">${escapeXml(`${work.year} / ${work.role.en} / ${work.platform}`.toUpperCase())}</text>
-    <text x="${x + 24}" y="${y + 252}" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="850">${escapeXml(title)}</text>
-    ${textBlock({ id: `text-work-${safeSlug}-description`, x: x + 24, y: y + 286, lines: textLines(desc, 36).slice(0, 3), size: 15, fill: tokens.muted, lineHeight: 22 })}
-    <text x="${x + 24}" y="${y + 374}" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" letter-spacing="1.3">${escapeXml((work.tags || []).slice(0, 3).join(" / ").toUpperCase())}</text>
-  </g>`;
-}
-
-function buildDesktopHome(site, works, collaborations, media) {
-  const hero = site.en;
-  const logoRow = collaborations
-    .slice(0, 7)
-    .map((item, index) => logoWordmark({ item, x: 92 + index * 180, y: 690, width: 132 }))
-    .join("\n");
-
-  const slashLines = hero.heroRoleLines
-    .map((line, index) => {
-      const y = 420 + index * 34;
-      if (!line.startsWith("/")) {
-        return textBlock({ id: `layer-hero-role-${index + 1}`, x: 772, y, lines: [line], size: 25, weight: 650, fill: tokens.ink });
-      }
-      return `<g id="layer-hero-role-${index + 1}">
-        <text x="772" y="${y}" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">/</text>
-        <text x="794" y="${y}" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="650">${escapeXml(line.replace(/^\s*\/\s*/, ""))}</text>
-      </g>`;
-    })
-    .join("\n");
-
-  return svgFrame({
-    id: "frame-desktop-home",
-    width: 1440,
-    height: 1200,
-    title: "Desktop Home",
-    body: `
-  <g id="layer-topbar">
-    <text x="72" y="54" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="850" letter-spacing="1.4">HSIN-HSIN YUAN</text>
-    <text x="1050" y="54" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="750" letter-spacing="1.1">WORKS / ABOUT / CONTACT / 中文</text>
-  </g>
-  <g id="layer-hero">
-    ${imageLayer({ id: "layer-hero-image", href: media.hero.background, x: 72, y: 104, width: 610, height: 520, opacity: 0.96 })}
-    <rect x="72" y="104" width="610" height="520" fill="${tokens.bg}" opacity="0.08"/>
-    <text id="layer-hero-eyebrow" x="772" y="148" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.5">${escapeXml(hero.heroEyebrow.toUpperCase())}</text>
-    <g id="layer-hero-title">
-      <text x="768" y="282" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="104" font-weight="900">HSIN-HSIN</text>
-      <text x="768" y="382" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="104" font-weight="900">YUAN</text>
-    </g>
-    ${slashLines}
-    ${textBlock({ id: "layer-hero-subcopy", x: 772, y: 526, lines: textLines(hero.heroSubcopy, 56).slice(0, 4), size: 18, fill: tokens.muted, lineHeight: 28 })}
-  </g>
-  <g id="layer-logo-wall">
-    <text x="72" y="668" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" letter-spacing="1.3">${escapeXml(hero.collabTitle.toUpperCase())}</text>
-    ${logoRow}
-  </g>
-  <g id="layer-available">
-    <text x="72" y="840" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.4">${escapeXml(hero.availabilityLabel.toUpperCase())}</text>
-    ${textBlock({ id: "layer-available-intro", x: 72, y: 896, lines: textLines(hero.availabilityIntro, 62).slice(0, 3), size: 26, weight: 760, fill: tokens.ink, lineHeight: 36 })}
-    ${textBlock({ id: "layer-available-list", x: 760, y: 888, lines: hero.availability.slice(0, 6), size: 17, fill: tokens.muted, lineHeight: 30 })}
-  </g>`,
-  });
-}
-
-function buildDesktopWorksLogos(site, works, collaborations) {
+function buildPortraitCarrier(site, media) {
   const copy = site.en;
-  const cards = works
-    .slice(0, 3)
-    .map((work, index) => workCard({ work, x: 72 + index * 430, y: 290, width: 390 }))
-    .join("\n");
-  const logos = collaborations
-    .map((item, index) => logoWordmark({ item, x: 72 + (index % 4) * 330, y: 910 + Math.floor(index / 4) * 92, width: 220 }))
-    .join("\n");
-
   return svgFrame({
-    id: "frame-desktop-works-logos",
+    id: "frame-desktop-portrait-carrier",
     width: 1440,
-    height: 1200,
-    title: "Desktop Works and Logo Wall",
+    height: 1800,
+    title: "Desktop portrait carrier — opening and release",
+    background: tokens.stage,
     body: `
-  <g id="layer-page-title">
-    <text x="72" y="110" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.4">${escapeXml(copy.worksLabel.toUpperCase())}</text>
-    <text x="72" y="178" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="64" font-weight="900">Featured Works</text>
-    ${textBlock({ id: "layer-works-intro", x: 760, y: 142, lines: textLines("Compact cards for browsing multiple projects at once. Use this frame to tune poster crops, card density, and work hierarchy before translating changes back into code.", 58).slice(0, 4), size: 18, fill: tokens.muted, lineHeight: 28 })}
+  <g id="scene-opening">
+    <rect x="0" y="0" width="1440" height="900" fill="${tokens.stage}"/>
+    ${glow({ id: "opening-signal-field", x: 760, y: 50, width: 610, height: 610, color: tokens.coral, opacity: 0.32 })}
+    ${phaseLabel({ x: 56, y: 54, number: "01", title: "Opening · 0–25%", fill: tokens.stageInk })}
+    <text x="1060" y="54" fill="${tokens.stageInk}" opacity="0.72" font-family="Helvetica Neue, Arial, sans-serif" font-size="13">Works　Practice　Contact　中</text>
+    <g id="opening-media-frame">
+      <rect x="152" y="104" width="1136" height="690" rx="42" fill="${tokens.lineDark}"/>
+      ${imageLayer({ id: "media-opening-background", href: media.hero.abstractLayer, x: 152, y: 104, width: 1136, height: 690, radius: 42, opacity: 0.82 })}
+      <rect x="152" y="104" width="1136" height="690" rx="42" fill="${tokens.stage}" opacity="0.32"/>
+    </g>
+    ${imageLayer({ id: "media-portrait-foreground-opening", href: media.hero.foregroundCutout, x: 430, y: 142, width: 580, height: 652, fit: "meet", position: "xMidYMax" })}
+    ${textBlock({ id: "opening-name", x: 56, y: 730, lines: [copy.name], size: 88, weight: 500, fill: tokens.stageInk, lineHeight: 90 })}
+    ${textBlock({ id: "opening-role", x: 1025, y: 716, lines: textLines(copy.portraitRole, 28), size: 22, weight: 400, fill: tokens.stageInk, lineHeight: 28 })}
+    <text x="1190" y="832" fill="${tokens.stageInk}" opacity="0.68" font-family="Helvetica Neue, Arial, sans-serif" font-size="13">Scroll to release the portrait ↓</text>
   </g>
-  <g id="layer-featured-work-cards">
-    ${cards}
-  </g>
-  <g id="layer-logo-wall">
-    <text x="72" y="820" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.4">${escapeXml(copy.collabTitle.toUpperCase())}</text>
-    <text x="72" y="866" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="850">No boxes, no heavy boundary, just a quiet trust strip.</text>
-    ${logos}
+  <g id="scene-release">
+    <rect x="0" y="900" width="1440" height="900" fill="${tokens.fog}"/>
+    ${glow({ id: "release-signal-field", x: 365, y: 1010, width: 710, height: 700, color: tokens.coral, opacity: 0.2 })}
+    ${phaseLabel({ x: 56, y: 954, number: "02", title: "Release · 25–48%", fill: tokens.ink })}
+    <text x="1060" y="954" fill="${tokens.ink}" opacity="0.64" font-family="Helvetica Neue, Arial, sans-serif" font-size="13">Works　Practice　Contact　中</text>
+    ${imageLayer({ id: "media-release-abstract", href: media.hero.abstractLayer, x: 72, y: 1050, width: 410, height: 270, radius: 22, opacity: 0.92 })}
+    ${imageLayer({ id: "media-release-frame", href: media.hero.background, x: 1010, y: 1044, width: 320, height: 212, radius: 22, opacity: 0.82 })}
+    ${imageLayer({ id: "media-portrait-foreground-release", href: media.hero.foregroundCutout, x: 442, y: 1010, width: 560, height: 730, fit: "meet", position: "xMidYMax" })}
+    ${textBlock({ id: "release-name", x: 64, y: 1455, lines: [copy.name], size: 76, weight: 500, fill: tokens.ink })}
+    ${textBlock({ id: "release-role", x: 1010, y: 1425, lines: textLines(copy.portraitRole, 29), size: 21, weight: 400, fill: tokens.ink, lineHeight: 30 })}
+    ${textBlock({ id: "release-statement", x: 64, y: 1640, lines: textLines(copy.portraitStatement, 58), size: 28, weight: 400, fill: tokens.ink, lineHeight: 36 })}
+    ${textBlock({ id: "release-accent", x: 1010, y: 1640, lines: [copy.portraitAccent], size: 36, weight: 400, fill: tokens.ink, family: "serif", italic: true })}
+    <line x1="64" y1="1738" x2="1376" y2="1738" stroke="${tokens.lineLight}"/>
+    <text x="64" y="1770" fill="${tokens.quietInk}" font-family="Helvetica Neue, Arial, sans-serif" font-size="12">Foreground portrait stays independent; background, abstract layer, and crop remain replaceable.</text>
   </g>`,
   });
 }
 
-function buildMobileHome(site, works, collaborations, media) {
-  const hero = site.en;
-  const logos = collaborations
-    .slice(0, 4)
-    .map((item, index) => logoWordmark({ item, x: 28 + (index % 2) * 168, y: 614 + Math.floor(index / 2) * 62, width: 118 }))
-    .join("\n");
+function practiceRail(copy, activeId, signal, y) {
+  return `<g id="practice-mode-rail-${activeId}">
+    ${copy.practiceModes.map((mode, index) => {
+      const active = mode.id === activeId;
+      const x = 70 + index * 220;
+      return `<g id="rail-${activeId}-${mode.id}">
+        <circle cx="${x + 6}" cy="${y - 4}" r="${active ? 6 : 3}" fill="${active ? signal : tokens.quietInk}"/>
+        <text x="${x + 20}" y="${y}" fill="${active ? tokens.ink : tokens.quietInk}" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="${active ? 600 : 400}">${escapeXml(mode.label)}</text>
+      </g>`;
+    }).join("\n")}
+  </g>`;
+}
+
+function buildPracticeModes(site, media) {
+  const copy = site.en;
+  const body = media.practiceModes.map((modeMedia, index) => {
+    const modeCopy = copy.practiceModes.find((mode) => mode.id === modeMedia.id);
+    if (!modeCopy) throw new Error(`Missing site copy for practice mode ${modeMedia.id}`);
+    const y = index * 900;
+    const signal = tokens[modeMedia.signal];
+    if (!signal) throw new Error(`Unknown signal token ${modeMedia.signal}`);
+    return `<g id="practice-scene-${modeMedia.id}">
+      <rect x="0" y="${y}" width="1440" height="900" fill="${index % 2 === 0 ? tokens.fog : tokens.paper}"/>
+      ${glow({ id: `practice-${modeMedia.id}-signal-field`, x: 370, y: y + 105, width: 720, height: 680, color: signal, opacity: 0.23 })}
+      ${phaseLabel({ x: 70, y: y + 54, number: `0${index + 3}`, title: `Practice · ${modeCopy.label}`, fill: tokens.ink })}
+      ${practiceRail(copy, modeMedia.id, signal, y + 106)}
+      ${imageLayer({ id: `practice-${modeMedia.id}-primary`, href: modeMedia.primary, x: 72, y: y + 185, width: 390, height: 278, radius: 18, opacity: 0.95 })}
+      ${imageLayer({ id: `practice-${modeMedia.id}-supporting`, href: modeMedia.supporting, x: 1045, y: y + 470, width: 310, height: 220, radius: 18, opacity: 0.92 })}
+      ${imageLayer({ id: `practice-${modeMedia.id}-portrait`, href: media.hero.foregroundCutout, x: 440, y: y + 125, width: 560, height: 720, fit: "meet", position: "xMidYMax" })}
+      <text x="72" y="${y + 570}" fill="${signal}" font-family="Iowan Old Style, Baskerville, Times New Roman, serif" font-size="40" font-style="italic">${escapeXml(modeCopy.verb)}</text>
+      ${textBlock({ id: `practice-${modeMedia.id}-title`, x: 72, y: y + 640, lines: textLines(modeCopy.title, 27), size: 38, weight: 500, fill: tokens.ink, lineHeight: 44 })}
+      ${textBlock({ id: `practice-${modeMedia.id}-body`, x: 1045, y: y + 215, lines: textLines(modeCopy.body, 34), size: 18, weight: 400, fill: tokens.ink, lineHeight: 28 })}
+      <line x1="72" y1="${y + 842}" x2="1355" y2="${y + 842}" stroke="${tokens.lineLight}"/>
+      <text x="1045" y="${y + 815}" fill="${tokens.quietInk}" font-family="Helvetica Neue, Arial, sans-serif" font-size="12">Portrait anchor remains fixed while copy, signal, and project stills change.</text>
+    </g>`;
+  }).join("\n");
 
   return svgFrame({
-    id: "frame-mobile-home",
+    id: "frame-desktop-practice-modes",
+    width: 1440,
+    height: 2700,
+    title: "Desktop practice modes storyboard",
+    background: tokens.fog,
+    body,
+  });
+}
+
+function workMediaFor(work, media) {
+  if (work.posterImage && !/^https?:\/\//.test(work.posterImage)) return work.posterImage;
+  if (work.slug === "tech-dreamers") {
+    return media.practiceModes.find((mode) => mode.id === "editorial-systems")?.primary || "";
+  }
+  return "";
+}
+
+function workSupportingFor(work, media) {
+  if (work.supportingImages?.[0]?.src) return work.supportingImages[0].src;
+  if (work.slug === "tech-dreamers") {
+    return media.practiceModes.find((mode) => mode.id === "editorial-systems")?.supporting || "";
+  }
+  return "";
+}
+
+function buildWorkTheatre(site, works, media) {
+  const sceneSignals = [tokens.moss, tokens.cobalt, tokens.coral];
+  const body = works.map((work, index) => {
+    const y = index * 900;
+    const signal = sceneSignals[index];
+    const mediaPath = workMediaFor(work, media);
+    const supportingPath = workSupportingFor(work, media);
+    const safeSlug = slug(work.slug);
+    const mainMedia = mediaPath
+      ? imageLayer({ id: `work-${safeSlug}-primary`, href: mediaPath, x: 64, y: y + 118, width: 850, height: 650, radius: 24, opacity: 0.9 })
+      : `<g id="work-${safeSlug}-text-led-field">
+          <rect x="64" y="${y + 118}" width="850" height="650" rx="24" fill="${tokens.stage}" stroke="${tokens.lineDark}"/>
+          ${glow({ id: `work-${safeSlug}-text-glow`, x: 160, y: y + 210, width: 650, height: 450, color: signal, opacity: 0.22 })}
+          ${textBlock({ id: `work-${safeSlug}-field-title`, x: 126, y: y + 415, lines: work.title.en.split(/\s+/), size: 116, weight: 400, fill: tokens.stageInk, lineHeight: 105, family: "serif", italic: true })}
+        </g>`;
+    return `<g id="work-scene-${safeSlug}">
+      <rect x="0" y="${y}" width="1440" height="900" fill="${tokens.stage}"/>
+      ${glow({ id: `work-${safeSlug}-signal-field`, x: 810, y: y + 80, width: 560, height: 650, color: signal, opacity: 0.18 })}
+      ${phaseLabel({ x: 64, y: y + 54, number: String(index + 1).padStart(2, "0"), title: "Work theatre", fill: tokens.stageInk })}
+      <text x="1280" y="${y + 54}" text-anchor="end" fill="${tokens.stageInk}" opacity="0.64" font-family="Helvetica Neue, Arial, sans-serif" font-size="13">${escapeXml(`${work.year} · ${work.platform}`)}</text>
+      ${mainMedia}
+      ${supportingPath ? imageLayer({ id: `work-${safeSlug}-supporting`, href: supportingPath, x: 760, y: y + 570, width: 220, height: 170, radius: 14, opacity: 0.96 }) : ""}
+      ${textBlock({ id: `work-${safeSlug}-title`, x: 980, y: y + 195, lines: textLines(work.title.en, 18), size: 50, weight: 500, fill: tokens.stageInk, lineHeight: 56 })}
+      ${textBlock({ id: `work-${safeSlug}-tagline`, x: 980, y: y + 330, lines: textLines(work.tagline.en, 28), size: 25, weight: 400, fill: tokens.stageInk, lineHeight: 32, family: "serif", italic: true })}
+      ${textBlock({ id: `work-${safeSlug}-description`, x: 980, y: y + 465, lines: textLines(work.description.en, 34), size: 17, weight: 400, fill: tokens.stageInk, lineHeight: 27, opacity: 0.74 })}
+      ${textBlock({ id: `work-${safeSlug}-role`, x: 980, y: y + 640, lines: textLines(work.role.en, 28), size: 14, weight: 500, fill: signal, lineHeight: 22 })}
+      <line x1="980" y1="${y + 700}" x2="1350" y2="${y + 700}" stroke="${signal}"/>
+      <text x="980" y="${y + 742}" fill="${tokens.stageInk}" font-family="Helvetica Neue, Arial, sans-serif" font-size="14">View project ↗</text>
+      <text x="64" y="${y + 852}" fill="${tokens.stageInk}" opacity="0.46" font-family="Helvetica Neue, Arial, sans-serif" font-size="12">Scene ${index + 1} of ${works.length} · one dominant proof, one action</text>
+    </g>`;
+  }).join("\n");
+
+  return svgFrame({
+    id: "frame-desktop-work-theatre",
+    width: 1440,
+    height: 2700,
+    title: site.en.workTheatreTitle,
+    background: tokens.stage,
+    body,
+  });
+}
+
+function buildMobileFlow(site, works, media) {
+  const copy = site.en;
+  const practices = media.practiceModes.map((modeMedia, index) => {
+    const modeCopy = copy.practiceModes.find((mode) => mode.id === modeMedia.id);
+    const signal = tokens[modeMedia.signal];
+    const y = 790 + index * 430;
+    return `<g id="mobile-practice-${modeMedia.id}">
+      <text x="22" y="${y + 38}" fill="${signal}" font-family="Iowan Old Style, Baskerville, Times New Roman, serif" font-size="25" font-style="italic">${escapeXml(modeCopy.verb)}</text>
+      ${textBlock({ id: `mobile-practice-${modeMedia.id}-title`, x: 22, y: y + 88, lines: textLines(modeCopy.title, 26), size: 28, weight: 500, fill: tokens.ink, lineHeight: 32 })}
+      ${imageLayer({ id: `mobile-practice-${modeMedia.id}-primary`, href: modeMedia.primary, x: 22, y: y + 154, width: 218, height: 168, radius: 12, opacity: 0.94 })}
+      ${imageLayer({ id: `mobile-practice-${modeMedia.id}-supporting`, href: modeMedia.supporting, x: 252, y: y + 222, width: 116, height: 100, radius: 10, opacity: 0.94 })}
+      ${textBlock({ id: `mobile-practice-${modeMedia.id}-body`, x: 22, y: y + 360, lines: textLines(modeCopy.body, 48), size: 14, weight: 400, fill: tokens.quietInk, lineHeight: 20 })}
+    </g>`;
+  }).join("\n");
+
+  const mobileWorkY = 2110;
+  const workScenes = works.map((work, index) => {
+    const y = mobileWorkY + 70 + index * 520;
+    const mediaPath = workMediaFor(work, media);
+    const safeSlug = slug(work.slug);
+    const signal = [tokens.moss, tokens.cobalt, tokens.coral][index];
+    return `<g id="mobile-work-${safeSlug}">
+      ${mediaPath
+        ? imageLayer({ id: `mobile-work-${safeSlug}-primary`, href: mediaPath, x: 22, y, width: 346, height: 248, radius: 14, opacity: 0.9 })
+        : `<g id="mobile-work-${safeSlug}-text-led"><rect x="22" y="${y}" width="346" height="248" rx="14" fill="${tokens.lineDark}"/>${textBlock({ id: `mobile-work-${safeSlug}-field-title`, x: 44, y: y + 105, lines: work.title.en.split(/\s+/), size: 54, weight: 400, fill: tokens.stageInk, family: "serif", italic: true, lineHeight: 50 })}</g>`}
+      <text x="22" y="${y + 288}" fill="${signal}" font-family="Helvetica Neue, Arial, sans-serif" font-size="12">${escapeXml(`${work.year} · ${work.role.en}`)}</text>
+      ${textBlock({ id: `mobile-work-${safeSlug}-title`, x: 22, y: y + 338, lines: textLines(work.title.en, 22), size: 34, weight: 500, fill: tokens.stageInk, lineHeight: 38 })}
+      ${textBlock({ id: `mobile-work-${safeSlug}-tagline`, x: 22, y: y + 410, lines: textLines(work.tagline.en, 40), size: 17, weight: 400, fill: tokens.stageInk, lineHeight: 23, family: "serif", italic: true })}
+      <text x="22" y="${y + 480}" fill="${tokens.stageInk}" opacity="0.7" font-family="Helvetica Neue, Arial, sans-serif" font-size="13">View project ↗</text>
+    </g>`;
+  }).join("\n");
+
+  return svgFrame({
+    id: "frame-mobile-static-flow",
     width: 390,
-    height: 844,
-    title: "Mobile Home",
+    height: 4200,
+    title: "Mobile static stacked flow",
+    background: tokens.paper,
     body: `
-  <g id="layer-mobile-topbar">
-    <text x="24" y="42" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.2">HSIN-HSIN YUAN</text>
-    <text x="308" y="42" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="750">中文</text>
+  <g id="mobile-portrait-carrier">
+    <rect x="0" y="0" width="390" height="530" fill="${tokens.stage}"/>
+    <text x="20" y="36" fill="${tokens.stageInk}" font-family="Helvetica Neue, Arial, sans-serif" font-size="12">Hsin-Hsin Yuan</text>
+    <text x="282" y="36" fill="${tokens.stageInk}" opacity="0.68" font-family="Helvetica Neue, Arial, sans-serif" font-size="11">Works　Contact　中</text>
+    ${glow({ id: "mobile-opening-signal", x: 82, y: 80, width: 250, height: 330, color: tokens.coral, opacity: 0.3 })}
+    ${imageLayer({ id: "mobile-opening-background", href: media.hero.abstractLayer, x: 20, y: 68, width: 350, height: 350, radius: 24, opacity: 0.78 })}
+    <rect x="20" y="68" width="350" height="350" rx="24" fill="${tokens.stage}" opacity="0.28"/>
+    ${imageLayer({ id: "mobile-portrait-foreground", href: media.hero.foregroundCutout, x: 78, y: 92, width: 235, height: 410, fit: "meet", position: "xMidYMax" })}
+    ${textBlock({ id: "mobile-name", x: 20, y: 466, lines: [copy.name], size: 42, weight: 500, fill: tokens.stageInk })}
   </g>
-  <g id="layer-mobile-hero">
-    ${imageLayer({ id: "layer-mobile-hero-image", href: media.hero.background, x: 24, y: 76, width: 342, height: 252, opacity: 0.94 })}
-    <text id="layer-mobile-eyebrow" x="24" y="370" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="850" letter-spacing="1.3">DOCUMENTARY / CULTURE / TECHNOLOGY</text>
-    <g id="layer-hero-title">
-      <text x="22" y="436" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="900">HSIN-HSIN</text>
-      <text x="22" y="492" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="900">YUAN</text>
-    </g>
-    <text x="24" y="532" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="650">Documentary Director <tspan fill="${tokens.acid}">/</tspan> Writer <tspan fill="${tokens.acid}">/</tspan> Producer</text>
-    <text x="24" y="558" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">/ <tspan fill="${tokens.ink}">Cross-Cultural Storyteller</tspan></text>
+  <g id="mobile-release-copy">
+    <rect x="0" y="530" width="390" height="245" fill="${tokens.fog}"/>
+    ${textBlock({ id: "mobile-role", x: 20, y: 590, lines: textLines(copy.portraitRole, 34), size: 19, weight: 400, fill: tokens.ink, lineHeight: 26 })}
+    ${textBlock({ id: "mobile-statement", x: 20, y: 672, lines: textLines(copy.portraitStatement, 40), size: 16, weight: 400, fill: tokens.quietInk, lineHeight: 22 })}
+    ${textBlock({ id: "mobile-accent", x: 20, y: 742, lines: [copy.portraitAccent], size: 28, weight: 400, fill: tokens.ink, family: "serif", italic: true })}
   </g>
-  <g id="layer-logo-wall">
-    <text x="24" y="596" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="800" letter-spacing="1.2">${escapeXml(hero.collabTitle.toUpperCase())}</text>
-    ${logos}
+  <g id="mobile-practice-stack">
+    <rect x="0" y="775" width="390" height="1335" fill="${tokens.paper}"/>
+    ${practices}
   </g>
-  <g id="layer-mobile-available">
-    <text x="24" y="748" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="850" letter-spacing="1.2">${escapeXml(hero.availabilityLabel.toUpperCase())}</text>
-    ${textBlock({ id: "layer-mobile-available-intro", x: 24, y: 782, lines: textLines(hero.availabilityIntro, 36).slice(0, 3), size: 18, weight: 760, fill: tokens.ink, lineHeight: 24 })}
+  <g id="mobile-work-stack">
+    <rect x="0" y="${mobileWorkY}" width="390" height="1640" fill="${tokens.stage}"/>
+    <text x="22" y="${mobileWorkY + 42}" fill="${tokens.stageInk}" font-family="Helvetica Neue, Arial, sans-serif" font-size="13">${escapeXml(copy.workTheatreTitle)}</text>
+    ${workScenes}
+  </g>
+  <g id="mobile-contact">
+    <rect x="0" y="3750" width="390" height="450" fill="${tokens.paper}"/>
+    <text x="22" y="3812" fill="${tokens.quietInk}" font-family="Helvetica Neue, Arial, sans-serif" font-size="12">Contact</text>
+    ${textBlock({ id: "mobile-contact-title", x: 22, y: 3880, lines: textLines(copy.contactTitle, 23), size: 39, weight: 500, fill: tokens.ink, lineHeight: 43 })}
+    ${textBlock({ id: "mobile-contact-copy", x: 22, y: 3990, lines: textLines(copy.contactSubcopy, 50), size: 14, weight: 400, fill: tokens.quietInk, lineHeight: 20 })}
+    <rect x="22" y="4118" width="346" height="54" rx="27" fill="${tokens.stage}"/>
+    <text x="195" y="4151" text-anchor="middle" fill="${tokens.stageInk}" font-family="Helvetica Neue, Arial, sans-serif" font-size="14">${escapeXml(copy.contactCta)}</text>
   </g>`,
   });
+}
+
+function buildManifest(media) {
+  return {
+    schemaVersion: 1,
+    system: "portrait-carrier",
+    tokens: exportedTokens,
+    mediaContract: {
+      treatment: media.hero.treatment,
+      foregroundRequired: media.hero.treatment === "portrait-carrier",
+      foregroundPath: media.hero.foregroundCutout,
+      replaceIn: "data/media.json",
+    },
+    frames: [
+      { file: "01-desktop-portrait-carrier.svg", title: "Portrait carrier · opening and release", width: 1440, height: 1800 },
+      { file: "02-desktop-practice-modes.svg", title: "Practice modes · three scene states", width: 1440, height: 2700 },
+      { file: "03-desktop-work-theatre.svg", title: "Work theatre · three story scenes", width: 1440, height: 2700 },
+      { file: "04-mobile-static-flow.svg", title: "Mobile · static stacked flow", width: 390, height: 4200 },
+    ],
+  };
 }
 
 function buildReadme() {
-  return `# Figma SVG Export
+  return `# Figma Scene Export
 
-This folder is a free Figma import package for the Hsin-Hsin Yuan portfolio design layer.
+This package translates the active Hsin-Hsin Yuan portfolio into editable scene storyboards. Its signature is the portrait carrier: the person separates from the opening frame, stays anchored through three practice modes, then hands the page to the work theatre.
 
 ## Files
 
-- \`01-desktop-home.svg\` - desktop hero, logo strip, and about section.
-- \`02-desktop-works-logos.svg\` - compact work cards and logo wall.
-- \`03-mobile-home.svg\` - mobile home reference frame.
+- \`01-desktop-portrait-carrier.svg\` — opening and release states with independent background, abstract, and foreground portrait layers.
+- \`02-desktop-practice-modes.svg\` — Documentary direction, Cross-cultural story, and Editorial systems states.
+- \`03-desktop-work-theatre.svg\` — three full-viewport work scenes, including the text-led Slow Steps treatment.
+- \`04-mobile-static-flow.svg\` — the static stacked mobile reading path; mobile does not use sticky scene traps.
+- \`manifest.json\` — scene inventory, active tokens, dimensions, and portrait media contract.
 
-## How To Use
+## Use In Figma
 
-1. Open your Figma file.
-2. Drag the SVG files into Figma, or use \`File > Place image/video\`.
-3. Select an imported SVG and ungroup if needed.
-4. Edit text layers, move sections, tune spacing, and annotate decisions.
-5. Send approved changes back into the website repo, especially \`src/styles.css\`, \`data/site.json\`, and \`content/works/*.md\`.
+1. Drag the SVG files into Figma or choose \`File > Place image/video\`.
+2. Ungroup each imported SVG to reach editable text layers, image layers, signal fields, rules, and scene labels.
+3. Replace imagery by selecting its named media layer. Keep the foreground portrait separate from the background frame.
+4. Review desktop scene states and the static stacked mobile frame together.
+5. Sync approved decisions back to \`data/media.json\`, \`data/site.json\`, \`content/works/*.md\`, and \`src/styles.css\`.
 
-## Notes
+## Boundaries
 
-- The SVGs are generated from current site content, so re-run \`npm run figma:export\` after major content changes.
-- Photos are embedded as image layers to keep the package portable.
-- Text, rectangles, logo wordmarks, cards, and color token swatches remain editable SVG layers, including editable text layers after import.
-- This is a design control layer, not the production source of truth.
+- The SVGs describe composition states; the website remains the production source of truth.
+- Signal colors identify real practice modes and should stay local to their scene.
+- Re-run \`npm run figma:export\` after changing portfolio media or copy.
+- Photos are embedded for portability. Remote sources use a labeled replace-in-Figma media field.
 `;
 }
 
 function main() {
   const site = readJson("data/site.json");
-  const collaborations = readJson("data/collaborations.json");
   const media = readJson("data/media.json");
   const works = [
-    parseFrontmatter("content/works/my-art-my-voice.md"),
-    parseFrontmatter("content/works/tech-dreamers.md"),
     parseFrontmatter("content/works/slow-steps.md"),
+    parseFrontmatter("content/works/tech-dreamers.md"),
+    parseFrontmatter("content/works/my-art-my-voice.md"),
   ].sort((a, b) => a.order - b.order);
+
+  if (media.hero.treatment === "portrait-carrier" && !media.hero.foregroundCutout) {
+    throw new Error("portrait-carrier export requires media.hero.foregroundCutout");
+  }
 
   rmSync(outDir, { recursive: true, force: true });
   mkdirSync(outDir, { recursive: true });
 
-  writeFileSync(join(outDir, "01-desktop-home.svg"), buildDesktopHome(site, works, collaborations, media));
-  writeFileSync(join(outDir, "02-desktop-works-logos.svg"), buildDesktopWorksLogos(site, works, collaborations));
-  writeFileSync(join(outDir, "03-mobile-home.svg"), buildMobileHome(site, works, collaborations, media));
+  writeFileSync(join(outDir, "01-desktop-portrait-carrier.svg"), buildPortraitCarrier(site, media));
+  writeFileSync(join(outDir, "02-desktop-practice-modes.svg"), buildPracticeModes(site, media));
+  writeFileSync(join(outDir, "03-desktop-work-theatre.svg"), buildWorkTheatre(site, works, media));
+  writeFileSync(join(outDir, "04-mobile-static-flow.svg"), buildMobileFlow(site, works, media));
+  writeFileSync(join(outDir, "manifest.json"), `${JSON.stringify(buildManifest(media), null, 2)}\n`);
   writeFileSync(join(outDir, "README.md"), buildReadme());
 
-  console.log(`Generated Figma SVG export package in ${outDir}`);
+  console.log(`Generated portrait-carrier Figma package in ${outDir}`);
 }
 
 main();

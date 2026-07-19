@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "system": "portrait-carrier",
+  "tokens": {
+    "stage": "#050807",
+    "fog": "#dddcd7",
+    "paper": "#f6f4ee",
+    "coral": "#f0645a",
+    "cobalt": "#4867d9",
+    "moss": "#4d9259"
+  },
+  "mediaContract": {
+    "treatment": "portrait-carrier",
+    "foregroundRequired": true,
+    "foregroundPath": "/assets/portfolio/hsin-portrait-foreground.webp",
+    "replaceIn": "data/media.json"
+  },
+  "frames": [
+    {
+      "file": "01-desktop-portrait-carrier.svg",
+      "title": "Portrait carrier · opening and release",
+      "width": 1440,
+      "height": 1800
+    },
+    {
+      "file": "02-desktop-practice-modes.svg",
+      "title": "Practice modes · three scene states",
+      "width": 1440,
+      "height": 2700
+    },
+    {
+      "file": "03-desktop-work-theatre.svg",
+      "title": "Work theatre · three story scenes",
+      "width": 1440,
+      "height": 2700
+    },
+    {
+      "file": "04-mobile-static-flow.svg",
+      "title": "Mobile · static stacked flow",
+      "width": 390,
+      "height": 4200
+    }
+  ]
+}

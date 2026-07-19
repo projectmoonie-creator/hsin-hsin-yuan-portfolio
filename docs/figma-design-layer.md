@@ -1,329 +1,201 @@
 # Figma Design Layer
 
-> The hero image in active SVG exports comes from `data/media.json`. Remote work imagery is represented as an explicit replace-in-Figma placeholder; the exporter does not download or embed third-party images.
+This Figma layer is a storyboard for the active portrait-carrier portfolio, not a second source of production truth. It exists to review the opening frame, portrait release, practice-mode changes, work-theatre scenes, image crops, and the static mobile reading path before translating approved decisions back into the website.
 
-This document defines the Figma layer for Hsin-Hsin Yuan's portfolio site. It is the visual control layer above the codebase, not a replacement for the current GitHub + Vercel deployment.
+## Source Of Truth
 
-## Purpose
+Final content and media remain in the repository:
 
-Use Figma to make layout, typography, image crop, spacing, and mobile/desktop decisions visually. Keep the website code as the production source.
+- Portrait and practice media: `data/media.json`
+- English and Chinese site copy: `data/site.json`
+- Selected work: `content/works/*.md`
+- Layout and scene styling: `src/styles.css`
+- Scroll-state mapping: `src/scene-state.js`
 
-The workflow is:
+Figma may hold visual experiments and annotations, but approved copy or media changes must be synced back to those files.
 
-1. Design or adjust sections in Figma.
-2. Confirm desktop and mobile frames.
-3. Translate approved changes back into `src/styles.css`, `data/site.json`, and content files.
-4. Run `npm test` and `npm run build`.
-5. Deploy through GitHub + Vercel.
+## Active Scene Architecture
 
-## Figma File Structure
+### Portrait carrier
 
-Create one Figma file named:
+The portrait is a real foreground layer, independent from the opening image frame.
 
-`Hsin-Hsin Yuan Portfolio - Design Layer`
+1. `Opening · 0–25%`: Stage surface, rounded background frame, foreground person, name, role, and navigation.
+2. `Release · 25–48%`: the background frame shrinks, the surface changes to Fog, and the person remains anchored outside the frame.
+3. `Practice · 48–78%`: the foreground person remains stable while signal color, copy, and two project stills change.
+4. `Handoff · 78–100%`: the portrait scene recedes before the dark work theatre takes over.
 
-Use these pages:
+Keep these media layers separately named and replaceable:
 
-1. `00 Cover`
-2. `01 Current Site Reference`
-3. `02 Design System`
-4. `03 Desktop Layouts`
-5. `04 Mobile Layouts`
-6. `05 Components`
-7. `06 Content Map`
-8. `07 Experiments`
+- `Opening frame / Background media`
+- `Replaceable abstract layer`
+- `Foreground portrait / Opening`
+- `Foreground portrait / Release`
 
-## Frame Sizes
+Do not merge the portrait into the background image. That would remove the selected B treatment and make later image replacement brittle.
 
-Use these core frames first:
+### Practice modes
 
-- Desktop: `1440 x 1200`
-- Laptop: `1200 x 1000`
-- Tablet: `834 x 1112`
-- Mobile: `390 x 844`
-- Small mobile: `360 x 800`
+Practice modes describe real areas of work, not decorative product states:
 
-Every major page decision should have at least:
+- `Documentary direction` — coral signal
+- `Cross-cultural story` — cobalt signal
+- `Editorial systems` — moss signal
 
-- One desktop frame
-- One mobile frame
+Each mode must show one primary still, one supporting still, a short verb, a title, and concise body copy. The person remains in the same visual anchor while the other layers change.
 
-## Current Site Sections
+### Work theatre
 
-Map the Figma frames to the current site sections:
+The work theatre contains three full scenes:
 
-1. `Topbar`
-2. `Hero`
-3. `Platforms & Collaborations`
-4. `Screening Strip`
-5. `Available For`
-6. `Featured Works`
-7. `Who Should Contact Me`
-8. `AI / Language Lab`
-9. `Selected Archive`
-10. `Contact`
+1. `Slow Steps` — deliberate text-led field until approved project imagery exists.
+2. `Tech Dreamers` — one dominant production image plus one supporting still.
+3. `My Art, My Voice` — one dominant performance still plus one supporting still.
+
+Each scene has one dominant proof, concise role/context, and one action. Do not reduce the three scenes to a grid of small browsing cards.
+
+### Mobile
+
+Mobile is an ordinary stacked reading path. It contains the portrait opening, release copy, three practice chapters, three work chapters, and contact. It does not simulate the desktop sticky duration.
 
 ## Design Tokens
 
-Mirror the current CSS tokens in Figma variables.
+Mirror these values in Figma variables and generated SVGs:
 
-### Colors
-
-| Token | CSS | Figma variable | Value |
+| Role | CSS token | Figma variable | Value |
 | --- | --- | --- | --- |
-| Background | `--bg` | `color/bg` | `#0B0B0C` |
-| Ink | `--ink` | `color/ink` | `#F7F2E8` |
-| Muted | `--muted` | `color/muted` | `#B8B0A3` |
-| Line | `--line` | `color/line` | `rgba(247, 242, 232, 0.18)` |
-| Panel | `--panel` | `color/panel` | `rgba(255, 255, 255, 0.055)` |
-| Panel strong | `--panel-strong` | `color/panel-strong` | `rgba(255, 255, 255, 0.095)` |
-| Acid | `--acid` | `color/accent-acid` | `#D8FF3E` |
-| Heat | `--heat` | `color/accent-heat` | `#FF4D1F` |
-| Blue | `--blue` | `color/accent-blue` | `#7CC7FF` |
+| Opening and theatre | `--stage` | `color/stage` | `#050807` |
+| Light scene | `--fog` | `color/fog` | `#dddcd7` |
+| Reading surface | `--paper` | `color/paper` | `#f6f4ee` |
+| Documentary signal | `--signal-coral` | `color/signal-coral` | `#f0645a` |
+| Cross-cultural signal | `--signal-cobalt` | `color/signal-cobalt` | `#4867d9` |
+| Editorial-systems signal | `--signal-moss` | `color/signal-moss` | `#4d9259` |
 
-### Typography
+Signal colors belong to local glows, active markers, and small metadata. They are not persistent headline decoration.
 
-Use:
+## Typography
 
-- Primary Latin: `Inter`
-- Traditional Chinese fallback: `Noto Sans TC` or `PingFang TC`
+- Interface and display: `Helvetica Neue`, then `Arial` or a local sans-serif fallback.
+- Editorial accent: `Iowan Old Style`, `Baskerville`, or `Times New Roman` italic.
+- Traditional Chinese: `PingFang TC`, `Noto Serif TC`, and system fallbacks, preserving the sans/serif role split.
+- Metadata: small sans-serif text in ordinary case with restrained spacing.
 
-Core text styles:
+Use mixed case. Reserve the italic serif for one meaningful phrase or verb in a scene. The design should not depend on global uppercase or extreme letter spacing.
 
-- `Display/Hero`: uppercase, heavy weight, tight line height
-- `Title/Section`: 12px, uppercase, bold, accent color
-- `Body/Large`: 18-22px, medium line height
-- `Body/Base`: 15-17px
-- `Meta`: 12px, uppercase, bold
-- `Card/Title`: 24-40px, bold
+## Generated SVG Package
 
-Important rule:
+Run:
 
-Do not rely on viewport-scaled typography alone. Check actual mobile frames for text overflow.
-
-## Components
-
-Create these Figma components:
-
-### `Topbar`
-
-Variants:
-
-- Desktop
-- Mobile
-- English
-- Chinese
-
-Editable properties:
-
-- Brand text
-- Nav labels
-- Language switch
-
-### `Hero`
-
-Variants:
-
-- Desktop right-text
-- Desktop alternate
-- Mobile stacked
-- Chinese copy
-
-Required controls:
-
-- Image crop position
-- Hero title size
-- Role line breaks
-- Slash accent color
-- CTA spacing
-
-Current hero copy:
-
-```text
-HSIN-HSIN
-YUAN
-Documentary Director / Writer / Producer
-/ Cross-Cultural Storyteller
+```bash
+npm run figma:export
 ```
 
-Chinese role copy:
+The command recreates `figma-export/` with:
 
-```text
-紀錄片導演 / 編劇 / 製作人
-/ 跨文化敘事者
+- `01-desktop-portrait-carrier.svg`
+- `02-desktop-practice-modes.svg`
+- `03-desktop-work-theatre.svg`
+- `04-mobile-static-flow.svg`
+- `manifest.json`
+- `README.md`
+
+Drag the SVG files into Figma and ungroup them. Text, shapes, signal fields, rules, and media layers remain named and editable. Local photos are embedded so the package can travel without separate asset uploads.
+
+The manifest records frame dimensions, tokens, and the portrait requirement. If the treatment is `portrait-carrier`, a missing `foregroundCutout` must stop generation rather than silently falling back to a flat hero.
+
+## Local Importer Plugin
+
+Install `figma/hsin-portfolio-importer/manifest.json` as a Figma development plugin, then run `Hsin Portfolio Importer` in a blank design file.
+
+It creates these pages:
+
+1. `02 Scene Tokens`
+2. `03 Portrait Carrier`
+3. `04 Practice Modes`
+4. `05 Work Theatre`
+5. `06 Mobile Static`
+
+The importer loads image fills from the deployed portfolio URL. If an image request fails, it leaves the media path visible on the layer so the image can be replaced without blocking the rest of the import.
+
+## Image Replacement Workflow
+
+For a durable website change:
+
+1. Put the approved asset in `public/assets/portfolio/`.
+2. Change only the corresponding named path in `data/media.json` or the relevant work frontmatter.
+3. Preserve bilingual alt text and review focal points.
+4. Run the media validator and site tests.
+5. Run `npm run figma:export` again.
+6. Check the portrait, background frame, practice stills, and mobile crop independently.
+
+For a Figma-only experiment, select the named image rectangle and replace its fill. Record the final source path when handing the decision back to code.
+
+The foreground portrait should use a transparent image and a fit-style crop. Backgrounds and project stills usually use a fill-style crop. Never flatten those roles into one bitmap merely to match a single desktop screenshot.
+
+## Frame Sizes
+
+Core production review sizes:
+
+- Desktop scene state: `1440 × 900`
+- Laptop spot check: `1200 × 900`
+- Tablet flow: `834 × 1112`
+- Mobile flow: `390 × 844` viewport, documented in one tall stacked frame
+- Small mobile spot check: `360 × 800`
+
+Review at least one desktop state from every phase and the complete mobile reading path.
+
+## Handoff Contract
+
+For every approved Figma change, record:
+
+1. Exact page and frame name
+2. Scene state or mobile chapter
+3. Screenshot at the relevant viewport
+4. Layer names affected
+5. Exact change to spacing, type, color, image crop, order, or copy
+6. Whether English, Chinese, or both require adjustment
+7. Source file that should receive the change
+
+After implementation, run:
+
+```bash
+npm test
+npm run build
+npm run figma:export
 ```
 
-### `Logo Wall`
+## Visual Acceptance Gate
 
-Variants:
+Before approving or publishing a Figma pass:
 
-- Desktop strip
-- Mobile wrap
+- The foreground portrait is visibly independent from the opening frame.
+- Opening and release are materially different compositions.
+- All three practice modes have distinct signal/media states while retaining the same person anchor.
+- The work theatre reads as three immersive scenes, not the previous dense card system.
+- Slow Steps has an intentional text-led state rather than a generic missing-image placeholder.
+- Mobile remains readable without sticky interactions.
+- No legacy neon accent, ambient shader language, carousel strip, glass contact panel, or old left-image/right-copy hero survives.
+- A side-by-side comparison cannot plausibly be mistaken for the old site.
 
-Rules:
-
-- No boxes
-- No visible card backgrounds
-- No heavy borders
-- Logos follow page background
-- Monochrome / muted treatment unless the specific logo needs color
-
-### `Featured Work Card`
-
-Variants:
-
-- With image
-- With video embed
-- Coming soon
-- Desktop compact card
-- Mobile full-width card
-
-Content fields:
-
-- Year / role / platform
-- Title
-- Tagline
-- Description
-- Tags
-- Metrics
-- Case study: Challenge / What I shaped
-- CTA
-
-### `Info Card`
-
-Used for:
-
-- Who Should Contact Me
-- Work With Me
-- AI / Language Lab
-
-Variants:
-
-- 4-up desktop
-- 2-up tablet
-- 1-up mobile
-
-### `Impact Metric`
-
-Fields:
-
-- Value
-- Label
-- Detail
-
-### `Archive Row`
-
-Fields:
-
-- Year / role / platform
-- Title
-- Metrics
-
-### `Contact Block`
-
-Fields:
-
-- Headline
-- Subcopy
-- CTA
-- Email / links
-
-## Content Sources
-
-Figma should not become the source of truth for final text. Final content lives here:
-
-- Site copy: `data/site.json`
-- Metrics live with the work or archive item they explain. There is no standalone Selected Impact section.
-- Collaborations: `data/collaborations.json`
-- Featured works: `content/works/*.md`
-- Archive: `content/archive/*.md`
-- Lab: `content/lab/*.md`
-
-Use Figma for layout and short copy experiments. Once approved, sync final text back to the repo.
-
-## Handoff Rules
-
-When a Figma change should be implemented, capture:
-
-1. Figma frame name
-2. Desktop frame screenshot
-3. Mobile frame screenshot
-4. Exact component/section affected
-5. What changed:
-   - spacing
-   - font size
-   - color
-   - image crop
-   - order
-   - copy
-6. Whether it affects English, Chinese, or both
-
-Implementation should update the smallest possible set of files.
-
-## Figma Setup Prompt
-
-Paste this into Figma Make, Figma AI, or Claude Code if it has access to screenshots/assets:
+## Reusable Figma Brief
 
 ```text
-Create a Figma design layer for an international documentary director portfolio.
+Build an editable Figma scene layer for Hsin-Hsin Yuan, a documentary director, writer, producer, and cross-cultural story partner.
 
-The site belongs to Hsin-Hsin Yuan, a documentary director / writer / producer / cross-cultural storyteller. The design should feel international, editorial, cinematic, and professional enough for cultural institutions, platforms, producers, artists, and brand/factual video clients.
+The signature is a portrait carrier. A real transparent foreground portrait begins inside a rounded black media frame, separates from that frame as the surface becomes light, remains anchored through three professional practice states, then hands off to a dark three-scene work theatre.
 
-Use a dark background, cream text, acid green accent, restrained orange/blue secondary accents, large editorial typography, strong image-led layouts, compact but premium work cards, and a borderless monochrome logo wall.
+Use Stage #050807, Fog #dddcd7, Paper #f6f4ee, documentary coral #f0645a, cross-cultural cobalt #4867d9, and editorial-systems moss #4d9259. Use mixed-case sans-serif display text and one restrained italic serif accent per scene.
 
-Create desktop and mobile frames for:
-1. Hero
-2. Logo wall
-3. Screening strip
-4. Available For
-5. Featured Works
-6. Who Should Contact Me
-7. AI / Language Lab
-8. Archive
-9. Contact
+Create editable frames for:
+1. Portrait carrier / Opening
+2. Portrait carrier / Release
+3. Practice mode / Documentary direction
+4. Practice mode / Cross-cultural story
+5. Practice mode / Editorial systems
+6. Work theatre / Slow Steps
+7. Work theatre / Tech Dreamers
+8. Work theatre / My Art, My Voice
+9. Mobile / Static stacked flow
 
-Do not create a generic landing page. This is a real portfolio site for work inquiries.
-
-Hero text:
-HSIN-HSIN
-YUAN
-Documentary Director / Writer / Producer
-/ Cross-Cultural Storyteller
-
-The slash marks should use the acid green accent.
-
-Prioritize:
-- mobile readability
-- professional first impression
-- clear contact path
-- easy scanning of work proof
-- image crops that do not hide the subject
-- enough control for later manual layout adjustment
-
-Create reusable components and name layers clearly so the design can be translated back into HTML/CSS.
+Keep foreground portrait, background frame, abstract layer, primary still, and supporting still as separately named media layers. Make later image replacement possible without changing layout code. Avoid generic landing-page cards and scattered decorative effects.
 ```
-
-## Code Sync Checklist
-
-Before implementing a Figma change:
-
-- Confirm whether the change is visual, content, or structure.
-- Confirm desktop and mobile frames both exist.
-- Check whether Chinese copy needs a separate layout adjustment.
-- Update source files, not only `dist/`.
-- Run `npm test`.
-- Run `npm run build`.
-- Commit with a focused message.
-
-## Migration Decision
-
-Do not migrate to Framer, Webflow, or Figma Sites until the Figma design layer has stabilized.
-
-Review migration only if:
-
-- You want to edit production layout directly without code most of the time.
-- Portfolio content will change weekly.
-- You need a CMS interface for non-technical editing.
-- You are willing to trade GitHub/Vercel control for platform convenience.
-
-For now, Figma is the design control layer; GitHub + Vercel remains production.

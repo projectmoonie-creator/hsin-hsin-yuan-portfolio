@@ -1,24 +1,26 @@
-# Figma SVG Export
+# Figma Scene Export
 
-This folder is a free Figma import package for the Hsin-Hsin Yuan portfolio design layer.
+This package translates the active Hsin-Hsin Yuan portfolio into editable scene storyboards. Its signature is the portrait carrier: the person separates from the opening frame, stays anchored through three practice modes, then hands the page to the work theatre.
 
 ## Files
 
-- `01-desktop-home.svg` - desktop hero, logo strip, and about section.
-- `02-desktop-works-logos.svg` - compact work cards and logo wall.
-- `03-mobile-home.svg` - mobile home reference frame.
+- `01-desktop-portrait-carrier.svg` — opening and release states with independent background, abstract, and foreground portrait layers.
+- `02-desktop-practice-modes.svg` — Documentary direction, Cross-cultural story, and Editorial systems states.
+- `03-desktop-work-theatre.svg` — three full-viewport work scenes, including the text-led Slow Steps treatment.
+- `04-mobile-static-flow.svg` — the static stacked mobile reading path; mobile does not use sticky scene traps.
+- `manifest.json` — scene inventory, active tokens, dimensions, and portrait media contract.
 
-## How To Use
+## Use In Figma
 
-1. Open your Figma file.
-2. Drag the SVG files into Figma, or use `File > Place image/video`.
-3. Select an imported SVG and ungroup if needed.
-4. Edit text layers, move sections, tune spacing, and annotate decisions.
-5. Send approved changes back into the website repo, especially `src/styles.css`, `data/site.json`, and `content/works/*.md`.
+1. Drag the SVG files into Figma or choose `File > Place image/video`.
+2. Ungroup each imported SVG to reach editable text layers, image layers, signal fields, rules, and scene labels.
+3. Replace imagery by selecting its named media layer. Keep the foreground portrait separate from the background frame.
+4. Review desktop scene states and the static stacked mobile frame together.
+5. Sync approved decisions back to `data/media.json`, `data/site.json`, `content/works/*.md`, and `src/styles.css`.
 
-## Notes
+## Boundaries
 
-- The SVGs are generated from current site content, so re-run `npm run figma:export` after major content changes.
-- Photos are embedded as image layers to keep the package portable.
-- Text, rectangles, logo wordmarks, cards, and color token swatches remain editable SVG layers, including editable text layers after import.
-- This is a design control layer, not the production source of truth.
+- The SVGs describe composition states; the website remains the production source of truth.
+- Signal colors identify real practice modes and should stay local to their scene.
+- Re-run `npm run figma:export` after changing portfolio media or copy.
+- Photos are embedded for portability. Remote sources use a labeled replace-in-Figma media field.
