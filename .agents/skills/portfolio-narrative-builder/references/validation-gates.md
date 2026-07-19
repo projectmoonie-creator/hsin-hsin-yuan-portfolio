@@ -34,6 +34,20 @@ Distinguish allowed content motion from retired ambient motion. A moving work st
 
 ## 4. Functional And Accessibility Matrix
 
+### Preview Identity Preflight
+
+Before visual QA:
+
+1. build from the intended worktree;
+2. confirm the chosen port is free; if it is occupied, leave the unknown process alone and use a unique port;
+3. start the preview with an explicit working directory and output directory;
+4. verify a served content fingerprint against the current build, such as a known heading, selector, asset path, or embedded build marker;
+5. record the worktree, build command, URL, and port with the QA evidence.
+
+A `server-ready` signal proves only that a listener responded; it does not prove the current build or intended worktree is being served. Never capture screenshots until preview identity is verified.
+
+### Viewport And Behavior Matrix
+
 Inspect at minimum:
 
 - desktop `1440 × 900`;

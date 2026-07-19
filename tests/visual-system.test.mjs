@@ -33,3 +33,20 @@ test("assigned supporting images use the same replaceable crop contract", () => 
   assert.match(css, /\.work-supporting-image\s*\{[\s\S]*object-position:\s*var\(--media-focal/);
   assert.match(css, /@media\s*\(max-width:\s*820px\)[\s\S]*?\.work-supporting-image[\s\S]*?var\(--media-mobile-focal/);
 });
+
+test("Watch Loop work anchors clear the fixed navigation", () => {
+  assert.match(css, /\.work-row\s*\{[\s\S]*?scroll-margin-top:\s*(?:var\([^;]+\)|[\d.]+rem)/);
+});
+
+test("showreel poster keeps its native frame and the contact action stays legible", () => {
+  assert.match(css, /\.hero-media\s*\{[\s\S]*?aspect-ratio:\s*16\s*\/\s*9/);
+  assert.doesNotMatch(css, /aspect-ratio:\s*(?:16\s*\/\s*10|1\s*\/\s*0\.82)/);
+  assert.match(css, /\.contact\s+\.contact-submit\s*\{[\s\S]*?color:\s*var\(--stage\)/);
+});
+
+test("compact mobile navigation keeps a direct Works path", () => {
+  assert.match(
+    css,
+    /@media\s*\(max-width:\s*820px\)[\s\S]*?\.nav-links\s*>\s*a:not\(\.language-switch\):not\(\[href="#contact"\]\):not\(\[href="#works"\]\)/,
+  );
+});

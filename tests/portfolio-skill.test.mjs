@@ -39,6 +39,20 @@ test("the tracked skill keeps provider runtime facts in the canonical review ski
   assert.doesNotMatch(skillFiles, /GEMINI_API_KEY|AQ\.|claude-fable-5|quotaId/);
 });
 
+test("validation gates reject stale preview servers before visual QA", () => {
+  const gates = readFileSync(
+    join(skillRoot, "references/validation-gates.md"),
+    "utf8",
+  );
+
+  assert.match(gates, /before visual QA/i);
+  assert.match(gates, /chosen port.*(?:free|available)/i);
+  assert.match(gates, /served content fingerprint/i);
+  assert.match(gates, /worktree/i);
+  assert.match(gates, /unique port/i);
+  assert.match(gates, /server[- ]ready.*current build/i);
+});
+
 test("project bible protects the selected hybrid behavior", () => {
   const bible = readFileSync(join(root, "PROJECT_BIBLE.md"), "utf8");
   assert.match(bible, /five moving-image previews/i);

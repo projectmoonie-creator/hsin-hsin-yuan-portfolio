@@ -159,7 +159,7 @@ textarea {
 }
 
 .hero-media {
-  aspect-ratio: 16 / 11;
+  aspect-ratio: 16 / 9;
   background: #0c100e;
   border: 1px solid var(--line-dark);
   border-radius: var(--radius);
@@ -618,6 +618,10 @@ textarea {
   padding: clamp(2rem, 6vw, 5rem) 0;
 }
 
+.work-row {
+  scroll-margin-top: 5.25rem;
+}
+
 .work-panel:nth-child(even) .media-frame,
 .work-row:nth-child(even) .media-frame {
   order: 2;
@@ -1047,6 +1051,10 @@ textarea {
   transition: background 160ms ease, color 160ms ease;
 }
 
+.contact .contact-submit {
+  color: var(--stage);
+}
+
 .contact-submit:hover,
 .contact-submit:focus-visible {
   background: var(--signal-coral);
@@ -1148,7 +1156,7 @@ textarea {
   }
 
   .hero-media {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
   }
 
   .section-intro,
@@ -1187,7 +1195,7 @@ textarea {
     gap: 0.5rem;
   }
 
-  .nav-links > a:not(.language-switch):not([href="#contact"]) {
+  .nav-links > a:not(.language-switch):not([href="#contact"]):not([href="#works"]) {
     display: none;
   }
 
@@ -1206,10 +1214,6 @@ textarea {
 
   .hero h1 {
     font-size: clamp(3.2rem, 16vw, 5.8rem);
-  }
-
-  .hero-media {
-    aspect-ratio: 1 / 0.82;
   }
 
   .hero-media > img,
