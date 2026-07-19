@@ -5,6 +5,7 @@ import { join } from "node:path";
 import test from "node:test";
 
 import { loadWorks } from "../scripts/build-site.mjs";
+import * as mediaContract from "../scripts/media-manifest.mjs";
 
 const root = process.cwd();
 
@@ -21,9 +22,22 @@ test("hybrid media uses a replaceable split-showreel contract", () => {
   assert.ok(media.hero.alt.zh.length > 6);
 });
 
-test("every approved work poster has alt, focal point, and dimensions", () => {
+test("every work reserves desktop and mobile crop metadata for replacement", () => {
   const works = loadWorks(join(root, "content/works"));
   const posterWorks = works.filter((work) => work.posterImage);
+
+  for (const work of works) {
+    assert.match(work.focalPoint, /^\d{1,3}% \d{1,3}%$/, `${work.slug} desktop focal point`);
+    assert.match(work.mobileFocalPoint, /^\d{1,3}% \d{1,3}%$/, `${work.slug} mobile focal point`);
+    for (const image of work.supportingImages || []) {
+      assert.ok(image.alt.en.trim(), `${work.slug} supporting English alt`);
+      assert.ok(image.alt.zh.trim(), `${work.slug} supporting Chinese alt`);
+      assert.match(image.focalPoint, /^\d{1,3}% \d{1,3}%$/, `${work.slug} supporting desktop focal point`);
+      assert.match(image.mobileFocalPoint, /^\d{1,3}% \d{1,3}%$/, `${work.slug} supporting mobile focal point`);
+      assert.ok(image.dimensions.width > 0, `${work.slug} supporting width`);
+      assert.ok(image.dimensions.height > 0, `${work.slug} supporting height`);
+    }
+  }
 
   assert.deepEqual(
     posterWorks.map((work) => work.slug),
@@ -32,10 +46,22 @@ test("every approved work poster has alt, focal point, and dimensions", () => {
   for (const work of posterWorks) {
     assert.ok(work.posterAlt.en.trim());
     assert.ok(work.posterAlt.zh.trim());
-    assert.match(work.focalPoint, /^\d{1,3}% \d{1,3}%$/);
     assert.ok(work.posterDimensions.width > 0);
     assert.ok(work.posterDimensions.height > 0);
   }
+});
+
+test("the shared media module rejects incomplete work replacement metadata", () => {
+  assert.equal(typeof mediaContract.validateWorkMediaContract, "function");
+  const works = loadWorks(join(root, "content/works"));
+  assert.doesNotThrow(() => mediaContract.validateWorkMediaContract(works));
+
+  const invalid = structuredClone(works);
+  invalid[1].mobileFocalPoint = "";
+  assert.throws(
+    () => mediaContract.validateWorkMediaContract(invalid),
+    /tech-dreamers\.mobileFocalPoint/,
+  );
 });
 
 test("the shared validator accepts the hybrid manifest", () => {

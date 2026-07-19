@@ -47,6 +47,7 @@
     "zh": "Tech Dreamers 官方系列主視覺"
   },
   "focalPoint": "50% 50%",
+  "mobileFocalPoint": "50% 50%",
   "posterDimensions": { "width": 1280, "height": 720 },
   "supportingImages": [],
   "tags": ["technology", "founders", "AI", "interview"],

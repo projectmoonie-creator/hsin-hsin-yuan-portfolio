@@ -47,6 +47,7 @@
     "zh": "《My Art, My Voice》表演畫面"
   },
   "focalPoint": "50% 42%",
+  "mobileFocalPoint": "50% 42%",
   "posterDimensions": { "width": 1600, "height": 900 },
   "supportingImages": [
     {
@@ -54,14 +55,20 @@
       "alt": {
         "en": "Artist performance filmed for My Art, My Voice",
         "zh": "《My Art, My Voice》藝術家表演畫面"
-      }
+      },
+      "focalPoint": "50% 50%",
+      "mobileFocalPoint": "50% 50%",
+      "dimensions": { "width": 1600, "height": 900 }
     },
     {
       "src": "/assets/portfolio/my-art-my-voice-interview.jpg",
       "alt": {
         "en": "Artist interview filmed for My Art, My Voice",
         "zh": "《My Art, My Voice》藝術家訪談畫面"
-      }
+      },
+      "focalPoint": "50% 45%",
+      "mobileFocalPoint": "50% 45%",
+      "dimensions": { "width": 1600, "height": 900 }
     }
   ],
   "tags": ["documentary", "arts", "identity", "Paris Cultural Olympiad"],

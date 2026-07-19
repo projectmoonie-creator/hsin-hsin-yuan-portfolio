@@ -43,6 +43,7 @@
   "posterImage": "",
   "posterAlt": {"en": "", "zh": ""},
   "focalPoint": "50% 50%",
+  "mobileFocalPoint": "50% 50%",
   "supportingImages": [],
   "tags": ["documentary", "travel"],
   "metrics": [],

@@ -6,11 +6,8 @@
   "scripts": {
     "build": "node scripts/build-site.mjs",
     "figma:export": "node scripts/build-figma-export.mjs",
+    "media:validate": "node scripts/validate-media-manifest.mjs data/media.json public",
     "test": "node --test tests/*.test.mjs",
     "serve": "python3 -m http.server 4173 -d dist"
-  },
-  "dependencies": {
-    "animejs": "^4.5.0",
-    "ogl": "^1.0.11"
   }
 }

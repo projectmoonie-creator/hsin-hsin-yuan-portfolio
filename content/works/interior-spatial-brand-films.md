@@ -45,6 +45,10 @@
   "watchUrl": "",
   "videoEmbedUrl": "",
   "posterImage": "",
+  "posterAlt": {"en": "", "zh": ""},
+  "focalPoint": "50% 50%",
+  "mobileFocalPoint": "50% 50%",
+  "supportingImages": [],
   "tags": ["interior design", "branded content", "lifestyle", "editing"],
   "metrics": [
     {"value": "20+", "label": {"en": "public links archived", "zh": "已整理公開連結"}},

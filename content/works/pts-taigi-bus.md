@@ -47,6 +47,7 @@
     "zh": "公視台語台《無事坐巴士》節目畫面"
   },
   "focalPoint": "50% 50%",
+  "mobileFocalPoint": "50% 50%",
   "posterDimensions": { "width": 480, "height": 360 },
   "supportingImages": [],
   "tags": ["public media", "travel factual", "Taiwanese language", "local culture"],

@@ -3,6 +3,8 @@ import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, write
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { validateMediaManifest, validateWorkMediaContract } from "./media-manifest.mjs";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
@@ -10,14 +12,13 @@ const SITE_ORIGIN = (process.env.SITE_ORIGIN || "https://hsin-hsin-yuan-portfoli
 const ASSET_VERSION = createHash("sha256")
   .update(readFileSync(join(root, "src/styles.css")))
   .update(readFileSync(join(root, "src/main.js")))
+  .update(readFileSync(join(root, "src/watch-loop.js")))
   .digest("hex")
   .slice(0, 12);
 
 export function parseFrontmatter(source) {
   const match = source.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
-  if (!match) {
-    throw new Error("Markdown file is missing JSON frontmatter");
-  }
+  if (!match) throw new Error("Markdown file is missing JSON frontmatter");
 
   return {
     data: JSON.parse(match[1]),
@@ -26,18 +27,17 @@ export function parseFrontmatter(source) {
 }
 
 export function loadWorks(dir) {
-  return readdirSync(dir)
+  const works = readdirSync(dir)
     .filter((file) => file.endsWith(".md"))
     .map((file) => {
-      const source = readFileSync(join(dir, file), "utf8");
-      const parsed = parseFrontmatter(source);
-      return {
-        ...parsed.data,
-        body: parsed.body.trim(),
-      };
+      const parsed = parseFrontmatter(readFileSync(join(dir, file), "utf8"));
+      return { ...parsed.data, body: parsed.body.trim() };
     })
     .filter((work) => work.featured)
     .sort((a, b) => a.order - b.order);
+
+  validateWorkMediaContract(works);
+  return works;
 }
 
 export function loadMarkdownCollection(dir) {
@@ -46,22 +46,21 @@ export function loadMarkdownCollection(dir) {
   return readdirSync(dir)
     .filter((file) => file.endsWith(".md"))
     .map((file) => {
-      const source = readFileSync(join(dir, file), "utf8");
-      const parsed = parseFrontmatter(source);
-      return {
-        ...parsed.data,
-        body: parsed.body.trim(),
-      };
+      const parsed = parseFrontmatter(readFileSync(join(dir, file), "utf8"));
+      return { ...parsed.data, body: parsed.body.trim() };
     })
     .sort((a, b) => a.order - b.order);
 }
 
 export function loadSiteData(baseDir = root) {
+  const media = JSON.parse(readFileSync(join(baseDir, "data/media.json"), "utf8"));
+  validateMediaManifest(media, join(baseDir, "public"));
+
   return {
     site: JSON.parse(readFileSync(join(baseDir, "data/site.json"), "utf8")),
+    media,
     collaborations: JSON.parse(readFileSync(join(baseDir, "data/collaborations.json"), "utf8")),
     archive: loadMarkdownCollection(join(baseDir, "content/archive")),
-    lab: loadMarkdownCollection(join(baseDir, "content/lab")),
   };
 }
 
@@ -75,18 +74,6 @@ function escapeHtml(value) {
 
 function escapeJsonForHtml(value) {
   return JSON.stringify(value).replaceAll("<", "\\u003c");
-}
-
-function escapeCssUrl(value) {
-  return String(value ?? "")
-    .replaceAll("\\", "\\\\")
-    .replaceAll("'", "\\'")
-    .replaceAll("\n", "\\A ")
-    .replaceAll("\r", "\\A ");
-}
-
-function cssUrl(value) {
-  return `url(&quot;${escapeHtml(escapeCssUrl(value))}&quot;)`;
 }
 
 function otherLang(lang) {
@@ -105,11 +92,8 @@ function cleanHtml(html) {
 }
 
 function renderTags(tags = []) {
-  return tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
-}
-
-function renderPills(items = []) {
-  return items.map((item) => `<span class="pill">${escapeHtml(item)}</span>`).join("");
+  if (!tags.length) return "";
+  return `<div class="pill-row">${tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}</div>`;
 }
 
 function renderAvailabilityPills(items = []) {
@@ -156,7 +140,6 @@ function renderCaseStudy(items = [], lang) {
 
 function renderPress(items = [], lang) {
   if (!items.length) return "";
-
   const label = lang === "en" ? "Press & Interviews" : "媒體報導與訪談";
 
   return `
@@ -185,36 +168,10 @@ function renderPress(items = [], lang) {
             if (item.url) {
               return `<a class="press-preview-card" href="${escapeHtml(item.canonicalUrl || item.url)}" target="_blank" rel="noreferrer"${auditAttrs}>${body}</a>`;
             }
-
             return `<div class="press-preview-card press-preview-card-muted"${auditAttrs}>${body}</div>`;
           })
           .join("")}
       </div>
-    </div>
-  `;
-}
-
-function mediaFrame(work, copy) {
-  if (work.status === "available" && work.videoEmbedUrl) {
-    return `
-      <div class="media-frame">
-        <iframe src="${escapeHtml(work.videoEmbedUrl)}" title="${escapeHtml(work.title.en)}" allowfullscreen loading="lazy"></iframe>
-      </div>
-    `;
-  }
-
-  if (work.posterImage) {
-    return `
-      <div class="media-frame" style="background-image: linear-gradient(135deg, rgba(9,9,10,.2), rgba(9,9,10,.78)), ${cssUrl(work.posterImage)}; background-size: cover; background-position: center;">
-        <div class="media-label">${escapeHtml(work.title.en)}</div>
-      </div>
-    `;
-  }
-
-  const label = work.status === "coming-soon" ? copy.comingLabel : work.title.en;
-  return `
-    <div class="media-frame media-${escapeHtml(work.accent || "default")}">
-      <div class="media-label">${escapeHtml(label)}</div>
     </div>
   `;
 }
@@ -235,69 +192,114 @@ function watchActionLabel(work, lang, copy) {
     collection: { en: "Watch selected films", zh: "觀看精選影片" },
     sample: { en: "Watch representative segment", zh: "觀看代表片段" },
   };
-
   return labels[work.watchMode]?.[lang] ?? copy.watchLabel;
 }
 
+function renderWorkImage(work, lang, className, loading = "lazy") {
+  if (!work.posterImage) return "";
+  const focalPoint = work.focalPoint || "50% 50%";
+  const mobileFocalPoint = work.mobileFocalPoint || focalPoint;
+  return `<img class="${escapeHtml(className)}" src="${escapeHtml(work.posterImage)}" alt="${escapeHtml(localize(work.posterAlt, lang))}" width="${escapeHtml(work.posterDimensions?.width)}" height="${escapeHtml(work.posterDimensions?.height)}" loading="${escapeHtml(loading)}" decoding="async" style="--media-focal: ${escapeHtml(focalPoint)}; --media-mobile-focal: ${escapeHtml(mobileFocalPoint)}">`;
+}
+
+function renderSupportingMedia(items = [], lang) {
+  if (!items.length) return "";
+  return `
+    <div class="work-supporting-media">
+      ${items
+        .map((image) => {
+          const focalPoint = image.focalPoint || "50% 50%";
+          const mobileFocalPoint = image.mobileFocalPoint || focalPoint;
+          return `
+            <figure class="work-supporting-frame">
+              <img class="work-supporting-image" src="${escapeHtml(image.src)}" alt="${escapeHtml(localize(image.alt, lang))}" width="${escapeHtml(image.dimensions?.width)}" height="${escapeHtml(image.dimensions?.height)}" loading="lazy" decoding="async" style="--media-focal: ${escapeHtml(focalPoint)}; --media-mobile-focal: ${escapeHtml(mobileFocalPoint)}">
+            </figure>
+          `;
+        })
+        .join("")}
+    </div>
+  `;
+}
+
+function renderWorkMedia(work, lang) {
+  if (!work.posterImage) {
+    return `
+      <div class="media-frame media-frame-text">
+        <span class="media-label">${escapeHtml(localize(work.title, lang))}</span>
+      </div>
+    `;
+  }
+
+  return `
+    <figure class="media-frame">
+      ${renderWorkImage(work, lang, "work-image")}
+    </figure>
+  `;
+}
+
 function renderWork(work, lang, copy) {
-  const title = work.title[lang];
-  const tagline = work.tagline[lang];
-  const description = work.description[lang];
-  const role = work.role[lang];
   const actionLabel = watchActionLabel(work, lang, copy);
   const action = work.watchUrl
-    ? `<a class="button-link" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer">${escapeHtml(actionLabel)}</a>`
+    ? `<a class="button-link" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer">${escapeHtml(actionLabel)} <span aria-hidden="true">↗</span></a>`
     : actionLabel
       ? `<span class="status-badge">${escapeHtml(actionLabel)}</span>`
       : "";
 
   return `
-    <article class="work-panel" id="${escapeHtml(work.slug)}">
-      ${mediaFrame(work, copy)}
+    <article class="work-row work-panel" id="${escapeHtml(work.slug)}">
+      ${renderWorkMedia(work, lang)}
       <div class="work-copy">
-        <div class="work-meta">${escapeHtml(work.year)} / ${escapeHtml(role)} / ${escapeHtml(work.platform)}</div>
-        <h3>${escapeHtml(title)}</h3>
-        <p class="work-tagline">${escapeHtml(tagline)}</p>
-        <p class="work-description">${escapeHtml(description)}</p>
+        <p class="work-meta">${escapeHtml(work.year)} / ${escapeHtml(localize(work.role, lang))} / ${escapeHtml(work.platform)}</p>
+        <h3>${escapeHtml(localize(work.title, lang))}</h3>
+        <p class="work-tagline">${escapeHtml(localize(work.tagline, lang))}</p>
+        <p class="work-description">${escapeHtml(localize(work.description, lang))}</p>
         ${renderTags(work.tags)}
         ${renderMetrics(work.metrics, lang)}
         ${renderCaseStudy(work.caseStudy, lang)}
         ${renderPress(work.press, lang)}
+        ${renderSupportingMedia(work.supportingImages, lang)}
         ${action}
       </div>
     </article>
   `;
 }
 
-function renderWatchLoopItem(work, lang, copy) {
-  const title = localize(work.title, lang);
-  const role = localize(work.role, lang);
-  const tagline = localize(work.tagline, lang);
-  const image = work.posterImage
-    ? `style="background-image: linear-gradient(180deg, rgba(8,8,9,.12), rgba(8,8,9,.78)), ${cssUrl(work.posterImage)}"`
-    : "";
-  const cardClass = work.posterImage ? "watch-loop-card" : "watch-loop-card watch-loop-card-plain";
+function isWatchLoopWork(work) {
+  return Boolean(work.watchUrl) || work.slug === "slow-steps";
+}
+
+function renderWatchLoopItem(work, lang) {
+  const textFirst = !work.posterImage;
+  const classes = textFirst
+    ? "watch-loop-card watch-loop-card--text watch-loop-card-text-first"
+    : "watch-loop-card";
+  const media = textFirst
+    ? ""
+    : `<span class="watch-loop-media">${renderWorkImage(work, lang, "watch-loop-image")}</span>`;
 
   return `
-    <a class="${cardClass}" href="#${escapeHtml(work.slug)}" ${image}>
-      <span class="watch-loop-meta">${escapeHtml(work.platform)} / ${escapeHtml(work.year)}</span>
-      <strong>${escapeHtml(title)}</strong>
-      <span class="watch-loop-role">${escapeHtml(role)}</span>
-      <span class="watch-loop-tagline">${escapeHtml(tagline)}</span>
+    <a class="${classes}" href="#${escapeHtml(work.slug)}">
+      ${media}
+      <span class="watch-loop-copy">
+        <span class="watch-loop-meta">${escapeHtml(work.platform)} / ${escapeHtml(work.year)}</span>
+        <strong>${escapeHtml(localize(work.title, lang))}</strong>
+        <span class="watch-loop-role">${escapeHtml(localize(work.role, lang))}</span>
+        <span class="watch-loop-tagline">${escapeHtml(localize(work.tagline, lang))}</span>
+      </span>
     </a>
   `;
 }
 
 function renderWatchLoop(works, lang, copy) {
-  const watchableWorks = works.filter((work) => work.watchUrl || work.status === "external-only");
-  if (!watchableWorks.length) return "";
+  const previews = works.filter(isWatchLoopWork);
+  if (!previews.length) return "";
 
   return `
-    <section class="section watch-loop-section watch-loop" data-watch-loop data-speed="34" aria-label="${escapeHtml(copy.watchShelfAria)}">
+    <section class="section watch-loop-section watch-loop" data-watch-loop data-speed="28" aria-label="${escapeHtml(copy.watchLoopAria)}">
       <div class="watch-loop-viewport">
         <div class="watch-loop-track" data-watch-loop-track>
           <div class="watch-loop-sequence" data-watch-loop-sequence>
-            ${watchableWorks.map((work) => renderWatchLoopItem(work, lang, copy)).join("")}
+            ${previews.map((work) => renderWatchLoopItem(work, lang)).join("")}
           </div>
         </div>
       </div>
@@ -305,23 +307,8 @@ function renderWatchLoop(works, lang, copy) {
   `;
 }
 
-function renderLab(lab, lang) {
-  return lab
-    .map(
-      (item) => `
-        <article class="lab-card">
-          <p class="card-kicker">${escapeHtml(localize(item.kicker, lang))}</p>
-          <h3>${escapeHtml(localize(item.title, lang))}</h3>
-          <p>${escapeHtml(localize(item.summary, lang))}</p>
-          ${item.body ? `<p class="card-body">${escapeHtml(item.body)}</p>` : ""}
-        </article>
-      `,
-    )
-    .join("");
-}
-
-function renderArchive(archive, lang) {
-  return archive
+function renderArchive(items = [], lang) {
+  return items
     .map(
       (item) => `
         <article class="archive-item">
@@ -337,28 +324,14 @@ function renderArchive(archive, lang) {
     .join("");
 }
 
-function renderInfoCards(items = []) {
-  return items
-    .map(
-      (item) => `
-        <article class="service-card">
-          <h3>${escapeHtml(item.title)}</h3>
-          <p>${escapeHtml(item.line)}</p>
-        </article>
-      `,
-    )
-    .join("");
-}
-
 function renderCollaborations(items = []) {
   return items
     .map((item) => {
       const content = item.logo
-        ? `<img class="partner-logo" src="${escapeHtml(item.logo)}" alt="${escapeHtml(item.name)} logo" loading="lazy">`
+        ? `<img class="partner-logo" src="${escapeHtml(item.logo)}" alt="${escapeHtml(item.name)} logo" loading="lazy" decoding="async">`
         : `<span class="partner-wordmark">${escapeHtml(item.label || item.name)}</span>`;
       const tag = item.url ? "a" : "div";
       const href = item.url ? ` href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer"` : "";
-
       return `
         <${tag} class="collab-item"${href} aria-label="${escapeHtml(item.name)}">
           ${content}
@@ -375,13 +348,8 @@ function renderContactLinks(links = []) {
     .join("");
 }
 
-function renderHeroRoleLine(role) {
-  return escapeHtml(role).replaceAll("/", `<span class="role-slash">/</span>`);
-}
-
 function renderContactForm(copy) {
   const form = copy.contactForm;
-
   return `
     <form class="contact-form" action="/api/contact" method="post" data-contact-form>
       <input type="hidden" name="startedAt" value="" data-contact-started-at>
@@ -467,16 +435,18 @@ function renderSitemap(lastmod = new Date().toISOString().slice(0, 10)) {
 
 export function renderPage({ lang, site, works }) {
   const copy = site.site[lang];
+  const heroMedia = site.media.hero;
   const switchLang = otherLang(lang);
-  const heroTitleLines = (copy.heroTitleLines || [copy.heroTitle]).map((line) => `<span>${escapeHtml(line)}</span>`).join("");
-  const heroRoles = (copy.heroRoleLines || copy.heroRoles).map((role) => `<span>${renderHeroRoleLine(role)}</span>`).join("");
   const navItems = [
-    { href: "#available", label: copy.availabilityLabel },
     { href: "#works", label: lang === "en" ? "Works" : "作品" },
+    { href: "#available", label: copy.availabilityLabel },
     { href: "#contact", label: lang === "en" ? "Contact" : "聯絡" },
   ];
-  const services = renderInfoCards(copy.services);
-  const collaborations = renderCollaborations(site.collaborations);
+  const heroName = copy.name
+    .split(/\s+/)
+    .map((part) => `<span>${escapeHtml(part)}</span>`)
+    .join("");
+  const heroRoles = copy.heroRoles.map((role) => `<span>${escapeHtml(role)}</span>`).join("");
 
   return `<!doctype html>
 <html lang="${escapeHtml(lang)}">
@@ -499,26 +469,33 @@ export function renderPage({ lang, site, works }) {
     <meta name="twitter:card" content="summary_large_image">
     <script type="application/ld+json">${escapeJsonForHtml(renderPersonJsonLd(site))}</script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="preload" as="image" href="/assets/portfolio/hsin-working-white-space.jpg">
+    <link rel="preload" as="image" href="${escapeHtml(heroMedia.poster)}">
     <link rel="stylesheet" href="/styles.css?v=${ASSET_VERSION}">
     <script type="module" src="/main.js?v=${ASSET_VERSION}"></script>
   </head>
   <body>
-    <div class="light-beam-layer" aria-hidden="true">
-      <span class="light-beam light-beam-right"></span>
-    </div>
     <div class="site-shell">
       <header class="topbar">
-        <div class="brand">${escapeHtml(copy.navName)}</div>
+        <a class="brand" href="#top" aria-label="${escapeHtml(copy.name)}">${escapeHtml(copy.name)}</a>
         <nav class="nav-links" aria-label="Primary">
           ${navItems.map((item) => `<a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`).join("")}
           <a class="language-switch" href="/${switchLang}/">${switchLang === "en" ? "EN" : "中"}</a>
         </nav>
       </header>
 
-      <main>
+      <main id="top">
         <section class="hero">
           <div class="hero-media" id="showreel">
+            <img
+              class="hero-poster"
+              src="${escapeHtml(heroMedia.poster)}"
+              alt="${escapeHtml(localize(heroMedia.alt, lang))}"
+              width="${escapeHtml(heroMedia.dimensions.width)}"
+              height="${escapeHtml(heroMedia.dimensions.height)}"
+              decoding="async"
+              fetchpriority="high"
+              style="--hero-focal: ${escapeHtml(heroMedia.desktopFocalPoint)}; --hero-mobile-focal: ${escapeHtml(heroMedia.mobileFocalPoint)}"
+            >
             <video
               class="hero-showreel-video"
               data-showreel-video
@@ -526,25 +503,29 @@ export function renderPage({ lang, site, works }) {
               playsinline
               webkit-playsinline
               preload="none"
+              poster="${escapeHtml(heroMedia.poster)}"
               aria-label="${escapeHtml(copy.showreelTitle)}"
             >
-              <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
+              <source src="${escapeHtml(heroMedia.video)}" type="video/mp4">
             </video>
             <button class="hero-play-button" type="button" data-showreel-play aria-label="${escapeHtml(copy.showreelCta)}">
-              <span class="hero-play-icon"></span>
+              <span class="hero-play-icon" aria-hidden="true"></span>
             </button>
           </div>
           <div class="hero-content">
-            <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
-            <h1 aria-label="${escapeHtml(copy.heroTitle)}">${heroTitleLines}</h1>
+            <h1 aria-label="${escapeHtml(copy.name)}">${heroName}</h1>
             <div class="hero-roles">${heroRoles}</div>
-            <p class="hero-subcopy">${escapeHtml(copy.heroSubcopy)}</p>
+            <p class="hero-subcopy">${escapeHtml(copy.portraitRole)}</p>
+            <p class="hero-statement">${escapeHtml(copy.portraitStatement)} <em>${escapeHtml(copy.portraitAccent)}</em>.</p>
+            <div class="hero-actions">
+              <a class="button-link" href="#contact">${escapeHtml(copy.portraitContactCta)}</a>
+            </div>
           </div>
         </section>
 
-        <section class="section collab-section collab-section-early">
-          <h2 class="section-title">${escapeHtml(copy.collabTitle)}</h2>
-          <div class="collab-grid">${collaborations}</div>
+        <section class="section collab-section collab-section-early" aria-labelledby="collaborations-title-${lang}">
+          <h2 class="section-title" id="collaborations-title-${lang}">${escapeHtml(copy.collabTitle)}</h2>
+          <div class="collab-grid">${renderCollaborations(site.collaborations)}</div>
         </section>
 
         ${renderWatchLoop(works, lang, copy)}
@@ -552,39 +533,27 @@ export function renderPage({ lang, site, works }) {
         <section class="section available-section" id="available">
           <div class="available-simple">
             <h2 class="section-title">${escapeHtml(copy.availabilityLabel)}</h2>
-            <div class="section-intro">
-              <p>${escapeHtml(copy.availabilityIntro)}</p>
-            </div>
-            <div class="available-pill-list">
-              ${renderAvailabilityPills(copy.availability)}
+            <div>
+              <p class="available-intro">${escapeHtml(copy.availabilityIntro)}</p>
+              <div class="available-pill-list">${renderAvailabilityPills(copy.availability)}</div>
             </div>
           </div>
         </section>
 
         <section class="section works-section" id="works">
           <div class="works-head">
-            <h2 class="section-title">${escapeHtml(copy.worksLabel)}</h2>
-            ${copy.worksHint ? `<div class="works-hint">${escapeHtml(copy.worksHint)}</div>` : ""}
+            <h2>${escapeHtml(copy.workTheatreTitle)}</h2>
           </div>
-          <div class="works-stack" data-scroll-stack>
+          <div class="works-stack">
             ${works.map((work) => renderWork(work, lang, copy)).join("")}
           </div>
         </section>
 
-        <section class="section">
-          <div class="section-intro">
-            <h2 class="section-title">${escapeHtml(copy.createTitle)}</h2>
-            <p>${escapeHtml(copy.createSubcopy)}</p>
+        <section class="section collaboration-fit">
+          <div class="collaboration-fit-content">
+            <h2>${escapeHtml(copy.createTitle)}</h2>
+            <p class="section-subcopy">${escapeHtml(copy.createSubcopy)}</p>
           </div>
-          <div class="services-grid">${services}</div>
-        </section>
-
-        <section class="section lab-section">
-          <div class="section-intro">
-            <h2 class="section-title">${escapeHtml(copy.labTitle)}</h2>
-            <p>${escapeHtml(copy.labSubcopy)}</p>
-          </div>
-          <div class="lab-grid">${renderLab(site.lab, lang)}</div>
         </section>
 
         <section class="section archive-section">
@@ -605,6 +574,11 @@ export function renderPage({ lang, site, works }) {
         </section>
       </main>
 
+      <footer class="site-footer">
+        <p>${escapeHtml(copy.name)}</p>
+        <p>${escapeHtml(copy.portraitRole)}</p>
+        <a href="#top">${lang === "en" ? "Back to top" : "回到頁首"} ↑</a>
+      </footer>
     </div>
   </body>
 </html>`;
@@ -624,10 +598,7 @@ function build() {
   writeFileSync(join(dist, "index.html"), '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=/en/">');
   cpSync(join(root, "src/styles.css"), join(dist, "styles.css"));
   cpSync(join(root, "src/main.js"), join(dist, "main.js"));
-  cpSync(join(root, "src/ambient-background.js"), join(dist, "ambient-background.js"));
-  mkdirSync(join(dist, "vendor"), { recursive: true });
-  cpSync(join(root, "node_modules/animejs/dist/bundles/anime.esm.min.js"), join(dist, "vendor/anime.esm.min.js"));
-  cpSync(join(root, "node_modules/ogl/src"), join(dist, "vendor/ogl/src"), { recursive: true });
+  cpSync(join(root, "src/watch-loop.js"), join(dist, "watch-loop.js"));
 
   if (existsSync(join(root, "public"))) {
     cpSync(join(root, "public"), dist, { recursive: true });
@@ -637,6 +608,4 @@ function build() {
   writeFileSync(join(dist, "sitemap.xml"), renderSitemap());
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  build();
-}
+if (process.argv[1] === fileURLToPath(import.meta.url)) build();
