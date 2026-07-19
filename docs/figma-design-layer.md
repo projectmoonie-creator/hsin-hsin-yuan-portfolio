@@ -1,327 +1,122 @@
-# Figma Design Layer
+# Figma Design Layer — Editorial Watch Loop Hybrid
 
-This document defines the Figma layer for Hsin-Hsin Yuan's portfolio site. It is the visual control layer above the codebase, not a replacement for the current GitHub + Vercel deployment.
+## Role of this layer
 
-## Purpose
+Figma is the editable visual control layer for the active hybrid portfolio. The repository remains canonical for copy, media, work order, collaborations, and archive credits. GitHub and Vercel remain the production path; Figma does not publish or replace the website.
 
-Use Figma to make layout, typography, image crop, spacing, and mobile/desktop decisions visually. Keep the website code as the production source.
+The active direction preserves the older site's useful split hero, content rhythm, and horizontal work preview, while applying the approved editorial palette, type hierarchy, rounded media frames, and restrained borders. The portrait-scene direction remains in its Git checkpoint and is not represented as the active homepage here.
 
-The workflow is:
-
-1. Design or adjust sections in Figma.
-2. Confirm desktop and mobile frames.
-3. Translate approved changes back into `src/styles.css`, `data/site.json`, and content files.
-4. Run `npm test` and `npm run build`.
-5. Deploy through GitHub + Vercel.
-
-## Figma File Structure
-
-Create one Figma file named:
-
-`Hsin-Hsin Yuan Portfolio - Design Layer`
-
-Use these pages:
-
-1. `00 Cover`
-2. `01 Current Site Reference`
-3. `02 Design System`
-4. `03 Desktop Layouts`
-5. `04 Mobile Layouts`
-6. `05 Components`
-7. `06 Content Map`
-8. `07 Experiments`
-
-## Frame Sizes
-
-Use these core frames first:
-
-- Desktop: `1440 x 1200`
-- Laptop: `1200 x 1000`
-- Tablet: `834 x 1112`
-- Mobile: `390 x 844`
-- Small mobile: `360 x 800`
-
-Every major page decision should have at least:
-
-- One desktop frame
-- One mobile frame
-
-## Current Site Sections
-
-Map the Figma frames to the current site sections:
-
-1. `Topbar`
-2. `Hero`
-3. `Platforms & Collaborations`
-4. `Screening Strip`
-5. `Available For`
-6. `Featured Works`
-7. `Who Should Contact Me`
-8. `AI / Language Lab`
-9. `Selected Archive`
-10. `Contact`
-
-## Design Tokens
-
-Mirror the current CSS tokens in Figma variables.
-
-### Colors
-
-| Token | CSS | Figma variable | Value |
-| --- | --- | --- | --- |
-| Background | `--bg` | `color/bg` | `#0B0B0C` |
-| Ink | `--ink` | `color/ink` | `#F7F2E8` |
-| Muted | `--muted` | `color/muted` | `#B8B0A3` |
-| Line | `--line` | `color/line` | `rgba(247, 242, 232, 0.18)` |
-| Panel | `--panel` | `color/panel` | `rgba(255, 255, 255, 0.055)` |
-| Panel strong | `--panel-strong` | `color/panel-strong` | `rgba(255, 255, 255, 0.095)` |
-| Acid | `--acid` | `color/accent-acid` | `#D8FF3E` |
-| Heat | `--heat` | `color/accent-heat` | `#FF4D1F` |
-| Blue | `--blue` | `color/accent-blue` | `#7CC7FF` |
-
-### Typography
-
-Use:
-
-- Primary Latin: `Inter`
-- Traditional Chinese fallback: `Noto Sans TC` or `PingFang TC`
-
-Core text styles:
-
-- `Display/Hero`: uppercase, heavy weight, tight line height
-- `Title/Section`: 12px, uppercase, bold, accent color
-- `Body/Large`: 18-22px, medium line height
-- `Body/Base`: 15-17px
-- `Meta`: 12px, uppercase, bold
-- `Card/Title`: 24-40px, bold
-
-Important rule:
-
-Do not rely on viewport-scaled typography alone. Check actual mobile frames for text overflow.
-
-## Components
-
-Create these Figma components:
-
-### `Topbar`
-
-Variants:
-
-- Desktop
-- Mobile
-- English
-- Chinese
-
-Editable properties:
-
-- Brand text
-- Nav labels
-- Language switch
-
-### `Hero`
-
-Variants:
-
-- Desktop right-text
-- Desktop alternate
-- Mobile stacked
-- Chinese copy
-
-Required controls:
-
-- Image crop position
-- Hero title size
-- Role line breaks
-- Slash accent color
-- CTA spacing
-
-Current hero copy:
+## One canonical graph
 
 ```text
-HSIN-HSIN
-YUAN
-Documentary Director / Writer / Producer
-/ Cross-Cultural Storyteller
+data/site.json ───────────────┐
+data/media.json ──────────────┤
+data/collaborations.json ─────┤
+content/works/*.md ───────────┼─> scripts/build-figma-export.mjs
+content/archive/*.md ─────────┘        ├─> figma-export/*.svg + manifest.json
+                                      └─> importer code.js + manifest.json
 ```
 
-Chinese role copy:
+The importer runtime lives in `figma/hsin-portfolio-importer/code.template.js`. The build inserts one generated `PORTFOLIO_MODEL` snapshot into that template. Do not add handwritten parallel `COPY`, `ASSETS`, `WORKS`, or logo lists.
 
-```text
-紀錄片導演 / 編劇 / 製作人
-/ 跨文化敘事者
+The generated manifest carries a deterministic SHA-256 fingerprint of the canonical inputs. Two builds from unchanged sources must be byte-for-byte identical. Tests also mutate a canonical media role in an isolated fixture and require that the SVG, importer snapshot, and fingerprint all change together.
+
+## Fixed information architecture
+
+Desktop and mobile frames use this exact order:
+
+1. Split Hero
+2. Collaborations
+3. Watch Loop
+4. Availability
+5. Selected Works
+6. Collaboration Fit
+7. Archive
+8. Contact
+
+Selected Works always contains these six rows in canonical order:
+
+1. Slow Steps
+2. Tech Dreamers
+3. My Art, My Voice
+4. Interior / Spatial Brand Films
+5. PTS Taigi
+6. Top Gear
+
+The Watch Loop contains five previews. Slow Steps is an intentional text-first preview. Interior / Spatial Brand Films remains a Selected Works row but is not a Watch Loop preview.
+
+## Active files and frames
+
+Run:
+
+```bash
+npm run figma:export
 ```
 
-### `Logo Wall`
+The command writes:
 
-Variants:
+- `figma-export/01-desktop-home.svg` — complete 1440-pixel desktop page
+- `figma-export/02-desktop-works-logos.svg` — five preview and six work-row component inventory
+- `figma-export/03-mobile-home.svg` — complete 390-pixel mobile page
+- `figma-export/manifest.json` — sources, tokens, dimensions, counts, and fingerprint
+- `figma/hsin-portfolio-importer/code.js` — generated runnable importer
+- `figma/hsin-portfolio-importer/manifest.json` — generated media-domain permissions
 
-- Desktop strip
-- Mobile wrap
+Use the desktop plugin frame for 1440×900 and 1200×900 reviews. Use the mobile plugin frame for 390×844 and 360×800 reviews. Tablet review remains a website verification viewport; if a tablet-specific visual decision is needed, duplicate the desktop frame at 834×1112 and document the delta rather than creating another content source.
 
-Rules:
+## Design tokens
 
-- No boxes
-- No visible card backgrounds
-- No heavy borders
-- Logos follow page background
-- Monochrome / muted treatment unless the specific logo needs color
+| Role | Value | Use |
+| --- | --- | --- |
+| Stage | `#050807` | opening, Watch Loop, archive, footer-like surfaces |
+| Fog | `#dddcd7` | muted field and quiet separation |
+| Paper | `#f6f4ee` | primary editorial reading surface |
+| Signal coral | `#f0645a` | documentary/directing markers |
+| Signal cobalt | `#4867d9` | cross-cultural markers |
+| Signal moss | `#4d9259` | editorial-system markers |
 
-### `Featured Work Card`
+Display and interface text uses `Helvetica Neue`, with Arial/system fallbacks. Editorial accents use `Iowan Old Style` italic, with Baskerville/Times fallbacks. Signal colors stay small. Layout depends on spacing, crop, scale, flat borders, and rounded media frames rather than atmospheric effects.
 
-Variants:
+## Media contract
 
-- With image
-- With video embed
-- Coming soon
-- Desktop compact card
-- Mobile full-width card
+Every replaceable media role should carry:
 
-Content fields:
+- semantic role and source path
+- bilingual alt text
+- desktop/mobile focal point when applicable
+- intrinsic dimensions
+- approved, text-first, or open-role status
+- original remote reference when the source is remote
 
-- Year / role / platform
-- Title
-- Tagline
-- Description
-- Tags
-- Metrics
-- Case study: Challenge / What I shaped
-- CTA
+Local media is referenced through the configured site origin in the SVG/importer. Remote media remains its canonical remote URL. If Figma cannot load it, the importer creates a labeled reference; it must not silently substitute a local portrait, still, or another project's poster.
 
-### `Info Card`
+To replace an ordinary image:
 
-Used for:
+1. add or replace the approved asset;
+2. update only the canonical manifest/frontmatter role, alt, dimensions, and focal point;
+3. run media validation and both builds;
+4. confirm the site, SVG, and importer snapshot changed together;
+5. review desktop and mobile crops.
 
-- Who Should Contact Me
-- Work With Me
-- AI / Language Lab
+## Figma-to-code handoff
 
-Variants:
+For every approved Figma change, record:
 
-- 4-up desktop
-- 2-up tablet
-- 1-up mobile
+1. frame name and review viewport;
+2. affected section/component;
+3. exact spacing, size, border, radius, crop, order, or copy change;
+4. English, Chinese, or shared scope;
+5. whether canonical data or only the visual owner changes.
 
-### `Impact Metric`
+Implement the smallest owning change. Do not repair generated SVG or `code.js` manually. Rebuild, run deterministic tests, then verify the website at desktop, tablet, mobile, reduced-motion, keyboard, and no-JavaScript paths.
 
-Fields:
+## Guardrails
 
-- Value
-- Label
-- Detail
-
-### `Archive Row`
-
-Fields:
-
-- Year / role / platform
-- Title
-- Metrics
-
-### `Contact Block`
-
-Fields:
-
-- Headline
-- Subcopy
-- CTA
-- Email / links
-
-## Content Sources
-
-Figma should not become the source of truth for final text. Final content lives here:
-
-- Site copy: `data/site.json`
-- Metrics live with the work or archive item they explain. There is no standalone Selected Impact section.
-- Collaborations: `data/collaborations.json`
-- Featured works: `content/works/*.md`
-- Archive: `content/archive/*.md`
-- Lab: `content/lab/*.md`
-
-Use Figma for layout and short copy experiments. Once approved, sync final text back to the repo.
-
-## Handoff Rules
-
-When a Figma change should be implemented, capture:
-
-1. Figma frame name
-2. Desktop frame screenshot
-3. Mobile frame screenshot
-4. Exact component/section affected
-5. What changed:
-   - spacing
-   - font size
-   - color
-   - image crop
-   - order
-   - copy
-6. Whether it affects English, Chinese, or both
-
-Implementation should update the smallest possible set of files.
-
-## Figma Setup Prompt
-
-Paste this into Figma Make, Figma AI, or Claude Code if it has access to screenshots/assets:
-
-```text
-Create a Figma design layer for an international documentary director portfolio.
-
-The site belongs to Hsin-Hsin Yuan, a documentary director / writer / producer / cross-cultural storyteller. The design should feel international, editorial, cinematic, and professional enough for cultural institutions, platforms, producers, artists, and brand/factual video clients.
-
-Use a dark background, cream text, acid green accent, restrained orange/blue secondary accents, large editorial typography, strong image-led layouts, compact but premium work cards, and a borderless monochrome logo wall.
-
-Create desktop and mobile frames for:
-1. Hero
-2. Logo wall
-3. Screening strip
-4. Available For
-5. Featured Works
-6. Who Should Contact Me
-7. AI / Language Lab
-8. Archive
-9. Contact
-
-Do not create a generic landing page. This is a real portfolio site for work inquiries.
-
-Hero text:
-HSIN-HSIN
-YUAN
-Documentary Director / Writer / Producer
-/ Cross-Cultural Storyteller
-
-The slash marks should use the acid green accent.
-
-Prioritize:
-- mobile readability
-- professional first impression
-- clear contact path
-- easy scanning of work proof
-- image crops that do not hide the subject
-- enough control for later manual layout adjustment
-
-Create reusable components and name layers clearly so the design can be translated back into HTML/CSS.
-```
-
-## Code Sync Checklist
-
-Before implementing a Figma change:
-
-- Confirm whether the change is visual, content, or structure.
-- Confirm desktop and mobile frames both exist.
-- Check whether Chinese copy needs a separate layout adjustment.
-- Update source files, not only `dist/`.
-- Run `npm test`.
-- Run `npm run build`.
-- Commit with a focused message.
-
-## Migration Decision
-
-Do not migrate to Framer, Webflow, or Figma Sites until the Figma design layer has stabilized.
-
-Review migration only if:
-
-- You want to edit production layout directly without code most of the time.
-- Portfolio content will change weekly.
-- You need a CMS interface for non-technical editing.
-- You are willing to trade GitHub/Vercel control for platform convenience.
-
-For now, Figma is the design control layer; GitHub + Vercel remains production.
+- No three-card work truncation: all six works remain visible.
+- No active portrait carrier.
+- No additional continuous movement beyond the Watch Loop.
+- Mobile Watch Loop is always manual-scroll-only.
+- No invented watch URL or poster for Slow Steps.
+- No local replacement for canonical remote media.
+- No generic service-card or standalone Lab section in the active homepage frame.
+- No production deployment until the hybrid preview is explicitly approved.

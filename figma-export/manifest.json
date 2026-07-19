@@ -1,0 +1,46 @@
+{
+  "design": "editorial-watch-loop-hybrid",
+  "sourceFingerprint": "sha256:64c5e98e367180bd28fa214573807a972a76fd44a6c05631eb0b6708c38d8309",
+  "generatedFrom": "canonical repository sources",
+  "canonicalSources": {
+    "site": "data/site.json",
+    "media": "data/media.json",
+    "works": "content/works/*.md",
+    "collaborations": "data/collaborations.json",
+    "archive": "content/archive/*.md"
+  },
+  "tokens": {
+    "stage": "#050807",
+    "fog": "#dddcd7",
+    "paper": "#f6f4ee",
+    "coral": "#f0645a",
+    "cobalt": "#4867d9",
+    "moss": "#4d9259"
+  },
+  "frames": [
+    {
+      "file": "01-desktop-home.svg",
+      "width": 1440,
+      "height": 8000,
+      "scope": "complete desktop page"
+    },
+    {
+      "file": "02-desktop-works-logos.svg",
+      "width": 1440,
+      "height": 4380,
+      "scope": "watch and work components"
+    },
+    {
+      "file": "03-mobile-home.svg",
+      "width": 390,
+      "height": 8800,
+      "scope": "complete mobile page"
+    }
+  ],
+  "counts": {
+    "watchPreviews": 5,
+    "selectedWorks": 6,
+    "collaborations": 7,
+    "archiveItems": 4
+  }
+}

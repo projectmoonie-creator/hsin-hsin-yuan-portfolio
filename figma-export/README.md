@@ -1,24 +1,20 @@
-# Figma SVG Export
+# Figma SVG Export — Editorial Watch Loop Hybrid
 
-This folder is a free Figma import package for the Hsin-Hsin Yuan portfolio design layer.
+This package is generated from the portfolio's canonical site copy, media manifest, six work files, collaborations, and archive files.
 
 ## Files
 
-- `01-desktop-home.svg` - desktop hero, logo strip, and about section.
-- `02-desktop-works-logos.svg` - compact work cards and logo wall.
-- `03-mobile-home.svg` - mobile home reference frame.
+- `01-desktop-home.svg` — complete desktop page in the approved hybrid order.
+- `02-desktop-works-logos.svg` — five Watch Loop previews and all six editable work-row components.
+- `03-mobile-home.svg` — complete mobile page; the Watch Loop is marked manual-scroll-only.
+- `manifest.json` — canonical inputs, tokens, frame inventory, and item counts.
 
-## How To Use
+## Import
 
-1. Open your Figma file.
-2. Drag the SVG files into Figma, or use `File > Place image/video`.
-3. Select an imported SVG and ungroup if needed.
-4. Edit text layers, move sections, tune spacing, and annotate decisions.
-5. Send approved changes back into the website repo, especially `src/styles.css`, `data/site.json`, and `content/works/*.md`.
+Drag the SVG files into Figma and ungroup them to edit text, shapes, borders, and image layers. For a richer editable reconstruction, run the local plugin in `figma/hsin-portfolio-importer`.
 
-## Notes
+## Round trip
 
-- The SVGs are generated from current site content, so re-run `npm run figma:export` after major content changes.
-- Photos are embedded as image layers to keep the package portable.
-- Text, rectangles, logo wordmarks, cards, and color token swatches remain editable SVG layers, including editable text layers after import.
-- This is a design control layer, not the production source of truth.
+Do not edit generated copy or image paths as a second source of truth. Update `data/site.json`, `data/media.json`, `content/works/*.md`, `data/collaborations.json`, or `content/archive/*.md`, then run `npm run figma:export`.
+
+Remote media stays a remote reference. A failed remote load is labeled in the importer; it is never silently replaced by a local image.

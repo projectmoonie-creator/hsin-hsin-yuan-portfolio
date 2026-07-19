@@ -3,10 +3,16 @@
   "id": "hsin-portfolio-importer",
   "api": "1.0.0",
   "main": "code.js",
-  "editorType": ["figma"],
+  "editorType": [
+    "figma"
+  ],
   "documentAccess": "dynamic-page",
   "networkAccess": {
-    "allowedDomains": ["https://hsin-hsin-yuan-portfolio.vercel.app"],
-    "reasoning": "The importer loads the current production portfolio images and SVG logos as editable Figma image fills."
+    "allowedDomains": [
+      "https://hsin-hsin-yuan-portfolio.vercel.app",
+      "https://i.ytimg.com",
+      "https://prod-img.taiwanplus.com"
+    ],
+    "reasoning": "Loads canonical portfolio media by its recorded local production URL or original remote source; no fallback image substitution."
   }
 }
