@@ -1,6 +1,9 @@
 .DS_Store
 node_modules/
 dist/
+docs/reviews/claude-review-watcher.log
+docs/reviews/claude-review-watcher-error.log
+docs/reviews/2026-07-19-claude-review-watcher-state.json
 .vercel/
 npm-debug.log*
 showreel/**/.thumbnails/
