@@ -271,6 +271,26 @@ test("renderPage escapes image URLs in semantic image markup", () => {
   assert.match(html, /src="\/assets\/poster&quot; onerror=&quot;alert\(1\)\.jpg"/);
 });
 
+test("active CSS is the new scene system rather than a legacy override", () => {
+  const css = readFileSync(join(root, "src/styles.css"), "utf8");
+
+  for (const token of ["--stage: #050807", "--fog: #dddcd7", "--paper: #f6f4ee", "--signal-coral: #f0645a", "--signal-cobalt: #4867d9", "--signal-moss: #4d9259"]) {
+    assert.match(css.toLowerCase(), new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+
+  assert.match(css, /\.portrait-carrier/);
+  assert.match(css, /\.work-theatre/);
+  assert.match(css, /data-phase="opening"[^}]*\.portrait-foreground[\s\S]*?filter: brightness/);
+  assert.doesNotMatch(css, /#d8ff3e|\.ambient-canvas|\.watch-loop|\.edge-light|\.work-panel|\.contact-card|Cinematic portfolio system: calm editorial structure/);
+});
+
+test("new scene runtime does not ship the retired animation stack", () => {
+  const packageData = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
+
+  assert.equal(packageData.dependencies?.animejs, undefined);
+  assert.equal(packageData.dependencies?.ogl, undefined);
+});
+
 test("build generates English, Chinese, CSS, and JS assets", () => {
   execFileSync("node", ["scripts/build-site.mjs"], { cwd: root, stdio: "pipe" });
 
@@ -278,13 +298,15 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.equal(existsSync(join(root, "dist/zh/index.html")), true);
   assert.equal(existsSync(join(root, "dist/styles.css")), true);
   assert.equal(existsSync(join(root, "dist/main.js")), true);
-  assert.equal(existsSync(join(root, "dist/ambient-background.js")), true);
+  assert.equal(existsSync(join(root, "dist/scene-state.js")), true);
+  assert.equal(existsSync(join(root, "dist/ambient-background.js")), false);
   assert.equal(existsSync(join(root, "dist/robots.txt")), true);
   assert.equal(existsSync(join(root, "dist/sitemap.xml")), true);
-  assert.equal(existsSync(join(root, "dist/vendor/anime.esm.min.js")), true);
-  assert.equal(existsSync(join(root, "dist/vendor/ogl/src/index.js")), true);
+  assert.equal(existsSync(join(root, "dist/vendor/anime.esm.min.js")), false);
+  assert.equal(existsSync(join(root, "dist/vendor/ogl/src/index.js")), false);
   assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel.mp4")), true);
   assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel-poster.png")), true);
+  assert.equal(existsSync(join(root, "dist/assets/portfolio/hsin-portrait-foreground.webp")), true);
 
   const zh = readFileSync(join(root, "dist/zh/index.html"), "utf8");
   const robots = readFileSync(join(root, "dist/robots.txt"), "utf8");
@@ -296,94 +318,37 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(robots, /Sitemap: https:\/\/hsin-hsin-yuan-portfolio\.vercel\.app\/sitemap\.xml/);
   assert.match(sitemap, /<loc>https:\/\/hsin-hsin-yuan-portfolio\.vercel\.app\/en\/<\/loc>/);
   assert.match(sitemap, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
-  assert.match(zh, /紀錄片導演/);
+  assert.match(zh, /class="portrait-carrier" data-portrait-carrier/);
+  assert.match(zh, /class="portrait-foreground"/);
+  assert.match(zh, /紀錄片導演、編劇，也是跨文化的故事夥伴/);
   assert.match(zh, /觀看 showreel/);
-  assert.doesNotMatch(zh, /Showreel 整理中/);
-  assert.doesNotMatch(zh, /data-about-tabs/);
+  assert.match(zh, /找到人真正改變的那一刻/);
+  assert.match(zh, /讓脈絡被帶走，而不是被磨平/);
+  assert.match(zh, /讓好的判斷可以被重複/);
+  assert.equal((zh.match(/class="work-scene"/g) || []).length, 3);
   assert.match(zh, /可合作項目/);
-  assert.doesNotMatch(zh, /<h2 class="section-title">關於我<\/h2>/);
-  assert.doesNotMatch(zh, /合作方式/);
-  assert.doesNotMatch(zh, /我是來自台灣的紀錄片導演與創意製作人/);
-  assert.doesNotMatch(zh, /情感質地/);
-  assert.doesNotMatch(zh, /溫柔但準確地轉譯/);
-  assert.doesNotMatch(zh, /住宅與室內設計影像、空間品牌影片/);
-  assert.doesNotMatch(zh, /class="services-grid"/);
-  assert.match(zh, /剪輯/);
-  assert.match(zh, /挑戰/);
-  assert.match(zh, /我如何處理/);
-  assert.doesNotMatch(zh, /適合合作/);
-  assert.doesNotMatch(zh, /代表成績/);
-  assert.doesNotMatch(zh, /impact-grid/);
-  assert.doesNotMatch(zh, /class="section lab-section"/);
   assert.match(zh, /精選舊作/);
-  assert.match(zh, /觀看完整單集/);
-  assert.match(zh, /觀看完整系列/);
-  assert.doesNotMatch(zh, /觀看代表片段/);
-  assert.doesNotMatch(zh, /3 yrs|三年間|約三年/);
-  assert.match(zh, /公視台語台《無事坐巴士》/);
-  assert.match(zh, /《巔峰拍檔》中國版：英國篇/);
-  assert.doesNotMatch(zh, /中方導演/);
-  assert.doesNotMatch(zh, /同時段綜藝類冠軍/);
-  assert.doesNotMatch(zh, /觀看精選影片/);
-  assert.match(zh, /代表影像作品/);
-  assert.match(zh, /媒體報導與訪談/);
-  assert.match(zh, /官方節目頁/);
-  assert.match(zh, /文化奧運紀錄片《My Art, My Voice》　台法藝術家跨國對話/);
-  assert.match(zh, /鏡週刊 Mirror Media/);
-  assert.match(zh, /真誠地往前走，走進創作的大海/);
-  assert.match(zh, /非常木蘭/);
   assert.match(zh, /合作類型/);
   assert.match(zh, /送出洽詢/);
   assert.doesNotMatch(zh, /mailto:/);
-  assert.doesNotMatch(zh, /舊.*履歷/);
-  assert.match(css, /\.works-stack \{/);
+  assert.doesNotMatch(zh, /data-watch-loop|watch-loop-card|work-panel|light-beam-layer|services-grid/);
+  assert.match(css, /--stage: #050807/);
+  assert.match(css, /--fog: #dddcd7/);
+  assert.match(css, /--paper: #f6f4ee/);
+  assert.match(css, /--signal-coral: #f0645a/);
+  assert.match(css, /--signal-cobalt: #4867d9/);
+  assert.match(css, /--signal-moss: #4d9259/);
+  assert.match(css, /\.has-scene-controller \.portrait-carrier/);
+  assert.match(css, /\.has-scene-controller \.portrait-foreground/);
+  assert.match(css, /\.has-scene-controller \.work-theatre/);
   assert.match(css, /position: sticky;/);
-  assert.match(css, /grid-template-columns: minmax\(18rem, 0\.9fr\) minmax\(0, 1fr\)/);
-  assert.match(css, /transform: translate3d\(0, calc\(var\(--stack-progress\) \* -0\.45rem\), 0\) scale\(calc\(1 - var\(--stack-progress\) \* 0\.035\)\)/);
-  assert.match(css, /\.hero h1 \{\n  font-size: clamp\(3\.5rem, 7\.2vw, 7\.2rem\);/);
-  assert.match(css, /\.hero-media \{[\s\S]*?min-height: auto;/);
-  assert.match(css, /@media \(max-width: 1280px\) \{\n  \.hero \{\n    grid-template-columns: 1fr;/);
-  assert.doesNotMatch(css, /\.impact-grid/);
-  assert.doesNotMatch(css, /\.impact-item/);
-  assert.match(css, /url\(\"\/assets\/portfolio\/hsin-working-white-space\.jpg\"\)/);
-  assert.match(css, /\.hero-play-button \{/);
-  assert.match(css, /\.hero-showreel-video \{/);
-  assert.doesNotMatch(css, /\.hero-actions/);
-  assert.doesNotMatch(css, /\.hero-media-caption/);
-  assert.doesNotMatch(css, /\.about-tab/);
-  assert.doesNotMatch(css, /\.about-copy/);
-  assert.match(css, /\.available-pill-list \{/);
-  assert.doesNotMatch(css, /\.available-line/);
-  assert.doesNotMatch(css, /showreel-modal/);
-  assert.match(css, /\.collab-grid \{\n  align-items: center;\n  display: flex;/);
-  assert.match(css, /\.collab-item \{\n  align-items: center;\n  background: transparent;\n  border: 0;/);
-  assert.match(css, /\.partner-name \{\n  display: none;/);
-  assert.match(css, /\.hero h1 span \{\n  display: block;\n  white-space: nowrap;/);
-  assert.match(css, /@keyframes heroStillPush/);
-  assert.match(css, /\.hero-media \{\n    animation: heroStillPush/);
-  assert.match(css, /\.hero-roles \.role-slash \{\n  color: var\(--acid\);/);
-  assert.match(css, /\.edge-light/);
-  assert.match(css, /--edge-proximity/);
-  assert.match(css, /\.ambient-canvas \{/);
-  assert.match(css, /\.has-ambient-background \.light-beam/);
-  assert.doesNotMatch(css, /\.light-beam-left/);
-  assert.match(css, /--page-pad: clamp/);
-  assert.match(css, /\.watch-loop-card \{/);
-  assert.match(css, /\.watch-loop-card-plain \{/);
-  assert.match(css, /\.watch-loop-card-plain \{[\s\S]*?background: transparent;/);
-  assert.match(css, /\.watch-loop-viewport::before/);
-  assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\):not\(\[href="#contact"\]\)/);
-  assert.doesNotMatch(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\) \{\n    display: none;/);
-  assert.match(js, /getEdgeProximity/);
-  assert.match(js, /pointermove/);
-  assert.match(js, /initAmbientBackground/);
-  assert.match(js, /scrollRestoration = "manual"/);
-  assert.match(js, /clearInitialHash/);
-  assert.match(js, /replaceState/);
-  assert.match(js, /data-watch-loop/);
-  assert.match(js, /syncLoopCopies/);
-  assert.match(js, /offset %= sequenceWidth/);
-  assert.match(js, /startLoop/);
-  assert.match(js, /pointerdown/);
-  assert.match(css, /@media \(max-width: 460px\) \{\n  \.hero h1 \{\n    font-size: clamp\(2\.65rem, 14vw, 3\.45rem\);/);
+  assert.match(css, /@media \(max-width: 820px\)/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.doesNotMatch(css, /#d8ff3e|\.ambient-canvas|\.watch-loop|\.edge-light|\.work-panel/);
+  assert.match(js, /from "\.\/scene-state\.js"/);
+  assert.match(js, /data-portrait-carrier/);
+  assert.match(js, /data-work-theatre/);
+  assert.match(js, /requestAnimationFrame/);
+  assert.match(js, /prefers-reduced-motion: reduce/);
+  assert.doesNotMatch(js, /getEdgeProximity|pointermove|initAmbientBackground|data-watch-loop|syncLoopCopies/);
 });
