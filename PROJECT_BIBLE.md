@@ -46,7 +46,7 @@
 ## Work Navigation
 
 - The screening strip is a visual index. It should stay lightweight: no explanatory heading unless needed, no duplicate action labels, and cards jump to the matching Featured Work.
-- Works enter the screening strip only when they have a public `watchUrl`.
+- A public `watchUrl` qualifies a work for the screening strip. An explicitly approved text-first preview may instead link only to that work's existing internal anchor; it must not invent a URL, image, or media claim.
 - Featured Works carries detail. The strip should preview; Featured Works should explain.
 - Each work belongs to one public tier at a time: Featured Work, Archive, or unpublished source material. If a work is removed from Featured Works, move it deliberately to Archive or keep it out of the public site.
 - For single films or episodes, use "Watch the full episode" / "觀看完整單集". For multi-episode series, use "Watch the series" / "觀看完整系列". For a curated group, use "Watch selected films" / "觀看精選影片".
@@ -65,9 +65,21 @@
 
 - Before implementing a design reference, translate it into project-specific rules: what to borrow, what to avoid, which parts serve the portfolio goal, and how it should behave on desktop and mobile.
 - Do not copy a reference site's surface style literally when the user's content needs another rhythm. Use references to derive decisions about typography, spacing, motion, image treatment, logo treatment, and section order.
-- Motion should guide attention without becoming a second product. Subtle ambient light is acceptable only when it preserves readability, keeps the site fast, and is verified on mobile.
+- Motion should guide attention without becoming a second product. For the approved Editorial Watch Loop Hybrid, use no ambient glow; the moving work strip is the only continuous motion.
 - If a work has no approved image, use an explicit placeholder or text-first layout. Do not borrow an unrelated project still just to fill a card or design export.
 - Design-layer artifacts must follow the same content rules as the live site. Figma SVG exports and importer plugins are not allowed to reintroduce removed sections, old metrics, or borrowed images.
+
+## Editorial Watch Loop Hybrid
+
+- Preserve this fixed public order: Hero → Collaborations → Watch Loop → Availability → Selected Works → Collaboration Fit → Archive → Contact → Footer.
+- The Watch Loop contains five moving-image previews while Selected Works contains six anchored rows in this order: Slow Steps; Tech Dreamers; My Art, My Voice; Interior / Spatial Brand Films; PTS Taigi; Top Gear.
+- Slow Steps is a deliberate text-first preview linked to its existing internal work anchor. Do not invent a public URL or borrow another project's image.
+- The Watch Loop is the only ongoing movement. Use no ambient glow, light beam, pointer glow, sticky work theatre, Anime.js, OGL, WebGL, reflection effect, or decorative motion canvas.
+- Mobile always uses manual horizontal scrolling. Reduced-motion and no-JavaScript output must remain readable and navigable.
+- Use data-only media replacement: normal image changes belong in the canonical manifest/frontmatter plus the asset, not in HTML, CSS, SVG, or importer code.
+- The live site and Figma/design importer must derive work order, copy, media roles, focal points, and replacement metadata from the same canonical source.
+- Keep the portrait-scene experiment available at its named checkpoint; do not carry its portrait carrier or three-mode shell into this hybrid.
+- Keep deployment as a preview until the user explicitly approves replacing production.
 
 ## Detail Pages
 
@@ -96,6 +108,7 @@
 - After content or layout changes, run `npm test`.
 - After removing or renaming a public section, run a repo search for the old label, CSS classes, data file names, generator functions, Figma importer code, Figma export files, and tests. Confirm remaining hits are only historical docs or negative regression tests.
 - For visual changes, inspect desktop and mobile widths before pushing.
-- Check that the hero starts at the top on refresh, the showreel plays inline, the screening strip loops without a visible blank gap, and Featured Works remains reachable.
+- Check that the hero starts at the top on refresh, the showreel plays inline, the desktop Watch Loop has no visible blank gap, mobile remains manually scrollable, and Selected Works remains reachable.
+- Verify reduced-motion and no-JavaScript states, keyboard focus, loop pause behavior, and body overflow before preview review.
 - Check that press thumbnails come from press metadata or approved replacements.
 - Check that no private source material appears in generated output.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Portfolio Narrative Builder"
+  short_description: "Build or reshape evidence-led creator portfolios"
+  default_prompt: "Use $portfolio-narrative-builder to turn my work evidence, design references, must-keep/must-remove choices, media rights, languages, and site/Figma constraints into a maintainable portfolio."
