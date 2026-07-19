@@ -2,7 +2,7 @@
 
 ## Status
 
-Approved creative direction, awaiting written-spec review before implementation.
+Approved for implementation on 2026-07-19.
 
 This is the selected **third / hybrid direction**: preserve the old portfolio's familiar reading order, split hero, and horizontally moving series preview, then apply the newer editorial typography, palette, rounded framing, and simplified visual language. Unnecessary glow, ambient decoration, and competing motion are removed.
 
@@ -66,7 +66,7 @@ The canonical work order remains unchanged:
 5. PTS Taigi
 6. Top Gear
 
-All six works render as simplified editorial rows with stable section anchors. The watch loop contains the five works with watchable media: Slow Steps, Tech Dreamers, My Art, My Voice, PTS Taigi, and Top Gear. Each preview links to its corresponding internal work anchor; the work row then exposes the appropriate external watch or project link. Interior / Spatial Brand Films remains in Selected Works but is omitted from the watch loop because it has no canonical watch URL.
+All six works render as simplified editorial rows with stable section anchors. The watch loop contains five moving-image work previews: Slow Steps, Tech Dreamers, My Art, My Voice, PTS Taigi, and Top Gear. Each preview links to its corresponding internal work anchor; the work row then exposes an external watch or project link only when one is already public. Slow Steps currently remains a deliberate text-first preview because it has neither an approved poster nor a public watch URL. Interior / Spatial Brand Films remains in Selected Works but is omitted from the watch loop because it is an in-progress collection without a canonical watch URL.
 
 ## Visual System
 
@@ -111,7 +111,7 @@ The watch loop is the site's one signature movement. It restores the old native 
 - It moves at a calm, constant rate rather than using a dramatic carousel snap.
 - It pauses on pointer hover, keyboard focus within the loop, and touch interaction.
 - Keyboard users can reach every preview and link.
-- Preview media uses semantic `<img>` elements with manifest-provided alt text, focal position, width, and height metadata. Filenames are never hardcoded in CSS.
+- Preview media uses semantic `<img>` elements with manifest-provided alt text, focal position, width, and height metadata when an approved poster exists. A work without approved media renders as a deliberate text-first preview. Filenames are never hardcoded in CSS.
 - The loop may duplicate its visual sequence for seamless movement, but duplicated items are hidden from assistive technology and removed from the tab order.
 - With `prefers-reduced-motion: reduce`, auto-movement is disabled. The same items remain manually scrollable and fully readable.
 - Without JavaScript, the previews render as an ordinary horizontal overflow row.
