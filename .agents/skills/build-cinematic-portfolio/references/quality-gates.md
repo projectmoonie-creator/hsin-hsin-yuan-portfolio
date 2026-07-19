@@ -10,9 +10,21 @@
 ## Media
 
 - All public images have rights status and bilingual alt text.
-- Missing optional layers degrade cleanly.
+- Every role required by the selected treatment exists; layered-person treatments fail validation without a transparent foreground asset.
+- Missing genuinely optional layers degrade cleanly.
 - Image replacement requires no CSS change.
 - Hero and flagship crops work at desktop and mobile widths.
+- Foreground cutout edges have been inspected against light and dark scene fields.
+
+## Material redesign
+
+- A legacy fingerprint ledger covers palette, typography, navigation, hero composition, section grammar, components, motion, and active design generators.
+- Every high-salience fingerprint has an explicit keep/replace decision and regression proof.
+- Retired visual tokens, DOM structures, and motion handlers are absent from both owning source and generated output.
+- The new visual system replaces old source architecture; it is not an old stylesheet or controller hidden beneath end-of-file overrides.
+- Matched before/after screenshots cover desktop and mobile opening and work states. Reduced motion is included when choreography carries hierarchy.
+- An informed viewer cannot reasonably describe the candidate as the old site with a new skin. If they can, publication is blocked.
+- Mobile preserves the approved new identity instead of reverting to the legacy card stack.
 
 ## Motion and accessibility
 
