@@ -73,6 +73,7 @@ function pill({ x, y, width, text, fill = "transparent", stroke = tokens.line, c
 }
 
 function imageData(path) {
+  if (/^https?:\/\//.test(path)) return "";
   const fullPath = join(root, "public", path.replace(/^\//, ""));
   const ext = extname(fullPath).toLowerCase();
   const mime = ext === ".png" ? "image/png" : ext === ".svg" ? "image/svg+xml" : "image/jpeg";
@@ -87,9 +88,16 @@ function imageLayer({ id, href, x, y, width, height, opacity = 1 }) {
   </g>`;
   }
   const filename = basename(href);
+  const embedded = imageData(href);
+  if (!embedded) {
+    return `<g id="${id}" data-source="remote:${escapeXml(href)}">
+    <rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${tokens.panelStrong}"/>
+    <text x="${x + 18}" y="${y + height - 18}" fill="${tokens.ink}" opacity="0.55" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700">remote image — replace in Figma</text>
+  </g>`;
+  }
   return `<g id="${id}" data-source="${escapeXml(filename)}">
     <rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${tokens.panelStrong}"/>
-    <image href="${imageData(href)}" x="${x}" y="${y}" width="${width}" height="${height}" preserveAspectRatio="xMidYMid slice" opacity="${opacity}"/>
+    <image href="${embedded}" x="${x}" y="${y}" width="${width}" height="${height}" preserveAspectRatio="xMidYMid slice" opacity="${opacity}"/>
     <text x="${x + 18}" y="${y + height - 18}" fill="${tokens.ink}" opacity="0.55" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700">${escapeXml(filename)}</text>
   </g>`;
 }
@@ -133,9 +141,8 @@ function workCard({ work, x, y, width }) {
   </g>`;
 }
 
-function buildDesktopHome(site, works, collaborations) {
+function buildDesktopHome(site, works, collaborations, media) {
   const hero = site.en;
-  const featured = works.find((work) => work.posterImage) || works[0];
   const logoRow = collaborations
     .slice(0, 7)
     .map((item, index) => logoWordmark({ item, x: 92 + index * 180, y: 690, width: 132 }))
@@ -165,7 +172,7 @@ function buildDesktopHome(site, works, collaborations) {
     <text x="1050" y="54" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="750" letter-spacing="1.1">WORKS / ABOUT / CONTACT / 中文</text>
   </g>
   <g id="layer-hero">
-    ${imageLayer({ id: "layer-hero-image", href: featured.posterImage, x: 72, y: 104, width: 610, height: 520, opacity: 0.96 })}
+    ${imageLayer({ id: "layer-hero-image", href: media.hero.background, x: 72, y: 104, width: 610, height: 520, opacity: 0.96 })}
     <rect x="72" y="104" width="610" height="520" fill="${tokens.bg}" opacity="0.08"/>
     <text id="layer-hero-eyebrow" x="772" y="148" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.5">${escapeXml(hero.heroEyebrow.toUpperCase())}</text>
     <g id="layer-hero-title">
@@ -219,7 +226,7 @@ function buildDesktopWorksLogos(site, works, collaborations) {
   });
 }
 
-function buildMobileHome(site, works, collaborations) {
+function buildMobileHome(site, works, collaborations, media) {
   const hero = site.en;
   const logos = collaborations
     .slice(0, 4)
@@ -237,7 +244,7 @@ function buildMobileHome(site, works, collaborations) {
     <text x="308" y="42" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="750">中文</text>
   </g>
   <g id="layer-mobile-hero">
-    ${imageLayer({ id: "layer-mobile-hero-image", href: works[0].posterImage, x: 24, y: 76, width: 342, height: 252, opacity: 0.94 })}
+    ${imageLayer({ id: "layer-mobile-hero-image", href: media.hero.background, x: 24, y: 76, width: 342, height: 252, opacity: 0.94 })}
     <text id="layer-mobile-eyebrow" x="24" y="370" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="850" letter-spacing="1.3">DOCUMENTARY / CULTURE / TECHNOLOGY</text>
     <g id="layer-hero-title">
       <text x="22" y="436" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="900">HSIN-HSIN</text>
@@ -288,6 +295,7 @@ This folder is a free Figma import package for the Hsin-Hsin Yuan portfolio desi
 function main() {
   const site = readJson("data/site.json");
   const collaborations = readJson("data/collaborations.json");
+  const media = readJson("data/media.json");
   const works = [
     parseFrontmatter("content/works/my-art-my-voice.md"),
     parseFrontmatter("content/works/tech-dreamers.md"),
@@ -297,9 +305,9 @@ function main() {
   rmSync(outDir, { recursive: true, force: true });
   mkdirSync(outDir, { recursive: true });
 
-  writeFileSync(join(outDir, "01-desktop-home.svg"), buildDesktopHome(site, works, collaborations));
+  writeFileSync(join(outDir, "01-desktop-home.svg"), buildDesktopHome(site, works, collaborations, media));
   writeFileSync(join(outDir, "02-desktop-works-logos.svg"), buildDesktopWorksLogos(site, works, collaborations));
-  writeFileSync(join(outDir, "03-mobile-home.svg"), buildMobileHome(site, works, collaborations));
+  writeFileSync(join(outDir, "03-mobile-home.svg"), buildMobileHome(site, works, collaborations, media));
   writeFileSync(join(outDir, "README.md"), buildReadme());
 
   console.log(`Generated Figma SVG export package in ${outDir}`);

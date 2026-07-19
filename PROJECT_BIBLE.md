@@ -90,6 +90,9 @@
 - Use work packages instead of open-ended polishing. Each package should have a short goal, affected files, non-goals, validation steps, and a rollback path.
 - Suggested roadmap order for this site: stabilize content and public claims; refine visual system and motion; add work detail pages for dense projects; replace temporary media with approved images/video; improve SEO/social previews; add analytics only when the user wants behavior data; then package the workflow as a reusable skill/service.
 - External reviewers such as Claude Code or Gemini should first produce findings, not edit the repo directly, unless the change scope is mechanical and approved.
+- For material reviews, use two separate roles: a first reviewer produces evidence-backed findings; a second reviewer adjudicates each finding as agree, upgrade, downgrade, reject, or already fixed. The maintainer verifies source evidence and approves a bounded work package before editing.
+- A failed reviewer login, unavailable CLI/model, timeout, empty output, sandbox failure, or exhausted conversation is not a completed review. Record the attempt and continue only with checks that produced usable evidence.
+- Review tests should protect semantic structure, public-content rules, privacy boundaries, and important removals. Avoid exact CSS-whitespace or full-page snapshot assertions that turn normal visual refinement into false regressions.
 
 ## QA Checklist
 

@@ -10,6 +10,7 @@ import {
   loadWorks,
   parseFrontmatter,
   renderPage,
+  validateMediaManifest,
 } from "../scripts/build-site.mjs";
 
 const root = process.cwd();
@@ -46,6 +47,8 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[5].role.en, "Director");
   assert.equal(works[5].platform, "China Dragon TV");
   assert.equal(works[0].posterImage, "");
+  assert.equal(works[1].posterImage, "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp");
+  assert.equal(works[1].watchUrl, "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers");
   assert.equal(works[0].platform, "TaiwanPlus / Travel");
   assert.deepEqual(works[0].tags, ["documentary", "travel"]);
   assert.deepEqual(works[5].tags, ["car show", "factual entertainment", "broadcast", "UK production"]);
@@ -111,6 +114,49 @@ test("loadMarkdownCollection returns ordered archive and lab entries", () => {
   assert.match(lab[0].body, /future skill name/);
 });
 
+test("media manifest provides a replaceable bilingual hero image", () => {
+  const media = loadSiteData(root).media;
+
+  assert.doesNotThrow(() => validateMediaManifest(media));
+  assert.match(media.hero.background, /^\/assets\/portfolio\//);
+  assert.equal(media.hero.foreground, "");
+  assert.match(media.hero.focalPoint, /^\d+% \d+%$/);
+  assert.ok(media.hero.alt.en.length > 5);
+  assert.ok(media.hero.alt.zh.length > 2);
+});
+
+test("media manifest rejects a hero without bilingual alt text", () => {
+  assert.throws(
+    () =>
+      validateMediaManifest({
+        hero: {
+          background: "/assets/portfolio/portrait.jpg",
+          foreground: "",
+          focalPoint: "50% 50%",
+          alt: { en: "Portrait", zh: "" },
+          treatment: "portrait-layered",
+        },
+      }),
+    /hero\.alt\.zh/,
+  );
+});
+
+test("homepage uses three cinematic work chapters and one practice statement", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const html = renderPage({ lang: "en", site, works });
+
+  assert.match(html, /class="hero-portrait-stage [^"]+"/);
+  assert.match(html, /data-cinematic-hero/);
+  assert.equal((html.match(/class="work-panel/g) || []).length, 3);
+  assert.match(html, /class="section practice-section"/);
+  assert.match(html, /class="section archive-section selected-history"/);
+  assert.doesNotMatch(html, /class="services-grid"/);
+  assert.doesNotMatch(html, /class="section lab-section"/);
+  assert.doesNotMatch(html, /class="tag"/);
+  assert.doesNotMatch(html, /data-horizontal-scroll/);
+});
+
 test("renderPage creates bilingual page with scroll-stack works and video fallbacks", () => {
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
@@ -140,7 +186,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.ok(html.indexOf('id="showreel"') < html.indexOf("collab-section-early"));
   assert.match(html, /Available for/);
   assert.match(html, /I can enter a project early as a story partner/);
-  assert.match(html, /available-simple/);
+  assert.match(html, /practice-section/);
   assert.match(html, /available-pill-list/);
   assert.match(html, /Editing/);
   assert.doesNotMatch(html, /class="available-line"/);
@@ -154,17 +200,15 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Research, treatments, pitch framing, and narrative structure/i);
   assert.doesNotMatch(html, /I partner with artists, cultural teams, producers, and technology companies/i);
   assert.doesNotMatch(html, /interior design and spatial-brand films/i);
-  assert.match(html, /For Artists &amp; Cultural Institutions/);
-  assert.match(html, /For Documentary \/ Factual Producers/);
+  assert.doesNotMatch(html, /For Artists &amp; Cultural Institutions/);
+  assert.doesNotMatch(html, /For Documentary \/ Factual Producers/);
   assert.match(html, /Challenge/);
   assert.match(html, /What I shaped/);
   assert.doesNotMatch(html, /Best for/);
   assert.doesNotMatch(html, /Selected Impact/);
   assert.doesNotMatch(html, /impact-grid/);
   assert.doesNotMatch(html, /impact-section/);
-  assert.match(html, /AI \/ Language Lab/);
-  assert.match(html, /fact-checked bilingual script workflow/i);
-  assert.match(html, /working home for the future skill name/i);
+  assert.doesNotMatch(html, /class="section lab-section"/);
   assert.match(html, /Selected Archive/);
   assert.match(html, /Short-form web drama work across food/);
   assert.match(html, /<form class="contact-form" action="\/api\/contact" method="post" data-contact-form>/);
@@ -177,10 +221,10 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /\/assets\/logos\/taiwanplus.svg/);
   assert.match(html, /Happy Space/);
   assert.ok(html.indexOf("collab-grid") < html.indexOf("watch-loop"));
-  assert.ok(html.indexOf("watch-loop") < html.indexOf("available-section"));
+  assert.ok(html.indexOf("watch-loop") < html.indexOf("practice-section"));
   assert.ok(html.indexOf("watch-loop") < html.indexOf("works-section"));
-  assert.ok(html.indexOf("available-section") < html.indexOf("works-section"));
-  assert.ok(html.indexOf('class="section works-section"') < html.indexOf('class="section lab-section"'));
+  assert.ok(html.indexOf("practice-section") < html.indexOf("works-section"));
+  assert.ok(html.indexOf('class="section works-section"') < html.indexOf('class="section archive-section selected-history"'));
   assert.match(html, /works-stack/);
   assert.match(html, /data-scroll-stack/);
   assert.doesNotMatch(html, /data-horizontal-scroll/);
@@ -198,6 +242,11 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Scroll to explore/);
   assert.match(html, /My Art, My Voice/);
   assert.match(html, /Tech Dreamers/);
+  assert.match(html, /https:\/\/prod-img\.taiwanplus\.com\/program\/224be7ed-057b-400f-af63-a8582cd80cfb\.webp/);
+  assert.doesNotMatch(html, /Tech Dreamers[\s\S]*?hsin-working-white-space\.jpg/);
+  assert.match(html, /Tech Dreamers[\s\S]*?Official series page/);
+  assert.match(html, /Tech Dreamers[\s\S]*?Meet the Founder: Battery Testing Startup Liminal Insights/);
+  assert.match(html, /https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers\/250707010\/meet-the-founder-battery-testing-startup-liminal-insights-tech-dreamers-ep-1/);
   assert.match(html, /Slow Steps/);
   assert.doesNotMatch(html, /slow-steps[\s\S]*?paris-cultural-olympiad-team\.jpg/);
   assert.doesNotMatch(html, /Slow Steps[\s\S]*?Upcoming/);
@@ -205,12 +254,8 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Slow Steps[\s\S]*?Movement/i);
   assert.match(html, /Slow Steps[\s\S]*?Director \/ Editor \/ Producer/);
   assert.match(html, /Slow Steps[\s\S]*?Travel/);
-  assert.match(html, /Interior \/ Spatial Brand Films/);
-  assert.match(html, /Gorgeous Space \/ 幸福空間/);
-  assert.match(html, /Director \/ Editor/);
-  assert.match(html, /Showreel in progress/);
+  assert.doesNotMatch(html, /Interior \/ Spatial Brand Films/);
   assert.doesNotMatch(html, /3 yrs/);
-  assert.doesNotMatch(html, /Interior \/ Spatial Brand Films[\s\S]*?Coming 2026/);
   assert.match(html, /PTS Taigi - Bus Travel Factual Episodes/);
   assert.match(html, /Planning \/ Script/);
   assert.match(html, /Top Gear China: UK Special/);
@@ -219,14 +264,10 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /China-side Director/);
   assert.doesNotMatch(html, /Oriental Satellite TV/);
   assert.match(html, /car show/);
-  assert.match(html, /200M/);
-  assert.match(html, /previous series average/);
-  assert.match(html, /0\.81/);
   assert.match(html, /href="#top-gear-china-uk-special"/);
   assert.match(html, /href="#pts-taigi-bus"/);
   assert.doesNotMatch(html, /href="#interior-spatial-brand-films"/);
-  assert.match(html, /https:\/\/youtu\.be\/M_eXe9HRD9Y\?si=YZ_3JZ7FJY4vVcZv/);
-  assert.match(html, /Watch the full episode/);
+  assert.doesNotMatch(html, /https:\/\/youtu\.be\/M_eXe9HRD9Y\?si=YZ_3JZ7FJY4vVcZv/);
   assert.match(html, /Watch the series/);
   assert.match(html, /Press &amp; Interviews/);
   assert.match(html, /Official program page/);
@@ -309,7 +350,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(sitemap, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
   assert.match(zh, /紀錄片導演/);
   assert.match(zh, /觀看 showreel/);
-  assert.match(zh, /Showreel 整理中/);
+  assert.doesNotMatch(zh, /Showreel 整理中/);
   assert.doesNotMatch(zh, /data-about-tabs/);
   assert.match(zh, /可合作項目/);
   assert.doesNotMatch(zh, /<h2 class="section-title">關於我<\/h2>/);
@@ -318,30 +359,23 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.doesNotMatch(zh, /情感質地/);
   assert.doesNotMatch(zh, /溫柔但準確地轉譯/);
   assert.doesNotMatch(zh, /住宅與室內設計影像、空間品牌影片/);
-  assert.match(zh, /藝術家與文化單位/);
-  assert.match(zh, /紀實製作人/);
+  assert.doesNotMatch(zh, /class="services-grid"/);
   assert.match(zh, /剪輯/);
   assert.match(zh, /挑戰/);
   assert.match(zh, /我如何處理/);
   assert.doesNotMatch(zh, /適合合作/);
   assert.doesNotMatch(zh, /代表成績/);
   assert.doesNotMatch(zh, /impact-grid/);
-  assert.match(zh, /AI \/ Language Lab/);
-  assert.match(zh, /future skill name/);
+  assert.doesNotMatch(zh, /class="section lab-section"/);
   assert.match(zh, /精選舊作/);
   assert.match(zh, /觀看完整單集/);
   assert.match(zh, /觀看完整系列/);
-  assert.match(zh, /觀看代表片段/);
-  assert.match(zh, /幸福空間與室內設計影像/);
-  assert.match(zh, /導演 \/ 剪輯/);
+  assert.doesNotMatch(zh, /觀看代表片段/);
   assert.doesNotMatch(zh, /3 yrs|三年間|約三年/);
   assert.match(zh, /公視台語台《無事坐巴士》/);
-  assert.match(zh, /企劃 \/ 企編/);
   assert.match(zh, /《巔峰拍檔》中國版：英國篇/);
-  assert.match(zh, /China Dragon TV/);
-  assert.match(zh, /汽車節目與紀實娛樂/);
   assert.doesNotMatch(zh, /中方導演/);
-  assert.match(zh, /同時段綜藝類冠軍/);
+  assert.doesNotMatch(zh, /同時段綜藝類冠軍/);
   assert.doesNotMatch(zh, /觀看精選影片/);
   assert.match(zh, /代表影像作品/);
   assert.match(zh, /媒體報導與訪談/);

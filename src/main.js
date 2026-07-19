@@ -28,6 +28,25 @@ window.addEventListener("pageshow", (event) => {
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+const cinematicHero = document.querySelector("[data-cinematic-hero]");
+
+if (cinematicHero && !prefersReducedMotion) {
+  let cinematicFrame = 0;
+  const updateCinematicHero = () => {
+    cinematicFrame = 0;
+    const rect = cinematicHero.getBoundingClientRect();
+    const progress = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height, 1)));
+    cinematicHero.style.setProperty("--hero-progress", progress.toFixed(4));
+  };
+  const scheduleCinematicHero = () => {
+    if (cinematicFrame) return;
+    cinematicFrame = window.requestAnimationFrame(updateCinematicHero);
+  };
+  updateCinematicHero();
+  window.addEventListener("scroll", scheduleCinematicHero, { passive: true });
+  window.addEventListener("resize", scheduleCinematicHero);
+}
+
 if (!prefersReducedMotion) {
   const sections = Array.from(document.querySelectorAll(".section"));
   initAmbientBackground(document.querySelector(".light-beam-layer"));

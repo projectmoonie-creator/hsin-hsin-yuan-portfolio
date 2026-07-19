@@ -1,5 +1,7 @@
 # Hsin-Hsin Yuan Portfolio Website Spec
 
+> Active visual architecture update (2026-07-19): the homepage uses a cinematic portrait hero driven by `data/media.json`, three featured-work chapters, one consolidated practice statement, selected history, collaborations, and contact. Service and lab card grids are no longer active homepage sections. See `docs/superpowers/specs/2026-07-19-cinematic-portfolio-system-design.md`.
+
 ## Goal
 
 Build a concise, modern, bilingual portfolio website for Hsin-Hsin Yuan as a creator/director and production collaborator. The site should feel like a quiet, cinematic advertisement: strong opening copy, minimal text, embedded or linked video spaces, and a horizontal featured works section inside an otherwise vertical page.
@@ -51,4 +53,3 @@ Each work reserves a 16:9 media area.
 ## Deployment
 
 Static site output in `dist/`. Can be deployed to Netlify, Vercel, or Cloudflare Pages using `npm run build` and publish directory `dist`.
-

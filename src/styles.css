@@ -27,6 +27,7 @@ html {
   background: var(--bg);
   color: var(--ink);
   font-family: Inter, "Noto Sans TC", "PingFang TC", "Helvetica Neue", Arial, sans-serif;
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 
@@ -1600,5 +1601,225 @@ a {
 
   .watch-loop-track {
     transform: none !important;
+  }
+}
+
+/* Cinematic portfolio system: calm editorial structure with an optional portrait layer. */
+.hero[data-cinematic-hero] {
+  --hero-progress: 0;
+  align-items: end;
+  grid-template-columns: 1fr;
+  min-height: 100svh;
+  padding: 0;
+}
+
+.hero-portrait-stage {
+  background: #d9d8d3;
+  inset: 0;
+  overflow: hidden;
+  position: absolute;
+}
+
+.hero-portrait-stage::after {
+  background:
+    linear-gradient(90deg, rgba(8, 8, 9, 0.04) 20%, rgba(8, 8, 9, 0.22) 62%, rgba(8, 8, 9, 0.72)),
+    linear-gradient(0deg, rgba(8, 8, 9, 0.88), transparent 58%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.hero-portrait-background,
+.hero-portrait-foreground {
+  height: 108%;
+  inset: -4% 0;
+  object-fit: cover;
+  object-position: var(--hero-focal-point, 50% 50%);
+  position: absolute;
+  transform: translate3d(0, calc(var(--hero-progress) * 4vh), 0) scale(1.035);
+  width: 100%;
+  will-change: transform;
+}
+
+.hero-portrait-foreground {
+  pointer-events: none;
+  transform: translate3d(calc(var(--hero-progress) * -1.5vw), calc(var(--hero-progress) * 7vh), 0) scale(1.02);
+  z-index: 3;
+}
+
+.hero[data-cinematic-hero] .hero-media {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  inset: 0;
+  position: absolute;
+  z-index: 4;
+}
+
+.hero[data-cinematic-hero] .hero-media::before {
+  display: none;
+}
+
+.hero[data-cinematic-hero] .hero-play-button {
+  left: auto;
+  position: absolute;
+  right: var(--page-pad);
+  top: 48%;
+  z-index: 6;
+}
+
+.hero[data-cinematic-hero] .hero-content {
+  margin: 0 var(--page-pad) clamp(2.5rem, 6vw, 5.5rem);
+  max-width: min(1120px, 86vw);
+  position: relative;
+  transform: translate3d(0, calc(var(--hero-progress) * -2.4vh), 0);
+  z-index: 5;
+}
+
+.hero[data-cinematic-hero] h1 {
+  font-size: clamp(4.2rem, 13vw, 12.5rem);
+  line-height: 0.78;
+  max-width: 8ch;
+}
+
+.hero[data-cinematic-hero] .hero-subcopy {
+  max-width: 42rem;
+}
+
+.collab-section-early {
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.collab-grid {
+  border-block: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.collab-item {
+  background: transparent;
+  border: 0;
+  min-height: 0;
+  padding: 1rem clamp(1rem, 2.5vw, 2rem) 1rem 0;
+}
+
+.partner-name {
+  display: none;
+}
+
+.practice-section {
+  display: grid;
+  gap: clamp(2rem, 6vw, 7rem);
+  grid-template-columns: minmax(9rem, 0.35fr) minmax(0, 1.25fr);
+  min-height: 72svh;
+}
+
+.practice-statement h2 {
+  font-size: clamp(2.8rem, 7vw, 7rem);
+  line-height: 0.9;
+  margin: 0 0 2rem;
+  max-width: 10ch;
+}
+
+.practice-statement p {
+  color: var(--muted);
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  line-height: 1.55;
+  max-width: 52rem;
+}
+
+.practice-section .available-pill-list {
+  align-content: end;
+  grid-column: 2;
+}
+
+.works-stack {
+  gap: 0;
+}
+
+.works-stack .work-panel {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  gap: clamp(2rem, 5vw, 6rem);
+  grid-template-columns: minmax(0, 1.35fr) minmax(19rem, 0.65fr);
+  min-height: 100svh;
+  padding: clamp(2rem, 5vw, 4rem) 0;
+  top: 0;
+}
+
+.works-stack .media-frame {
+  align-self: center;
+  border-radius: 1.1rem;
+  min-height: min(70svh, 760px);
+}
+
+.work-copy {
+  align-self: center;
+}
+
+.selected-history .archive-item {
+  background: transparent;
+  border-inline: 0;
+  padding-inline: 0;
+}
+
+@media (max-width: 820px) {
+  .hero[data-cinematic-hero] {
+    min-height: 94svh;
+  }
+
+  .hero[data-cinematic-hero] .hero-content {
+    margin: 0 1rem 2rem;
+    max-width: calc(100vw - 2rem);
+    transform: none;
+  }
+
+  .hero[data-cinematic-hero] h1 {
+    font-size: clamp(3.25rem, 17vw, 6.2rem);
+  }
+
+  .hero[data-cinematic-hero] .hero-play-button {
+    right: 1rem;
+    top: 42%;
+  }
+
+  .hero-portrait-background,
+  .hero-portrait-foreground {
+    transform: none;
+  }
+
+  .hero-portrait-stage::after {
+    background: linear-gradient(0deg, rgba(8, 8, 9, 0.92), transparent 72%);
+  }
+
+  .practice-section {
+    display: block;
+    min-height: 0;
+  }
+
+  .practice-section .available-pill-list {
+    margin-top: 2rem;
+  }
+
+  .works-stack .work-panel {
+    min-height: 0;
+    padding-block: 2.5rem;
+  }
+
+  .works-stack .media-frame {
+    min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-portrait-background,
+  .hero-portrait-foreground,
+  .hero[data-cinematic-hero] .hero-content {
+    transform: none;
   }
 }

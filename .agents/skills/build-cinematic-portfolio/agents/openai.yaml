@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build Cinematic Portfolio"
+  short_description: "Create cinematic replaceable-media portfolios"
+  default_prompt: "Use $build-cinematic-portfolio to turn my materials and references into a cinematic, maintainable portfolio website."

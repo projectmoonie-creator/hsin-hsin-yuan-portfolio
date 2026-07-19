@@ -57,12 +57,27 @@ export function loadMarkdownCollection(dir) {
 }
 
 export function loadSiteData(baseDir = root) {
+  const media = JSON.parse(readFileSync(join(baseDir, "data/media.json"), "utf8"));
+  validateMediaManifest(media);
   return {
     site: JSON.parse(readFileSync(join(baseDir, "data/site.json"), "utf8")),
+    media,
     collaborations: JSON.parse(readFileSync(join(baseDir, "data/collaborations.json"), "utf8")),
     archive: loadMarkdownCollection(join(baseDir, "content/archive")),
     lab: loadMarkdownCollection(join(baseDir, "content/lab")),
   };
+}
+
+export function validateMediaManifest(media) {
+  const hero = media?.hero;
+  if (!hero || typeof hero !== "object") throw new Error("media.hero is required");
+  if (typeof hero.background !== "string" || !hero.background) throw new Error("media.hero.background is required");
+  if (typeof hero.foreground !== "string") throw new Error("media.hero.foreground must be a string");
+  if (!/^\d{1,3}% \d{1,3}%$/.test(hero.focalPoint || "")) throw new Error("media.hero.focalPoint must use X% Y%");
+  if (typeof hero.alt?.en !== "string" || !hero.alt.en.trim()) throw new Error("media.hero.alt.en is required");
+  if (typeof hero.alt?.zh !== "string" || !hero.alt.zh.trim()) throw new Error("media.hero.alt.zh is required");
+  if (typeof hero.treatment !== "string" || !hero.treatment) throw new Error("media.hero.treatment is required");
+  return media;
 }
 
 function escapeHtml(value) {
@@ -259,7 +274,6 @@ function renderWork(work, lang, copy) {
         <h3>${escapeHtml(title)}</h3>
         <p class="work-tagline">${escapeHtml(tagline)}</p>
         <p class="work-description">${escapeHtml(description)}</p>
-        ${renderTags(work.tags)}
         ${renderMetrics(work.metrics, lang)}
         ${renderCaseStudy(work.caseStudy, lang)}
         ${renderPress(work.press, lang)}
@@ -467,6 +481,8 @@ function renderSitemap(lastmod = new Date().toISOString().slice(0, 10)) {
 
 export function renderPage({ lang, site, works }) {
   const copy = site.site[lang];
+  const heroMedia = site.media.hero;
+  const featuredWorks = works.slice(0, 3);
   const switchLang = otherLang(lang);
   const heroTitleLines = (copy.heroTitleLines || [copy.heroTitle]).map((line) => `<span>${escapeHtml(line)}</span>`).join("");
   const heroRoles = (copy.heroRoleLines || copy.heroRoles).map((role) => `<span>${renderHeroRoleLine(role)}</span>`).join("");
@@ -475,8 +491,10 @@ export function renderPage({ lang, site, works }) {
     { href: "#works", label: lang === "en" ? "Works" : "作品" },
     { href: "#contact", label: lang === "en" ? "Contact" : "聯絡" },
   ];
-  const services = renderInfoCards(copy.services);
   const collaborations = renderCollaborations(site.collaborations);
+  const heroForeground = heroMedia.foreground
+    ? `<img class="hero-portrait-foreground" src="${escapeHtml(heroMedia.foreground)}" alt="" aria-hidden="true">`
+    : "";
 
   return `<!doctype html>
 <html lang="${escapeHtml(lang)}">
@@ -499,7 +517,7 @@ export function renderPage({ lang, site, works }) {
     <meta name="twitter:card" content="summary_large_image">
     <script type="application/ld+json">${escapeJsonForHtml(renderPersonJsonLd(site))}</script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="preload" as="image" href="/assets/portfolio/hsin-working-white-space.jpg">
+    <link rel="preload" as="image" href="${escapeHtml(heroMedia.background)}">
     <link rel="stylesheet" href="/styles.css?v=${ASSET_VERSION}">
     <script type="module" src="/main.js?v=${ASSET_VERSION}"></script>
   </head>
@@ -517,8 +535,11 @@ export function renderPage({ lang, site, works }) {
       </header>
 
       <main>
-        <section class="hero">
-          <div class="hero-media" id="showreel">
+        <section class="hero" data-cinematic-hero>
+          <div class="hero-portrait-stage ${escapeHtml(heroMedia.treatment)}" style="--hero-focal-point:${escapeHtml(heroMedia.focalPoint)}">
+            <img class="hero-portrait-background" src="${escapeHtml(heroMedia.background)}" alt="${escapeHtml(localize(heroMedia.alt, lang))}">
+            ${heroForeground}
+            <div class="hero-media" id="showreel">
             <video
               class="hero-showreel-video"
               data-showreel-video
@@ -533,6 +554,7 @@ export function renderPage({ lang, site, works }) {
             <button class="hero-play-button" type="button" data-showreel-play aria-label="${escapeHtml(copy.showreelCta)}">
               <span class="hero-play-icon"></span>
             </button>
+            </div>
           </div>
           <div class="hero-content">
             <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
@@ -549,16 +571,14 @@ export function renderPage({ lang, site, works }) {
 
         ${renderWatchLoop(works, lang, copy)}
 
-        <section class="section available-section" id="available">
-          <div class="available-simple">
-            <h2 class="section-title">${escapeHtml(copy.availabilityLabel)}</h2>
-            <div class="section-intro">
-              <p>${escapeHtml(copy.availabilityIntro)}</p>
-            </div>
-            <div class="available-pill-list">
-              ${renderAvailabilityPills(copy.availability)}
-            </div>
+        <section class="section practice-section" id="available">
+          <p class="section-title">${escapeHtml(copy.availabilityLabel)}</p>
+          <div class="practice-statement">
+            <h2>${escapeHtml(copy.createTitle)}</h2>
+            <p>${escapeHtml(copy.createSubcopy)}</p>
+            <p>${escapeHtml(copy.availabilityIntro)}</p>
           </div>
+          <div class="available-pill-list">${renderAvailabilityPills(copy.availability)}</div>
         </section>
 
         <section class="section works-section" id="works">
@@ -567,27 +587,11 @@ export function renderPage({ lang, site, works }) {
             ${copy.worksHint ? `<div class="works-hint">${escapeHtml(copy.worksHint)}</div>` : ""}
           </div>
           <div class="works-stack" data-scroll-stack>
-            ${works.map((work) => renderWork(work, lang, copy)).join("")}
+            ${featuredWorks.map((work) => renderWork(work, lang, copy)).join("")}
           </div>
         </section>
 
-        <section class="section">
-          <div class="section-intro">
-            <h2 class="section-title">${escapeHtml(copy.createTitle)}</h2>
-            <p>${escapeHtml(copy.createSubcopy)}</p>
-          </div>
-          <div class="services-grid">${services}</div>
-        </section>
-
-        <section class="section lab-section">
-          <div class="section-intro">
-            <h2 class="section-title">${escapeHtml(copy.labTitle)}</h2>
-            <p>${escapeHtml(copy.labSubcopy)}</p>
-          </div>
-          <div class="lab-grid">${renderLab(site.lab, lang)}</div>
-        </section>
-
-        <section class="section archive-section">
+        <section class="section archive-section selected-history">
           <div class="section-intro">
             <h2 class="section-title">${escapeHtml(copy.archiveTitle)}</h2>
             <p>${escapeHtml(copy.archiveSubcopy)}</p>

@@ -1,0 +1,12 @@
+{
+  "hero": {
+    "background": "/assets/portfolio/hsin-working-white-space.jpg",
+    "foreground": "",
+    "focalPoint": "38% 72%",
+    "alt": {
+      "en": "Hsin-Hsin Yuan developing a documentary project",
+      "zh": "袁欣欣進行紀錄片創作工作"
+    },
+    "treatment": "portrait-layered"
+  }
+}

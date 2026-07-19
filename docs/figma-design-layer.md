@@ -1,5 +1,7 @@
 # Figma Design Layer
 
+> The hero image in active SVG exports comes from `data/media.json`. Remote work imagery is represented as an explicit replace-in-Figma placeholder; the exporter does not download or embed third-party images.
+
 This document defines the Figma layer for Hsin-Hsin Yuan's portfolio site. It is the visual control layer above the codebase, not a replacement for the current GitHub + Vercel deployment.
 
 ## Purpose
