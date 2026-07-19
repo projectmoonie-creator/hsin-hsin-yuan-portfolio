@@ -74,11 +74,14 @@ def open_page(
     *,
     reduced_motion: str = "no-preference",
     java_script_enabled: bool = True,
+    touch_only: bool = False,
 ) -> tuple[Page, list[str], list[str]]:
     context = browser.new_context(
         viewport={"width": width, "height": height},
         reduced_motion=reduced_motion,
         java_script_enabled=java_script_enabled,
+        has_touch=touch_only,
+        is_mobile=touch_only,
     )
     page = context.new_page()
     console_errors: list[str] = []
@@ -103,6 +106,7 @@ def run_scenario(
     lang: str = "en",
     reduced_motion: str = "no-preference",
     java_script_enabled: bool = True,
+    touch_only: bool = False,
 ) -> dict:
     result = {
         "name": name,
@@ -110,6 +114,7 @@ def run_scenario(
         "viewport": [width, height],
         "reducedMotion": reduced_motion,
         "javaScript": java_script_enabled,
+        "touchOnly": touch_only,
         "checks": [],
         "failures": [],
     }
@@ -121,6 +126,7 @@ def run_scenario(
         height,
         reduced_motion=reduced_motion,
         java_script_enabled=java_script_enabled,
+        touch_only=touch_only,
     )
     try:
         result["url"] = page.url
@@ -138,12 +144,45 @@ def run_scenario(
         add_check(result, not page_errors, "no uncaught page errors", page_errors)
         add_check(result, not console_errors, "no console errors", console_errors)
 
+        mobile = width <= 820
+        should_be_manual = mobile or reduced_motion == "reduce" or not java_script_enabled or touch_only
+
         visual_contract = page.evaluate(
             """() => {
               const worksLink = document.querySelector('.nav-links a[href="#works"]');
               const submit = document.querySelector('.contact-submit');
               const submitStyle = getComputedStyle(submit);
               const heroMedia = document.querySelector('.hero-media').getBoundingClientRect();
+              const watchViewport = document.querySelector('.watch-loop-viewport');
+              const showreelVideo = document.querySelector('[data-showreel-video]');
+              const showreelPlay = document.querySelector('[data-showreel-play]');
+              const parseRgb = (value) => (value.match(/[\d.]+/g) || []).slice(0, 3).map(Number);
+              const luminance = (rgb) => {
+                const values = rgb.map((value) => {
+                  const channel = value / 255;
+                  return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+                });
+                return 0.2126 * values[0] + 0.7152 * values[1] + 0.0722 * values[2];
+              };
+              const contrast = (foreground, background) => {
+                const a = luminance(parseRgb(foreground));
+                const b = luminance(parseRgb(background));
+                return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+              };
+              const effectiveBackground = (node) => {
+                for (let current = node; current; current = current.parentElement) {
+                  const value = getComputedStyle(current).backgroundColor;
+                  if (value && value !== 'rgba(0, 0, 0, 0)' && value !== 'transparent') return value;
+                }
+                return getComputedStyle(document.body).backgroundColor;
+              };
+              const labelContrasts = [...document.querySelectorAll(
+                '.section-title, .work-meta, .case-study-item span'
+              )].map((node) => ({
+                selector: node.className,
+                text: node.textContent.trim().slice(0, 60),
+                ratio: contrast(getComputedStyle(node).color, effectiveBackground(node)),
+              }));
               return {
                 worksLinkVisible: Boolean(
                   worksLink && getComputedStyle(worksLink).display !== 'none' && worksLink.getClientRects().length
@@ -152,6 +191,13 @@ def run_scenario(
                 submitColor: submitStyle.color,
                 submitBackground: submitStyle.backgroundColor,
                 heroRatio: heroMedia.width / heroMedia.height,
+                htmlLang: document.documentElement.lang,
+                labelContrasts,
+                showreelPlayDisplay: getComputedStyle(showreelPlay).display,
+                showreelVideoControls: showreelVideo.controls,
+                showreelVideoOpacity: Number(getComputedStyle(showreelVideo).opacity),
+                showreelVideoPoster: showreelVideo.poster,
+                watchOverflowX: getComputedStyle(watchViewport).overflowX,
               };
             }""",
         )
@@ -170,6 +216,74 @@ def run_scenario(
             "showreel poster keeps a 16:9 frame",
             visual_contract["heroRatio"],
         )
+        add_check(
+            result,
+            visual_contract["htmlLang"] == ("zh-Hant" if lang == "zh" else "en"),
+            "document language matches localized output",
+            visual_contract["htmlLang"],
+        )
+        low_contrast_labels = [
+            item for item in visual_contract["labelContrasts"] if item["ratio"] < 4.5
+        ]
+        add_check(
+            result,
+            not low_contrast_labels,
+            "small text labels meet 4.5:1 contrast",
+            low_contrast_labels,
+        )
+        add_check(
+            result,
+            visual_contract["watchOverflowX"] == ("auto" if should_be_manual else "hidden"),
+            "Watch overflow matches motion policy",
+            visual_contract["watchOverflowX"],
+        )
+        if not java_script_enabled:
+            add_check(
+                result,
+                visual_contract["showreelPlayDisplay"] == "none"
+                and visual_contract["showreelVideoControls"]
+                and visual_contract["showreelVideoOpacity"] >= 0.99
+                and bool(visual_contract["showreelVideoPoster"]),
+                "no-JavaScript showreel exposes native playback",
+                visual_contract,
+            )
+
+        if java_script_enabled:
+            press_fallback = page.evaluate(
+                """() => {
+                  const source = document.querySelector('.press-preview-card:has(img)');
+                  if (!source) return { available: false };
+                  const clone = source.cloneNode(true);
+                  clone.style.position = 'fixed';
+                  clone.style.left = '0';
+                  clone.style.top = '0';
+                  clone.style.visibility = 'hidden';
+                  clone.style.width = 'min(44rem, 90vw)';
+                  document.body.append(clone);
+                  clone.querySelector('img').dispatchEvent(new Event('error'));
+                  const frame = clone.querySelector('.press-preview-image');
+                  const copy = clone.querySelector('.press-preview-copy');
+                  const result = {
+                    available: true,
+                    framePreserved: Boolean(frame),
+                    imageRemoved: !clone.querySelector('img'),
+                    cardWidth: clone.getBoundingClientRect().width,
+                    copyWidth: copy.getBoundingClientRect().width,
+                  };
+                  clone.remove();
+                  return result;
+                }""",
+            )
+            result["pressFallback"] = press_fallback
+            add_check(
+                result,
+                press_fallback["available"]
+                and press_fallback["framePreserved"]
+                and press_fallback["imageRemoved"]
+                and press_fallback["copyWidth"] > press_fallback["cardWidth"] * 0.6,
+                "press image failure preserves readable card layout",
+                press_fallback,
+            )
 
         watch = page.locator("[data-watch-loop]")
         if watch.count() == 0:
@@ -184,9 +298,6 @@ def run_scenario(
         before = transform_of(page)
         page.wait_for_timeout(650)
         after = transform_of(page)
-        mobile = width <= 820
-        should_be_manual = mobile or reduced_motion == "reduce" or not java_script_enabled
-
         if should_be_manual:
             add_check(result, before == after, "Watch Loop remains manually positioned", [before, after])
             viewport = page.locator(".watch-loop-viewport")
@@ -407,6 +518,17 @@ def main() -> int:
             )
             scenarios.append(
                 run_scenario(browser, args.base_url, output_dir, "mobile-390", 390, 844, lang="zh"),
+            )
+            scenarios.append(
+                run_scenario(
+                    browser,
+                    args.base_url,
+                    output_dir,
+                    "touch-tablet-1024",
+                    1024,
+                    1366,
+                    touch_only=True,
+                ),
             )
         finally:
             browser.close()

@@ -3,8 +3,8 @@ const TRACK_SELECTOR = "[data-watch-loop-track]";
 const SEQUENCE_SELECTOR = "[data-watch-loop-sequence]";
 const FOCUSABLE_SELECTOR = "a[href], button, input, select, textarea, [tabindex]";
 
-export function watchLoopMotionAllowed({ reducedMotion, narrowViewport }) {
-  return !reducedMotion && !narrowViewport;
+export function watchLoopMotionAllowed({ reducedMotion, narrowViewport, finePointer }) {
+  return !reducedMotion && !narrowViewport && finePointer;
 }
 
 function addListener(target, type, listener, options) {
@@ -29,6 +29,7 @@ function createWatchLoopController(loop, root, view) {
   if (!viewport || !track || !sequence) return null;
 
   const page = root.nodeType === 9 ? root : root.ownerDocument || view.document;
+  const manualOverflowX = viewport.style.overflowX;
   const configuredSpeed = Number(loop.dataset.speed || 28);
   const speed = Number.isFinite(configuredSpeed) ? configuredSpeed : 28;
   const pauseReasons = new Set();
@@ -51,6 +52,7 @@ function createWatchLoopController(loop, root, view) {
   function restoreManualRail() {
     removeCopies();
     track.style.transform = "";
+    viewport.style.overflowX = manualOverflowX;
     sequenceWidth = 0;
     offset = 0;
   }
@@ -156,6 +158,8 @@ function createWatchLoopController(loop, root, view) {
     if (enabled) return;
     enabled = true;
     pageVisible = !page?.hidden;
+    viewport.scrollLeft = 0;
+    viewport.style.overflowX = "hidden";
     addInteractionListeners();
     syncLoopCopies();
 
@@ -200,6 +204,7 @@ function createWatchLoopController(loop, root, view) {
 export function initWatchLoops(root = document, view = window) {
   const reducedMotionQuery = view.matchMedia("(prefers-reduced-motion: reduce)");
   const narrowViewportQuery = view.matchMedia("(max-width: 820px)");
+  const finePointerQuery = view.matchMedia("(hover: hover) and (pointer: fine)");
   const controllers = Array.from(root.querySelectorAll(LOOP_SELECTOR))
     .map((loop) => createWatchLoopController(loop, root, view))
     .filter(Boolean);
@@ -208,6 +213,7 @@ export function initWatchLoops(root = document, view = window) {
     const allowed = watchLoopMotionAllowed({
       reducedMotion: reducedMotionQuery.matches,
       narrowViewport: narrowViewportQuery.matches,
+      finePointer: finePointerQuery.matches,
     });
     controllers.forEach((controller) => (allowed ? controller.enable() : controller.disable()));
   }
@@ -215,6 +221,7 @@ export function initWatchLoops(root = document, view = window) {
   const removeMediaListeners = [
     addMediaListener(reducedMotionQuery, applyMotionPolicy),
     addMediaListener(narrowViewportQuery, applyMotionPolicy),
+    addMediaListener(finePointerQuery, applyMotionPolicy),
   ];
 
   let destroyed = false;

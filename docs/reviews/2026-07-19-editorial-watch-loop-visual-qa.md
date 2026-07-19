@@ -18,13 +18,14 @@ This failure mode is now part of the reusable portfolio skill: visual QA must re
 - 1440×900 desktop;
 - 1200×900 desktop;
 - 834×1112 tablet;
+- 1024×1366 touch-only tablet;
 - 390×844 mobile;
 - 360×800 mobile;
 - 1440×900 with reduced motion;
 - 1440×900 without JavaScript;
 - 390×844 Chinese output.
 
-Each run verifies six canonical work anchors, five original Watch previews, one readable source sequence, no page-level horizontal overflow, no console or page errors, visible keyboard focus, complete image loading, non-broken media, a visible Works navigation path, legible contact-submit colors, a 16:9 showreel frame, and fixed-navigation clearance for work and Contact anchors. Desktop additionally verifies loop advance and hover/focus pause; mobile, reduced-motion, and no-JavaScript paths verify manual horizontal scrolling without transform-driven autoplay.
+Each run verifies six canonical work anchors, five original Watch previews, one readable source sequence, no page-level horizontal overflow, no console or page errors, visible keyboard focus, complete image loading, non-broken media, a visible Works navigation path, legible contact-submit colors, a 16:9 showreel frame, correct document language, 4.5:1 small-label contrast, press-card layout after a simulated image error, and fixed-navigation clearance for work and Contact anchors. Fine-pointer desktop additionally verifies loop advance, hidden manual overflow, and hover/focus pause; mobile, touch-only tablet, reduced-motion, and no-JavaScript paths verify an `overflow-x: auto` manual rail without transform-driven autoplay. The no-JavaScript run also verifies visible native showreel controls and a poster.
 
 Report: `/tmp/hybrid-visual-qa/report.md`  
 Machine-readable result: `/tmp/hybrid-visual-qa/report.json`
@@ -38,6 +39,8 @@ The first screenshot pass exposed three concrete defects that structural tests d
 3. The 16:9 showreel poster was placed in 16:11, 16:10, and approximately 1.22:1 crops, cutting off its own title treatment. Every breakpoint now preserves the native 16:9 frame.
 
 The mobile topbar now retains a direct Works path alongside Contact and language switching. Supporting images were decoded and captured individually to rule out the blank-frame artefact produced by extra-tall locator screenshots.
+
+The post-review pass additionally verifies the adjudicated fixes: autoplay no longer shares ownership with manual `scrollLeft`; small labels use accessible light-surface text colors; a failed press image preserves its frame and readable copy column; the Chinese document declares `zh-Hant`; and the no-JavaScript showreel exposes poster-backed native playback. Native form posts are covered separately by contact API tests for localized HTML success/error responses.
 
 ## Continuity judgment
 
@@ -61,4 +64,4 @@ Hybrid evidence:
 
 ## Outcome
 
-Visual QA: **PASS**. The hybrid is ready for independent Claude and Gemini review before preview deployment. Production remains untouched.
+Visual QA after Claude/Gemini adjudication: **PASS**. The hybrid is ready for preview deployment. Production remains untouched.

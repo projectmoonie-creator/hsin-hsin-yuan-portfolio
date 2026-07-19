@@ -149,7 +149,7 @@ function renderPress(items = [], lang) {
         ${items
           .map((item) => {
             const image = item.image
-              ? `<span class="press-preview-image"><img src="${escapeHtml(item.image)}" alt="" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></span>`
+              ? `<span class="press-preview-image"><img src="${escapeHtml(item.image)}" alt="" loading="lazy" decoding="async" onerror="this.remove()"></span>`
               : "";
             const body = `
               ${image}
@@ -309,18 +309,19 @@ function renderWatchLoop(works, lang, copy) {
 
 function renderArchive(items = [], lang) {
   return items
-    .map(
-      (item) => `
+    .map((item) => {
+      const description = localize(item.description, lang) || item.body;
+      return `
         <article class="archive-item">
           <div>
-            <p class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(localize(item.role, lang))} / ${escapeHtml(item.platform)}</p>
+            <p class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(localize(item.role, lang))} / ${escapeHtml(localize(item.platform, lang))}</p>
             <h3>${escapeHtml(localize(item.title, lang))}</h3>
-            ${item.body ? `<p class="archive-body">${escapeHtml(item.body)}</p>` : ""}
+            ${description ? `<p class="archive-body">${escapeHtml(description)}</p>` : ""}
           </div>
           ${renderMetrics(item.metrics, lang)}
         </article>
-      `,
-    )
+      `;
+    })
     .join("");
 }
 
@@ -449,7 +450,7 @@ export function renderPage({ lang, site, works }) {
   const heroRoles = copy.heroRoles.map((role) => `<span>${escapeHtml(role)}</span>`).join("");
 
   return `<!doctype html>
-<html lang="${escapeHtml(lang)}">
+<html lang="${escapeHtml(lang === "zh" ? "zh-Hant" : lang)}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -472,6 +473,14 @@ export function renderPage({ lang, site, works }) {
     <link rel="preload" as="image" href="${escapeHtml(heroMedia.poster)}">
     <link rel="stylesheet" href="/styles.css?v=${ASSET_VERSION}">
     <script type="module" src="/main.js?v=${ASSET_VERSION}"></script>
+    <noscript>
+      <style>
+        .hero-poster,
+        .hero-play-button { display: none !important; }
+        .hero-showreel-video { opacity: 1 !important; pointer-events: auto !important; }
+        .hero-media { cursor: auto; }
+      </style>
+    </noscript>
   </head>
   <body>
     <div class="site-shell">
@@ -499,6 +508,7 @@ export function renderPage({ lang, site, works }) {
             <video
               class="hero-showreel-video"
               data-showreel-video
+              controls
               muted
               playsinline
               webkit-playsinline

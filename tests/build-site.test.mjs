@@ -85,6 +85,41 @@ test("featured press entries carry source-audit metadata", () => {
   }
 });
 
+test("press image failures preserve the fixed thumbnail frame", () => {
+  const { html } = renderEnglish();
+
+  assert.match(
+    html,
+    /<span class="press-preview-image"><img[^>]+onerror="this\.remove\(\)"[^>]*><\/span>/,
+  );
+  assert.doesNotMatch(html, /onerror="this\.parentElement\.remove\(\)"/);
+});
+
+test("archive frontmatter localizes platform and description from canonical data", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const archive = site.archive;
+
+  assert.equal(archive.length, 4);
+  for (const item of archive) {
+    assert.equal(typeof item.platform, "object", `${item.slug} platform should be localized`);
+    assert.ok(item.platform.en?.trim(), `${item.slug} platform.en should be present`);
+    assert.ok(item.platform.zh?.trim(), `${item.slug} platform.zh should be present`);
+    assert.equal(typeof item.description, "object", `${item.slug} description should be localized`);
+    assert.ok(item.description.en?.trim(), `${item.slug} description.en should be present`);
+    assert.ok(item.description.zh?.trim(), `${item.slug} description.zh should be present`);
+    assert.equal(item.body, "", `${item.slug} legacy body copy should move into frontmatter`);
+  }
+
+  const en = renderPage({ lang: "en", site, works });
+  const zh = renderPage({ lang: "zh", site, works });
+  assert.match(en, /Chinese online platforms/);
+  assert.match(en, /Short-form web drama work across food, fantasy, comedy, suspense, and youth romance formats\./);
+  assert.match(zh, /中國網路影音平台/);
+  assert.match(zh, /橫跨美食、奇幻、喜劇、懸疑與青春愛情類型的網路短劇作品。/);
+  assert.doesNotMatch(zh, /Short-form web drama work/);
+});
+
 test("site copy uses the current schema plus one watch-loop label", () => {
   const { site, media, archive, ...rest } = loadSiteData(root);
   const retiredFields = [
@@ -121,12 +156,13 @@ test("site copy uses the current schema plus one watch-loop label", () => {
   }
 });
 
-test("loadMarkdownCollection still returns ordered archive evidence", () => {
+test("loadMarkdownCollection returns ordered canonical archive evidence", () => {
   const archive = loadMarkdownCollection(join(root, "content/archive"));
 
   assert.equal(archive[0].slug, "three-minute-micro-drama");
   assert.equal(archive[0].metrics[0].value, "200M");
-  assert.match(archive[0].body, /Short-form web drama work/);
+  assert.match(archive[0].description.en, /Short-form web drama work/);
+  assert.match(archive[0].description.zh, /網路短劇作品/);
 });
 
 test("renderPage follows the approved hybrid order through the footer", () => {
@@ -290,7 +326,7 @@ test("Chinese output maps the same architecture and action language", () => {
   const works = loadWorks(join(root, "content/works"));
   const html = renderPage({ lang: "zh", site, works });
 
-  assert.match(html, /<html lang="zh">/);
+  assert.match(html, /<html lang="zh-Hant">/);
   assert.match(html, /代表影像作品/);
   assert.match(html, /可合作項目/);
   assert.match(html, /精選作品/);
@@ -303,6 +339,17 @@ test("Chinese output maps the same architecture and action language", () => {
   assert.match(html, /class="language-switch" href="\/en\/">EN<\/a>/);
   assert.equal((html.match(/<article class="work-row/g) || []).length, 6);
   assert.equal((html.match(/<a class="watch-loop-card/g) || []).length, 5);
+});
+
+test("showreel remains playable with JavaScript disabled", () => {
+  const { html, site } = renderEnglish();
+
+  assert.match(html, /<video[\s\S]*?class="hero-showreel-video"[\s\S]*?\scontrols(?:\s|>)/);
+  assert.match(html, new RegExp(`poster="${site.media.hero.poster.replaceAll("/", "\\/")}"`));
+  assert.match(html, /<noscript>[\s\S]*?\.hero-poster[\s\S]*?display:\s*none\s*!important/);
+  assert.match(html, /<noscript>[\s\S]*?\.hero-play-button[\s\S]*?display:\s*none\s*!important/);
+  assert.match(html, /<noscript>[\s\S]*?\.hero-showreel-video[\s\S]*?opacity:\s*1\s*!important/);
+  assert.match(html, /<noscript>[\s\S]*?\.hero-showreel-video[\s\S]*?pointer-events:\s*auto\s*!important/);
 });
 
 test("build generates bilingual pages, core assets, watch-loop module, and discovery files", () => {

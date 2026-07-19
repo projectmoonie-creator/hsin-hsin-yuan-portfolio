@@ -1,6 +1,6 @@
 {
   "design": "editorial-watch-loop-hybrid",
-  "sourceFingerprint": "sha256:64c5e98e367180bd28fa214573807a972a76fd44a6c05631eb0b6708c38d8309",
+  "sourceFingerprint": "sha256:92167fc79db3ec9563e3753216d6c622242be7916242275c2b3999f5ec515c53",
   "generatedFrom": "canonical repository sources",
   "canonicalSources": {
     "site": "data/site.json",

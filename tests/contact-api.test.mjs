@@ -27,14 +27,22 @@ function createResponse() {
   };
 }
 
-async function callContact(body, env = {}) {
+async function callContact(body, env = {}, request = {}) {
   const previousEnv = { ...process.env };
   Object.assign(process.env, env);
   for (const key of ["RESEND_API_KEY", "CONTACT_TO_EMAIL", "CONTACT_FROM_EMAIL"]) {
     if (!(key in env)) delete process.env[key];
   }
 
-  const req = { method: "POST", body, headers: { "x-forwarded-for": "203.0.113.7" } };
+  const req = {
+    method: request.method || "POST",
+    body,
+    headers: {
+      accept: "application/json",
+      "x-forwarded-for": "203.0.113.7",
+      ...request.headers,
+    },
+  };
   const res = createResponse();
 
   try {
@@ -165,6 +173,78 @@ test("contact API applies a basic per-client rate limit before sending email", a
     assert.equal(second.body.ok, false);
     assert.match(second.body.error, /too many/i);
     assert.equal(calls, 1);
+  } finally {
+    global.fetch = originalFetch;
+  }
+});
+
+test("contact API accepts a native form post without startedAt and returns localized HTML", async () => {
+  const originalFetch = global.fetch;
+  const calls = [];
+  global.fetch = async (url, options) => {
+    calls.push({ url, options });
+    return { ok: true, json: async () => ({ id: "email_native" }) };
+  };
+
+  const nativeBody = new URLSearchParams({
+    name: "No JavaScript Visitor",
+    email: "native@example.com",
+    projectType: "Documentary",
+    message: "I would like to discuss a project without JavaScript.",
+  }).toString();
+
+  try {
+    const res = await callContact(nativeBody, mailEnv, {
+      headers: {
+        accept: "text/html,application/xhtml+xml",
+        "content-type": "application/x-www-form-urlencoded",
+        referer: "https://hsinhsinyuan.com/zh/",
+      },
+    });
+
+    assert.equal(res.statusCode, 200);
+    assert.match(res.headers["Content-Type"], /^text\/html/);
+    assert.match(res.headers.Vary, /Accept/);
+    assert.equal(typeof res.body, "string");
+    assert.match(res.body, /<html lang="zh-Hant">/);
+    assert.match(res.body, /訊息已送出/);
+    assert.match(res.body, /href="\/zh\/"/);
+    assert.equal(calls.length, 1, "missing startedAt must not be classified as spam");
+  } finally {
+    global.fetch = originalFetch;
+  }
+});
+
+test("contact API returns a usable HTML error for an invalid native form post", async () => {
+  let fetchCalled = false;
+  const originalFetch = global.fetch;
+  global.fetch = async () => {
+    fetchCalled = true;
+    return { ok: true, json: async () => ({ id: "unexpected" }) };
+  };
+
+  const nativeBody = new URLSearchParams({
+    name: "No JavaScript Visitor",
+    email: "invalid-email",
+    projectType: "Documentary",
+    message: "Please reply when possible.",
+  }).toString();
+
+  try {
+    const res = await callContact(nativeBody, mailEnv, {
+      headers: {
+        accept: "text/html,application/xhtml+xml",
+        "content-type": "application/x-www-form-urlencoded",
+        referer: "https://hsinhsinyuan.com/en/",
+      },
+    });
+
+    assert.equal(res.statusCode, 400);
+    assert.match(res.headers["Content-Type"], /^text\/html/);
+    assert.equal(typeof res.body, "string");
+    assert.match(res.body, /Message not sent/);
+    assert.match(res.body, /href="\/en\/"/);
+    assert.equal(fetchCalled, false);
   } finally {
     global.fetch = originalFetch;
   }

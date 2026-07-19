@@ -299,7 +299,7 @@ function addArchive(parent, mode, copy) {
     text(row, "Year", item.year, { size: 12, color: PORTFOLIO_MODEL.tokens.moss, width: mobile ? 294 : 130 });
     text(row, "Title", localized(item.title, "en"), { size: mobile ? 22 : 26, fontRole: "editorial", color: PORTFOLIO_MODEL.tokens.paper, width: mobile ? 294 : 430 });
     text(row, "Role", localized(item.role, "en"), { size: 13, color: PORTFOLIO_MODEL.tokens.fog, width: mobile ? 294 : 260 });
-    text(row, "Platform", item.platform, { size: 13, color: PORTFOLIO_MODEL.tokens.fog, width: mobile ? 294 : 320 });
+    text(row, "Platform", localized(item.platform, "en"), { size: 13, color: PORTFOLIO_MODEL.tokens.fog, width: mobile ? 294 : 320 });
   }
 }
 

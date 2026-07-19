@@ -327,7 +327,7 @@ textarea {
 }
 
 .section-title {
-  color: var(--signal-coral);
+  color: var(--ink-soft);
   margin: 0;
 }
 
@@ -358,6 +358,10 @@ textarea {
   color: var(--stage-ink);
   padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
   padding-top: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.collab-section-early .section-title {
+  color: var(--stage-soft);
 }
 
 .collab-grid {
@@ -675,7 +679,7 @@ textarea {
 }
 
 .work-meta {
-  color: var(--signal-coral);
+  color: var(--ink-soft);
   margin-bottom: 1.1rem;
 }
 
@@ -721,10 +725,12 @@ textarea {
 }
 
 .case-study-item span {
-  color: var(--signal-moss);
+  border-left: 2px solid var(--signal-moss);
+  color: var(--ink-soft);
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.06em;
+  padding-left: 0.55rem;
   text-transform: uppercase;
 }
 

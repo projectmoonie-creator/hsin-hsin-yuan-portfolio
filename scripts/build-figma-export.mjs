@@ -179,6 +179,7 @@ function buildModel() {
     title: item.title,
     role: item.role,
     platform: item.platform,
+    description: item.description,
     metrics: item.metrics || [],
   }));
   const watchPreviews = works.filter((work) => work.watchUrl || work.slug === "slow-steps");

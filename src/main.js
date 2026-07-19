@@ -5,6 +5,7 @@ initWatchLoops();
 const showreelMedia = document.querySelector("#showreel");
 const showreelPlay = document.querySelector("[data-showreel-play]");
 const showreelVideo = document.querySelector("[data-showreel-video]");
+if (showreelVideo) showreelVideo.controls = false;
 
 function playShowreel() {
   if (!showreelVideo) return;

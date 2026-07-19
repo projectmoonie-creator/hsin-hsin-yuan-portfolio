@@ -61,6 +61,10 @@ test("generated importer snapshot matches canonical sources and approved counts"
   assert.equal(model.watchPreviews.length, 5);
   assert.equal(model.works.length, 6);
   assert.equal(model.archive.length, 4);
+  for (const item of model.archive) {
+    assert.equal(typeof item.platform, "object", `${item.slug} platform should remain localized in the shared model`);
+    assert.equal(typeof item.description, "object", `${item.slug} description should remain localized in the shared model`);
+  }
   assert.equal(model.watchPreviews[0].slug, "slow-steps");
   assert.equal(model.watchPreviews[0].media.status, "text-first");
   assert.equal(model.watchPreviews.some((item) => item.slug === "interior-spatial-brand-films"), false);
@@ -96,6 +100,7 @@ test("Figma importer builds editable hybrid pages in fixed order and preserves r
   assert.match(code, /sectionKey === "watchLoop" && mode === "mobile"/);
   assert.match(code, /asset\.startsWith\("http"\) \? asset :/);
   assert.match(code, /Remote media reference/);
+  assert.match(code, /text\(row, "Platform", localized\(item\.platform, "en"\)/);
 
   const order = ["hero", "collaborations", "watchLoop", "availability", "selectedWorks", "collaborationFit", "archive", "contact"];
   const orderLiteral = JSON.stringify(order);

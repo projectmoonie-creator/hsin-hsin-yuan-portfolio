@@ -44,7 +44,8 @@ class FakeNode extends FakeEventTarget {
     this.width = width;
     this.clientWidth = clientWidth;
     this.dataset = kind === "loop" ? { speed } : {};
-    this.style = { transform: "" };
+    this.style = { overflowX: "", transform: "" };
+    this.scrollLeft = 0;
     this.children = [];
     this.parentNode = null;
     this.attributes = new Map();
@@ -105,7 +106,14 @@ class FakeNode extends FakeEventTarget {
   }
 }
 
-function createEnvironment({ reducedMotion = false, narrowViewport = false, viewportWidth = 350, sequenceWidth = 100, speed = "28" } = {}) {
+function createEnvironment({
+  reducedMotion = false,
+  narrowViewport = false,
+  finePointer = true,
+  viewportWidth = 350,
+  sequenceWidth = 100,
+  speed = "28",
+} = {}) {
   const viewport = new FakeNode("viewport", { clientWidth: viewportWidth });
   const track = new FakeNode("track");
   const sequence = new FakeNode("sequence", { width: sequenceWidth });
@@ -123,6 +131,7 @@ function createEnvironment({ reducedMotion = false, narrowViewport = false, view
 
   const reducedQuery = new FakeMediaQuery(reducedMotion);
   const narrowQuery = new FakeMediaQuery(narrowViewport);
+  const finePointerQuery = new FakeMediaQuery(finePointer);
   const rafCallbacks = new Map();
   let rafId = 0;
   const intersectionObservers = [];
@@ -165,7 +174,12 @@ function createEnvironment({ reducedMotion = false, narrowViewport = false, view
   }
 
   const view = new FakeEventTarget();
-  view.matchMedia = (query) => (query.includes("reduced-motion") ? reducedQuery : narrowQuery);
+  view.matchMedia = (query) => {
+    if (query.includes("reduced-motion")) return reducedQuery;
+    if (query.includes("max-width")) return narrowQuery;
+    if (query.includes("hover: hover") && query.includes("pointer: fine")) return finePointerQuery;
+    throw new Error(`Unexpected media query: ${query}`);
+  };
   view.requestAnimationFrame = (callback) => {
     const id = ++rafId;
     rafCallbacks.set(id, callback);
@@ -177,6 +191,7 @@ function createEnvironment({ reducedMotion = false, narrowViewport = false, view
 
   return {
     intersectionObservers,
+    finePointerQuery,
     loop,
     narrowQuery,
     pendingFrames: () => rafCallbacks.size,
@@ -200,24 +215,45 @@ function offsetFromTransform(transform) {
   return match ? Math.abs(Number(match[1])) : 0;
 }
 
-test("watch loop auto motion is desktop-only and respects reduced motion", () => {
-  assert.equal(watchLoopMotionAllowed({ reducedMotion: false, narrowViewport: false }), true);
-  assert.equal(watchLoopMotionAllowed({ reducedMotion: true, narrowViewport: false }), false);
-  assert.equal(watchLoopMotionAllowed({ reducedMotion: false, narrowViewport: true }), false);
+test("watch loop auto motion requires a wide, motion-safe fine pointer", () => {
+  assert.equal(watchLoopMotionAllowed({ reducedMotion: false, narrowViewport: false, finePointer: true }), true);
+  assert.equal(watchLoopMotionAllowed({ reducedMotion: true, narrowViewport: false, finePointer: true }), false);
+  assert.equal(watchLoopMotionAllowed({ reducedMotion: false, narrowViewport: true, finePointer: true }), false);
+  assert.equal(watchLoopMotionAllowed({ reducedMotion: false, narrowViewport: false, finePointer: false }), false);
 
   const source = readFileSync(new URL("../src/watch-loop.js", import.meta.url), "utf8");
   assert.match(source, /max-width:\s*820px/);
+  assert.match(source, /hover:\s*hover/);
+  assert.match(source, /pointer:\s*fine/);
 });
 
-test("mobile and reduced-motion modes leave the original sequence manual", () => {
-  for (const settings of [{ narrowViewport: true }, { reducedMotion: true }]) {
+test("mobile, reduced-motion, and touch-only modes leave the original sequence manual", () => {
+  for (const settings of [{ narrowViewport: true }, { reducedMotion: true }, { finePointer: false }]) {
     const environment = createEnvironment(settings);
     initWatchLoops(environment.root, environment.view);
 
     assert.equal(environment.track.children.length, 1);
     assert.equal(environment.track.style.transform, "");
+    assert.equal(environment.viewport.style.overflowX, "");
     assert.equal(environment.pendingFrames(), 0);
   }
+});
+
+test("active autoplay owns horizontal movement and disabling restores the manual overflow rail", () => {
+  const environment = createEnvironment();
+  environment.viewport.scrollLeft = 96;
+
+  initWatchLoops(environment.root, environment.view);
+
+  assert.equal(environment.viewport.style.overflowX, "hidden");
+  assert.equal(environment.viewport.scrollLeft, 0);
+  assert.ok(environment.track.children.length > 1);
+
+  environment.finePointerQuery.setMatches(false);
+  assert.equal(environment.viewport.style.overflowX, "");
+  assert.equal(environment.track.children.length, 1);
+  assert.equal(environment.track.style.transform, "");
+  assert.equal(environment.pendingFrames(), 0);
 });
 
 test("desktop enhancement creates inert copies wide enough to wrap without a blank", () => {
@@ -288,6 +324,7 @@ test("switching to a narrow viewport restores the manual rail", () => {
   environment.narrowQuery.setMatches(true);
   assert.equal(environment.track.children.length, 1);
   assert.equal(environment.track.style.transform, "");
+  assert.equal(environment.viewport.style.overflowX, "");
   assert.equal(environment.pendingFrames(), 0);
 
   environment.narrowQuery.setMatches(false);
@@ -313,6 +350,10 @@ test("main runtime keeps core controls without retired ambient libraries", () =>
 
   assert.match(mainSource, /initWatchLoops/);
   assert.match(mainSource, /data-showreel-play/);
+  assert.ok(
+    mainSource.indexOf("showreelVideo.controls = false;") < mainSource.indexOf("function playShowreel"),
+    "enhanced mode should remove hidden native controls before wiring the custom player",
+  );
   assert.match(mainSource, /data-contact-form/);
   assert.doesNotMatch(mainSource, /anime|ambient-background|initAmbientBackground|data-scroll-stack|GuidingLight|edge-glow/i);
   assert.doesNotMatch(packageSource, /"(?:animejs|ogl)"/);

@@ -50,3 +50,9 @@ test("compact mobile navigation keeps a direct Works path", () => {
     /@media\s*\(max-width:\s*820px\)[\s\S]*?\.nav-links\s*>\s*a:not\(\.language-switch\):not\(\[href="#contact"\]\):not\(\[href="#works"\]\)/,
   );
 });
+
+test("small labels on light surfaces use accessible text colors", () => {
+  assert.match(css, /\.section-title\s*\{[^}]*color:\s*var\(--ink(?:-soft)?\)/);
+  assert.match(css, /\.work-meta\s*\{[^}]*color:\s*var\(--ink(?:-soft)?\)/);
+  assert.match(css, /\.case-study-item span\s*\{[^}]*color:\s*var\(--ink(?:-soft)?\)/);
+});
