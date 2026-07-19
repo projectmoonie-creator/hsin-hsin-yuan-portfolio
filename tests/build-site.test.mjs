@@ -157,6 +157,24 @@ test("homepage uses three cinematic work chapters and one practice statement", (
   assert.doesNotMatch(html, /data-horizontal-scroll/);
 });
 
+test("portrait carrier redesign replaces every high-salience legacy fingerprint", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const en = renderPage({ lang: "en", site, works });
+  const zh = renderPage({ lang: "zh", site, works });
+
+  for (const html of [en, zh]) {
+    assert.match(html, /data-portrait-carrier/);
+    assert.match(html, /class="portrait-foreground"/);
+    assert.match(html, /data-practice-mode="documentary"/);
+    assert.match(html, /data-practice-mode="cross-cultural"/);
+    assert.match(html, /data-practice-mode="editorial-systems"/);
+    assert.match(html, /data-work-theatre/);
+    assert.equal((html.match(/class="work-scene/g) || []).length, 3);
+    assert.doesNotMatch(html, /data-watch-loop|watch-loop-card|work-panel|light-beam-layer/);
+  }
+});
+
 test("renderPage creates bilingual page with scroll-stack works and video fallbacks", () => {
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
