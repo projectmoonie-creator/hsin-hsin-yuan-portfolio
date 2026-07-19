@@ -10,6 +10,7 @@ const SITE_ORIGIN = (process.env.SITE_ORIGIN || "https://hsin-hsin-yuan-portfoli
 const ASSET_VERSION = createHash("sha256")
   .update(readFileSync(join(root, "src/styles.css")))
   .update(readFileSync(join(root, "src/main.js")))
+  .update(readFileSync(join(root, "src/scene-state.js")))
   .digest("hex")
   .slice(0, 12);
 
@@ -576,10 +577,7 @@ function build() {
   writeFileSync(join(dist, "index.html"), '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=/en/">');
   cpSync(join(root, "src/styles.css"), join(dist, "styles.css"));
   cpSync(join(root, "src/main.js"), join(dist, "main.js"));
-  cpSync(join(root, "src/ambient-background.js"), join(dist, "ambient-background.js"));
-  mkdirSync(join(dist, "vendor"), { recursive: true });
-  cpSync(join(root, "node_modules/animejs/dist/bundles/anime.esm.min.js"), join(dist, "vendor/anime.esm.min.js"));
-  cpSync(join(root, "node_modules/ogl/src"), join(dist, "vendor/ogl/src"), { recursive: true });
+  cpSync(join(root, "src/scene-state.js"), join(dist, "scene-state.js"));
 
   if (existsSync(join(root, "public"))) {
     cpSync(join(root, "public"), dist, { recursive: true });
