@@ -96,6 +96,16 @@
 - Suggested roadmap order for this site: stabilize content and public claims; refine visual system and motion; add work detail pages for dense projects; replace temporary media with approved images/video; improve SEO/social previews; add analytics only when the user wants behavior data; then package the workflow as a reusable skill/service.
 - External reviewers such as Claude Code or Gemini should first produce findings, not edit the repo directly, unless the change scope is mechanical and approved.
 
+## Phase Closeout And Cold Resume
+
+- `STATUS.md` is the only mutable entry point for the current project state. A new session reads it after `AGENTS.md` and this Bible instead of depending on chat history.
+- A phase closeout reviews one declared baseline; it does not claim that the portfolio can never be revised again.
+- Use `PASS`, `PASS_WITH_OPEN_ITEMS`, or `BLOCKED`. Known aesthetic refinements may move to the next phase, but truth, privacy, rights, functional, deployment, and unpushed-work blockers may not.
+- Every formal closeout records the reviewed branch and commit, preview/production state, deterministic and visual evidence, external-review use or skip reason, accepted open items, and one exact next action in a dated file under `docs/reviews/`.
+- A substantial closed phase receives a named Git tag after the closeout package is committed. Push the branch and tag, then read back the remote tips.
+- Before declaring closeout complete, answer: "What changed in this phase that is not in a repository, durably backed up, or pushed?" Any remaining item must be listed as a risk.
+- Begin the next phase as a bounded work package from the recorded checkpoint. Do not rewrite historical closeout reports.
+
 ## QA Checklist
 
 - After content or layout changes, run `npm test`.
