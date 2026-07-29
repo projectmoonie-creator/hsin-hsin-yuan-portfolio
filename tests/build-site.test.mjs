@@ -43,12 +43,12 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[1].role.en, "Director / Editor / Producer");
   assert.equal(works[3].role.en, "Director / Editor");
   assert.equal(
-    works[3].cardReelUrl,
+    works[3].featuredReelUrl,
     "/assets/showreel/interior-spatial-card-reel.mp4",
   );
-  assert.equal(works[3].cardReelMode, "after-hold");
+  assert.equal(works[3].featuredReelMode, "in-view");
   assert.equal(
-    works[3].cardReelPoster,
+    works[3].featuredReelPoster,
     "/assets/portfolio/gorgeous-space-lg-sunny-wang.webp",
   );
   assert.equal(
@@ -73,12 +73,12 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     "https://www.youtube.com/playlist?list=PLfuPqJAlXvCs",
   );
   assert.equal(
-    works[4].cardReelUrl,
+    works[4].featuredReelUrl,
     "/assets/showreel/nothing-by-bus-card-reel.mp4",
   );
-  assert.equal(works[4].cardReelMode, "after-hold");
+  assert.equal(works[4].featuredReelMode, "in-view");
   assert.equal(
-    works[4].cardReelPoster,
+    works[4].featuredReelPoster,
     works[4].posterImage,
   );
   assert.equal(works[5].role.en, "Director");
@@ -107,31 +107,21 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   );
 });
 
-test("screening strip renders reels only for explicit after-hold opt-in", () => {
+test("screening strip stays static while approved reels render in featured panels", () => {
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
   const html = renderPage({ lang: "en", site, works });
 
-  assert.match(html, /data-card-reel-mode="after-hold"/);
-
-  const staticWorks = works.map((work) => {
-    const staticWork = { ...work };
-    delete staticWork.cardReelMode;
-    return staticWork;
-  });
-  const staticHtml = renderPage({ lang: "en", site, works: staticWorks });
-
-  assert.doesNotMatch(
-    staticHtml,
-    /src="\/assets\/showreel\/interior-spatial-card-reel\.mp4"/,
-  );
-  assert.doesNotMatch(
-    staticHtml,
-    /src="\/assets\/showreel\/nothing-by-bus-card-reel\.mp4"/,
+  assert.doesNotMatch(html, /data-watch-loop-video/);
+  assert.doesNotMatch(html, /class="watch-loop-video/);
+  assert.doesNotMatch(html, /data-card-reel-mode/);
+  assert.match(
+    html,
+    /<article class="work-panel work-panel-compact-media" id="interior-spatial-brand-films">[\s\S]*?data-featured-reel-video[\s\S]*?src="\/assets\/showreel\/interior-spatial-card-reel\.mp4"/,
   );
   assert.match(
-    staticHtml,
-    /href="#interior-spatial-brand-films" style="background-image:[\s\S]*?gorgeous-space-lg-sunny-wang\.webp/,
+    html,
+    /<article class="work-panel" id="pts-taigi-bus">[\s\S]*?data-featured-reel-video[\s\S]*?src="\/assets\/showreel\/nothing-by-bus-card-reel\.mp4"/,
   );
 });
 
@@ -316,7 +306,8 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Screening strip/);
   assert.doesNotMatch(html, /Swipe to explore/);
   assert.match(html, /watch-loop-card/);
-  assert.match(html, /data-watch-loop-video/);
+  assert.doesNotMatch(html, /data-watch-loop-video/);
+  assert.match(html, /data-featured-reel-video/);
   assert.match(
     html,
     /src="\/assets\/showreel\/interior-spatial-card-reel\.mp4"/,
@@ -375,7 +366,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Gorgeous Space \/ 幸福空間/);
   assert.match(
     html,
-    /<article class="work-panel work-panel-compact-media" id="interior-spatial-brand-films">[\s\S]*?class="media-frame media-frame-contain media-frame-link"[\s\S]*?aria-label="Play video: Interior \/ Spatial Brand Films"[\s\S]*?linear-gradient\(180deg, rgba\(9,9,10,.04\), rgba\(9,9,10,.26\)\)[\s\S]*?gorgeous-space-lg-sunny-wang\.webp[\s\S]*?background-size: cover, contain;[\s\S]*?background-repeat: no-repeat;[^>]*>\s*<span class="work-media-play"/,
+    /<article class="work-panel work-panel-compact-media" id="interior-spatial-brand-films">[\s\S]*?class="media-frame media-frame-contain media-frame-link"[\s\S]*?aria-label="Play video: Interior \/ Spatial Brand Films"[\s\S]*?linear-gradient\(180deg, rgba\(9,9,10,.04\), rgba\(9,9,10,.26\)\)[\s\S]*?gorgeous-space-lg-sunny-wang\.webp[\s\S]*?background-size: cover, contain;[\s\S]*?background-repeat: no-repeat;[^>]*>[\s\S]*?class="work-media-play"/,
   );
   assert.match(html, /Director \/ Editor/);
   assert.match(html, /Selected reel/);
@@ -617,22 +608,23 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   );
   assert.match(css, /--page-pad: clamp/);
   assert.match(css, /\.watch-loop-card \{/);
-  assert.match(css, /\.watch-loop-video \{/);
-  assert.match(css, /\.watch-loop-video \{[\s\S]*?pointer-events: none;/);
+  assert.doesNotMatch(css, /\.watch-loop-video \{/);
+  assert.match(css, /\.featured-reel-video \{/);
+  assert.match(css, /\.featured-reel-video \{[\s\S]*?pointer-events: none;/);
   assert.match(
     css,
-    /\.watch-loop-video \{[\s\S]*?opacity: 0;[\s\S]*?transition: opacity 260ms ease;/,
+    /\.featured-reel-video \{[\s\S]*?opacity: 0;[\s\S]*?transition: opacity 260ms ease;/,
   );
   assert.match(
     css,
-    /\.watch-loop-video\.is-playing \{[\s\S]*?opacity: 1;/,
+    /\.featured-reel-video\.is-playing \{[\s\S]*?opacity: 1;/,
   );
   assert.match(
     css,
-    /\.watch-loop-video::?-webkit-media-controls \{[\s\S]*?display: none !important;/,
+    /\.featured-reel-video::?-webkit-media-controls \{[\s\S]*?display: none !important;/,
   );
   assert.match(css, /\.watch-loop-scrim \{/);
-  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.watch-loop-video \{[\s\S]*?display: none;/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.featured-reel-video \{[\s\S]*?display: none;/);
   assert.match(css, /\.watch-loop-card-plain \{/);
   assert.match(css, /\.watch-loop-card-plain \{[\s\S]*?background: transparent;/);
   assert.doesNotMatch(css, /\.watch-loop-viewport::before/);
@@ -649,23 +641,19 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(js, /clearInitialHash/);
   assert.match(js, /replaceState/);
   assert.match(js, /data-watch-loop/);
-  assert.match(js, /data-watch-loop-video/);
-  assert.match(js, /const WATCH_LOOP_REEL_HOLD_MS = 1400;/);
-  assert.match(js, /const watchLoopVideoTimers = new WeakMap\(\);/);
-  assert.match(js, /window\.setTimeout/);
-  assert.match(js, /window\.clearTimeout/);
+  assert.doesNotMatch(js, /data-watch-loop-video/);
+  assert.match(js, /data-featured-reel-video/);
+  assert.doesNotMatch(js, /WATCH_LOOP_REEL_HOLD_MS|watchLoopVideoTimers/);
+  assert.match(js, /const visibleFeaturedReels = new Set\(\);/);
+  assert.match(js, /const activeFeaturedReel = visibleFeaturedReels\.size[\s\S]*?featuredReelVideos\.filter[\s\S]*?\.at\(-1\)/);
+  assert.match(js, /video === activeFeaturedReel[\s\S]*?playFeaturedReel\(video\)[\s\S]*?resetFeaturedReel\(video\)/);
   assert.match(js, /video\.currentTime = 0;/);
   assert.match(js, /video\.classList\.add\("is-playing"\)/);
   assert.match(js, /video\.classList\.remove\("is-playing"\)/);
   assert.match(js, /video\.addEventListener\("playing"/);
-  assert.match(js, /function refreshWatchLoopVideos\(\)/);
   assert.match(
     js,
-    /function scheduleWatchLoopVideo\(video\) \{[\s\S]*?if \(!isVisible\) \{[\s\S]*?resetWatchLoopVideo\(video\);/,
-  );
-  assert.match(
-    js,
-    /if \(isVisible\) \{[\s\S]*?refreshWatchLoopVideos\(\);[\s\S]*?\} else \{[\s\S]*?pauseWatchLoopVideos\(\);/,
+    /function playFeaturedReel\(video\) \{[\s\S]*?if \(document\.visibilityState !== "visible"\) \{[\s\S]*?resetFeaturedReel\(video\);/,
   );
   assert.match(js, /\{ rootMargin: "0px", threshold: 0\.01 \}/);
   assert.doesNotMatch(js, /rootMargin: "20% 0px"/);

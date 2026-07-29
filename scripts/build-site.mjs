@@ -194,6 +194,32 @@ function mediaFrameContainer({ work, lang, className, style = "", content }) {
   `;
 }
 
+function renderFeaturedReel(work) {
+  const hasApprovedFeaturedReel =
+    work.featuredReelMode === "in-view" &&
+    work.featuredReelUrl &&
+    work.featuredReelPoster;
+
+  if (!hasApprovedFeaturedReel) return "";
+
+  return `
+    <video
+      class="featured-reel-video"
+      data-featured-reel-video
+      muted
+      loop
+      playsinline
+      webkit-playsinline
+      preload="metadata"
+      poster="${escapeHtml(work.featuredReelPoster)}"
+      aria-hidden="true"
+      tabindex="-1"
+    >
+      <source src="${escapeHtml(work.featuredReelUrl)}" type="video/mp4">
+    </video>
+  `;
+}
+
 function mediaFrame(work, lang, copy) {
   const mediaLabel = work.hideMediaLabel
     ? ""
@@ -224,7 +250,7 @@ function mediaFrame(work, lang, copy) {
         ? "media-frame media-frame-contain"
         : "media-frame",
       style: `background-image: ${posterGradient}, ${cssUrl(work.posterImage)}; background-size: cover, ${posterFit}; background-position: center, center; background-repeat: no-repeat; background-color: #0b0b0c;`,
-      content: mediaLabel,
+      content: `${renderFeaturedReel(work)}${mediaLabel}`,
     });
   }
 
@@ -289,39 +315,16 @@ function renderWatchLoopItem(work, lang, copy) {
   const opensWatchUrl = work.watchLoopTarget === "watch" && work.watchUrl;
   const href = opensWatchUrl ? work.watchUrl : `#${work.slug}`;
   const linkAttrs = opensWatchUrl ? ' target="_blank" rel="noreferrer"' : "";
-  const poster = work.cardReelPoster || work.posterImage;
+  const poster = work.posterImage;
   const image = poster
     ? `style="background-image: ${cssUrl(poster)}"`
     : "";
-  const hasApprovedCardReel =
-    work.cardReelMode === "after-hold" &&
-    work.cardReelUrl &&
-    poster;
   const cardClass = poster
     ? "watch-loop-card"
     : "watch-loop-card watch-loop-card-plain";
-  const video = hasApprovedCardReel
-    ? `
-      <video
-        class="watch-loop-video"
-        data-watch-loop-video
-        data-card-reel-mode="after-hold"
-        muted
-        loop
-        playsinline
-        webkit-playsinline
-        preload="metadata"
-        poster="${escapeHtml(poster || "")}"
-        aria-hidden="true"
-        tabindex="-1"
-      >
-        <source src="${escapeHtml(work.cardReelUrl)}" type="video/mp4">
-      </video>`
-    : "";
 
   return `
     <a class="${cardClass}" href="${escapeHtml(href)}"${linkAttrs} ${image}>
-      ${video}
       <span class="watch-loop-scrim" aria-hidden="true"></span>
       <span class="watch-loop-meta">${escapeHtml(work.platform)} / ${escapeHtml(work.year)}</span>
       <strong>${escapeHtml(title)}</strong>
@@ -333,7 +336,7 @@ function renderWatchLoopItem(work, lang, copy) {
 
 function renderWatchLoop(works, lang, copy) {
   const watchableWorks = works.filter(
-    (work) => work.cardReelUrl || work.watchUrl || work.status === "external-only",
+    (work) => work.posterImage || work.watchUrl || work.status === "external-only",
   );
   if (!watchableWorks.length) return "";
 
