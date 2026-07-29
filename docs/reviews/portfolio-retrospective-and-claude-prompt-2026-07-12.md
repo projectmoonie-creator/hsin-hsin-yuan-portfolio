@@ -67,7 +67,7 @@ Do not edit files unless explicitly asked. First produce findings and a suggeste
 
 Run from this repo:
 
-cd "/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V/hsin-hsin-yuan-portfolio-edit"
+cd "<portfolio-repo>"
 
 Read first:
 - PROJECT_BIBLE.md
@@ -107,4 +107,3 @@ Output in Traditional Chinese:
 - A suggested next work package, with goal, files, non-goals, validation steps, and rollback path.
 - Do not modify the repo unless I explicitly approve a specific package.
 ```
-

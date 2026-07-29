@@ -242,13 +242,13 @@ Primary recent source files:
 
 Older impact/stat sources:
 
-- `/Users/hsin-hsinyuan/Work/2026/CV/袁欣欣purple cv 繁體.key`
-- `/Users/hsin-hsinyuan/Work/2026/CV/袁欣欣 简历.docx`
-- `/Users/hsin-hsinyuan/Work/2026/CV/Hsin hsin Yuan CV.docx`
-- `/Users/hsin-hsinyuan/Work/2026/CV/袁欣欣2019.pdf`
-- `/Users/hsin-hsinyuan/Work/2026/CV/Xin xin Yuan CV 1024.pdf`
-- `/Users/hsin-hsinyuan/Work/2026/CV/袁欣欣CV 影片链结版.pdf`
-- `/Users/hsin-hsinyuan/Work/2026/CV/袁欣欣 影片作品链结.pdf`
+- `<private CV archive>/current Traditional Chinese CV`
+- `<private CV archive>/current Simplified Chinese CV`
+- `<private CV archive>/current English CV`
+- `<private CV archive>/2019 CV`
+- `<private CV archive>/older English CV`
+- `<private CV archive>/CV with video links`
+- `<private CV archive>/video-work links`
 
 Word versions are preferred for extraction when available because old Chinese PDF text extraction is noisy.
 

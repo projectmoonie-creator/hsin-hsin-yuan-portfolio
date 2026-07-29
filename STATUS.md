@@ -8,10 +8,13 @@ State: `PASS_WITH_OPEN_ITEMS`
 
 - Reviewed implementation commit: `f4f4d0029c71a2f20f88fea5051a8726b0d0773d`
 - Active branch: `codex/work-card-video-links`
-- Closeout tag: `portfolio-phase-2026-07-29`
+- Final closeout tag: `portfolio-phase-2026-07-29-r2`
 - Vercel Preview:
   `https://hsin-hsin-yuan-portfolio-adp4ci6hx.vercel.app/en/`
 - The closeout did not replace the production deployment.
+- The final closeout also redacts the direct Yahoo address and private absolute
+  paths from the public repository, and replaces the burned-in address in the
+  homepage showreel with the portfolio inquiry form.
 
 This baseline is a trustworthy bilingual resume-supplement portfolio. It
 includes the hero/showreel entry, platform proof, continuous screening strip,
@@ -40,7 +43,7 @@ These are next-phase decisions, not blockers:
 At the next session, first consolidate the user's new requests by function
 (content, information architecture, visual system, media, interaction, SEO, or
 deployment). Choose one package, state its non-goals and validation, then branch
-from `portfolio-phase-2026-07-29`.
+from `portfolio-phase-2026-07-29-r2`.
 
 ## Cold Resume
 

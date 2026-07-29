@@ -6,8 +6,9 @@ Outcome: `PASS_WITH_OPEN_ITEMS`
 
 ## Scope
 
-This review closes the current bilingual portfolio baseline through
-`f4f4d00`. It covers the cumulative content hierarchy, work navigation,
+This review closes the current bilingual portfolio feature baseline through
+`f4f4d00`, plus the final public-repository privacy remediation. It covers the
+cumulative content hierarchy, work navigation,
 screening-strip loop, Featured Works, work-specific reels and links, archive
 recovery, contact flow, responsive behavior, build output, Git durability, and
 Vercel Preview identity.
@@ -21,11 +22,22 @@ production.
 
 ### High
 
-None.
+Resolved before final close:
+
+- The public repository still exposed a direct Yahoo address in a historical
+  design plan, the active Figma importer, and the website-visual showreel
+  source. The rendered homepage MP4 also contained the address in its final
+  scene. All source layers now route readers to the portfolio inquiry form, and
+  the 30-second MP4 was re-rendered and visually checked. A repository-wide
+  regression test prevents that direct address from returning in tracked text
+  files.
 
 ### Medium
 
-None blocking this phase.
+Resolved before final close:
+
+- Historical plans and review prompts exposed private local absolute paths.
+  They now use redacted placeholders, with a repository-wide regression test.
 
 ### Low / Accepted Open Items
 
@@ -43,7 +55,7 @@ None blocking this phase.
 
 ## Deterministic Evidence
 
-- `npm test`: 17 tests passed, 0 failed.
+- `npm test`: 19 tests passed, 0 failed.
 - `npm run build`: passed.
 - `git diff --check`: passed.
 - Generated English and Chinese pages have no missing internal anchors or local
@@ -51,8 +63,18 @@ None blocking this phase.
 - `dist/` remains generated and untracked.
 - Credential scan found only expected environment-variable names in
   `api/contact.js` and its tests; no key value or private key was found.
+- Public-repository privacy scan found and removed the direct Yahoo address
+  from historical design, Figma, and showreel layers.
+- Public-repository privacy scan found and removed private local absolute paths
+  from historical plans and review prompts.
 - Contact tests cover honeypot rejection, missing configuration, Resend
   success, friendly network failure, and basic rate limiting.
+- HyperFrames `lint`, `validate`, and `inspect` completed with zero errors and
+  zero layout issues. Existing density and decorative low-contrast warnings
+  remain non-blocking.
+- The replacement homepage showreel is 30 seconds, has SHA-256
+  `89af81f8047e4b688083af6a86e0fce30d94a3d69291d611b509a26d9fc37fa7`,
+  and its final scene was visually verified to show `PORTFOLIO INQUIRY FORM`.
 
 ## Visual And Interaction Evidence
 
@@ -88,9 +110,11 @@ assets.
   `https://hsin-hsin-yuan-portfolio-adp4ci6hx.vercel.app/en/`
 - The implementation branch matched
   `origin/codex/work-card-video-links` before the closeout documentation change.
-- The closeout package is checkpointed by tag
-  `portfolio-phase-2026-07-29`; branch and tag remote readback are required
+- The final closeout package is checkpointed by tag
+  `portfolio-phase-2026-07-29-r2`; branch and tag remote readback are required
   before declaring the close complete.
+- `portfolio-phase-2026-07-29` preserves the pre-privacy-remediation closeout
+  attempt and is not the cold-resume baseline.
 
 ## External Review Decision
 

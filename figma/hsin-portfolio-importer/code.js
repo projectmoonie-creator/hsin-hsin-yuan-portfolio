@@ -253,7 +253,7 @@ async function createDesktopPage() {
   sectionTitle(contact, "Contact");
   text(contact, "Contact headline", COPY.contactTitle, { size: 82, style: "Black", lineHeight: 90, width: 720 });
   text(contact, "Contact subcopy", COPY.contactSubcopy, { size: 20, color: TOKENS.muted.value, lineHeight: 145, width: 640 });
-  text(contact, "Contact CTA", "Contact Hsin-Hsin  /  hsin54@yahoo.com", { size: 14, style: "Bold", color: TOKENS.acid.value, uppercase: true });
+  text(contact, "Contact CTA", "Contact Hsin-Hsin  /  Portfolio inquiry form", { size: 14, style: "Bold", color: TOKENS.acid.value, uppercase: true });
 }
 
 async function createMobilePage() {

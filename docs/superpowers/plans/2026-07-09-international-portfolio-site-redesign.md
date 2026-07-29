@@ -19,7 +19,7 @@
 - Create `content/archive/*.md`: older credits with roles, metrics, platform, and source notes.
 - Create `content/lab/*.md`: AI / Language Lab cards, including the Codex + Claude fact-checked series script workflow.
 - Modify `content/works/*.md`: add poster images, tags, metrics, and expanded descriptions.
-- Create `public/assets/portfolio/`: copied image assets from `/Users/hsin-hsinyuan/Downloads/其他/非常木蘭/`.
+- Create `public/assets/portfolio/`: copied approved image assets from `<approved local photo archive>`.
 - Replace `src/styles.css`: international editorial visual system with mobile-first layouts.
 - Modify `src/main.js`: keep horizontal scroll enhancement and add lightweight mobile-safe UI behavior if needed.
 - Create `.gitignore`: exclude generated and system files before pushing to GitHub.
@@ -364,13 +364,13 @@ mkdir -p public/assets/portfolio
 Run:
 
 ```bash
-cp "/Users/hsin-hsinyuan/Downloads/其他/非常木蘭/Shanghai00006.jpg" public/assets/portfolio/hsin-working-white-space.jpg
-cp "/Users/hsin-hsinyuan/Downloads/其他/非常木蘭/Paris 00002.JPG" public/assets/portfolio/paris-cultural-olympiad-team.jpg
-cp "/Users/hsin-hsinyuan/Downloads/其他/非常木蘭/My art my voice-1.png" public/assets/portfolio/my-art-my-voice-performance-1.png
-cp "/Users/hsin-hsinyuan/Downloads/其他/非常木蘭/My art my voice-2.png" public/assets/portfolio/my-art-my-voice-performance-2.png
-cp "/Users/hsin-hsinyuan/Downloads/其他/非常木蘭/My art my voice-7.png" public/assets/portfolio/my-art-my-voice-interview.png
-cp "/Users/hsin-hsinyuan/Downloads/其他/非常木蘭/England 00003.jpg" public/assets/portfolio/top-gear-uk-special-car.jpg
-cp "/Users/hsin-hsinyuan/Downloads/其他/非常木蘭/india 0003 (在印度被邀請去陌生人的婚禮).jpg" public/assets/portfolio/india-overclocking-production.jpg
+cp "<approved local photo archive>/Shanghai00006.jpg" public/assets/portfolio/hsin-working-white-space.jpg
+cp "<approved local photo archive>/Paris 00002.JPG" public/assets/portfolio/paris-cultural-olympiad-team.jpg
+cp "<approved local photo archive>/My art my voice-1.png" public/assets/portfolio/my-art-my-voice-performance-1.png
+cp "<approved local photo archive>/My art my voice-2.png" public/assets/portfolio/my-art-my-voice-performance-2.png
+cp "<approved local photo archive>/My art my voice-7.png" public/assets/portfolio/my-art-my-voice-interview.png
+cp "<approved local photo archive>/England 00003.jpg" public/assets/portfolio/top-gear-uk-special-car.jpg
+cp "<approved local photo archive>/india 0003 (在印度被邀請去陌生人的婚禮).jpg" public/assets/portfolio/india-overclocking-production.jpg
 ```
 
 - [ ] **Step 3: Verify assets**
@@ -459,7 +459,7 @@ Use this shape:
     "contactTitle": "Let’s build a story with signal.",
     "contactSubcopy": "For documentary, cultural, branded, AI-language, and cross-cultural production collaborations.",
     "contactCta": "Contact Hsin-Hsin",
-    "email": "hsin54@yahoo.com"
+    "contactMethod": "Portfolio inquiry form"
   },
   "zh": {
     "metaTitle": "袁欣欣 | 紀錄片導演與 AI 語言創作者",
@@ -491,7 +491,7 @@ Use this shape:
     "contactTitle": "一起做一個有訊號的故事。",
     "contactSubcopy": "紀錄片、文化內容、品牌短影音、AI 語言與跨文化製作合作洽詢。",
     "contactCta": "聯絡袁欣欣",
-    "email": "hsin54@yahoo.com"
+    "contactMethod": "Portfolio inquiry form"
   }
 }
 ```

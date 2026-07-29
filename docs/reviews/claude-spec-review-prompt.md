@@ -48,6 +48,6 @@ Output format:
 Suggested CLI command after login:
 
 ```sh
-cd "/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V/hsin-hsin-yuan-portfolio-edit"
+cd "<portfolio-repo>"
 claude -p --permission-mode dontAsk --allowedTools Read,Grep,Glob --no-session-persistence "$(cat docs/reviews/claude-spec-review-prompt.md)"
 ```

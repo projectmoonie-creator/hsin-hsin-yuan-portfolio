@@ -152,6 +152,47 @@ test("site copy has no retired section fields in active data", () => {
   }
 });
 
+test("public tracked artifacts do not expose the direct contact address", () => {
+  const directAddress = ["hsin54", "yahoo.com"].join("@");
+  let matches = "";
+
+  try {
+    matches = execFileSync(
+      "git",
+      ["grep", "-n", "-I", "-F", directAddress],
+      { cwd: root, encoding: "utf8" },
+    ).trim();
+  } catch (error) {
+    if (error.status !== 1) {
+      throw error;
+    }
+  }
+
+  assert.equal(matches, "");
+});
+
+test("public tracked artifacts do not expose private absolute paths", () => {
+  const privatePathPattern = [
+    ["/Us", "ers/"].join(""),
+    ["/tmp/codex-", "remote-attachments"].join(""),
+  ].join("|");
+  let matches = "";
+
+  try {
+    matches = execFileSync(
+      "git",
+      ["grep", "-n", "-I", "-E", privatePathPattern],
+      { cwd: root, encoding: "utf8" },
+    ).trim();
+  } catch (error) {
+    if (error.status !== 1) {
+      throw error;
+    }
+  }
+
+  assert.equal(matches, "");
+});
+
 test("loadMarkdownCollection returns ordered archive and lab entries", () => {
   const archive = loadMarkdownCollection(join(root, "content/archive"));
   const lab = loadMarkdownCollection(join(root, "content/lab"));
