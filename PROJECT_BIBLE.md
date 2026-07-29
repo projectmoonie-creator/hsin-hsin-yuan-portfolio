@@ -15,6 +15,19 @@
 - Partner, publisher, and platform labels must be localizable at the data source. English pages and English design handoffs should use the English label without leaking a Chinese wordmark; Chinese pages may preserve the official Chinese name. Historical source titles are exempt when the title itself is evidence.
 - Do not translate press headlines or source titles too freely. If an English title is editorially translated from a Chinese source, keep it factual and close to the source.
 - Keep homepage language concise. Move richer, warmer explanation into work details, press, archive, or future case-study pages.
+- Treat the screening-strip tagline and Featured Work description as two
+  different reading moments. The tagline should be one memorable invitation;
+  the description should name the recognizable program type, subject, and
+  contribution without reading like a production inventory.
+- For English portfolio-grouping titles, use natural, searchable industry
+  language. Do not publish literal internal category labels that an
+  English-speaking viewer would not know to search.
+- Elegance must remain evidence-led. Prefer concrete images, places, materials,
+  and human stakes over adjective stacking, and do not introduce unsupported
+  facts merely to make a work sound more cinematic.
+- When only one language has been approved, change only that language and list
+  the other language as an explicit follow-up rather than silently translating
+  the new copy.
 
 ## Press Cards
 

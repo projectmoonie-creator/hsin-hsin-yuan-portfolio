@@ -6,24 +6,24 @@ State: `PASS_WITH_OPEN_ITEMS`
 
 ## Current Work Package
 
-- Package: `Gorgeous Space English Localization + Sunny Wang Poster`
-- Outcome: `PASS`
+- Package: `English Featured Work Copy Closeout`
+- Outcome: `PASS_WITH_OPEN_ITEMS`
 - Active branch: `codex/contact-archive-entrypoints`
 - Closed baseline tag: `portfolio-phase-2026-07-29-closed`
 - Immediate parent commit:
-  `5ff4470fbe222a3a724fd15617ebeb69cf50090d`
+  `9e395cfd68d88fa3beec437dc88a153949974354`
 - Reviewed implementation commit:
-  `213dc8a0e6d3f2e05c100fecdeaff45b42a85965`
+  `d45787888ef0e68cdbfb68b071edee9bd6aed522`
 - Review:
-  `docs/reviews/gorgeous-space-localization-sunny-poster-2026-07-30.md`
+  `docs/reviews/english-featured-copy-closeout-2026-07-30.md`
 - No Preview or production deployment was created or replaced.
 - No Git history rewrite or old-deployment deletion was performed.
 
-Gorgeous Space is now a bilingual data value instead of one mixed-language
-string. The English site and English Figma handoff use `Gorgeous Space` with no
-visible `幸福空間`; the Chinese site preserves the official Chinese label. The
-work poster now uses a larger frontal Sunny Wang frame, positioned on the right
-so the screening-strip copy remains readable on the left.
+The English screening-strip and Featured Work copy for `Nothing by Bus` and
+the Gorgeous Space collection now uses an evocative first line followed by
+clear, searchable program language. `Interior / Spatial Brand Films` has been
+renamed `Interior Design & Branded Films`. Chinese copy remains unchanged for
+the user's next review.
 
 Verification:
 
@@ -31,14 +31,9 @@ Verification:
 - `npm run build`: passed.
 - `npm run figma:export`: passed.
 - `git diff --check`: passed.
-- English generated HTML, English Figma exports, and the Figma importer contain
-  no `幸福空間`; Chinese generated HTML retains it.
-- Desktop `1440x1100` and mobile `390x844` checks passed for the
-  screening-strip card and Featured Work image.
-- No tested viewport reported console errors.
-- Delivered WebP SHA-256:
-  `db41763c6846b186a0bfcc5e9b45d4765917fed99a48c038d61693135d78a666`.
-- Disposable screenshots and QA files remain outside the repository.
+- A regression test failed first against the previous wording, then passed
+  with the approved English copy.
+- English output retains `Gorgeous Space` with no visible `幸福空間`.
 
 ## Closed Baseline
 
@@ -60,19 +55,30 @@ time of the tag; they do not override the current site structure.
 
 These are next-phase decisions, not blockers:
 
-1. Approve and implement the proposed `PUBLIC LINKS` rule so public watch,
-   official, press, and credit/proof destinations use one repeatable contract.
-2. Build a 35-45 second Three-Minute Micro Drama reel only from approved local
-   source material, then decide whether it becomes a visual archive card.
-3. Add user-approved stills for `鬼手神車`; public release materials remain
-   incomplete.
-4. Curate or replace playlist destinations for Gorgeous Space and Nothing by
+1. Rebuild `FROM THE ARCHIVE` as one descending chronological stream while
+   preserving the current large/supporting visual vocabulary. Add truthful
+   screenshots or stills where sources permit.
+2. Verify the very early CV credits before publishing them: current source says
+   `e4kids`, while the remembered name was `D4Kids`; dates and roles for that
+   credit, `Explore the Unknown World`, and `Digital Archives` remain open.
+3. Approve and implement one public-links contract for official, watch, press,
+   trailer, and credit/proof destinations.
+4. Build a 35-45 second Three-Minute Micro Drama reel only from approved local
+   source material, then decide whether it becomes a visual Archive card.
+5. Add user-approved stills for `鬼手神車` and render its restrained 12-15
+   second still-led reel; public release materials remain incomplete.
+6. Replace the collaboration names with locally preserved official logos.
+   Continue from `docs/source-materials/collaboration-logo-wall.md`; Dragon TV
+   and ScreenHouse still require exact source verification.
+7. Review and rewrite the Chinese copy for `Nothing by Bus` and `Interior
+   Design & Branded Films`.
+8. Curate or replace playlist destinations for Gorgeous Space and Nothing by
    Bus as the source lists become more complete.
-5. Review whether `AI-Language Creative` should remain in SEO metadata now
+9. Review whether `AI-Language Creative` should remain in SEO metadata now
    that the standalone lab section and public service taxonomy are retired.
-6. Replace remote archive thumbnails or make a custom archive reel only when
+10. Replace remote archive thumbnails or make a custom archive reel only when
    local source or explicit picture-and-music reuse permission exists.
-7. Create a new Preview or promote production only after an explicit
+11. Create a new Preview or promote production only after an explicit
    deployment decision.
 
 ## Residual Privacy Risk
@@ -86,9 +92,10 @@ performed during this package.
 
 ## Exact Next Action
 
-Obtain the user's approval on the proposed `PUBLIC LINKS` layout and data
-contract, then implement it as a separate bounded package. Do not deploy
-production without explicit approval.
+Start the Archive chronology and collaboration-logo package from the reviewed
+implementation commit. First make chronology independent of card size; then
+complete official logo source verification before downloading or publishing
+marks. Do not deploy production without explicit approval.
 
 ## Cold Resume
 
@@ -96,8 +103,11 @@ production without explicit approval.
 2. Verify the active branch, reviewed implementation commit, remote tip,
    worktree state, and preserved closeout tag.
 3. Read
-   `docs/reviews/gorgeous-space-localization-sunny-poster-2026-07-30.md` for
-   the current package evidence. Read
+   `docs/reviews/english-featured-copy-closeout-2026-07-30.md` for the current
+   package evidence and preserved next requirements. Read
+   `docs/source-materials/collaboration-logo-wall.md` before resuming the logo
+   package. Read
+   `docs/reviews/gorgeous-space-localization-sunny-poster-2026-07-30.md`,
    `docs/reviews/slow-steps-no-title-poster-2026-07-30.md` and
    `docs/reviews/contact-archive-entrypoints-v1-2026-07-30.md` when the earlier
    poster or contact/archive rationale is needed.
