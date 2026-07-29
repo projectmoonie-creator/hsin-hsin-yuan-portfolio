@@ -8,9 +8,9 @@ State: `PASS_WITH_OPEN_ITEMS`
 
 - Reviewed implementation commit: `f4f4d0029c71a2f20f88fea5051a8726b0d0773d`
 - Active branch: `codex/work-card-video-links`
-- Final closeout tag: `portfolio-phase-2026-07-29-r2`
+- Final closeout tag: `portfolio-phase-2026-07-29-final`
 - Vercel Preview:
-  `https://hsin-hsin-yuan-portfolio-adp4ci6hx.vercel.app/en/`
+  `https://hsin-hsin-yuan-portfolio-rk6jdrkve.vercel.app/en/`
 - The closeout did not replace the production deployment.
 - The final closeout also redacts the direct Yahoo address and private absolute
   paths from the public repository, and replaces the burned-in address in the
@@ -43,7 +43,7 @@ These are next-phase decisions, not blockers:
 At the next session, first consolidate the user's new requests by function
 (content, information architecture, visual system, media, interaction, SEO, or
 deployment). Choose one package, state its non-goals and validation, then branch
-from `portfolio-phase-2026-07-29-r2`.
+from `portfolio-phase-2026-07-29-final`.
 
 ## Cold Resume
 

@@ -106,15 +106,18 @@ assets.
 ## Deployment And Durability
 
 - Vercel reported commit `f4f4d00` Ready in the Preview environment.
-- Public Preview:
-  `https://hsin-hsin-yuan-portfolio-adp4ci6hx.vercel.app/en/`
+- Vercel also reported privacy-remediation commit `9fbf541` Ready.
+- Verified privacy-remediated Preview:
+  `https://hsin-hsin-yuan-portfolio-rk6jdrkve.vercel.app/en/`
 - The implementation branch matched
   `origin/codex/work-card-video-links` before the closeout documentation change.
 - The final closeout package is checkpointed by tag
-  `portfolio-phase-2026-07-29-r2`; branch and tag remote readback are required
+  `portfolio-phase-2026-07-29-final`; branch and tag remote readback are required
   before declaring the close complete.
 - `portfolio-phase-2026-07-29` preserves the pre-privacy-remediation closeout
   attempt and is not the cold-resume baseline.
+- `portfolio-phase-2026-07-29-r2` preserves the privacy-remediation code
+  checkpoint before the final deployment identity was recorded.
 
 ## External Review Decision
 
