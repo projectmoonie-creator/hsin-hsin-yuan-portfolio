@@ -433,7 +433,10 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.watch-loop-card \{/);
   assert.match(css, /\.watch-loop-card-plain \{/);
   assert.match(css, /\.watch-loop-card-plain \{[\s\S]*?background: transparent;/);
-  assert.match(css, /\.watch-loop-viewport::before/);
+  assert.doesNotMatch(css, /\.watch-loop-viewport::before/);
+  assert.doesNotMatch(css, /\.watch-loop-viewport::after/);
+  assert.doesNotMatch(css, /linear-gradient\(90deg, var\(--bg\), transparent\)/);
+  assert.doesNotMatch(css, /linear-gradient\(270deg, var\(--bg\), transparent\)/);
   assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\):not\(\[href="#contact"\]\)/);
   assert.doesNotMatch(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\) \{\n    display: none;/);
   assert.doesNotMatch(js, /getEdgeProximity|initAmbientBackground|lightState|beamOpacity|is-guided|is-lit|edge-glow-card/);

@@ -421,26 +421,6 @@ a {
   scrollbar-color: rgba(255, 255, 255, 0.28) transparent;
 }
 
-.watch-loop-viewport::before,
-.watch-loop-viewport::after {
-  content: "";
-  inset-block: 0;
-  pointer-events: none;
-  position: absolute;
-  width: min(8rem, 12vw);
-  z-index: 2;
-}
-
-.watch-loop-viewport::before {
-  background: linear-gradient(90deg, var(--bg), transparent);
-  left: 0;
-}
-
-.watch-loop-viewport::after {
-  background: linear-gradient(270deg, var(--bg), transparent);
-  right: 0;
-}
-
 .watch-loop-track {
   align-items: stretch;
   display: flex;
