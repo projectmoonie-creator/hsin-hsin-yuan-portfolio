@@ -15,11 +15,11 @@
   },
   "platform": "PTS Taigi",
   "tagline": {
-    "en": "Local travel, public media, and Taiwanese-language factual storytelling.",
+    "en": "Taiwan, one bus route at a time.",
     "zh": "地方行旅、公共媒體，以及台語語境裡的紀實節目敘事。"
   },
   "description": {
-    "en": "Selected episode-planning work for a PTS Taigi travel-factual program built around bus routes, local memory, food, markets, and people along the road.",
+    "en": "A Taiwanese-language travel series that follows local bus routes beyond the timetable—to markets, coastlines, kitchens, and the people who give each place its character.",
     "zh": "公視台語台行腳節目的單集企劃 / 企編工作，節目以公車路線串起地方記憶、飲食、市集與路上的人。"
   },
   "watchMode": "series",

@@ -42,6 +42,15 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[0].role.en, "Director / Editor / Producer");
   assert.equal(works[1].role.en, "Director / Editor / Producer");
   assert.equal(works[3].role.en, "Director / Editor");
+  assert.equal(works[3].title.en, "Interior Design & Branded Films");
+  assert.equal(
+    works[3].tagline.en,
+    "Rooms reveal how people want to live.",
+  );
+  assert.equal(
+    works[3].description.en,
+    "For Gorgeous Space, I directed and edited films across residential interiors, renovations, designer profiles, and home-brand collaborations—using materials, light, and everyday rituals to show how people choose to live.",
+  );
   assert.equal(
     works[3].featuredReelUrl,
     "/assets/showreel/interior-spatial-card-reel.mp4",
@@ -77,6 +86,11 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[4].platform, "PTS Taigi");
   assert.equal(works[4].year, "2021");
   assert.equal(works[4].title.en, "Nothing by Bus");
+  assert.equal(works[4].tagline.en, "Taiwan, one bus route at a time.");
+  assert.equal(
+    works[4].description.en,
+    "A Taiwanese-language travel series that follows local bus routes beyond the timetable—to markets, coastlines, kitchens, and the people who give each place its character.",
+  );
   assert.equal(works[4].watchMode, "series");
   assert.equal(works[4].showWatchCta, true);
   assert.equal(
@@ -436,17 +450,17 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
     /class="media-frame media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/arts\/410\/my-art-my-voice\/250220001\/whats-the-vibe-in-taiwan-my-art-my-voice"[\s\S]*?aria-label="Play video: My Art, My Voice"/,
   );
   assert.match(html, /class="work-media-play" aria-hidden="true"><span><\/span><\/span>/);
-  assert.match(html, /Interior \/ Spatial Brand Films/);
+  assert.match(html, /Interior Design &amp; Branded Films/);
   assert.match(html, /Gorgeous Space/);
   assert.doesNotMatch(html, /幸福空間/);
   assert.match(
     html,
-    /<article class="work-panel work-panel-compact-media" id="interior-spatial-brand-films">[\s\S]*?class="media-frame media-frame-contain media-frame-link"[\s\S]*?aria-label="Play video: Interior \/ Spatial Brand Films"[\s\S]*?linear-gradient\(180deg, rgba\(9,9,10,.04\), rgba\(9,9,10,.26\)\)[\s\S]*?gorgeous-space-sunny-wang-frontal\.webp[\s\S]*?background-size: cover, contain;[\s\S]*?background-repeat: no-repeat;[^>]*>[\s\S]*?class="work-media-play"/,
+    /<article class="work-panel work-panel-compact-media" id="interior-spatial-brand-films">[\s\S]*?class="media-frame media-frame-contain media-frame-link"[\s\S]*?aria-label="Play video: Interior Design &amp; Branded Films"[\s\S]*?linear-gradient\(180deg, rgba\(9,9,10,.04\), rgba\(9,9,10,.26\)\)[\s\S]*?gorgeous-space-sunny-wang-frontal\.webp[\s\S]*?background-size: cover, contain;[\s\S]*?background-repeat: no-repeat;[^>]*>[\s\S]*?class="work-media-play"/,
   );
   assert.match(html, /Director \/ Editor/);
   assert.match(html, /Selected reel/);
   assert.doesNotMatch(html, /3 yrs/);
-  assert.doesNotMatch(html, /Interior \/ Spatial Brand Films[\s\S]*?Coming 2026/);
+  assert.doesNotMatch(html, /Interior Design &amp; Branded Films[\s\S]*?Coming 2026/);
   assert.match(html, /Nothing by Bus/);
   assert.match(html, /Gui Shou Shen Che/);
   assert.match(html, /final public release materials are still being reconstructed/);
