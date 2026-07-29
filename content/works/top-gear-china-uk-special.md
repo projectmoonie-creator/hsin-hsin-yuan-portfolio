@@ -9,6 +9,7 @@
     "en": "Top Gear China: UK Special",
     "zh": "《巔峰拍檔》中國版：英國篇"
   },
+  "mediaTitleLines": ["Top Gear China", "UK Special"],
   "role": {
     "en": "Director",
     "zh": "導演"
@@ -26,7 +27,7 @@
   "watchUrl": "https://youtu.be/M_eXe9HRD9Y?si=YZ_3JZ7FJY4vVcZv",
   "videoEmbedUrl": "",
   "posterImage": "/assets/portfolio/top-gear-uk-special-car.jpg",
-  "tags": ["car show", "factual entertainment", "broadcast", "UK production"],
+  "tags": ["factual entertainment"],
   "metrics": [
     {"value": "200M", "label": {"en": "viewers", "zh": "觀眾"}},
     {"value": "9M", "label": {"en": "previous series average", "zh": "此前系列平均觀眾"}},

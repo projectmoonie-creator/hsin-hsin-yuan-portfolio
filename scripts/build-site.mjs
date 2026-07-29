@@ -195,6 +195,12 @@ function mediaFrameContainer({ work, lang, className, style = "", content }) {
 }
 
 function mediaFrame(work, lang, copy) {
+  const mediaLabel = Array.isArray(work.mediaTitleLines) && work.mediaTitleLines.length
+    ? `<div class="media-label media-label-lines">${work.mediaTitleLines
+        .map((line) => `<span>${escapeHtml(line)}</span>`)
+        .join("")}</div>`
+    : `<div class="media-label">${escapeHtml(work.title.en)}</div>`;
+
   if (work.status === "available" && work.videoEmbedUrl) {
     return `
       <div class="media-frame">
@@ -209,7 +215,7 @@ function mediaFrame(work, lang, copy) {
       lang,
       className: "media-frame",
       style: `background-image: linear-gradient(135deg, rgba(9,9,10,.2), rgba(9,9,10,.78)), ${cssUrl(work.posterImage)}; background-size: cover; background-position: center;`,
-      content: `<div class="media-label">${escapeHtml(work.title.en)}</div>`,
+      content: mediaLabel,
     });
   }
 
@@ -218,7 +224,9 @@ function mediaFrame(work, lang, copy) {
     work,
     lang,
     className: `media-frame media-${escapeHtml(work.accent || "default")}`,
-    content: `<div class="media-label">${escapeHtml(label)}</div>`,
+    content: Array.isArray(work.mediaTitleLines) && work.mediaTitleLines.length
+      ? mediaLabel
+      : `<div class="media-label">${escapeHtml(label)}</div>`,
   });
 }
 

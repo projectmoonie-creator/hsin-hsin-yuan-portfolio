@@ -75,6 +75,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   );
   assert.equal(works[5].role.en, "Director");
   assert.equal(works[5].platform, "China Dragon TV");
+  assert.deepEqual(works[5].mediaTitleLines, ["Top Gear China", "UK Special"]);
   assert.equal(works[0].posterImage, "/assets/portfolio/slow-steps-poster.webp");
   assert.equal(works[0].platform, "TaiwanPlus / Travel");
   assert.deepEqual(works[0].tags, ["documentary", "travel"]);
@@ -89,7 +90,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[1].watchLoopTarget, "watch");
   assert.equal(Object.hasOwn(works[1], "mediaWatchUrl"), false);
   assert.ok(works.every((work) => !Object.hasOwn(work, "caseStudy")));
-  assert.deepEqual(works[5].tags, ["car show", "factual entertainment", "broadcast", "UK production"]);
+  assert.deepEqual(works[5].tags, ["factual entertainment"]);
   assert.equal(works[0].metrics.length, 0);
   assert.equal(works[2].metrics.length, 0);
   assert.deepEqual(
@@ -302,7 +303,15 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Director/);
   assert.doesNotMatch(html, /China-side Director/);
   assert.doesNotMatch(html, /Oriental Satellite TV/);
-  assert.match(html, /car show/);
+  assert.match(
+    html,
+    /<div class="media-label media-label-lines"><span>Top Gear China<\/span><span>UK Special<\/span><\/div>/,
+  );
+  assert.doesNotMatch(html, /<span>Top Gear<\/span><span>China: UK<\/span><span>Special<\/span>/);
+  assert.doesNotMatch(html, />car show</i);
+  assert.doesNotMatch(html, />broadcast</i);
+  assert.doesNotMatch(html, />UK production</i);
+  assert.match(html, />factual entertainment</i);
   assert.match(html, /200M/);
   assert.match(html, /previous series average/);
   assert.match(html, /0\.81/);
@@ -499,9 +508,11 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.media-frame-link \{/);
   assert.match(css, /\.work-media-play \{/);
   assert.match(css, /\.work-media-play span \{/);
+  assert.match(css, /\.work-media-play \{[\s\S]*?left: 1rem;[\s\S]*?right: auto;/);
+  assert.match(css, /\.media-label-lines span \{[\s\S]*?white-space: nowrap;/);
   assert.match(
     css,
-    /@media \(max-width: 820px\) \{[\s\S]*?\.work-media-play \{[\s\S]*?bottom: 0\.75rem;[\s\S]*?right: 0\.75rem;[\s\S]*?top: auto;/,
+    /@media \(max-width: 820px\) \{[\s\S]*?\.work-media-play \{[\s\S]*?bottom: 0\.75rem;[\s\S]*?left: 0\.75rem;[\s\S]*?right: auto;[\s\S]*?top: auto;/,
   );
   assert.doesNotMatch(css, /\.case-study|\.case-study-item/);
   assert.doesNotMatch(
