@@ -45,8 +45,9 @@
 
 ## Work Navigation
 
-- The screening strip is a visual index. It should stay lightweight: no explanatory heading unless needed, no duplicate action labels, and cards jump to the matching Featured Work.
+- The screening strip is a visual index. It should stay lightweight: no explanatory heading unless needed and no duplicate action labels. Cards jump to the matching Featured Work by default. Use `watchLoopTarget: "watch"` only when the user explicitly wants that small card to open the public work page directly.
 - Works enter the screening strip only when they have a public `watchUrl`.
+- Keep one canonical public `watchUrl` per work whenever the small card, Featured Work image, and text CTA should share a destination. Add a separate media URL only when the destinations are intentionally different and that difference is covered by a regression test.
 - Featured Works carries detail. The strip should preview; Featured Works should explain.
 - Each work belongs to one public tier at a time: Featured Work, Archive, or unpublished source material. If a work is removed from Featured Works, move it deliberately to Archive or keep it out of the public site.
 - For single films or episodes, use "Watch the full episode" / "觀看完整單集". For multi-episode series, use "Watch the series" / "觀看完整系列". For a curated group, use "Watch selected films" / "觀看精選影片".

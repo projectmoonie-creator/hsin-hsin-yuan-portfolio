@@ -24,9 +24,15 @@
   },
   "watchMode": "series",
   "watchUrl": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
-  "mediaWatchUrl": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers/250707010/meet-the-founder-battery-testing-startup-liminal-insights-tech-dreamers-ep-1",
+  "watchLoopTarget": "watch",
   "videoEmbedUrl": "",
-  "posterImage": "/assets/portfolio/hsin-working-white-space.jpg",
+  "posterImage": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+  "posterAlt": {
+    "en": "Tech Dreamers official series artwork",
+    "zh": "Tech Dreamers 官方系列主視覺"
+  },
+  "focalPoint": "50% 50%",
+  "posterDimensions": {"width": 1280, "height": 720},
   "tags": ["technology", "founders", "AI", "interview"],
   "metrics": [],
   "accent": "cyan"

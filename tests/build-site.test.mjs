@@ -49,9 +49,15 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[0].platform, "TaiwanPlus / Travel");
   assert.deepEqual(works[0].tags, ["documentary", "travel"]);
   assert.equal(
-    works[1].mediaWatchUrl,
-    "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers/250707010/meet-the-founder-battery-testing-startup-liminal-insights-tech-dreamers-ep-1",
+    works[1].watchUrl,
+    "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
   );
+  assert.equal(
+    works[1].posterImage,
+    "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+  );
+  assert.equal(works[1].watchLoopTarget, "watch");
+  assert.equal(Object.hasOwn(works[1], "mediaWatchUrl"), false);
   assert.ok(works.every((work) => !Object.hasOwn(work, "caseStudy")));
   assert.deepEqual(works[5].tags, ["car show", "factual entertainment", "broadcast", "UK production"]);
   assert.equal(works[0].metrics.length, 0);
@@ -194,7 +200,17 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /href="#slow-steps"/);
   assert.match(html, /watch-loop-card watch-loop-card-plain/);
   assert.doesNotMatch(html, /watch-loop-card" href="#slow-steps" style="background-image/);
-  assert.ok(html.indexOf('href="#slow-steps"') < html.indexOf('href="#tech-dreamers"'));
+  assert.ok(
+    html.indexOf('href="#slow-steps"') <
+      html.indexOf(
+        'href="https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers"',
+      ),
+  );
+  assert.doesNotMatch(html, /href="#tech-dreamers"/);
+  assert.match(
+    html,
+    /class="watch-loop-card" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers" target="_blank" rel="noreferrer"/,
+  );
   assert.match(html, /href="#my-art-my-voice"/);
   assert.doesNotMatch(html, /View in featured works/);
   assert.doesNotMatch(html, /Scroll to explore/);
@@ -210,7 +226,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /aria-label="Play video: Slow Steps"/);
   assert.match(
     html,
-    /class="media-frame media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers\/250707010\/meet-the-founder-battery-testing-startup-liminal-insights-tech-dreamers-ep-1"[\s\S]*?aria-label="Play video: Tech Dreamers"/,
+    /class="media-frame media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers"[\s\S]*?aria-label="Play video: Tech Dreamers"[\s\S]*?background-image:[\s\S]*?224be7ed-057b-400f-af63-a8582cd80cfb\.webp/,
   );
   assert.match(
     html,
