@@ -195,11 +195,13 @@ function mediaFrameContainer({ work, lang, className, style = "", content }) {
 }
 
 function mediaFrame(work, lang, copy) {
-  const mediaLabel = Array.isArray(work.mediaTitleLines) && work.mediaTitleLines.length
-    ? `<div class="media-label media-label-lines">${work.mediaTitleLines
-        .map((line) => `<span>${escapeHtml(line)}</span>`)
-        .join("")}</div>`
-    : `<div class="media-label">${escapeHtml(work.title.en)}</div>`;
+  const mediaLabel = work.hideMediaLabel
+    ? ""
+    : Array.isArray(work.mediaTitleLines) && work.mediaTitleLines.length
+      ? `<div class="media-label media-label-lines">${work.mediaTitleLines
+          .map((line) => `<span>${escapeHtml(line)}</span>`)
+          .join("")}</div>`
+      : `<div class="media-label">${escapeHtml(work.title.en)}</div>`;
 
   if (work.status === "available" && work.videoEmbedUrl) {
     return `
@@ -210,11 +212,18 @@ function mediaFrame(work, lang, copy) {
   }
 
   if (work.posterImage) {
+    const posterFit = work.posterFit === "contain" ? "contain" : "cover";
+    const posterGradient = work.hideMediaLabel
+      ? "linear-gradient(180deg, rgba(9,9,10,.04), rgba(9,9,10,.26))"
+      : "linear-gradient(135deg, rgba(9,9,10,.2), rgba(9,9,10,.78))";
+
     return mediaFrameContainer({
       work,
       lang,
-      className: "media-frame",
-      style: `background-image: linear-gradient(135deg, rgba(9,9,10,.2), rgba(9,9,10,.78)), ${cssUrl(work.posterImage)}; background-size: cover; background-position: center;`,
+      className: posterFit === "contain"
+        ? "media-frame media-frame-contain"
+        : "media-frame",
+      style: `background-image: ${posterGradient}, ${cssUrl(work.posterImage)}; background-size: cover, ${posterFit}; background-position: center, center; background-repeat: no-repeat; background-color: #0b0b0c;`,
       content: mediaLabel,
     });
   }
@@ -252,9 +261,12 @@ function renderWork(work, lang, copy) {
   const action = watchAction || statusAction
     ? `<div class="work-actions">${statusAction}${watchAction}</div>`
     : "";
+  const panelClass = work.posterFit === "contain"
+    ? "work-panel work-panel-compact-media"
+    : "work-panel";
 
   return `
-    <article class="work-panel" id="${escapeHtml(work.slug)}">
+    <article class="${panelClass}" id="${escapeHtml(work.slug)}">
       ${mediaFrame(work, lang, copy)}
       <div class="work-copy">
         <div class="work-meta">${escapeHtml(work.year)} / ${escapeHtml(role)} / ${escapeHtml(work.platform)}</div>
@@ -352,18 +364,20 @@ function renderLab(lab, lang) {
 
 function renderArchive(archive, lang) {
   return archive
-    .map(
-      (item) => `
+    .map((item) => {
+      const summary = item.summary ? localize(item.summary, lang) : item.body;
+
+      return `
         <article class="archive-item">
           <div>
             <p class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(localize(item.role, lang))} / ${escapeHtml(item.platform)}</p>
             <h3>${escapeHtml(localize(item.title, lang))}</h3>
-            ${item.body ? `<p class="archive-body">${escapeHtml(item.body)}</p>` : ""}
+            ${summary ? `<p class="archive-body">${escapeHtml(summary)}</p>` : ""}
           </div>
           ${renderMetrics(item.metrics, lang)}
         </article>
-      `,
-    )
+      `;
+    })
     .join("");
 }
 

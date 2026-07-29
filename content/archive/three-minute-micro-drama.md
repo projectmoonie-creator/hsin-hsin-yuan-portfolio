@@ -12,11 +12,14 @@
     "zh": "策劃 / 製作人 / 編劇"
   },
   "platform": "Chinese online platforms",
+  "summary": {
+    "en": "Short-form web drama work across food, fantasy, comedy, suspense, and youth romance formats.",
+    "zh": "涵蓋美食、奇幻、喜劇、懸疑與青春愛情的網路短劇系列。"
+  },
   "metrics": [
-    {"value": "200M", "label": {"en": "cumulative views", "zh": "累積播放量"}},
-    {"value": "1M+", "label": {"en": "Weibo audience", "zh": "微博會員 / 受眾"}}
+    {"value": "200M", "label": {"en": "flagship series plays", "zh": "《不作不愛》累積播放"}},
+    {"value": "250M", "label": {"en": "flagship Weibo views", "zh": "《不作不愛》微博瀏覽"}}
   ],
-  "sourceNote": "袁欣欣 简历.docx"
+  "sourceNote": "docs/source-materials/three-minute-micro-drama.md"
 }
 ---
-Short-form web drama work across food, fantasy, comedy, suspense, and youth romance formats.

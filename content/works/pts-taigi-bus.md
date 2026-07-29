@@ -28,7 +28,7 @@
   "videoEmbedUrl": "",
   "posterImage": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
   "cardReelUrl": "/assets/showreel/nothing-by-bus-card-reel.mp4",
-  "cardReelPoster": "/assets/showreel/nothing-by-bus-card-reel-poster.webp",
+  "cardReelPoster": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
   "tags": ["public media", "travel factual", "Taiwanese language", "local culture"],
   "metrics": [
     {"value": "3+", "label": {"en": "episode leads archived", "zh": "已整理集數線索"}},

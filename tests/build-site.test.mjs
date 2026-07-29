@@ -48,8 +48,14 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   );
   assert.equal(
     works[3].cardReelPoster,
-    "/assets/showreel/interior-spatial-card-reel-poster.webp",
+    "/assets/portfolio/gorgeous-space-lg-sunny-wang.webp",
   );
+  assert.equal(
+    works[3].posterImage,
+    "/assets/portfolio/gorgeous-space-lg-sunny-wang.webp",
+  );
+  assert.equal(works[3].posterFit, "contain");
+  assert.equal(works[3].hideMediaLabel, true);
   assert.equal(works[3].watchMode, "series");
   assert.equal(works[3].showWatchCta, true);
   assert.equal(
@@ -71,7 +77,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   );
   assert.equal(
     works[4].cardReelPoster,
-    "/assets/showreel/nothing-by-bus-card-reel-poster.webp",
+    works[4].posterImage,
   );
   assert.equal(works[5].role.en, "Director");
   assert.equal(works[5].platform, "China Dragon TV");
@@ -150,9 +156,13 @@ test("loadMarkdownCollection returns ordered archive and lab entries", () => {
   const archive = loadMarkdownCollection(join(root, "content/archive"));
   const lab = loadMarkdownCollection(join(root, "content/lab"));
 
-  assert.equal(archive[0].slug, "three-minute-micro-drama");
-  assert.equal(archive[0].metrics[0].value, "200M");
-  assert.match(archive[0].body, /Short-form web drama work/);
+  assert.equal(archive[0].slug, "ghost-hand-divine-car");
+  assert.equal(archive[0].title.zh, "鬼手神車");
+  assert.match(archive[0].summary.zh, /公開版本/);
+  assert.equal(archive[1].slug, "three-minute-micro-drama");
+  assert.equal(archive[1].metrics[0].value, "200M");
+  assert.equal(archive[1].metrics[1].value, "250M");
+  assert.match(archive[1].summary.en, /Short-form web drama work/);
   assert.equal(lab[0].slug, "verified-series-script-workflow");
   assert.match(lab[0].title.en, /Script/i);
   assert.match(lab[0].body, /future skill name/);
@@ -292,11 +302,17 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /class="work-media-play" aria-hidden="true"><span><\/span><\/span>/);
   assert.match(html, /Interior \/ Spatial Brand Films/);
   assert.match(html, /Gorgeous Space \/ 幸福空間/);
+  assert.match(
+    html,
+    /<article class="work-panel work-panel-compact-media" id="interior-spatial-brand-films">[\s\S]*?class="media-frame media-frame-contain media-frame-link"[\s\S]*?aria-label="Play video: Interior \/ Spatial Brand Films"[\s\S]*?linear-gradient\(180deg, rgba\(9,9,10,.04\), rgba\(9,9,10,.26\)\)[\s\S]*?gorgeous-space-lg-sunny-wang\.webp[\s\S]*?background-size: cover, contain;[\s\S]*?background-repeat: no-repeat;[^>]*>\s*<span class="work-media-play"/,
+  );
   assert.match(html, /Director \/ Editor/);
   assert.match(html, /Selected reel/);
   assert.doesNotMatch(html, /3 yrs/);
   assert.doesNotMatch(html, /Interior \/ Spatial Brand Films[\s\S]*?Coming 2026/);
   assert.match(html, /Nothing by Bus/);
+  assert.match(html, /Gui Shou Shen Che/);
+  assert.match(html, /final public release materials are still being reconstructed/);
   assert.match(html, /Planning \/ Script/);
   assert.match(html, /Top Gear China: UK Special/);
   assert.match(html, /China Dragon TV/);
@@ -408,6 +424,10 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
     true,
   );
   assert.equal(
+    existsSync(join(root, "dist/assets/portfolio/gorgeous-space-lg-sunny-wang.webp")),
+    true,
+  );
+  assert.equal(
     existsSync(join(root, "dist/assets/showreel/nothing-by-bus-card-reel.mp4")),
     true,
   );
@@ -508,6 +528,11 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.media-frame-link \{/);
   assert.match(css, /\.work-media-play \{/);
   assert.match(css, /\.work-media-play span \{/);
+  assert.match(
+    css,
+    /\.media-frame-contain \{[\s\S]*?align-self: start;[\s\S]*?aspect-ratio: 16 \/ 9;[\s\S]*?min-height: 0;/,
+  );
+  assert.match(css, /\.work-panel-compact-media \{[\s\S]*?min-height: auto;/);
   assert.match(css, /\.work-media-play \{[\s\S]*?left: 1rem;[\s\S]*?right: auto;/);
   assert.match(css, /\.media-label-lines span \{[\s\S]*?white-space: nowrap;/);
   assert.match(
@@ -546,6 +571,14 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(js, /replaceState/);
   assert.match(js, /data-watch-loop/);
   assert.match(js, /data-watch-loop-video/);
+  assert.match(js, /function consumeNativeScroll\(\)/);
+  assert.match(js, /const nativeOffset = viewport\.scrollLeft;/);
+  assert.match(js, /offset = \(offset \+ nativeOffset\) % sequenceWidth;/);
+  assert.match(js, /viewport\.scrollLeft = 0;/);
+  assert.match(
+    js,
+    /viewport\.addEventListener\("scroll", consumeNativeScroll, \{ passive: true \}\)/,
+  );
   assert.match(js, /video\.play\(\)\.catch/);
   assert.match(js, /video\.pause\(\)/);
   assert.match(js, /visibilitychange/);

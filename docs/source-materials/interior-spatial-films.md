@@ -36,6 +36,9 @@ Default credit for this group:
 - YouTube: https://www.youtube.com/watch?v=me4KutyUoT4
 - User-provided start reference: 111s
 - Thumbnail: https://i.ytimg.com/vi/me4KutyUoT4/hqdefault.jpg
+- Website poster: `/assets/portfolio/gorgeous-space-lg-sunny-wang.webp`, derived from the public
+  1280x720 YouTube thumbnail; subtitle area removed and replaced with the site's dark
+  background color so the image remains legible beneath portfolio metadata.
 - Useful positioning: branded interior / lifestyle video, home transformation, celebrity / brand collaboration
 - Website use candidate: yes, especially to show branded content and interior/lifestyle production experience
 - Showreel candidate: strong candidate if the public video quality is usable; review around 01:51 and nearby sequences first

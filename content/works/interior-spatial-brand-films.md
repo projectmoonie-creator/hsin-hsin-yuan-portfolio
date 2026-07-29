@@ -30,9 +30,11 @@
   "watchUrl": "https://www.youtube.com/playlist?list=PLJCU8axtQoPI",
   "showWatchCta": true,
   "videoEmbedUrl": "",
-  "posterImage": "",
+  "posterImage": "/assets/portfolio/gorgeous-space-lg-sunny-wang.webp",
+  "posterFit": "contain",
+  "hideMediaLabel": true,
   "cardReelUrl": "/assets/showreel/interior-spatial-card-reel.mp4",
-  "cardReelPoster": "/assets/showreel/interior-spatial-card-reel-poster.webp",
+  "cardReelPoster": "/assets/portfolio/gorgeous-space-lg-sunny-wang.webp",
   "tags": ["interior design", "branded content", "lifestyle", "editing"],
   "metrics": [
     {"value": "20+", "label": {"en": "public links archived", "zh": "已整理公開連結"}},

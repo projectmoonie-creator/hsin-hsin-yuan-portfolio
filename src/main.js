@@ -154,6 +154,17 @@ if (!prefersReducedMotion) {
       }
     }
 
+    function consumeNativeScroll() {
+      const nativeOffset = viewport.scrollLeft;
+      if (!nativeOffset) return;
+
+      if (sequenceWidth > 0) {
+        offset = (offset + nativeOffset) % sequenceWidth;
+        track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+      }
+      viewport.scrollLeft = 0;
+    }
+
     function tick(time) {
       if (!lastTime) lastTime = time;
       const deltaSeconds = Math.min((time - lastTime) / 1000, 0.08);
@@ -220,6 +231,7 @@ if (!prefersReducedMotion) {
     resizeObserver?.observe(viewport);
     observeWatchLoopVideos(sequence);
     syncLoopCopies();
+    viewport.addEventListener("scroll", consumeNativeScroll, { passive: true });
     document.addEventListener("visibilitychange", handleDocumentVisibility);
 
     if ("IntersectionObserver" in window) {
