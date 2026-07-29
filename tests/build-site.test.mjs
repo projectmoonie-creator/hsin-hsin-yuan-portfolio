@@ -48,6 +48,11 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[0].posterImage, "");
   assert.equal(works[0].platform, "TaiwanPlus / Travel");
   assert.deepEqual(works[0].tags, ["documentary", "travel"]);
+  assert.equal(
+    works[1].mediaWatchUrl,
+    "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers/250707010/meet-the-founder-battery-testing-startup-liminal-insights-tech-dreamers-ep-1",
+  );
+  assert.ok(works.every((work) => !Object.hasOwn(work, "caseStudy")));
   assert.deepEqual(works[5].tags, ["car show", "factual entertainment", "broadcast", "UK production"]);
   assert.equal(works[0].metrics.length, 0);
   assert.equal(works[2].metrics.length, 0);
@@ -154,8 +159,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /interior design and spatial-brand films/i);
   assert.match(html, /For Artists &amp; Cultural Institutions/);
   assert.match(html, /For Documentary \/ Factual Producers/);
-  assert.match(html, /Challenge/);
-  assert.match(html, /What I shaped/);
+  assert.doesNotMatch(html, /Challenge|What I shaped|class="case-study/);
   assert.doesNotMatch(html, /Best for/);
   assert.doesNotMatch(html, /Selected Impact/);
   assert.doesNotMatch(html, /impact-grid/);
@@ -203,6 +207,16 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Slow Steps[\s\S]*?Movement/i);
   assert.match(html, /Slow Steps[\s\S]*?Director \/ Editor \/ Producer/);
   assert.match(html, /Slow Steps[\s\S]*?Travel/);
+  assert.doesNotMatch(html, /aria-label="Play video: Slow Steps"/);
+  assert.match(
+    html,
+    /class="media-frame media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers\/250707010\/meet-the-founder-battery-testing-startup-liminal-insights-tech-dreamers-ep-1"[\s\S]*?aria-label="Play video: Tech Dreamers"/,
+  );
+  assert.match(
+    html,
+    /class="media-frame media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/arts\/410\/my-art-my-voice\/250220001\/whats-the-vibe-in-taiwan-my-art-my-voice"[\s\S]*?aria-label="Play video: My Art, My Voice"/,
+  );
+  assert.match(html, /class="work-media-play" aria-hidden="true"><span><\/span><\/span>/);
   assert.match(html, /Interior \/ Spatial Brand Films/);
   assert.match(html, /Gorgeous Space \/ 幸福空間/);
   assert.match(html, /Director \/ Editor/);
@@ -268,7 +282,6 @@ test("renderPage escapes image URLs for inline CSS contexts", () => {
       posterImage: "/assets/poster')bad.jpg",
       tags: [],
       metrics: [],
-      caseStudy: [],
       press: [],
       accent: "cyan",
     },
@@ -319,8 +332,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /藝術家與文化單位/);
   assert.match(zh, /紀實製作人/);
   assert.match(zh, /剪輯/);
-  assert.match(zh, /挑戰/);
-  assert.match(zh, /我如何處理/);
+  assert.doesNotMatch(zh, /挑戰|我如何處理|class="case-study/);
+  assert.match(zh, /aria-label="播放影片：Tech Dreamers"/);
   assert.doesNotMatch(zh, /適合合作/);
   assert.doesNotMatch(zh, /代表成績/);
   assert.doesNotMatch(zh, /impact-grid/);
@@ -354,7 +367,11 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.doesNotMatch(zh, /舊.*履歷/);
   assert.match(css, /\.works-stack \{/);
   assert.match(css, /position: sticky;/);
+  assert.match(css, /--work-panel: #171719;/);
+  assert.match(css, /\.work-panel \{\n  background: var\(--work-panel\);/);
   assert.match(css, /grid-template-columns: minmax\(18rem, 0\.9fr\) minmax\(0, 1fr\)/);
+  assert.match(css, /z-index: calc\(var\(--stack-index\) \+ 1\);/);
+  assert.match(css, /\.works-stack \.work-panel:nth-child\(6\) \{\n  --stack-index: 5;/);
   assert.match(css, /transform: translate3d\(0, calc\(var\(--stack-progress\) \* -0\.45rem\), 0\) scale\(calc\(1 - var\(--stack-progress\) \* 0\.035\)\)/);
   assert.match(css, /\.hero h1 \{\n  font-size: clamp\(3\.5rem, 7\.2vw, 7\.2rem\);/);
   assert.match(css, /\.hero-media \{[\s\S]*?min-height: auto;/);
@@ -378,6 +395,14 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /@keyframes heroStillPush/);
   assert.match(css, /\.hero-media \{\n    animation: heroStillPush/);
   assert.match(css, /\.hero-roles \.role-slash \{\n  color: var\(--acid\);/);
+  assert.match(css, /\.media-frame-link \{/);
+  assert.match(css, /\.work-media-play \{/);
+  assert.match(css, /\.work-media-play span \{/);
+  assert.match(
+    css,
+    /@media \(max-width: 820px\) \{[\s\S]*?\.work-media-play \{[\s\S]*?bottom: 0\.75rem;[\s\S]*?right: 0\.75rem;[\s\S]*?top: auto;/,
+  );
+  assert.doesNotMatch(css, /\.case-study|\.case-study-item/);
   assert.doesNotMatch(
     css,
     /body::before|light-beam|ambient-canvas|edge-glow-card|edge-light|--edge-proximity|--beam-opacity|sectionReflection|frameReflection|\.section\.is-lit|\.section\.is-guided|\.works-section::after|\.hero-media::before|\.watch-loop-card::before/,

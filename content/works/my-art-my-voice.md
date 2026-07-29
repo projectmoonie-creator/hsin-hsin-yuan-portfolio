@@ -22,22 +22,6 @@
     "en": "A documentary on the Paris Cultural Olympiad, creative freedom, and the voices behind performance.",
     "zh": "巴黎文化奧運紀錄片。關於創作、自由，以及人如何被聽見。"
   },
-  "caseStudy": [
-    {
-      "label": {"en": "Challenge", "zh": "挑戰"},
-      "text": {
-        "en": "Translate the artists and cultural stakes of Taiwan's Paris Cultural Olympiad presence into an intimate story for international viewers.",
-        "zh": "把藝術家與台灣參與巴黎文化奧運的文化意義，轉化成國際觀眾能靠近的親密故事。"
-      }
-    },
-    {
-      "label": {"en": "What I shaped", "zh": "我如何處理"},
-      "text": {
-        "en": "Directed the documentary spine: artist interviews, emotional through-lines, cultural context, and the voice of performance beyond event coverage.",
-        "zh": "執導整體紀錄片主線：藝術家訪談、情感線、文化脈絡，以及超越活動紀錄的表演者聲音。"
-      }
-    }
-  ],
   "watchMode": "single",
   "watchUrl": "https://www.taiwanplus.com/shows/documentary/arts/410/my-art-my-voice/250220001/whats-the-vibe-in-taiwan-my-art-my-voice",
   "videoEmbedUrl": "",

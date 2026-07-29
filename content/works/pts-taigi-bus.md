@@ -22,22 +22,6 @@
     "en": "Selected episode-planning work for a PTS Taigi travel-factual program built around bus routes, local memory, food, markets, and people along the road.",
     "zh": "公視台語台行腳節目的單集企劃 / 企編工作，節目以公車路線串起地方記憶、飲食、市集與路上的人。"
   },
-  "caseStudy": [
-    {
-      "label": {"en": "Challenge", "zh": "挑戰"},
-      "text": {
-        "en": "Shape local travel material into episode logic that could hold route, place, encounter, language, and public-media pacing together.",
-        "zh": "把地方行旅素材整理成能同時承載路線、地方、人、語言與公共媒體節奏的單集架構。"
-      }
-    },
-    {
-      "label": {"en": "What I shaped", "zh": "我如何處理"},
-      "text": {
-        "en": "Developed episode-planning and script structure for selected routes, keeping the credit compact here until the full episode list is confirmed.",
-        "zh": "參與特定路線的單集企劃與腳本結構；目前先以精簡作品卡呈現，待完整集數確認後再展開。"
-      }
-    }
-  ],
   "watchMode": "sample",
   "watchUrl": "https://youtu.be/q4TMcoOpzKA?si=k5AIjDHuywFRbGiw",
   "videoEmbedUrl": "",

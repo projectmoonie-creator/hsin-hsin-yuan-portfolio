@@ -6,6 +6,7 @@
   --line: rgba(247, 242, 232, 0.18);
   --panel: rgba(255, 255, 255, 0.055);
   --panel-strong: rgba(255, 255, 255, 0.095);
+  --work-panel: #171719;
   --acid: #d8ff3e;
   --heat: #ff4d1f;
 }
@@ -371,6 +372,7 @@ a {
   transform: translate3d(0, calc(var(--stack-progress) * -0.45rem), 0) scale(calc(1 - var(--stack-progress) * 0.035));
   transform-origin: top center;
   will-change: transform;
+  z-index: calc(var(--stack-index) + 1);
 }
 
 .works-stack .work-panel:nth-child(1) {
@@ -391,6 +393,10 @@ a {
 
 .works-stack .work-panel:nth-child(5) {
   --stack-index: 4;
+}
+
+.works-stack .work-panel:nth-child(6) {
+  --stack-index: 5;
 }
 
 .watch-loop {
@@ -516,7 +522,7 @@ a {
 }
 
 .work-panel {
-  background: var(--panel);
+  background: var(--work-panel);
   border: 1px solid var(--line);
   border-radius: 8px;
   display: grid;
@@ -542,6 +548,56 @@ a {
   min-height: 100%;
   overflow: hidden;
   position: relative;
+}
+
+.media-frame-link {
+  color: var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.media-frame-link:focus-visible {
+  outline: 2px solid var(--acid);
+  outline-offset: 4px;
+}
+
+.work-media-play {
+  align-items: center;
+  background: rgba(11, 11, 12, 0.7);
+  border: 1px solid rgba(247, 242, 232, 0.58);
+  border-radius: 50%;
+  color: var(--ink);
+  display: flex;
+  height: 2.85rem;
+  justify-content: center;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+  width: 2.85rem;
+  z-index: 2;
+}
+
+.work-media-play span {
+  border-bottom: 0.38rem solid transparent;
+  border-left: 0.58rem solid currentColor;
+  border-top: 0.38rem solid transparent;
+  display: block;
+  height: 0;
+  margin-left: 0.16rem;
+  width: 0;
+}
+
+.media-frame-link:hover .work-media-play,
+.media-frame-link:focus-visible .work-media-play {
+  background: var(--acid);
+  border-color: var(--acid);
+  color: var(--bg);
+  transform: scale(1.04);
 }
 
 .media-frame iframe {
@@ -604,34 +660,6 @@ a {
   font-size: 0.72rem;
   margin: 0 0.35rem 0.6rem 0;
   padding: 0.35rem 0.55rem;
-}
-
-.case-study {
-  display: grid;
-  gap: 0.55rem;
-  margin: 0.5rem 0 1.15rem;
-}
-
-.case-study-item {
-  border-top: 1px solid var(--line);
-  padding-top: 0.55rem;
-}
-
-.case-study-item span {
-  color: var(--acid);
-  display: block;
-  font-size: 0.68rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  margin-bottom: 0.25rem;
-  text-transform: uppercase;
-}
-
-.case-study-item p {
-  color: var(--muted);
-  font-size: 0.86rem;
-  line-height: 1.35;
-  margin: 0;
 }
 
 .press-preview {
@@ -1176,6 +1204,14 @@ a {
 
   .media-frame {
     min-height: auto;
+  }
+
+  .work-media-play {
+    bottom: 0.75rem;
+    height: 2.55rem;
+    right: 0.75rem;
+    top: auto;
+    width: 2.55rem;
   }
 
   .services-grid,

@@ -135,25 +135,6 @@ function renderMetrics(metrics = [], lang) {
   `;
 }
 
-function renderCaseStudy(items = [], lang) {
-  if (!items.length) return "";
-
-  return `
-    <div class="case-study">
-      ${items
-        .map(
-          (item) => `
-            <div class="case-study-item">
-              <span>${escapeHtml(localize(item.label, lang))}</span>
-              <p>${escapeHtml(localize(item.text, lang))}</p>
-            </div>
-          `,
-        )
-        .join("")}
-    </div>
-  `;
-}
-
 function renderPress(items = [], lang) {
   if (!items.length) return "";
 
@@ -194,7 +175,26 @@ function renderPress(items = [], lang) {
   `;
 }
 
-function mediaFrame(work, copy) {
+function mediaFrameContainer({ work, lang, className, style = "", content }) {
+  const mediaWatchUrl = work.mediaWatchUrl || work.watchUrl;
+  const styleAttr = style ? ` style="${style}"` : "";
+
+  if (!mediaWatchUrl) {
+    return `<div class="${className}"${styleAttr}>${content}</div>`;
+  }
+
+  const title = localize(work.title, lang);
+  const playLabel = lang === "en" ? `Play video: ${title}` : `播放影片：${title}`;
+
+  return `
+    <a class="${className} media-frame-link" href="${escapeHtml(mediaWatchUrl)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(playLabel)}"${styleAttr}>
+      ${content}
+      <span class="work-media-play" aria-hidden="true"><span></span></span>
+    </a>
+  `;
+}
+
+function mediaFrame(work, lang, copy) {
   if (work.status === "available" && work.videoEmbedUrl) {
     return `
       <div class="media-frame">
@@ -204,19 +204,22 @@ function mediaFrame(work, copy) {
   }
 
   if (work.posterImage) {
-    return `
-      <div class="media-frame" style="background-image: linear-gradient(135deg, rgba(9,9,10,.2), rgba(9,9,10,.78)), ${cssUrl(work.posterImage)}; background-size: cover; background-position: center;">
-        <div class="media-label">${escapeHtml(work.title.en)}</div>
-      </div>
-    `;
+    return mediaFrameContainer({
+      work,
+      lang,
+      className: "media-frame",
+      style: `background-image: linear-gradient(135deg, rgba(9,9,10,.2), rgba(9,9,10,.78)), ${cssUrl(work.posterImage)}; background-size: cover; background-position: center;`,
+      content: `<div class="media-label">${escapeHtml(work.title.en)}</div>`,
+    });
   }
 
   const label = work.status === "coming-soon" ? copy.comingLabel : work.title.en;
-  return `
-    <div class="media-frame media-${escapeHtml(work.accent || "default")}">
-      <div class="media-label">${escapeHtml(label)}</div>
-    </div>
-  `;
+  return mediaFrameContainer({
+    work,
+    lang,
+    className: `media-frame media-${escapeHtml(work.accent || "default")}`,
+    content: `<div class="media-label">${escapeHtml(label)}</div>`,
+  });
 }
 
 function noWatchStatusLabel(work, lang, copy) {
@@ -253,7 +256,7 @@ function renderWork(work, lang, copy) {
 
   return `
     <article class="work-panel" id="${escapeHtml(work.slug)}">
-      ${mediaFrame(work, copy)}
+      ${mediaFrame(work, lang, copy)}
       <div class="work-copy">
         <div class="work-meta">${escapeHtml(work.year)} / ${escapeHtml(role)} / ${escapeHtml(work.platform)}</div>
         <h3>${escapeHtml(title)}</h3>
@@ -261,7 +264,6 @@ function renderWork(work, lang, copy) {
         <p class="work-description">${escapeHtml(description)}</p>
         ${renderTags(work.tags)}
         ${renderMetrics(work.metrics, lang)}
-        ${renderCaseStudy(work.caseStudy, lang)}
         ${renderPress(work.press, lang)}
         ${action}
       </div>

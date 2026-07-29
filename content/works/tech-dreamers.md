@@ -22,24 +22,9 @@
     "en": "From AI to deep tech, stories of people turning ideas into tomorrow.",
     "zh": "從 AI 到深科技，拍攝創業者如何想像世界的下一步。"
   },
-  "caseStudy": [
-    {
-      "label": {"en": "Challenge", "zh": "挑戰"},
-      "text": {
-        "en": "Make technical founders and future-facing ideas understandable without flattening the people behind the systems.",
-        "zh": "讓技術創業者與面向未來的想法變得容易理解，同時保留系統背後的人。"
-      }
-    },
-    {
-      "label": {"en": "What I shaped", "zh": "我如何處理"},
-      "text": {
-        "en": "Directed interviews and story structure around motivation, risk, and the human reason a technology matters.",
-        "zh": "以動機、風險與科技為何重要的人性理由，設計訪談與故事結構。"
-      }
-    }
-  ],
   "watchMode": "series",
   "watchUrl": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
+  "mediaWatchUrl": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers/250707010/meet-the-founder-battery-testing-startup-liminal-insights-tech-dreamers-ep-1",
   "videoEmbedUrl": "",
   "posterImage": "/assets/portfolio/hsin-working-white-space.jpg",
   "tags": ["technology", "founders", "AI", "interview"],

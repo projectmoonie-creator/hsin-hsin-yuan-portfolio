@@ -26,22 +26,6 @@
     "en": "I directed and edited films for residential design, renovation, designer portfolios, and branded lifestyle campaigns.",
     "zh": "我為住宅設計、老屋翻新、設計師作品、居家品牌與廚電業配內容擔任導演 / 剪輯。"
   },
-  "caseStudy": [
-    {
-      "label": {"en": "Challenge", "zh": "挑戰"},
-      "text": {
-        "en": "Turn completed spaces, designer decisions, product placements, and client needs into stories that could serve viewers, studios, brands, and platform programming at once.",
-        "zh": "把完成的空間、設計師判斷、產品置入與客戶需求，整理成同時服務觀眾、設計公司、品牌與平台節目的故事。"
-      }
-    },
-    {
-      "label": {"en": "What I shaped", "zh": "我如何處理"},
-      "text": {
-        "en": "Directed and edited spatial narratives around layout, light, circulation, materials, lifestyle detail, small-space transformation, and branded product use.",
-        "zh": "以導演與剪輯工作，整理格局、光線、動線、材質、生活細節、小宅改造，以及品牌產品在家中的使用情境。"
-      }
-    }
-  ],
   "watchUrl": "",
   "videoEmbedUrl": "",
   "posterImage": "",
