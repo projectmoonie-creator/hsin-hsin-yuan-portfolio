@@ -100,12 +100,17 @@ if (!prefersReducedMotion) {
     }
 
     function scheduleWatchLoopVideo(video) {
+      if (!isVisible) {
+        resetWatchLoopVideo(video);
+        return;
+      }
       clearWatchLoopVideoHold(video);
       video.dataset.watchLoopVisible = "true";
       video.classList.remove("is-playing");
       const timer = window.setTimeout(() => {
         watchLoopVideoTimers.delete(video);
         if (
+          !isVisible ||
           video.dataset.watchLoopVisible !== "true" ||
           document.visibilityState !== "visible"
         ) {
@@ -159,16 +164,20 @@ if (!prefersReducedMotion) {
       track.querySelectorAll("[data-watch-loop-video]").forEach(resetWatchLoopVideo);
     }
 
+    function refreshWatchLoopVideos() {
+      track.querySelectorAll("[data-watch-loop-video]").forEach((video) => {
+        videoObserver?.unobserve(video);
+        videoObserver?.observe(video);
+      });
+    }
+
     function handleDocumentVisibility() {
       if (document.visibilityState !== "visible") {
         pauseWatchLoopVideos();
         return;
       }
 
-      track.querySelectorAll("[data-watch-loop-video]").forEach((video) => {
-        videoObserver?.unobserve(video);
-        videoObserver?.observe(video);
-      });
+      if (isVisible) refreshWatchLoopVideos();
     }
 
     function syncLoopCopies() {
@@ -288,11 +297,13 @@ if (!prefersReducedMotion) {
           isVisible = entries.some((entry) => entry.isIntersecting);
           if (isVisible) {
             startLoop();
+            refreshWatchLoopVideos();
           } else {
             stopLoop();
+            pauseWatchLoopVideos();
           }
         },
-        { rootMargin: "20% 0px", threshold: 0.01 },
+        { rootMargin: "0px", threshold: 0.01 },
       );
       loopObserver.observe(loop);
 

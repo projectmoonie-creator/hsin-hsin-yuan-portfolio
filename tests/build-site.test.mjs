@@ -658,6 +658,17 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(js, /video\.classList\.add\("is-playing"\)/);
   assert.match(js, /video\.classList\.remove\("is-playing"\)/);
   assert.match(js, /video\.addEventListener\("playing"/);
+  assert.match(js, /function refreshWatchLoopVideos\(\)/);
+  assert.match(
+    js,
+    /function scheduleWatchLoopVideo\(video\) \{[\s\S]*?if \(!isVisible\) \{[\s\S]*?resetWatchLoopVideo\(video\);/,
+  );
+  assert.match(
+    js,
+    /if \(isVisible\) \{[\s\S]*?refreshWatchLoopVideos\(\);[\s\S]*?\} else \{[\s\S]*?pauseWatchLoopVideos\(\);/,
+  );
+  assert.match(js, /\{ rootMargin: "0px", threshold: 0\.01 \}/);
+  assert.doesNotMatch(js, /rootMargin: "20% 0px"/);
   assert.match(js, /function consumeNativeScroll\(\)/);
   assert.match(js, /const nativeOffset = viewport\.scrollLeft;/);
   assert.match(js, /offset = \(offset \+ nativeOffset\) % sequenceWidth;/);
