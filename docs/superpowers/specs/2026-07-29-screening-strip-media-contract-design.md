@@ -59,8 +59,9 @@ The initially approved moving-thumbnail works are:
 ## Runtime Behavior
 
 1. The poster is visible immediately.
-2. When at least 35% of an opted-in reel is visible within the strip, start a
-   1400 ms hold.
+2. When the strip intersects the actual browser viewport and at least 35% of
+   an opted-in reel is visible within the strip, start a 1400 ms hold. Do not
+   use a pre-roll root margin for media playback.
 3. If the reel remains visible and the document remains active, request silent
    playback.
 4. Reveal the video only after the browser confirms playback.
@@ -96,6 +97,8 @@ Automated regression tests must prove:
 - CSS keeps videos hidden until confirmed playback and under reduced motion;
 - JavaScript waits 1400 ms, cancels pending playback, resets the video, and
   reveals it only after the `playing` event;
+- offscreen strips cannot begin a hold or play a reel through observer
+  pre-roll;
 - clone videos retain `preload="none"`;
 - existing links, strip continuity, bilingual pages, privacy scans, and build
   output continue to pass.

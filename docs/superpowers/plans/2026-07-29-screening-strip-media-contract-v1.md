@@ -29,7 +29,7 @@
 - Modify: `content/works/pts-taigi-bus.md`
 - Modify: `scripts/build-site.mjs`
 
-- [ ] **Step 1: Write the failing data assertions**
+- [x] **Step 1: Write the failing data assertions**
 
 Add these assertions to `loadWorks returns ordered bilingual portfolio works`:
 
@@ -38,7 +38,7 @@ assert.equal(works[3].cardReelMode, "after-hold");
 assert.equal(works[4].cardReelMode, "after-hold");
 ```
 
-- [ ] **Step 2: Write the failing render-contract test**
+- [x] **Step 2: Write the failing render-contract test**
 
 Add:
 
@@ -72,7 +72,7 @@ test("screening strip renders reels only for explicit after-hold opt-in", () => 
 });
 ```
 
-- [ ] **Step 3: Run the focused tests and verify RED**
+- [x] **Step 3: Run the focused tests and verify RED**
 
 Run:
 
@@ -83,7 +83,7 @@ node --test --test-name-pattern "loadWorks|screening strip renders" tests/build-
 Expected: FAIL because `cardReelMode` and the rendered
 `data-card-reel-mode="after-hold"` contract do not exist.
 
-- [ ] **Step 4: Add explicit approval to the two canonical work files**
+- [x] **Step 4: Add explicit approval to the two canonical work files**
 
 Place this field beside each existing `cardReelUrl`:
 
@@ -91,7 +91,7 @@ Place this field beside each existing `cardReelUrl`:
 "cardReelMode": "after-hold",
 ```
 
-- [ ] **Step 5: Implement fail-closed rendering**
+- [x] **Step 5: Implement fail-closed rendering**
 
 In `renderWatchLoopItem`, derive:
 
@@ -111,13 +111,13 @@ data-card-reel-mode="after-hold"
 Keep `poster`, `muted`, `loop`, `playsinline`, `preload="metadata"`,
 `aria-hidden="true"`, and `tabindex="-1"` unchanged.
 
-- [ ] **Step 6: Re-run the focused tests and verify GREEN**
+- [x] **Step 6: Re-run the focused tests and verify GREEN**
 
 Run the command from Step 3.
 
 Expected: both focused tests PASS.
 
-- [ ] **Step 7: Commit the data and render contract**
+- [x] **Step 7: Commit the data and render contract**
 
 ```bash
 git add tests/build-site.test.mjs content/works/interior-spatial-brand-films.md content/works/pts-taigi-bus.md scripts/build-site.mjs
@@ -131,7 +131,7 @@ git commit -m "Gate screening strip reels behind explicit approval"
 - Modify: `src/main.js`
 - Modify: `src/styles.css`
 
-- [ ] **Step 1: Write failing CSS and JavaScript source-contract assertions**
+- [x] **Step 1: Write failing CSS and JavaScript source-contract assertions**
 
 In `build generates English, Chinese, CSS, and JS assets`, add:
 
@@ -154,7 +154,7 @@ assert.match(js, /video\.classList\.remove\("is-playing"\)/);
 assert.match(js, /video\.addEventListener\("playing"/);
 ```
 
-- [ ] **Step 2: Run the focused build test and verify RED**
+- [x] **Step 2: Run the focused build test and verify RED**
 
 Run:
 
@@ -164,7 +164,7 @@ node --test --test-name-pattern "build generates" tests/build-site.test.mjs
 
 Expected: FAIL because the hold timer and opacity lifecycle do not exist.
 
-- [ ] **Step 3: Add the static-first CSS state**
+- [x] **Step 3: Add the static-first CSS state**
 
 Extend `.watch-loop-video` with:
 
@@ -183,7 +183,7 @@ Add:
 
 Keep the existing reduced-motion `display: none` rule.
 
-- [ ] **Step 4: Add cancellable hold helpers**
+- [x] **Step 4: Add cancellable hold helpers**
 
 Near the watch-loop setup in `src/main.js`, add:
 
@@ -232,7 +232,7 @@ function scheduleWatchLoopVideo(video) {
 }
 ```
 
-- [ ] **Step 5: Route observer and lifecycle events through the helpers**
+- [x] **Step 5: Route observer and lifecycle events through the helpers**
 
 Change the video intersection observer so qualifying entries call
 `scheduleWatchLoopVideo(video)` and non-qualifying entries call
@@ -255,14 +255,14 @@ Use `resetWatchLoopVideo` for document hiding, loop cleanup, page hiding, and
 removed clone sequences. Do not introduce autoplay when
 `IntersectionObserver` is unavailable.
 
-- [ ] **Step 6: Re-run the focused build test and verify GREEN**
+- [x] **Step 6: Re-run the focused build test and verify GREEN**
 
 Run the command from Step 2.
 
 Expected: PASS with generated CSS and JavaScript containing the complete
 poster-hold lifecycle.
 
-- [ ] **Step 7: Commit the motion lifecycle**
+- [x] **Step 7: Commit the motion lifecycle**
 
 ```bash
 git add tests/build-site.test.mjs src/main.js src/styles.css
@@ -275,7 +275,7 @@ git commit -m "Delay screening strip reels behind poster hold"
 - Modify: `PROJECT_BIBLE.md`
 - Modify: `STATUS.md`
 
-- [ ] **Step 1: Update the canonical media rule**
+- [x] **Step 1: Update the canonical media rule**
 
 Revise the Work Navigation rule to state:
 
@@ -290,7 +290,7 @@ when they leave view.
 
 Retain the clone preload, reduced-motion, and no-JavaScript requirements.
 
-- [ ] **Step 2: Update the mutable resume state**
+- [x] **Step 2: Update the mutable resume state**
 
 Record in `STATUS.md`:
 
@@ -304,7 +304,7 @@ Record in `STATUS.md`:
 Read `git rev-parse HEAD` after the implementation commit and record the exact
 observed commit rather than an abbreviation or guessed value.
 
-- [ ] **Step 3: Run documentation and privacy checks**
+- [x] **Step 3: Run documentation and privacy checks**
 
 Run:
 
@@ -330,7 +330,7 @@ git commit -m "Record screening strip media contract"
 - Verify: `dist/en/index.html`
 - Verify: `dist/zh/index.html`
 
-- [ ] **Step 1: Run the complete deterministic gate**
+- [x] **Step 1: Run the complete deterministic gate**
 
 Run:
 
@@ -344,7 +344,7 @@ git status --short
 Expected: all tests PASS, build succeeds, no whitespace errors, and only
 intentional status/documentation changes remain.
 
-- [ ] **Step 2: Inspect the local-server helper interface**
+- [x] **Step 2: Inspect the local-server helper interface**
 
 Run:
 
@@ -356,7 +356,7 @@ Expected: usage for a managed server command, port, and trailing Playwright
 command. Resolve `PORTFOLIO_WEBAPP_TESTING_SKILL` from the current session's
 skills catalog; do not record its user-specific absolute path in the repo.
 
-- [ ] **Step 3: Create and run native Playwright QA**
+- [x] **Step 3: Create and run native Playwright QA**
 
 The temporary Playwright script must:
 
@@ -382,7 +382,12 @@ python3 "$PORTFOLIO_WEBAPP_TESTING_SKILL/scripts/with_server.py" \
 
 Expected: all assertions PASS and browser console error list is empty.
 
-- [ ] **Step 4: Review the screenshots**
+Execution note: the helper's port poll could not observe a sandboxed listening
+socket. After confirming the bind restriction, the same temporary Playwright
+script ran an in-process static server under approved local escalation. No
+server or QA script was retained in the repository.
+
+- [x] **Step 4: Review the screenshots**
 
 Verify that:
 
@@ -392,7 +397,7 @@ Verify that:
 - card copy and destinations remain unchanged;
 - desktop and mobile have no horizontal body overflow.
 
-- [ ] **Step 5: Record exact verification evidence**
+- [x] **Step 5: Record exact verification evidence**
 
 Update `STATUS.md` with the observed test count, build result, viewport matrix,
 reduced-motion/no-JavaScript results, and note that screenshots are disposable
