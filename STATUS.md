@@ -11,7 +11,7 @@ State: `PASS_WITH_OPEN_ITEMS`
 - Active branch: `codex/screening-strip-media-contract-v1`
 - Base tag: `portfolio-phase-2026-07-29-closed`
 - Reviewed implementation commit:
-  `056106ebaba8f8074cafd73ba6dcf2e0ea4d78d9`
+  `8ea183dff562fee4363c75929c65ff40a1cc2f85`
 - Review:
   `docs/reviews/screening-strip-media-contract-v1-2026-07-29.md`
 - No Preview or production deployment was created or replaced.

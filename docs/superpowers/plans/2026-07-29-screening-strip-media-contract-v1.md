@@ -315,7 +315,7 @@ npm test
 
 Expected: no whitespace errors; all tests PASS; privacy scans remain empty.
 
-- [ ] **Step 4: Commit the project-state update**
+- [x] **Step 4: Commit the project-state update**
 
 ```bash
 git add PROJECT_BIBLE.md STATUS.md
@@ -403,7 +403,7 @@ Update `STATUS.md` with the observed test count, build result, viewport matrix,
 reduced-motion/no-JavaScript results, and note that screenshots are disposable
 QA artifacts rather than portfolio assets.
 
-- [ ] **Step 6: Commit and push the completed package**
+- [x] **Step 6: Commit and push the completed package**
 
 ```bash
 git add STATUS.md

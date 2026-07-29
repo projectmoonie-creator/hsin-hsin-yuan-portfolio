@@ -20,7 +20,7 @@ history, or delete old Vercel deployments.
 - Branch: `codex/screening-strip-media-contract-v1`
 - Closed baseline: `portfolio-phase-2026-07-29-closed`
 - Reviewed implementation commit:
-  `056106ebaba8f8074cafd73ba6dcf2e0ea4d78d9`
+  `8ea183dff562fee4363c75929c65ff40a1cc2f85`
 
 ## Contract
 
