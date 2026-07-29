@@ -193,6 +193,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /data-scroll-stack/);
   assert.doesNotMatch(html, /data-horizontal-scroll/);
   assert.match(html, /data-watch-loop/);
+  assert.match(html, /class="watch-loop-frame"/);
   assert.doesNotMatch(html, /Watch Selected Films/);
   assert.doesNotMatch(html, /Screening strip/);
   assert.doesNotMatch(html, /Swipe to explore/);
@@ -435,8 +436,11 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.watch-loop-card-plain \{[\s\S]*?background: transparent;/);
   assert.doesNotMatch(css, /\.watch-loop-viewport::before/);
   assert.doesNotMatch(css, /\.watch-loop-viewport::after/);
-  assert.doesNotMatch(css, /linear-gradient\(90deg, var\(--bg\), transparent\)/);
-  assert.doesNotMatch(css, /linear-gradient\(270deg, var\(--bg\), transparent\)/);
+  assert.match(css, /\.watch-loop-frame \{[\s\S]*?position: relative;/);
+  assert.match(css, /\.watch-loop-frame::before,/);
+  assert.match(css, /\.watch-loop-frame::after \{/);
+  assert.match(css, /\.watch-loop-frame::before \{[\s\S]*?linear-gradient\(90deg, var\(--bg\), transparent\)/);
+  assert.match(css, /\.watch-loop-frame::after \{[\s\S]*?linear-gradient\(270deg, var\(--bg\), transparent\)/);
   assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\):not\(\[href="#contact"\]\)/);
   assert.doesNotMatch(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\) \{\n    display: none;/);
   assert.doesNotMatch(js, /getEdgeProximity|initAmbientBackground|lightState|beamOpacity|is-guided|is-lit|edge-glow-card/);

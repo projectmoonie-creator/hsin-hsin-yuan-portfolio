@@ -67,7 +67,7 @@
 - Before implementing a design reference, translate it into project-specific rules: what to borrow, what to avoid, which parts serve the portfolio goal, and how it should behave on desktop and mobile.
 - Do not copy a reference site's surface style literally when the user's content needs another rhythm. Use references to derive decisions about typography, spacing, motion, image treatment, logo treatment, and section order.
 - Motion should guide attention without becoming a second product. Subtle ambient light is acceptable only when it preserves readability, keeps the site fast, and is verified on mobile.
-- Keep the moving work strip visually open at both edges. Do not add black gradient masks or edge-fade pseudo-elements; movement and partial cards provide enough horizontal-scroll affordance.
+- The moving work strip may use subtle black edge gradients, but they must stay fixed on a non-scrolling outer frame. Never attach edge-fade pseudo-elements to the scrollable viewport or moving track.
 - If a work has no approved image, use an explicit placeholder or text-first layout. Do not borrow an unrelated project still just to fill a card or design export.
 - Design-layer artifacts must follow the same content rules as the live site. Figma SVG exports and importer plugins are not allowed to reintroduce removed sections, old metrics, or borrowed images.
 

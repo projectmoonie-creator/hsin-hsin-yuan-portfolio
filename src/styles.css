@@ -411,9 +411,33 @@ a {
   padding-top: clamp(0.8rem, 2vw, 1.4rem);
 }
 
+.watch-loop-frame {
+  margin-inline: calc(var(--page-pad) * -1);
+  position: relative;
+}
+
+.watch-loop-frame::before,
+.watch-loop-frame::after {
+  content: "";
+  inset-block: 0;
+  pointer-events: none;
+  position: absolute;
+  width: min(8rem, 12vw);
+  z-index: 2;
+}
+
+.watch-loop-frame::before {
+  background: linear-gradient(90deg, var(--bg), transparent);
+  left: 0;
+}
+
+.watch-loop-frame::after {
+  background: linear-gradient(270deg, var(--bg), transparent);
+  right: 0;
+}
+
 .watch-loop-viewport {
   -webkit-overflow-scrolling: touch;
-  margin-inline: calc(var(--page-pad) * -1);
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.35rem var(--page-pad) 0.9rem;

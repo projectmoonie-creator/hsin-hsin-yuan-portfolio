@@ -299,10 +299,12 @@ function renderWatchLoop(works, lang, copy) {
 
   return `
     <section class="section watch-loop-section watch-loop" data-watch-loop data-speed="34" aria-label="${escapeHtml(copy.watchShelfAria)}">
-      <div class="watch-loop-viewport">
-        <div class="watch-loop-track" data-watch-loop-track>
-          <div class="watch-loop-sequence" data-watch-loop-sequence>
-            ${watchableWorks.map((work) => renderWatchLoopItem(work, lang, copy)).join("")}
+      <div class="watch-loop-frame">
+        <div class="watch-loop-viewport">
+          <div class="watch-loop-track" data-watch-loop-track>
+            <div class="watch-loop-sequence" data-watch-loop-sequence>
+              ${watchableWorks.map((work) => renderWatchLoopItem(work, lang, copy)).join("")}
+            </div>
           </div>
         </div>
       </div>
