@@ -6,43 +6,39 @@ State: `PASS_WITH_OPEN_ITEMS`
 
 ## Current Work Package
 
-- Package: `Contact & Archive Entry Points v1`
+- Package: `Slow Steps No-Title Poster`
 - Outcome: `PASS`
 - Active branch: `codex/contact-archive-entrypoints`
 - Closed baseline tag: `portfolio-phase-2026-07-29-closed`
 - Immediate parent commit:
-  `6d2b44af7d9ef47264bde16de91b46a36157ddbd`
+  `ed40089bc1f3ac22b1151401b8bc486c24973740`
 - Reviewed implementation commit:
-  `dfec4330b02536f47ba97829e243ab393ea46725`
+  `9bc45bc601b07d159457c49aae205a83e8a5d62f`
 - Review:
-  `docs/reviews/contact-archive-entrypoints-v1-2026-07-30.md`
+  `docs/reviews/slow-steps-no-title-poster-2026-07-30.md`
 - No Preview or production deployment was created or replaced.
 - No Git history rewrite or old-deployment deletion was performed.
 
-The active site no longer renders `Who Should Contact Me` or
-`AI / Language Lab`. Contact is now a persistent navigation entry and a
-focused invitation built around `Let’s build a story together.` The homepage
-visual reel closes on the same invitation and points viewers to the Contact
-section.
-
-`FROM THE ARCHIVE` now uses one lead visual card for `Overclocking`, two
-supporting visual cards for `Heart of Steel` and `Lying Game`, and a text
-ledger for the remaining early works. Public video remains at its original
-source; no third-party video was downloaded, re-edited, or rehosted.
+The user-provided 3840x2160 no-title `Slow Steps` artwork is now the canonical
+poster. The web copy is a 1920x1080 WebP and keeps the same stable asset path,
+so the live site and generated Figma SVGs update together. The Featured Work
+image no longer adds a duplicate `SLOW STEPS` overlay; the screening-strip
+card keeps its title because it functions as navigation.
 
 Verification:
 
 - `npm test`: 21 passed, 0 failed.
 - `npm run build`: passed.
 - `git diff --check`: passed.
-- HyperFrames lint: 0 errors; one accepted existing dense-track warning.
-- HyperFrames validate: 0 errors; five accepted low-contrast warnings for
-  intentionally decorative ghost words.
-- HyperFrames inspect: 0 layout issues across 9 samples.
-- English desktop `1440x900`, English mobile `390x844`, and Chinese mobile
-  `390x844` browser QA passed with no body overflow or console/page errors.
-- The replacement homepage showreel is 30 seconds, 1920x1080, and was visually
-  checked at the final Contact frame.
+- English desktop `1440x900` and mobile `390x844` checks passed for both the
+  screening-strip card and Featured Work image.
+- Desktop keeps the central rider as the focal subject. Mobile uses a 16:9
+  frame that retains all three torn-paper portraits.
+- No tested viewport has body-level horizontal overflow or console/page errors.
+- Source PNG SHA-256:
+  `3a6f37deee03aab1836fecaee547685f8b79a23106e5b540cac94094a193c78a`.
+- Delivered WebP SHA-256:
+  `f733046cd1de822ecee43de08461c34e8990f1644c4f449a9d2268da5656da3d`.
 - Disposable screenshots and QA files remain outside the repository.
 
 ## Closed Baseline
@@ -65,17 +61,19 @@ time of the tag; they do not override the current site structure.
 
 These are next-phase decisions, not blockers:
 
-1. Build a 35-45 second Three-Minute Micro Drama reel only from approved local
+1. Approve and implement the proposed `PUBLIC LINKS` rule so public watch,
+   official, press, and credit/proof destinations use one repeatable contract.
+2. Build a 35-45 second Three-Minute Micro Drama reel only from approved local
    source material, then decide whether it becomes a visual archive card.
-2. Add user-approved stills for `鬼手神車`; public release materials remain
+3. Add user-approved stills for `鬼手神車`; public release materials remain
    incomplete.
-3. Curate or replace playlist destinations for Gorgeous Space and Nothing by
+4. Curate or replace playlist destinations for Gorgeous Space and Nothing by
    Bus as the source lists become more complete.
-4. Review whether `AI-Language Creative` should remain in SEO metadata now
+5. Review whether `AI-Language Creative` should remain in SEO metadata now
    that the standalone lab section and public service taxonomy are retired.
-5. Replace remote archive thumbnails or make a custom archive reel only when
+6. Replace remote archive thumbnails or make a custom archive reel only when
    local source or explicit picture-and-music reuse permission exists.
-6. Create a new Preview or promote production only after an explicit
+7. Create a new Preview or promote production only after an explicit
    deployment decision.
 
 ## Residual Privacy Risk
@@ -89,16 +87,17 @@ performed during this package.
 
 ## Exact Next Action
 
-Review the current branch visually, then decide whether to create a new Vercel
-Preview. Keep the Three-Minute Micro Drama reel as the next separate media
-package and do not download or rehost archive videos to create it.
+Obtain the user's approval on the proposed `PUBLIC LINKS` layout and data
+contract, then implement it as a separate bounded package. Do not deploy
+production without explicit approval.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, and this file.
 2. Verify the active branch, reviewed implementation commit, remote tip,
    worktree state, and preserved closeout tag.
-3. Read `docs/reviews/contact-archive-entrypoints-v1-2026-07-30.md` for the
-   current package evidence. Read `docs/reviews/phase-closeout-2026-07-29.md`
-   only when the earlier closeout rationale is needed.
+3. Read `docs/reviews/slow-steps-no-title-poster-2026-07-30.md` for the current
+   package evidence. Read
+   `docs/reviews/contact-archive-entrypoints-v1-2026-07-30.md` when the earlier
+   contact/archive rationale is needed.
 4. Do not depend on old chat history or rewrite historical review files.
