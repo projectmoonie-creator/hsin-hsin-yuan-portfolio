@@ -6,39 +6,38 @@ State: `PASS_WITH_OPEN_ITEMS`
 
 ## Current Work Package
 
-- Package: `Slow Steps No-Title Poster`
+- Package: `Gorgeous Space English Localization + Sunny Wang Poster`
 - Outcome: `PASS`
 - Active branch: `codex/contact-archive-entrypoints`
 - Closed baseline tag: `portfolio-phase-2026-07-29-closed`
 - Immediate parent commit:
-  `ed40089bc1f3ac22b1151401b8bc486c24973740`
+  `5ff4470fbe222a3a724fd15617ebeb69cf50090d`
 - Reviewed implementation commit:
-  `9bc45bc601b07d159457c49aae205a83e8a5d62f`
+  `213dc8a0e6d3f2e05c100fecdeaff45b42a85965`
 - Review:
-  `docs/reviews/slow-steps-no-title-poster-2026-07-30.md`
+  `docs/reviews/gorgeous-space-localization-sunny-poster-2026-07-30.md`
 - No Preview or production deployment was created or replaced.
 - No Git history rewrite or old-deployment deletion was performed.
 
-The user-provided 3840x2160 no-title `Slow Steps` artwork is now the canonical
-poster. The web copy is a 1920x1080 WebP and keeps the same stable asset path,
-so the live site and generated Figma SVGs update together. The Featured Work
-image no longer adds a duplicate `SLOW STEPS` overlay; the screening-strip
-card keeps its title because it functions as navigation.
+Gorgeous Space is now a bilingual data value instead of one mixed-language
+string. The English site and English Figma handoff use `Gorgeous Space` with no
+visible `幸福空間`; the Chinese site preserves the official Chinese label. The
+work poster now uses a larger frontal Sunny Wang frame, positioned on the right
+so the screening-strip copy remains readable on the left.
 
 Verification:
 
-- `npm test`: 21 passed, 0 failed.
+- `npm test`: 23 passed, 0 failed.
 - `npm run build`: passed.
+- `npm run figma:export`: passed.
 - `git diff --check`: passed.
-- English desktop `1440x900` and mobile `390x844` checks passed for both the
+- English generated HTML, English Figma exports, and the Figma importer contain
+  no `幸福空間`; Chinese generated HTML retains it.
+- Desktop `1440x1100` and mobile `390x844` checks passed for the
   screening-strip card and Featured Work image.
-- Desktop keeps the central rider as the focal subject. Mobile uses a 16:9
-  frame that retains all three torn-paper portraits.
-- No tested viewport has body-level horizontal overflow or console/page errors.
-- Source PNG SHA-256:
-  `3a6f37deee03aab1836fecaee547685f8b79a23106e5b540cac94094a193c78a`.
+- No tested viewport reported console errors.
 - Delivered WebP SHA-256:
-  `f733046cd1de822ecee43de08461c34e8990f1644c4f449a9d2268da5656da3d`.
+  `db41763c6846b186a0bfcc5e9b45d4765917fed99a48c038d61693135d78a666`.
 - Disposable screenshots and QA files remain outside the repository.
 
 ## Closed Baseline
@@ -96,8 +95,10 @@ production without explicit approval.
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, and this file.
 2. Verify the active branch, reviewed implementation commit, remote tip,
    worktree state, and preserved closeout tag.
-3. Read `docs/reviews/slow-steps-no-title-poster-2026-07-30.md` for the current
-   package evidence. Read
+3. Read
+   `docs/reviews/gorgeous-space-localization-sunny-poster-2026-07-30.md` for
+   the current package evidence. Read
+   `docs/reviews/slow-steps-no-title-poster-2026-07-30.md` and
    `docs/reviews/contact-archive-entrypoints-v1-2026-07-30.md` when the earlier
-   contact/archive rationale is needed.
+   poster or contact/archive rationale is needed.
 4. Do not depend on old chat history or rewrite historical review files.
