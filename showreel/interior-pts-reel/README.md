@@ -1,6 +1,14 @@
-# Interior + PTS Portfolio Reel
+# Future Homepage Showreel Assembly
 
-Private working package for a website-first portfolio reel.
+Private working package for a future website-homepage showreel. This 54-second
+Interior + PTS assembly is retained as an editorial spine for a broader reel
+that will later add major documentary work.
+
+It is not the card reel for either featured work. The site uses two separate
+short compositions:
+
+- `../interior-card-reel/`
+- `../nothing-by-bus-card-reel/`
 
 ## Editorial Shape
 
@@ -32,10 +40,11 @@ source credit is separately confirmed.
 Pre-production and the silent picture cut are complete.
 
 - Fixed toolchain: `hyperframes@0.7.48`
-- Current review master: `renders/interior-pts-picture-cut-v3.mp4`
+- Current assembly master: `renders/interior-pts-picture-cut-v3.mp4`
 - Working media: 360p scout downloads and 720p shot selects, all excluded from Git
 - Verification: lint, runtime validation, WCAG contrast, and layout inspection pass
 - Pending: picture-cut approval, cleared music and sound design, high-resolution
   source replacement, and website playback testing
 
-The review master is intentionally silent. Do not publish it as the final reel.
+The assembly master is intentionally silent. Preserve its timecodes, but do not
+publish it as the final homepage reel.

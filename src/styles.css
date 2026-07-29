@@ -462,7 +462,7 @@ a {
 
 .watch-loop-card {
   aspect-ratio: 16 / 10;
-  background: linear-gradient(180deg, rgba(8, 8, 9, 0.12), rgba(8, 8, 9, 0.82)), rgba(255, 255, 255, 0.045);
+  background-color: rgba(255, 255, 255, 0.045);
   background-position: center;
   background-size: cover;
   border: 1px solid rgba(247, 242, 232, 0.16);
@@ -482,6 +482,31 @@ a {
   width: clamp(260px, 25vw, 340px);
 }
 
+.watch-loop-video,
+.watch-loop-scrim {
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.watch-loop-video {
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.watch-loop-video::-webkit-media-controls {
+  display: none !important;
+}
+
+.watch-loop-scrim {
+  background: linear-gradient(180deg, rgba(8, 8, 9, 0.1), rgba(8, 8, 9, 0.82));
+  pointer-events: none;
+  z-index: 1;
+}
+
 .watch-loop-card-plain {
   background: transparent;
   border-color: rgba(247, 242, 232, 0.22);
@@ -497,7 +522,7 @@ a {
 .watch-loop-role,
 .watch-loop-tagline {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .watch-loop-meta,
@@ -514,7 +539,7 @@ a {
   line-height: 0.98;
   margin: 0.35rem 0 0.25rem;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .watch-loop-tagline {
@@ -1302,6 +1327,10 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .hero-media {
     animation: none;
+  }
+
+  .watch-loop-video {
+    display: none;
   }
 
   .watch-loop-track {

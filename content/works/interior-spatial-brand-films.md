@@ -5,8 +5,8 @@
   "order": 4,
   "status": "in-progress",
   "statusLabel": {
-    "en": "Showreel in progress",
-    "zh": "Showreel 整理中"
+    "en": "Selected reel",
+    "zh": "精選短片"
   },
   "year": "2021-2024",
   "title": {
@@ -29,6 +29,8 @@
   "watchUrl": "",
   "videoEmbedUrl": "",
   "posterImage": "",
+  "cardReelUrl": "/assets/showreel/interior-spatial-card-reel.mp4",
+  "cardReelPoster": "/assets/showreel/interior-spatial-card-reel-poster.webp",
   "tags": ["interior design", "branded content", "lifestyle", "editing"],
   "metrics": [
     {"value": "20+", "label": {"en": "public links archived", "zh": "已整理公開連結"}},

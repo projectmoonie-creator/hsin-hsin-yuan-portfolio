@@ -46,12 +46,14 @@
 ## Work Navigation
 
 - The screening strip is a visual index. It should stay lightweight: no explanatory heading unless needed and no duplicate action labels. Cards jump to the matching Featured Work by default. Use `watchLoopTarget: "watch"` only when the user explicitly wants that small card to open the public work page directly.
-- Works enter the screening strip only when they have a public `watchUrl`.
+- Works enter the screening strip when they have a public `watchUrl`, an approved local `cardReelUrl`, or an explicitly supported external-only state.
 - Keep one canonical public `watchUrl` per work whenever the small card, Featured Work image, and text CTA should share a destination. Add a separate media URL only when the destinations are intentionally different and that difference is covered by a regression test.
+- Use `cardReelUrl` only for a silent, work-specific moving thumbnail and `cardReelPoster` for its static fallback. Card reels must play only while visible; cloned loop cards use `preload="none"`, and reduced-motion or no-JavaScript states remain usable as static cards.
+- Keep each work-specific reel separate. Do not combine unrelated credits or program identities inside one thumbnail. The retained `showreel/interior-pts-reel/` assembly is an editorial spine for a future homepage showreel, not a source for either work card.
 - Featured Works carries detail. The strip should preview; Featured Works should explain.
 - Each work belongs to one public tier at a time: Featured Work, Archive, or unpublished source material. If a work is removed from Featured Works, move it deliberately to Archive or keep it out of the public site.
 - For single films or episodes, use "Watch the full episode" / "觀看完整單集". For multi-episode series, use "Watch the series" / "觀看完整系列". For a curated group, use "Watch selected films" / "觀看精選影片".
-- Do not use the global coming-soon label for every work without a `watchUrl`. Completed or in-progress collections need their own `statusLabel`, such as "Showreel in progress" / "Showreel 整理中".
+- Do not use the global coming-soon label for every work without a `watchUrl`. Completed or in-progress collections need their own truthful `statusLabel`, such as "Selected reel" / "精選短片" once a public card reel exists.
 - Keep the homepage clean. If a work has trailers, press, full episodes, metrics, and many related links, move deeper material into a future detail page.
 
 ## Proof And Metrics

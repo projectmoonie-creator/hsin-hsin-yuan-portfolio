@@ -42,9 +42,25 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[0].role.en, "Director / Editor / Producer");
   assert.equal(works[1].role.en, "Director / Editor / Producer");
   assert.equal(works[3].role.en, "Director / Editor");
+  assert.equal(
+    works[3].cardReelUrl,
+    "/assets/showreel/interior-spatial-card-reel.mp4",
+  );
+  assert.equal(
+    works[3].cardReelPoster,
+    "/assets/showreel/interior-spatial-card-reel-poster.webp",
+  );
   assert.equal(works[4].platform, "PTS Taigi");
   assert.equal(works[4].year, "2021");
   assert.equal(works[4].title.en, "Nothing by Bus");
+  assert.equal(
+    works[4].cardReelUrl,
+    "/assets/showreel/nothing-by-bus-card-reel.mp4",
+  );
+  assert.equal(
+    works[4].cardReelPoster,
+    "/assets/showreel/nothing-by-bus-card-reel-poster.webp",
+  );
   assert.equal(works[5].role.en, "Director");
   assert.equal(works[5].platform, "China Dragon TV");
   assert.equal(works[0].posterImage, "/assets/portfolio/slow-steps-poster.webp");
@@ -200,6 +216,19 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Screening strip/);
   assert.doesNotMatch(html, /Swipe to explore/);
   assert.match(html, /watch-loop-card/);
+  assert.match(html, /data-watch-loop-video/);
+  assert.match(
+    html,
+    /src="\/assets\/showreel\/interior-spatial-card-reel\.mp4"/,
+  );
+  assert.match(
+    html,
+    /src="\/assets\/showreel\/nothing-by-bus-card-reel\.mp4"/,
+  );
+  assert.match(
+    html,
+    /<video[\s\S]*?muted[\s\S]*?loop[\s\S]*?playsinline[\s\S]*?preload="metadata"/,
+  );
   assert.match(html, /href="#slow-steps"/);
   assert.match(
     html,
@@ -245,7 +274,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Interior \/ Spatial Brand Films/);
   assert.match(html, /Gorgeous Space \/ 幸福空間/);
   assert.match(html, /Director \/ Editor/);
-  assert.match(html, /Showreel in progress/);
+  assert.match(html, /Selected reel/);
   assert.doesNotMatch(html, /3 yrs/);
   assert.doesNotMatch(html, /Interior \/ Spatial Brand Films[\s\S]*?Coming 2026/);
   assert.match(html, /Nothing by Bus/);
@@ -261,7 +290,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /0\.81/);
   assert.match(html, /href="#top-gear-china-uk-special"/);
   assert.match(html, /href="#pts-taigi-bus"/);
-  assert.doesNotMatch(html, /href="#interior-spatial-brand-films"/);
+  assert.match(html, /href="#interior-spatial-brand-films"/);
   assert.match(html, /https:\/\/youtu\.be\/M_eXe9HRD9Y\?si=YZ_3JZ7FJY4vVcZv/);
   assert.match(html, /Watch the full episode/);
   assert.match(html, /Watch the series/);
@@ -332,6 +361,22 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.equal(existsSync(join(root, "dist/vendor/ogl/src/index.js")), false);
   assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel.mp4")), true);
   assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel-poster.png")), true);
+  assert.equal(
+    existsSync(join(root, "dist/assets/showreel/interior-spatial-card-reel.mp4")),
+    true,
+  );
+  assert.equal(
+    existsSync(join(root, "dist/assets/showreel/interior-spatial-card-reel-poster.webp")),
+    true,
+  );
+  assert.equal(
+    existsSync(join(root, "dist/assets/showreel/nothing-by-bus-card-reel.mp4")),
+    true,
+  );
+  assert.equal(
+    existsSync(join(root, "dist/assets/showreel/nothing-by-bus-card-reel-poster.webp")),
+    true,
+  );
 
   const zh = readFileSync(join(root, "dist/zh/index.html"), "utf8");
   const robots = readFileSync(join(root, "dist/robots.txt"), "utf8");
@@ -345,7 +390,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(sitemap, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
   assert.match(zh, /紀錄片導演/);
   assert.match(zh, /觀看 showreel/);
-  assert.match(zh, /Showreel 整理中/);
+  assert.match(zh, /精選短片/);
   assert.doesNotMatch(zh, /data-about-tabs/);
   assert.match(zh, /可合作項目/);
   assert.doesNotMatch(zh, /<h2 class="section-title">關於我<\/h2>/);
@@ -434,6 +479,14 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   );
   assert.match(css, /--page-pad: clamp/);
   assert.match(css, /\.watch-loop-card \{/);
+  assert.match(css, /\.watch-loop-video \{/);
+  assert.match(css, /\.watch-loop-video \{[\s\S]*?pointer-events: none;/);
+  assert.match(
+    css,
+    /\.watch-loop-video::?-webkit-media-controls \{[\s\S]*?display: none !important;/,
+  );
+  assert.match(css, /\.watch-loop-scrim \{/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.watch-loop-video \{[\s\S]*?display: none;/);
   assert.match(css, /\.watch-loop-card-plain \{/);
   assert.match(css, /\.watch-loop-card-plain \{[\s\S]*?background: transparent;/);
   assert.doesNotMatch(css, /\.watch-loop-viewport::before/);
@@ -450,6 +503,11 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(js, /clearInitialHash/);
   assert.match(js, /replaceState/);
   assert.match(js, /data-watch-loop/);
+  assert.match(js, /data-watch-loop-video/);
+  assert.match(js, /video\.play\(\)\.catch/);
+  assert.match(js, /video\.pause\(\)/);
+  assert.match(js, /visibilitychange/);
+  assert.match(js, /threshold: \[0, 0\.35\]/);
   assert.match(js, /syncLoopCopies/);
   assert.match(js, /offset %= sequenceWidth/);
   assert.match(js, /startLoop/);

@@ -278,13 +278,35 @@ function renderWatchLoopItem(work, lang, copy) {
   const opensWatchUrl = work.watchLoopTarget === "watch" && work.watchUrl;
   const href = opensWatchUrl ? work.watchUrl : `#${work.slug}`;
   const linkAttrs = opensWatchUrl ? ' target="_blank" rel="noreferrer"' : "";
-  const image = work.posterImage
-    ? `style="background-image: linear-gradient(180deg, rgba(8,8,9,.12), rgba(8,8,9,.78)), ${cssUrl(work.posterImage)}"`
+  const poster = work.cardReelPoster || work.posterImage;
+  const image = poster
+    ? `style="background-image: ${cssUrl(poster)}"`
     : "";
-  const cardClass = work.posterImage ? "watch-loop-card" : "watch-loop-card watch-loop-card-plain";
+  const cardClass = poster || work.cardReelUrl
+    ? "watch-loop-card"
+    : "watch-loop-card watch-loop-card-plain";
+  const video = work.cardReelUrl
+    ? `
+      <video
+        class="watch-loop-video"
+        data-watch-loop-video
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="metadata"
+        poster="${escapeHtml(poster || "")}"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <source src="${escapeHtml(work.cardReelUrl)}" type="video/mp4">
+      </video>`
+    : "";
 
   return `
     <a class="${cardClass}" href="${escapeHtml(href)}"${linkAttrs} ${image}>
+      ${video}
+      <span class="watch-loop-scrim" aria-hidden="true"></span>
       <span class="watch-loop-meta">${escapeHtml(work.platform)} / ${escapeHtml(work.year)}</span>
       <strong>${escapeHtml(title)}</strong>
       <span class="watch-loop-role">${escapeHtml(role)}</span>
@@ -294,7 +316,9 @@ function renderWatchLoopItem(work, lang, copy) {
 }
 
 function renderWatchLoop(works, lang, copy) {
-  const watchableWorks = works.filter((work) => work.watchUrl || work.status === "external-only");
+  const watchableWorks = works.filter(
+    (work) => work.cardReelUrl || work.watchUrl || work.status === "external-only",
+  );
   if (!watchableWorks.length) return "";
 
   return `

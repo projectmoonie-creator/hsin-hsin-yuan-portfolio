@@ -76,10 +76,62 @@ if (!prefersReducedMotion) {
     let isInteracting = false;
     let animationFrame = 0;
     let isVisible = false;
+    const observedVideos = new WeakSet();
+    const videoObserver =
+      "IntersectionObserver" in window
+        ? new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                const video = entry.target;
+                if (
+                  entry.isIntersecting &&
+                  entry.intersectionRatio >= 0.35 &&
+                  document.visibilityState === "visible"
+                ) {
+                  video.play().catch(() => {});
+                } else {
+                  video.pause();
+                }
+              });
+            },
+            { root: viewport, threshold: [0, 0.35] },
+          )
+        : null;
+
+    function observeWatchLoopVideos(root) {
+      root.querySelectorAll("[data-watch-loop-video]").forEach((video) => {
+        if (observedVideos.has(video)) return;
+        video.muted = true;
+        observedVideos.add(video);
+        videoObserver?.observe(video);
+      });
+    }
+
+    function pauseWatchLoopVideos() {
+      track.querySelectorAll("[data-watch-loop-video]").forEach((video) => video.pause());
+    }
+
+    function handleDocumentVisibility() {
+      if (document.visibilityState !== "visible") {
+        pauseWatchLoopVideos();
+        return;
+      }
+
+      track.querySelectorAll("[data-watch-loop-video]").forEach((video) => {
+        videoObserver?.unobserve(video);
+        videoObserver?.observe(video);
+      });
+    }
 
     function syncLoopCopies() {
       const copies = Array.from(track.querySelectorAll("[data-watch-loop-sequence]"));
-      copies.slice(1).forEach((copy) => copy.remove());
+      copies.slice(1).forEach((copy) => {
+        copy.querySelectorAll("[data-watch-loop-video]").forEach((video) => {
+          videoObserver?.unobserve(video);
+          video.pause();
+        });
+        copy.remove();
+      });
       sequenceWidth = sequence.getBoundingClientRect().width;
       if (!sequenceWidth) return;
       offset %= sequenceWidth;
@@ -93,7 +145,11 @@ if (!prefersReducedMotion) {
         clone.querySelectorAll("a").forEach((link) => {
           link.tabIndex = -1;
         });
+        clone.querySelectorAll("[data-watch-loop-video]").forEach((video) => {
+          video.preload = "none";
+        });
         track.append(clone);
+        observeWatchLoopVideos(clone);
         renderedWidth += sequenceWidth;
       }
     }
@@ -162,7 +218,9 @@ if (!prefersReducedMotion) {
           })
         : null;
     resizeObserver?.observe(viewport);
+    observeWatchLoopVideos(sequence);
     syncLoopCopies();
+    document.addEventListener("visibilitychange", handleDocumentVisibility);
 
     if ("IntersectionObserver" in window) {
       const loopObserver = new IntersectionObserver(
@@ -180,6 +238,9 @@ if (!prefersReducedMotion) {
 
       window.addEventListener("pagehide", () => {
         stopLoop();
+        pauseWatchLoopVideos();
+        document.removeEventListener("visibilitychange", handleDocumentVisibility);
+        videoObserver?.disconnect();
         loopObserver.disconnect();
         resizeObserver?.disconnect();
       });
@@ -189,6 +250,8 @@ if (!prefersReducedMotion) {
 
       window.addEventListener("pagehide", () => {
         stopLoop();
+        pauseWatchLoopVideos();
+        document.removeEventListener("visibilitychange", handleDocumentVisibility);
         resizeObserver?.disconnect();
       });
     }
