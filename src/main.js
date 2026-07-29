@@ -24,6 +24,8 @@ window.addEventListener("pageshow", (event) => {
 });
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const WATCH_LOOP_REEL_HOLD_MS = 1400;
+const watchLoopVideoTimers = new WeakMap();
 
 if (!prefersReducedMotion) {
   const stackMedia = window.matchMedia("(min-width: 861px)");
@@ -77,6 +79,43 @@ if (!prefersReducedMotion) {
     let animationFrame = 0;
     let isVisible = false;
     const observedVideos = new WeakSet();
+
+    function clearWatchLoopVideoHold(video) {
+      const timer = watchLoopVideoTimers.get(video);
+      if (timer === undefined) return;
+      window.clearTimeout(timer);
+      watchLoopVideoTimers.delete(video);
+    }
+
+    function resetWatchLoopVideo(video) {
+      clearWatchLoopVideoHold(video);
+      video.dataset.watchLoopVisible = "false";
+      video.classList.remove("is-playing");
+      video.pause();
+      try {
+        video.currentTime = 0;
+      } catch {
+        // The poster remains visible if media metadata is not ready.
+      }
+    }
+
+    function scheduleWatchLoopVideo(video) {
+      clearWatchLoopVideoHold(video);
+      video.dataset.watchLoopVisible = "true";
+      video.classList.remove("is-playing");
+      const timer = window.setTimeout(() => {
+        watchLoopVideoTimers.delete(video);
+        if (
+          video.dataset.watchLoopVisible !== "true" ||
+          document.visibilityState !== "visible"
+        ) {
+          return;
+        }
+        video.play().catch(() => resetWatchLoopVideo(video));
+      }, WATCH_LOOP_REEL_HOLD_MS);
+      watchLoopVideoTimers.set(video, timer);
+    }
+
     const videoObserver =
       "IntersectionObserver" in window
         ? new IntersectionObserver(
@@ -88,9 +127,9 @@ if (!prefersReducedMotion) {
                   entry.intersectionRatio >= 0.35 &&
                   document.visibilityState === "visible"
                 ) {
-                  video.play().catch(() => {});
+                  scheduleWatchLoopVideo(video);
                 } else {
-                  video.pause();
+                  resetWatchLoopVideo(video);
                 }
               });
             },
@@ -102,13 +141,22 @@ if (!prefersReducedMotion) {
       root.querySelectorAll("[data-watch-loop-video]").forEach((video) => {
         if (observedVideos.has(video)) return;
         video.muted = true;
+        video.dataset.watchLoopVisible = "false";
+        video.addEventListener("playing", () => {
+          if (video.dataset.watchLoopVisible === "true") {
+            video.classList.add("is-playing");
+          } else {
+            resetWatchLoopVideo(video);
+          }
+        });
+        video.addEventListener("error", () => resetWatchLoopVideo(video));
         observedVideos.add(video);
         videoObserver?.observe(video);
       });
     }
 
     function pauseWatchLoopVideos() {
-      track.querySelectorAll("[data-watch-loop-video]").forEach((video) => video.pause());
+      track.querySelectorAll("[data-watch-loop-video]").forEach(resetWatchLoopVideo);
     }
 
     function handleDocumentVisibility() {
@@ -128,7 +176,7 @@ if (!prefersReducedMotion) {
       copies.slice(1).forEach((copy) => {
         copy.querySelectorAll("[data-watch-loop-video]").forEach((video) => {
           videoObserver?.unobserve(video);
-          video.pause();
+          resetWatchLoopVideo(video);
         });
         copy.remove();
       });

@@ -621,6 +621,14 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.watch-loop-video \{[\s\S]*?pointer-events: none;/);
   assert.match(
     css,
+    /\.watch-loop-video \{[\s\S]*?opacity: 0;[\s\S]*?transition: opacity 260ms ease;/,
+  );
+  assert.match(
+    css,
+    /\.watch-loop-video\.is-playing \{[\s\S]*?opacity: 1;/,
+  );
+  assert.match(
+    css,
     /\.watch-loop-video::?-webkit-media-controls \{[\s\S]*?display: none !important;/,
   );
   assert.match(css, /\.watch-loop-scrim \{/);
@@ -642,6 +650,14 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(js, /replaceState/);
   assert.match(js, /data-watch-loop/);
   assert.match(js, /data-watch-loop-video/);
+  assert.match(js, /const WATCH_LOOP_REEL_HOLD_MS = 1400;/);
+  assert.match(js, /const watchLoopVideoTimers = new WeakMap\(\);/);
+  assert.match(js, /window\.setTimeout/);
+  assert.match(js, /window\.clearTimeout/);
+  assert.match(js, /video\.currentTime = 0;/);
+  assert.match(js, /video\.classList\.add\("is-playing"\)/);
+  assert.match(js, /video\.classList\.remove\("is-playing"\)/);
+  assert.match(js, /video\.addEventListener\("playing"/);
   assert.match(js, /function consumeNativeScroll\(\)/);
   assert.match(js, /const nativeOffset = viewport\.scrollLeft;/);
   assert.match(js, /offset = \(offset \+ nativeOffset\) % sequenceWidth;/);
