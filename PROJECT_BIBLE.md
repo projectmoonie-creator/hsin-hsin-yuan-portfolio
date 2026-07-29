@@ -12,6 +12,7 @@
 ## Bilingual Voice
 
 - English can carry the international positioning and fast hiring scan. Chinese should preserve precision, cultural nuance, and warmth.
+- Partner, publisher, and platform labels must be localizable at the data source. English pages and English design handoffs should use the English label without leaking a Chinese wordmark; Chinese pages may preserve the official Chinese name. Historical source titles are exempt when the title itself is evidence.
 - Do not translate press headlines or source titles too freely. If an English title is editorially translated from a Chinese source, keep it factual and close to the source.
 - Keep homepage language concise. Move richer, warmer explanation into work details, press, archive, or future case-study pages.
 
@@ -33,6 +34,7 @@
 - Local portfolio images are for owned/project visuals, not replacements for press-source thumbnails.
 - For a work card, an official broadcaster, platform, or production page image may be used as a remote thumbnail only when it clearly represents that work and is link-first, not rehosted.
 - Treat public platform videos, YouTube, TaiwanPlus, broadcaster pages, and press pages as link/embed-first sources. Do not upload or rehost video unless music, image, and platform rights are clear.
+- When the user approves a local portfolio still derived from a public video of her confirmed work, record the canonical source URL, exact timecode, output dimensions, focal point, and rights status. Keep the public watch destination attached to the work, and use only editorial crop/resize unless a generative edit is separately approved.
 - If a remote image breaks, blocks hotlinking, or creates mixed-content issues, use a text-only press card or ask the user for a replacement image. Do not silently swap in an unrelated still.
 - The showreel may use local footage only when the rights status is acceptable. If rights are uncertain, prefer a link-based or still-based reel until the user confirms.
 

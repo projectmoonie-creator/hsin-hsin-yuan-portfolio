@@ -29,6 +29,13 @@ function parseFrontmatter(path) {
   return JSON.parse(match[1]);
 }
 
+function englishText(value) {
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    return value.en ?? "";
+  }
+  return value ?? "";
+}
+
 function escapeXml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -112,10 +119,11 @@ ${body}
 }
 
 function logoWordmark({ item, x, y, width = 150 }) {
-  const display = item.label || item.name;
-  return `<g id="logo-${escapeXml(item.name).toLowerCase().replace(/[^a-z0-9]+/g, "-")}" opacity="0.7">
+  const name = englishText(item.name);
+  const display = englishText(item.label) || name;
+  return `<g id="logo-${escapeXml(name).toLowerCase().replace(/[^a-z0-9]+/g, "-")}" opacity="0.7">
     <text x="${x}" y="${y}" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800">${escapeXml(display)}</text>
-    <text x="${x}" y="${y + 18}" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="700">${escapeXml(item.name)}</text>
+    <text x="${x}" y="${y + 18}" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="700">${escapeXml(name)}</text>
     <line x1="${x}" y1="${y + 28}" x2="${x + width}" y2="${y + 28}" stroke="${tokens.ink}" stroke-opacity="0.2"/>
   </g>`;
 }
@@ -127,7 +135,7 @@ function workCard({ work, x, y, width }) {
   return `<g id="component-work-card-${safeSlug}">
     <rect x="${x}" y="${y}" width="${width}" height="410" rx="8" fill="${tokens.panel}" stroke="${tokens.line}"/>
     ${imageLayer({ id: `image-work-${safeSlug}`, href: work.posterImage, x: x + 14, y: y + 14, width: width - 28, height: 160, opacity: 0.88 })}
-    <text x="${x + 24}" y="${y + 210}" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" letter-spacing="1.3">${escapeXml(`${work.year} / ${work.role.en} / ${work.platform}`.toUpperCase())}</text>
+    <text x="${x + 24}" y="${y + 210}" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" letter-spacing="1.3">${escapeXml(`${work.year} / ${work.role.en} / ${englishText(work.platform)}`.toUpperCase())}</text>
     <text x="${x + 24}" y="${y + 252}" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="850">${escapeXml(title)}</text>
     ${textBlock({ id: `text-work-${safeSlug}-description`, x: x + 24, y: y + 286, lines: textLines(desc, 36).slice(0, 3), size: 15, fill: tokens.muted, lineHeight: 22 })}
     <text x="${x + 24}" y="${y + 374}" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="800" letter-spacing="1.3">${escapeXml((work.tags || []).slice(0, 3).join(" / ").toUpperCase())}</text>

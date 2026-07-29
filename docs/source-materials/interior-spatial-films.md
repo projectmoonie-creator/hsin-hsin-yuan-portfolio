@@ -36,9 +36,13 @@ Default credit for this group:
 - YouTube: https://www.youtube.com/watch?v=me4KutyUoT4
 - User-provided start reference: 111s
 - Thumbnail: https://i.ytimg.com/vi/me4KutyUoT4/hqdefault.jpg
-- Website poster: `/assets/portfolio/gorgeous-space-lg-sunny-wang.webp`, derived from the public
-  1280x720 YouTube thumbnail; subtitle area removed and replaced with the site's dark
-  background color so the image remains legible beneath portfolio metadata.
+- Website poster: `/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp`, derived
+  from the confirmed public video at `00:00:28`.
+- Poster treatment: 1280x720 WebP; editorial crop/resize only. Sunny Wang is framed
+  as a larger frontal portrait on the right so the screening-strip copy has open
+  space on the left. The crop excludes the subtitle and publisher watermark rather
+  than retouching them.
+- Rights status: `public-source-user-confirmed-work`.
 - Useful positioning: branded interior / lifestyle video, home transformation, celebrity / brand collaboration
 - Website use candidate: yes, especially to show branded content and interior/lifestyle production experience
 - Showreel candidate: strong candidate if the public video quality is usable; review around 01:51 and nearby sequences first

@@ -17,7 +17,10 @@
     "en": "Director / Editor",
     "zh": "導演 / 剪輯"
   },
-  "platform": "Gorgeous Space / 幸福空間",
+  "platform": {
+    "en": "Gorgeous Space",
+    "zh": "Gorgeous Space / 幸福空間"
+  },
   "tagline": {
     "en": "Design, product, and home stories shaped for watchable short-form video.",
     "zh": "把設計、產品與家的故事，整理成觀眾願意停留的短影音。"
@@ -30,12 +33,23 @@
   "watchUrl": "https://www.youtube.com/playlist?list=PLJCU8axtQoPI",
   "showWatchCta": true,
   "videoEmbedUrl": "",
-  "posterImage": "/assets/portfolio/gorgeous-space-lg-sunny-wang.webp",
+  "posterImage": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
   "posterFit": "contain",
+  "posterRightsStatus": "public-source-user-confirmed-work",
+  "posterDimensions": {
+    "width": 1280,
+    "height": 720
+  },
+  "posterFocalPoint": {
+    "x": 0.73,
+    "y": 0.3
+  },
+  "posterSourceUrl": "https://www.youtube.com/watch?v=me4KutyUoT4&t=28s",
+  "posterSourceTimecode": "00:00:28",
   "hideMediaLabel": true,
   "featuredReelUrl": "/assets/showreel/interior-spatial-card-reel.mp4",
   "featuredReelMode": "in-view",
-  "featuredReelPoster": "/assets/portfolio/gorgeous-space-lg-sunny-wang.webp",
+  "featuredReelPoster": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
   "tags": ["interior design", "branded content", "lifestyle", "editing"],
   "metrics": [
     {"value": "20+", "label": {"en": "public links archived", "zh": "已整理公開連結"}},

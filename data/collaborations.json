@@ -30,7 +30,10 @@
   },
   {
     "name": "Gorgeous Space",
-    "label": "幸福空間",
+    "label": {
+      "en": "Gorgeous Space",
+      "zh": "幸福空間"
+    },
     "url": "https://www.hhh.com.tw/"
   }
 ]

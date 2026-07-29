@@ -33,7 +33,7 @@ const ASSETS = {
   taiwanplus: "/assets/logos/taiwanplus.svg",
 };
 
-const LOGOS = ["TaiwanPlus", "PTS", "DRAGON TV", "WMW", "TICFF", "ScreenHouse", "幸福空間"];
+const LOGOS = ["TaiwanPlus", "PTS", "DRAGON TV", "WMW", "TICFF", "ScreenHouse", "Gorgeous Space"];
 
 const WORKS = [
   {

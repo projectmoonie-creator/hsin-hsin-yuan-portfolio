@@ -49,12 +49,23 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[3].featuredReelMode, "in-view");
   assert.equal(
     works[3].featuredReelPoster,
-    "/assets/portfolio/gorgeous-space-lg-sunny-wang.webp",
+    "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
   );
   assert.equal(
     works[3].posterImage,
-    "/assets/portfolio/gorgeous-space-lg-sunny-wang.webp",
+    "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
   );
+  assert.equal(
+    works[3].posterRightsStatus,
+    "public-source-user-confirmed-work",
+  );
+  assert.deepEqual(works[3].posterDimensions, { width: 1280, height: 720 });
+  assert.deepEqual(works[3].posterFocalPoint, { x: 0.73, y: 0.3 });
+  assert.equal(
+    works[3].posterSourceUrl,
+    "https://www.youtube.com/watch?v=me4KutyUoT4&t=28s",
+  );
+  assert.equal(works[3].posterSourceTimecode, "00:00:28");
   assert.equal(works[3].posterFit, "contain");
   assert.equal(works[3].hideMediaLabel, true);
   assert.equal(works[3].watchMode, "series");
@@ -111,6 +122,17 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     works.filter((work) => work.showWatchCta).map((work) => work.slug),
     ["interior-spatial-brand-films", "pts-taigi-bus"],
   );
+});
+
+test("English output uses Gorgeous Space while Chinese output preserves 幸福空間", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const en = renderPage({ lang: "en", site, works });
+  const zh = renderPage({ lang: "zh", site, works });
+
+  assert.doesNotMatch(en, /幸福空間/);
+  assert.match(en, /Gorgeous Space/);
+  assert.match(zh, /幸福空間/);
 });
 
 test("screening strip stays static while approved reels render in featured panels", () => {
@@ -415,10 +437,11 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   );
   assert.match(html, /class="work-media-play" aria-hidden="true"><span><\/span><\/span>/);
   assert.match(html, /Interior \/ Spatial Brand Films/);
-  assert.match(html, /Gorgeous Space \/ 幸福空間/);
+  assert.match(html, /Gorgeous Space/);
+  assert.doesNotMatch(html, /幸福空間/);
   assert.match(
     html,
-    /<article class="work-panel work-panel-compact-media" id="interior-spatial-brand-films">[\s\S]*?class="media-frame media-frame-contain media-frame-link"[\s\S]*?aria-label="Play video: Interior \/ Spatial Brand Films"[\s\S]*?linear-gradient\(180deg, rgba\(9,9,10,.04\), rgba\(9,9,10,.26\)\)[\s\S]*?gorgeous-space-lg-sunny-wang\.webp[\s\S]*?background-size: cover, contain;[\s\S]*?background-repeat: no-repeat;[^>]*>[\s\S]*?class="work-media-play"/,
+    /<article class="work-panel work-panel-compact-media" id="interior-spatial-brand-films">[\s\S]*?class="media-frame media-frame-contain media-frame-link"[\s\S]*?aria-label="Play video: Interior \/ Spatial Brand Films"[\s\S]*?linear-gradient\(180deg, rgba\(9,9,10,.04\), rgba\(9,9,10,.26\)\)[\s\S]*?gorgeous-space-sunny-wang-frontal\.webp[\s\S]*?background-size: cover, contain;[\s\S]*?background-repeat: no-repeat;[^>]*>[\s\S]*?class="work-media-play"/,
   );
   assert.match(html, /Director \/ Editor/);
   assert.match(html, /Selected reel/);
@@ -515,6 +538,28 @@ test("renderPage escapes image URLs for inline CSS contexts", () => {
   assert.match(html, /url\(&quot;\/assets\/poster\\'\)bad\.jpg&quot;\)/);
 });
 
+test("English Figma handoff uses the localized Gorgeous Space label", () => {
+  execFileSync("node", ["scripts/build-figma-export.mjs"], { cwd: root, stdio: "pipe" });
+
+  const desktopHome = readFileSync(
+    join(root, "figma-export/01-desktop-home.svg"),
+    "utf8",
+  );
+  const desktopWorks = readFileSync(
+    join(root, "figma-export/02-desktop-works-logos.svg"),
+    "utf8",
+  );
+  const figmaImporter = readFileSync(
+    join(root, "figma/hsin-portfolio-importer/code.js"),
+    "utf8",
+  );
+
+  for (const artifact of [desktopHome, desktopWorks, figmaImporter]) {
+    assert.match(artifact, /Gorgeous Space/);
+    assert.doesNotMatch(artifact, /幸福空間|\[object Object\]/i);
+  }
+});
+
 test("build generates English, Chinese, CSS, and JS assets", () => {
   execFileSync("node", ["scripts/build-site.mjs"], { cwd: root, stdio: "pipe" });
 
@@ -538,7 +583,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
     true,
   );
   assert.equal(
-    existsSync(join(root, "dist/assets/portfolio/gorgeous-space-lg-sunny-wang.webp")),
+    existsSync(join(root, "dist/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp")),
     true,
   );
   assert.equal(

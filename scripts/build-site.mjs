@@ -278,6 +278,7 @@ function renderWork(work, lang, copy) {
   const tagline = work.tagline[lang];
   const description = work.description[lang];
   const role = work.role[lang];
+  const platform = localize(work.platform, lang);
   const statusLabel = noWatchStatusLabel(work, lang, copy);
   const watchAction = work.showWatchCta && work.watchUrl
     ? `<a class="button-link" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer">${lang === "en" ? "Watch the full series" : "觀看完整系列"}</a>`
@@ -296,7 +297,7 @@ function renderWork(work, lang, copy) {
     <article class="${panelClass}" id="${escapeHtml(work.slug)}">
       ${mediaFrame(work, lang, copy)}
       <div class="work-copy">
-        <div class="work-meta">${escapeHtml(work.year)} / ${escapeHtml(role)} / ${escapeHtml(work.platform)}</div>
+        <div class="work-meta">${escapeHtml(work.year)} / ${escapeHtml(role)} / ${escapeHtml(platform)}</div>
         <h3>${escapeHtml(title)}</h3>
         <p class="work-tagline">${escapeHtml(tagline)}</p>
         <p class="work-description">${escapeHtml(description)}</p>
@@ -313,6 +314,7 @@ function renderWatchLoopItem(work, lang, copy) {
   const title = localize(work.title, lang);
   const role = localize(work.role, lang);
   const tagline = localize(work.tagline, lang);
+  const platform = localize(work.platform, lang);
   const opensWatchUrl = work.watchLoopTarget === "watch" && work.watchUrl;
   const href = opensWatchUrl ? work.watchUrl : `#${work.slug}`;
   const linkAttrs = opensWatchUrl ? ' target="_blank" rel="noreferrer"' : "";
@@ -327,7 +329,7 @@ function renderWatchLoopItem(work, lang, copy) {
   return `
     <a class="${cardClass}" href="${escapeHtml(href)}"${linkAttrs} ${image}>
       <span class="watch-loop-scrim" aria-hidden="true"></span>
-      <span class="watch-loop-meta">${escapeHtml(work.platform)} / ${escapeHtml(work.year)}</span>
+      <span class="watch-loop-meta">${escapeHtml(platform)} / ${escapeHtml(work.year)}</span>
       <strong>${escapeHtml(title)}</strong>
       <span class="watch-loop-role">${escapeHtml(role)}</span>
       <span class="watch-loop-tagline">${escapeHtml(tagline)}</span>
@@ -379,11 +381,12 @@ function renderArchiveMediaCard(item, lang) {
 
 function renderArchiveLedgerItem(item, lang) {
   const summary = item.summary ? localize(item.summary, lang) : item.body;
+  const platform = localize(item.platform, lang);
 
   return `
     <article class="archive-item">
       <div>
-        <p class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(localize(item.role, lang))} / ${escapeHtml(item.platform)}</p>
+        <p class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(localize(item.role, lang))} / ${escapeHtml(platform)}</p>
         <h3>${escapeHtml(localize(item.title, lang))}</h3>
         ${summary ? `<p class="archive-body">${escapeHtml(summary)}</p>` : ""}
       </div>
@@ -407,19 +410,21 @@ function renderArchive(archive, lang) {
   `;
 }
 
-function renderCollaborations(items = []) {
+function renderCollaborations(items = [], lang) {
   return items
     .map((item) => {
+      const name = localize(item.name, lang);
+      const label = localize(item.label, lang) || name;
       const content = item.logo
-        ? `<img class="partner-logo" src="${escapeHtml(item.logo)}" alt="${escapeHtml(item.name)} logo" loading="lazy">`
-        : `<span class="partner-wordmark">${escapeHtml(item.label || item.name)}</span>`;
+        ? `<img class="partner-logo" src="${escapeHtml(item.logo)}" alt="${escapeHtml(name)} logo" loading="lazy">`
+        : `<span class="partner-wordmark">${escapeHtml(label)}</span>`;
       const tag = item.url ? "a" : "div";
       const href = item.url ? ` href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer"` : "";
 
       return `
-        <${tag} class="collab-item"${href} aria-label="${escapeHtml(item.name)}">
+        <${tag} class="collab-item"${href} aria-label="${escapeHtml(name)}">
           ${content}
-          <span class="partner-name">${escapeHtml(item.name)}</span>
+          <span class="partner-name">${escapeHtml(name)}</span>
         </${tag}>
       `;
     })
@@ -532,7 +537,7 @@ export function renderPage({ lang, site, works }) {
     { href: "#works", label: lang === "en" ? "Works" : "作品" },
     { href: "#contact", label: lang === "en" ? "Contact" : "聯絡", className: "nav-contact" },
   ];
-  const collaborations = renderCollaborations(site.collaborations);
+  const collaborations = renderCollaborations(site.collaborations, lang);
 
   return `<!doctype html>
 <html lang="${escapeHtml(lang)}">
