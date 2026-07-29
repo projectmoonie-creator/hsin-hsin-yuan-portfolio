@@ -29,7 +29,13 @@ source credit is separately confirmed.
 
 ## Status
 
-Pre-production is complete. Source extraction is blocked until an approved
-access method is available for the public YouTube videos. The composition
-should be authored only after the selected clips have been reviewed and their
-timecodes are recorded in `EDIT_PLAN.md`.
+Pre-production and the silent picture cut are complete.
+
+- Fixed toolchain: `hyperframes@0.7.48`
+- Current review master: `renders/interior-pts-picture-cut-v3.mp4`
+- Working media: 360p scout downloads and 720p shot selects, all excluded from Git
+- Verification: lint, runtime validation, WCAG contrast, and layout inspection pass
+- Pending: picture-cut approval, cleared music and sound design, high-resolution
+  source replacement, and website playback testing
+
+The review master is intentionally silent. Do not publish it as the final reel.

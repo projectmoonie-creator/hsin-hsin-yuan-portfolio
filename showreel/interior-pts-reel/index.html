@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      :root {
+        --bg: #0b0b0c;
+        --ink: #f7f2e8;
+        --muted: #b8b0a3;
+        --acid: #d8ff3e;
+        --heat: #ff4d1f;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        margin: 0;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      body {
+        color: var(--ink);
+        font-family: "Montserrat", Arial, sans-serif;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      .clip {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .source-video {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        background: var(--bg);
+        filter: saturate(0.9) contrast(1.07) brightness(0.93);
+      }
+
+      .source-video.crop-right {
+        left: -2%;
+        right: auto;
+        width: 120%;
+        max-width: none;
+      }
+
+      .source-video.soft {
+        filter: saturate(0.82) contrast(1.04) brightness(0.9);
+      }
+
+      .shade {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+        background:
+          linear-gradient(90deg, rgba(11, 11, 12, 0.54), transparent 42%),
+          linear-gradient(0deg, rgba(11, 11, 12, 0.5), transparent 34%);
+      }
+
+      .grain {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+        opacity: 0.18;
+        background-image:
+          linear-gradient(rgba(247, 242, 232, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(247, 242, 232, 0.025) 1px, transparent 1px);
+        background-size: 72px 72px;
+        mask-image: radial-gradient(circle at center, black, transparent 82%);
+      }
+
+      .topline {
+        z-index: 6;
+        bottom: auto;
+        height: 108px;
+        padding: 52px 76px 0;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        background: linear-gradient(
+          180deg,
+          rgba(11, 11, 12, 0.72) 0,
+          rgba(11, 11, 12, 0.34) 52%,
+          transparent 100%
+        );
+        color: rgba(247, 242, 232, 0.76);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 19px;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.72);
+      }
+
+      .topline-right {
+        color: var(--acid);
+      }
+
+      .registration {
+        position: absolute;
+        z-index: 7;
+        width: 58px;
+        height: 58px;
+        border-color: rgba(216, 255, 62, 0.78);
+        pointer-events: none;
+      }
+
+      .registration.top-left {
+        left: 38px;
+        top: 38px;
+        border-left: 3px solid;
+        border-top: 3px solid;
+      }
+
+      .registration.bottom-right {
+        right: 38px;
+        bottom: 38px;
+        border-right: 3px solid;
+        border-bottom: 3px solid;
+      }
+
+      .route {
+        position: absolute;
+        left: 76px;
+        right: 76px;
+        bottom: 54px;
+        z-index: 6;
+        height: 3px;
+        background: rgba(247, 242, 232, 0.26);
+        overflow: hidden;
+      }
+
+      .route-fill {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: var(--acid);
+        transform-origin: left center;
+      }
+
+      .chapter {
+        z-index: 5;
+        padding: 108px 76px 88px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+        pointer-events: none;
+      }
+
+      .chapter.top {
+        justify-content: flex-start;
+        padding-top: 118px;
+      }
+
+      .chapter-kicker {
+        margin: 0 0 20px;
+        color: var(--acid);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.8);
+      }
+
+      .chapter-title {
+        max-width: 1420px;
+        margin: 0;
+        font-family: "League Gothic", sans-serif;
+        font-size: 146px;
+        font-weight: 400;
+        line-height: 0.86;
+        letter-spacing: 0.015em;
+        text-transform: uppercase;
+        text-shadow: 0 4px 28px rgba(0, 0, 0, 0.7);
+      }
+
+      .chapter-detail {
+        margin-top: 24px;
+        color: var(--ink);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 23px;
+        font-weight: 700;
+        line-height: 1.3;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.82);
+      }
+
+      .identity {
+        padding-bottom: 110px;
+      }
+
+      .identity .chapter-title {
+        font-size: 190px;
+        max-width: 1040px;
+      }
+
+      .identity .chapter-detail {
+        font-size: 28px;
+      }
+
+      .slash {
+        color: var(--acid);
+      }
+
+      .pivot {
+        z-index: 8;
+        display: grid;
+        place-items: center;
+        padding: 110px 150px;
+        background: rgba(11, 11, 12, 0.88);
+      }
+
+      .pivot-content {
+        width: 100%;
+      }
+
+      .pivot-label {
+        color: var(--muted);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 22px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .pivot-title {
+        margin: 30px 0 44px;
+        font-family: "League Gothic", sans-serif;
+        font-size: 180px;
+        font-weight: 400;
+        line-height: 0.84;
+        letter-spacing: 0.015em;
+        text-transform: uppercase;
+      }
+
+      .pivot-line {
+        position: relative;
+        width: 100%;
+        height: 8px;
+        background: rgba(247, 242, 232, 0.16);
+      }
+
+      .pivot-line::before,
+      .pivot-line::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 22px;
+        height: 22px;
+        border: 4px solid var(--acid);
+        background: var(--bg);
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      .pivot-line::before {
+        left: 17%;
+      }
+
+      .pivot-line::after {
+        right: 13%;
+      }
+
+      .pivot-line-fill {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: var(--acid);
+        transform-origin: left center;
+      }
+
+      .pts-credit {
+        z-index: 7;
+        padding: 88px 76px 92px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        pointer-events: none;
+      }
+
+      .pts-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 80px;
+      }
+
+      .pts-platform,
+      .pts-role {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.85);
+      }
+
+      .pts-platform {
+        color: var(--ink);
+      }
+
+      .pts-role {
+        color: var(--acid);
+        text-align: right;
+      }
+
+      .pts-title {
+        max-width: 1180px;
+        margin: 0;
+        font-family: "League Gothic", sans-serif;
+        font-size: 178px;
+        font-weight: 400;
+        line-height: 0.86;
+        letter-spacing: 0.015em;
+        text-transform: uppercase;
+        text-shadow: 0 4px 28px rgba(0, 0, 0, 0.78);
+      }
+
+      .pts-locations {
+        margin-top: 24px;
+        color: var(--muted);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.85);
+      }
+
+      .end-card {
+        z-index: 10;
+        padding: 116px 120px 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background:
+          radial-gradient(circle at 76% 24%, rgba(216, 255, 62, 0.12), transparent 30%),
+          var(--bg);
+      }
+
+      .end-eyebrow {
+        color: var(--acid);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 23px;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .end-name {
+        width: 1240px;
+        margin: 42px 0 28px;
+        font-family: "League Gothic", sans-serif;
+        font-size: 230px;
+        font-weight: 400;
+        line-height: 0.82;
+        letter-spacing: 0.015em;
+        text-transform: uppercase;
+      }
+
+      .end-detail {
+        color: var(--muted);
+        font-size: 34px;
+        line-height: 1.3;
+      }
+
+      .end-url {
+        position: absolute;
+        left: 120px;
+        bottom: 90px;
+        color: var(--ink);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .end-rule {
+        position: absolute;
+        left: 120px;
+        right: 120px;
+        bottom: 58px;
+        height: 4px;
+        background: var(--acid);
+        transform-origin: left center;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="reel-root" id="root" data-composition-id="main" data-start="0" data-duration="54" data-width="1920" data-height="1080">
+      <video data-hf-id="shot-01" id="shot-01" class="source-video" src="assets/source-clips/selects/shot-01.mp4" data-start="0" data-duration="1" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-02" id="shot-02" class="source-video soft" src="assets/source-clips/selects/shot-02.mp4" data-start="1" data-duration="1" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-03" id="shot-03" class="source-video crop-right" src="assets/source-clips/selects/shot-03.mp4" data-start="2" data-duration="1.2" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-04" id="shot-04" class="source-video" src="assets/source-clips/selects/shot-04.mp4" data-start="3.2" data-duration="2.2" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-05" id="shot-05" class="source-video" src="assets/source-clips/selects/shot-05.mp4" data-start="5.4" data-duration="2" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-06" id="shot-06" class="source-video" src="assets/source-clips/selects/shot-06.mp4" data-start="7.4" data-duration="2.2" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-07" id="shot-07" class="source-video" src="assets/source-clips/selects/shot-07.mp4" data-start="9.6" data-duration="2.2" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-08" id="shot-08" class="source-video" src="assets/source-clips/selects/shot-08.mp4" data-start="11.8" data-duration="2.2" data-track-index="0" muted playsinline></video>
+
+      <video data-hf-id="shot-09" id="shot-09" class="source-video" src="assets/source-clips/selects/shot-09.mp4" data-start="14" data-duration="2.2" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-10" id="shot-10" class="source-video" src="assets/source-clips/selects/shot-10.mp4" data-start="16.2" data-duration="2" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-11" id="shot-11" class="source-video" src="assets/source-clips/selects/shot-11.mp4" data-start="18.2" data-duration="2.2" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-12" id="shot-12" class="source-video" src="assets/source-clips/selects/shot-12.mp4" data-start="20.4" data-duration="2.2" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-13" id="shot-13" class="source-video" src="assets/source-clips/selects/shot-13.mp4" data-start="22.6" data-duration="2.4" data-track-index="0" muted playsinline></video>
+
+      <video data-hf-id="shot-14" id="shot-14" class="source-video" src="assets/source-clips/selects/shot-14.mp4" data-start="25" data-duration="2.2" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-15" id="shot-15" class="source-video" src="assets/source-clips/selects/shot-15.mp4" data-start="27.2" data-duration="2.2" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-16" id="shot-16" class="source-video" src="assets/source-clips/selects/shot-16.mp4" data-start="29.4" data-duration="2.1" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-17" id="shot-17" class="source-video" src="assets/source-clips/selects/shot-17.mp4" data-start="31.5" data-duration="2.2" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-18" id="shot-18" class="source-video" src="assets/source-clips/selects/shot-18.mp4" data-start="33.7" data-duration="2" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-19" id="shot-19" class="source-video" src="assets/source-clips/selects/shot-19.mp4" data-start="35.7" data-duration="1.8" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-20" id="shot-20" class="source-video soft" src="assets/source-clips/selects/shot-20.mp4" data-start="37.5" data-duration="2" data-track-index="0" muted playsinline></video>
+
+      <video data-hf-id="shot-21" id="shot-21" class="source-video" src="assets/source-clips/selects/shot-21.mp4" data-start="39.5" data-duration="1.7" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-22" id="shot-22" class="source-video" src="assets/source-clips/selects/shot-22.mp4" data-start="41.2" data-duration="1.7" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-23" id="shot-23" class="source-video" src="assets/source-clips/selects/shot-23.mp4" data-start="42.9" data-duration="1.7" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-24" id="shot-24" class="source-video" src="assets/source-clips/selects/shot-24.mp4" data-start="44.6" data-duration="1.7" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-25" id="shot-25" class="source-video" src="assets/source-clips/selects/shot-25.mp4" data-start="46.3" data-duration="1.7" data-track-index="0" muted playsinline></video>
+      <video data-hf-id="shot-26" id="shot-26" class="source-video" src="assets/source-clips/selects/shot-26.mp4" data-start="48" data-duration="1.5" data-track-index="0" muted playsinline></video>
+
+      <div data-hf-id="shade" class="shade" data-layout-ignore=""></div>
+      <div data-hf-id="grain" class="grain" data-layout-ignore=""></div>
+      <div data-hf-id="reg-tl" class="registration top-left" data-layout-ignore=""></div>
+      <div data-hf-id="reg-br" class="registration bottom-right" data-layout-ignore=""></div>
+
+      <div data-hf-id="topline" id="topline" class="clip topline" data-start="0" data-duration="37.5" data-track-index="11">
+        <span data-hf-id="topline-name">Hsin-Hsin Yuan / Selected Work</span>
+        <span data-hf-id="topline-role" class="topline-right">Director + Editor</span>
+      </div>
+
+      <div data-hf-id="route" id="route" class="clip route" data-start="0" data-duration="37.5" data-track-index="12">
+        <span data-hf-id="route-fill" class="route-fill"></span>
+      </div>
+
+      <section data-hf-id="identity" id="identity" class="clip chapter identity" data-start="1.2" data-duration="3.2" data-track-index="20">
+        <p data-hf-id="identity-kicker" class="chapter-kicker" data-layout-allow-occlusion="">Interior / Spatial Brand Films</p>
+        <h1 data-hf-id="identity-title" class="chapter-title" data-layout-allow-occlusion="">Hsin-Hsin Yuan</h1>
+        <p data-hf-id="identity-role" class="chapter-detail" data-layout-allow-occlusion="">Director <span data-hf-id="hf-tbqh" class="slash" data-layout-allow-occlusion="">/</span> Editor</p>
+      </section>
+
+      <section data-hf-id="space" id="space" class="clip chapter top" data-start="4.4" data-duration="9.6" data-track-index="21">
+        <p data-hf-id="space-kicker" class="chapter-kicker" data-layout-allow-occlusion="">01 / Interior + Spatial Brand Films</p>
+        <h2 data-hf-id="space-title" class="chapter-title" data-layout-allow-occlusion="">Space / Light / Material</h2>
+      </section>
+
+      <section data-hf-id="living" id="living" class="clip chapter" data-start="14" data-duration="11" data-track-index="22">
+        <p data-hf-id="living-kicker" class="chapter-kicker" data-layout-allow-occlusion="">02 / Human Use</p>
+        <h2 data-hf-id="living-title" class="chapter-title" data-layout-allow-occlusion="">Designed for Living</h2>
+      </section>
+
+      <section data-hf-id="brand" id="brand" class="clip chapter top" data-start="25" data-duration="12.5" data-track-index="23">
+        <p data-hf-id="brand-kicker" class="chapter-kicker" data-layout-allow-occlusion="">03 / Brand Integration</p>
+        <h2 data-hf-id="brand-title" class="chapter-title" data-layout-allow-occlusion="">Story / Function / Desire</h2>
+      </section>
+
+      <section data-hf-id="pivot" id="pivot" class="clip pivot" data-start="37.5" data-duration="2" data-track-index="24">
+        <div data-hf-id="pivot-content" class="pivot-content">
+          <div data-hf-id="pivot-label" class="pivot-label">From designed spaces to stories on the road</div>
+          <h2 data-hf-id="pivot-title" class="pivot-title">Taiwan / On the Road</h2>
+          <div data-hf-id="pivot-line" class="pivot-line">
+            <span data-hf-id="pivot-line-fill" class="pivot-line-fill"></span>
+          </div>
+        </div>
+      </section>
+
+      <section data-hf-id="pts-credit" id="pts-credit" class="clip pts-credit" data-start="39.5" data-duration="10" data-track-index="25">
+        <div data-hf-id="pts-header" class="pts-header">
+          <div data-hf-id="pts-platform" class="pts-platform" data-layout-allow-occlusion="">PTS Taigi / 2021</div>
+          <div data-hf-id="pts-role" class="pts-role" data-layout-allow-occlusion="">Planning + Script</div>
+        </div>
+        <div data-hf-id="pts-copy">
+          <h2 data-hf-id="pts-title" class="pts-title" data-layout-allow-occlusion="">Nothing by Bus</h2>
+          <div data-hf-id="pts-locations" class="pts-locations" data-layout-allow-occlusion="">Bus routes / local memory / food / craft / place</div>
+        </div>
+      </section>
+
+      <section data-hf-id="end-card" id="end-card" class="clip end-card" data-start="49.5" data-duration="4.5" data-track-index="26">
+        <div data-hf-id="end-eyebrow" class="end-eyebrow">Selected factual + branded work</div>
+        <h2 data-hf-id="end-name" class="end-name">Hsin-Hsin Yuan</h2>
+        <div data-hf-id="end-detail" class="end-detail">Director / Editor / Producer / Planning / Script</div>
+        <div data-hf-id="end-url" class="end-url">hsin-hsin-yuan-portfolio.vercel.app</div>
+        <div data-hf-id="end-rule" class="end-rule"></div>
+      </section>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      function fromTo(selector, fromVars, toVars, at) {
+        if (!document.querySelectorAll(selector).length) return;
+        tl.fromTo(selector, fromVars, { ...toVars, immediateRender: false }, at);
+      }
+
+      fromTo("#identity .chapter-kicker", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 1.3);
+      fromTo("#identity .chapter-title", { opacity: 0, x: -70 }, { opacity: 1, x: 0, duration: 0.7, ease: "expo.out" }, 1.45);
+      fromTo("#identity .chapter-detail", { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 1.8);
+
+      fromTo("#space .chapter-kicker", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 4.55);
+      fromTo("#space .chapter-title", { opacity: 0, x: -58 }, { opacity: 1, x: 0, duration: 0.62, ease: "expo.out" }, 4.72);
+      fromTo("#living .chapter-kicker", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 14.15);
+      fromTo("#living .chapter-title", { opacity: 0, x: -58 }, { opacity: 1, x: 0, duration: 0.62, ease: "expo.out" }, 14.32);
+      fromTo("#brand .chapter-kicker", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 25.15);
+      fromTo("#brand .chapter-title", { opacity: 0, x: -58 }, { opacity: 1, x: 0, duration: 0.62, ease: "expo.out" }, 25.32);
+
+      fromTo("#route .route-fill", { scaleX: 0 }, { scaleX: 1, duration: 37.2, ease: "none" }, 0.15);
+      fromTo(".registration.top-left", { opacity: 0.28, x: -6, y: -6 }, { opacity: 0.9, x: 0, y: 0, duration: 1.2, ease: "sine.inOut", repeat: 21, yoyo: true }, 0);
+      fromTo(".registration.bottom-right", { opacity: 0.24, x: 6, y: 6 }, { opacity: 0.78, x: 0, y: 0, duration: 1.35, ease: "sine.inOut", repeat: 19, yoyo: true }, 0);
+
+      fromTo("#pivot .pivot-label", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.32, ease: "power3.out" }, 37.56);
+      fromTo("#pivot .pivot-title", { opacity: 0, x: -78 }, { opacity: 1, x: 0, duration: 0.55, ease: "expo.out" }, 37.68);
+      fromTo("#pivot .pivot-line-fill", { scaleX: 0 }, { scaleX: 1, duration: 1.25, ease: "power3.inOut" }, 37.82);
+
+      fromTo("#pts-credit .pts-platform", { opacity: 0, x: -48 }, { opacity: 1, x: 0, duration: 0.48, ease: "power3.out" }, 39.65);
+      fromTo("#pts-credit .pts-role", { opacity: 0, x: 48 }, { opacity: 1, x: 0, duration: 0.48, ease: "power3.out" }, 39.72);
+      fromTo("#pts-credit .pts-title", { opacity: 0, y: 54 }, { opacity: 1, y: 0, duration: 0.65, ease: "expo.out" }, 40.02);
+      fromTo("#pts-credit .pts-locations", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }, 40.3);
+
+      fromTo("#end-card .end-eyebrow", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 49.65);
+      fromTo("#end-card .end-name", { opacity: 0, x: -82 }, { opacity: 1, x: 0, duration: 0.72, ease: "expo.out" }, 49.8);
+      fromTo("#end-card .end-detail", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 50.2);
+      fromTo("#end-card .end-url", { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.42, ease: "power2.out" }, 50.55);
+      fromTo("#end-card .end-rule", { scaleX: 0 }, { scaleX: 1, duration: 1.05, ease: "power3.inOut" }, 50.65);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

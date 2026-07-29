@@ -52,7 +52,12 @@ and script work, not a claim of visual authorship.
 ## Access Status
 
 - YouTube oEmbed and thumbnails are public.
-- Automated media extraction currently receives a YouTube reload challenge.
-- Reading Chrome cookies requires separate, explicit user authorization.
-- The HyperFrames CLI is not installed locally; downloading and executing it
-  from npm also requires separate, explicit authorization.
+- The user explicitly authorized temporary Chrome-cookie access, but macOS
+  Chrome Safe Storage decryption returned zero usable cookies. No cookie value
+  was printed, saved, or added to Git.
+- Public scout copies were obtained without cookies through yt-dlp's public
+  Android VR client route.
+- Scout downloads, shot selects, snapshots, and rendered review files remain
+  local and are excluded from Git.
+- The composition is validated and rendered with the user-approved fixed
+  package version `hyperframes@0.7.48`.

@@ -32,6 +32,40 @@
 5. Crop conservatively. Protect faces, product marks, and architectural lines.
 6. Record the exact source URL and in/out timecode for every selected shot.
 
+## Picture Cut v3
+
+Source in/out values below refer to the local public scout files. The selects
+script produces one short, seekable proxy for each row.
+
+| Shot | Reel in-out | Source | Source in-out |
+| --- | --- | --- | --- |
+| `01` | `00:00.0-00:01.0` | `Gz9HV2XtXzM` | `00:00.0-00:01.0` |
+| `02` | `00:01.0-00:02.0` | `-64_T9ms6kM` | `00:00.0-00:01.0` |
+| `03` | `00:02.0-00:03.2` | `Gz9HV2XtXzM` | `02:15.0-02:16.2` |
+| `04` | `00:03.2-00:05.4` | `d5icTKIbL9E` | `00:00.0-00:02.2` |
+| `05` | `00:05.4-00:07.4` | `Gz9HV2XtXzM` | `00:43.0-00:45.0` |
+| `06` | `00:07.4-00:09.6` | `-64_T9ms6kM` | `00:13.0-00:15.2` |
+| `07` | `00:09.6-00:11.8` | `0zkXVU3m7Jc` | `00:42.0-00:44.2` |
+| `08` | `00:11.8-00:14.0` | `wiG0h7wofnw` | `00:24.0-00:26.2` |
+| `09` | `00:14.0-00:16.2` | `me4KutyUoT4` | `00:42.0-00:44.2` |
+| `10` | `00:16.2-00:18.2` | `d5icTKIbL9E` | `00:19.0-00:21.0` |
+| `11` | `00:18.2-00:20.4` | `me4KutyUoT4` | `01:12.0-01:14.2` |
+| `12` | `00:20.4-00:22.6` | `me4KutyUoT4` | `01:28.0-01:30.2` |
+| `13` | `00:22.6-00:25.0` | `wiG0h7wofnw` | `00:12.0-00:14.4` |
+| `14` | `00:25.0-00:27.2` | `d5icTKIbL9E` | `00:53.0-00:55.2` |
+| `15` | `00:27.2-00:29.4` | `d5icTKIbL9E` | `01:04.0-01:06.2` |
+| `16` | `00:29.4-00:31.5` | `me4KutyUoT4` | `01:43.0-01:45.1` |
+| `17` | `00:31.5-00:33.7` | `me4KutyUoT4` | `01:59.0-02:01.2` |
+| `18` | `00:33.7-00:35.7` | `me4KutyUoT4` | `02:42.0-02:44.0` |
+| `19` | `00:35.7-00:37.5` | `me4KutyUoT4` | `04:44.0-04:45.8` |
+| `20` | `00:37.5-00:39.5` | `Gz9HV2XtXzM` | `01:00.0-01:02.0` |
+| `21` | `00:39.5-00:41.2` | `2PRDDx8gxBc` | `01:55.0-01:56.7` |
+| `22` | `00:41.2-00:42.9` | `2PRDDx8gxBc` | `03:25.0-03:26.7` |
+| `23` | `00:42.9-00:44.6` | `q4TMcoOpzKA` | `02:25.0-02:26.7` |
+| `24` | `00:44.6-00:46.3` | `wPHF2ve2WhE` | `05:30.0-05:31.7` |
+| `25` | `00:46.3-00:48.0` | `wPHF2ve2WhE` | `04:27.0-04:28.7` |
+| `26` | `00:48.0-00:49.5` | `2PRDDx8gxBc` | `08:27.0-08:28.5` |
+
 ## Audio Direction
 
 - Mood: warm editorial pulse with organic percussion and restrained low-end.
