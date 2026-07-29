@@ -24,7 +24,13 @@
   },
   "watchUrl": "",
   "videoEmbedUrl": "",
-  "posterImage": "",
+  "posterImage": "/assets/portfolio/slow-steps-poster.webp",
+  "posterAlt": {
+    "en": "Slow Steps series artwork with three travel documentary portraits",
+    "zh": "Slow Steps 系列主視覺，呈現三幅旅行紀錄片人物畫面"
+  },
+  "focalPoint": "50% 50%",
+  "posterDimensions": {"width": 1920, "height": 1080},
   "tags": ["documentary", "travel"],
   "metrics": [],
   "accent": "rose"

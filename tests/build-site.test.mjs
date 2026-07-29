@@ -45,7 +45,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[4].platform, "PTS Taigi / 公視台語台");
   assert.equal(works[5].role.en, "Director");
   assert.equal(works[5].platform, "China Dragon TV");
-  assert.equal(works[0].posterImage, "");
+  assert.equal(works[0].posterImage, "/assets/portfolio/slow-steps-poster.webp");
   assert.equal(works[0].platform, "TaiwanPlus / Travel");
   assert.deepEqual(works[0].tags, ["documentary", "travel"]);
   assert.equal(
@@ -198,8 +198,10 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Swipe to explore/);
   assert.match(html, /watch-loop-card/);
   assert.match(html, /href="#slow-steps"/);
-  assert.match(html, /watch-loop-card watch-loop-card-plain/);
-  assert.doesNotMatch(html, /watch-loop-card" href="#slow-steps" style="background-image/);
+  assert.match(
+    html,
+    /class="watch-loop-card" href="#slow-steps" style="background-image:[\s\S]*?slow-steps-poster\.webp/,
+  );
   assert.ok(
     html.indexOf('href="#slow-steps"') <
       html.indexOf(
@@ -224,6 +226,10 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Slow Steps[\s\S]*?Director \/ Editor \/ Producer/);
   assert.match(html, /Slow Steps[\s\S]*?Travel/);
   assert.doesNotMatch(html, /aria-label="Play video: Slow Steps"/);
+  assert.match(
+    html,
+    /class="media-frame" style="background-image:[\s\S]*?slow-steps-poster\.webp[\s\S]*?<div class="media-label">Slow Steps<\/div>/,
+  );
   assert.match(
     html,
     /class="media-frame media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers"[\s\S]*?aria-label="Play video: Tech Dreamers"[\s\S]*?background-image:[\s\S]*?224be7ed-057b-400f-af63-a8582cd80cfb\.webp/,
