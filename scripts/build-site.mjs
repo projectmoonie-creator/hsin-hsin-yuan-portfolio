@@ -229,30 +229,15 @@ function noWatchStatusLabel(work, lang, copy) {
   return "";
 }
 
-function watchActionLabel(work, lang, copy) {
-  if (!work.watchUrl) return noWatchStatusLabel(work, lang, copy);
-
-  const labels = {
-    single: { en: "Watch the full episode", zh: "觀看完整單集" },
-    series: { en: "Watch the series", zh: "觀看完整系列" },
-    collection: { en: "Watch selected films", zh: "觀看精選影片" },
-    sample: { en: "Watch representative segment", zh: "觀看代表片段" },
-  };
-
-  return labels[work.watchMode]?.[lang] ?? copy.watchLabel;
-}
-
 function renderWork(work, lang, copy) {
   const title = work.title[lang];
   const tagline = work.tagline[lang];
   const description = work.description[lang];
   const role = work.role[lang];
-  const actionLabel = watchActionLabel(work, lang, copy);
-  const action = work.watchUrl
-    ? `<a class="button-link" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer">${escapeHtml(actionLabel)}</a>`
-    : actionLabel
-      ? `<span class="status-badge">${escapeHtml(actionLabel)}</span>`
-      : "";
+  const statusLabel = work.watchUrl ? "" : noWatchStatusLabel(work, lang, copy);
+  const action = statusLabel
+    ? `<span class="status-badge">${escapeHtml(statusLabel)}</span>`
+    : "";
 
   return `
     <article class="work-panel" id="${escapeHtml(work.slug)}">

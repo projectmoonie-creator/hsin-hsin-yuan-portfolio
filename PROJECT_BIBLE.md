@@ -52,7 +52,7 @@
 - Keep each work-specific reel separate. Do not combine unrelated credits or program identities inside one thumbnail. The retained `showreel/interior-pts-reel/` assembly is an editorial spine for a future homepage showreel, not a source for either work card.
 - Featured Works carries detail. The strip should preview; Featured Works should explain.
 - Each work belongs to one public tier at a time: Featured Work, Archive, or unpublished source material. If a work is removed from Featured Works, move it deliberately to Archive or keep it out of the public site.
-- For single films or episodes, use "Watch the full episode" / "觀看完整單集". For multi-episode series, use "Watch the series" / "觀看完整系列". For a curated group, use "Watch selected films" / "觀看精選影片".
+- On homepage Featured Work cards, the linked media image is the primary watch action. Do not repeat that destination with "Watch the full episode", "Watch the series", "Watch representative segment", or equivalent Chinese CTA buttons below the same card.
 - Do not use the global coming-soon label for every work without a `watchUrl`. Completed or in-progress collections need their own truthful `statusLabel`, such as "Selected reel" / "精選短片" once a public card reel exists.
 - Keep the homepage clean. If a work has trailers, press, full episodes, metrics, and many related links, move deeper material into a future detail page.
 
@@ -77,7 +77,7 @@
 
 - Future detail pages should use `/en/works/<slug>/` and `/zh/works/<slug>/` with canonical and hreflang generated from `SITE_ORIGIN`.
 - A work earns a detail page when it has more than two press items, more than one public watch/source link, or enough case-study detail that the homepage card becomes dense.
-- Homepage work cards should keep the role, short description, key metrics, press preview, and one primary watch/status action. Trailers, full episode lists, source trails, extended notes, and dense proof belong on detail pages.
+- Homepage work cards should keep the role, short description, key metrics, press preview, and at most one primary media link or no-watch status. Trailers, full episode lists, source trails, extended notes, and dense proof belong on detail pages.
 
 ## Contact And Deployment
 

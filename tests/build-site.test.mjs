@@ -116,6 +116,7 @@ test("site copy has no retired section fields in active data", () => {
     "watchShelfTitle",
     "watchShelfHint",
     "watchShelfAction",
+    "watchLabel",
     "impactLabel",
   ];
 
@@ -201,7 +202,8 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /mailto:/);
   assert.match(html, /partner-wordmark/);
   assert.doesNotMatch(html, /\/assets\/logos\/taiwanplus.svg/);
-  assert.match(html, /Happy Space/);
+  assert.match(html, /Gorgeous Space/);
+  assert.doesNotMatch(html, /Happy Space/);
   assert.ok(html.indexOf("collab-grid") < html.indexOf("watch-loop"));
   assert.ok(html.indexOf("watch-loop") < html.indexOf("available-section"));
   assert.ok(html.indexOf("watch-loop") < html.indexOf("works-section"));
@@ -292,8 +294,10 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /href="#pts-taigi-bus"/);
   assert.match(html, /href="#interior-spatial-brand-films"/);
   assert.match(html, /https:\/\/youtu\.be\/M_eXe9HRD9Y\?si=YZ_3JZ7FJY4vVcZv/);
-  assert.match(html, /Watch the full episode/);
-  assert.match(html, /Watch the series/);
+  assert.doesNotMatch(html, /Watch the full episode/);
+  assert.doesNotMatch(html, /Watch the series/);
+  assert.doesNotMatch(html, /Watch representative segment/);
+  assert.doesNotMatch(html, /<a class="button-link"/);
   assert.match(html, /Press &amp; Interviews/);
   assert.match(html, /Official program page/);
   assert.doesNotMatch(html, /24 artist groups/);
@@ -410,9 +414,9 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /AI \/ Language Lab/);
   assert.match(zh, /future skill name/);
   assert.match(zh, /精選舊作/);
-  assert.match(zh, /觀看完整單集/);
-  assert.match(zh, /觀看完整系列/);
-  assert.match(zh, /觀看代表片段/);
+  assert.doesNotMatch(zh, /觀看完整單集/);
+  assert.doesNotMatch(zh, /觀看完整系列/);
+  assert.doesNotMatch(zh, /觀看代表片段/);
   assert.match(zh, /幸福空間與室內設計影像/);
   assert.match(zh, /導演 \/ 剪輯/);
   assert.doesNotMatch(zh, /3 yrs|三年間|約三年/);

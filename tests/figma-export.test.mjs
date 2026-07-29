@@ -47,6 +47,8 @@ test("Figma SVG export keeps portfolio layers editable and named", () => {
   assert.match(worksLogos, /id="layer-logo-wall"/);
   assert.match(worksLogos, /TaiwanPlus/);
   assert.match(worksLogos, /Public Television Service Taiwan/);
+  assert.match(worksLogos, /Gorgeous Space/);
+  assert.doesNotMatch(worksLogos, /Happy Space/);
   assert.match(worksLogos, /id="component-work-card-slow-steps"/);
   assert.match(worksLogos, /id="component-work-card-my-art-my-voice"/);
   assert.match(worksLogos, /id="component-work-card-tech-dreamers"/);
