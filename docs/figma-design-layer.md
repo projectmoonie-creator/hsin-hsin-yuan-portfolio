@@ -56,10 +56,8 @@ Map the Figma frames to the current site sections:
 4. `Screening Strip`
 5. `Available For`
 6. `Featured Works`
-7. `Who Should Contact Me`
-8. `AI / Language Lab`
-9. `Selected Archive`
-10. `Contact`
+7. `FROM THE ARCHIVE`
+8. `Contact`
 
 ## Design Tokens
 
@@ -187,20 +185,6 @@ Content fields:
 - Optional press preview
 - CTA
 
-### `Info Card`
-
-Used for:
-
-- Who Should Contact Me
-- Work With Me
-- AI / Language Lab
-
-Variants:
-
-- 4-up desktop
-- 2-up tablet
-- 1-up mobile
-
 ### `Impact Metric`
 
 Fields:
@@ -208,6 +192,22 @@ Fields:
 - Value
 - Label
 - Detail
+
+### `Archive Media Card`
+
+Variants:
+
+- Lead card
+- Supporting card
+- Static poster with public watch link
+
+Fields:
+
+- Poster
+- Year / role
+- Title
+- Metrics
+- Public watch label
 
 ### `Archive Row`
 
@@ -223,8 +223,9 @@ Fields:
 
 - Headline
 - Subcopy
-- CTA
-- Email / links
+- Inquiry form
+- Persistent navigation CTA
+- External links
 
 ## Content Sources
 
@@ -275,10 +276,8 @@ Create desktop and mobile frames for:
 3. Screening strip
 4. Available For
 5. Featured Works
-6. Who Should Contact Me
-7. AI / Language Lab
-8. Archive
-9. Contact
+6. FROM THE ARCHIVE
+7. Contact
 
 Do not create a generic landing page. This is a real portfolio site for work inquiries.
 
@@ -293,7 +292,7 @@ The slash marks should use the acid green accent.
 Prioritize:
 - mobile readability
 - professional first impression
-- clear contact path
+- a persistent but quiet contact path in the fixed topbar
 - easy scanning of work proof
 - image crops that do not hide the subject
 - enough control for later manual layout adjustment

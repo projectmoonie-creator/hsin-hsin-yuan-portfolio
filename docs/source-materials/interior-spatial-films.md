@@ -424,7 +424,7 @@ Chinese:
 - Status: user-provided credit; source check pending against CV/email.
 - Platform: 公視台語台
 - Role: 企劃編劇
-- Positioning: secondary but meaningful public-broadcast credit; better placed in Selected Archive or Additional Experience, not among the main featured visual works.
+- Positioning: secondary but meaningful public-broadcast credit; better placed in `FROM THE ARCHIVE` or Additional Experience, not among the main featured visual works.
 - Public context found so far: the program is associated with 公視台語台 and has been described publicly as a travel / local culture program built around bus journeys. Search results indicate it began in 2019 and received Golden Bell nominations, but this credit should be verified against CV or email before public website copy is finalized.
 
 Potential website phrasing:

@@ -61,7 +61,6 @@ export function loadSiteData(baseDir = root) {
     site: JSON.parse(readFileSync(join(baseDir, "data/site.json"), "utf8")),
     collaborations: JSON.parse(readFileSync(join(baseDir, "data/collaborations.json"), "utf8")),
     archive: loadMarkdownCollection(join(baseDir, "content/archive")),
-    lab: loadMarkdownCollection(join(baseDir, "content/lab")),
   };
 }
 
@@ -355,51 +354,55 @@ function renderWatchLoop(works, lang, copy) {
   `;
 }
 
-function renderLab(lab, lang) {
-  return lab
-    .map(
-      (item) => `
-        <article class="lab-card">
-          <p class="card-kicker">${escapeHtml(localize(item.kicker, lang))}</p>
-          <h3>${escapeHtml(localize(item.title, lang))}</h3>
-          <p>${escapeHtml(localize(item.summary, lang))}</p>
-          ${item.body ? `<p class="card-body">${escapeHtml(item.body)}</p>` : ""}
-        </article>
-      `,
-    )
-    .join("");
+function renderArchiveMediaCard(item, lang) {
+  const title = localize(item.title, lang);
+  const watchLabel = localize(item.watchLabel, lang);
+  const summary = item.summary ? localize(item.summary, lang) : item.body;
+  const leadClass = item.archiveFeature === "lead" ? " archive-media-card-lead" : "";
+
+  return `
+    <a class="archive-media-card${leadClass}" href="${escapeHtml(item.watchUrl)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(`${watchLabel}: ${title}`)}">
+      <img class="archive-media-image" src="${escapeHtml(item.posterImage)}" alt="${escapeHtml(localize(item.imageAlt, lang))}" loading="lazy" decoding="async" onerror="this.remove()">
+      <span class="archive-media-scrim" aria-hidden="true"></span>
+      <span class="archive-media-copy">
+        <span class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(localize(item.role, lang))}</span>
+        <strong>${escapeHtml(title)}</strong>
+        ${item.archiveFeature === "lead" && summary ? `<span class="archive-media-summary">${escapeHtml(summary)}</span>` : ""}
+        ${renderMetrics(item.metrics, lang)}
+        <span class="archive-media-action">${escapeHtml(watchLabel)} <span aria-hidden="true">↗</span></span>
+      </span>
+    </a>
+  `;
+}
+
+function renderArchiveLedgerItem(item, lang) {
+  const summary = item.summary ? localize(item.summary, lang) : item.body;
+
+  return `
+    <article class="archive-item">
+      <div>
+        <p class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(localize(item.role, lang))} / ${escapeHtml(item.platform)}</p>
+        <h3>${escapeHtml(localize(item.title, lang))}</h3>
+        ${summary ? `<p class="archive-body">${escapeHtml(summary)}</p>` : ""}
+      </div>
+      ${renderMetrics(item.metrics, lang)}
+    </article>
+  `;
 }
 
 function renderArchive(archive, lang) {
-  return archive
-    .map((item) => {
-      const summary = item.summary ? localize(item.summary, lang) : item.body;
+  const mediaItems = archive
+    .filter((item) => item.archiveFeature && item.posterImage && item.watchUrl)
+    .sort((a, b) => {
+      if (a.archiveFeature === b.archiveFeature) return a.order - b.order;
+      return a.archiveFeature === "lead" ? -1 : 1;
+    });
+  const ledgerItems = archive.filter((item) => !mediaItems.includes(item));
 
-      return `
-        <article class="archive-item">
-          <div>
-            <p class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(localize(item.role, lang))} / ${escapeHtml(item.platform)}</p>
-            <h3>${escapeHtml(localize(item.title, lang))}</h3>
-            ${summary ? `<p class="archive-body">${escapeHtml(summary)}</p>` : ""}
-          </div>
-          ${renderMetrics(item.metrics, lang)}
-        </article>
-      `;
-    })
-    .join("");
-}
-
-function renderInfoCards(items = []) {
-  return items
-    .map(
-      (item) => `
-        <article class="service-card">
-          <h3>${escapeHtml(item.title)}</h3>
-          <p>${escapeHtml(item.line)}</p>
-        </article>
-      `,
-    )
-    .join("");
+  return `
+    ${mediaItems.length ? `<div class="archive-media-grid">${mediaItems.map((item) => renderArchiveMediaCard(item, lang)).join("")}</div>` : ""}
+    ${ledgerItems.length ? `<div class="archive-list">${ledgerItems.map((item) => renderArchiveLedgerItem(item, lang)).join("")}</div>` : ""}
+  `;
 }
 
 function renderCollaborations(items = []) {
@@ -525,9 +528,8 @@ export function renderPage({ lang, site, works }) {
   const navItems = [
     { href: "#available", label: copy.availabilityLabel },
     { href: "#works", label: lang === "en" ? "Works" : "作品" },
-    { href: "#contact", label: lang === "en" ? "Contact" : "聯絡" },
+    { href: "#contact", label: lang === "en" ? "Contact" : "聯絡", className: "nav-contact" },
   ];
-  const services = renderInfoCards(copy.services);
   const collaborations = renderCollaborations(site.collaborations);
 
   return `<!doctype html>
@@ -558,9 +560,9 @@ export function renderPage({ lang, site, works }) {
   <body>
     <div class="site-shell">
       <header class="topbar">
-        <div class="brand">${escapeHtml(copy.navName)}</div>
+        <div class="brand"><span class="brand-desktop">${escapeHtml(copy.navName)}</span><span class="brand-mobile">${escapeHtml(copy.navMobileName || copy.navName)}</span></div>
         <nav class="nav-links" aria-label="Primary">
-          ${navItems.map((item) => `<a href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`).join("")}
+          ${navItems.map((item) => `<a${item.className ? ` class="${escapeHtml(item.className)}"` : ""} href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`).join("")}
           <a class="language-switch" href="/${switchLang}/">${switchLang === "en" ? "EN" : "中"}</a>
         </nav>
       </header>
@@ -620,33 +622,17 @@ export function renderPage({ lang, site, works }) {
           </div>
         </section>
 
-        <section class="section">
-          <div class="section-intro">
-            <h2 class="section-title">${escapeHtml(copy.createTitle)}</h2>
-            <p>${escapeHtml(copy.createSubcopy)}</p>
-          </div>
-          <div class="services-grid">${services}</div>
-        </section>
-
-        <section class="section lab-section">
-          <div class="section-intro">
-            <h2 class="section-title">${escapeHtml(copy.labTitle)}</h2>
-            <p>${escapeHtml(copy.labSubcopy)}</p>
-          </div>
-          <div class="lab-grid">${renderLab(site.lab, lang)}</div>
-        </section>
-
         <section class="section archive-section">
           <div class="section-intro">
             <h2 class="section-title">${escapeHtml(copy.archiveTitle)}</h2>
             <p>${escapeHtml(copy.archiveSubcopy)}</p>
           </div>
-          <div class="archive-list">${renderArchive(site.archive, lang)}</div>
+          ${renderArchive(site.archive, lang)}
         </section>
 
         <section class="section contact" id="contact">
           <div class="contact-content">
-            <h2>${escapeHtml(copy.contactTitle)}</h2>
+            <h2><span class="contact-title-lead">${escapeHtml(copy.contactTitleLead)}</span><span class="contact-title-accent">${escapeHtml(copy.contactTitleAccent)}</span></h2>
             <p>${escapeHtml(copy.contactSubcopy)}</p>
             ${renderContactForm(copy)}
             <div class="contact-links">${renderContactLinks(copy.contactLinks)}</div>

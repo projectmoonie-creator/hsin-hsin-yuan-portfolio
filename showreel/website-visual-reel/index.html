@@ -362,20 +362,42 @@
         padding: 44px;
       }
 
-      .scene-6 .modes {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 18px;
-        margin-top: 46px;
+      .scene-6 .display span {
+        display: block;
       }
 
-      .mode {
-        min-height: 96px;
-        padding: 20px;
-        border: 2px solid rgba(247, 242, 232, 0.18);
-        color: #f7f2e8;
+      .scene-6 .display {
+        display: flex;
+        flex-direction: column;
+        font-size: 172px;
+        line-height: 1;
+      }
+
+      .scene-6 .cta-accent {
+        color: #d8ff3e;
+      }
+
+      .scene-6 .contact-cue {
+        display: grid;
+        grid-template-columns: 230px 1fr;
+        align-items: center;
+        gap: 28px;
+        width: 860px;
+        margin-top: 52px;
+        padding: 28px 0;
+        border-top: 2px solid rgba(247, 242, 232, 0.28);
+        border-bottom: 2px solid rgba(247, 242, 232, 0.28);
+      }
+
+      .scene-6 .contact-cue-label {
+        color: #d8ff3e;
         font-size: 22px;
-        line-height: 1.15;
+      }
+
+      .scene-6 .contact-cue-copy {
+        color: #f7f2e8;
+        font-size: 27px;
+        line-height: 1.3;
       }
     </style>
   </head>
@@ -495,20 +517,22 @@
         <div data-hf-id="hf-3zuu" class="ghost" data-layout-ignore="" style="left: 545px; top: 720px">CONTACT</div>
         <div data-hf-id="hf-apeu" class="cta">
           <div data-hf-id="hf-mzts" class="kicker">Available for collaboration</div>
-          <h2 data-hf-id="hf-grw4" class="display">Let’s build a story with signal.</h2>
-          <div data-hf-id="hf-d4u0" class="modes">
-            <div data-hf-id="hf-1jef" class="mode">Artists and cultural institutions</div>
-            <div data-hf-id="hf-ava4" class="mode">Documentary and factual producers</div>
-            <div data-hf-id="hf-zos7" class="mode">Tech and brand teams</div>
-            <div data-hf-id="hf-kk5b" class="mode">AI-language editorial workflows</div>
+          <h2 data-hf-id="hf-grw4" class="display">
+            <span data-hf-id="hf-cta-lead">Let’s build a</span>
+            <span data-hf-id="hf-cta-story">story</span>
+            <span data-hf-id="hf-cta-accent" class="cta-accent">together.</span>
+          </h2>
+          <div data-hf-id="hf-d4u0" class="contact-cue">
+            <span data-hf-id="hf-1jef" class="mono contact-cue-label">Open Contact</span>
+            <span data-hf-id="hf-ava4" class="contact-cue-copy">Tell me the story, timing, and the role you need.</span>
           </div>
         </div>
         <aside data-hf-id="hf-h8zi" class="panel contact-panel">
           <div data-hf-id="hf-xtol" class="kicker">Contact</div>
-          <p data-hf-id="hf-m247" class="body" style="margin-top: 52px">Documentary, cultural, branded, AI-language, and cross-cultural production collaborations.</p>
+          <p data-hf-id="hf-m247" class="body" style="margin-top: 52px">If something here connects with a project you’re shaping, send a short note.</p>
           <div data-hf-id="hf-gv9u" class="hairline" style="width: 100%; margin-top: 72px"></div>
-          <p data-hf-id="hf-w3rb" class="mono" style="margin-top: 46px; color: #d8ff3e; font-size: 28px">Portfolio inquiry form</p>
-          <p data-hf-id="hf-oelp" class="mono" style="margin-top: 24px; color: #b8b0a3; font-size: 22px">hsin-hsin-yuan-portfolio.vercel.app</p>
+          <p data-hf-id="hf-w3rb" class="mono" style="margin-top: 46px; color: #d8ff3e; font-size: 28px">Open Contact</p>
+          <p data-hf-id="hf-oelp" class="mono" style="margin-top: 24px; color: #b8b0a3; font-size: 22px">hsin-hsin-yuan-portfolio.vercel.app/en/#contact</p>
         </aside>
       </section>
     </div>
@@ -530,7 +554,7 @@
         fromTo(`${scene} .kicker`, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, at + 0.16);
         fromTo(`${scene} .title, ${scene} .display`, { opacity: 0, x: -62 }, { opacity: 1, x: 0, duration: 0.7, ease: "expo.out" }, at + 0.28);
         fromTo(`${scene} .body, ${scene} .roles`, { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.56, ease: "power2.out" }, at + 0.54);
-        fromTo(`${scene} .tag, ${scene} .mode`, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.42, ease: "back.out(1.3)", stagger: 0.05 }, at + 0.78);
+        fromTo(`${scene} .tag, ${scene} .contact-cue`, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.42, ease: "back.out(1.3)", stagger: 0.05 }, at + 0.78);
         fromTo(`${scene} .image-frame`, { opacity: 0, y: 48, scale: 0.985 }, { opacity: 1, y: 0, scale: 1, duration: 0.72, ease: "power3.out", stagger: 0.08 }, at + 0.18);
         fromTo(`${scene} .rule, ${scene} .hairline`, { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.62, ease: "power4.out" }, at + 0.86);
       }

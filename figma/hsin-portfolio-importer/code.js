@@ -21,9 +21,9 @@ const COPY = {
     "I am a Taiwan-born documentary director and creative producer for artists, cultural institutions, factual producers, and technology teams that need stories shaped with research, empathy, and cross-cultural judgment.",
   aboutBody:
     "My work often begins before the camera: listening, researching, structuring interviews, and translating a complicated subject into a story that can move across languages and audiences.",
-  contactTitle: "Let’s build a story with signal.",
+  contactTitle: "Let’s build a story together.",
   contactSubcopy:
-    "For documentary, cultural, branded, AI-language, and cross-cultural production collaborations. Send a brief note about the project, timeline, and what kind of partner you need.",
+    "If something here connects with a project you’re shaping, send a short note about the story, timing, and the kind of partner you need.",
 };
 
 const ASSETS = {
@@ -208,7 +208,7 @@ async function createDesktopPage() {
   const topbar = frame(desktop, "Topbar / Desktop", 1312, 44, { fill: TOKENS.bg.value });
   setAutoLayout(topbar, "HORIZONTAL", 32, 0);
   text(topbar, "Brand", "HSIN-HSIN YUAN", { size: 12, style: "Bold" });
-  text(topbar, "Navigation", "About    Works    Contact    中", { size: 12, style: "Bold", color: TOKENS.muted.value });
+  text(topbar, "Navigation", "Available for    Works    Contact    中", { size: 12, style: "Bold", color: TOKENS.muted.value });
 
   const hero = frame(desktop, "Hero / Desktop editable", 1312, 720, { fill: TOKENS.bg.value });
   setAutoLayout(hero, "HORIZONTAL", 64, 0);

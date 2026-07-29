@@ -125,6 +125,25 @@ test("screening strip stays static while approved reels render in featured panel
   );
 });
 
+test("website visual reel closes on the same focused contact invitation as the page", () => {
+  const reelSource = readFileSync(
+    join(root, "showreel/website-visual-reel/index.html"),
+    "utf8",
+  );
+
+  assert.match(
+    reelSource,
+    /Let’s build a<\/span>\s*<span[^>]*>story<\/span>\s*<span[^>]*>together\.<\/span>/,
+  );
+  assert.match(reelSource, /Open Contact/);
+  assert.doesNotMatch(reelSource, /Let’s build a story with signal\./);
+  assert.doesNotMatch(reelSource, /Artists and cultural institutions/);
+  assert.doesNotMatch(reelSource, /AI-language editorial workflows/);
+  assert.ok(
+    existsSync(join(root, "public/assets/showreel/website-visual-reel.mp4")),
+  );
+});
+
 test("featured press entries carry audit metadata", () => {
   const works = loadWorks(join(root, "content/works"));
   const pressEntries = works.flatMap((work) => work.press || []);
@@ -161,6 +180,11 @@ test("site copy has no retired section fields in active data", () => {
     "watchShelfAction",
     "watchLabel",
     "impactLabel",
+    "labTitle",
+    "labSubcopy",
+    "createTitle",
+    "createSubcopy",
+    "services",
   ];
 
   for (const lang of ["en", "zh"]) {
@@ -213,10 +237,11 @@ test("public tracked artifacts do not expose private absolute paths", () => {
   assert.equal(matches, "");
 });
 
-test("loadMarkdownCollection returns ordered archive and lab entries", () => {
+test("loadSiteData keeps retired lab content out of the public site model", () => {
+  const siteData = loadSiteData(root);
   const archive = loadMarkdownCollection(join(root, "content/archive"));
-  const lab = loadMarkdownCollection(join(root, "content/lab"));
 
+  assert.equal("lab" in siteData, false);
   assert.equal(archive[0].slug, "ghost-hand-divine-car");
   assert.equal(archive[0].title.zh, "鬼手神車");
   assert.match(archive[0].summary.zh, /公開版本/);
@@ -224,9 +249,11 @@ test("loadMarkdownCollection returns ordered archive and lab entries", () => {
   assert.equal(archive[1].metrics[0].value, "200M");
   assert.equal(archive[1].metrics[1].value, "250M");
   assert.match(archive[1].summary.en, /Short-form web drama work/);
-  assert.equal(lab[0].slug, "verified-series-script-workflow");
-  assert.match(lab[0].title.en, /Script/i);
-  assert.match(lab[0].body, /future skill name/);
+
+  const heartOfSteel = archive.find((item) => item.slug === "heart-of-steel");
+  const lyingGame = archive.find((item) => item.slug === "lying-game");
+  assert.equal(heartOfSteel.watchUrl, "https://www.youtube.com/watch?v=6g9YLv30DyU");
+  assert.equal(lyingGame.watchUrl, "https://www.youtube.com/watch?v=DVzQf5COsyk");
 });
 
 test("renderPage creates bilingual page with scroll-stack works and video fallbacks", () => {
@@ -270,18 +297,30 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Research, treatments, pitch framing, and narrative structure/i);
   assert.doesNotMatch(html, /I partner with artists, cultural teams, producers, and technology companies/i);
   assert.doesNotMatch(html, /interior design and spatial-brand films/i);
-  assert.match(html, /For Artists &amp; Cultural Institutions/);
-  assert.match(html, /For Documentary \/ Factual Producers/);
+  assert.doesNotMatch(html, /Who Should Contact Me/);
+  assert.doesNotMatch(html, /For Artists &amp; Cultural Institutions/);
+  assert.doesNotMatch(html, /For Documentary \/ Factual Producers/);
   assert.doesNotMatch(html, /Challenge|What I shaped|class="case-study/);
   assert.doesNotMatch(html, /Best for/);
   assert.doesNotMatch(html, /Selected Impact/);
   assert.doesNotMatch(html, /impact-grid/);
   assert.doesNotMatch(html, /impact-section/);
-  assert.match(html, /AI \/ Language Lab/);
-  assert.match(html, /fact-checked bilingual script workflow/i);
-  assert.match(html, /working home for the future skill name/i);
-  assert.match(html, /Selected Archive/);
+  assert.doesNotMatch(html, /AI \/ Language Lab/);
+  assert.doesNotMatch(html, /fact-checked bilingual script workflow/i);
+  assert.doesNotMatch(html, /working home for the future skill name/i);
+  assert.match(html, /FROM THE ARCHIVE/);
+  assert.match(html, /class="archive-media-grid"/);
+  assert.match(html, /class="archive-media-card archive-media-card-lead"/);
+  assert.match(html, /href="https:\/\/www\.youtube\.com\/watch\?v=l9__7mhWJBM"/);
+  assert.match(html, /href="https:\/\/www\.youtube\.com\/watch\?v=6g9YLv30DyU"/);
+  assert.match(html, /href="https:\/\/www\.youtube\.com\/watch\?v=DVzQf5COsyk"/);
+  assert.match(html, /Watch public program/);
+  assert.match(html, /Watch official trailer/);
+  assert.match(html, /Watch official promo/);
   assert.match(html, /Short-form web drama work across food/);
+  assert.match(html, /class="nav-contact" href="#contact"/);
+  assert.match(html, /class="contact-title-lead">Let’s build a story<\/span>/);
+  assert.match(html, /class="contact-title-accent">together\.<\/span>/);
   assert.match(html, /<form class="contact-form" action="\/api\/contact" method="post" data-contact-form>/);
   assert.match(html, /name="startedAt"/);
   assert.match(html, /name="website"/);
@@ -296,7 +335,10 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.ok(html.indexOf("watch-loop") < html.indexOf("available-section"));
   assert.ok(html.indexOf("watch-loop") < html.indexOf("works-section"));
   assert.ok(html.indexOf("available-section") < html.indexOf("works-section"));
-  assert.ok(html.indexOf('class="section works-section"') < html.indexOf('class="section lab-section"'));
+  assert.ok(html.indexOf('class="section works-section"') < html.indexOf('class="section archive-section"'));
+  assert.ok(html.indexOf('class="section archive-section"') < html.indexOf('class="section contact"'));
+  assert.doesNotMatch(html, /class="section lab-section"/);
+  assert.doesNotMatch(html, /class="services-grid"/);
   assert.match(html, /works-stack/);
   assert.match(html, /data-scroll-stack/);
   assert.doesNotMatch(html, /data-horizontal-scroll/);
@@ -509,6 +551,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(sitemap, /<loc>https:\/\/hsin-hsin-yuan-portfolio\.vercel\.app\/en\/<\/loc>/);
   assert.match(sitemap, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
   assert.match(zh, /紀錄片導演/);
+  assert.match(zh, /<span class="brand-desktop">袁欣欣 \/ HSIN-HSIN YUAN<\/span>/);
+  assert.match(zh, /<span class="brand-mobile">袁欣欣<\/span>/);
   assert.match(zh, /觀看 showreel/);
   assert.match(zh, /精選短片/);
   assert.doesNotMatch(zh, /data-about-tabs/);
@@ -519,17 +563,23 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.doesNotMatch(zh, /情感質地/);
   assert.doesNotMatch(zh, /溫柔但準確地轉譯/);
   assert.doesNotMatch(zh, /住宅與室內設計影像、空間品牌影片/);
-  assert.match(zh, /藝術家與文化單位/);
-  assert.match(zh, /紀實製作人/);
+  assert.doesNotMatch(zh, /誰適合找我/);
+  assert.doesNotMatch(zh, /藝術家與文化單位/);
+  assert.doesNotMatch(zh, /紀實製作人與節目團隊/);
   assert.match(zh, /剪輯/);
   assert.doesNotMatch(zh, /挑戰|我如何處理|class="case-study/);
   assert.match(zh, /aria-label="播放影片：Tech Dreamers"/);
   assert.doesNotMatch(zh, /適合合作/);
   assert.doesNotMatch(zh, /代表成績/);
   assert.doesNotMatch(zh, /impact-grid/);
-  assert.match(zh, /AI \/ Language Lab/);
-  assert.match(zh, /future skill name/);
-  assert.match(zh, /精選舊作/);
+  assert.doesNotMatch(zh, /AI \/ Language Lab/);
+  assert.doesNotMatch(zh, /future skill name/);
+  assert.match(zh, /FROM THE ARCHIVE/);
+  assert.match(zh, /觀看公開節目/);
+  assert.match(zh, /觀看官方預告/);
+  assert.match(zh, /觀看官方宣傳片/);
+  assert.match(zh, /class="contact-title-lead">一起把故事<\/span>/);
+  assert.match(zh, /class="contact-title-accent">做出來。<\/span>/);
   assert.doesNotMatch(zh, /觀看完整單集/);
   assert.equal((zh.match(/>觀看完整系列<\/a>/g) || []).length, 2);
   assert.match(zh, /href="https:\/\/www\.youtube\.com\/playlist\?list=PLJCU8axtQoPI"/);
@@ -579,6 +629,17 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.doesNotMatch(css, /\.about-copy/);
   assert.match(css, /\.available-pill-list \{/);
   assert.doesNotMatch(css, /\.available-line/);
+  assert.doesNotMatch(css, /\.services-grid/);
+  assert.doesNotMatch(css, /\.service-card/);
+  assert.doesNotMatch(css, /\.lab-grid/);
+  assert.doesNotMatch(css, /\.lab-card/);
+  assert.match(css, /\.archive-media-grid \{/);
+  assert.match(css, /\.archive-media-card-lead \{/);
+  assert.match(css, /\.archive-media-action \{/);
+  assert.match(css, /\.nav-contact \{/);
+  assert.match(css, /\.contact-title-accent \{/);
+  assert.match(css, /\.brand-mobile \{\n  display: none;/);
+  assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*\.brand-desktop \{[\s\S]*display: none;[\s\S]*\.brand-mobile \{[\s\S]*display: inline;/);
   assert.doesNotMatch(css, /showreel-modal/);
   assert.match(css, /\.collab-grid \{\n  align-items: center;\n  display: flex;/);
   assert.match(css, /\.collab-item \{\n  align-items: center;\n  background: transparent;\n  border: 0;/);
@@ -634,7 +695,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.watch-loop-frame::after \{/);
   assert.match(css, /\.watch-loop-frame::before \{[\s\S]*?linear-gradient\(90deg, var\(--bg\), transparent\)/);
   assert.match(css, /\.watch-loop-frame::after \{[\s\S]*?linear-gradient\(270deg, var\(--bg\), transparent\)/);
-  assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\):not\(\[href="#contact"\]\)/);
+  assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\):not\(\.nav-contact\)/);
   assert.doesNotMatch(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\) \{\n    display: none;/);
   assert.doesNotMatch(js, /getEdgeProximity|initAmbientBackground|lightState|beamOpacity|is-guided|is-lit|edge-glow-card/);
   assert.match(js, /scrollRestoration = "manual"/);
