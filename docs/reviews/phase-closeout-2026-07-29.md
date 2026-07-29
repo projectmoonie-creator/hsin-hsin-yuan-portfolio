@@ -32,6 +32,14 @@ Resolved before final close:
   regression test prevents that direct address from returning in tracked text
   files.
 
+Residual risk:
+
+- Earlier public Git commits and older Vercel Preview deployments may retain
+  the previously published address. Full erasure requires an explicitly
+  approved history rewrite and old-deployment cleanup. This closeout changes
+  current public surfaces only and does not claim cached historical copies were
+  erased.
+
 ### Medium
 
 Resolved before final close:
@@ -112,12 +120,14 @@ assets.
 - The implementation branch matched
   `origin/codex/work-card-video-links` before the closeout documentation change.
 - The final closeout package is checkpointed by tag
-  `portfolio-phase-2026-07-29-final`; branch and tag remote readback are required
+  `portfolio-phase-2026-07-29-closed`; branch and tag remote readback are required
   before declaring the close complete.
 - `portfolio-phase-2026-07-29` preserves the pre-privacy-remediation closeout
   attempt and is not the cold-resume baseline.
 - `portfolio-phase-2026-07-29-r2` preserves the privacy-remediation code
   checkpoint before the final deployment identity was recorded.
+- `portfolio-phase-2026-07-29-final` preserves the closeout state before the
+  historical-exposure residual risk was explicitly recorded.
 
 ## External Review Decision
 
@@ -145,7 +155,10 @@ pushed?
 
 ## Exact Next Action
 
-Start the next conversation by consolidating the user's new requests into one
-bounded package. The recommended first decision is the screening-strip media
-contract, because it determines whether the Three-Minute Micro Drama reel
-belongs in the strip, Archive, or a future work detail page.
+Start the next conversation by deciding whether current-surface redaction is
+sufficient or whether the user explicitly authorizes a destructive
+public-history and old-deployment purge. After that decision, consolidate the
+new requests into one bounded package. The recommended first design decision is
+the screening-strip media contract, because it determines whether the
+Three-Minute Micro Drama reel belongs in the strip, Archive, or a future work
+detail page.

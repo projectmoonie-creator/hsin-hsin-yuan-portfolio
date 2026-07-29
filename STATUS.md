@@ -8,7 +8,7 @@ State: `PASS_WITH_OPEN_ITEMS`
 
 - Reviewed implementation commit: `f4f4d0029c71a2f20f88fea5051a8726b0d0773d`
 - Active branch: `codex/work-card-video-links`
-- Final closeout tag: `portfolio-phase-2026-07-29-final`
+- Final closeout tag: `portfolio-phase-2026-07-29-closed`
 - Vercel Preview:
   `https://hsin-hsin-yuan-portfolio-rk6jdrkve.vercel.app/en/`
 - The closeout did not replace the production deployment.
@@ -38,12 +38,23 @@ These are next-phase decisions, not blockers:
 6. Continue the user's known visual/content refinements as a new bounded work
    package rather than reopening the whole site at once.
 
+## Residual Privacy Risk
+
+The current branch, generated site, Figma importer, showreel source, and
+replacement MP4 no longer expose the direct Yahoo address or private absolute
+paths. Earlier public Git commits and older Vercel Preview deployments may
+still retain the previous address. Full erasure requires a separately approved
+Git history rewrite and old-deployment cleanup; neither destructive action was
+performed during this closeout.
+
 ## Exact Next Action
 
-At the next session, first consolidate the user's new requests by function
-(content, information architecture, visual system, media, interaction, SEO, or
-deployment). Choose one package, state its non-goals and validation, then branch
-from `portfolio-phase-2026-07-29-final`.
+At the next session, first decide whether current-surface redaction is
+sufficient or whether to authorize a separate public-history and old-deployment
+purge. Then consolidate the user's new requests by function (content,
+information architecture, visual system, media, interaction, SEO, or
+deployment), choose one package, state its non-goals and validation, and branch
+from `portfolio-phase-2026-07-29-closed`.
 
 ## Cold Resume
 
