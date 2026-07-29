@@ -247,7 +247,9 @@ function mediaFrame(work, lang, copy) {
       lang,
       className: posterFit === "contain"
         ? "media-frame media-frame-contain"
-        : "media-frame",
+        : work.hideMediaLabel
+          ? "media-frame media-frame-unlabeled"
+          : "media-frame",
       style: `background-image: ${posterGradient}, ${cssUrl(work.posterImage)}; background-size: cover, ${posterFit}; background-position: center, center; background-repeat: no-repeat; background-color: #0b0b0c;`,
       content: `${renderFeaturedReel(work)}${mediaLabel}`,
     });

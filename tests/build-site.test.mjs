@@ -85,6 +85,12 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[5].platform, "China Dragon TV");
   assert.deepEqual(works[5].mediaTitleLines, ["Top Gear China", "UK Special"]);
   assert.equal(works[0].posterImage, "/assets/portfolio/slow-steps-poster.webp");
+  assert.equal(works[0].posterVariant, "no-title");
+  assert.equal(works[0].posterRightsStatus, "user-approved-local");
+  assert.equal(
+    works[0].posterSourceSha256,
+    "3a6f37deee03aab1836fecaee547685f8b79a23106e5b540cac94094a193c78a",
+  );
   assert.equal(works[0].platform, "TaiwanPlus / Travel");
   assert.deepEqual(works[0].tags, ["documentary", "travel"]);
   assert.equal(
@@ -393,7 +399,11 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /aria-label="Play video: Slow Steps"/);
   assert.match(
     html,
-    /class="media-frame" style="background-image:[\s\S]*?slow-steps-poster\.webp[\s\S]*?<div class="media-label">Slow Steps<\/div>/,
+    /<article class="work-panel" id="slow-steps">[\s\S]*?class="media-frame media-frame-unlabeled" style="background-image:[\s\S]*?slow-steps-poster\.webp[\s\S]*?<\/div>[\s\S]*?<div class="work-copy">/,
+  );
+  assert.doesNotMatch(
+    html,
+    /<article class="work-panel" id="slow-steps">[\s\S]*?<div class="media-label">Slow Steps<\/div>[\s\S]*?<div class="work-copy">/,
   );
   assert.match(
     html,

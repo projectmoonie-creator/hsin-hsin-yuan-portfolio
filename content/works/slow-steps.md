@@ -25,12 +25,16 @@
   "watchUrl": "",
   "videoEmbedUrl": "",
   "posterImage": "/assets/portfolio/slow-steps-poster.webp",
+  "hideMediaLabel": true,
   "posterAlt": {
-    "en": "Slow Steps series artwork with three travel documentary portraits",
-    "zh": "Slow Steps 系列主視覺，呈現三幅旅行紀錄片人物畫面"
+    "en": "Torn-paper collage of three travel documentary portraits: a man at work, a scooter rider at sunset, and a man in profile",
+    "zh": "三幅撕紙拼貼的旅行紀錄片人物畫面：工作中的男子、夕陽下騎車的人，以及側面人物"
   },
   "focalPoint": "50% 50%",
   "posterDimensions": {"width": 1920, "height": 1080},
+  "posterVariant": "no-title",
+  "posterRightsStatus": "user-approved-local",
+  "posterSourceSha256": "3a6f37deee03aab1836fecaee547685f8b79a23106e5b540cac94094a193c78a",
   "tags": ["documentary", "travel"],
   "metrics": [],
   "accent": "rose"

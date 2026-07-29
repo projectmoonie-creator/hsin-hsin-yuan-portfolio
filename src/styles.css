@@ -1381,6 +1381,11 @@ a {
     min-height: auto;
   }
 
+  .media-frame-unlabeled {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+
   .work-media-play {
     bottom: 0.75rem;
     height: 2.55rem;
