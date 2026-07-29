@@ -9,6 +9,10 @@ credit wording:
 
 - EN: Planning / Script
 - ZH: 企劃 / 企編
+- Curated YouTube playlist (Unlisted, created 2026-07-29):
+  https://www.youtube.com/playlist?list=PLfuPqJAlXvCs
+- Playlist scope: 12 split segments from episodes #65, #70, and #17, grouped
+  in episode order.
 
 ## Program Context
 
@@ -85,25 +89,17 @@ Other matching split segments found through YouTube public search + oEmbed:
 
 No official full-episode upload was found in the search pass.
 
-## Portfolio Presentation Recommendation
+## Portfolio Presentation Decision
 
-Keep this off the main Featured Works stack for now unless the user wants to foreground PTS Taigi work. Better options:
-
-1. Add one compact Archive item:
-   - EN title: `Nothing by Bus`
-   - ZH title: `無事坐巴士`
-   - Role: user-confirmed `Planning / Script` and `企劃 / 企編`
-   - Link: one representative episode or no primary link until user chooses.
-
-2. Add one detail page later:
-   - show the show credit once
-   - list selected episodes in a collapsible "Selected episode links" area
-   - avoid displaying every split segment on the homepage
-
-3. If using a public link, prefer one representative Part 1 link or an official playlist/channel page. Do not embed all split segments by default.
+- Keep the show as one Featured Work card rather than exposing 12 separate
+  segment links on the homepage.
+- The work-specific short reel remains the moving preview.
+- The large media image and `Watch the full series` / `觀看完整系列` action
+  open the curated playlist.
+- A future detail page may describe individual episodes, but the homepage
+  should continue to treat the program as one credit.
 
 ## Open Questions
 
-- Confirm whether these three are all user credits or only examples from the show.
-- Choose whether the site should link to one representative episode, a playlist/channel page, or no direct link.
-- Confirm whether `無事坐巴士` belongs in Archive or in a future "Selected TV / factual credits" section.
+- Confirm whether future discovered credited episodes should be appended to the
+  existing playlist.

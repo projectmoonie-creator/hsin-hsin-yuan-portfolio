@@ -26,7 +26,9 @@
     "en": "I directed and edited films for residential design, renovation, designer portfolios, and branded lifestyle campaigns.",
     "zh": "我為住宅設計、老屋翻新、設計師作品、居家品牌與廚電業配內容擔任導演 / 剪輯。"
   },
-  "watchUrl": "",
+  "watchMode": "series",
+  "watchUrl": "https://www.youtube.com/playlist?list=PLJCU8axtQoPI",
+  "showWatchCta": true,
   "videoEmbedUrl": "",
   "posterImage": "",
   "cardReelUrl": "/assets/showreel/interior-spatial-card-reel.mp4",

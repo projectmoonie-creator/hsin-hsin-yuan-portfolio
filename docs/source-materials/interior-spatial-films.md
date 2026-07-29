@@ -7,6 +7,9 @@ Default credit for this group:
 - Platform / publisher: 幸福空間 Gorgeous Space
 - Portfolio use: resume support, website proof point, possible showreel reference
 - Rights note: public links can support portfolio context; use original files or confirmed downloadable sources for final showreel editing when available.
+- Curated YouTube playlist (Unlisted, created 2026-07-29):
+  https://www.youtube.com/playlist?list=PLJCU8axtQoPI
+- Playlist scope: 18 user-provided public work links, ordered as a selected work archive.
 
 ## Confirmed Links
 

@@ -234,9 +234,15 @@ function renderWork(work, lang, copy) {
   const tagline = work.tagline[lang];
   const description = work.description[lang];
   const role = work.role[lang];
-  const statusLabel = work.watchUrl ? "" : noWatchStatusLabel(work, lang, copy);
-  const action = statusLabel
+  const statusLabel = noWatchStatusLabel(work, lang, copy);
+  const watchAction = work.showWatchCta && work.watchUrl
+    ? `<a class="button-link" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer">${lang === "en" ? "Watch the full series" : "觀看完整系列"}</a>`
+    : "";
+  const statusAction = statusLabel
     ? `<span class="status-badge">${escapeHtml(statusLabel)}</span>`
+    : "";
+  const action = watchAction || statusAction
+    ? `<div class="work-actions">${statusAction}${watchAction}</div>`
     : "";
 
   return `

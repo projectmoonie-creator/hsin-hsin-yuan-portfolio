@@ -821,6 +821,13 @@ a {
   color: var(--muted);
 }
 
+.work-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
 .status-badge {
   border: 1px solid var(--line);
   border-radius: 999px;

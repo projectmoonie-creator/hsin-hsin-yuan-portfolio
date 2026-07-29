@@ -22,8 +22,9 @@
     "en": "Selected episode-planning work for a PTS Taigi travel-factual program built around bus routes, local memory, food, markets, and people along the road.",
     "zh": "公視台語台行腳節目的單集企劃 / 企編工作，節目以公車路線串起地方記憶、飲食、市集與路上的人。"
   },
-  "watchMode": "sample",
-  "watchUrl": "https://youtu.be/q4TMcoOpzKA?si=k5AIjDHuywFRbGiw",
+  "watchMode": "series",
+  "watchUrl": "https://www.youtube.com/playlist?list=PLfuPqJAlXvCs",
+  "showWatchCta": true,
   "videoEmbedUrl": "",
   "posterImage": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
   "cardReelUrl": "/assets/showreel/nothing-by-bus-card-reel.mp4",

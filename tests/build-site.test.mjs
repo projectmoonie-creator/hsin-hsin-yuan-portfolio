@@ -50,9 +50,21 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     works[3].cardReelPoster,
     "/assets/showreel/interior-spatial-card-reel-poster.webp",
   );
+  assert.equal(works[3].watchMode, "series");
+  assert.equal(works[3].showWatchCta, true);
+  assert.equal(
+    works[3].watchUrl,
+    "https://www.youtube.com/playlist?list=PLJCU8axtQoPI",
+  );
   assert.equal(works[4].platform, "PTS Taigi");
   assert.equal(works[4].year, "2021");
   assert.equal(works[4].title.en, "Nothing by Bus");
+  assert.equal(works[4].watchMode, "series");
+  assert.equal(works[4].showWatchCta, true);
+  assert.equal(
+    works[4].watchUrl,
+    "https://www.youtube.com/playlist?list=PLfuPqJAlXvCs",
+  );
   assert.equal(
     works[4].cardReelUrl,
     "/assets/showreel/nothing-by-bus-card-reel.mp4",
@@ -80,6 +92,10 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.deepEqual(works[5].tags, ["car show", "factual entertainment", "broadcast", "UK production"]);
   assert.equal(works[0].metrics.length, 0);
   assert.equal(works[2].metrics.length, 0);
+  assert.deepEqual(
+    works.filter((work) => work.showWatchCta).map((work) => work.slug),
+    ["interior-spatial-brand-films", "pts-taigi-bus"],
+  );
 });
 
 test("featured press entries carry audit metadata", () => {
@@ -294,10 +310,19 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /href="#pts-taigi-bus"/);
   assert.match(html, /href="#interior-spatial-brand-films"/);
   assert.match(html, /https:\/\/youtu\.be\/M_eXe9HRD9Y\?si=YZ_3JZ7FJY4vVcZv/);
+  assert.equal((html.match(/>Watch the full series<\/a>/g) || []).length, 2);
+  assert.equal((html.match(/<a class="button-link"/g) || []).length, 2);
+  assert.match(
+    html,
+    /href="https:\/\/www\.youtube\.com\/playlist\?list=PLJCU8axtQoPI"[\s\S]*?>Watch the full series<\/a>/,
+  );
+  assert.match(
+    html,
+    /href="https:\/\/www\.youtube\.com\/playlist\?list=PLfuPqJAlXvCs"[\s\S]*?>Watch the full series<\/a>/,
+  );
   assert.doesNotMatch(html, /Watch the full episode/);
-  assert.doesNotMatch(html, /Watch the series/);
+  assert.doesNotMatch(html, />Watch the series<\/a>/);
   assert.doesNotMatch(html, /Watch representative segment/);
-  assert.doesNotMatch(html, /<a class="button-link"/);
   assert.match(html, /Press &amp; Interviews/);
   assert.match(html, /Official program page/);
   assert.doesNotMatch(html, /24 artist groups/);
@@ -415,7 +440,9 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /future skill name/);
   assert.match(zh, /精選舊作/);
   assert.doesNotMatch(zh, /觀看完整單集/);
-  assert.doesNotMatch(zh, /觀看完整系列/);
+  assert.equal((zh.match(/>觀看完整系列<\/a>/g) || []).length, 2);
+  assert.match(zh, /href="https:\/\/www\.youtube\.com\/playlist\?list=PLJCU8axtQoPI"/);
+  assert.match(zh, /href="https:\/\/www\.youtube\.com\/playlist\?list=PLfuPqJAlXvCs"/);
   assert.doesNotMatch(zh, /觀看代表片段/);
   assert.match(zh, /幸福空間與室內設計影像/);
   assert.match(zh, /導演 \/ 剪輯/);
