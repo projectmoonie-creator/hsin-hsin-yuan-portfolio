@@ -293,14 +293,19 @@ function renderWatchLoopItem(work, lang, copy) {
   const image = poster
     ? `style="background-image: ${cssUrl(poster)}"`
     : "";
-  const cardClass = poster || work.cardReelUrl
+  const hasApprovedCardReel =
+    work.cardReelMode === "after-hold" &&
+    work.cardReelUrl &&
+    poster;
+  const cardClass = poster
     ? "watch-loop-card"
     : "watch-loop-card watch-loop-card-plain";
-  const video = work.cardReelUrl
+  const video = hasApprovedCardReel
     ? `
       <video
         class="watch-loop-video"
         data-watch-loop-video
+        data-card-reel-mode="after-hold"
         muted
         loop
         playsinline

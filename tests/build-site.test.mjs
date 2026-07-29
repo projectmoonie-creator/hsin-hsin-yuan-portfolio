@@ -46,6 +46,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     works[3].cardReelUrl,
     "/assets/showreel/interior-spatial-card-reel.mp4",
   );
+  assert.equal(works[3].cardReelMode, "after-hold");
   assert.equal(
     works[3].cardReelPoster,
     "/assets/portfolio/gorgeous-space-lg-sunny-wang.webp",
@@ -75,6 +76,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     works[4].cardReelUrl,
     "/assets/showreel/nothing-by-bus-card-reel.mp4",
   );
+  assert.equal(works[4].cardReelMode, "after-hold");
   assert.equal(
     works[4].cardReelPoster,
     works[4].posterImage,
@@ -102,6 +104,34 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.deepEqual(
     works.filter((work) => work.showWatchCta).map((work) => work.slug),
     ["interior-spatial-brand-films", "pts-taigi-bus"],
+  );
+});
+
+test("screening strip renders reels only for explicit after-hold opt-in", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const html = renderPage({ lang: "en", site, works });
+
+  assert.match(html, /data-card-reel-mode="after-hold"/);
+
+  const staticWorks = works.map((work) => {
+    const staticWork = { ...work };
+    delete staticWork.cardReelMode;
+    return staticWork;
+  });
+  const staticHtml = renderPage({ lang: "en", site, works: staticWorks });
+
+  assert.doesNotMatch(
+    staticHtml,
+    /src="\/assets\/showreel\/interior-spatial-card-reel\.mp4"/,
+  );
+  assert.doesNotMatch(
+    staticHtml,
+    /src="\/assets\/showreel\/nothing-by-bus-card-reel\.mp4"/,
+  );
+  assert.match(
+    staticHtml,
+    /href="#interior-spatial-brand-films" style="background-image:[\s\S]*?gorgeous-space-lg-sunny-wang\.webp/,
   );
 });
 

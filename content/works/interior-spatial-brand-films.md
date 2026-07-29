@@ -34,6 +34,7 @@
   "posterFit": "contain",
   "hideMediaLabel": true,
   "cardReelUrl": "/assets/showreel/interior-spatial-card-reel.mp4",
+  "cardReelMode": "after-hold",
   "cardReelPoster": "/assets/portfolio/gorgeous-space-lg-sunny-wang.webp",
   "tags": ["interior design", "branded content", "lifestyle", "editing"],
   "metrics": [
