@@ -122,9 +122,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /<span><span class="role-slash">\/<\/span> Cross-Cultural Storyteller<\/span>/);
   assert.doesNotMatch(html, /<div class="hero-roles">.*AI-Language Creative.*<\/div>/s);
   assert.match(html, /<div class="hero-media" id="showreel">/);
-  assert.match(html, /class="light-beam-layer"/);
-  assert.doesNotMatch(html, /light-beam-left/);
-  assert.match(html, /light-beam-right/);
+  assert.doesNotMatch(html, /light-beam-layer|light-beam-right|ambient-canvas/);
   assert.match(html, /<video[\s\S]*class="hero-showreel-video"[\s\S]*data-showreel-video/);
   assert.match(html, /muted/);
   assert.match(html, /webkit-playsinline/);
@@ -289,11 +287,11 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.equal(existsSync(join(root, "dist/zh/index.html")), true);
   assert.equal(existsSync(join(root, "dist/styles.css")), true);
   assert.equal(existsSync(join(root, "dist/main.js")), true);
-  assert.equal(existsSync(join(root, "dist/ambient-background.js")), true);
+  assert.equal(existsSync(join(root, "dist/ambient-background.js")), false);
   assert.equal(existsSync(join(root, "dist/robots.txt")), true);
   assert.equal(existsSync(join(root, "dist/sitemap.xml")), true);
-  assert.equal(existsSync(join(root, "dist/vendor/anime.esm.min.js")), true);
-  assert.equal(existsSync(join(root, "dist/vendor/ogl/src/index.js")), true);
+  assert.equal(existsSync(join(root, "dist/vendor/anime.esm.min.js")), false);
+  assert.equal(existsSync(join(root, "dist/vendor/ogl/src/index.js")), false);
   assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel.mp4")), true);
   assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel-poster.png")), true);
 
@@ -380,11 +378,10 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /@keyframes heroStillPush/);
   assert.match(css, /\.hero-media \{\n    animation: heroStillPush/);
   assert.match(css, /\.hero-roles \.role-slash \{\n  color: var\(--acid\);/);
-  assert.match(css, /\.edge-light/);
-  assert.match(css, /--edge-proximity/);
-  assert.match(css, /\.ambient-canvas \{/);
-  assert.match(css, /\.has-ambient-background \.light-beam/);
-  assert.doesNotMatch(css, /\.light-beam-left/);
+  assert.doesNotMatch(
+    css,
+    /body::before|light-beam|ambient-canvas|edge-glow-card|edge-light|--edge-proximity|--beam-opacity|sectionReflection|frameReflection|\.section\.is-lit|\.section\.is-guided|\.works-section::after|\.hero-media::before|\.watch-loop-card::before/,
+  );
   assert.match(css, /--page-pad: clamp/);
   assert.match(css, /\.watch-loop-card \{/);
   assert.match(css, /\.watch-loop-card-plain \{/);
@@ -392,9 +389,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.watch-loop-viewport::before/);
   assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\):not\(\[href="#contact"\]\)/);
   assert.doesNotMatch(css, /@media \(max-width: 820px\) \{[\s\S]*\.nav-links > a:not\(\.language-switch\) \{\n    display: none;/);
-  assert.match(js, /getEdgeProximity/);
-  assert.match(js, /pointermove/);
-  assert.match(js, /initAmbientBackground/);
+  assert.doesNotMatch(js, /getEdgeProximity|initAmbientBackground|lightState|beamOpacity|is-guided|is-lit|edge-glow-card/);
   assert.match(js, /scrollRestoration = "manual"/);
   assert.match(js, /clearInitialHash/);
   assert.match(js, /replaceState/);
