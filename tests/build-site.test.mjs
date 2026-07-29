@@ -42,7 +42,9 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[0].role.en, "Director / Editor / Producer");
   assert.equal(works[1].role.en, "Director / Editor / Producer");
   assert.equal(works[3].role.en, "Director / Editor");
-  assert.equal(works[4].platform, "PTS Taigi / 公視台語台");
+  assert.equal(works[4].platform, "PTS Taigi");
+  assert.equal(works[4].year, "2021");
+  assert.equal(works[4].title.en, "Nothing by Bus");
   assert.equal(works[5].role.en, "Director");
   assert.equal(works[5].platform, "China Dragon TV");
   assert.equal(works[0].posterImage, "/assets/portfolio/slow-steps-poster.webp");
@@ -246,7 +248,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Showreel in progress/);
   assert.doesNotMatch(html, /3 yrs/);
   assert.doesNotMatch(html, /Interior \/ Spatial Brand Films[\s\S]*?Coming 2026/);
-  assert.match(html, /PTS Taigi - Bus Travel Factual Episodes/);
+  assert.match(html, /Nothing by Bus/);
   assert.match(html, /Planning \/ Script/);
   assert.match(html, /Top Gear China: UK Special/);
   assert.match(html, /China Dragon TV/);
@@ -369,7 +371,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /幸福空間與室內設計影像/);
   assert.match(zh, /導演 \/ 剪輯/);
   assert.doesNotMatch(zh, /3 yrs|三年間|約三年/);
-  assert.match(zh, /公視台語台《無事坐巴士》/);
+  assert.match(zh, /無事坐巴士/);
   assert.match(zh, /企劃 \/ 企編/);
   assert.match(zh, /《巔峰拍檔》中國版：英國篇/);
   assert.match(zh, /China Dragon TV/);

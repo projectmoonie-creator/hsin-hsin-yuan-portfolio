@@ -422,7 +422,7 @@ Chinese:
 - Public context found so far: the program is associated with 公視台語台 and has been described publicly as a travel / local culture program built around bus journeys. Search results indicate it began in 2019 and received Golden Bell nominations, but this credit should be verified against CV or email before public website copy is finalized.
 
 Potential website phrasing:
-- EN: Planning Writer, "Bô-sū Tsē Bá-suh" / No Trouble Taking the Bus, PTS Taigi.
+- EN: Planning / Script, "Nothing by Bus," PTS Taigi.
 - ZH: 公視台語台《無事坐巴士》企劃編劇。
 
 Next useful searches:

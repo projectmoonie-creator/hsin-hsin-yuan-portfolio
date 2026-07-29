@@ -4,16 +4,16 @@
   "featured": true,
   "order": 5,
   "status": "external-only",
-  "year": "2020s",
+  "year": "2021",
   "title": {
-    "en": "PTS Taigi - Bus Travel Factual Episodes",
-    "zh": "公視台語台《無事坐巴士》"
+    "en": "Nothing by Bus",
+    "zh": "無事坐巴士"
   },
   "role": {
     "en": "Planning / Script",
     "zh": "企劃 / 企編"
   },
-  "platform": "PTS Taigi / 公視台語台",
+  "platform": "PTS Taigi",
   "tagline": {
     "en": "Local travel, public media, and Taiwanese-language factual storytelling.",
     "zh": "地方行旅、公共媒體，以及台語語境裡的紀實節目敘事。"
@@ -31,7 +31,7 @@
     {"value": "3+", "label": {"en": "episode leads archived", "zh": "已整理集數線索"}},
     {"value": "PTS", "label": {"en": "public media", "zh": "公共媒體"}}
   ],
-  "sourceNote": "docs/source-materials/pts-taigi-bus.md; role wording needs final user confirmation",
+  "sourceNote": "docs/source-materials/pts-taigi-bus.md; English title, 2021 air year, and role wording confirmed by user",
   "accent": "violet"
 }
 ---

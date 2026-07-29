@@ -1,20 +1,27 @@
-# PTS Taigi - 無事坐巴士 Source Notes
+# PTS Taigi - Nothing by Bus Source Notes
 
 ## Status
 
 These links are source material for Hsin-Hsin Yuan's public portfolio. Do not add every split YouTube segment to the homepage. Treat the show as one credit or one compact archive entry unless the user later wants a fuller detail page.
 
-The user has confirmed these are work results, but exact role wording still needs user confirmation before publishing. Candidate wording:
+The user has confirmed these are work results and confirmed the public-facing
+credit wording:
 
-- EN: Planning / Script or Episode Planning, PTS Taigi travel-factual program
-- ZH: 企劃 / 企編 / 單集企劃，公視台語台行腳節目
+- EN: Planning / Script
+- ZH: 企劃 / 企編
 
 ## Program Context
 
-- Program: `無事坐巴士`
+- Official English title: `Nothing by Bus`
+- Original title: `無事坐巴士`
 - Channel/platform: 公視台語台 / PTS Taigi
+- Portfolio display year: `2021`, confirmed by the user as the air year for
+  the credited work
+- Program year context: `2019-NOW` in TAICCA's international program listing
 - Public context: Taiwanese Hokkien travel / local-culture program built around bus journeys.
 - Public recognition to verify if used: the program was nominated for Golden Bell lifestyle / factual-related awards in multiple years.
+- Official international listing checked 2026-07-29:
+  https://pavilion.taicca.tw/portfolio-item/nothing-by-bus/
 
 ## User-Provided Links
 
@@ -83,9 +90,9 @@ No official full-episode upload was found in the search pass.
 Keep this off the main Featured Works stack for now unless the user wants to foreground PTS Taigi work. Better options:
 
 1. Add one compact Archive item:
-   - EN title: `PTS Taigi - Bus Travel Factual Episodes`
-   - ZH title: `公視台語台《無事坐巴士》單集企劃`
-   - Role: user-confirmed `企劃 / 企編 / 單集企劃`
+   - EN title: `Nothing by Bus`
+   - ZH title: `無事坐巴士`
+   - Role: user-confirmed `Planning / Script` and `企劃 / 企編`
    - Link: one representative episode or no primary link until user chooses.
 
 2. Add one detail page later:
@@ -97,7 +104,6 @@ Keep this off the main Featured Works stack for now unless the user wants to for
 
 ## Open Questions
 
-- Confirm exact role wording: `企編`, `企劃編劇`, `單集企劃`, or another credit.
 - Confirm whether these three are all user credits or only examples from the show.
 - Choose whether the site should link to one representative episode, a playlist/channel page, or no direct link.
 - Confirm whether `無事坐巴士` belongs in Archive or in a future "Selected TV / factual credits" section.

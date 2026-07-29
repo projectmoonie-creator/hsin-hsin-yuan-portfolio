@@ -4,5 +4,6 @@ dist/
 .vercel/
 npm-debug.log*
 showreel/**/.thumbnails/
+showreel/**/assets/source-clips/
 showreel/**/renders/
 showreel/**/snapshots/
