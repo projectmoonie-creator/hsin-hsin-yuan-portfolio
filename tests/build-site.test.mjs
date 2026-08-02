@@ -356,6 +356,10 @@ test("loadSiteData keeps retired lab content out of the public site model", () =
   const lyingGame = archive.find((item) => item.slug === "lying-game");
   assert.equal(heartOfSteel.watchUrl, "https://www.youtube.com/watch?v=6g9YLv30DyU");
   assert.equal(lyingGame.watchUrl, "https://www.youtube.com/watch?v=DVzQf5COsyk");
+  assert.ok(
+    archive.every((item) => !Object.hasOwn(item, "archiveFeature")),
+    "visual hierarchy must not live in Archive content",
+  );
 });
 
 test("archive renders as one descending chronology independent of card treatment", () => {
@@ -383,6 +387,30 @@ test("archive renders as one descending chronology independent of card treatment
   assert.ok(titlePositions.every((position) => position >= 0));
   assert.deepEqual(titlePositions, [...titlePositions].sort((a, b) => a - b));
   assert.match(html, /class="archive-chronology"/);
+});
+
+test("archive renders five equal cards with one 40/60 contract", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const html = renderPage({ lang: "en", site, works });
+  const archiveMarkup = html.match(
+    /<section class="section archive-section">[\s\S]*?<div class="archive-chronology">[\s\S]*?<\/section>/,
+  )?.[0];
+
+  assert.ok(archiveMarkup, "Archive section renders");
+  assert.equal((archiveMarkup.match(/class="archive-card"/g) || []).length, 5);
+  assert.equal((archiveMarkup.match(/<a class="archive-card"/g) || []).length, 3);
+  assert.equal((archiveMarkup.match(/<article class="archive-card"/g) || []).length, 2);
+  assert.match(archiveMarkup, /archive-card-copy/);
+  assert.match(archiveMarkup, /archive-card-media archive-card-media-placeholder/);
+  assert.match(archiveMarkup, /class="archive-card-index" aria-hidden="true">01/);
+  assert.match(archiveMarkup, /class="archive-card-index" aria-hidden="true">02/);
+  assert.match(archiveMarkup, /data-archive-reel-video/);
+  assert.doesNotMatch(
+    archiveMarkup,
+    /archive-media-card|archive-media-card-lead|archive-item|archive-media-summary|mini-metrics/,
+  );
+  assert.doesNotMatch(archiveMarkup, /200M|250M|NT\$6M|600K|66%/);
 });
 
 test("Overclocking archive data uses the approved local poster and reel", () => {
@@ -478,9 +506,10 @@ test("archive reel markup renders only for explicit after-hold approval", () => 
 
   assert.match(
     html,
-    /class="archive-media-card archive-media-card-lead"[\s\S]*?data-archive-reel-video[\s\S]*?data-archive-reel-mode="after-hold"[\s\S]*?poster="\/assets\/showreel\/overclocking-card-reel-poster\.webp"[\s\S]*?<source src="\/assets\/showreel\/overclocking-card-reel\.mp4" type="video\/mp4">/,
+    /<a class="archive-card"[^>]*>[\s\S]*?data-archive-reel-video[\s\S]*?data-archive-reel-mode="after-hold"[\s\S]*?poster="\/assets\/showreel\/overclocking-card-reel-poster\.webp"[\s\S]*?<source src="\/assets\/showreel\/overclocking-card-reel\.mp4" type="video\/mp4">[\s\S]*?<\/a>/,
   );
   assert.match(html, /data-archive-reel-video[\s\S]*?preload="none"/);
+  assert.doesNotMatch(html, /archive-media-card-lead/);
   assert.doesNotMatch(html, /india-overclocking-production/i);
 
   const staticSite = structuredClone(site);
@@ -518,13 +547,31 @@ test("archive reel styling keeps the poster visible until playback is confirmed"
 
   assert.match(
     css,
-    /\.archive-media-image,\s*\.archive-media-reel \{[\s\S]*?height: 100%;[\s\S]*?object-fit: cover;[\s\S]*?position: absolute;[\s\S]*?width: 100%;/,
+    /\.archive-card-image,\s*\.archive-card-reel \{[^}]*height: 100%;[^}]*object-fit: cover;[^}]*object-position: center;[^}]*position: absolute;[^}]*width: 100%;[^}]*\}/,
   );
   assert.match(
     css,
-    /\.archive-media-reel \{[\s\S]*?opacity: 0;[\s\S]*?pointer-events: none;[\s\S]*?transition: opacity/,
+    /\.archive-card-reel \{[^}]*opacity: 0;[^}]*pointer-events: none;[^}]*transition: opacity[^}]*\}/,
   );
-  assert.match(css, /\.archive-media-reel\.is-playing \{\s*opacity: 1;/);
+  assert.match(css, /\.archive-card-reel\.is-playing \{[^}]*opacity: 1;[^}]*\}/);
+  assert.match(
+    css,
+    /a\.archive-card:hover \.archive-card-image \{[^}]*transform: scale\(1\.025\);[^}]*\}/,
+  );
+  assert.match(
+    css,
+    /a\.archive-card:focus-visible \{[^}]*outline: 2px solid var\(--acid\);[^}]*outline-offset: 3px;[^}]*\}/,
+  );
+  assert.doesNotMatch(css, /^\.archive-card:hover \.archive-card-image \{/m);
+  assert.doesNotMatch(css, /^\.archive-card:focus-visible \{/m);
+  assert.match(
+    css,
+    /@media \(max-width: 460px\) \{[\s\S]*?\.archive-card \{[^}]*aspect-ratio: auto;[^}]*min-height: clamp\(8\.25rem, 38vw, 10rem\);[^}]*\}/,
+  );
+  assert.match(
+    css,
+    /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*?\.archive-card-reel \{[^}]*display: none;[^}]*\}/,
+  );
 });
 
 test("renderPage creates bilingual page with scroll-stack works and video fallbacks", () => {
@@ -581,14 +628,15 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /working home for the future skill name/i);
   assert.match(html, /FROM THE ARCHIVE/);
   assert.match(html, /class="archive-chronology"/);
-  assert.match(html, /class="archive-media-card archive-media-card-lead"/);
+  assert.match(html, /class="archive-card"/);
+  assert.doesNotMatch(html, /archive-media-card|archive-media-card-lead|archive-item/);
   assert.match(html, /href="https:\/\/www\.youtube\.com\/watch\?v=l9__7mhWJBM"/);
   assert.match(html, /href="https:\/\/www\.youtube\.com\/watch\?v=6g9YLv30DyU"/);
   assert.match(html, /href="https:\/\/www\.youtube\.com\/watch\?v=DVzQf5COsyk"/);
   assert.match(html, /Watch public program/);
   assert.match(html, /Watch official trailer/);
   assert.match(html, /Watch official promo/);
-  assert.match(html, /Short-form web drama work across food/);
+  assert.doesNotMatch(html, /Short-form web drama work across food/);
   assert.match(html, /class="nav-contact" href="#contact"/);
   assert.match(html, /<h2 class="contact-title"><span class="contact-title-line">Let’s build<\/span><span class="contact-title-line"><span class="contact-title-bridge">a story <\/span><span class="contact-title-accent">together\.<\/span><\/span><\/h2>/);
   assert.match(html, /<form class="contact-form" action="\/api\/contact" method="post" data-contact-form>/);
@@ -691,7 +739,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Interior Design &amp; Branded Films[\s\S]*?Coming 2026/);
   assert.match(html, /Nothing by Bus/);
   assert.match(html, /Gui Shou Shen Che/);
-  assert.match(html, /final public release materials are still being reconstructed/);
+  assert.doesNotMatch(html, /final public release materials are still being reconstructed/);
   assert.match(html, /Planning \/ Script/);
   assert.match(html, /Top Gear China: UK Special/);
   assert.match(html, /China Dragon TV/);
@@ -967,8 +1015,17 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.doesNotMatch(css, /\.lab-grid/);
   assert.doesNotMatch(css, /\.lab-card/);
   assert.match(css, /\.archive-chronology \{/);
-  assert.match(css, /\.archive-media-card-lead \{/);
-  assert.match(css, /\.archive-media-action \{/);
+  assert.match(
+    css,
+    /\.archive-card \{[^}]*aspect-ratio: 80 \/ 27;[^}]*grid-template-columns: minmax\(0, 2fr\) minmax\(0, 3fr\);[^}]*\}/,
+  );
+  assert.match(css, /\.archive-card-copy \{/);
+  assert.match(css, /\.archive-card-media \{/);
+  assert.match(css, /\.archive-card-index \{/);
+  assert.doesNotMatch(
+    css,
+    /\.archive-media-card|\.archive-media-card-lead|\.archive-item|\.archive-media-summary/,
+  );
   assert.match(css, /\.nav-contact \{/);
   assert.match(css, /\.contact-title-line \{[^}]*display: block;[^}]*white-space: nowrap;[^}]*\}/);
   assert.match(css, /\.contact-title-accent \{[\s\S]*?color: var\(--acid\);/);

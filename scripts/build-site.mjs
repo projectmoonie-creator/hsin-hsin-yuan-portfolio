@@ -361,77 +361,58 @@ function renderWatchLoop(works, lang, copy) {
   `;
 }
 
-function renderArchiveMediaCard(item, lang) {
+function renderArchiveCard(item, lang) {
   const title = localize(item.title, lang);
+  const role = localize(item.role, lang);
   const watchLabel = localize(item.watchLabel, lang);
-  const summary = item.summary ? localize(item.summary, lang) : item.body;
-  const leadClass = item.archiveFeature === "lead" ? " archive-media-card-lead" : "";
+  const hasWatch = Boolean(item.watchUrl && watchLabel);
+  const hasPoster = Boolean(item.posterImage);
+  const indexLabel = String(item.order).padStart(2, "0");
+  const focalPoint = item.posterFocalPoint;
+  const focalStyle = focalPoint
+    ? ` style="object-position: ${Number(focalPoint.x) * 100}% ${Number(focalPoint.y) * 100}%"`
+    : "";
   const hasApprovedCardReel =
     item.cardReelMode === "after-hold" &&
     item.cardReelUrl &&
     item.cardReelPoster;
-  const cardReel = hasApprovedCardReel
-    ? `
-      <video
-        class="archive-media-reel"
-        data-archive-reel-video
-        data-archive-reel-mode="after-hold"
-        muted
-        loop
-        playsinline
-        webkit-playsinline
-        preload="none"
-        poster="${escapeHtml(item.cardReelPoster)}"
-        aria-hidden="true"
-        tabindex="-1"
-      >
-        <source src="${escapeHtml(item.cardReelUrl)}" type="video/mp4">
-      </video>
-    `
+  const image = hasPoster
+    ? `<img class="archive-card-image" src="${escapeHtml(item.posterImage)}" alt="${escapeHtml(localize(item.imageAlt, lang))}" loading="lazy" decoding="async" onerror="this.remove()"${focalStyle}>`
     : "";
+  const reel = hasApprovedCardReel
+    ? `<video class="archive-card-reel" data-archive-reel-video data-archive-reel-mode="after-hold" muted loop playsinline webkit-playsinline preload="none" poster="${escapeHtml(item.cardReelPoster)}" aria-hidden="true" tabindex="-1"${focalStyle}><source src="${escapeHtml(item.cardReelUrl)}" type="video/mp4"></video>`
+    : "";
+  const action = hasWatch
+    ? `<span class="archive-card-action">${escapeHtml(watchLabel)} <span aria-hidden="true">↗</span></span>`
+    : "";
+  const tag = hasWatch ? "a" : "article";
+  const linkAttrs = hasWatch
+    ? ` href="${escapeHtml(item.watchUrl)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(`${watchLabel}: ${title}`)}"`
+    : "";
+  const mediaClass = hasPoster
+    ? "archive-card-media"
+    : "archive-card-media archive-card-media-placeholder";
 
   return `
-    <a class="archive-media-card${leadClass}" href="${escapeHtml(item.watchUrl)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(`${watchLabel}: ${title}`)}">
-      <img class="archive-media-image" src="${escapeHtml(item.posterImage)}" alt="${escapeHtml(localize(item.imageAlt, lang))}" loading="lazy" decoding="async" onerror="this.remove()">
-      ${cardReel}
-      <span class="archive-media-scrim" aria-hidden="true"></span>
-      <span class="archive-media-copy">
-        <span class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(localize(item.role, lang))}</span>
+    <${tag} class="archive-card"${linkAttrs}>
+      <span class="archive-card-copy">
+        <span class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(role)}</span>
         <strong>${escapeHtml(title)}</strong>
-        ${item.archiveFeature === "lead" && summary ? `<span class="archive-media-summary">${escapeHtml(summary)}</span>` : ""}
-        ${renderMetrics(item.metrics, lang)}
-        <span class="archive-media-action">${escapeHtml(watchLabel)} <span aria-hidden="true">↗</span></span>
+        ${action}
       </span>
-    </a>
-  `;
-}
-
-function renderArchiveLedgerItem(item, lang) {
-  const summary = item.summary ? localize(item.summary, lang) : item.body;
-  const platform = localize(item.platform, lang);
-
-  return `
-    <article class="archive-item">
-      <div>
-        <p class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(localize(item.role, lang))} / ${escapeHtml(platform)}</p>
-        <h3>${escapeHtml(localize(item.title, lang))}</h3>
-        ${summary ? `<p class="archive-body">${escapeHtml(summary)}</p>` : ""}
-      </div>
-      ${renderMetrics(item.metrics, lang)}
-    </article>
+      <span class="${mediaClass}">
+        <span class="archive-card-index" aria-hidden="true">${indexLabel}</span>
+        ${image}
+        ${reel}
+      </span>
+    </${tag}>
   `;
 }
 
 function renderArchive(archive, lang) {
   return `
     <div class="archive-chronology">
-      ${archive
-        .map((item) =>
-          item.archiveFeature && item.posterImage && item.watchUrl
-            ? renderArchiveMediaCard(item, lang)
-            : renderArchiveLedgerItem(item, lang),
-        )
-        .join("")}
+      ${archive.map((item) => renderArchiveCard(item, lang)).join("")}
     </div>
   `;
 }

@@ -12,7 +12,6 @@
     "zh": "共同主創 / 編劇 / 製作人"
   },
   "platform": "ScreenHouse / Taiwan science collaboration",
-  "archiveFeature": "lead",
   "posterImage": "/assets/showreel/overclocking-card-reel-poster.webp",
   "imageAlt": {
     "en": "Green water-bike frame and chain drive during workshop assembly",

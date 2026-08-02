@@ -12,7 +12,6 @@
     "zh": "編劇"
   },
   "platform": "CTV / CTi TV / PPTV",
-  "archiveFeature": "supporting",
   "posterImage": "https://i.ytimg.com/vi/6g9YLv30DyU/hqdefault.jpg",
   "imageAlt": {
     "en": "Official trailer artwork for Heart of Steel",

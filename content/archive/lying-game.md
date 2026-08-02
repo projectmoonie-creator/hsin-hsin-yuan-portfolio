@@ -12,7 +12,6 @@
     "zh": "編劇"
   },
   "platform": "CTV / CTi TV",
-  "archiveFeature": "supporting",
   "posterImage": "https://i.ytimg.com/vi/DVzQf5COsyk/hqdefault.jpg",
   "imageAlt": {
     "en": "Official broadcaster promo artwork for Lying Game",
