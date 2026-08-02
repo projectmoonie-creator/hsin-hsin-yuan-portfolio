@@ -11,9 +11,14 @@ State: `PASS_WITH_OPEN_ITEMS`
 - Outcome: `PASS_WITH_OPEN_ITEMS`
 - Active branch: `codex/contact-archive-entrypoints`
 - Closed baseline tag: `portfolio-phase-2026-07-29-closed`
-- QA input commit: `47821ff6100a2484175dd3af8c8df45acfd66621`
-- Deployment source reviewed commit:
+- Implementation / product-source tip:
+  `47821ff6100a2484175dd3af8c8df45acfd66621`
+- QA / review-record commit:
   `6b63f5d086a1db4070105f9adc190154cb6f707c`
+- Exact deployed checkout:
+  `6b63f5d086a1db4070105f9adc190154cb6f707c`
+- Preview / status documentation commit:
+  `f16c3029978c0392096faedda0fa56218a698283`
 - Review:
   `docs/reviews/archive-uniformity-and-english-copy-v1-2026-08-03.md`
 - Preview project:
@@ -27,36 +32,38 @@ State: `PASS_WITH_OPEN_ITEMS`
 - The original production website and domain were not changed. No `--prod`,
   alias, or domain promotion was used for the accepted Preview.
 
-The deployed staging package contained exactly 22 files: the built public
-pages, CSS, JavaScript, page-referenced public images and videos,
-`api/contact.js`, and minimal package and Vercel configuration. It excluded
-Git data, source scripts and content, tests, documentation and reviews,
-original media, caches, unused assets, and the unused India group photograph.
-Deployment used ephemeral Vercel CLI `58.4.4` under the existing
-`projectmoonie-creator` account; it did not install a global CLI and produced
-no claim URL.
+The implementation/product tree at the deployed checkout is unchanged from
+`47821ff...`; `6b63f5d...` adds or clarifies the dated local-QA review only.
+`f16c302...` records the completed Preview and status. The documentation-only
+follow-up after it clarifies provenance and intentionally does not
+self-reference its unknown-at-authoring commit SHA.
 
-Vercel unexpectedly assigned the first deployment in the new preview-named
-project a production target even though the command omitted `--prod`. That
-deployment (`dpl_Dd2eMsQ58YQUEMAijs4hHceZxggS`,
-`hsin-hsin-yuan-portfolio-preview-ghlzgynyn.vercel.app`) was never accepted as
-the deliverable and was permanently deleted after separate explicit user
-approval; Vercel reported `Success! Removed 1 deployment`. The final listing
-contains exactly one deployment in the project: the accepted URL above,
-environment `Preview`, status `Ready`.
+The approved security boundary, exact 22-path payload manifest and hash,
+Vercel-owned link metadata, reproducible construction, authenticated CLI
+provenance, and deletion evidence for the rejected first deployment are in the
+dated review above. In brief: no full repository, product source, tests,
+reviews, original media, unused assets, or unused India group photograph was
+uploaded. The isolated, accidentally production-targeted first deployment was
+permanently deleted after explicit approval. The original production website
+and domain were never changed.
 
 Verification:
 
-- Local QA: `PASS` at input commit `47821ff6100a2484175dd3af8c8df45acfd66621`.
+- Local QA: `PASS` for product-source tip
+  `47821ff6100a2484175dd3af8c8df45acfd66621`.
 - `npm test`: 35 passed, 0 failed.
-- `npm run build`: passed again at deployment source commit `6b63f5d...` before
-  packaging.
+- `npm run build`: passed at exact deployed checkout `6b63f5d...` before
+  packaging; the product source was unchanged from `47821ff...`.
 - `npm run figma:export`: passed with no tracked output change during local QA.
 - `git diff --check`: passed.
 - English and Chinese responsive, reduced-motion, no-JavaScript, focus,
   overflow, archive-uniformity, contact-heading, and copy checks passed locally.
 - `vercel inspect`: target `preview`, status `Ready`, created Mon Aug 03 2026
   06:12:41 GMT+0800; build includes `λ api/contact` (`2.56KB`) in `iad1`.
+- At `2026-08-03T06:50:31+08:00`, the final deployment listing showed exactly
+  one deployment in the preview-named project: the accepted URL, environment
+  `Preview`, status `Ready`. This is an observed timestamped state, not a
+  timeless assertion.
 - Direct public URL, route, content, and API probing was not performed because
   the active `vercel-deploy` skill prohibits requesting the deployed URL. No
   form was submitted and no email was sent.
@@ -84,10 +91,22 @@ time of the tag; they do not override the current site structure.
 ## Accepted Open Items
 
 One accepted item remains, and it is not a blocker to the completed local QA or
-Ready deployment: optionally inspect Preview `/en/`, `/zh/`, and GET
-`/api/contact` manually. Those public responses were not observed because the
-active deployment skill prohibits the agent from requesting the deployed URL.
-Do not submit the form or send email during that inspection.
+Ready deployment: optional/manual safe GET inspection, unless a later explicit
+workflow permits the agent to perform it. Closure requires all of the following:
+
+- `/en/`: HTTP `200`; current Design title, `archive-card`,
+  `contact-title-bridge`, and
+  `/assets/showreel/overclocking-card-reel.mp4` present; `Interior Design &amp;
+  Branded Films` and `contact-title-lead` absent.
+- `/zh/`: HTTP `200`; `幸福空間與室內設計影像`, `archive-card`, Tech official
+  card, and exact contact lines `一起把故事` / `做出來。` present.
+- `/api/contact`: HTTP `405` with
+  `{ "ok": false, "error": "Method not allowed." }`.
+
+Record evidence in the dated review. If all pass, change the overall result to
+`PASS`; any failure keeps `PASS_WITH_OPEN_ITEMS` and triggers diagnosis. Use
+GET only: do not POST, submit the form, send email, or call Resend. These checks
+cannot validate mail delivery.
 
 Earlier future-work candidates remain documented in
 `docs/reviews/archive-chronology-v1-2026-08-02.md`; they are not open items in
@@ -104,12 +123,11 @@ performed during this package.
 
 ## Exact Next Action
 
-If desired, a human may open
-`https://hsin-hsin-yuan-portfolio-preview-ldm6qfz3d.vercel.app/en/`, then
-`/zh/`, and issue a non-submitting GET inspection of `/api/contact`. Record
-only what is actually observed. Do not submit the contact form or send email,
-and do not promote, alias, or replace production without separate explicit
-approval.
+If desired, follow the GET-only closure criteria above against
+`https://hsin-hsin-yuan-portfolio-preview-ldm6qfz3d.vercel.app`. Record only
+what is actually observed in the dated review. Do not submit the contact form,
+send email, call Resend, or promote, alias, or replace production without
+separate explicit approval.
 
 ## Cold Resume
 

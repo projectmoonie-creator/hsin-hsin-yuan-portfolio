@@ -5,8 +5,6 @@
 **PASS_WITH_OPEN_ITEMS**
 
 - Branch: `codex/contact-archive-entrypoints`
-- QA input commit: `47821ff6100a2484175dd3af8c8df45acfd66621`
-- Deployment source reviewed commit: `6b63f5d086a1db4070105f9adc190154cb6f707c`
 - Local preview: `http://127.0.0.1:57888/` (port `57888` was free before this QA server started)
 - Final Vercel Preview: `https://hsin-hsin-yuan-portfolio-preview-ldm6qfz3d.vercel.app`
 - Deployment: `dpl_4GW7xq4wuX5nf1v7VjtQ3JLAm3cW`, target `preview`, status `Ready`.
@@ -18,16 +16,128 @@ because public route, content, and API behavior was not directly observed after
 deployment; it does not weaken the completed local content, layout, behavior,
 accessibility, or fallback evidence below.
 
+## Commit roles
+
+| Role | Exact commit | Meaning |
+| --- | --- | --- |
+| Implementation / product-source tip | `47821ff6100a2484175dd3af8c8df45acfd66621` | Last product-source change, including the Figma-sync/product tree used by local QA. |
+| QA / review record | `6b63f5d086a1db4070105f9adc190154cb6f707c` | Adds or clarifies this dated local-QA review only. |
+| Exact deployed checkout | `6b63f5d086a1db4070105f9adc190154cb6f707c` | Checkout built and staged for Vercel; its product source is unchanged from `47821ff6100a2484175dd3af8c8df45acfd66621` apart from review documentation. |
+| Preview / status documentation | `f16c3029978c0392096faedda0fa56218a698283` | Records the completed Preview and status after deployment. |
+
+The follow-up documentation change after `f16c302...` only clarifies this
+provenance; its not-yet-known commit SHA is intentionally not self-referenced
+in this file.
+
 ## Preview deployment provenance
 
 `npm run build` passed at deployment source commit
 `6b63f5d086a1db4070105f9adc190154cb6f707c` before packaging. The full-repository
 fallback upload was rejected and did not create a deployment. A materially safer
-staging package was then created with exactly 22 files: built public pages, CSS,
-JavaScript, page-referenced public images and videos, `api/contact.js`, and
-minimal `package.json` and `vercel.json`. It excluded Git data, source scripts
-and content, tests, documentation and reviews, original media, caches, unused
-assets, and the unused India group photograph.
+staging package was then constructed. Before CLI linking it contained exactly
+the following 22 approved payload paths, sorted bytewise:
+
+```text
+api/contact.js
+assets/og-image.jpg
+assets/portfolio/gorgeous-space-sunny-wang-frontal.webp
+assets/portfolio/hsin-working-white-space.jpg
+assets/portfolio/my-art-my-voice-performance-2.jpg
+assets/portfolio/slow-steps-poster.webp
+assets/portfolio/top-gear-uk-special-car.jpg
+assets/showreel/interior-spatial-card-reel.mp4
+assets/showreel/nothing-by-bus-card-reel.mp4
+assets/showreel/overclocking-card-reel-poster.webp
+assets/showreel/overclocking-card-reel.mp4
+assets/showreel/website-visual-reel.mp4
+en/index.html
+favicon.svg
+index.html
+main.js
+package.json
+robots.txt
+sitemap.xml
+styles.css
+vercel.json
+zh/index.html
+```
+
+The sorted path-list SHA-256 is
+`1940a63b96e81606d82bb164be8f66b9d9292da10c45d79474adc41e05505388`.
+It was computed by finding staged files while excluding `.vercel/*` and
+`.gitignore`, stripping the staging-directory prefix, sorting the relative
+paths, and piping that list to `shasum -a 256`.
+
+```sh
+find "$preview_stage" -type f ! -path "$preview_stage/.vercel/*" ! -path "$preview_stage/.gitignore" \
+  | sed "s#^$preview_stage/##" | LC_ALL=C sort | shasum -a 256
+```
+
+Vercel CLI subsequently created local control files `.vercel/project.json`,
+`.vercel/README.txt`, and `.gitignore`. The remote build log reported
+downloading 23 deployment files, so the remote transport manifest is not
+claimed to contain exactly 22 files. The security boundary was the 22 approved
+content payload paths above plus Vercel-owned local link metadata. Git data,
+source scripts and source content, tests, documentation and reviews, original
+media, caches, other unused assets, and the unused India group photograph were
+not included.
+
+### Reproducible staging construction
+
+From the exact `6b63f5d086a1db4070105f9adc190154cb6f707c` checkout:
+
+1. Run `npm run build`.
+2. Create an isolated directory with `preview_stage=$(mktemp -d)`, then copy
+   `dist/.` into `$preview_stage/`.
+3. Create `$preview_stage/api/` and copy `api/contact.js` into it.
+4. Retain only the 22 paths in the manifest above. This is the authoritative
+   allowlist for copied public assets; the ten unused assets copied by the
+   initial broad `dist` copy are removed rather than inferred from filename.
+5. Replace the copied package configuration with this minimal
+   `package.json`:
+
+   ```json
+   {
+     "name": "hsin-hsin-yuan-portfolio",
+     "version": "1.0.0",
+     "private": true,
+     "type": "module"
+   }
+   ```
+
+6. Use a minimal `vercel.json` containing only `cleanUrls`, the `/` to `/en/`
+   redirect, and the existing asset/static-file cache headers. It contains no
+   `buildCommand` or `outputDirectory`:
+
+   ```json
+   {
+     "cleanUrls": true,
+     "redirects": [
+       { "source": "/", "destination": "/en/", "permanent": false }
+     ],
+     "headers": [
+       {
+         "source": "/assets/(.*)",
+         "headers": [
+           { "key": "Cache-Control", "value": "public, max-age=604800, stale-while-revalidate=86400" }
+         ]
+       },
+       {
+         "source": "/(styles.css|main.js|favicon.svg)",
+         "headers": [
+           { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+         ]
+       }
+     ]
+   }
+   ```
+
+7. Verify every local page asset reference resolves inside the allowlisted
+   stage; scan the stage for private paths, direct credentials, and other
+   excluded material; then reproduce the sorted relative-path manifest and
+   SHA-256 above.
+8. Run the Vercel CLI from `$preview_stage`, allowing it to create only its
+   local link metadata before the Preview command.
 
 Deployment used ephemeral Vercel CLI `58.4.4` through `npx` under the existing
 `projectmoonie-creator` account; no global CLI was installed and no claim URL
@@ -51,12 +161,35 @@ promotion, or production routing was used. Exact final evidence:
 - Inspector: `https://vercel.com/projectmoonie-creators-projects/hsin-hsin-yuan-portfolio-preview/4GW7xq4wuX5nf1v7VjtQ3JLAm3cW`
 - Deployment ID: `dpl_4GW7xq4wuX5nf1v7VjtQ3JLAm3cW`
 - `vercel inspect`: target `preview`, status `Ready`, created Mon Aug 03 2026 06:12:41 GMT+0800; build includes `λ api/contact` (`2.56KB`) in `iad1`.
-- `vercel ls hsin-hsin-yuan-portfolio-preview --yes`: exactly one deployment in the project, the final URL above, status `Ready`, environment `Preview`, duration `7s`.
+- `vercel ls hsin-hsin-yuan-portfolio-preview --yes`, observed at `2026-08-03T06:50:31+08:00`: exactly one deployment in the project at that time, the final URL above, status `Ready`, environment `Preview`, duration `7s`.
 
 The original production website and domain were never changed. The isolated,
 accidental production-target deployment in the new preview-named project was
 deleted. No request was made to the final Preview URL, including `/en/`,
 `/zh/`, or `/api/contact`; no form was submitted and no email was sent.
+
+## Open-item closure criteria
+
+Because the active `vercel-deploy` skill prohibited the agent from directly
+requesting the deployed URL, these checks remain optional/manual unless a later
+explicit workflow permits them. Use safe GET requests only and record the
+observed evidence in this dated review:
+
+- GET `/en/` must return HTTP `200`; contain `Design &amp; Brand Films`,
+  `archive-card`, `contact-title-bridge`, and
+  `/assets/showreel/overclocking-card-reel.mp4`; and omit
+  `Interior Design &amp; Branded Films` and `contact-title-lead`.
+- GET `/zh/` must return HTTP `200`; contain the Chinese Design title
+  `幸福空間與室內設計影像`, `archive-card`, the Tech official card, and the
+  exact two contact lines `一起把故事` and `做出來。`.
+- GET `/api/contact` must return HTTP `405` with JSON
+  `{ "ok": false, "error": "Method not allowed." }`. Do not use POST, submit
+  the form, send email, or trigger a Resend call.
+
+If all three checks pass, change the overall result from
+`PASS_WITH_OPEN_ITEMS` to `PASS`. Any failure keeps
+`PASS_WITH_OPEN_ITEMS` and triggers diagnosis. These GET-only checks cannot
+validate mail delivery and must never be represented as doing so.
 
 ## Deterministic checks
 
