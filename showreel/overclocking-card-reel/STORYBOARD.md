@@ -80,5 +80,6 @@ performs in the world.
 - source_start: 00:39:56
 - motion: source footage only
 
-Close on precision and a small comic reward. Do not add an end card; the
-surrounding Archive card supplies title, year, role, metrics, and CTA.
+Close on precision and a small comic reward. Do not add an end card. The
+uniform site renderer supplies the Archive card's title, year/role, optional
+watch action, index, and media; this reel supplies motion only.

@@ -1,6 +1,6 @@
 # Overclocking Card Reel
 
-Silent moving thumbnail for the Overclocking Archive lead card.
+Approved silent reel for the uniform Overclocking card in the portfolio Archive.
 
 - Duration: 10 seconds
 - Canvas: 1280 x 720
