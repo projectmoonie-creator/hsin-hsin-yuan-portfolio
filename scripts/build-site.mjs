@@ -460,6 +460,14 @@ function renderContactLinks(links = []) {
     .join("");
 }
 
+function renderContactHeading(copy) {
+  const bridge = copy.contactTitleBridge
+    ? `<span class="contact-title-bridge">${escapeHtml(copy.contactTitleBridge)} </span>`
+    : "";
+
+  return `<h2 class="contact-title"><span class="contact-title-line">${escapeHtml(copy.contactTitleLead)}</span><span class="contact-title-line">${bridge}<span class="contact-title-accent">${escapeHtml(copy.contactTitleAccent)}</span></span></h2>`;
+}
+
 function renderHeroRoleLine(role) {
   return escapeHtml(role).replaceAll("/", `<span class="role-slash">/</span>`);
 }
@@ -662,7 +670,7 @@ export function renderPage({ lang, site, works }) {
 
         <section class="section contact" id="contact">
           <div class="contact-content">
-            <h2><span class="contact-title-lead">${escapeHtml(copy.contactTitleLead)}</span><span class="contact-title-accent">${escapeHtml(copy.contactTitleAccent)}</span></h2>
+            ${renderContactHeading(copy)}
             <p>${escapeHtml(copy.contactSubcopy)}</p>
             ${renderContactForm(copy)}
             <div class="contact-links">${renderContactLinks(copy.contactLinks)}</div>

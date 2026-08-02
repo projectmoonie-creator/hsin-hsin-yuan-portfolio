@@ -1104,9 +1104,9 @@ a {
   max-width: 10ch;
 }
 
-.contact-title-lead,
-.contact-title-accent {
+.contact-title-line {
   display: block;
+  white-space: nowrap;
 }
 
 .contact-title-accent {
@@ -1431,6 +1431,11 @@ a {
 @media (max-width: 460px) {
   .hero h1 {
     font-size: clamp(2.65rem, 14vw, 3.45rem);
+  }
+
+  .contact h2 {
+    font-size: clamp(2.25rem, 11vw, 3.2rem);
+    max-width: none;
   }
 
 }

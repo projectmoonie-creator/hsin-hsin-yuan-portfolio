@@ -174,6 +174,23 @@ test("English output uses Gorgeous Space while Chinese output preserves 幸福�
   assert.match(zh, /幸福空間/);
 });
 
+test("contact heading uses two explicit English lines with only together accented", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const en = renderPage({ lang: "en", site, works });
+  const zh = renderPage({ lang: "zh", site, works });
+
+  assert.match(
+    en,
+    /<h2 class="contact-title"><span class="contact-title-line">Let’s build<\/span><span class="contact-title-line"><span class="contact-title-bridge">a story <\/span><span class="contact-title-accent">together\.<\/span><\/span><\/h2>/,
+  );
+  assert.doesNotMatch(en, /contact-title-lead">Let’s build a story/);
+  assert.match(
+    zh,
+    /<h2 class="contact-title"><span class="contact-title-line">一起把故事<\/span><span class="contact-title-line"><span class="contact-title-accent">做出來。<\/span><\/span><\/h2>/,
+  );
+});
+
 test("screening strip stays static while approved reels render in featured panels", () => {
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
@@ -555,8 +572,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Watch official promo/);
   assert.match(html, /Short-form web drama work across food/);
   assert.match(html, /class="nav-contact" href="#contact"/);
-  assert.match(html, /class="contact-title-lead">Let’s build a story<\/span>/);
-  assert.match(html, /class="contact-title-accent">together\.<\/span>/);
+  assert.match(html, /<h2 class="contact-title"><span class="contact-title-line">Let’s build<\/span><span class="contact-title-line"><span class="contact-title-bridge">a story <\/span><span class="contact-title-accent">together\.<\/span><\/span><\/h2>/);
   assert.match(html, /<form class="contact-form" action="\/api\/contact" method="post" data-contact-form>/);
   assert.match(html, /name="startedAt"/);
   assert.match(html, /name="website"/);
@@ -878,8 +894,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /觀看公開節目/);
   assert.match(zh, /觀看官方預告/);
   assert.match(zh, /觀看官方宣傳片/);
-  assert.match(zh, /class="contact-title-lead">一起把故事<\/span>/);
-  assert.match(zh, /class="contact-title-accent">做出來。<\/span>/);
+  assert.match(zh, /<h2 class="contact-title"><span class="contact-title-line">一起把故事<\/span><span class="contact-title-line"><span class="contact-title-accent">做出來。<\/span><\/span><\/h2>/);
   assert.doesNotMatch(zh, /觀看完整單集/);
   assert.equal((zh.match(/>觀看完整系列<\/a>/g) || []).length, 2);
   assert.match(zh, /href="https:\/\/www\.youtube\.com\/playlist\?list=PLJCU8axtQoPI"/);
@@ -937,7 +952,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.archive-media-card-lead \{/);
   assert.match(css, /\.archive-media-action \{/);
   assert.match(css, /\.nav-contact \{/);
-  assert.match(css, /\.contact-title-accent \{/);
+  assert.match(css, /\.contact-title-line \{[^}]*display: block;[^}]*white-space: nowrap;[^}]*\}/);
+  assert.match(css, /\.contact-title-accent \{[\s\S]*?color: var\(--acid\);/);
   assert.match(css, /\.brand-mobile \{\n  display: none;/);
   assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*\.brand-desktop \{[\s\S]*display: none;[\s\S]*\.brand-mobile \{[\s\S]*display: inline;/);
   assert.doesNotMatch(css, /showreel-modal/);
@@ -1035,4 +1051,5 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(js, /startLoop/);
   assert.match(js, /pointerdown/);
   assert.match(css, /@media \(max-width: 460px\) \{\n  \.hero h1 \{\n    font-size: clamp\(2\.65rem, 14vw, 3\.45rem\);/);
+  assert.match(css, /@media \(max-width: 460px\) \{[\s\S]*?\.contact h2 \{[^}]*font-size: clamp\(2\.25rem, 11vw, 3\.2rem\);[^}]*max-width: none;[^}]*\}/);
 });
