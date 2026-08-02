@@ -27,6 +27,7 @@
   "watchLoopTarget": "watch",
   "videoEmbedUrl": "",
   "posterImage": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+  "figmaPosterImage": "/assets/portfolio/tech-dreamers-official.webp",
   "posterAlt": {
     "en": "Tech Dreamers official series artwork",
     "zh": "Tech Dreamers 官方系列主視覺"

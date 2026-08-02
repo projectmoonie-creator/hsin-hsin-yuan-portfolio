@@ -3,9 +3,31 @@ import { existsSync, readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
 import test from "node:test";
+import { imageData, validateFeaturedWorks } from "../scripts/build-figma-export.mjs";
 
 const root = process.cwd();
 const exportDir = join(root, "figma-export");
+
+function workCardBlock(svg, slug) {
+  const start = svg.indexOf(`<g id="component-work-card-${slug}">`);
+  assert.notEqual(start, -1, `${slug} work card should exist`);
+  const next = svg.indexOf('<g id="component-work-card-', start + 1);
+  const end = next === -1 ? svg.indexOf('<g id="layer-logo-wall">', start) : next;
+  return svg.slice(start, end);
+}
+
+test("Figma export helpers reject remote images and invalid featured work metadata", () => {
+  assert.throws(
+    () => imageData("https://example.test/poster.webp"),
+    /Remote Figma export image requires a local figmaPosterImage: https:\/\/example\.test\/poster\.webp/,
+  );
+  assert.doesNotThrow(() => validateFeaturedWorks([{ slug: "valid", order: 1 }]));
+  assert.throws(() => validateFeaturedWorks([{ slug: "", order: 1 }]), /missing a non-empty slug/);
+  assert.throws(() => validateFeaturedWorks([{ slug: "same", order: 1 }, { slug: "same", order: 2 }]), /slug must be unique/);
+  assert.throws(() => validateFeaturedWorks([{ slug: "fraction", order: 1.5 }]), /finite integer order/);
+  assert.throws(() => validateFeaturedWorks([{ slug: "nan", order: Number.NaN }]), /finite integer order/);
+  assert.throws(() => validateFeaturedWorks([{ slug: "first", order: 1 }, { slug: "second", order: 1 }]), /order must be unique/);
+});
 
 test("Figma SVG export package can be generated from site content", () => {
   rmSync(exportDir, { recursive: true, force: true });
@@ -30,6 +52,7 @@ test("Figma SVG export package can be generated from site content", () => {
 });
 
 test("Figma SVG export keeps portfolio layers editable and named", () => {
+  const generator = readFileSync(join(root, "scripts/build-figma-export.mjs"), "utf8");
   const desktopHome = readFileSync(join(exportDir, "01-desktop-home.svg"), "utf8");
   const worksLogos = readFileSync(join(exportDir, "02-desktop-works-logos.svg"), "utf8");
   const mobileHome = readFileSync(join(exportDir, "03-mobile-home.svg"), "utf8");
@@ -49,9 +72,62 @@ test("Figma SVG export keeps portfolio layers editable and named", () => {
   assert.match(worksLogos, /Public Television Service Taiwan/);
   assert.match(worksLogos, /Gorgeous Space/);
   assert.doesNotMatch(worksLogos, /Happy Space/);
-  assert.match(worksLogos, /id="component-work-card-slow-steps"/);
-  assert.match(worksLogos, /id="component-work-card-my-art-my-voice"/);
-  assert.match(worksLogos, /id="component-work-card-tech-dreamers"/);
+  for (const slug of [
+    "slow-steps",
+    "tech-dreamers",
+    "my-art-my-voice",
+    "interior-spatial-brand-films",
+    "pts-taigi-bus",
+    "top-gear-china-uk-special",
+  ]) {
+    assert.match(worksLogos, new RegExp(`id="component-work-card-${slug}"`));
+  }
+  assert.match(worksLogos, /Design &amp; Brand Films/);
+  assert.doesNotMatch(worksLogos, /Interior Design &amp; Branded Films/);
+  assert.match(desktopHome, /id="layer-contact-heading"/);
+  assert.match(desktopHome, /Let’s build/);
+  assert.match(desktopHome, /a story/);
+  assert.match(desktopHome, /together\./);
+  assert.match(worksLogos, /data:image\/webp;base64,/);
+
+  const workCards = [...worksLogos.matchAll(/<g id="component-work-card-([^"]+)">\n    <rect x="(\d+)" y="(\d+)" width="(\d+)" height="(\d+)"/g)];
+  assert.deepEqual(
+    workCards.map(([, slug, x, y, width, height]) => ({ slug, x: Number(x), y: Number(y), width: Number(width), height: Number(height) })),
+    [
+      "slow-steps",
+      "tech-dreamers",
+      "my-art-my-voice",
+      "interior-spatial-brand-films",
+      "pts-taigi-bus",
+      "top-gear-china-uk-special",
+    ].map((slug, index) => ({
+      slug,
+      x: 72 + (index % 3) * 430,
+      y: 290 + Math.floor(index / 3) * 440,
+      width: 390,
+      height: 410,
+    })),
+  );
+  assert.match(worksLogos, /viewBox="0 0 1440 1660"/);
+  assert.match(desktopHome, /viewBox="0 0 1440 1420"/);
+
+  const contactHeading = desktopHome.match(/<g id="layer-contact-heading">([\s\S]*?)<\/g>/)?.[1];
+  assert.ok(contactHeading);
+  assert.equal((contactHeading.match(/<text\b/g) || []).length, 2);
+  assert.match(contactHeading, /<text x="72" y="1080"[^>]*>Let’s build<\/text>/);
+  assert.match(contactHeading, /<text x="72" y="1152"[^>]*>a story <tspan fill="#D8FF3E">together\.<\/tspan><\/text>/);
+
+  for (const svg of [desktopHome, worksLogos, mobileHome]) {
+    assert.doesNotMatch(svg, /<image href="https?:\/\//);
+  }
+  for (const slug of ["slow-steps", "interior-spatial-brand-films", "tech-dreamers", "pts-taigi-bus"]) {
+    assert.match(workCardBlock(worksLogos, slug), /<image href="data:image\/webp;base64,/);
+  }
+  for (const slug of ["my-art-my-voice", "top-gear-china-uk-special"]) {
+    assert.match(workCardBlock(worksLogos, slug), /<image href="data:image\/jpeg;base64,/);
+  }
+  assert.match(generator, /function validateFeaturedWorks\(works\)/);
+  assert.match(generator, /validateFeaturedWorks\(works\);/);
 
   assert.match(mobileHome, /id="frame-mobile-home"/);
   assert.match(mobileHome, /viewBox="0 0 390 844"/);

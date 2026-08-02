@@ -1,5 +1,6 @@
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { basename, extname, join } from "node:path";
+import { pathToFileURL } from "node:url";
 
 const root = process.cwd();
 const outDir = join(root, "figma-export");
@@ -27,6 +28,28 @@ function parseFrontmatter(path) {
     throw new Error(`Missing JSON frontmatter in ${path}`);
   }
   return JSON.parse(match[1]);
+}
+
+export function validateFeaturedWorks(works) {
+  const slugs = new Set();
+  const orders = new Set();
+
+  for (const work of works) {
+    if (typeof work.slug !== "string" || !work.slug.trim()) {
+      throw new Error("Featured work is missing a non-empty slug");
+    }
+    if (!Number.isFinite(work.order) || !Number.isInteger(work.order)) {
+      throw new Error(`Featured work ${work.slug} must have a finite integer order`);
+    }
+    if (slugs.has(work.slug)) {
+      throw new Error(`Featured work slug must be unique: ${work.slug}`);
+    }
+    if (orders.has(work.order)) {
+      throw new Error(`Featured work order must be unique: ${work.order}`);
+    }
+    slugs.add(work.slug);
+    orders.add(work.order);
+  }
 }
 
 function englishText(value) {
@@ -79,11 +102,19 @@ function pill({ x, y, width, text, fill = "transparent", stroke = tokens.line, c
   </g>`;
 }
 
-function imageData(path) {
-  if (/^https?:\/\//.test(path)) return path;
+export function imageData(path) {
+  if (/^https?:\/\//.test(path)) {
+    throw new Error(`Remote Figma export image requires a local figmaPosterImage: ${path}`);
+  }
   const fullPath = join(root, "public", path.replace(/^\//, ""));
   const ext = extname(fullPath).toLowerCase();
-  const mime = ext === ".png" ? "image/png" : ext === ".svg" ? "image/svg+xml" : "image/jpeg";
+  const mime = ext === ".png"
+    ? "image/png"
+    : ext === ".svg"
+      ? "image/svg+xml"
+      : ext === ".webp"
+        ? "image/webp"
+        : "image/jpeg";
   return `data:${mime};base64,${readFileSync(fullPath).toString("base64")}`;
 }
 
@@ -134,7 +165,7 @@ function workCard({ work, x, y, width }) {
   const safeSlug = work.slug.replace(/[^a-z0-9-]/gi, "-");
   return `<g id="component-work-card-${safeSlug}">
     <rect x="${x}" y="${y}" width="${width}" height="410" rx="8" fill="${tokens.panel}" stroke="${tokens.line}"/>
-    ${imageLayer({ id: `image-work-${safeSlug}`, href: work.posterImage, x: x + 14, y: y + 14, width: width - 28, height: 160, opacity: 0.88 })}
+    ${imageLayer({ id: `image-work-${safeSlug}`, href: work.figmaPosterImage || work.posterImage, x: x + 14, y: y + 14, width: width - 28, height: 160, opacity: 0.88 })}
     <text x="${x + 24}" y="${y + 210}" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" letter-spacing="1.3">${escapeXml(`${work.year} / ${work.role.en} / ${englishText(work.platform)}`.toUpperCase())}</text>
     <text x="${x + 24}" y="${y + 252}" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="850">${escapeXml(title)}</text>
     ${textBlock({ id: `text-work-${safeSlug}-description`, x: x + 24, y: y + 286, lines: textLines(desc, 36).slice(0, 3), size: 15, fill: tokens.muted, lineHeight: 22 })}
@@ -166,7 +197,7 @@ function buildDesktopHome(site, works, collaborations) {
   return svgFrame({
     id: "frame-desktop-home",
     width: 1440,
-    height: 1200,
+    height: 1420,
     title: "Desktop Home",
     body: `
   <g id="layer-topbar">
@@ -192,6 +223,10 @@ function buildDesktopHome(site, works, collaborations) {
     <text x="72" y="840" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.4">${escapeXml(hero.availabilityLabel.toUpperCase())}</text>
     ${textBlock({ id: "layer-available-intro", x: 72, y: 896, lines: textLines(hero.availabilityIntro, 62).slice(0, 3), size: 26, weight: 760, fill: tokens.ink, lineHeight: 36 })}
     ${textBlock({ id: "layer-available-list", x: 760, y: 888, lines: hero.availability.slice(0, 6), size: 17, fill: tokens.muted, lineHeight: 30 })}
+  </g>
+  <g id="layer-contact-heading">
+    <text x="72" y="1080" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="900">${escapeXml(hero.contactTitleLead)}</text>
+    <text x="72" y="1152" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="900">${escapeXml(hero.contactTitleBridge ? `${hero.contactTitleBridge} ` : "")}<tspan fill="${tokens.acid}">${escapeXml(hero.contactTitleAccent)}</tspan></text>
   </g>`,
   });
 }
@@ -199,17 +234,21 @@ function buildDesktopHome(site, works, collaborations) {
 function buildDesktopWorksLogos(site, works, collaborations) {
   const copy = site.en;
   const cards = works
-    .slice(0, 3)
-    .map((work, index) => workCard({ work, x: 72 + index * 430, y: 290, width: 390 }))
+    .map((work, index) => workCard({
+      work,
+      x: 72 + (index % 3) * 430,
+      y: 290 + Math.floor(index / 3) * 440,
+      width: 390,
+    }))
     .join("\n");
   const logos = collaborations
-    .map((item, index) => logoWordmark({ item, x: 72 + (index % 4) * 330, y: 910 + Math.floor(index / 4) * 92, width: 220 }))
+    .map((item, index) => logoWordmark({ item, x: 72 + (index % 4) * 330, y: 1370 + Math.floor(index / 4) * 92, width: 220 }))
     .join("\n");
 
   return svgFrame({
     id: "frame-desktop-works-logos",
     width: 1440,
-    height: 1200,
+    height: 1660,
     title: "Desktop Works and Logo Wall",
     body: `
   <g id="layer-page-title">
@@ -221,8 +260,8 @@ function buildDesktopWorksLogos(site, works, collaborations) {
     ${cards}
   </g>
   <g id="layer-logo-wall">
-    <text x="72" y="820" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.4">${escapeXml(copy.collabTitle.toUpperCase())}</text>
-    <text x="72" y="866" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="850">No boxes, no heavy boundary, just a quiet trust strip.</text>
+    <text x="72" y="1280" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.4">${escapeXml(copy.collabTitle.toUpperCase())}</text>
+    <text x="72" y="1326" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="850">No boxes, no heavy boundary, just a quiet trust strip.</text>
     ${logos}
   </g>`,
   });
@@ -297,11 +336,12 @@ This folder is a free Figma import package for the Hsin-Hsin Yuan portfolio desi
 function main() {
   const site = readJson("data/site.json");
   const collaborations = readJson("data/collaborations.json");
-  const works = [
-    parseFrontmatter("content/works/my-art-my-voice.md"),
-    parseFrontmatter("content/works/tech-dreamers.md"),
-    parseFrontmatter("content/works/slow-steps.md"),
-  ].sort((a, b) => a.order - b.order);
+  const works = readdirSync(join(root, "content/works"))
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => parseFrontmatter(`content/works/${file}`))
+    .filter((work) => work.featured);
+  validateFeaturedWorks(works);
+  works.sort((a, b) => a.order - b.order || a.slug.localeCompare(b.slug));
 
   rmSync(outDir, { recursive: true, force: true });
   mkdirSync(outDir, { recursive: true });
@@ -314,4 +354,6 @@ function main() {
   console.log(`Generated Figma SVG export package in ${outDir}`);
 }
 
-main();
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main();
+}
