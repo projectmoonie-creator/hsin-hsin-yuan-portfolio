@@ -1,0 +1,1221 @@
+{
+  "composition": "../..",
+  "duration": 10,
+  "totalTweens": 10,
+  "mappedTweens": 6,
+  "skippedMicroTweens": 4,
+  "tweens": [
+    {
+      "index": 1,
+      "selector": "#shot-03-propeller-video",
+      "targets": 1,
+      "props": [
+        "opacity"
+      ],
+      "start": 4.9,
+      "end": 5.05,
+      "duration": 0.15,
+      "ease": "none",
+      "bboxes": [
+        {
+          "t": 4.913,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1,
+          "visible": true
+        },
+        {
+          "t": 4.938,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.7778,
+          "visible": true
+        },
+        {
+          "t": 4.963,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.7778,
+          "visible": true
+        },
+        {
+          "t": 4.988,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.5556,
+          "visible": true
+        },
+        {
+          "t": 5.013,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.3333,
+          "visible": true
+        },
+        {
+          "t": 5.038,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.1111,
+          "visible": true
+        }
+      ],
+      "flags": [
+        "paced-fast",
+        "collision"
+      ],
+      "summary": "#shot-03-propeller-video animates opacity over 0.15s (none). opacity 1.0→0.1. ends at (0, 0) 1280×720px. FLAGS: paced-fast. Overlaps another animated element."
+    },
+    {
+      "index": 2,
+      "selector": "#shot-04-assembly-video",
+      "targets": 1,
+      "props": [
+        "opacity"
+      ],
+      "start": 4.9,
+      "end": 5.05,
+      "duration": 0.15,
+      "ease": "none",
+      "bboxes": [
+        {
+          "t": 4.913,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0,
+          "visible": true
+        },
+        {
+          "t": 4.938,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.2222,
+          "visible": true
+        },
+        {
+          "t": 4.963,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.2222,
+          "visible": true
+        },
+        {
+          "t": 4.988,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.4444,
+          "visible": true
+        },
+        {
+          "t": 5.013,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.6667,
+          "visible": true
+        },
+        {
+          "t": 5.038,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.8889,
+          "visible": true
+        }
+      ],
+      "flags": [
+        "paced-fast",
+        "collision"
+      ],
+      "summary": "#shot-04-assembly-video animates opacity over 0.15s (none). fades in. ends at (0, 0) 1280×720px. FLAGS: paced-fast. Overlaps another animated element."
+    },
+    {
+      "index": 3,
+      "selector": "#shot-04-assembly-video",
+      "targets": 1,
+      "props": [
+        "opacity"
+      ],
+      "start": 6.5,
+      "end": 6.65,
+      "duration": 0.15,
+      "ease": "none",
+      "bboxes": [
+        {
+          "t": 6.513,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1,
+          "visible": true
+        },
+        {
+          "t": 6.537,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.7778,
+          "visible": true
+        },
+        {
+          "t": 6.563,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.7778,
+          "visible": true
+        },
+        {
+          "t": 6.588,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.5556,
+          "visible": true
+        },
+        {
+          "t": 6.613,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.3333,
+          "visible": true
+        },
+        {
+          "t": 6.638,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.1111,
+          "visible": true
+        }
+      ],
+      "flags": [
+        "paced-fast",
+        "collision"
+      ],
+      "summary": "#shot-04-assembly-video animates opacity over 0.15s (none). opacity 1.0→0.1. ends at (0, 0) 1280×720px. FLAGS: paced-fast. Overlaps another animated element."
+    },
+    {
+      "index": 4,
+      "selector": "#shot-05-water-test-video",
+      "targets": 1,
+      "props": [
+        "opacity"
+      ],
+      "start": 6.5,
+      "end": 6.65,
+      "duration": 0.15,
+      "ease": "none",
+      "bboxes": [
+        {
+          "t": 6.513,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0,
+          "visible": true
+        },
+        {
+          "t": 6.537,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.2222,
+          "visible": true
+        },
+        {
+          "t": 6.563,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.2222,
+          "visible": true
+        },
+        {
+          "t": 6.588,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.4444,
+          "visible": true
+        },
+        {
+          "t": 6.613,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.6667,
+          "visible": true
+        },
+        {
+          "t": 6.638,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.8889,
+          "visible": true
+        }
+      ],
+      "flags": [
+        "paced-fast",
+        "collision"
+      ],
+      "summary": "#shot-05-water-test-video animates opacity over 0.15s (none). fades in. ends at (0, 0) 1280×720px. FLAGS: paced-fast. Overlaps another animated element."
+    },
+    {
+      "index": 5,
+      "selector": "#shot-05-water-test-video",
+      "targets": 1,
+      "props": [
+        "opacity"
+      ],
+      "start": 8.35,
+      "end": 8.5,
+      "duration": 0.15,
+      "ease": "none",
+      "bboxes": [
+        {
+          "t": 8.362,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1,
+          "visible": true
+        },
+        {
+          "t": 8.387,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.8889,
+          "visible": true
+        },
+        {
+          "t": 8.412,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.6667,
+          "visible": true
+        },
+        {
+          "t": 8.438,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.4444,
+          "visible": true
+        },
+        {
+          "t": 8.463,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.4444,
+          "visible": true
+        },
+        {
+          "t": 8.488,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.2222,
+          "visible": true
+        }
+      ],
+      "flags": [
+        "paced-fast",
+        "collision"
+      ],
+      "summary": "#shot-05-water-test-video animates opacity over 0.15s (none). opacity 1.0→0.2. ends at (0, 0) 1280×720px. FLAGS: paced-fast. Overlaps another animated element."
+    },
+    {
+      "index": 6,
+      "selector": "#shot-06-bottle-detail-video",
+      "targets": 1,
+      "props": [
+        "opacity"
+      ],
+      "start": 8.35,
+      "end": 8.5,
+      "duration": 0.15,
+      "ease": "none",
+      "bboxes": [
+        {
+          "t": 8.362,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0,
+          "visible": false
+        },
+        {
+          "t": 8.387,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.1111,
+          "visible": true
+        },
+        {
+          "t": 8.412,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.3333,
+          "visible": true
+        },
+        {
+          "t": 8.438,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.5556,
+          "visible": true
+        },
+        {
+          "t": 8.463,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.5556,
+          "visible": true
+        },
+        {
+          "t": 8.488,
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.7778,
+          "visible": true
+        }
+      ],
+      "flags": [
+        "paced-fast",
+        "collision"
+      ],
+      "summary": "#shot-06-bottle-detail-video animates opacity over 0.15s (none). fades in. becomes visible. ends at (0, 0) 1280×720px. FLAGS: paced-fast. Overlaps another animated element."
+    }
+  ],
+  "choreography": "Timeline (10.0s, each char ≈ 0.17s):\n  0s                                                    10s\n  ┼───────────────────────────────────────────────────────────┤\n                               ██                               #shot-03-propeller-video opacity\n                               ██                               #shot-04-assembly-video opacity\n                                         █                      #shot-04-assembly-video opacity\n                                         █                      #shot-05-water-test-video opacity\n                                                    █           #shot-05-water-test-video opacity\n                                                    █           #shot-06-bottle-detail-video opacity",
+  "density": [
+    {
+      "t": 0,
+      "activeTweens": 0
+    },
+    {
+      "t": 0.5,
+      "activeTweens": 0
+    },
+    {
+      "t": 1,
+      "activeTweens": 0
+    },
+    {
+      "t": 1.5,
+      "activeTweens": 0
+    },
+    {
+      "t": 2,
+      "activeTweens": 0
+    },
+    {
+      "t": 2.5,
+      "activeTweens": 0
+    },
+    {
+      "t": 3,
+      "activeTweens": 0
+    },
+    {
+      "t": 3.5,
+      "activeTweens": 0
+    },
+    {
+      "t": 4,
+      "activeTweens": 0
+    },
+    {
+      "t": 4.5,
+      "activeTweens": 2
+    },
+    {
+      "t": 5,
+      "activeTweens": 2
+    },
+    {
+      "t": 5.5,
+      "activeTweens": 0
+    },
+    {
+      "t": 6,
+      "activeTweens": 2
+    },
+    {
+      "t": 6.5,
+      "activeTweens": 2
+    },
+    {
+      "t": 7,
+      "activeTweens": 0
+    },
+    {
+      "t": 7.5,
+      "activeTweens": 0
+    },
+    {
+      "t": 8,
+      "activeTweens": 2
+    },
+    {
+      "t": 8.5,
+      "activeTweens": 2
+    },
+    {
+      "t": 9,
+      "activeTweens": 0
+    },
+    {
+      "t": 9.5,
+      "activeTweens": 0
+    }
+  ],
+  "staggers": [],
+  "elements": {
+    "#shot-03-propeller-video": {
+      "firstAppears": 4.9,
+      "lastAnimates": 5.05,
+      "tweenCount": 1,
+      "props": [
+        "opacity"
+      ],
+      "endsVisible": true,
+      "finalPosition": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720
+      }
+    },
+    "#shot-04-assembly-video": {
+      "firstAppears": 4.9,
+      "lastAnimates": 6.65,
+      "tweenCount": 2,
+      "props": [
+        "opacity"
+      ],
+      "endsVisible": true,
+      "finalPosition": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720
+      }
+    },
+    "#shot-05-water-test-video": {
+      "firstAppears": 6.5,
+      "lastAnimates": 8.5,
+      "tweenCount": 2,
+      "props": [
+        "opacity"
+      ],
+      "endsVisible": true,
+      "finalPosition": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720
+      }
+    },
+    "#shot-06-bottle-detail-video": {
+      "firstAppears": 8.35,
+      "lastAnimates": 8.5,
+      "tweenCount": 1,
+      "props": [
+        "opacity"
+      ],
+      "endsVisible": true,
+      "finalPosition": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 720
+      }
+    }
+  },
+  "deadZones": [
+    {
+      "start": 0,
+      "end": 4.5,
+      "duration": 4.5,
+      "note": "No animation for 4.5s. Intentional hold or missing entrance?"
+    },
+    {
+      "start": 7,
+      "end": 8,
+      "duration": 1,
+      "note": "No animation for 1.0s. Intentional hold or missing entrance?"
+    },
+    {
+      "start": 9,
+      "end": 10,
+      "duration": 1,
+      "note": "No animation for 1.0s at end. Final hold or missing outro?"
+    }
+  ],
+  "snapshots": [
+    {
+      "t": 0,
+      "visibleElements": 14,
+      "animatingNow": [],
+      "elements": [
+        {
+          "id": "root",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-01-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-01-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-02-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-02-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-03-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-03-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-04-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-04-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-05-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-05-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-06-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-06-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "shot-01-mechanism-video",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        }
+      ]
+    },
+    {
+      "t": 2.5,
+      "visibleElements": 14,
+      "animatingNow": [],
+      "elements": [
+        {
+          "id": "root",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-01-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-01-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-02-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-02-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-03-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-03-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-04-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-04-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-05-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-05-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-06-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-06-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "shot-02-build-video",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        }
+      ]
+    },
+    {
+      "t": 5,
+      "visibleElements": 15,
+      "animatingNow": [
+        "#shot-03-propeller-video",
+        "#shot-04-assembly-video"
+      ],
+      "elements": [
+        {
+          "id": "root",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-01-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-01-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-02-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-02-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-03-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-03-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-04-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-04-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-05-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-05-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-06-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-06-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "shot-03-propeller-video",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.33
+        },
+        {
+          "id": "shot-04-assembly-video",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 0.67
+        }
+      ]
+    },
+    {
+      "t": 7.5,
+      "visibleElements": 14,
+      "animatingNow": [],
+      "elements": [
+        {
+          "id": "root",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-01-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-01-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-02-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-02-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-03-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-03-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-04-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-04-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-05-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-05-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-06-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-06-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "shot-05-water-test-video",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        }
+      ]
+    },
+    {
+      "t": 9.9,
+      "visibleElements": 14,
+      "animatingNow": [],
+      "elements": [
+        {
+          "id": "root",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-01-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-01-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-02-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-02-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-03-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-03-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-04-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-04-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-05-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-05-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "frame-06-host",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "scene-06-plane",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        },
+        {
+          "id": "shot-06-bottle-detail-video",
+          "x": 0,
+          "y": 0,
+          "w": 1280,
+          "h": 720,
+          "opacity": 1
+        }
+      ]
+    }
+  ]
+}

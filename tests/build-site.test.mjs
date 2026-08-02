@@ -325,6 +325,148 @@ test("archive renders as one descending chronology independent of card treatment
   assert.match(html, /class="archive-chronology"/);
 });
 
+test("Overclocking archive data uses the approved local poster and reel", () => {
+  const archive = loadMarkdownCollection(join(root, "content/archive"));
+  const overclocking = archive.find((item) => item.slug === "overclocking");
+
+  assert.equal(
+    overclocking.posterImage,
+    "/assets/showreel/overclocking-card-reel-poster.webp",
+  );
+  assert.doesNotMatch(overclocking.posterImage, /india/i);
+  assert.equal(
+    overclocking.cardReelUrl,
+    "/assets/showreel/overclocking-card-reel.mp4",
+  );
+  assert.equal(overclocking.cardReelMode, "after-hold");
+  assert.equal(overclocking.cardReelPoster, overclocking.posterImage);
+  assert.equal(overclocking.posterRightsStatus, "user-supplied-local-source");
+  assert.deepEqual(overclocking.posterDimensions, { width: 1280, height: 720 });
+  assert.equal(overclocking.posterSourceTimecode, "00:29:46");
+  assert.match(overclocking.imageAlt.en, /green water-bike frame and chain drive/i);
+  assert.match(overclocking.imageAlt.zh, /綠色水上腳踏車車架與鏈條傳動/);
+});
+
+test("Overclocking reel package records the approved six-cut local-source edit", () => {
+  const reelRoot = join(root, "showreel/overclocking-card-reel");
+  const expectedFiles = [
+    "scripts/make-selects.sh",
+    "compositions/frames/01-mechanism.html",
+    "compositions/frames/02-build.html",
+    "compositions/frames/03-propeller.html",
+    "compositions/frames/04-assembly.html",
+    "compositions/frames/05-water-test.html",
+    "compositions/frames/06-bottle-detail.html",
+  ];
+
+  for (const file of expectedFiles) {
+    const sourcePath = join(reelRoot, file);
+    assert.ok(existsSync(sourcePath), `missing reel source file: ${file}`);
+    if (file.endsWith(".html")) {
+      const source = readFileSync(sourcePath, "utf8");
+      assert.doesNotMatch(source, /<video/);
+      assert.match(source, /class="clip"/);
+    }
+  }
+
+  const storyboard = readFileSync(join(reelRoot, "STORYBOARD.md"), "utf8");
+  const storyboardSources = [
+    ...storyboard.matchAll(/^- src: (.+)$/gm),
+  ].map(([, source]) => source);
+  assert.ok(storyboardSources.length > 0, "storyboard declares frame sources");
+  for (const source of storyboardSources) {
+    assert.ok(
+      existsSync(join(reelRoot, source)),
+      `storyboard source resolves: ${source}`,
+    );
+  }
+
+  const makeSelects = readFileSync(
+    join(reelRoot, "scripts/make-selects.sh"),
+    "utf8",
+  );
+  for (const timecode of [
+    "00:04:56",
+    "00:15:50",
+    "00:24:04",
+    "00:29:44",
+    "00:36:28",
+    "00:39:56",
+  ]) {
+    assert.match(makeSelects, new RegExp(timecode.replaceAll(":", "\\:")));
+  }
+  assert.match(makeSelects, /00:29:46/);
+  assert.doesNotMatch(makeSelects, /Downloads|india/i);
+
+  const composition = readFileSync(join(reelRoot, "index.html"), "utf8");
+  assert.match(composition, /data-width="1280"/);
+  assert.match(composition, /data-height="720"/);
+  assert.equal((composition.match(/data-composition-src=/g) || []).length, 6);
+  assert.equal((composition.match(/<video/g) || []).length, 6);
+  assert.equal(
+    (composition.match(/src="assets\/source-clips\/selects\//g) || []).length,
+    6,
+  );
+  assert.doesNotMatch(composition, /src="\.\.\//);
+  assert.doesNotMatch(composition, /\sid="\d/);
+});
+
+test("archive reel markup renders only for explicit after-hold approval", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const html = renderPage({ lang: "en", site, works });
+
+  assert.match(
+    html,
+    /class="archive-media-card archive-media-card-lead"[\s\S]*?data-archive-reel-video[\s\S]*?data-archive-reel-mode="after-hold"[\s\S]*?poster="\/assets\/showreel\/overclocking-card-reel-poster\.webp"[\s\S]*?<source src="\/assets\/showreel\/overclocking-card-reel\.mp4" type="video\/mp4">/,
+  );
+  assert.match(html, /data-archive-reel-video[\s\S]*?preload="none"/);
+  assert.doesNotMatch(html, /india-overclocking-production/i);
+
+  const staticSite = structuredClone(site);
+  const staticOverclocking = staticSite.archive.find(
+    (item) => item.slug === "overclocking",
+  );
+  delete staticOverclocking.cardReelMode;
+  const staticHtml = renderPage({ lang: "en", site: staticSite, works });
+
+  assert.doesNotMatch(staticHtml, /data-archive-reel-video/);
+  assert.doesNotMatch(staticHtml, /overclocking-card-reel\.mp4/);
+  assert.match(staticHtml, /overclocking-card-reel-poster\.webp/);
+});
+
+test("archive reels wait on the poster and reset when playback is no longer allowed", () => {
+  const mainSource = readFileSync(join(root, "src/main.js"), "utf8");
+
+  assert.match(mainSource, /const ARCHIVE_REEL_HOLD_MS = 1400;/);
+  assert.match(mainSource, /querySelectorAll\("\[data-archive-reel-video\]"\)/);
+  assert.match(mainSource, /archiveReelTimers = new Map\(\)/);
+  assert.match(
+    mainSource,
+    /setTimeout\(\(\) => playArchiveReel\(video\), ARCHIVE_REEL_HOLD_MS\)/,
+  );
+  assert.match(mainSource, /video\.classList\.remove\("is-playing"\)/);
+  assert.match(mainSource, /video\.pause\(\)/);
+  assert.match(mainSource, /video\.currentTime = 0/);
+  assert.match(mainSource, /document\.visibilityState !== "visible"/);
+  assert.match(mainSource, /document\.addEventListener\("visibilitychange"/);
+  assert.match(mainSource, /window\.addEventListener\("pagehide"/);
+});
+
+test("archive reel styling keeps the poster visible until playback is confirmed", () => {
+  const css = readFileSync(join(root, "src/styles.css"), "utf8");
+
+  assert.match(
+    css,
+    /\.archive-media-image,\s*\.archive-media-reel \{[\s\S]*?height: 100%;[\s\S]*?object-fit: cover;[\s\S]*?position: absolute;[\s\S]*?width: 100%;/,
+  );
+  assert.match(
+    css,
+    /\.archive-media-reel \{[\s\S]*?opacity: 0;[\s\S]*?pointer-events: none;[\s\S]*?transition: opacity/,
+  );
+  assert.match(css, /\.archive-media-reel\.is-playing \{\s*opacity: 1;/);
+});
+
 test("renderPage creates bilingual page with scroll-stack works and video fallbacks", () => {
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));

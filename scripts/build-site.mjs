@@ -363,10 +363,34 @@ function renderArchiveMediaCard(item, lang) {
   const watchLabel = localize(item.watchLabel, lang);
   const summary = item.summary ? localize(item.summary, lang) : item.body;
   const leadClass = item.archiveFeature === "lead" ? " archive-media-card-lead" : "";
+  const hasApprovedCardReel =
+    item.cardReelMode === "after-hold" &&
+    item.cardReelUrl &&
+    item.cardReelPoster;
+  const cardReel = hasApprovedCardReel
+    ? `
+      <video
+        class="archive-media-reel"
+        data-archive-reel-video
+        data-archive-reel-mode="after-hold"
+        muted
+        loop
+        playsinline
+        webkit-playsinline
+        preload="none"
+        poster="${escapeHtml(item.cardReelPoster)}"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <source src="${escapeHtml(item.cardReelUrl)}" type="video/mp4">
+      </video>
+    `
+    : "";
 
   return `
     <a class="archive-media-card${leadClass}" href="${escapeHtml(item.watchUrl)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(`${watchLabel}: ${title}`)}">
       <img class="archive-media-image" src="${escapeHtml(item.posterImage)}" alt="${escapeHtml(localize(item.imageAlt, lang))}" loading="lazy" decoding="async" onerror="this.remove()">
+      ${cardReel}
       <span class="archive-media-scrim" aria-hidden="true"></span>
       <span class="archive-media-copy">
         <span class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(localize(item.role, lang))}</span>

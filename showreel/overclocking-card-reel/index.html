@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280, height=720">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background: #0b0b0c;
+      }
+      #root {
+        position: relative;
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background: #0b0b0c;
+      }
+      #root > div[data-composition-src] {
+        position: absolute;
+        inset: 0;
+        width: 1280px;
+        height: 720px;
+      }
+      #root > video.clip {
+        position: absolute;
+        inset: 0;
+        width: 1280px;
+        height: 720px;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-hf-id="hf-oqz9" id="root" data-composition-id="overclocking-card-reel" data-start="0" data-duration="10" data-width="1280" data-height="720">
+      <div data-hf-id="hf-1c09" id="frame-01-host" data-composition-id="01-mechanism" data-composition-src="compositions/frames/01-mechanism.html" data-start="0" data-duration="1.8" data-track-index="1" data-width="1280" data-height="720"></div>
+      <div data-hf-id="hf-hisj" id="frame-02-host" data-composition-id="02-build" data-composition-src="compositions/frames/02-build.html" data-start="1.65" data-duration="1.75" data-track-index="2" data-width="1280" data-height="720"></div>
+      <div data-hf-id="hf-r5ed" id="frame-03-host" data-composition-id="03-propeller" data-composition-src="compositions/frames/03-propeller.html" data-start="3.25" data-duration="1.8" data-track-index="1" data-width="1280" data-height="720"></div>
+      <div data-hf-id="hf-3vhc" id="frame-04-host" data-composition-id="04-assembly" data-composition-src="compositions/frames/04-assembly.html" data-start="4.9" data-duration="1.75" data-track-index="2" data-width="1280" data-height="720"></div>
+      <div data-hf-id="hf-8r4n" id="frame-05-host" data-composition-id="05-water-test" data-composition-src="compositions/frames/05-water-test.html" data-start="6.5" data-duration="2" data-track-index="1" data-width="1280" data-height="720"></div>
+      <div data-hf-id="hf-famc" id="frame-06-host" data-composition-id="06-bottle-detail" data-composition-src="compositions/frames/06-bottle-detail.html" data-start="8.35" data-duration="1.65" data-track-index="2" data-width="1280" data-height="720"></div>
+      <video data-hf-id="hf-uiji" id="shot-01-mechanism-video" class="clip" src="assets/source-clips/selects/01-mechanism.mp4" data-start="0" data-duration="1.8" data-track-index="10" muted playsinline></video>
+      <video data-hf-id="hf-7ayh" id="shot-02-build-video" class="clip" src="assets/source-clips/selects/02-build.mp4" data-start="1.65" data-duration="1.75" data-track-index="11" muted playsinline></video>
+      <video data-hf-id="hf-aclo" id="shot-03-propeller-video" class="clip" src="assets/source-clips/selects/03-propeller.mp4" data-start="3.25" data-duration="1.8" data-track-index="10" muted playsinline></video>
+      <video data-hf-id="hf-yt6s" id="shot-04-assembly-video" class="clip" src="assets/source-clips/selects/04-assembly.mp4" data-start="4.9" data-duration="1.75" data-track-index="11" muted playsinline></video>
+      <video data-hf-id="hf-blti" id="shot-05-water-test-video" class="clip" src="assets/source-clips/selects/05-water-test.mp4" data-start="6.5" data-duration="2" data-track-index="10" muted playsinline></video>
+      <video data-hf-id="hf-0pnm" id="shot-06-bottle-detail-video" class="clip" src="assets/source-clips/selects/06-bottle-detail.mp4" data-start="8.35" data-duration="1.65" data-track-index="11" muted playsinline></video>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      const fades = [
+        ["#shot-01-mechanism-video", "#shot-02-build-video", 1.65],
+        ["#shot-02-build-video", "#shot-03-propeller-video", 3.25],
+        ["#shot-03-propeller-video", "#shot-04-assembly-video", 4.9],
+        ["#shot-04-assembly-video", "#shot-05-water-test-video", 6.5],
+        ["#shot-05-water-test-video", "#shot-06-bottle-detail-video", 8.35],
+      ];
+
+      for (const [outgoing, incoming, at] of fades) {
+        tl.to(outgoing, { opacity: 0, duration: 0.15, ease: "none" }, at);
+        tl.fromTo(incoming, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, at);
+      }
+
+      window.__timelines["overclocking-card-reel"] = tl;
+    </script>
+  </body>
+</html>

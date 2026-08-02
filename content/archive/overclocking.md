@@ -13,11 +13,20 @@
   },
   "platform": "ScreenHouse / Taiwan science collaboration",
   "archiveFeature": "lead",
-  "posterImage": "/assets/portfolio/india-overclocking-production.jpg",
+  "posterImage": "/assets/showreel/overclocking-card-reel-poster.webp",
   "imageAlt": {
-    "en": "Production still from the South India adaptation of Overclocking",
-    "zh": "《Overclocking》印度南部版本製作現場"
+    "en": "Green water-bike frame and chain drive during workshop assembly",
+    "zh": "工作室裡正在組裝的綠色水上腳踏車車架與鏈條傳動"
   },
+  "posterRightsStatus": "user-supplied-local-source",
+  "posterDimensions": {"width": 1280, "height": 720},
+  "posterFocalPoint": {"x": 0.5, "y": 0.5},
+  "posterSourceTimecode": "00:29:46",
+  "cardReelUrl": "/assets/showreel/overclocking-card-reel.mp4",
+  "cardReelPoster": "/assets/showreel/overclocking-card-reel-poster.webp",
+  "cardReelMode": "after-hold",
+  "cardReelDuration": 10,
+  "cardReelRightsStatus": "user-supplied-local-source",
   "watchUrl": "https://www.youtube.com/watch?v=l9__7mhWJBM",
   "watchLabel": {
     "en": "Watch public program",

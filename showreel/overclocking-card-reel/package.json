@@ -1,0 +1,12 @@
+{
+  "name": "overclocking-card-reel",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "selects": "sh scripts/make-selects.sh",
+    "dev": "npx --yes hyperframes@0.7.88 preview",
+    "check": "npx --yes hyperframes@0.7.88 check",
+    "render": "npx --yes hyperframes@0.7.88 render",
+    "publish": "npx --yes hyperframes@0.7.88 publish"
+  }
+}

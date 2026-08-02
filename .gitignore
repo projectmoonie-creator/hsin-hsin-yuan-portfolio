@@ -7,3 +7,5 @@ showreel/**/.thumbnails/
 showreel/**/assets/source-clips/
 showreel/**/renders/
 showreel/**/snapshots/
+.superpowers/
+showreel/**/.media/
