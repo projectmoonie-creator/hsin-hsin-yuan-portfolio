@@ -1,7 +1,7 @@
 ---
 {
   "slug": "heart-of-steel",
-  "order": 4,
+  "order": 3,
   "year": "2014-2015",
   "title": {
     "en": "Heart of Steel",

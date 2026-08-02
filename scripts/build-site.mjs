@@ -396,17 +396,16 @@ function renderArchiveLedgerItem(item, lang) {
 }
 
 function renderArchive(archive, lang) {
-  const mediaItems = archive
-    .filter((item) => item.archiveFeature && item.posterImage && item.watchUrl)
-    .sort((a, b) => {
-      if (a.archiveFeature === b.archiveFeature) return a.order - b.order;
-      return a.archiveFeature === "lead" ? -1 : 1;
-    });
-  const ledgerItems = archive.filter((item) => !mediaItems.includes(item));
-
   return `
-    ${mediaItems.length ? `<div class="archive-media-grid">${mediaItems.map((item) => renderArchiveMediaCard(item, lang)).join("")}</div>` : ""}
-    ${ledgerItems.length ? `<div class="archive-list">${ledgerItems.map((item) => renderArchiveLedgerItem(item, lang)).join("")}</div>` : ""}
+    <div class="archive-chronology">
+      ${archive
+        .map((item) =>
+          item.archiveFeature && item.posterImage && item.watchUrl
+            ? renderArchiveMediaCard(item, lang)
+            : renderArchiveLedgerItem(item, lang),
+        )
+        .join("")}
+    </div>
   `;
 }
 

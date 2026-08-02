@@ -298,6 +298,33 @@ test("loadSiteData keeps retired lab content out of the public site model", () =
   assert.equal(lyingGame.watchUrl, "https://www.youtube.com/watch?v=DVzQf5COsyk");
 });
 
+test("archive renders as one descending chronology independent of card treatment", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const html = renderPage({ lang: "en", site, works });
+  const archiveSlugs = site.archive.map((item) => item.slug);
+
+  assert.deepEqual(archiveSlugs, [
+    "ghost-hand-divine-car",
+    "three-minute-micro-drama",
+    "heart-of-steel",
+    "lying-game",
+    "overclocking",
+  ]);
+
+  const titlePositions = [
+    "Gui Shou Shen Che",
+    "Three-Minute Micro Drama Series",
+    "Heart of Steel",
+    "Lying Game",
+    "Overclocking",
+  ].map((title) => html.indexOf(title));
+
+  assert.ok(titlePositions.every((position) => position >= 0));
+  assert.deepEqual(titlePositions, [...titlePositions].sort((a, b) => a - b));
+  assert.match(html, /class="archive-chronology"/);
+});
+
 test("renderPage creates bilingual page with scroll-stack works and video fallbacks", () => {
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
@@ -351,7 +378,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /fact-checked bilingual script workflow/i);
   assert.doesNotMatch(html, /working home for the future skill name/i);
   assert.match(html, /FROM THE ARCHIVE/);
-  assert.match(html, /class="archive-media-grid"/);
+  assert.match(html, /class="archive-chronology"/);
   assert.match(html, /class="archive-media-card archive-media-card-lead"/);
   assert.match(html, /href="https:\/\/www\.youtube\.com\/watch\?v=l9__7mhWJBM"/);
   assert.match(html, /href="https:\/\/www\.youtube\.com\/watch\?v=6g9YLv30DyU"/);
@@ -702,7 +729,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.doesNotMatch(css, /\.service-card/);
   assert.doesNotMatch(css, /\.lab-grid/);
   assert.doesNotMatch(css, /\.lab-card/);
-  assert.match(css, /\.archive-media-grid \{/);
+  assert.match(css, /\.archive-chronology \{/);
   assert.match(css, /\.archive-media-card-lead \{/);
   assert.match(css, /\.archive-media-action \{/);
   assert.match(css, /\.nav-contact \{/);
