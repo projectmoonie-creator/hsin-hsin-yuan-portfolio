@@ -58,6 +58,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     "/assets/showreel/interior-spatial-card-reel.mp4",
   );
   assert.equal(works[3].featuredReelMode, "in-view");
+  assert.equal(works[3].featuredMediaAspect, "16:9");
   assert.equal(
     works[3].featuredReelPoster,
     "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
@@ -108,6 +109,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     "/assets/showreel/nothing-by-bus-card-reel.mp4",
   );
   assert.equal(works[4].featuredReelMode, "in-view");
+  assert.equal(works[4].featuredMediaAspect, "16:9");
   assert.equal(
     works[4].featuredReelPoster,
     works[4].posterImage,
@@ -201,11 +203,27 @@ test("screening strip stays static while approved reels render in featured panel
   assert.doesNotMatch(html, /data-card-reel-mode/);
   assert.match(
     html,
-    /<article class="work-panel work-panel-compact-media" id="interior-spatial-brand-films">[\s\S]*?data-featured-reel-video[\s\S]*?src="\/assets\/showreel\/interior-spatial-card-reel\.mp4"/,
+    /<article class="work-panel work-panel-wide-media" id="interior-spatial-brand-films">[\s\S]*?class="media-frame media-frame-wide media-frame-unlabeled media-frame-link"[\s\S]*?data-featured-reel-video[\s\S]*?src="\/assets\/showreel\/interior-spatial-card-reel\.mp4"/,
   );
   assert.match(
     html,
-    /<article class="work-panel" id="pts-taigi-bus">[\s\S]*?data-featured-reel-video[\s\S]*?src="\/assets\/showreel\/nothing-by-bus-card-reel\.mp4"/,
+    /<article class="work-panel work-panel-wide-media" id="pts-taigi-bus">[\s\S]*?class="media-frame media-frame-wide media-frame-link"[\s\S]*?data-featured-reel-video[\s\S]*?src="\/assets\/showreel\/nothing-by-bus-card-reel\.mp4"/,
+  );
+});
+
+test("wide media semantics apply to embedded work frames", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const embeddedWideWork = {
+    ...works[3],
+    status: "available",
+    videoEmbedUrl: "https://example.com/embed/featured-reel",
+  };
+  const html = renderPage({ lang: "en", site, works: [embeddedWideWork] });
+
+  assert.match(
+    html,
+    /<article class="work-panel work-panel-wide-media" id="interior-spatial-brand-films">[\s\S]*?<div class="media-frame media-frame-wide(?: [^"]+)?">[\s\S]*?<iframe src="https:\/\/example\.com\/embed\/featured-reel"/,
   );
 });
 
@@ -665,7 +683,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /幸福空間/);
   assert.match(
     html,
-    /<article class="work-panel work-panel-compact-media" id="interior-spatial-brand-films">[\s\S]*?class="media-frame media-frame-contain media-frame-link"[\s\S]*?aria-label="Play video: Design &amp; Brand Films"[\s\S]*?linear-gradient\(180deg, rgba\(9,9,10,.04\), rgba\(9,9,10,.26\)\)[\s\S]*?gorgeous-space-sunny-wang-frontal\.webp[\s\S]*?background-size: cover, contain;[\s\S]*?background-repeat: no-repeat;[^>]*>[\s\S]*?class="work-media-play"/,
+    /<article class="work-panel work-panel-wide-media" id="interior-spatial-brand-films">[\s\S]*?class="media-frame media-frame-wide media-frame-unlabeled media-frame-link"[\s\S]*?aria-label="Play video: Design &amp; Brand Films"[\s\S]*?linear-gradient\(180deg, rgba\(9,9,10,.04\), rgba\(9,9,10,.26\)\)[\s\S]*?gorgeous-space-sunny-wang-frontal\.webp[\s\S]*?background-size: cover, contain;[\s\S]*?background-repeat: no-repeat;[^>]*>[\s\S]*?class="work-media-play"/,
   );
   assert.match(html, /Director \/ Editor/);
   assert.match(html, /Selected reel/);
@@ -969,9 +987,14 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.work-media-play span \{/);
   assert.match(
     css,
-    /\.media-frame-contain \{[\s\S]*?align-self: start;[\s\S]*?aspect-ratio: 16 \/ 9;[\s\S]*?min-height: 0;/,
+    /\.media-frame-wide \{[\s\S]*?align-self: center;[\s\S]*?aspect-ratio: 16 \/ 9;[\s\S]*?min-height: 0;[\s\S]*?width: 100%;/,
   );
-  assert.match(css, /\.work-panel-compact-media \{[\s\S]*?min-height: auto;/);
+  assert.match(
+    css,
+    /\.featured-reel-video \{[\s\S]*?object-fit: cover;[\s\S]*?object-position: center;/,
+  );
+  assert.doesNotMatch(css, /\.media-frame-contain/);
+  assert.doesNotMatch(css, /\.work-panel-compact-media/);
   assert.match(css, /\.work-media-play \{[\s\S]*?left: 1rem;[\s\S]*?right: auto;/);
   assert.match(css, /\.media-label-lines span \{[\s\S]*?white-space: nowrap;/);
   assert.match(

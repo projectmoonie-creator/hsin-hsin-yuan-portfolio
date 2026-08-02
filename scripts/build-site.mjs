@@ -227,10 +227,17 @@ function mediaFrame(work, lang, copy) {
           .map((line) => `<span>${escapeHtml(line)}</span>`)
           .join("")}</div>`
       : `<div class="media-label">${escapeHtml(work.title.en)}</div>`;
+  const mediaClasses = ["media-frame"];
+  if (work.featuredMediaAspect === "16:9") {
+    mediaClasses.push("media-frame-wide");
+  }
+  if (work.hideMediaLabel) {
+    mediaClasses.push("media-frame-unlabeled");
+  }
 
   if (work.status === "available" && work.videoEmbedUrl) {
     return `
-      <div class="media-frame">
+      <div class="${mediaClasses.join(" ")}">
         <iframe src="${escapeHtml(work.videoEmbedUrl)}" title="${escapeHtml(work.title.en)}" allowfullscreen loading="lazy"></iframe>
       </div>
     `;
@@ -245,11 +252,7 @@ function mediaFrame(work, lang, copy) {
     return mediaFrameContainer({
       work,
       lang,
-      className: posterFit === "contain"
-        ? "media-frame media-frame-contain"
-        : work.hideMediaLabel
-          ? "media-frame media-frame-unlabeled"
-          : "media-frame",
+      className: mediaClasses.join(" "),
       style: `background-image: ${posterGradient}, ${cssUrl(work.posterImage)}; background-size: cover, ${posterFit}; background-position: center, center; background-repeat: no-repeat; background-color: #0b0b0c;`,
       content: `${renderFeaturedReel(work)}${mediaLabel}`,
     });
@@ -259,7 +262,7 @@ function mediaFrame(work, lang, copy) {
   return mediaFrameContainer({
     work,
     lang,
-    className: `media-frame media-${escapeHtml(work.accent || "default")}`,
+    className: [...mediaClasses, `media-${escapeHtml(work.accent || "default")}`].join(" "),
     content: Array.isArray(work.mediaTitleLines) && work.mediaTitleLines.length
       ? mediaLabel
       : `<div class="media-label">${escapeHtml(label)}</div>`,
@@ -289,8 +292,8 @@ function renderWork(work, lang, copy) {
   const action = watchAction || statusAction
     ? `<div class="work-actions">${statusAction}${watchAction}</div>`
     : "";
-  const panelClass = work.posterFit === "contain"
-    ? "work-panel work-panel-compact-media"
+  const panelClass = work.featuredMediaAspect === "16:9"
+    ? "work-panel work-panel-wide-media"
     : "work-panel";
 
   return `

@@ -27,6 +27,7 @@
   "showWatchCta": true,
   "videoEmbedUrl": "",
   "posterImage": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+  "featuredMediaAspect": "16:9",
   "featuredReelUrl": "/assets/showreel/nothing-by-bus-card-reel.mp4",
   "featuredReelMode": "in-view",
   "featuredReelPoster": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",

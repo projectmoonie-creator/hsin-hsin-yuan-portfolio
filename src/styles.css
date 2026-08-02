@@ -581,10 +581,6 @@ a {
     transform 500ms ease;
 }
 
-.work-panel-compact-media {
-  min-height: auto;
-}
-
 .media-frame {
   align-items: center;
   aspect-ratio: auto;
@@ -605,10 +601,11 @@ a {
   text-decoration: none;
 }
 
-.media-frame-contain {
-  align-self: start;
+.media-frame-wide {
+  align-self: center;
   aspect-ratio: 16 / 9;
   min-height: 0;
+  width: 100%;
 }
 
 .media-frame-link:focus-visible {
