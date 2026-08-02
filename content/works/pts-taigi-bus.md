@@ -19,7 +19,7 @@
     "zh": "地方行旅、公共媒體，以及台語語境裡的紀實節目敘事。"
   },
   "description": {
-    "en": "A Taiwanese-language travel series that follows local bus routes beyond the timetable—to markets, coastlines, kitchens, and the people who give each place its character.",
+    "en": "A Taiwanese-language travel series following local buses off the main road and into the food, work, and daily life of each stop.",
     "zh": "公視台語台行腳節目的單集企劃 / 企編工作，節目以公車路線串起地方記憶、飲食、市集與路上的人。"
   },
   "watchMode": "series",

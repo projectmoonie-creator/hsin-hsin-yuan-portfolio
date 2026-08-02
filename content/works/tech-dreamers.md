@@ -33,6 +33,19 @@
   },
   "focalPoint": "50% 50%",
   "posterDimensions": {"width": 1280, "height": 720},
+  "press": [
+    {
+      "type": {"en": "Official page", "zh": "官方節目頁"},
+      "title": {"en": "Official program page", "zh": "官方節目頁"},
+      "source": "TaiwanPlus",
+      "url": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
+      "canonicalUrl": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
+      "image": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+      "titleSource": "official platform page",
+      "imageSource": "official platform series artwork",
+      "metadataCheckedAt": "2026-08-03"
+    }
+  ],
   "tags": ["technology", "founders", "AI", "interview"],
   "metrics": [],
   "accent": "cyan"

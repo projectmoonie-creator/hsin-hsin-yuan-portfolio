@@ -42,14 +42,16 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[0].role.en, "Director / Editor / Producer");
   assert.equal(works[1].role.en, "Director / Editor / Producer");
   assert.equal(works[3].role.en, "Director / Editor");
-  assert.equal(works[3].title.en, "Interior Design & Branded Films");
-  assert.equal(
-    works[3].tagline.en,
-    "Rooms reveal how people want to live.",
-  );
+  assert.equal(works[3].title.en, "Design & Brand Films");
+  assert.equal(works[3].tagline.en, "How design becomes part of everyday life.");
   assert.equal(
     works[3].description.en,
-    "For Gorgeous Space, I directed and edited films across residential interiors, renovations, designer profiles, and home-brand collaborations—using materials, light, and everyday rituals to show how people choose to live.",
+    "Films about residential design and brand collaborations, following how homes are planned, renovated, and lived in—from a designer’s choices to the routines that fill the finished space.",
+  );
+  assert.equal(works[3].title.zh, "幸福空間與室內設計影像");
+  assert.equal(
+    works[3].description.zh,
+    "我為住宅設計、老屋翻新、設計師作品、居家品牌與廚電業配內容擔任導演 / 剪輯。",
   );
   assert.equal(
     works[3].featuredReelUrl,
@@ -89,7 +91,11 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[4].tagline.en, "Taiwan, one bus route at a time.");
   assert.equal(
     works[4].description.en,
-    "A Taiwanese-language travel series that follows local bus routes beyond the timetable—to markets, coastlines, kitchens, and the people who give each place its character.",
+    "A Taiwanese-language travel series following local buses off the main road and into the food, work, and daily life of each stop.",
+  );
+  assert.equal(
+    works[4].description.zh,
+    "公視台語台行腳節目的單集企劃 / 企編工作，節目以公車路線串起地方記憶、飲食、市集與路上的人。",
   );
   assert.equal(works[4].watchMode, "series");
   assert.equal(works[4].showWatchCta, true);
@@ -109,6 +115,15 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[5].role.en, "Director");
   assert.equal(works[5].platform, "China Dragon TV");
   assert.deepEqual(works[5].mediaTitleLines, ["Top Gear China", "UK Special"]);
+  assert.equal(works[5].tagline.en, "A world-renowned car show, reimagined for China.");
+  assert.equal(
+    works[5].description.en,
+    "For the UK Special, the Chinese production travelled to Britain to work with the original Top Gear team on a cross-border factual-entertainment shoot.",
+  );
+  assert.equal(
+    works[5].description.zh,
+    "擔任《巔峰拍檔》中國版第二季第五期英國篇導演，負責英國拍攝內容，協調播出端、中國製作端與英國原版 Top Gear 團隊之間的製作需求。",
+  );
   assert.equal(works[0].posterImage, "/assets/portfolio/slow-steps-poster.webp");
   assert.equal(works[0].posterVariant, "no-title");
   assert.equal(works[0].posterRightsStatus, "user-approved-local");
@@ -128,6 +143,16 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   );
   assert.equal(works[1].watchLoopTarget, "watch");
   assert.equal(Object.hasOwn(works[1], "mediaWatchUrl"), false);
+  const techOfficialEntry = works[1].press[0];
+  assert.deepEqual(techOfficialEntry.type, { en: "Official page", zh: "官方節目頁" });
+  assert.deepEqual(techOfficialEntry.title, { en: "Official program page", zh: "官方節目頁" });
+  assert.equal(techOfficialEntry.source, "TaiwanPlus");
+  assert.equal(techOfficialEntry.url, works[1].watchUrl);
+  assert.equal(techOfficialEntry.canonicalUrl, works[1].watchUrl);
+  assert.equal(techOfficialEntry.image, works[1].posterImage);
+  assert.equal(techOfficialEntry.titleSource, "official platform page");
+  assert.equal(techOfficialEntry.imageSource, "official platform series artwork");
+  assert.equal(techOfficialEntry.metadataCheckedAt, "2026-08-03");
   assert.ok(works.every((work) => !Object.hasOwn(work, "caseStudy")));
   assert.deepEqual(works[5].tags, ["factual entertainment"]);
   assert.equal(works[0].metrics.length, 0);
@@ -619,12 +644,12 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
     /class="media-frame media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/arts\/410\/my-art-my-voice\/250220001\/whats-the-vibe-in-taiwan-my-art-my-voice"[\s\S]*?aria-label="Play video: My Art, My Voice"/,
   );
   assert.match(html, /class="work-media-play" aria-hidden="true"><span><\/span><\/span>/);
-  assert.match(html, /Interior Design &amp; Branded Films/);
+  assert.match(html, /Design &amp; Brand Films/);
   assert.match(html, /Gorgeous Space/);
   assert.doesNotMatch(html, /幸福空間/);
   assert.match(
     html,
-    /<article class="work-panel work-panel-compact-media" id="interior-spatial-brand-films">[\s\S]*?class="media-frame media-frame-contain media-frame-link"[\s\S]*?aria-label="Play video: Interior Design &amp; Branded Films"[\s\S]*?linear-gradient\(180deg, rgba\(9,9,10,.04\), rgba\(9,9,10,.26\)\)[\s\S]*?gorgeous-space-sunny-wang-frontal\.webp[\s\S]*?background-size: cover, contain;[\s\S]*?background-repeat: no-repeat;[^>]*>[\s\S]*?class="work-media-play"/,
+    /<article class="work-panel work-panel-compact-media" id="interior-spatial-brand-films">[\s\S]*?class="media-frame media-frame-contain media-frame-link"[\s\S]*?aria-label="Play video: Design &amp; Brand Films"[\s\S]*?linear-gradient\(180deg, rgba\(9,9,10,.04\), rgba\(9,9,10,.26\)\)[\s\S]*?gorgeous-space-sunny-wang-frontal\.webp[\s\S]*?background-size: cover, contain;[\s\S]*?background-repeat: no-repeat;[^>]*>[\s\S]*?class="work-media-play"/,
   );
   assert.match(html, /Director \/ Editor/);
   assert.match(html, /Selected reel/);
@@ -719,6 +744,43 @@ test("renderPage escapes image URLs for inline CSS contexts", () => {
 
   assert.doesNotMatch(html, /url\('\/assets\/poster'\)bad\.jpg'\)/);
   assert.match(html, /url\(&quot;\/assets\/poster\\'\)bad\.jpg&quot;\)/);
+});
+
+test("Tech Dreamers repeats its canonical TaiwanPlus destination as an audited official entry", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const en = renderPage({ lang: "en", site, works });
+  const zh = renderPage({ lang: "zh", site, works });
+  const techPanel = en.match(
+    /<article class="work-panel" id="tech-dreamers">[\s\S]*?<\/article>/,
+  )?.[0];
+  const techOfficialCard = techPanel?.match(
+    /<a class="press-preview-card" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers"[^>]*data-metadata-checked-at="2026-08-03"[^>]*>[\s\S]*?Official program page[\s\S]*?<\/a>/,
+  )?.[0];
+  const techPanelZh = zh.match(
+    /<article class="work-panel" id="tech-dreamers">[\s\S]*?<\/article>/,
+  )?.[0];
+  const techOfficialCardZh = techPanelZh?.match(
+    /<a class="press-preview-card" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers"[^>]*>[\s\S]*?官方節目頁[\s\S]*?<\/a>/,
+  )?.[0];
+
+  assert.ok(techPanel);
+  assert.ok(techOfficialCard);
+  assert.ok(techPanelZh);
+  assert.ok(techOfficialCardZh);
+});
+
+test("Design title propagates to the English screening-strip card", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const html = renderPage({ lang: "en", site, works });
+  const card = html.match(
+    /<a class="watch-loop-card" href="#interior-spatial-brand-films"[\s\S]*?<\/a>/,
+  )?.[0];
+
+  assert.ok(card);
+  assert.match(card, /<strong>Design &amp; Brand Films<\/strong>/);
+  assert.doesNotMatch(card, /Interior Design &amp; Branded Films/);
 });
 
 test("English Figma handoff uses the localized Gorgeous Space label", () => {

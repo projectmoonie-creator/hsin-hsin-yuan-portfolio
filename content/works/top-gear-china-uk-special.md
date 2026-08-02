@@ -16,11 +16,11 @@
   },
   "platform": "China Dragon TV",
   "tagline": {
-    "en": "A car show and factual-entertainment shoot with the original UK Top Gear team.",
+    "en": "A world-renowned car show, reimagined for China.",
     "zh": "與英國原版 Top Gear 團隊合作的汽車節目與紀實娛樂製作。"
   },
   "description": {
-    "en": "Directed the UK shoot for S02E05, the UK special of Top Gear China, coordinating format, location, and story needs across the broadcaster, Chinese production, and the original UK Top Gear team.",
+    "en": "For the UK Special, the Chinese production travelled to Britain to work with the original Top Gear team on a cross-border factual-entertainment shoot.",
     "zh": "擔任《巔峰拍檔》中國版第二季第五期英國篇導演，負責英國拍攝內容，協調播出端、中國製作端與英國原版 Top Gear 團隊之間的製作需求。"
   },
   "watchMode": "single",
