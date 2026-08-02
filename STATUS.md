@@ -1,47 +1,75 @@
 # Portfolio Status
 
-Updated: 2026-08-02
+Updated: 2026-08-03
 
 State: `PASS_WITH_OPEN_ITEMS`
 
 ## Current Work Package
 
-- Package: `Archive Chronology v1`
+- Package: `hsin-hsin-yuan-portfolio`
+- Work package: `Archive Uniformity and English Copy v1`
 - Outcome: `PASS_WITH_OPEN_ITEMS`
 - Active branch: `codex/contact-archive-entrypoints`
 - Closed baseline tag: `portfolio-phase-2026-07-29-closed`
-- Immediate parent commit:
-  `e4338006c3b88835b8b50c964d66bd34a35003b5`
-- Reviewed implementation commit:
-  `e5d7aa680a2f6a2c8df14d4ccf007d0fdfdfcaa0`
+- QA input commit: `47821ff6100a2484175dd3af8c8df45acfd66621`
+- Deployment source reviewed commit:
+  `6b63f5d086a1db4070105f9adc190154cb6f707c`
 - Review:
-  `docs/reviews/archive-chronology-v1-2026-08-02.md`
-- No Preview or production deployment was created or replaced.
-- No Git history rewrite or old-deployment deletion was performed.
+  `docs/reviews/archive-uniformity-and-english-copy-v1-2026-08-03.md`
+- Preview project:
+  `projectmoonie-creators-projects/hsin-hsin-yuan-portfolio-preview`
+- Preview URL:
+  `https://hsin-hsin-yuan-portfolio-preview-ldm6qfz3d.vercel.app`
+- Deployment ID: `dpl_4GW7xq4wuX5nf1v7VjtQ3JLAm3cW`
+- Deployment target/status: `preview` / `Ready`
+- Inspector:
+  `https://vercel.com/projectmoonie-creators-projects/hsin-hsin-yuan-portfolio-preview/4GW7xq4wuX5nf1v7VjtQ3JLAm3cW`
+- The original production website and domain were not changed. No `--prod`,
+  alias, or domain promotion was used for the accepted Preview.
 
-`FROM THE ARCHIVE` is now one descending chronology: `鬼手神車` (2018),
-Three-Minute Micro Drama (2017-2018), `Heart of Steel` (2014-2015), `Lying
-Game` (2013-2014), then `Overclocking` (2011-2013). Text-only, supporting, and
-lead card treatments remain, but card size no longer changes reading order.
+The deployed staging package contained exactly 22 files: the built public
+pages, CSS, JavaScript, page-referenced public images and videos,
+`api/contact.js`, and minimal package and Vercel configuration. It excluded
+Git data, source scripts and content, tests, documentation and reviews,
+original media, caches, unused assets, and the unused India group photograph.
+Deployment used ephemeral Vercel CLI `58.4.4` under the existing
+`projectmoonie-creator` account; it did not install a global CLI and produced
+no claim URL.
+
+Vercel unexpectedly assigned the first deployment in the new preview-named
+project a production target even though the command omitted `--prod`. That
+deployment (`dpl_Dd2eMsQ58YQUEMAijs4hHceZxggS`,
+`hsin-hsin-yuan-portfolio-preview-ghlzgynyn.vercel.app`) was never accepted as
+the deliverable and was permanently deleted after separate explicit user
+approval; Vercel reported `Success! Removed 1 deployment`. The final listing
+contains exactly one deployment in the project: the accepted URL above,
+environment `Preview`, status `Ready`.
 
 Verification:
 
-- A chronology regression test failed first against the previous ordering,
-  then passed with the new canonical stream.
-- `npm test`: 24 passed, 0 failed.
-- `npm run build`: passed.
-- `npm run figma:export`: passed with no tracked output change.
+- Local QA: `PASS` at input commit `47821ff6100a2484175dd3af8c8df45acfd66621`.
+- `npm test`: 35 passed, 0 failed.
+- `npm run build`: passed again at deployment source commit `6b63f5d...` before
+  packaging.
+- `npm run figma:export`: passed with no tracked output change during local QA.
 - `git diff --check`: passed.
-- English and Chinese output share the same five-item chronology.
-- Matched desktop and mobile captures against detached baseline `e433800`,
-  plus the full responsive, reduced-motion, no-JavaScript, focus, and overflow
-  matrix, passed.
+- English and Chinese responsive, reduced-motion, no-JavaScript, focus,
+  overflow, archive-uniformity, contact-heading, and copy checks passed locally.
+- `vercel inspect`: target `preview`, status `Ready`, created Mon Aug 03 2026
+  06:12:41 GMT+0800; build includes `λ api/contact` (`2.56KB`) in `iad1`.
+- Direct public URL, route, content, and API probing was not performed because
+  the active `vercel-deploy` skill prohibits requesting the deployed URL. No
+  form was submitted and no email was sent.
 
 ## Closed Baseline
 
 - Reviewed implementation commit: `f4f4d0029c71a2f20f88fea5051a8726b0d0773d`
 - Closed branch: `codex/work-card-video-links`
 - Final closeout tag: `portfolio-phase-2026-07-29-closed`
+- Annotated tag object:
+  `68d99c13341f27ad388a8c9bc06df22b3d38bcf2`
+- Peeled tag commit:
+  `7e6200106fe9feb10331e6558981b0314de00597`
 - Vercel Preview:
   `https://hsin-hsin-yuan-portfolio-rk6jdrkve.vercel.app/en/`
 - The closeout did not replace the production deployment.
@@ -55,35 +83,15 @@ time of the tag; they do not override the current site structure.
 
 ## Accepted Open Items
 
-These are next-phase decisions, not blockers:
+One accepted item remains, and it is not a blocker to the completed local QA or
+Ready deployment: optionally inspect Preview `/en/`, `/zh/`, and GET
+`/api/contact` manually. Those public responses were not observed because the
+active deployment skill prohibits the agent from requesting the deployed URL.
+Do not submit the form or send email during that inspection.
 
-1. Verify the very early CV credits before publishing them: current source says
-   `e4kids`, while the remembered name was `D4Kids`; dates and roles for that
-   credit, `Explore the Unknown World`, and `Digital Archives` remain open.
-2. Approve and implement one public-links contract for official, watch, press,
-   trailer, and credit/proof destinations.
-3. Build a 35-45 second Three-Minute Micro Drama reel only from approved local
-   source material, then decide whether it becomes a visual Archive card.
-4. Add user-approved stills for `鬼手神車` and render its restrained 12-15
-   second still-led reel; public release materials remain incomplete.
-5. Replace the collaboration names with locally preserved official logos.
-   Continue from `docs/source-materials/collaboration-logo-wall.md`; Dragon TV
-   and ScreenHouse still require exact source verification.
-6. Review and rewrite the Chinese copy for `Nothing by Bus` and `Interior
-   Design & Branded Films`.
-7. Curate or replace playlist destinations for Gorgeous Space and Nothing by
-   Bus as the source lists become more complete.
-8. Review whether `AI-Language Creative` should remain in SEO metadata now
-   that the standalone lab section and public service taxonomy are retired.
-9. Replace remote archive thumbnails or make a custom archive reel only when
-   local source or explicit picture-and-music reuse permission exists.
-10. Generate an editable Archive design layer from the canonical collection if
-    Figma Archive parity becomes part of a future package; do not add a second
-    hand-maintained ordering list.
-11. Identify the pre-existing untracked duplicate review file before another
-    package edits or removes it. This package left it untouched.
-12. Create a new Preview or promote production only after an explicit
-   deployment decision.
+Earlier future-work candidates remain documented in
+`docs/reviews/archive-chronology-v1-2026-08-02.md`; they are not open items in
+this deployment package.
 
 ## Residual Privacy Risk
 
@@ -96,23 +104,23 @@ performed during this package.
 
 ## Exact Next Action
 
-First identify whether
-`docs/reviews/screening-strip-media-contract-v1-2026-07-29 2.md` is valid
-evidence or an accidental copy without deleting it. Then start a separate
-`Collaboration Logo Wall Source Verification` package from
-`e5d7aa680a2f6a2c8df14d4ccf007d0fdfdfcaa0`: confirm
-the exact Dragon TV and ScreenHouse identities and official domains before
-downloading or publishing marks. Do not deploy production without explicit
+If desired, a human may open
+`https://hsin-hsin-yuan-portfolio-preview-ldm6qfz3d.vercel.app/en/`, then
+`/zh/`, and issue a non-submitting GET inspection of `/api/contact`. Record
+only what is actually observed. Do not submit the contact form or send email,
+and do not promote, alias, or replace production without separate explicit
 approval.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, and this file.
-2. Verify the active branch, reviewed implementation commit, remote tip,
-   worktree state, and preserved closeout tag.
+2. Verify the active branch, deployment source reviewed commit, remote tip,
+   worktree state, final Preview metadata, and preserved closeout tag object
+   and peeled commit.
 3. Read
-   `docs/reviews/archive-chronology-v1-2026-08-02.md` for the current package
-   evidence and preserved next requirements. Read
+   `docs/reviews/archive-uniformity-and-english-copy-v1-2026-08-03.md` for the
+   current package evidence. Read `docs/reviews/archive-chronology-v1-2026-08-02.md`
+   for earlier future-work candidates. Read
    `docs/source-materials/collaboration-logo-wall.md` before resuming the logo
    package. Read `docs/reviews/english-featured-copy-closeout-2026-07-30.md`,
    `docs/reviews/gorgeous-space-localization-sunny-poster-2026-07-30.md`,

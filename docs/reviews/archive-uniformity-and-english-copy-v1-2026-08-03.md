@@ -2,14 +2,61 @@
 
 ## Outcome
 
-**PASS**
+**PASS_WITH_OPEN_ITEMS**
 
 - Branch: `codex/contact-archive-entrypoints`
 - QA input commit: `47821ff6100a2484175dd3af8c8df45acfd66621`
+- Deployment source reviewed commit: `6b63f5d086a1db4070105f9adc190154cb6f707c`
 - Local preview: `http://127.0.0.1:57888/` (port `57888` was free before this QA server started)
-- Deployment: **pending Task 8**. No Preview or production deployment was performed; production was not touched.
+- Final Vercel Preview: `https://hsin-hsin-yuan-portfolio-preview-ldm6qfz3d.vercel.app`
+- Deployment: `dpl_4GW7xq4wuX5nf1v7VjtQ3JLAm3cW`, target `preview`, status `Ready`.
 - Contact form: not submitted. No email or other external side effect was triggered.
-- Open items: none.
+- Open item: direct public inspection of Preview `/en/`, `/zh/`, and GET `/api/contact` was not performed because the active `vercel-deploy` skill prohibits requesting the deployed URL. It remains optional manual verification if desired.
+
+Local QA remains **PASS**. The overall record is `PASS_WITH_OPEN_ITEMS` only
+because public route, content, and API behavior was not directly observed after
+deployment; it does not weaken the completed local content, layout, behavior,
+accessibility, or fallback evidence below.
+
+## Preview deployment provenance
+
+`npm run build` passed at deployment source commit
+`6b63f5d086a1db4070105f9adc190154cb6f707c` before packaging. The full-repository
+fallback upload was rejected and did not create a deployment. A materially safer
+staging package was then created with exactly 22 files: built public pages, CSS,
+JavaScript, page-referenced public images and videos, `api/contact.js`, and
+minimal `package.json` and `vercel.json`. It excluded Git data, source scripts
+and content, tests, documentation and reviews, original media, caches, unused
+assets, and the unused India group photograph.
+
+Deployment used ephemeral Vercel CLI `58.4.4` through `npx` under the existing
+`projectmoonie-creator` account; no global CLI was installed and no claim URL
+was produced. The final project is
+`projectmoonie-creators-projects/hsin-hsin-yuan-portfolio-preview`.
+
+The first new-project deployment, although invoked without `--prod`, was
+unexpectedly assigned the production target by Vercel because it was the
+project's first deployment. Its deployment ID was
+`dpl_Dd2eMsQ58YQUEMAijs4hHceZxggS` and its URL was
+`hsin-hsin-yuan-portfolio-preview-ghlzgynyn.vercel.app`. It was never accepted
+as the deliverable. After the user separately and explicitly authorized
+permanent deletion, the exact deployment was removed; Vercel CLI reported
+`Success! Removed 1 deployment`.
+
+The true Preview was created with
+`npx --yes vercel deploy --yes --target=preview`: no `--prod`, alias, domain
+promotion, or production routing was used. Exact final evidence:
+
+- Preview URL: `https://hsin-hsin-yuan-portfolio-preview-ldm6qfz3d.vercel.app`
+- Inspector: `https://vercel.com/projectmoonie-creators-projects/hsin-hsin-yuan-portfolio-preview/4GW7xq4wuX5nf1v7VjtQ3JLAm3cW`
+- Deployment ID: `dpl_4GW7xq4wuX5nf1v7VjtQ3JLAm3cW`
+- `vercel inspect`: target `preview`, status `Ready`, created Mon Aug 03 2026 06:12:41 GMT+0800; build includes `λ api/contact` (`2.56KB`) in `iad1`.
+- `vercel ls hsin-hsin-yuan-portfolio-preview --yes`: exactly one deployment in the project, the final URL above, status `Ready`, environment `Preview`, duration `7s`.
+
+The original production website and domain were never changed. The isolated,
+accidental production-target deployment in the new preview-named project was
+deleted. No request was made to the final Preview URL, including `/en/`,
+`/zh/`, or `/api/contact`; no form was submitted and no email was sent.
 
 ## Deterministic checks
 
