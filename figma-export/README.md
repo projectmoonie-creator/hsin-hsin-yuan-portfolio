@@ -4,7 +4,7 @@ This folder is a free Figma import package for the Hsin-Hsin Yuan portfolio desi
 
 ## Files
 
-- `01-desktop-home.svg` - desktop hero, logo strip, and about section.
+- `01-desktop-home.svg` - desktop hero, logo strip, availability, and contact heading.
 - `02-desktop-works-logos.svg` - compact work cards and logo wall.
 - `03-mobile-home.svg` - mobile home reference frame.
 
