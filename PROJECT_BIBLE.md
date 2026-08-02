@@ -67,6 +67,10 @@
 - Keep each work-specific reel separate. Do not combine unrelated credits or program identities inside one thumbnail. The retained `showreel/interior-pts-reel/` assembly is an editorial spine for a future homepage showreel, not a source for either work card.
 - Featured Works carries detail. The strip should preview; Featured Works should explain.
 - Each work belongs to one public tier at a time: Featured Work, Archive, or unpublished source material. If a work is removed from Featured Works, move it deliberately to Archive or keep it out of the public site.
+- `FROM THE ARCHIVE` is one descending chronology. Canonical `order` controls
+  both DOM and visual reading order; `lead`, `supporting`, and text-only
+  treatments may change card size but must not move an older work ahead of a
+  newer one.
 - On homepage Featured Work cards, the linked media image is the primary watch action. Do not normally repeat that destination with a text CTA.
 - A deliberate exception is allowed for a user-curated full-series playlist that gathers fragmented episodes or a substantial body of related work. Mark it with `watchMode: "series"` and `showWatchCta: true`, use "Watch the full series" / "觀看完整系列", and protect the exact count and destinations with regression tests. Do not enable this exception for a single episode, trailer, representative segment, or ordinary program page.
 - Do not use the global coming-soon label for every work without a `watchUrl`. Completed or in-progress collections need their own truthful `statusLabel`, such as "Selected reel" / "精選短片" once a public card reel exists.
