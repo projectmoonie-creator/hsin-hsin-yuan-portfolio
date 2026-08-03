@@ -76,7 +76,7 @@
 唯讀模式稽核，**不代改任何檔案**，輸出到
 `docs/reviews/2026-08-04-process-diet-codex-audit.md`：
 
-1. 逐條（R1–R7）判：採納／修文（附具體措辭）／駁回（附理由）。
+1. 逐條（R1–R8）判：採納／修文（附具體措辭）／駁回（附理由）。
 2. 檢查點：條文是否有歧義、是否機械可檢、是否與既有 Bible 條文或現行
    測試衝突、立案事實是否與 repo 實況相符。
 3. 特別驗證 R6：在本 worktree 實跑 `git rev-list --count origin/main..HEAD`
