@@ -181,9 +181,9 @@ Run:
 
 ```bash
 git worktree list --porcelain
-git -C "/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V/hsin-hsin-yuan-portfolio-edit" branch --show-current
-git -C "/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V/hsin-hsin-yuan-portfolio-edit" status --short
-git -C "/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V/hsin-hsin-yuan-portfolio-edit" merge-base main codex/contact-archive-entrypoints
+git -C "<registered-main-worktree>" branch --show-current
+git -C "<registered-main-worktree>" status --short
+git -C "<registered-main-worktree>" merge-base main codex/contact-archive-entrypoints
 ```
 
 Expected: the registered main worktree is on `main`; stop rather than overwrite
