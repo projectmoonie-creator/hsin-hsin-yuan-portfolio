@@ -23,11 +23,11 @@ State: `PASS`
 - Cross-review adjudication: `docs/reviews/portfolio-design-contract-governance-review-adjudication-2026-08-03.md`
 - Final content review: `docs/reviews/final-content-cleanup-v1-2026-08-03.md`
 - Latest Vercel Preview:
-  `https://hsin-hsin-yuan-portfolio-preview-2qb5bbn2s.vercel.app`
-- Deployment ID: `dpl_BQ4CziQ9G9q2Xj27uffnLff4AYtb`
+  `https://hsin-hsin-yuan-portfolio-preview-5s4u5ncf6.vercel.app`
+- Deployment ID: `dpl_HDN2GMNaGKxu6HLP91uZQ3vJBgK2`
 - Deployment target/status: `preview` / `READY`
 - Inspector:
-  `https://vercel.com/projectmoonie-creators-projects/hsin-hsin-yuan-portfolio-preview/BQ4CziQ9G9q2Xj27uffnLff4AYtb`
+  `https://vercel.com/projectmoonie-creators-projects/hsin-hsin-yuan-portfolio-preview/HDN2GMNaGKxu6HLP91uZQ3vJBgK2`
 - Original production website/domain: unchanged.
 
 The producer approved Option A with a hard requirement that governance must not
@@ -57,14 +57,13 @@ fast-forwarded from its unchanged recorded base to `8f4e190`.
   two centered 16:9 desktop variants were preserved; all six become 16:9
   at/below 820px.
 - Desktop and mobile Works screenshots were visually inspected.
-- No deployment was created. The contact form was not submitted and no email
-  was sent.
+- A new non-production Vercel Preview was deployed from the verified public
+  package. The contact form was not submitted and no email was sent.
 
 ## Accepted Boundaries And Future Work
 
-1. The governance implementation is now on local `main`. It was not pushed or
-   deployed, so the latest Preview remains the older external preview and does
-   not contain this package.
+1. The governance implementation is on local `main` and the new Preview contains
+   its verified public output. Nothing was pushed or promoted to Production.
 2. The project layer, shared skill, and cross-review pass. A future renderer
    cleanup may remove transitional compatibility aliases only after it consumes
    `contract.public` and reproduces the frozen output hashes.
@@ -75,6 +74,9 @@ fast-forwarded from its unchanged recorded base to `8f4e190`.
 5. Top Gear's `0.81` value remains CV-sourced. The first-five-episode audience,
    weekly live average, and four-week national time-slot rank are publicly
    corroborated and recorded in the preceding annotated-content review.
+6. The Preview project has no mail environment variables. `/api/contact` is
+   deployed, but email delivery remains disabled until `RESEND_API_KEY`,
+   `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EMAIL` are configured for Preview.
 
 ## Closed Baseline
 
@@ -91,9 +93,10 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-No implementation action is required for this package. Begin any later content
-or visual change as a new bounded package from local `main`. Preview deployment
-remains a separate explicit action; do not modify Production implicitly.
+No implementation action is required for this package. Review the new Preview;
+begin any later content or visual change as a new bounded package from local
+`main`. Configure Preview mail variables only as a separate authorized task;
+do not modify Production implicitly.
 
 ## Cold Resume
 
