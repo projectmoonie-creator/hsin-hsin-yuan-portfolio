@@ -126,7 +126,8 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.deepEqual(works[4].metrics, []);
   assert.equal(works[5].role.en, "Director");
   assert.equal(works[5].platform, "China Dragon TV");
-  assert.deepEqual(works[5].mediaTitleLines, ["Top Gear China", "UK Special"]);
+  assert.equal(works[5].hideMediaLabel, true);
+  assert.equal(works[5].mediaTitleLines, undefined);
   assert.equal(works[5].tagline.en, "A world-renowned car show, reimagined for China.");
   assert.equal(
     works[5].description.en,
@@ -230,7 +231,7 @@ test("screening strip stays static while approved reels render in featured panel
   );
   assert.match(
     html,
-    /<article class="work-panel work-panel-wide-media" id="pts-taigi-bus">[\s\S]*?class="media-frame media-frame-wide media-frame-link"[\s\S]*?data-featured-reel-video[\s\S]*?src="\/assets\/showreel\/nothing-by-bus-card-reel\.mp4"/,
+    /<article class="work-panel work-panel-wide-media" id="pts-taigi-bus">[\s\S]*?class="media-frame media-frame-wide media-frame-unlabeled media-frame-link"[\s\S]*?data-featured-reel-video[\s\S]*?src="\/assets\/showreel\/nothing-by-bus-card-reel\.mp4"/,
   );
 });
 
@@ -960,11 +961,11 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   );
   assert.match(
     html,
-    /class="media-frame media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers"[\s\S]*?aria-label="Play video: Tech Dreamers"[\s\S]*?background-image:[\s\S]*?224be7ed-057b-400f-af63-a8582cd80cfb\.webp/,
+    /class="media-frame media-frame-unlabeled media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers"[\s\S]*?aria-label="Play video: Tech Dreamers"[\s\S]*?background-image:[\s\S]*?224be7ed-057b-400f-af63-a8582cd80cfb\.webp/,
   );
   assert.match(
     html,
-    /class="media-frame media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/arts\/410\/my-art-my-voice\/250220001\/whats-the-vibe-in-taiwan-my-art-my-voice"[\s\S]*?aria-label="Play video: My Art, My Voice"/,
+    /class="media-frame media-frame-unlabeled media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/arts\/410\/my-art-my-voice\/250220001\/whats-the-vibe-in-taiwan-my-art-my-voice"[\s\S]*?aria-label="Play video: My Art, My Voice"/,
   );
   assert.match(html, /class="work-media-play" aria-hidden="true"><span><\/span><\/span>/);
   assert.match(html, /Design &amp; Brand Films/);
@@ -1035,7 +1036,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /<img src="https:\/\/v3-statics\.mirrormedia\.mg\/images\/00f85da2-db1d-4c46-9b3d-a7359d911e52-w1600\.png" alt="" loading="lazy" decoding="async" onerror="this\.parentElement\.remove\(\)">/);
   assert.match(html, /Director interview: walking into the sea of creation/);
   assert.match(html, /Very Mulan/);
-  assert.match(html, /17472124753d\.png/);
+  assert.doesNotMatch(html, /17472124753d\.png/);
   assert.match(html, /press-preview-card/);
   assert.match(html, /<script type="application\/ld\+json">/);
   assert.match(html, /"@type":"Person"/);
