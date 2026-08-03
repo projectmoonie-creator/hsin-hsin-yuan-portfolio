@@ -47,6 +47,11 @@ test("Featured preview derivatives are complete silent 720p H.264 BT.709 files",
       sha256: "f5e79c8e8e13b62b337b75190f25b7d034d6059e297f8044da56d6e00a682e93",
       size: 32662721,
     }],
+    ["top-gear-china-uk-special-card-reel.mp4", {
+      duration: 29.96,
+      sha256: "4d57e75a81e2ebf0e398a08b57c8e99ddcb0973bc1562db8036221b9a014db72",
+      size: 8651457,
+    }],
   ]);
 
   for (const [filename, manifest] of expected) {
@@ -86,31 +91,4 @@ test("Featured preview derivatives are complete silent 720p H.264 BT.709 files",
     assert.equal(video.color_primaries, "bt709", filename);
     assert.ok(Math.abs(Number(probe.format.duration) - manifest.duration) < 0.2, filename);
   }
-});
-
-test("Top Gear Featured derivative satisfies the provisional web contract", () => {
-  const filePath = join(
-    process.cwd(),
-    "public/assets/showreel/top-gear-china-uk-special-card-reel.mp4",
-  );
-  assert.equal(existsSync(filePath), true);
-  const probe = JSON.parse(execFileSync("ffprobe", [
-    "-v", "error",
-    "-show_entries", "format=duration:stream=codec_name,codec_type,width,height,pix_fmt,color_space,color_transfer,color_primaries",
-    "-of", "json",
-    filePath,
-  ], { encoding: "utf8" }));
-  assert.equal(probe.streams.length, 1);
-  assert.deepEqual(
-    probe.streams.map((stream) => stream.codec_type),
-    ["video"],
-  );
-  assert.equal(probe.streams[0].codec_name, "h264");
-  assert.equal(probe.streams[0].width, 1280);
-  assert.equal(probe.streams[0].height, 720);
-  assert.equal(probe.streams[0].pix_fmt, "yuv420p");
-  assert.equal(probe.streams[0].color_space, "bt709");
-  assert.equal(probe.streams[0].color_transfer, "bt709");
-  assert.equal(probe.streams[0].color_primaries, "bt709");
-  assert.ok(Math.abs(Number(probe.format.duration) - 30) < 0.2);
 });
