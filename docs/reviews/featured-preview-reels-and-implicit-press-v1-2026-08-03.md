@@ -10,9 +10,12 @@ Final status: `PASS_WITH_OPEN_ITEMS`
   `be5ff4fe3d828a85c955764dedf9e0ce1200e0f6`
 - Validated implementation head:
   `f264f471e7c69acc2a2573e4d18fc2145c3ef5bd`
-- This report and the mutable status/plan updates belong to the subsequent
-  closeout commit. Its exact commit SHA is reported externally after that
-  commit exists; it is intentionally not self-referenced here.
+- Initial closeout commit, which first added this dated report:
+  `8a52d8506ee155b0450508430583416e08cb008b`. Its parent is the validated
+  implementation head `f264f471e7c69acc2a2573e4d18fc2145c3ef5bd`.
+- A subsequent evidence-hardening commit adds the tracked sanitized QA package
+  and corrects closeout wording. Its exact SHA is reported externally after
+  that commit exists; it is intentionally not self-referenced here.
 - This is a local closeout only. It did not deploy, change Production, merge
   local `main`, or submit the contact form.
 
@@ -49,7 +52,9 @@ external source paths. Rights for every row are
 Each derivative preserves its complete source timeline and is H.264
 1280×720, yuv420p, BT.709 space/transfer/primaries, video-only, and faststart
 (`moov` before `mdat`). Full decode-to-null completed with exit `0` for all
-three files.
+three files. The exact reproducible ffmpeg commands and durable source/output
+ledger are in
+[`showreel/featured-preview-reels/README.md`](../../showreel/featured-preview-reels/README.md).
 
 | Public derivative | Bytes | Duration (s) | SHA-256 |
 | --- | ---: | ---: | --- |
@@ -88,16 +93,22 @@ three files.
   passed.
 - The request ledger contains zero `/api/contact` POST requests. No contact
   submit action or deployment command ran.
-- The identified local port was stopped, and the repository returned to its
-  pre-QA state.
+- The identified local port was stopped. The tracked worktree returned to
+  protected-file-only status: no tracked or staged changes remained; ignored
+  `dist/` may exist.
 - Browser tool versions: Python `3.9.6`, Playwright `1.60.0`, Chromium
   `148.0.7778.96`.
-- Disposable r2 session evidence was stored at
-  `/private/tmp/featured-browser-qa-r2.fKm9Mi`. Its manifest verified `98/98`
-  entries; the manifest SHA-256 is
+- The original disposable r2 packet manifest verified `98/98` entries; its
+  manifest SHA-256 is
   `418ece08fd3b13ec2a2f8f8d5e20794f82fc1fdcf9333f9a070d108394d6d1d6`.
-  This review contains the necessary durable summary and does not depend on
-  that disposable location.
+- Durable sanitized evidence is tracked in
+  [`README.md`](./evidence/featured-preview-reels-browser-qa-r2/README.md),
+  [`results-summary.json`](./evidence/featured-preview-reels-browser-qa-r2/results-summary.json),
+  [`qa_harness.py`](./evidence/featured-preview-reels-browser-qa-r2/qa_harness.py),
+  [`reproduce.md`](./evidence/featured-preview-reels-browser-qa-r2/reproduce.md),
+  and [`evidence-manifest.sha256`](./evidence/featured-preview-reels-browser-qa-r2/evidence-manifest.sha256).
+  The durable record does not depend on the disposable packet or its
+  session-only raster captures.
 - No baseline pixel-diff claim is made.
 
 ## Sole open item

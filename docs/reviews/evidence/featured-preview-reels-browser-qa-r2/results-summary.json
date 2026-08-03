@@ -1,0 +1,188 @@
+{
+  "status": "PASS_WITH_OPEN_ITEMS",
+  "date": "2026-08-03",
+  "identity": {
+    "branch": "codex/featured-preview-reels-implicit-press",
+    "validatedImplementationHead": "f264f471e7c69acc2a2573e4d18fc2145c3ef5bd",
+    "baseRollbackCheckpoint": "be5ff4fe3d828a85c955764dedf9e0ce1200e0f6"
+  },
+  "environment": {
+    "python": "3.9.6",
+    "playwright": "1.60.0",
+    "chromium": "148.0.7778.96"
+  },
+  "originalSessionPacket": {
+    "manifestEntriesVerified": 98,
+    "manifestEntriesTotal": 98,
+    "manifestSha256": "418ece08fd3b13ec2a2f8f8d5e20794f82fc1fdcf9333f9a070d108394d6d1d6",
+    "durabilityNote": "The original packet and raster captures were session-only; this sanitized package is the durable evidence authority."
+  },
+  "deterministic": {
+    "overallPass": true,
+    "npmTest": {"pass": true, "passed": 61, "total": 61},
+    "runtimeLifecycle": {"pass": true, "passed": 6, "total": 6},
+    "designContractAudit": {"pass": true, "featured": 6, "archive": 5, "globalPress": 2, "workPress": 3},
+    "build": {"pass": true},
+    "figmaExport": {"pass": true, "outputDiff": false},
+    "gitDiffCheck": {"pass": true},
+    "privacyScan": {"pass": true},
+    "figma": [
+      {"path": "figma-export/01-desktop-home.svg", "sha256": "818a95fd1b41f5d84ac30842887f564c2f83d60ba3b7769255a3e0789373647e", "pass": true},
+      {"path": "figma-export/02-desktop-works-logos.svg", "sha256": "8368e496d283f47a2fd73742f24dc46512275e251be6caf500c448a623a8a03f", "pass": true},
+      {"path": "figma-export/03-mobile-home.svg", "sha256": "43ecb8b502fe606505a5fa4a590a03d0b3da8091377acd9146bf8e65e8564e06", "pass": true},
+      {"path": "figma-export/README.md", "sha256": "1a91858e1c323a7e76e7e1015b05cbc50f8005658628cf686ea4c4284668f625", "pass": true}
+    ],
+    "media": [
+      {
+        "path": "public/assets/showreel/slow-steps-card-reel.mp4",
+        "duration": "30.030000",
+        "bytes": 7427742,
+        "sha256": "6061dceb6e583a5fc20d695b6cb555f4e02a80970b41bda8ec787acb3f3f1174",
+        "stream": {"codec": "h264", "type": "video", "width": 1280, "height": 720, "pixelFormat": "yuv420p", "colorSpace": "bt709", "colorTransfer": "bt709", "colorPrimaries": "bt709"},
+        "moovOffset": 36,
+        "mdatOffset": 11263,
+        "faststart": true,
+        "decodeExitCode": 0,
+        "completeTimeline": true,
+        "pass": true
+      },
+      {
+        "path": "public/assets/showreel/tech-dreamers-card-reel.mp4",
+        "duration": "30.030000",
+        "bytes": 6441958,
+        "sha256": "4c6c1070902b9d6dd8b170c8021c3bca303a9e2c9a1abca05a7911264f23835c",
+        "stream": {"codec": "h264", "type": "video", "width": 1280, "height": 720, "pixelFormat": "yuv420p", "colorSpace": "bt709", "colorTransfer": "bt709", "colorPrimaries": "bt709"},
+        "moovOffset": 36,
+        "mdatOffset": 11699,
+        "faststart": true,
+        "decodeExitCode": 0,
+        "completeTimeline": true,
+        "pass": true
+      },
+      {
+        "path": "public/assets/showreel/my-art-my-voice-card-reel.mp4",
+        "duration": "100.033267",
+        "bytes": 32662721,
+        "sha256": "f5e79c8e8e13b62b337b75190f25b7d034d6059e297f8044da56d6e00a682e93",
+        "stream": {"codec": "h264", "type": "video", "width": 1280, "height": 720, "pixelFormat": "yuv420p", "colorSpace": "bt709", "colorTransfer": "bt709", "colorPrimaries": "bt709"},
+        "moovOffset": 36,
+        "mdatOffset": 36479,
+        "faststart": true,
+        "decodeExitCode": 0,
+        "completeTimeline": true,
+        "pass": true
+      }
+    ]
+  },
+  "browser": {
+    "localOverallPass": true,
+    "matrix": [
+      {"language": "en", "viewport": "1440x900", "pass": true, "navigationStatus": 200, "requests": 12, "responses": 12, "contactPosts": 0, "consoleWarningsErrors": 0, "pageErrors": 0, "requestFailures": 0, "httpErrors": 0},
+      {"language": "en", "viewport": "1200x900", "pass": true, "navigationStatus": 200, "requests": 11, "responses": 11, "contactPosts": 0, "consoleWarningsErrors": 0, "pageErrors": 0, "requestFailures": 0, "httpErrors": 0},
+      {"language": "en", "viewport": "834x1112", "pass": true, "navigationStatus": 200, "requests": 12, "responses": 12, "contactPosts": 0, "consoleWarningsErrors": 0, "pageErrors": 0, "requestFailures": 0, "httpErrors": 0},
+      {"language": "en", "viewport": "390x844", "pass": true, "navigationStatus": 200, "requests": 12, "responses": 12, "contactPosts": 0, "consoleWarningsErrors": 0, "pageErrors": 0, "requestFailures": 0, "httpErrors": 0},
+      {"language": "en", "viewport": "360x800", "pass": true, "navigationStatus": 200, "requests": 12, "responses": 12, "contactPosts": 0, "consoleWarningsErrors": 0, "pageErrors": 0, "requestFailures": 0, "httpErrors": 0},
+      {"language": "zh", "viewport": "1440x900", "pass": true, "navigationStatus": 200, "requests": 12, "responses": 12, "contactPosts": 0, "consoleWarningsErrors": 0, "pageErrors": 0, "requestFailures": 0, "httpErrors": 0},
+      {"language": "zh", "viewport": "1200x900", "pass": true, "navigationStatus": 200, "requests": 11, "responses": 11, "contactPosts": 0, "consoleWarningsErrors": 0, "pageErrors": 0, "requestFailures": 0, "httpErrors": 0},
+      {"language": "zh", "viewport": "834x1112", "pass": true, "navigationStatus": 200, "requests": 12, "responses": 12, "contactPosts": 0, "consoleWarningsErrors": 0, "pageErrors": 0, "requestFailures": 0, "httpErrors": 0},
+      {"language": "zh", "viewport": "390x844", "pass": true, "navigationStatus": 200, "requests": 12, "responses": 12, "contactPosts": 0, "consoleWarningsErrors": 0, "pageErrors": 0, "requestFailures": 0, "httpErrors": 0},
+      {"language": "zh", "viewport": "360x800", "pass": true, "navigationStatus": 200, "requests": 12, "responses": 12, "contactPosts": 0, "consoleWarningsErrors": 0, "pageErrors": 0, "requestFailures": 0, "httpErrors": 0}
+    ],
+    "matrixPredicates": {
+      "http200AndBoundedNetworkIdle": true,
+      "noHorizontalOverflow": true,
+      "exactlyFiveFeaturedVideos": true,
+      "posterPreloadControlTabPointerMediaAttributes": true,
+      "localizedWorkPressGroups": true,
+      "visibleWorkPressHeadingAbsent": true,
+      "threeVisibleEntryTypes": true,
+      "globalPressVisible": true,
+      "slowTechArtDestinationsExact": true,
+      "fiveContactFieldsNeverSubmitted": true,
+      "localErrorArraysEmpty": true
+    },
+    "requestLedger": {
+      "matrixRequests": 118,
+      "interactionRequests": 14,
+      "reducedMotionRequests": 11,
+      "noJavaScriptRequests": 13,
+      "keyboardRequests": 12,
+      "localSideComparisonAttemptRequests": 140,
+      "allLocalContextRequests": 308,
+      "historicalBaselineRequests": 1155,
+      "contactPosts": 0,
+      "contactSubmitEvents": 0,
+      "localConsoleWarningsErrors": 0,
+      "localPageErrors": 0,
+      "localRequestFailures": 0,
+      "localHttpErrors": 0,
+      "baselineLoginPageConsoleWarningsErrors": 47,
+      "baselineLoginPageHttpErrors": 13,
+      "baselinePageErrors": 0,
+      "baselineRequestFailures": 0
+    },
+    "interaction": {
+      "pass": true,
+      "hold": {"elapsedMs": 1012, "playingClass": false, "paused": true, "currentTime": 0, "opacity": "0"},
+      "playing": {"elapsedMs": 1708, "playingClass": true, "paused": false, "currentTime": 0.009375, "opacity": "0"},
+      "advanced": {"currentTime": 0.614702, "deltaCurrentTime": 0.605327, "opacity": "1"},
+      "exit": {"playingClass": false, "paused": true, "currentTime": 0, "opacity": "0"},
+      "reentryHold": {"elapsedMs": 1014, "playingClass": false, "paused": true, "currentTime": 0, "opacity": "0"},
+      "reentryPlaying": {"elapsedMs": 1676, "playingClass": true, "paused": false, "currentTime": 0.017286, "opacity": "0"},
+      "arbitration": {
+        "method": "natural sticky geometry",
+        "scrollY": 1880,
+        "eligibleIndexes": [0, 1],
+        "playingIndexes": [1],
+        "cards": [
+          {"index": 0, "id": "slow-steps", "ratio": 1, "top": 95.59375, "bottom": 714.40625, "playingClass": false, "paused": true, "currentTime": 0},
+          {"index": 1, "id": "tech-dreamers", "ratio": 0.35705989294010704, "top": 679.046875, "bottom": 1297.859375, "playingClass": true, "paused": false, "currentTime": 0.607651},
+          {"index": 2, "id": "my-art-my-voice", "ratio": 0, "top": 1372.046875, "bottom": 1990.859375, "playingClass": false, "paused": true, "currentTime": 0},
+          {"index": 3, "id": "interior-spatial-brand-films", "ratio": 0, "top": 2224.328125, "bottom": 2524.5625, "playingClass": false, "paused": true, "currentTime": 0},
+          {"index": 4, "id": "pts-taigi-bus", "ratio": 0, "top": 2917.328125, "bottom": 3217.5625, "playingClass": false, "paused": true, "currentTime": 0}
+        ],
+        "pass": true
+      },
+      "mediaError": {"method": "synthetic error event on active media", "beforeCurrentTime": 0.017873, "afterCurrentTime": 0, "resetToPoster": true, "pass": true},
+      "pageLifecycle": {"method": "synthetic persisted PageTransitionEvent pagehide/pageshow", "afterHideCurrentTime": 0, "afterShowCurrentTime": 0.017743, "afterShowElapsedMs": 1424, "pass": true},
+      "visibility": {"method": "controlled reversible document.visibilityState override", "resetCurrentTime": 0, "restoredState": "visible", "replayedCurrentTime": 0.006425, "pass": true}
+    },
+    "fallbacks": {
+      "reducedMotion": {"pass": true, "visiblePosterWrappers": 5, "videosDisplayNone": 5, "pausedAtZero": 5, "contactPosts": 0},
+      "noJavaScript": {"pass": true, "documentRequestsBefore": 1, "documentRequestsAfter": 1, "hash": "#works", "scrollY": 2208, "worksRect": {"top": 0.421875, "bottom": 4420.421875, "inViewport": true}, "visiblePosterWrappers": 5, "pausedAtZero": 5, "contactPosts": 0},
+      "keyboard": {
+        "pass": true,
+        "techWrapperFocusRect": {"x": 144.59375, "y": 281.046875, "width": 533.75, "height": 618.8125, "bottom": 899.859375, "right": 678.34375},
+        "outline": {"style": "solid", "width": "2px", "color": "rgb(216, 255, 62)", "offset": "4px"},
+        "contactFieldsReached": true,
+        "videosFocused": false,
+        "videoTabIndex": -1,
+        "videoControls": false,
+        "videoPointerEvents": "none",
+        "contactPosts": 0
+      }
+    },
+    "historicalBaseline": {
+      "status": "PASS_WITH_OPEN_ITEMS",
+      "attemptedCases": 10,
+      "authGatedCases": 10,
+      "portfolioDomAvailableCases": 0,
+      "matchedComparisonCases": 0,
+      "pixelStatisticsCases": 0,
+      "matchedBaselineClaim": false,
+      "soleOpenItem": "Matched pre-package browser comparison remains unavailable because the recorded historical Vercel Preview redirects unauthenticated QA contexts through Vercel SSO to the login page; no portfolio DOM, matched Featured screenshots, geometry/crop comparison, or pixel statistics could be obtained."
+    }
+  },
+  "operational": {
+    "serverPort": 4873,
+    "listenerBefore": false,
+    "listenerAfter": false,
+    "serverStopped": true,
+    "deploymentCommandInvoked": false,
+    "contactFormSubmitActionInvoked": false,
+    "trackedWorktreeAfterQa": "protected-file-only",
+    "stagedChangesAfterQa": false,
+    "ignoredDistMayExist": true,
+    "protectedUntrackedFile": "docs/reviews/screening-strip-media-contract-v1-2026-07-29 2.md"
+  }
+}

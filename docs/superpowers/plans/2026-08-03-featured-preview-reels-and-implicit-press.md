@@ -710,12 +710,18 @@ reset, media-error poster fallback, horizontal overflow, and the semantic
 `role="group"`/localized `aria-label`. Confirm Slow Steps remains non-linked;
 Tech Dreamers and My Art, My Voice retain their TaiwanPlus destinations.
 
-- [x] **Step 6: Visually compare matched screenshots**
+- [x] **Step 6: Attempt matched screenshot comparison; blocked by Vercel SSO and carried as the recorded open item**
 
 Compare desktop and mobile Featured screenshots with the approved pre-package
 baseline. Allowed differences are only reel motion after the hold and removal
 of the visible work-Press group heading. Treat every poster, crop, panel size,
 copy, item card, or external-link difference as a regression.
+
+The required attempt was completed, but the historical Preview redirected all
+unauthenticated cases through Vercel SSO. No portfolio DOM, matched Featured
+screenshots, geometry/crop comparison, or pixel statistics were available.
+This remains the accepted external open item recorded in
+[`docs/reviews/featured-preview-reels-and-implicit-press-v1-2026-08-03.md`](../../reviews/featured-preview-reels-and-implicit-press-v1-2026-08-03.md).
 
 ### Task 7: Close the local package and hand it back for review
 
@@ -730,10 +736,13 @@ Record:
 
 - the base and final branch commit;
 - three source filenames/hashes without external paths;
-- exact ffmpeg recipe and three output hashes/sizes/durations;
+- a link to the exact durable ffmpeg recipe at
+  [`showreel/featured-preview-reels/README.md`](../../../showreel/featured-preview-reels/README.md),
+  plus three output hashes/sizes/durations;
 - data/contract, Press, interaction, Figma, privacy, browser, reduced-motion,
   no-JS, keyboard, and link results;
-- the unchanged poster/link/geometry proof;
+- the unchanged local poster/link proof, and explicit classification of matched
+  geometry/crop proof as unavailable/open rather than completed proof;
 - the protected user file remaining untouched;
 - no Preview/Production deployment and no contact submission.
 
@@ -761,6 +770,10 @@ git status --short
 
 Expected: all gates pass; only the protected user file remains untracked before
 the closeout commit.
+
+All package-execution checkboxes may be complete while the accepted external
+matched-comparison open item remains explicitly recorded; checkbox completion
+does not convert that unavailable evidence into a pass.
 
 - [x] **Step 4: Commit the closeout package**
 

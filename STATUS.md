@@ -15,9 +15,25 @@ State: `PASS_WITH_OPEN_ITEMS`
   `f264f471e7c69acc2a2573e4d18fc2145c3ef5bd`
 - Closeout record:
   `docs/reviews/featured-preview-reels-and-implicit-press-v1-2026-08-03.md`
-- The closeout commit contains this status, the dated report, and the completed
-  plan checklist. Its exact SHA is reported externally after commit and is not
-  self-referenced in the committed files.
+- Initial closeout commit, which first added the dated report:
+  `8a52d8506ee155b0450508430583416e08cb008b`; its parent is the validated
+  implementation head `f264f471e7c69acc2a2573e4d18fc2145c3ef5bd`.
+- The subsequent evidence-hardening commit adds the tracked sanitized QA
+  package and corrected closeout wording. Its exact SHA is reported externally
+  after commit and is not self-referenced in committed files.
+- Durable QA evidence:
+  `docs/reviews/evidence/featured-preview-reels-browser-qa-r2/README.md` and
+  `results-summary.json`; reproduction harness/commands and a manifest are in
+  the same directory.
+- Exact encoding recipe and source/output ledger:
+  `showreel/featured-preview-reels/README.md`.
+- This branch has no configured upstream and no local remote-tracking ref. No
+  push or remote metadata readback was performed for this package.
+- Every delegated role requested `gpt-5.6-sol`. Task 1 spec review and the
+  media/lifecycle implementation explicitly exposed requested/observed/
+  completed `gpt-5.6-sol`; other delegated runtimes did not expose independent
+  IDs, so none are inferred. No Claude or Gemini collaboration request was
+  made in this package.
 
 Three complete silent optimized reels now cover Slow Steps, Tech Dreamers, and
 My Art, My Voice. All five Featured reels use canonical `after-hold` behavior:
@@ -43,8 +59,9 @@ Current design/Figma rules are aligned and Figma output is unchanged.
   visibility, reduced motion, no JavaScript, keyboard, semantic, and
   contact-without-submit checks also passed.
 - The browser request ledger contains zero `/api/contact` POSTs. No deployment
-  command ran, the identified local port was stopped, and QA left the
-  repository unchanged.
+  command ran, and the identified local port was stopped. The tracked worktree
+  returned to protected-file-only status: no tracked or staged changes
+  remained; ignored `dist/` may exist.
 - r2 evidence manifest: `98/98`, SHA-256
   `418ece08fd3b13ec2a2f8f8d5e20794f82fc1fdcf9333f9a070d108394d6d1d6`.
 - No baseline pixel-diff claim is made.
@@ -95,15 +112,18 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-The user reviews the local build, then makes an explicit decision about a new
-Vercel Preview and/or merge to local `main`. Any Preview deployment, Production
-change, or merge requires explicit later authorization. No local server is
-claimed active.
+From the repository root, run `npm run build && npm run serve`, review
+`http://127.0.0.1:4173/en/` and `http://127.0.0.1:4173/zh/`, then stop the server
+with Ctrl-C. No local server is currently active. After review, the user makes
+an explicit decision about a new Vercel Preview and/or merge to local `main`.
+Any Preview deployment, Production change, push, or merge requires explicit
+later authorization.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and the dated closeout.
-2. Verify the branch, validated implementation head `f264f471`, closeout commit
-   reported externally, base/rollback checkpoint, and protected untracked file.
+2. Verify the branch, validated implementation head `f264f471`, initial
+   closeout commit `8a52d850`, subsequent hardening commit reported externally,
+   base/rollback checkpoint, durable QA package, and protected untracked file.
 3. Re-run deterministic gates if the branch changes.
 4. Do not deploy, change Production, submit Contact, or merge implicitly.
