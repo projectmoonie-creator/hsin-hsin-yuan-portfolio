@@ -35,7 +35,7 @@
     "sourceArtworkTitle": "present"
   },
   "featuredReelUrl": "/assets/showreel/nothing-by-bus-card-reel.mp4",
-  "featuredReelMode": "in-view",
+  "featuredReelMode": "after-hold",
   "featuredReelPoster": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
   "tags": ["travel factual", "Taiwanese", "local culture"],
   "metrics": [],

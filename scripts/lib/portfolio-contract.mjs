@@ -15,6 +15,8 @@ export const PRESENTATION_VARIANTS = Object.freeze({
   }),
 });
 
+export const FEATURED_REEL_MODES = Object.freeze(["after-hold"]);
+
 export const FIELD_CLASSIFICATION = Object.freeze({
   featured: Object.freeze({
     requiredRendered: Object.freeze([
@@ -29,6 +31,9 @@ export const FIELD_CLASSIFICATION = Object.freeze({
       "mediaWatchUrl", "mediaTitleLines",
     ]),
     evidenceOnly: Object.freeze([
+      "featuredReelRightsStatus", "featuredReelSourceDimensions",
+      "featuredReelSourceDuration", "featuredReelSourceFilename",
+      "featuredReelSourceSha256",
       "focalPoint", "metricsCheckedAt", "metricsSourceUrl", "posterDimensions",
       "posterFocalPoint", "posterRightsStatus", "posterSourceSha256",
       "posterSourceTimecode", "posterSourceUrl", "posterVariant", "sourceNote",
@@ -160,6 +165,58 @@ function validatePresentation(presentation, workLabel) {
   );
 }
 
+function validateFeaturedReel(source) {
+  const kind = `Featured work ${labelFor(source, "<unknown>")}`;
+  const publicFields = ["featuredReelMode", "featuredReelUrl", "featuredReelPoster"];
+  const presentPublicFields = publicFields.filter((field) => Object.hasOwn(source, field));
+  if (presentPublicFields.length > 0 && presentPublicFields.length < publicFields.length) {
+    throw new Error(`${kind} requires a complete featured reel triplet`);
+  }
+  if (presentPublicFields.length === publicFields.length) {
+    if (!FEATURED_REEL_MODES.includes(source.featuredReelMode)) {
+      throw new Error(`${kind} featuredReelMode must be one of: ${FEATURED_REEL_MODES.join(", ")}`);
+    }
+    for (const field of ["featuredReelUrl", "featuredReelPoster"]) {
+      if (typeof source[field] !== "string" || !source[field].trim()) {
+        throw new Error(`${kind} ${field} must be non-empty`);
+      }
+    }
+  }
+
+  const provenanceFields = [
+    "featuredReelSourceFilename",
+    "featuredReelSourceSha256",
+    "featuredReelSourceDuration",
+    "featuredReelSourceDimensions",
+    "featuredReelRightsStatus",
+  ];
+  const presentProvenanceFields = provenanceFields.filter((field) => Object.hasOwn(source, field));
+  if (presentProvenanceFields.length > 0 && presentProvenanceFields.length < provenanceFields.length) {
+    throw new Error(`${kind} requires complete featured reel provenance`);
+  }
+  if (presentProvenanceFields.length !== provenanceFields.length) return;
+
+  for (const field of ["featuredReelSourceFilename", "featuredReelRightsStatus"]) {
+    if (typeof source[field] !== "string" || !source[field].trim()) {
+      throw new Error(`${kind} ${field} must be non-empty`);
+    }
+  }
+  if (!/^[0-9a-f]{64}$/.test(source.featuredReelSourceSha256)) {
+    throw new Error(`${kind} featuredReelSourceSha256 must be a lowercase SHA-256`);
+  }
+  if (typeof source.featuredReelSourceDuration !== "number"
+    || !Number.isFinite(source.featuredReelSourceDuration)
+    || source.featuredReelSourceDuration <= 0) {
+    throw new Error(`${kind} featuredReelSourceDuration must be a positive number`);
+  }
+  const dimensions = source.featuredReelSourceDimensions;
+  if (!dimensions || typeof dimensions !== "object" || Array.isArray(dimensions)
+    || typeof dimensions.width !== "number" || !Number.isFinite(dimensions.width) || dimensions.width <= 0
+    || typeof dimensions.height !== "number" || !Number.isFinite(dimensions.height) || dimensions.height <= 0) {
+    throw new Error(`${kind} featuredReelSourceDimensions must contain positive numbers`);
+  }
+}
+
 export function normalizeWorkPressItem(source) {
   const kind = "Work Press item";
   requireLocalized(source, "type", kind);
@@ -211,6 +268,7 @@ export function normalizeFeaturedWork(source) {
   requireLocalizable(source, "platform", kind);
   requireField(source, "presentation", kind);
   validatePresentation(source.presentation, source.slug);
+  validateFeaturedReel(source);
 
   const presentation = { ...source.presentation };
   const normalized = {
