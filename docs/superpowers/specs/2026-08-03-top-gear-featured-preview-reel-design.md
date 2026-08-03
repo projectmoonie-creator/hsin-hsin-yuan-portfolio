@@ -2,7 +2,7 @@
 
 Date: 2026-08-03
 
-Status: approved visual direction; awaiting written-spec confirmation
+Status: approved for implementation by the user on 2026-08-03
 
 Work package branch: `codex/top-gear-featured-preview-reel`
 
@@ -48,11 +48,12 @@ final media ledger must record the exact in/out timecodes used.
 3. `6–10s` — the microcar moves through London traffic.
 4. `10–13s` — architecture or city-scale movement keeps the British location
    legible and creates a visual breath.
-5. `13–17s` — Chinese and British participants interact beside a vehicle,
-   making the cross-border production visible rather than relying on copy.
+5. `13–17s` — an on-location vehicle exchange at a British estate makes the
+   production journey visible rather than relying on copy.
 6. `17–22s` — road or sports-car action increases pace.
-7. `22–26s` — an aircraft over the British landscape provides the explicitly
-   requested aircraft image and expands the production scale.
+7. `22–26s` — an aircraft exterior followed by the Chinese host with its
+   British pilot provides the explicitly requested aircraft image and makes
+   the cross-border encounter visible.
 8. `26–30s` — return to road or vehicle movement for a clean loop into the
    opening London image.
 

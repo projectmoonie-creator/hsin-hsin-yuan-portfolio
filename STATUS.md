@@ -6,9 +6,9 @@ State: `IN_PROGRESS`
 
 ## Current Work Package
 
-- Package: `Top Gear Featured Preview Reel v1` — visual direction approved;
-  written design specification awaiting user confirmation before planning or
-  implementation.
+- Package: `Top Gear Featured Preview Reel v1` — visual direction and written
+  specification approved; implementation plan complete and awaiting execution
+  workflow selection.
 - Branch: `codex/top-gear-featured-preview-reel`.
 - Base and rollback checkpoint:
   `0e79852f7552af42b25d0e1adc9f746f98828fb6` (also current local `main`).
@@ -16,6 +16,8 @@ State: `IN_PROGRESS`
   `A · Action-led`, with an aircraft shot explicitly included.
 - Design specification:
   `docs/superpowers/specs/2026-08-03-top-gear-featured-preview-reel-design.md`.
+- Implementation plan:
+  `docs/superpowers/plans/2026-08-03-top-gear-featured-preview-reel.md`.
 - The user-supplied source is a 3195.042540-second H.264 1920×1080 BT.709
   episode file. Its basename and SHA-256 are recorded in the design
   specification; its absolute Downloads path remains session-only evidence.
@@ -131,12 +133,10 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-The user reviews
-`docs/superpowers/specs/2026-08-03-top-gear-featured-preview-reel-design.md`.
-After explicit confirmation, invoke the current canonical `writing-plans`
-skill, write and commit a test-first implementation plan, then begin source
-shot selection and reel implementation. Do not encode or change canonical
-work data before that confirmation.
+The user selects Subagent-Driven or Inline Execution for
+`docs/superpowers/plans/2026-08-03-top-gear-featured-preview-reel.md`. Then
+execute the plan test-first without deploying, pushing, merging, submitting
+Contact, or moving/deleting the source file.
 
 ## Cold Resume
 
@@ -145,8 +145,7 @@ work data before that confirmation.
 2. Verify branch `codex/top-gear-featured-preview-reel`, base
    `0e79852f7552af42b25d0e1adc9f746f98828fb6`, and the protected untracked
    file.
-3. Confirm whether the written design specification has received explicit
-   user approval. If not, remain at the review gate.
-4. After approval, use `writing-plans` before implementation and follow the
-   design's test, media-evidence, browser-QA, and rollback contracts.
+3. Confirm the written design is approved and the implementation plan exists.
+4. Ask for or recover the user's execution-workflow choice, then follow the
+   plan's test, media-evidence, browser-QA, and rollback contracts.
 5. Do not deploy, push, change Production, submit Contact, or merge implicitly.
