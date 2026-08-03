@@ -19,8 +19,7 @@ whether the resulting reusable skill guidance is genuinely project-agnostic.
 
 ### Portfolio repository
 
-- Repository:
-  `/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V/hsin-hsin-yuan-portfolio-remove-lights`
+- Repository: portfolio repository root
 - Branch: `codex/portfolio-design-contract-governance`
 - Baseline: `90b5d1ae5e32126c78672df33c4c6f4eaa7f0642`
 - Reviewed head: `03a5aee2622811c1085b618aa332225b2b3dbd44`
@@ -32,7 +31,7 @@ whether the resulting reusable skill guidance is genuinely project-agnostic.
 
 ### Shared skill repository
 
-- Repository: `/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V`
+- Repository: Moonie V workspace root
 - Branch: `main`
 - Skill commit: `9985f06`
 - Skill:
