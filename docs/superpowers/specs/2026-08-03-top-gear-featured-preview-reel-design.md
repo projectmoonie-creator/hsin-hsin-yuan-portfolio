@@ -2,11 +2,16 @@
 
 Date: 2026-08-03
 
-Status: approved for implementation by the user on 2026-08-03
+Status: implemented and reviewed locally on 2026-08-03 (`PASS_WITH_OPEN_ITEMS`)
 
 Work package branch: `codex/top-gear-featured-preview-reel`
 
 Base / rollback checkpoint: `0e79852f7552af42b25d0e1adc9f746f98828fb6`
+
+Validated implementation head: `c4c284707edd1f6560081ef9df3b56b0ba5f9bc5`
+
+Closeout record:
+`docs/reviews/top-gear-featured-preview-reel-v1-2026-08-03.md`
 
 ## Goal
 

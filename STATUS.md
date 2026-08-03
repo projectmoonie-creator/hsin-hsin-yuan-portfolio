@@ -2,28 +2,85 @@
 
 Updated: 2026-08-03
 
-State: `IN_PROGRESS`
+State: `PASS_WITH_OPEN_ITEMS`
 
 ## Current Work Package
 
-- Package: `Top Gear Featured Preview Reel v1` — visual direction and written
-  specification approved; implementation plan complete and awaiting execution
-  workflow selection.
+- Package: `Top Gear Featured Preview Reel v1` — implemented and reviewed
+  locally with deterministic, media, bilingual browser, fallback, privacy, and
+  repository-hygiene evidence complete.
 - Branch: `codex/top-gear-featured-preview-reel`.
 - Base and rollback checkpoint:
   `0e79852f7552af42b25d0e1adc9f746f98828fb6` (also current local `main`).
+- Validated implementation head:
+  `c4c284707edd1f6560081ef9df3b56b0ba5f9bc5`.
+- Closeout record:
+  `docs/reviews/top-gear-featured-preview-reel-v1-2026-08-03.md`.
+- Design, plan, contract, draft, refined-cut, and exact-evidence commits are
+  `cfea3cdd1ceec22dcb892077282ad3c3082d0e24`,
+  `9d1da19a042d2ff8031735da8f6296e5c583add5`,
+  `17f40857bbfb6c02c790d1b0a2fc2377f56d5b89`,
+  `8c3b66aa5806a34866cd616aa915b238a70c0a9a`,
+  `36305c8d86c4d3541358798491a2c0a1eaeaa903`, and
+  `c4c284707edd1f6560081ef9df3b56b0ba5f9bc5` respectively.
+- The documentation-only closeout commit is reported externally after commit
+  and intentionally is not self-referenced in committed files.
 - Approved direction: approximately 30 seconds, `B · Cross-border story` plus
   `A · Action-led`, with an aircraft shot explicitly included.
 - Design specification:
   `docs/superpowers/specs/2026-08-03-top-gear-featured-preview-reel-design.md`.
 - Implementation plan:
   `docs/superpowers/plans/2026-08-03-top-gear-featured-preview-reel.md`.
-- The user-supplied source is a 3195.042540-second H.264 1920×1080 BT.709
-  episode file. Its basename and SHA-256 are recorded in the design
-  specification; its absolute Downloads path remains session-only evidence.
-- No reel derivative, canonical work-data change, test change, deployment,
-  push, main merge, contact submission, or external message has occurred in
-  this package.
+- The exact public derivative is 8,651,457 bytes, 29.960000 seconds, one
+  silent H.264 1280×720 yuv420p BT.709 stream, SHA-256
+  `4d57e75a81e2ebf0e398a08b57c8e99ddcb0973bc1562db8036221b9a014db72`;
+  faststart and full decode passed.
+- The user-supplied source remains outside the repository. Its approved
+  basename, `3195.042540`-second duration, 1920×1080 dimensions, and SHA-256
+  are recorded without its absolute path.
+- The local preview served exactly ignored `dist/` on port `4873` during QA.
+  It was stopped after evidence capture; no listener remains and
+  `http://127.0.0.1:4873/en/` and `/zh/` are inactive. This was not a
+  deployment.
+- No Vercel Preview or Production deployment, push, main merge, Contact
+  submission, external message, or source-file move/deletion occurred.
+
+## Current Package Verification
+
+- `npm test`: `61/61` passed; Featured lifecycle: `6/6` passed.
+- Design audit passed with `6` Featured, `5` Archive, `2` global Press, and
+  `3` Work Press entries. Build, Figma export, exact generated markup, Figma
+  diff, media manifest, faststart, stream probe, and full decode passed.
+- All four current Figma hashes remained exact and unchanged; the closeout
+  record contains the fingerprints.
+- Persistent connected-browser QA passed `10/10` English/Chinese cases at
+  1440×900, 1200×900, 834×1112, 390×844, and 360×800. Every case proved poster
+  first, poster at the one-second hold sample, actual playing, last-eligible
+  ownership, exact wrapper/source, no overflow, no extra title overlay, and
+  approved responsive geometry.
+- Exit reset, re-entry, reduced motion, no-JavaScript, keyboard focus and Enter
+  activation, media error, BFCache, and controlled visibility passed. The
+  aircraft exterior and cockpit exchange were visibly captured at reel times
+  `22.44` and `24.61` seconds.
+- The repeatable disposable six-reel harness returned `PASS`, with the poster
+  still visible at `1018.4` ms and actual playing at `1434.6` ms from
+  eligibility. Its local page/console/request/HTTP error ledgers were empty.
+- Browser evidence recorded zero `/api/contact` POSTs and zero submit events.
+  The protected untracked file retained SHA-256
+  `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+
+## Current Package Open Item
+
+Matched pre-package browser comparison remains unavailable because the
+recorded historical Vercel Preview redirects unauthenticated QA through
+Vercel SSO. No matched portfolio DOM, screenshot, geometry/crop comparison,
+or pixel statistic is claimed. This is inherited external-state evidence, not
+a local product defect; unchanged Figma hashes support but do not replace the
+unavailable comparison.
+
+The branch remains local and unpushed by explicit scope. The next user decision
+is whether to accept the retained feature branch and separately authorize any
+push, deployment, or merge.
 
 ## Prior Accepted Work Package
 
@@ -65,7 +122,7 @@ longer renders the redundant visible group heading, while its localized
 semantic group and visible per-card types remain. Global Press is unchanged.
 Current design/Figma rules are aligned and Figma output is unchanged.
 
-## Verification
+## Prior Package Verification
 
 - `npm test`: `61/61` passed; Featured runtime lifecycle `6/6` passed.
 - Focused contract, media, renderer, audit, and Figma checks passed.
@@ -133,19 +190,20 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-The user selects Subagent-Driven or Inline Execution for
-`docs/superpowers/plans/2026-08-03-top-gear-featured-preview-reel.md`. Then
-execute the plan test-first without deploying, pushing, merging, submitting
-Contact, or moving/deleting the source file.
+Review and accept the retained local branch
+`codex/top-gear-featured-preview-reel` at its externally reported closeout
+commit. Any push, deployment, or merge requires a separate explicit user
+instruction.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and the Top Gear design
    specification.
-2. Verify branch `codex/top-gear-featured-preview-reel`, base
-   `0e79852f7552af42b25d0e1adc9f746f98828fb6`, and the protected untracked
-   file.
-3. Confirm the written design is approved and the implementation plan exists.
-4. Ask for or recover the user's execution-workflow choice, then follow the
-   plan's test, media-evidence, browser-QA, and rollback contracts.
+2. Verify branch `codex/top-gear-featured-preview-reel`, validated
+   implementation head `c4c284707edd1f6560081ef9df3b56b0ba5f9bc5`, the
+   externally reported closeout commit, and the protected untracked file.
+3. Read the dated Top Gear closeout record for exact media and browser
+   evidence; the port `4873` preview is stopped and inactive.
+4. Ask whether the user accepts the retained local package and wants a
+   separately authorized push, deployment, or merge.
 5. Do not deploy, push, change Production, submit Contact, or merge implicitly.
