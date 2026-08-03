@@ -137,6 +137,16 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     works[5].description.zh,
     "擔任《巔峰拍檔》中國版第二季第五期英國篇導演，負責英國拍攝內容，協調播出端、中國製作端與英國原版 Top Gear 團隊之間的製作需求。",
   );
+  assert.equal(works[5].featuredReelMode, "after-hold");
+  assert.equal(
+    works[5].featuredReelUrl,
+    "/assets/showreel/top-gear-china-uk-special-card-reel.mp4",
+  );
+  assert.equal(works[5].featuredReelPoster, works[5].posterImage);
+  assert.equal(
+    works[5].watchUrl,
+    "https://youtu.be/M_eXe9HRD9Y?si=YZ_3JZ7FJY4vVcZv",
+  );
   assert.deepEqual(works[5].metricsContext, {
     en: "Season 2 audience, reported across television and online",
     zh: "第二季播出表現（電視與線上）",
@@ -241,7 +251,7 @@ test("all approved Featured reels hold their existing poster before muted playba
   const html = renderPage({ lang: "en", site, works });
   const videoTags = html.match(/<video\b(?=[^>]*data-featured-reel-video)[^>]*>/g) || [];
 
-  assert.equal(videoTags.length, 5);
+  assert.equal(videoTags.length, 6);
   for (const videoTag of videoTags) {
     assert.match(videoTag, /data-featured-reel-mode="after-hold"/);
     assert.match(videoTag, /\smuted(?:\s|>)/);

@@ -434,7 +434,7 @@ test("Featured source records declare approved variants without legacy inference
   }
 });
 
-test("five Featured works declare the approved poster-first reel contract", () => {
+test("six Featured works declare the approved poster-first reel contract", () => {
   const expected = new Map([
     ["slow-steps", {
       featuredReelMode: "after-hold",
@@ -475,6 +475,16 @@ test("five Featured works declare the approved poster-first reel contract", () =
       featuredReelMode: "after-hold",
       featuredReelUrl: "/assets/showreel/nothing-by-bus-card-reel.mp4",
       featuredReelPoster: "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+    }],
+    ["top-gear-china-uk-special", {
+      featuredReelMode: "after-hold",
+      featuredReelUrl: "/assets/showreel/top-gear-china-uk-special-card-reel.mp4",
+      featuredReelPoster: "/assets/portfolio/top-gear-uk-special-car.jpg",
+      featuredReelSourceFilename: "巅峰拍挡第2季第5期20151116 巅峰拍挡之开着自行火炮闯英国 Top Gear China II EP.5东方卫视官方超清.mp4",
+      featuredReelSourceSha256: "4ba65130c3c172ffff40851ee83e05db494be261b1e50527576f5b9fcda2c955",
+      featuredReelSourceDuration: 3195.04254,
+      featuredReelSourceDimensions: { width: 1920, height: 1080 },
+      featuredReelRightsStatus: "user-supplied-local-source",
     }],
   ]);
   const reelWorks = readWorkSources().filter((work) => work.featuredReelUrl);
