@@ -141,13 +141,15 @@ Films and Nothing by Bus.
 - Only canonical `featuredReelMode: "after-hold"` approves a Featured reel;
   absence of that approval leaves the static poster.
 - A reel becomes eligible at 35% visibility. When more than one reel is
-  eligible, only the last visible reel in DOM order is active.
+  eligible, only the last eligible reel in DOM order is active.
 - The canonical poster holds for 1.4 seconds after activation and remains
   visible until the video actually emits `playing`.
-- Leaving eligibility, hiding the page, a media error, or `pagehide` resets the
-  reel: cancel its hold, pause it, seek it to time zero, and restore its poster.
-  A persisted BFCache restore rebinds observation safely before reels may
-  become eligible again.
+- Leaving eligibility, hiding the page, a media error, a rejected current
+  `video.play()` promise, or `pagehide` safely resets the reel: cancel its hold,
+  pause it, seek it to time zero, and restore its poster. A rejected promise
+  does not schedule a retry, and a stale rejection cannot reset a newer
+  activation. A persisted BFCache restore rebinds observation safely before
+  reels may become eligible again.
 - Reduced-motion and no-JavaScript states remain static posters.
 - Reel videos are muted, looped, inline, `preload="none"`, pointer-transparent,
   and non-interactive. The existing media wrapper owns navigation.

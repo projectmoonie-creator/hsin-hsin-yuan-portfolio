@@ -81,11 +81,13 @@
 - On homepage Featured Work cards, the linked media image is the primary watch action. Do not normally repeat that destination with a text CTA.
 - Approved Featured reels opt in only with canonical
   `featuredReelMode: "after-hold"`. Eligibility begins at 35% visibility; if
-  multiple reels qualify, only the last visible reel in DOM order is active.
+  multiple reels qualify, only the last eligible reel in DOM order is active.
 - Hold the canonical poster for 1.4 seconds after activation and keep it visible
   until the video actually emits `playing`. Leaving eligibility, hiding the
-  page, a media error, or `pagehide` must cancel the hold, pause, seek to time
-  zero, and restore the poster. A persisted BFCache restore must safely rebind
+  page, a media error, a rejected current `video.play()` promise, or `pagehide`
+  must cancel the hold, pause, seek to time zero, and restore the poster. A
+  rejected promise does not schedule a retry, and a stale rejection must not
+  reset a newer activation. A persisted BFCache restore must safely rebind
   observation.
 - Featured reel videos are muted, looped, inline, `preload="none"`,
   pointer-transparent, and non-interactive. The existing media wrapper owns

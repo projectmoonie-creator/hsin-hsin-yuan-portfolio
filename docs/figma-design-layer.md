@@ -177,7 +177,8 @@ Variants:
 - Desktop `centered-16x9`
 - Mobile 16:9
 - Static image
-- Approved in-view reel or video embed
+- Approved `after-hold` reel or video embed; Featured reel lifecycle details
+  are governed by [design-contract.md](./design-contract.md).
 
 Content fields:
 
