@@ -2,9 +2,28 @@
 
 Updated: 2026-08-03
 
-State: `PASS_WITH_OPEN_ITEMS`
+State: `IN_PROGRESS`
 
 ## Current Work Package
+
+- Package: `Top Gear Featured Preview Reel v1` — visual direction approved;
+  written design specification awaiting user confirmation before planning or
+  implementation.
+- Branch: `codex/top-gear-featured-preview-reel`.
+- Base and rollback checkpoint:
+  `0e79852f7552af42b25d0e1adc9f746f98828fb6` (also current local `main`).
+- Approved direction: approximately 30 seconds, `B · Cross-border story` plus
+  `A · Action-led`, with an aircraft shot explicitly included.
+- Design specification:
+  `docs/superpowers/specs/2026-08-03-top-gear-featured-preview-reel-design.md`.
+- The user-supplied source is a 3195.042540-second H.264 1920×1080 BT.709
+  episode file. Its basename and SHA-256 are recorded in the design
+  specification; its absolute Downloads path remains session-only evidence.
+- No reel derivative, canonical work-data change, test change, deployment,
+  push, main merge, contact submission, or external message has occurred in
+  this package.
+
+## Prior Accepted Work Package
 
 - Package: `Featured Preview Reels and Implicit Press v1` — locally complete
   with one external comparison open item.
@@ -112,18 +131,22 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-From the repository root, run `npm run build && npm run serve`, review
-`http://127.0.0.1:4173/en/` and `http://127.0.0.1:4173/zh/`, then stop the server
-with Ctrl-C. No local server is currently active. After review, the user makes
-an explicit decision about a new Vercel Preview and/or merge to local `main`.
-Any Preview deployment, Production change, push, or merge requires explicit
-later authorization.
+The user reviews
+`docs/superpowers/specs/2026-08-03-top-gear-featured-preview-reel-design.md`.
+After explicit confirmation, invoke the current canonical `writing-plans`
+skill, write and commit a test-first implementation plan, then begin source
+shot selection and reel implementation. Do not encode or change canonical
+work data before that confirmation.
 
 ## Cold Resume
 
-1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and the dated closeout.
-2. Verify the branch, validated implementation head `f264f471`, initial
-   closeout commit `8a52d850`, subsequent hardening commit reported externally,
-   base/rollback checkpoint, durable QA package, and protected untracked file.
-3. Re-run deterministic gates if the branch changes.
-4. Do not deploy, change Production, submit Contact, or merge implicitly.
+1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and the Top Gear design
+   specification.
+2. Verify branch `codex/top-gear-featured-preview-reel`, base
+   `0e79852f7552af42b25d0e1adc9f746f98828fb6`, and the protected untracked
+   file.
+3. Confirm whether the written design specification has received explicit
+   user approval. If not, remain at the review gate.
+4. After approval, use `writing-plans` before implementation and follow the
+   design's test, media-evidence, browser-QA, and rollback contracts.
+5. Do not deploy, push, change Production, submit Contact, or merge implicitly.
