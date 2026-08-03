@@ -16,6 +16,18 @@ export const PRESENTATION_VARIANTS = Object.freeze({
 });
 
 export const FEATURED_REEL_MODES = Object.freeze(["after-hold"]);
+export const FEATURED_REEL_PUBLIC_FIELDS = Object.freeze([
+  "featuredReelMode",
+  "featuredReelUrl",
+  "featuredReelPoster",
+]);
+export const FEATURED_REEL_EVIDENCE_FIELDS = Object.freeze([
+  "featuredReelSourceFilename",
+  "featuredReelSourceSha256",
+  "featuredReelSourceDuration",
+  "featuredReelSourceDimensions",
+  "featuredReelRightsStatus",
+]);
 
 export const FIELD_CLASSIFICATION = Object.freeze({
   featured: Object.freeze({
@@ -24,16 +36,14 @@ export const FIELD_CLASSIFICATION = Object.freeze({
       "platform", "tagline", "description", "presentation",
     ]),
     optionalRendered: Object.freeze([
-      "accent", "featuredReelMode", "featuredReelPoster", "featuredReelUrl",
+      "accent", ...FEATURED_REEL_PUBLIC_FIELDS,
       "figmaPosterImage", "metrics", "metricsContext", "posterAlt", "posterFit",
       "posterImage", "press", "showWatchCta", "statusLabel", "tags",
       "videoEmbedUrl", "watchLabel", "watchLoopTarget", "watchMode", "watchUrl",
       "mediaWatchUrl", "mediaTitleLines",
     ]),
     evidenceOnly: Object.freeze([
-      "featuredReelRightsStatus", "featuredReelSourceDimensions",
-      "featuredReelSourceDuration", "featuredReelSourceFilename",
-      "featuredReelSourceSha256",
+      ...FEATURED_REEL_EVIDENCE_FIELDS,
       "focalPoint", "metricsCheckedAt", "metricsSourceUrl", "posterDimensions",
       "posterFocalPoint", "posterRightsStatus", "posterSourceSha256",
       "posterSourceTimecode", "posterSourceUrl", "posterVariant", "sourceNote",
@@ -167,12 +177,11 @@ function validatePresentation(presentation, workLabel) {
 
 function validateFeaturedReel(source) {
   const kind = `Featured work ${labelFor(source, "<unknown>")}`;
-  const publicFields = ["featuredReelMode", "featuredReelUrl", "featuredReelPoster"];
-  const presentPublicFields = publicFields.filter((field) => Object.hasOwn(source, field));
-  if (presentPublicFields.length > 0 && presentPublicFields.length < publicFields.length) {
+  const presentPublicFields = FEATURED_REEL_PUBLIC_FIELDS.filter((field) => Object.hasOwn(source, field));
+  if (presentPublicFields.length > 0 && presentPublicFields.length < FEATURED_REEL_PUBLIC_FIELDS.length) {
     throw new Error(`${kind} requires a complete featured reel triplet`);
   }
-  if (presentPublicFields.length === publicFields.length) {
+  if (presentPublicFields.length === FEATURED_REEL_PUBLIC_FIELDS.length) {
     if (!FEATURED_REEL_MODES.includes(source.featuredReelMode)) {
       throw new Error(`${kind} featuredReelMode must be one of: ${FEATURED_REEL_MODES.join(", ")}`);
     }
@@ -183,18 +192,12 @@ function validateFeaturedReel(source) {
     }
   }
 
-  const provenanceFields = [
-    "featuredReelSourceFilename",
-    "featuredReelSourceSha256",
-    "featuredReelSourceDuration",
-    "featuredReelSourceDimensions",
-    "featuredReelRightsStatus",
-  ];
-  const presentProvenanceFields = provenanceFields.filter((field) => Object.hasOwn(source, field));
-  if (presentProvenanceFields.length > 0 && presentProvenanceFields.length < provenanceFields.length) {
+  const presentProvenanceFields = FEATURED_REEL_EVIDENCE_FIELDS.filter((field) => Object.hasOwn(source, field));
+  if (presentProvenanceFields.length > 0
+    && presentProvenanceFields.length < FEATURED_REEL_EVIDENCE_FIELDS.length) {
     throw new Error(`${kind} requires complete featured reel provenance`);
   }
-  if (presentProvenanceFields.length !== provenanceFields.length) return;
+  if (presentProvenanceFields.length !== FEATURED_REEL_EVIDENCE_FIELDS.length) return;
 
   for (const field of ["featuredReelSourceFilename", "featuredReelRightsStatus"]) {
     if (typeof source[field] !== "string" || !source[field].trim()) {

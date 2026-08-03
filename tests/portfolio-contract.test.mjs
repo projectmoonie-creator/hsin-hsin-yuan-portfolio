@@ -4,7 +4,9 @@ import { join } from "node:path";
 import test from "node:test";
 
 import {
+  FEATURED_REEL_EVIDENCE_FIELDS,
   FEATURED_REEL_MODES,
+  FEATURED_REEL_PUBLIC_FIELDS,
   FIELD_CLASSIFICATION,
   PRESENTATION_VARIANTS,
   normalizeArchiveItem,
@@ -122,6 +124,20 @@ test("featured reel contracts require one complete approved triplet and keep pro
   const normalized = normalizeFeaturedWork(source);
 
   assert.deepEqual(FEATURED_REEL_MODES, ["after-hold"]);
+  assert.deepEqual(FEATURED_REEL_PUBLIC_FIELDS, [
+    "featuredReelMode",
+    "featuredReelUrl",
+    "featuredReelPoster",
+  ]);
+  assert.deepEqual(FEATURED_REEL_EVIDENCE_FIELDS, [
+    "featuredReelSourceFilename",
+    "featuredReelSourceSha256",
+    "featuredReelSourceDuration",
+    "featuredReelSourceDimensions",
+    "featuredReelRightsStatus",
+  ]);
+  assert.equal(Object.isFrozen(FEATURED_REEL_PUBLIC_FIELDS), true);
+  assert.equal(Object.isFrozen(FEATURED_REEL_EVIDENCE_FIELDS), true);
   assert.deepEqual({
     featuredReelMode: normalized.contract.public.featuredReelMode,
     featuredReelUrl: normalized.contract.public.featuredReelUrl,
