@@ -212,6 +212,12 @@ role treatment, the two named Featured variants, one equal Archive family, and
 the same optional-module rules. Experimental Figma frames must be labeled as
 experiments and cannot be mistaken for the current reference.
 
+The hardcoded plugin under `figma/hsin-portfolio-importer/` is a retained
+legacy experiment, not an active current-reference consumer and not a
+bidirectional importer. Use `npm run figma:export` for current design handoff.
+Do not reactivate the plugin until it is generated from or translated through
+the normalized contracts and receives its own parity review.
+
 ## Regression map and rollback
 
 - Contract/source validation: `tests/portfolio-contract.test.mjs`.

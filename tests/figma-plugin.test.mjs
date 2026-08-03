@@ -20,6 +20,11 @@ test("Figma importer plugin files are present and configured", () => {
   assert.equal(manifest.main, "code.js");
   assert.equal(manifest.editorType.includes("figma"), true);
   assert.equal(manifest.networkAccess.allowedDomains.includes("https://hsin-hsin-yuan-portfolio.vercel.app"), true);
+
+  const readme = readFileSync(readmePath, "utf8");
+  assert.match(readme, /Status: `LEGACY_REFERENCE_DO_NOT_USE`/);
+  assert.match(readme, /npm run figma:export/);
+  assert.match(readme, /not a bidirectional content importer/i);
 });
 
 test("Figma importer creates editable portfolio layers", () => {

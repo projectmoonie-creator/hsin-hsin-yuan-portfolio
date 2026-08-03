@@ -252,15 +252,15 @@ Record baseline/implementation commits, exact website hashes, intentional Figma 
 - Modify: `.agents/skills/portfolio-narrative-builder/SKILL.md`
 - Create: `.agents/skills/portfolio-narrative-builder/references/format-contract-and-variant-governance.md`
 
-- [ ] **Step 1: Load the skill-authoring instructions**
+- [x] **Step 1: Load the skill-authoring instructions**
 
 Read the available official skill-creation/writing instructions completely before editing the project-owned skill.
 
-- [ ] **Step 2: Add reusable, project-agnostic guidance**
+- [x] **Step 2: Add reusable, project-agnostic guidance**
 
 Cover required/optional/evidence/retired fields, source-to-view-model normalization, named variants, media identity ownership, responsive invariants, minimum/maximum/exception pilots, report-only inspection before enforcement, compatibility adapters, output/geometry parity, and rollback. Do not copy this portfolio's colors, breakpoints, ratios, section names, titles, or values into the shared method.
 
-- [ ] **Step 3: Validate the skill package**
+- [x] **Step 3: Validate the skill package**
 
 Run the validator required by the loaded skill-authoring instructions and inspect the diff for project-specific leakage.
 
@@ -269,11 +269,11 @@ Run the validator required by the loaded skill-authoring instructions and inspec
 **Files:**
 - Modify review/status evidence only if findings require documentation.
 
-- [ ] **Step 1: Run convergent review**
+- [x] **Step 1: Run convergent review**
 
 Use `reviewing-with-multiple-ai` according to repository collaboration rules after deterministic and browser QA. Review scope: visual-freeze proof, contract completeness, normalizer correctness, Figma boundary, skill generalization, and evidence preservation.
 
-- [ ] **Step 2: Resolve valid findings with TDD and re-run all gates**
+- [x] **Step 2: Resolve valid findings with TDD and re-run all gates**
 
 Any code correction begins with a failing test. Re-run deterministic, output-hash, browser, and skill validation after changes.
 

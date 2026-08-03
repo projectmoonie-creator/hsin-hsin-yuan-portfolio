@@ -15,8 +15,10 @@ State: `PASS_WITH_OPEN_ITEMS`
 - Contract/audit checkpoint: `d12a98f`
 - Normalization checkpoint: `977d8a3`
 - Figma-alignment checkpoint: `5639fa7`
+- Shared-skill checkpoint (parent Moonie V repository): `9985f06`
 - Current audit: `docs/reviews/portfolio-design-contract-audit-v1-2026-08-03.md`
 - Governance validation: `docs/reviews/portfolio-design-contract-governance-v1-2026-08-03.md`
+- Cross-review adjudication: `docs/reviews/portfolio-design-contract-governance-review-adjudication-2026-08-03.md`
 - Final content review: `docs/reviews/final-content-cleanup-v1-2026-08-03.md`
 - Latest Vercel Preview:
   `https://hsin-hsin-yuan-portfolio-preview-2qb5bbn2s.vercel.app`
@@ -30,9 +32,10 @@ The producer approved Option A with a hard requirement that governance must not
 reset the iteratively tuned layout. The project-level implementation is now
 verified: canonical contract, read-only audit, explicit presentation variants,
 normalization, and Figma current-reference alignment. Generated English/Chinese
-HTML, CSS, and JavaScript remain byte-identical to baseline `90b5d1a`. The next
-bounded step is the project-agnostic skill update, followed by independent
-review and final local-main integration.
+HTML, CSS, and JavaScript remain byte-identical to baseline `90b5d1a`. The
+project-agnostic skill update and independent Gemini review are complete; both
+minor findings were resolved. The next bounded step is final revalidation and
+local-main integration.
 
 ## Verification
 
@@ -60,12 +63,14 @@ review and final local-main integration.
 1. The governance implementation remains local on
    `codex/portfolio-design-contract-governance`; the latest Preview does not
    contain it. Nothing was merged, pushed, or promoted.
-2. The project layer passes. The general method still needs to be added to
-   `portfolio-narrative-builder`, then independently reviewed before local-main
-   integration.
-3. The remaining Facebook destination is a public third-party availability and
+2. The project layer, shared skill, and cross-review pass. A future renderer
+   cleanup may remove transitional compatibility aliases only after it consumes
+   `contract.public` and reproduces the frozen output hashes.
+3. The hardcoded Figma plugin is retained only as a marked legacy experiment;
+   `npm run figma:export` is the current design-handoff path.
+4. The remaining Facebook destination is a public third-party availability and
    logged-out access risk. The page does not depend on its images or metadata.
-4. Top Gear's `0.81` value remains CV-sourced. The first-five-episode audience,
+5. Top Gear's `0.81` value remains CV-sourced. The first-five-episode audience,
    weekly live average, and four-week national time-slot rank are publicly
    corroborated and recorded in the preceding annotated-content review.
 
@@ -84,10 +89,9 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Add the proven, project-agnostic format-contract and variant-governance method
-to `portfolio-narrative-builder`, validate it, then run independent convergent
-review. Re-run every gate before local-main integration. Do not deploy or
-modify Production.
+Commit the review-resolution evidence, finish the isolated branch, and verify
+that local `main` is still at its recorded base. Then fast-forward it to the
+verified governance head. Do not deploy or modify Production.
 
 ## Cold Resume
 

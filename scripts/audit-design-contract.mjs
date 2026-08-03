@@ -60,6 +60,10 @@ export function auditDesignContract({ rootDir = process.cwd() } = {}) {
     join(rootDir, "scripts/build-figma-export.mjs"),
     "utf8",
   );
+  const figmaImporterReadme = readFileSync(
+    join(rootDir, "figma/hsin-portfolio-importer/README.md"),
+    "utf8",
+  );
 
   const workPress = featured.flatMap((work) => work.press || []);
   const explicitPresentation = featured.every((work) => work.presentation);
@@ -148,6 +152,13 @@ export function auditDesignContract({ rootDir = process.cwd() } = {}) {
       "figma.tokens.drift",
       2,
       "Figma panel tokens differ from the production CSS tokens.",
+    ));
+  }
+  if (!/Status: `LEGACY_REFERENCE_DO_NOT_USE`/.test(figmaImporterReadme)) {
+    findings.push(finding(
+      "figma.legacy-importer.unmarked",
+      1,
+      "The hardcoded legacy importer is not clearly separated from current-reference design handoff.",
     ));
   }
 

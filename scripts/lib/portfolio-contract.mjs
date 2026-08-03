@@ -219,6 +219,9 @@ export function normalizeFeaturedWork(source) {
     presentation,
   };
 
+  // Transitional compatibility adapter: the current renderer still reads
+  // these flattened aliases. Remove them only after it consumes
+  // contract.public directly and the frozen public-output hashes still match.
   delete normalized.hideMediaLabel;
   delete normalized.featuredMediaAspect;
   normalized.hideMediaLabel = presentation.siteTitleOverlay === "none";

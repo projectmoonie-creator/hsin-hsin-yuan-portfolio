@@ -16,7 +16,8 @@ source-to-view-model normalizer, and aligned Figma current references.
 
 The public website output remains byte-for-byte identical to the pre-migration
 baseline. The shared `portfolio-narrative-builder` method update and final
-independent review remain separate open steps before local-main integration.
+independent review were completed after the project checkpoint; final gates and
+local-main integration remain.
 
 ## Checkpoints
 
@@ -26,6 +27,8 @@ independent review remain separate open steps before local-main integration.
   ownership, unified focal evidence, and renderer compatibility.
 - `5639fa7` — Figma exporter routed through the shared loader; current mobile
   role, tokens, Press map, Archive family, and Featured variants aligned.
+- `9985f06` in the parent Moonie V repository — reusable format-contract and
+  variant-governance workflow added to `portfolio-narrative-builder`.
 
 ## Public website freeze proof
 
@@ -123,8 +126,19 @@ These changes do not flow into the live website.
 
 ## Open items
 
-1. Generalize only the proven method into `portfolio-narrative-builder` and
-   validate the skill package.
-2. Run the required independent convergent review and resolve valid findings.
-3. Re-run all gates, then fast-forward local `main` only if its recorded base
-   is unchanged. Do not deploy or push as part of that integration.
+1. Fast-forward local `main` only if its recorded base is unchanged. Do not
+   deploy or push as part of that integration.
+
+## Cross-review
+
+Gemini completed through the controlled reviewer as requested/observed/completed
+`gemini-3.6-flash` and returned `PASS_WITH_FINDINGS`: two minor, non-blocking
+items and a conditional merge recommendation. Both were adjudicated `agree`
+and resolved without public-output changes. The editable plugin is now clearly
+legacy and protected by audit/test; the renderer compatibility projection has
+an explicit removal condition. See the frozen packet, raw review, and dated
+adjudication under `docs/reviews/`.
+
+Claude was not sent a model request; no API/PAYG fallback or two-reviewer claim
+was made. Codex performed local source/test adjudication; its exact root model
+ID was not exposed and was not invented.

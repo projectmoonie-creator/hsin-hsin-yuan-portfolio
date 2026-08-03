@@ -1,6 +1,15 @@
 # Hsin Portfolio Importer
 
-This local Figma plugin rebuilds the current portfolio site as editable Figma layers.
+Status: `LEGACY_REFERENCE_DO_NOT_USE`
+
+This local plugin is an early, hardcoded partial reconstruction. It predates
+the current design contract and must not be used as the current site reference
+or as a source for implementation. It is not a bidirectional content importer
+and does not write Figma edits back into portfolio data.
+
+Use `npm run figma:export` and the generated `figma-export/` package for the
+current normalized design handoff. The legacy plugin is retained only so old
+Figma experiments remain reproducible.
 
 It does not upload anything automatically to a Figma account. Run it inside Figma from a blank design file.
 
@@ -32,7 +41,7 @@ It does not upload anything automatically to a Figma account. Run it inside Figm
 - The generated design is a clean editable reconstruction, not a pixel-perfect HTML-to-Figma conversion.
 - If image loading fails, the plugin leaves a labeled placeholder instead of stopping.
 
-## Recommended Workflow
+## Historical Workflow — Do Not Use For Current Reference
 
 1. Run the importer in a blank Figma file.
 2. Rename the file to `Hsin-Hsin Yuan Portfolio - Design Layer`.

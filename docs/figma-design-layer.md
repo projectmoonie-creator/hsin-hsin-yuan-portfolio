@@ -8,11 +8,16 @@ Use Figma to make layout, typography, image crop, spacing, and mobile/desktop de
 
 The workflow is:
 
-1. Design or adjust sections in Figma.
-2. Confirm desktop and mobile frames.
-3. Translate approved changes back into `src/styles.css`, `data/site.json`, and content files.
-4. Run `npm test` and `npm run build`.
-5. Deploy through GitHub + Vercel.
+1. Run `npm run figma:export` and import the generated current-reference SVGs.
+2. Design or adjust sections in Figma.
+3. Confirm desktop and mobile frames.
+4. Translate approved changes back into `src/styles.css`, `data/site.json`, and content files.
+5. Run `npm test` and `npm run build`.
+6. Deploy through GitHub + Vercel.
+
+The hardcoded `figma/hsin-portfolio-importer/` plugin is a legacy experiment.
+It is not a current-reference or bidirectional content tool; do not use it for
+new handoff work.
 
 ## Figma File Structure
 
