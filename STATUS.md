@@ -23,8 +23,10 @@ State: `PASS_WITH_OPEN_ITEMS`
   `8c3b66aa5806a34866cd616aa915b238a70c0a9a`,
   `36305c8d86c4d3541358798491a2c0a1eaeaa903`, and
   `c4c284707edd1f6560081ef9df3b56b0ba5f9bc5` respectively.
-- The documentation-only closeout commit is reported externally after commit
-  and intentionally is not self-referenced in committed files.
+- Initial documentation-only closeout commit:
+  `e5a34db485a36952a5f83334e75092a14bee22d0`.
+- The subsequent browser-evidence clarification commit is reported externally
+  after commit and intentionally is not self-referenced in committed files.
 - Approved direction: approximately 30 seconds, `B · Cross-border story` plus
   `A · Action-led`, with an aircraft shot explicitly included.
 - Design specification:
@@ -53,30 +55,40 @@ State: `PASS_WITH_OPEN_ITEMS`
   diff, media manifest, faststart, stream probe, and full decode passed.
 - All four current Figma hashes remained exact and unchanged; the closeout
   record contains the fingerprints.
-- Persistent connected-browser QA passed `10/10` English/Chinese cases at
-  1440×900, 1200×900, 834×1112, 390×844, and 360×800. Every case proved poster
-  first, poster at the one-second hold sample, actual playing, last-eligible
-  ownership, exact wrapper/source, no overflow, no extra title overlay, and
-  approved responsive geometry.
-- Exit reset, re-entry, reduced motion, no-JavaScript, keyboard focus and Enter
-  activation, media error, BFCache, and controlled visibility passed. The
-  aircraft exterior and cockpit exchange were visibly captured at reel times
-  `22.44` and `24.61` seconds.
-- The repeatable disposable six-reel harness returned `PASS`, with the poster
-  still visible at `1018.4` ms and actual playing at `1434.6` ms from
-  eligibility. Its local page/console/request/HTTP error ledgers were empty.
+- Session-only connected-browser QA covered `10/10` English/Chinese cases at
+  1440×900, 1200×900, 834×1112, 390×844, and 360×800. It observed poster-first,
+  one-second hold, actual playing, last-eligible ownership, exact
+  wrapper/source, no overflow, no extra title overlay, and approved responsive
+  geometry in-session; its per-case tool output was not durably retained.
+- The session-only adapted six-reel harness returned `PASS`. Its ten-row matrix
+  recorded structural, geometry, destination, network/error, and Contact
+  predicates in its session-only `/private/tmp` packet, not per-case temporal
+  lifecycle evidence.
+- A dedicated English 1440×900 interaction run measured the poster at
+  `1018.4` ms and actual playing at `1434.6` ms, plus exit/reset/re-entry,
+  natural last-eligible arbitration, media error, BFCache, and controlled
+  visibility. Separate reduced-motion and no-JavaScript checks ran at 1200×900;
+  keyboard ownership ran at 1440×900. Their local page/console/request/HTTP
+  error ledgers were empty.
+- The aircraft exterior and cockpit exchange were visibly captured in-session
+  at reel times `22.44` and `24.61` seconds.
 - Browser evidence recorded zero `/api/contact` POSTs and zero submit events.
   The protected untracked file retained SHA-256
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
 
-## Current Package Open Item
+## Current Package Open Risks
 
-Matched pre-package browser comparison remains unavailable because the
-recorded historical Vercel Preview redirects unauthenticated QA through
-Vercel SSO. No matched portfolio DOM, screenshot, geometry/crop comparison,
-or pixel statistic is claimed. This is inherited external-state evidence, not
-a local product defect; unchanged Figma hashes support but do not replace the
-unavailable comparison.
+- The Top Gear-specific adapted harness, JSON results, and screenshots existed
+  only under `/private/tmp/top-gear-browser-qa.9Ab009`; they are not durably
+  retained in Git or another recorded backup. A future audit must adapt and
+  rerun the durable preceding harness under
+  `docs/reviews/evidence/featured-preview-reels-browser-qa-r2/`.
+- Matched pre-package browser comparison remains unavailable because the
+  recorded historical Vercel Preview redirects unauthenticated QA through
+  Vercel SSO. No matched portfolio DOM, screenshot, geometry/crop comparison,
+  or pixel statistic is claimed. This is inherited external-state evidence,
+  not a local product defect; unchanged Figma hashes support but do not replace
+  the unavailable comparison.
 
 The branch remains local and unpushed by explicit scope. The next user decision
 is whether to accept the retained feature branch and separately authorize any
