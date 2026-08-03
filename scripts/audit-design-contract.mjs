@@ -2,6 +2,8 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { FIELD_CLASSIFICATION } from "./lib/portfolio-contract.mjs";
+
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"));
 }
@@ -34,6 +36,18 @@ function fieldInventory(records) {
 
 function finding(id, count, message) {
   return { id, severity: "warning", count, message };
+}
+
+function unclassifiedFields(records, classification) {
+  const classified = new Set([
+    ...classification.requiredRendered,
+    ...classification.optionalRendered,
+    ...classification.evidenceOnly,
+    ...classification.retired,
+  ]);
+  return Array.from(new Set(
+    records.flatMap((record) => Object.keys(record).filter((field) => !classified.has(field))),
+  )).sort();
 }
 
 export function auditDesignContract({ rootDir = process.cwd() } = {}) {
@@ -95,15 +109,17 @@ export function auditDesignContract({ rootDir = process.cwd() } = {}) {
       "Source evidence uses more than one focal-point field name.",
     ));
   }
-  const flatArchiveEvidence = archive.reduce(
-    (count, item) => count + ["platform", "summary", "metrics"].filter((field) => Object.hasOwn(item, field)).length,
-    0,
-  );
-  if (flatArchiveEvidence) {
+  const unknownFields = [
+    ...unclassifiedFields(featured, FIELD_CLASSIFICATION.featured).map((field) => `featured.${field}`),
+    ...unclassifiedFields(archive, FIELD_CLASSIFICATION.archive).map((field) => `archive.${field}`),
+    ...unclassifiedFields(globalPress, FIELD_CLASSIFICATION.globalPress).map((field) => `globalPress.${field}`),
+    ...unclassifiedFields(workPress, FIELD_CLASSIFICATION.workPress).map((field) => `workPress.${field}`),
+  ];
+  if (unknownFields.length) {
     findings.push(finding(
-      "archive.evidence-fields.flat",
-      flatArchiveEvidence,
-      "Archive evidence-only fields remain flat in source records and require explicit classification.",
+      "fields.unclassified",
+      unknownFields.length,
+      `Active source fields are not classified: ${unknownFields.join(", ")}`,
     ));
   }
   if (/readdirSync\(join\(root, "content\/works"\)\)/.test(figmaSource)) {

@@ -46,8 +46,12 @@
   },
   "posterSourceUrl": "https://www.youtube.com/watch?v=me4KutyUoT4&t=28s",
   "posterSourceTimecode": "00:00:28",
-  "hideMediaLabel": true,
-  "featuredMediaAspect": "16:9",
+  "presentation": {
+    "desktopMediaVariant": "centered-16x9",
+    "mobileMediaAspect": "16:9",
+    "siteTitleOverlay": "none",
+    "sourceArtworkTitle": "absent"
+  },
   "featuredReelUrl": "/assets/showreel/interior-spatial-card-reel.mp4",
   "featuredReelMode": "in-view",
   "featuredReelPoster": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",

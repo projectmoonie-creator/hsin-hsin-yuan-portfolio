@@ -28,8 +28,12 @@
   "videoEmbedUrl": "",
   "posterImage": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
   "figmaPosterImage": "/assets/showreel/nothing-by-bus-card-reel-poster.webp",
-  "hideMediaLabel": true,
-  "featuredMediaAspect": "16:9",
+  "presentation": {
+    "desktopMediaVariant": "centered-16x9",
+    "mobileMediaAspect": "16:9",
+    "siteTitleOverlay": "none",
+    "sourceArtworkTitle": "present"
+  },
   "featuredReelUrl": "/assets/showreel/nothing-by-bus-card-reel.mp4",
   "featuredReelMode": "in-view",
   "featuredReelPoster": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",

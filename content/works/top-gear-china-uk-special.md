@@ -26,7 +26,12 @@
   "watchUrl": "https://youtu.be/M_eXe9HRD9Y?si=YZ_3JZ7FJY4vVcZv",
   "videoEmbedUrl": "",
   "posterImage": "/assets/portfolio/top-gear-uk-special-car.jpg",
-  "hideMediaLabel": true,
+  "presentation": {
+    "desktopMediaVariant": "fill-card",
+    "mobileMediaAspect": "16:9",
+    "siteTitleOverlay": "none",
+    "sourceArtworkTitle": "present"
+  },
   "tags": ["factual entertainment"],
   "metricsContext": {
     "en": "Season 2 audience, reported across television and online",

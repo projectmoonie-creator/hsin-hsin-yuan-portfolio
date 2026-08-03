@@ -28,12 +28,17 @@
   "videoEmbedUrl": "",
   "posterImage": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
   "figmaPosterImage": "/assets/portfolio/tech-dreamers-official.webp",
-  "hideMediaLabel": true,
+  "presentation": {
+    "desktopMediaVariant": "fill-card",
+    "mobileMediaAspect": "16:9",
+    "siteTitleOverlay": "none",
+    "sourceArtworkTitle": "present"
+  },
   "posterAlt": {
     "en": "Tech Dreamers official series artwork",
     "zh": "Tech Dreamers 官方系列主視覺"
   },
-  "focalPoint": "50% 50%",
+  "posterFocalPoint": {"x": 0.5, "y": 0.5},
   "posterDimensions": {"width": 1280, "height": 720},
   "press": [
     {

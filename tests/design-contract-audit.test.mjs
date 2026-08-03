@@ -37,10 +37,11 @@ test("design contract audit inventories the current project without writing", ()
     "very-mulan-director-interview",
     "wmw-28-selection-guide-part-1",
   ]);
-  assert.equal(report.fieldInventory.featured.hideMediaLabel, 6);
-  assert.equal(report.fieldInventory.featured.featuredMediaAspect, 2);
-  assert.equal(report.fieldInventory.featured.focalPoint, 2);
-  assert.equal(report.fieldInventory.featured.posterFocalPoint, 1);
+  assert.equal(report.fieldInventory.featured.presentation, 6);
+  assert.equal(report.fieldInventory.featured.hideMediaLabel, undefined);
+  assert.equal(report.fieldInventory.featured.featuredMediaAspect, undefined);
+  assert.equal(report.fieldInventory.featured.focalPoint, undefined);
+  assert.equal(report.fieldInventory.featured.posterFocalPoint, 3);
   assert.deepEqual(report.variants.featured, {
     "fill-card": [
       "slow-steps",
@@ -52,7 +53,7 @@ test("design contract audit inventories the current project without writing", ()
       "interior-spatial-brand-films",
       "pts-taigi-bus",
     ],
-    source: "legacy-inference",
+    source: "explicit",
   });
   assert.deepEqual(report.variants.archive, {
     standard: [
@@ -72,11 +73,6 @@ test("design contract audit inventories the current project without writing", ()
 
   const findingIds = report.findings.map((finding) => finding.id);
   assert.deepEqual(findingIds, [
-    "featured.presentation.missing",
-    "featured.legacy.hide-media-label",
-    "featured.legacy.featured-media-aspect",
-    "media.focal-point.mixed",
-    "archive.evidence-fields.flat",
     "figma.featured-source.duplicated",
     "figma.mobile-role-slash.stale",
     "figma.press-map.missing",
@@ -86,5 +82,5 @@ test("design contract audit inventories the current project without writing", ()
   const text = formatAuditReport(report);
   assert.match(text, /Portfolio design contract audit: migration-warnings/);
   assert.match(text, /6 Featured \/ 5 Archive \/ 2 global Press/);
-  assert.match(text, /featured\.presentation\.missing/);
+  assert.match(text, /figma\.featured-source\.duplicated/);
 });

@@ -111,7 +111,7 @@ Run the focused test, then add `audit:design-contract` and `audit:design-contrac
 
 Run `npm run build` and compare the five frozen website hashes. Expected: all match. Run `git diff -- src public content data scripts/build-site.mjs src/styles.css src/main.js`; expected: no public-site change.
 
-- [ ] **Step 5: Commit Package 1**
+- [x] **Step 5: Commit Package 1**
 
 Stage only Package 1 files and commit `add portfolio design contract audit`.
 
@@ -121,7 +121,7 @@ Stage only Package 1 files and commit `add portfolio design contract audit`.
 - Create: `tests/portfolio-contract.test.mjs`
 - Create: `scripts/lib/portfolio-contract.mjs`
 
-- [ ] **Step 1: Write failing normalization tests**
+- [x] **Step 1: Write failing normalization tests**
 
 Import the absent module and assert:
 
@@ -134,7 +134,7 @@ Import the absent module and assert:
 
 Run `node --test tests/portfolio-contract.test.mjs`; expected RED: module absent.
 
-- [ ] **Step 2: Implement the dependency-free normalizer**
+- [x] **Step 2: Implement the dependency-free normalizer**
 
 Export:
 
@@ -150,7 +150,7 @@ PRESENTATION_VARIANTS
 
 Return a normalized record with explicit `presentation` plus a compatibility projection for the current renderer. Do not touch CSS or copy.
 
-- [ ] **Step 3: Prove GREEN**
+- [x] **Step 3: Prove GREEN**
 
 Run the focused tests. Expected: all normalization and rejection cases pass.
 
@@ -162,7 +162,7 @@ Run the focused tests. Expected: all normalization and rejection cases pass.
 - Modify: `tests/build-site.test.mjs`
 - Modify: `tests/design-contract-audit.test.mjs`
 
-- [ ] **Step 1: Write failing source-contract assertions**
+- [x] **Step 1: Write failing source-contract assertions**
 
 Require every Featured source record to contain:
 
@@ -177,7 +177,7 @@ Require every Featured source record to contain:
 
 Require absence of top-level `hideMediaLabel` and `featuredMediaAspect` after migration. Expected RED against current frontmatter.
 
-- [ ] **Step 2: Add exact approved values**
+- [x] **Step 2: Add exact approved values**
 
 - `fill-card`: Slow Steps, Tech Dreamers, My Art, My Voice, Top Gear China: UK Special.
 - `centered-16x9`: Design & Brand Films, Nothing by Bus.
@@ -187,11 +187,11 @@ Require absence of top-level `hideMediaLabel` and `featuredMediaAspect` after mi
 
 Remove the two legacy presentation fields only after the normalizer supplies renderer-compatible values.
 
-- [ ] **Step 3: Route the site loader through normalization**
+- [x] **Step 3: Route the site loader through normalization**
 
 Call `normalizeFeaturedWork` in `loadWorks`, `normalizeArchiveItem` in the archive loader, and `normalizeGlobalPressItem` for global Press. Nested work Press is normalized by `normalizeFeaturedWork`. Keep rendered HTML class names and order unchanged.
 
-- [ ] **Step 4: Prove website byte parity**
+- [x] **Step 4: Prove website byte parity**
 
 Run `npm test` and `npm run build`; compare all five frozen website hashes. Any mismatch blocks continuation. Commit `normalize portfolio presentation contracts` only after exact parity.
 

@@ -3,6 +3,12 @@ import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, write
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import {
+  normalizeArchiveItem,
+  normalizeFeaturedWork,
+  normalizeGlobalPressItem,
+} from "./lib/portfolio-contract.mjs";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 
@@ -37,6 +43,7 @@ export function loadWorks(dir) {
       };
     })
     .filter((work) => work.featured)
+    .map(normalizeFeaturedWork)
     .sort((a, b) => a.order - b.order);
 }
 
@@ -60,8 +67,10 @@ export function loadSiteData(baseDir = root) {
   return {
     site: JSON.parse(readFileSync(join(baseDir, "data/site.json"), "utf8")),
     collaborations: JSON.parse(readFileSync(join(baseDir, "data/collaborations.json"), "utf8")),
-    archive: loadMarkdownCollection(join(baseDir, "content/archive")),
+    archive: loadMarkdownCollection(join(baseDir, "content/archive"))
+      .map(normalizeArchiveItem),
     press: JSON.parse(readFileSync(join(baseDir, "data/press.json"), "utf8"))
+      .map(normalizeGlobalPressItem)
       .sort((a, b) => a.order - b.order),
   };
 }

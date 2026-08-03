@@ -25,12 +25,17 @@
   "watchUrl": "",
   "videoEmbedUrl": "",
   "posterImage": "/assets/portfolio/slow-steps-poster.webp",
-  "hideMediaLabel": true,
+  "presentation": {
+    "desktopMediaVariant": "fill-card",
+    "mobileMediaAspect": "16:9",
+    "siteTitleOverlay": "none",
+    "sourceArtworkTitle": "absent"
+  },
   "posterAlt": {
     "en": "Torn-paper collage of three travel documentary portraits: a man at work, a scooter rider at sunset, and a man in profile",
     "zh": "三幅撕紙拼貼的旅行紀錄片人物畫面：工作中的男子、夕陽下騎車的人，以及側面人物"
   },
-  "focalPoint": "50% 50%",
+  "posterFocalPoint": {"x": 0.5, "y": 0.5},
   "posterDimensions": {"width": 1920, "height": 1080},
   "posterVariant": "no-title",
   "posterRightsStatus": "user-approved-local",
