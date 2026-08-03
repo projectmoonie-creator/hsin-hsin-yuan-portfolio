@@ -1,10 +1,10 @@
 # Portfolio Design Contract Governance v1 — Project Validation
 
 Date: 2026-08-03  
-State: `PASS_WITH_OPEN_ITEMS`  
-Branch: `codex/portfolio-design-contract-governance`  
+State: `PASS`
+Branch: `main` (fast-forwarded from `codex/portfolio-design-contract-governance`)
 Visual/output baseline: `90b5d1ae5e32126c78672df33c4c6f4eaa7f0642`  
-Validated project checkpoint: `5639fa7314a47e64d08e13f0fc44433d8b0d6648`
+Integrated governance head: `8f4e19063f5e6bcfbd3a47b9840ee36518dfdb4e`
 
 ## Outcome
 
@@ -15,9 +15,8 @@ read-only inspector, explicit per-work presentation metadata, a shared
 source-to-view-model normalizer, and aligned Figma current references.
 
 The public website output remains byte-for-byte identical to the pre-migration
-baseline. The shared `portfolio-narrative-builder` method update and final
-independent review were completed after the project checkpoint; final gates and
-local-main integration remain.
+baseline. The shared `portfolio-narrative-builder` method update, independent
+review, final gates, and local-main integration are complete.
 
 ## Checkpoints
 
@@ -27,6 +26,9 @@ local-main integration remain.
   ownership, unified focal evidence, and renderer compatibility.
 - `5639fa7` — Figma exporter routed through the shared loader; current mobile
   role, tokens, Press map, Archive family, and Featured variants aligned.
+- `b17f10a` — both valid review findings resolved without changing public
+  output.
+- `8f4e190` — review provenance sanitized; all 50 tests pass before integration.
 - `9985f06` in the parent Moonie V repository — reusable format-contract and
   variant-governance workflow added to `portfolio-narrative-builder`.
 
@@ -124,10 +126,13 @@ These changes do not flow into the live website.
 - Do not use a destructive reset in the shared worktree; revert or abandon the
   isolated branch if rollback is required.
 
-## Open items
+## Local-main integration
 
-1. Fast-forward local `main` only if its recorded base is unchanged. Do not
-   deploy or push as part of that integration.
+Local `main` was verified at the recorded base
+`da91e25f9f306f526ede45a53c5d542be93088ba`, then fast-forwarded to
+`8f4e19063f5e6bcfbd3a47b9840ee36518dfdb4e`. The complete deterministic gate
+was rerun on the merged result and passed. No push, Preview deployment, or
+Production modification was performed.
 
 ## Cross-review
 

@@ -277,6 +277,6 @@ Use `reviewing-with-multiple-ai` according to repository collaboration rules aft
 
 Any code correction begins with a failing test. Re-run deterministic, output-hash, browser, and skill validation after changes.
 
-- [ ] **Step 3: Finish the development branch**
+- [x] **Step 3: Finish the development branch**
 
 Load and follow `superpowers:finishing-a-development-branch`. Do not deploy, push, or modify Production. Because the user has already requested local integration after successful completion, fast-forward local `main` only if its tip is still the recorded base and the protected user file remains untouched; otherwise stop and report the exact divergence.

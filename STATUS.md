@@ -2,13 +2,15 @@
 
 Updated: 2026-08-03
 
-State: `PASS_WITH_OPEN_ITEMS`
+State: `PASS`
 
 ## Current Work Package
 
-- Package: `Portfolio Design Contract Governance v1` — project layer verified; skill/review pending
-- Active branch: `codex/portfolio-design-contract-governance`
+- Package: `Portfolio Design Contract Governance v1` — completed and integrated locally
+- Integrated branch: `main`
+- Retained source branch: `codex/portfolio-design-contract-governance`
 - Base local `main`: `da91e25f9f306f526ede45a53c5d542be93088ba`
+- Integrated governance head: `8f4e19063f5e6bcfbd3a47b9840ee36518dfdb4e`
 - Final content implementation checkpoint: `dfdffa2`
 - Final content closeout checkpoint: `cbed4a9`
 - Governance baseline: `90b5d1a`
@@ -29,13 +31,13 @@ State: `PASS_WITH_OPEN_ITEMS`
 - Original production website/domain: unchanged.
 
 The producer approved Option A with a hard requirement that governance must not
-reset the iteratively tuned layout. The project-level implementation is now
-verified: canonical contract, read-only audit, explicit presentation variants,
-normalization, and Figma current-reference alignment. Generated English/Chinese
-HTML, CSS, and JavaScript remain byte-identical to baseline `90b5d1a`. The
-project-agnostic skill update and independent Gemini review are complete; both
-minor findings were resolved. The next bounded step is final revalidation and
-local-main integration.
+reset the iteratively tuned layout. The completed package formalizes the
+existing design through a canonical contract, read-only audit, explicit
+presentation variants, normalization, and aligned Figma current references.
+Generated English/Chinese HTML, CSS, and JavaScript remain byte-identical to
+baseline `90b5d1a`. The project-agnostic skill update and independent Gemini
+review are complete, both minor findings were resolved, and local `main` was
+fast-forwarded from its unchanged recorded base to `8f4e190`.
 
 ## Verification
 
@@ -58,11 +60,11 @@ local-main integration.
 - No deployment was created. The contact form was not submitted and no email
   was sent.
 
-## Accepted Open Items
+## Accepted Boundaries And Future Work
 
-1. The governance implementation remains local on
-   `codex/portfolio-design-contract-governance`; the latest Preview does not
-   contain it. Nothing was merged, pushed, or promoted.
+1. The governance implementation is now on local `main`. It was not pushed or
+   deployed, so the latest Preview remains the older external preview and does
+   not contain this package.
 2. The project layer, shared skill, and cross-review pass. A future renderer
    cleanup may remove transitional compatibility aliases only after it consumes
    `contract.public` and reproduces the frozen output hashes.
@@ -89,15 +91,15 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Commit the review-resolution evidence, finish the isolated branch, and verify
-that local `main` is still at its recorded base. Then fast-forward it to the
-verified governance head. Do not deploy or modify Production.
+No implementation action is required for this package. Begin any later content
+or visual change as a new bounded package from local `main`. Preview deployment
+remains a separate explicit action; do not modify Production implicitly.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, and this file.
-2. Verify the branch, implementation/closeout commits, latest Preview metadata, closed
-   tag object/peeled commit, and protected untracked file.
+2. Verify local `main`, integrated governance head `8f4e190`, latest Preview
+   metadata, closed tag object/peeled commit, and protected untracked file.
 3. Read `docs/reviews/portfolio-design-contract-governance-v1-2026-08-03.md`,
    the underlying design-contract audit, and the final-content review.
 4. Do not rely on old chat history or rewrite historical review files.
