@@ -224,7 +224,7 @@ Run `npm run build` and compare all five website hashes again. Commit `align fig
 - Create: `docs/reviews/portfolio-design-contract-governance-v1-2026-08-03.md`
 - Modify: `STATUS.md`
 
-- [ ] **Step 1: Run deterministic validation**
+- [x] **Step 1: Run deterministic validation**
 
 Run:
 
@@ -238,11 +238,11 @@ git diff --check
 
 Expected: all tests pass, audit has no unclassified active presentation fields, build/export succeed, and website hashes remain frozen.
 
-- [ ] **Step 2: Run matched browser QA**
+- [x] **Step 2: Run matched browser QA**
 
 Use local production output at 1440×900, 1200×900, 834×1112, 390×844, and 360×800 for English and Chinese, plus reduced-motion and no-JavaScript checks. Record section order, card widths/heights, media aspect ratios, overflow, first keyboard focus, and the two desktop Featured variants. Compare against the approved baseline behavior; no unauthorized visual delta is allowed.
 
-- [ ] **Step 3: Write closeout evidence**
+- [x] **Step 3: Write closeout evidence**
 
 Record baseline/implementation commits, exact website hashes, intentional Figma changes, tests, browser states, protected file, no-deploy status, and rollback command/commit. Update `STATUS.md` from decision-pending to locally verified governance implementation.
 
