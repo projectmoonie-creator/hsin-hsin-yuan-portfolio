@@ -6,42 +6,45 @@ State: `PASS_WITH_OPEN_ITEMS`
 
 ## Current Work Package
 
-- Package: `Annotated Content Trim v1`
+- Package: `Mobile Featured Media Parity v1`
 - Active branch: `codex/contact-archive-entrypoints`
 - Implementation and exact deployed checkout:
-  `34b5d41bcc48d581c6d18167dbad024ddca18489`
+  `533347ba9d369e1f7695d29b9ee86c91c192191c`
 - Review:
-  `docs/reviews/annotated-content-trim-v1-2026-08-03.md`
+  `docs/reviews/mobile-featured-media-parity-v1-2026-08-03.md`
 - Latest Vercel Preview:
-  `https://hsin-hsin-yuan-portfolio-preview-jfahkwa2x.vercel.app`
-- Deployment ID: `dpl_EphnKSXpHtgnR8TCKod1BkEiX1QQ`
-- Deployment target/status: `preview` / `Ready`
+  `https://hsin-hsin-yuan-portfolio-preview-2qb5bbn2s.vercel.app`
+- Deployment ID: `dpl_BQ4CziQ9G9q2Xj27uffnLff4AYtb`
+- Deployment target/status: `preview` / `READY`
 - Inspector:
-  `https://vercel.com/projectmoonie-creators-projects/hsin-hsin-yuan-portfolio-preview/EphnKSXpHtgnR8TCKod1BkEiX1QQ`
+  `https://vercel.com/projectmoonie-creators-projects/hsin-hsin-yuan-portfolio-preview/BQ4CziQ9G9q2Xj27uffnLff4AYtb`
 - Original production website/domain: unchanged.
 
-This package applies the user's six annotated mobile screenshots. It removes
-the Hero's leading second-line slash; trims duplicate Design and Nothing by Bus
-proof; gives Design one `Watch selected reel` action; contextualizes Top Gear's
-four-number block; removes small external-arrow glyphs from Archive and Press;
-and simplifies the bottom section to one verified, text-only `PRESS` record.
-The established type, color, media, 40/60, and archive-card systems remain.
+This package gives all six Featured Works cards one shared fixed `16:9` media
+area at mobile widths. Tech Dreamers, My Art, My Voice, and Top Gear now use the
+same large mobile image scale as the other featured cards. Existing desktop
+left/right media ownership, content, labels, reels, links, Press, Archive, and
+metrics remain unchanged. The user explicitly authorized local integration
+into `main` after completion; no remote push or Production promotion is
+authorized.
 
 ## Verification
 
-- TDD: focused content/rendering/Figma assertions failed against the old
-  implementation for the intended eight contract differences, then passed.
-- `npm test`: 39 passed, 0 failed.
+- TDD: the focused responsive-media assertion failed against the old
+  unlabeled-only rule, then passed after the shared mobile rule was applied.
+- The private-path regression also caught and then passed after correction of
+  an absolute path in the new implementation plan.
+- `npm test`: 40 passed, 0 failed.
 - `npm run build`: passed.
-- `npm run figma:export`: passed; two tracked SVG parity files updated.
+- `npm run figma:export`: passed; no tracked parity-file changes.
 - `git diff --check`: passed.
 - Local browser QA passed at `1440 × 900`, `1200 × 900`, `834 × 1112`,
   `390 × 844`, and `360 × 800`, plus English/Chinese, reduced-motion,
-  no-JavaScript, and keyboard-focus states: one Press record, five Archive
-  cards, the intended work proof/actions, clear Top Gear context, no horizontal
-  overflow, and no console or page errors.
-- Desktop and mobile element screenshots for Hero, Design, Nothing by Bus, Top
-  Gear, Archive, and Press were visually inspected and passed.
+  no-JavaScript, and keyboard-focus states. All six mobile media frames measured
+  `1.7778`; desktop cards retained the original two-column/aspect ownership.
+  There was no horizontal overflow and no application console or page error.
+- Mobile element screenshots for Tech Dreamers, My Art, My Voice, and Top Gear,
+  plus the desktop Tech Dreamers card, were visually inspected.
 - Preview payload: the same 22 approved public paths used by the previous safe
   package; sorted path-list SHA-256
   `1940a63b96e81606d82bb164be8f66b9d9292da10c45d79474adc41e05505388`.
@@ -54,17 +57,16 @@ The established type, color, media, 40/60, and archive-card systems remain.
 
 ## Accepted Open Items
 
-1. Manually open the latest Preview and inspect Top Gear's proof block, the
-   trimmed featured-work cards, Archive, and the single Press row. Do not submit
-   the contact form.
-2. The active branch is retained locally and is ahead of its recorded origin.
-   The user has not yet selected merge, PR/push, keep, or discard. Do not infer
-   authorization to push, merge, tag, or delete it.
+1. Manually open the latest Preview on a phone and inspect Tech Dreamers,
+   My Art, My Voice, and Top Gear. Do not submit the contact form.
+2. The user selected local merge to `main`. Complete that fast-forward and
+   verify the merged checkout; retain the host-owned worktree and feature
+   branch. Do not push, create a PR, delete branches, or promote Production.
 3. The remaining Facebook destination is a public third-party availability and
    logged-out access risk. The page does not depend on its images or metadata.
 4. Top Gear's `0.81` value remains CV-sourced. The first-five-episode audience,
    weekly live average, and four-week national time-slot rank are publicly
-   corroborated and recorded in the current review.
+   corroborated and recorded in the preceding annotated-content review.
 
 ## Closed Baseline
 
@@ -81,14 +83,14 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Have the user inspect the latest full-site Preview. If approved, ask which
-branch finish option they want: merge locally, push/create a PR, keep as-is, or
-discard. Do not modify production routing without separate explicit approval.
+Fast-forward the completed feature branch into local `main`, verify tests and
+build there, then record the local integration. Do not modify production
+routing without separate explicit approval.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, and this file.
 2. Verify the branch, implementation commit, latest Preview metadata, closed
    tag object/peeled commit, and protected untracked file.
-3. Read `docs/reviews/annotated-content-trim-v1-2026-08-03.md`.
+3. Read `docs/reviews/mobile-featured-media-parity-v1-2026-08-03.md`.
 4. Do not rely on old chat history or rewrite historical review files.
