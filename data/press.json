@@ -1,12 +1,32 @@
 [
   {
-    "id": "wmw-28-selection-guide-part-1",
+    "id": "very-mulan-director-interview",
     "order": 1,
-    "year": "2021",
-    "type": {
-      "en": "Festival conversation",
-      "zh": "影展對談"
+    "year": "2025",
+    "title": {
+      "en": "Director interview: walking into the sea of creation",
+      "zh": "真誠地往前走，走進創作的大海"
     },
+    "part": {
+      "en": "INTERVIEW",
+      "zh": "訪談"
+    },
+    "source": {
+      "en": "Very Mulan",
+      "zh": "非常木蘭"
+    },
+    "url": "https://www.verymulan.com/story/真誠地往前走，走進創作的大海：專訪巴黎文化奧運紀錄片導演袁欣欣-15241.html",
+    "canonicalUrl": "https://www.verymulan.com/story/真誠地往前走，走進創作的大海：專訪巴黎文化奧運紀錄片導演袁欣欣-15241.html",
+    "sourcePageUrl": "https://www.verymulan.com/story/真誠地往前走，走進創作的大海：專訪巴黎文化奧運紀錄片導演袁欣欣-15241.html",
+    "rightsStatus": "public-link-only",
+    "titleSource": "source page headline",
+    "imageSource": "source page article image; intentionally not rendered in global text-only Press",
+    "metadataCheckedAt": "2026-07-12"
+  },
+  {
+    "id": "wmw-28-selection-guide-part-1",
+    "order": 2,
+    "year": "2021",
     "title": {
       "en": "28th Women Make Waves Film Festival Selection Guide",
       "zh": "第 28 屆女性影展選片指南"
@@ -14,10 +34,6 @@
     "part": {
       "en": "PART 1",
       "zh": "上半場"
-    },
-    "context": {
-      "en": "Featuring Hsin-Hsin Yuan",
-      "zh": "袁欣欣參與對談"
     },
     "source": {
       "en": "Women Make Waves Film Festival",

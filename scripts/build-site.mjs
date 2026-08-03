@@ -457,9 +457,9 @@ function renderPressNotes(items = [], lang, copy) {
         <a class="press-note-card" href="${escapeHtml(url)}" target="_blank" rel="noreferrer" data-metadata-checked-at="${escapeHtml(item.metadataCheckedAt)}" data-title-source="${escapeHtml(item.titleSource)}" data-image-source="${escapeHtml(item.imageSource)}" data-source-page-url="${escapeHtml(item.sourcePageUrl)}">
           <span class="press-note-part">${escapeHtml(localize(item.part, lang))}</span>
           <span class="press-note-main">
-            <span class="press-note-kicker">${escapeHtml(localize(item.type, lang))} / ${escapeHtml(item.year)}</span>
+            <span class="press-note-kicker">${escapeHtml(item.year)}</span>
             <strong>${escapeHtml(localize(item.title, lang))}</strong>
-            <span class="press-note-meta">${escapeHtml(localize(item.context, lang))} · ${escapeHtml(localize(item.source, lang))}</span>
+            <span class="press-note-meta">${escapeHtml(localize(item.source, lang))}</span>
           </span>
         </a>
       `;

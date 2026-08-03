@@ -332,24 +332,38 @@ test("featured press entries carry audit metadata", () => {
   }
 });
 
-test("global press notes preserve audited Women Make Waves source metadata", () => {
+test("global press notes keep audited sources in newest-first order", () => {
   const site = loadSiteData(root);
+  const myArt = loadWorks(join(root, "content/works")).find(
+    (work) => work.slug === "my-art-my-voice",
+  );
 
-  assert.equal(site.press.length, 1);
-  assert.deepEqual(site.press.map((item) => item.id), ["wmw-28-selection-guide-part-1"]);
+  assert.deepEqual(
+    site.press.map((item) => [item.id, item.year, item.part.en]),
+    [
+      ["very-mulan-director-interview", "2025", "INTERVIEW"],
+      ["wmw-28-selection-guide-part-1", "2021", "PART 1"],
+    ],
+  );
   assert.equal(
-    site.press[0].canonicalUrl,
+    myArt.press.some((item) => item.canonicalUrl.includes("verymulan.com")),
+    false,
+  );
+  assert.equal(site.press[0].rightsStatus, "public-link-only");
+  assert.equal(site.press[1].rightsStatus, "public-link-only");
+  assert.equal(site.press[1].participationStatus, "verified-speaker");
+  assert.equal(
+    site.press[1].canonicalUrl,
     "https://www.facebook.com/watch/?v=257310076279164",
   );
-  assert.equal(site.press[0].sourcePageUrl, "https://www.wmw.org.tw/tw/title/733");
-  assert.equal(site.press[0].participationStatus, "verified-speaker");
+  assert.equal(site.press[1].sourcePageUrl, "https://www.wmw.org.tw/tw/title/733");
   for (const item of site.press) {
     assert.match(item.canonicalUrl, /^https:\/\//);
     assert.match(item.sourcePageUrl, /^https:\/\//);
-    assert.equal(item.titleSource, "official Women Make Waves event record");
-    assert.equal(item.imageSource, "none; Facebook returned generic Watch metadata");
-    assert.equal(item.metadataCheckedAt, "2026-08-03");
+    assert.match(item.metadataCheckedAt, /^2026-/);
     assert.equal("image" in item, false);
+    assert.equal("type" in item, false);
+    assert.equal("context" in item, false);
   }
 });
 
@@ -368,21 +382,39 @@ test("global press notes render as a low-priority text-only section after Archiv
   assert.ok(archivePosition >= 0 && pressPosition > archivePosition);
   assert.ok(contactPosition > pressPosition);
   assert.ok(pressSection);
-  assert.equal((pressSection.match(/class="press-note-card"/g) || []).length, 1);
+  assert.equal((pressSection.match(/class="press-note-card"/g) || []).length, 2);
   assert.doesNotMatch(pressSection, /<img/);
   assert.match(pressSection, />PRESS</);
+  assert.ok(
+    pressSection.indexOf("Director interview: walking into the sea of creation") <
+      pressSection.indexOf("28th Women Make Waves Film Festival Selection Guide"),
+  );
+  assert.match(pressSection, /<span class="press-note-part">INTERVIEW<\/span>/);
+  assert.match(pressSection, /<span class="press-note-kicker">2025<\/span>/);
+  assert.match(pressSection, /<span class="press-note-meta">Very Mulan<\/span>/);
   assert.match(pressSection, /28th Women Make Waves Film Festival Selection Guide/);
-  assert.match(pressSection, /PART 1/);
-  assert.match(pressSection, /Featuring Hsin-Hsin Yuan/);
+  assert.match(pressSection, /<span class="press-note-part">PART 1<\/span>/);
+  assert.match(pressSection, /<span class="press-note-kicker">2021<\/span>/);
+  assert.match(
+    pressSection,
+    /<span class="press-note-meta">Women Make Waves Film Festival<\/span>/,
+  );
+  assert.doesNotMatch(pressSection, /Festival conversation|Featuring Hsin-Hsin Yuan/);
   assert.doesNotMatch(pressSection, /Companion event archive|Selected interviews and festival conversations/);
   assert.doesNotMatch(pressSection, /412888580196820|press-note-arrow|↗/);
+  assert.match(
+    pressSection,
+    /href="https:\/\/www\.verymulan\.com\/story\/[^\"]+"[^>]*data-metadata-checked-at="2026-07-12"/,
+  );
   assert.match(
     pressSection,
     /href="https:\/\/www\.facebook\.com\/watch\/\?v=257310076279164"[^>]*data-metadata-checked-at="2026-08-03"/,
   );
   assert.match(zh, />PRESS</);
+  assert.match(zh, /訪談/);
+  assert.match(zh, /非常木蘭/);
   assert.match(zh, /第 28 屆女性影展選片指南/);
-  assert.match(zh, /袁欣欣參與對談/);
+  assert.doesNotMatch(zh, /影展對談|袁欣欣參與對談/);
   assert.doesNotMatch(zh, /同場活動紀錄|陸續收錄訪談與影展對談/);
 });
 
