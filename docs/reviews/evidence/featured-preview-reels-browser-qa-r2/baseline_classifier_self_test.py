@@ -7,6 +7,22 @@ from baseline_classifier import classify_baseline_case
 
 CASES = [
     {
+        "name": "auth gate plus portfolio DOM is contradictory and fails closed",
+        "input": {
+            "auth_gated": True,
+            "baseline_dom_available": True,
+            "local_case_pass": True,
+            "remote_contact_clear": True,
+        },
+        "expected": {
+            "branch": "contradictory_auth_and_dom",
+            "status": "FAIL",
+            "pass": False,
+            "authGatedIncrement": 0,
+            "concernType": "contradictory_auth_and_portfolio_dom",
+        },
+    },
+    {
         "name": "auth gate with preserved SSO evidence",
         "input": {
             "auth_gated": True,
@@ -113,7 +129,19 @@ def main():
             }
         )
 
-    output = {"overallPass": all(row["pass"] for row in results), "cases": results}
+    covered_branches = {row["branch"] for row in results}
+    required_branches = {
+        "contradictory_auth_and_dom",
+        "auth_gated",
+        "missing_dom_without_auth_evidence",
+        "dom_available",
+    }
+    output = {
+        "overallPass": all(row["pass"] for row in results)
+        and required_branches.issubset(covered_branches),
+        "requiredBranchesCovered": sorted(required_branches),
+        "cases": results,
+    }
     print(json.dumps(output, indent=2))
     if not output["overallPass"]:
         raise SystemExit(1)

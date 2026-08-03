@@ -56,12 +56,14 @@ npm run serve
 ```
 
 In a second terminal at the repository root, run syntax/help, classifier, and
-browser QA. Set the baseline only when repeating the historical authentication
+browser QA. The output directory is created outside the repository and printed
+before use. Set the baseline only when repeating the historical authentication
 attempt; omit it for local-only QA.
 
 ```sh
 qa_package='docs/reviews/evidence/featured-preview-reels-browser-qa-r2'
-qa_output_dir='qa-evidence/featured-preview-reels-browser-qa-r2'
+QA_OUTPUT_DIR="$(mktemp -d /private/tmp/featured-preview-qa.XXXXXX)"
+printf 'QA output: %s\n' "$QA_OUTPUT_DIR"
 PYTHONDONTWRITEBYTECODE=1 python3 -c 'from pathlib import Path; [compile(path.read_text(encoding="utf-8"), str(path), "exec") for path in map(Path, __import__("sys").argv[1:])]' "$qa_package/qa_harness.py" "$qa_package/baseline_classifier.py" "$qa_package/baseline_classifier_self_test.py"
 PYTHONDONTWRITEBYTECODE=1 python3 "$qa_package/qa_harness.py" --help
 PYTHONDONTWRITEBYTECODE=1 python3 "$qa_package/baseline_classifier_self_test.py"
@@ -69,7 +71,7 @@ PYTHONDONTWRITEBYTECODE=1 python3 "$qa_package/qa_harness.py" \
   --repo-root . \
   --base-url http://127.0.0.1:4173 \
   --baseline-url https://hsin-hsin-yuan-portfolio-preview-5s4u5ncf6.vercel.app \
-  --evidence-dir "$qa_output_dir"
+  --evidence-dir "$QA_OUTPUT_DIR"
 ```
 
 The harness fails closed if the baseline DOM is missing without preserved SSO
@@ -77,6 +79,23 @@ evidence, or if a reachable baseline lacks a complete matched comparison. Its
 saved JSON removes query strings, cookies, headers, form values, and absolute
 filesystem paths. Optional `--screenshots` output remains local/session
 evidence and must not be added to this package.
+
+Inspect `"$QA_OUTPUT_DIR/qa-results.json"` while the evidence is needed. To
+clean up, first verify that the resolved path begins with
+`/private/tmp/featured-preview-qa.` and is not a symlink, then remove that exact
+directory only:
+
+```sh
+case "$QA_OUTPUT_DIR" in
+  /private/tmp/featured-preview-qa.*)
+    test ! -L "$QA_OUTPUT_DIR" && rm -rf -- "$QA_OUTPUT_DIR"
+    ;;
+  *)
+    printf 'Refusing unexpected QA output path: %s\n' "$QA_OUTPUT_DIR" >&2
+    exit 1
+    ;;
+esac
+```
 
 Stop the server with Ctrl-C, then verify shutdown:
 
@@ -95,12 +114,13 @@ git status --short
 git diff --check
 private_home='/''Users/'
 private_volume='/''Volumes/'
-remote_attachment_root='/tmp/''codex-remote-attachments'
+remote_attachment_root='/tmp/codex-remote-''attachments'
 if git grep -n -I -E "${private_home}|${private_volume}|${remote_attachment_root}"; then
   exit 1
 fi
 ```
 
-The expected worktree exception is the protected user-owned untracked review;
-ignored `dist/` may exist. Do not deploy, push, merge, or submit Contact as part
-of this reproduction.
+The harness output never enters the repository. After cleanup, the expected
+worktree exception is the protected user-owned untracked review; ignored
+`dist/` may exist. Do not deploy, push, merge, or submit Contact as part of this
+reproduction.

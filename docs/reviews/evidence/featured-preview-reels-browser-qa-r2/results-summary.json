@@ -17,6 +17,105 @@
     "manifestSha256": "418ece08fd3b13ec2a2f8f8d5e20794f82fc1fdcf9333f9a070d108394d6d1d6",
     "durabilityNote": "The original packet and raster captures were session-only; this sanitized package is the durable evidence authority."
   },
+  "durableHarnessConformance": {
+    "status": "PASS_WITH_OPEN_ITEMS",
+    "pass": true,
+    "outputLocation": "external temporary directory; removed after durable summary capture",
+    "managedServer": {"port": 4173, "ready": true, "stopped": true},
+    "environment": {"python": "3.9.6", "playwright": "1.60.0", "chromium": "148.0.7778.96"},
+    "classifierSelfTest": {
+      "pass": true,
+      "caseCount": 6,
+      "requiredBranches": ["auth_gated", "contradictory_auth_and_dom", "dom_available", "missing_dom_without_auth_evidence"]
+    },
+    "matrix": {
+      "pass": true,
+      "passed": 10,
+      "total": 10,
+      "requestCount": 118,
+      "cases": [
+        {"language": "en", "viewport": "1440x900", "pass": true},
+        {"language": "en", "viewport": "1200x900", "pass": true},
+        {"language": "en", "viewport": "834x1112", "pass": true},
+        {"language": "en", "viewport": "390x844", "pass": true},
+        {"language": "en", "viewport": "360x800", "pass": true},
+        {"language": "zh", "viewport": "1440x900", "pass": true},
+        {"language": "zh", "viewport": "1200x900", "pass": true},
+        {"language": "zh", "viewport": "834x1112", "pass": true},
+        {"language": "zh", "viewport": "390x844", "pass": true},
+        {"language": "zh", "viewport": "360x800", "pass": true}
+      ],
+      "exactPosters": {
+        "slow-steps": "/assets/portfolio/slow-steps-poster.webp",
+        "tech-dreamers": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+        "my-art-my-voice": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+        "interior-spatial-brand-films": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+        "pts-taigi-bus": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg"
+      },
+      "exactPressTypes": {
+        "en": ["Official page", "Official page", "Project press"],
+        "zh": ["官方節目頁", "官方節目頁", "專案報導"]
+      },
+      "pressPreviewTitleCount": 0,
+      "directGroupLabelTextCount": 0
+    },
+    "interaction": {
+      "pass": true,
+      "posterHoldElapsedFromEligibilityMs": 1015.6000000238419,
+      "posterHoldPlayingClass": false,
+      "posterHoldPaused": true,
+      "posterHoldCurrentTime": 0,
+      "posterHoldVideoOpacity": "0",
+      "actualPlayingElapsedFromEligibilityMs": 1432.9000000357628,
+      "actualPlayingClass": true,
+      "actualPlayingPaused": false,
+      "actualPlayingCurrentTime": 0.007753,
+      "advancedCurrentTime": 0.615163,
+      "advancedDeltaCurrentTime": 0.60741,
+      "advancedOpacity": "1",
+      "naturalArbitration": {"scrollY": 1880, "eligibleIndexes": [0, 1], "playingIndexes": [1], "pass": true},
+      "exitReset": true,
+      "reentry": true,
+      "syntheticMediaError": true,
+      "syntheticPersistedBFCache": true,
+      "controlledVisibility": true
+    },
+    "fallbacks": {
+      "reducedMotion": {"pass": true, "exactFivePosters": true, "videosHiddenPausedAtZero": true},
+      "noJavaScript": {
+        "pass": true,
+        "fragment": "#works",
+        "worksRect": {"top": 0.421875, "bottom": 4420.421875, "left": 0, "right": 1200, "intersectsViewport": true},
+        "documentRequestsBefore": 1,
+        "documentRequestsAfter": 1,
+        "exactFivePosters": true,
+        "videosPausedAtZero": true
+      },
+      "keyboard": {
+        "pass": true,
+        "techWrapperRect": {"x": 144.59375, "y": 641.046875, "width": 533.75, "height": 618.8125},
+        "outline": {"style": "solid", "width": "2px", "color": "rgb(216, 255, 62)", "offset": "4px"},
+        "contactReached": true,
+        "videosNeverFocused": true
+      }
+    },
+    "baseline": {
+      "pass": true,
+      "status": "PASS_WITH_OPEN_ITEMS",
+      "attemptedCases": 10,
+      "authGatedCases": 10,
+      "portfolioDomAvailableCases": 0,
+      "classificationBranches": ["auth_gated"],
+      "requestCount": 1139,
+      "contactPosts": 0,
+      "authEvidenceChain": [
+        {"source": "final_navigation", "status": 200, "hostname": "vercel.com", "pathname": "/login", "redirectClassification": "vercel_login"},
+        {"source": "response", "status": 307, "hostname": "vercel.com", "pathname": "/sso-api", "redirectClassification": "vercel_sso_endpoint"},
+        {"source": "response", "status": 200, "hostname": "vercel.com", "pathname": "/login", "redirectClassification": "vercel_login"}
+      ],
+      "matchedBaselineClaim": false
+    }
+  },
   "deterministic": {
     "overallPass": true,
     "npmTest": {"pass": true, "passed": 61, "total": 61},
@@ -92,10 +191,10 @@
       "http200AndBoundedNetworkIdle": true,
       "noHorizontalOverflow": true,
       "exactlyFiveFeaturedVideos": true,
-      "posterPreloadControlTabPointerMediaAttributes": true,
+      "exactPosterIdentitiesAndPreloadControlTabPointerMediaAttributes": true,
       "localizedWorkPressGroups": true,
-      "visibleWorkPressHeadingAbsent": true,
-      "threeVisibleEntryTypes": true,
+      "pressPreviewTitleAndDirectGroupLabelTextAbsent": true,
+      "exactLocalizedWorkPressTypeMultiset": true,
       "globalPressVisible": true,
       "slowTechArtDestinationsExact": true,
       "fiveContactFieldsNeverSubmitted": true,

@@ -145,10 +145,16 @@ Every delegated role requested `gpt-5.6-sol`.
 | Other delegated runtimes, including browser QA and closeout | `gpt-5.6-sol` | Not independently exposed | Not independently exposed |
 
 Unexposed model IDs are not inferred or labeled. No Claude or Gemini
-collaboration request was made in this package.
+collaboration request was made in this package. This was an approved
+incremental portfolio integration within the existing architecture, not a new
+project kickoff or unresolved major architecture/adjudication decision;
+independent Codex implementer, spec, quality, and QA reviews were the selected
+verification lane.
 
 ## Exact next action
 
-The user reviews the local build. A new Vercel Preview, any Production change,
-or a merge to local `main` requires explicit later authorization. No local
-server is claimed active.
+From the repository root, run `npm run build && npm run serve`, review
+`http://127.0.0.1:4173/en/` and `http://127.0.0.1:4173/zh/`, then stop the server
+with Ctrl-C. No local server is currently active. A new Vercel Preview, any
+Production change, or a merge to local `main` requires explicit later
+authorization.

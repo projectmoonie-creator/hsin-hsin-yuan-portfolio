@@ -13,6 +13,20 @@ def classify_baseline_case(
     pixel_pass=None,
 ):
     """Classify one baseline case without treating missing evidence as success."""
+    if auth_gated and baseline_dom_available:
+        return {
+            "branch": "contradictory_auth_and_dom",
+            "status": "FAIL",
+            "pass": False,
+            "authGatedIncrement": 0,
+            "concernType": "contradictory_auth_and_portfolio_dom",
+            "reason": (
+                "Authentication-gate evidence and portfolio DOM were both "
+                "observed; fail closed because the evidence state contradicts "
+                "the auth-only open-item classification."
+            ),
+        }
+
     if auth_gated:
         return {
             "branch": "auth_gated",

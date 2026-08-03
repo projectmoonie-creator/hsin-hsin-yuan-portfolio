@@ -50,18 +50,20 @@ All `10/10` English/Chinese cases passed at:
 - 360×800
 
 Every case passed HTTP 200 and bounded network-idle, horizontal-overflow,
-five-video poster/preload/control/tab/pointer/media, localized semantic Work
-Press, absent visible Work Press group heading, three visible per-card types,
-visible global Press, exact Slow/Tech/Art destination, five contact-field, and
-empty local error predicates.
+exact five-poster identity plus preload/control/tab/pointer/media, localized
+semantic Work Press, absent `.press-preview-title`, absent direct group-label
+text nodes, exact localized per-card type multiset, visible global Press, exact
+Slow/Tech/Art destination, five contact-field, and empty local error
+predicates. English types were `Official page`, `Official page`, and
+`Project press`; Chinese types were `官方節目頁`, `官方節目頁`, and `專案報導`.
 
-The request ledger records 118 matrix requests, 308 total local-context
-requests (including the local sides of the comparison attempts), and 1,155
-historical baseline requests. It records zero `/api/contact` POSTs and zero
-submit events. The local console/page/request/HTTP error arrays were empty.
-The SSO/login page produced 47 console warning/error events and 13 HTTP errors;
-those are retained as authentication-gate evidence and are not portfolio
-errors.
+The original r2 request ledger records 118 matrix requests, 308 total
+local-context requests (including the local sides of the comparison attempts),
+and 1,155 historical baseline requests. It records zero `/api/contact` POSTs
+and zero submit events. The local console/page/request/HTTP error arrays were
+empty. The SSO/login page produced 47 console warning/error events and 13 HTTP
+errors; those are retained as authentication-gate evidence and are not
+portfolio errors.
 
 Real timing proved the 1.4-second poster hold, reveal only after `playing`,
 continuing playback, exit reset, and re-entry. Natural sticky geometry proved
@@ -75,6 +77,39 @@ second document request and retained five paused posters. Keyboard QA reached
 the visible Tech wrapper with the exact 2 px focus outline, then reached the
 contact fields; videos remained unfocusable, control-free, and
 pointer-transparent.
+
+## Tracked-harness conformance run
+
+The final tracked harness was run end-to-end with a managed server on port
+4173 and output in an external temporary directory. It returned
+`PASS_WITH_OPEN_ITEMS`, passed all `10/10` local matrix cases, and the helper
+stopped the server. The temporary output was summarized into this package and
+removed; no repository output directory or ignore workaround was used.
+
+The conformance run recorded:
+
+- all five exact poster identities in every matrix case;
+- the exact English and Chinese Work Press type multisets and zero
+  `.press-preview-title`/direct group-label text nodes;
+- poster state at `1015.6000000238419` ms from measured eligibility, with the
+  video paused at time `0` and opacity `0`;
+- the actual `playing` event at `1432.9000000357628` ms from eligibility,
+  followed by current time `0.615163`, delta `0.60741`, and opacity `1`;
+- natural arbitration at scroll Y `1880`, with indexes `0` and `1` eligible
+  and only later index `1` playing;
+- no-JavaScript fragment `#works`, an intersecting Works rect, exact posters,
+  and one document request before and after Enter;
+- reduced-motion and keyboard checks passed, including the exact Tech wrapper
+  focus outline and contact reachability;
+- ten baseline attempts, ten auth-gated cases, zero portfolio-DOM cases, 1,139
+  baseline requests, and zero contact POSTs.
+
+Every baseline case persisted the same sanitized evidence chain: final
+navigation `200` at hostname `vercel.com`, pathname `/login`, classified
+`vercel_login`; response `307` at `/sso-api`, classified
+`vercel_sso_endpoint`; and response `200` at `/login`. Query strings,
+fragments, tokens, cookies, and headers are absent. The classifier now treats
+simultaneous auth-gate evidence and portfolio DOM as a distinct hard failure.
 
 ## Server and repository state
 
@@ -100,9 +135,9 @@ the local result but do not replace the unavailable baseline comparison.
   baseline classification. It parameterizes repository, local origin,
   historical baseline, and output directory. If Playwright is unavailable it
   exits honestly with an installation message.
-- [baseline_classifier.py](./baseline_classifier.py) owns the three fail-closed
+- [baseline_classifier.py](./baseline_classifier.py) owns four fail-closed
   baseline branches; [baseline_classifier_self_test.py](./baseline_classifier_self_test.py)
-  covers five focused rows.
+  covers six focused rows, including contradictory auth-plus-DOM evidence.
 - [reproduce.md](./reproduce.md) records repo-root commands.
 - [evidence-manifest.sha256](./evidence-manifest.sha256) fingerprints every
   other tracked file in this directory.
