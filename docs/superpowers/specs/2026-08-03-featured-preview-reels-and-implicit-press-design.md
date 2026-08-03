@@ -143,6 +143,8 @@ not invent or restore a visible work-Press heading.
 Expected implementation surface:
 
 - `public/assets/showreel/` — three derived videos;
+- `showreel/featured-preview-reels/README.md` — source fingerprints,
+  deterministic conversion commands, and the local `media-use` ledger owner;
 - `content/works/*.md` — five playback modes, three reel roles, and three
   provenance records;
 - `scripts/lib/portfolio-contract.mjs` — evidence classification and reel
