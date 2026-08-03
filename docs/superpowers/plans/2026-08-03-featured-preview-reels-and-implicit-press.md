@@ -49,7 +49,7 @@
 - Modify: `tests/portfolio-contract.test.mjs`
 - Create: `tests/media-assets.test.mjs`
 
-- [ ] **Step 1: Add failing contract tests for a complete after-hold reel**
+- [x] **Step 1: Add failing contract tests for a complete after-hold reel**
 
 Import `FEATURED_REEL_MODES` beside the existing contract exports, then add:
 
@@ -88,7 +88,7 @@ test("featured reel contracts require one complete approved triplet and keep pro
 });
 ```
 
-- [ ] **Step 2: Add a failing exact source-declaration test**
+- [x] **Step 2: Add a failing exact source-declaration test**
 
 ```js
 test("five Featured works declare the approved poster-first reel contract", () => {
@@ -117,7 +117,7 @@ test("five Featured works declare the approved poster-first reel contract", () =
 });
 ```
 
-- [ ] **Step 3: Create the failing executable media test**
+- [x] **Step 3: Create the failing executable media test**
 
 ```js
 import assert from "node:assert/strict";
@@ -162,7 +162,7 @@ test("Featured preview derivatives are complete silent 720p H.264 BT.709 files",
 });
 ```
 
-- [ ] **Step 4: Run the focused tests and verify RED**
+- [x] **Step 4: Run the focused tests and verify RED**
 
 Run:
 
@@ -190,7 +190,7 @@ file must remain the only pre-existing untracked item.
 - Test: `tests/portfolio-contract.test.mjs`
 - Test: `tests/media-assets.test.mjs`
 
-- [ ] **Step 1: Resolve source files by approved basename and re-check hashes**
+- [x] **Step 1: Resolve source files by approved basename and re-check hashes**
 
 Run in one shell session:
 
@@ -210,7 +210,7 @@ Expected hashes, in order:
 d7ab1b3c7e4a70b479af7ab28801a9c41993576502aaca87fa7032adef1e1bdd
 ```
 
-- [ ] **Step 2: Encode all three complete timelines deterministically**
+- [x] **Step 2: Encode all three complete timelines deterministically**
 
 In the same shell session, run:
 
@@ -223,7 +223,7 @@ ffmpeg -hide_banner -i "$ART_SOURCE" -map 0:v:0 -vf "scale=1280:720:flags=lanczo
 Expected: all commands exit 0; sources are unchanged; the outputs keep the
 30.030 s, 30.030 s, and 100.033267 s timelines within 0.2 s.
 
-- [ ] **Step 3: Add the reproducible media record and local ledger**
+- [x] **Step 3: Add the reproducible media record and local ledger**
 
 Create `showreel/featured-preview-reels/README.md` with the approved source
 basenames and hashes, the three complete ffmpeg commands from Task 2 Step 2,
@@ -247,7 +247,7 @@ git check-ignore showreel/featured-preview-reels/.media/manifest.jsonl
 Expected: three successful ingest records; `.media/manifest.jsonl` is ignored
 by `showreel/**/.media/`.
 
-- [ ] **Step 4: Add canonical fields to the three new reel records**
+- [x] **Step 4: Add canonical fields to the three new reel records**
 
 For Slow Steps, use:
 
@@ -293,7 +293,7 @@ Do not alter either `watchUrl`. In
 `content/works/pts-taigi-bus.md`, change only `featuredReelMode` from
 `"in-view"` to `"after-hold"`.
 
-- [ ] **Step 5: Implement dependency-free reel validation and evidence classification**
+- [x] **Step 5: Implement dependency-free reel validation and evidence classification**
 
 Add these exports/constants to `scripts/lib/portfolio-contract.mjs`:
 
@@ -350,7 +350,7 @@ function validateFeaturedReel(source) {
 Call `validateFeaturedReel(source)` in `normalizeFeaturedWork` immediately
 after presentation validation.
 
-- [ ] **Step 6: Run focused and full tests to verify GREEN**
+- [x] **Step 6: Run focused and full tests to verify GREEN**
 
 Run:
 
@@ -361,7 +361,7 @@ npm test
 
 Expected: all tests pass; no private external path is tracked.
 
-- [ ] **Step 7: Commit the media and canonical contract package**
+- [x] **Step 7: Commit the media and canonical contract package**
 
 ```bash
 git add public/assets/showreel/slow-steps-card-reel.mp4 public/assets/showreel/tech-dreamers-card-reel.mp4 public/assets/showreel/my-art-my-voice-card-reel.mp4 showreel/featured-preview-reels/README.md content/works/slow-steps.md content/works/tech-dreamers.md content/works/my-art-my-voice.md content/works/interior-spatial-brand-films.md content/works/pts-taigi-bus.md scripts/lib/portfolio-contract.mjs tests/portfolio-contract.test.mjs tests/media-assets.test.mjs
@@ -375,7 +375,7 @@ git commit -m "add full-length featured preview reels"
 - Modify: `scripts/build-site.mjs:149-187`
 - Modify: `src/styles.css:750-764`
 
-- [ ] **Step 1: Write the failing bilingual semantic-Press test**
+- [x] **Step 1: Write the failing bilingual semantic-Press test**
 
 Add:
 
@@ -401,7 +401,7 @@ test("work Press keeps entry labels but hides its group heading", () => {
 Update older assertions that looked only for visible group-label text so they
 assert the `aria-label` and the continuing entry types instead.
 
-- [ ] **Step 2: Run the test and verify RED**
+- [x] **Step 2: Run the test and verify RED**
 
 ```bash
 node --test --test-name-pattern="work Press keeps entry labels" tests/build-site.test.mjs
@@ -410,7 +410,7 @@ node --test --test-name-pattern="work Press keeps entry labels" tests/build-site
 Expected: FAIL because the wrapper has no semantic label and the visible
 `press-preview-title` still exists.
 
-- [ ] **Step 3: Implement the smallest renderer and CSS change**
+- [x] **Step 3: Implement the smallest renderer and CSS change**
 
 In `renderPress`, replace:
 
@@ -430,7 +430,7 @@ muted cards, or the `.map(...).join("")` grid. Delete only the
 `.press-preview-title` CSS block. Retain `.press-preview`, its divider/padding,
 every card style, and all audit attributes.
 
-- [ ] **Step 4: Run focused and full tests to verify GREEN**
+- [x] **Step 4: Run focused and full tests to verify GREEN**
 
 ```bash
 node --test --test-name-pattern="work Press keeps entry labels" tests/build-site.test.mjs
@@ -439,7 +439,7 @@ npm test
 
 Expected: PASS; global `PRESS` and its title remain unchanged.
 
-- [ ] **Step 5: Commit the semantic Press package**
+- [x] **Step 5: Commit the semantic Press package**
 
 ```bash
 git add tests/build-site.test.mjs scripts/build-site.mjs src/styles.css
@@ -453,7 +453,7 @@ git commit -m "hide redundant work press heading"
 - Modify: `scripts/build-site.mjs:208-232`
 - Modify: `src/main.js:213-290`
 
-- [ ] **Step 1: Write failing markup and lifecycle assertions**
+- [x] **Step 1: Write failing markup and lifecycle assertions**
 
 Assert five exact Featured videos, approved mode, poster, lazy preload, and
 unchanged navigation:
@@ -489,7 +489,7 @@ assert.match(js, /video === activeFeaturedReel[\s\S]*?scheduleFeaturedReel\(vide
 assert.match(js, /function resetFeaturedReel\(video\) \{[\s\S]*?clearFeaturedReelTimer\(video\)/);
 ```
 
-- [ ] **Step 2: Run focused tests and verify RED**
+- [x] **Step 2: Run focused tests and verify RED**
 
 ```bash
 node --test --test-name-pattern="all approved Featured reels|scroll-stack works" tests/build-site.test.mjs
@@ -498,7 +498,7 @@ node --test --test-name-pattern="all approved Featured reels|scroll-stack works"
 Expected: FAIL because the renderer accepts only `in-view`, emits
 `preload="metadata"`, and JavaScript plays immediately.
 
-- [ ] **Step 3: Update the Featured reel markup**
+- [x] **Step 3: Update the Featured reel markup**
 
 Change approval and attributes to:
 
@@ -520,7 +520,7 @@ muted loop playsinline webkit-playsinline preload="none"
 Keep the existing poster, `aria-hidden`, `tabindex`, source, and
 pointer-event ownership.
 
-- [ ] **Step 4: Add hold timers without changing one-active-reel selection**
+- [x] **Step 4: Add hold timers without changing one-active-reel selection**
 
 Add beside the Featured controller:
 
@@ -551,7 +551,7 @@ Call `clearFeaturedReelTimer(video)` first in both `resetFeaturedReel` and
 selection, `playing`-class fade, error fallback, visibility reset, and
 `pagehide` cleanup.
 
-- [ ] **Step 5: Run focused and full tests to verify GREEN**
+- [x] **Step 5: Run focused and full tests to verify GREEN**
 
 ```bash
 node --test --test-name-pattern="all approved Featured reels|scroll-stack works" tests/build-site.test.mjs
@@ -561,7 +561,7 @@ npm test
 Expected: PASS; exactly five Featured reels render and only the active one is
 scheduled.
 
-- [ ] **Step 6: Commit the interaction package**
+- [x] **Step 6: Commit the interaction package**
 
 ```bash
 git add tests/build-site.test.mjs scripts/build-site.mjs src/main.js
@@ -579,7 +579,7 @@ git commit -m "hold featured posters before reel playback"
 - Modify only if generated: `figma-export/README.md`
 - Test: `tests/figma-export.test.mjs`
 
-- [ ] **Step 1: Update current rules, not historical reviews**
+- [x] **Step 1: Update current rules, not historical reviews**
 
 Add to Featured Work:
 
@@ -600,7 +600,7 @@ classification; do not render a second `PRESS & INTERVIEWS` field heading.
 Add the same operational rules to `PROJECT_BIBLE.md` under Work Navigation and
 Press Cards. Do not rewrite dated review/spec files.
 
-- [ ] **Step 2: Rebuild Figma references and prove poster parity**
+- [x] **Step 2: Rebuild Figma references and prove poster parity**
 
 ```bash
 npm run figma:export
@@ -619,7 +619,7 @@ Expected hashes remain:
 If any hash differs, stop and inspect the generated diff; this package does
 not approve a poster, geometry, copy, or Figma title-layer change.
 
-- [ ] **Step 3: Run contract and Figma gates**
+- [x] **Step 3: Run contract and Figma gates**
 
 ```bash
 npm run audit:design-contract
@@ -629,7 +629,7 @@ git diff --check
 
 Expected: PASS, no unclassified reel evidence, and no Figma drift.
 
-- [ ] **Step 4: Commit the current-rule alignment**
+- [x] **Step 4: Commit the current-rule alignment**
 
 ```bash
 git add docs/design-contract.md PROJECT_BIBLE.md
@@ -642,7 +642,7 @@ git commit -m "document featured reel and implicit press rules"
 - Create temporary QA evidence outside the repository only.
 - Do not modify Production or Vercel.
 
-- [ ] **Step 1: Run the complete deterministic gate**
+- [x] **Step 1: Run the complete deterministic gate**
 
 ```bash
 npm test
@@ -658,7 +658,7 @@ if git grep -n -I -E "${private_home}|${remote_attachment_root}"; then exit 1; f
 Expected: all tests pass; audit/build/export pass; privacy search returns no
 tracked match. Generated `dist/` contains all three new reels.
 
-- [ ] **Step 2: Record exact derived-media evidence**
+- [x] **Step 2: Record exact derived-media evidence**
 
 ```bash
 for reel in \
@@ -675,7 +675,7 @@ shasum -a 256 public/assets/showreel/slow-steps-card-reel.mp4 public/assets/show
 Expected: video-only H.264/yuv420p/BT.709, 1280×720, full durations, and three
 stable output hashes ready for the closeout report.
 
-- [ ] **Step 3: Start an identified local preview on a free port**
+- [x] **Step 3: Start an identified local preview on a free port**
 
 ```bash
 lsof -nP -iTCP:4873 -sTCP:LISTEN
@@ -686,7 +686,7 @@ If the first command shows an unknown listener, leave it untouched and use
 port `4874`. Verify the served English HTML contains
 `slow-steps-card-reel.mp4` before browser capture.
 
-- [ ] **Step 4: Validate the bilingual viewport matrix**
+- [x] **Step 4: Validate the bilingual viewport matrix**
 
 Using the current browser-testing skill, inspect English and Chinese at:
 
@@ -703,14 +703,14 @@ in only after playback starts following the 1.4 s hold, and leaving/re-entering
 restarts from poster/time zero. Scroll so two cards cross the threshold and
 confirm only the last visible reel plays.
 
-- [ ] **Step 5: Validate fallbacks and accessibility**
+- [x] **Step 5: Validate fallbacks and accessibility**
 
 Check reduced motion, JavaScript disabled, keyboard-only focus, page visibility
 reset, media-error poster fallback, horizontal overflow, and the semantic
 `role="group"`/localized `aria-label`. Confirm Slow Steps remains non-linked;
 Tech Dreamers and My Art, My Voice retain their TaiwanPlus destinations.
 
-- [ ] **Step 6: Visually compare matched screenshots**
+- [x] **Step 6: Visually compare matched screenshots**
 
 Compare desktop and mobile Featured screenshots with the approved pre-package
 baseline. Allowed differences are only reel motion after the hold and removal
@@ -724,7 +724,7 @@ copy, item card, or external-link difference as a regression.
 - Modify: `STATUS.md`
 - Modify: `docs/superpowers/plans/2026-08-03-featured-preview-reels-and-implicit-press.md`
 
-- [ ] **Step 1: Write the dated local validation report**
+- [x] **Step 1: Write the dated local validation report**
 
 Record:
 
@@ -741,14 +741,14 @@ Set `PASS` only if every required gate passed. Use `PASS_WITH_OPEN_ITEMS` if a
 non-blocking review item remains, and `BLOCKED` for a missing source, failed
 media contract, regression, or privacy failure.
 
-- [ ] **Step 2: Update the mutable status entry point**
+- [x] **Step 2: Update the mutable status entry point**
 
 Set the current package, branch, checkpoints, local validation state, latest
 existing Vercel Preview metadata, accepted open items, protected file, and exact
 next action. The exact next action is user review of the local build; do not
 claim deployment or local-main integration.
 
-- [ ] **Step 3: Mark every completed plan checkbox and run final gates**
+- [x] **Step 3: Mark every completed plan checkbox and run final gates**
 
 ```bash
 npm test
@@ -762,14 +762,14 @@ git status --short
 Expected: all gates pass; only the protected user file remains untracked before
 the closeout commit.
 
-- [ ] **Step 4: Commit the closeout package**
+- [x] **Step 4: Commit the closeout package**
 
 ```bash
 git add docs/reviews/featured-preview-reels-and-implicit-press-v1-2026-08-03.md STATUS.md docs/superpowers/plans/2026-08-03-featured-preview-reels-and-implicit-press.md
 git commit -m "close featured preview reel package"
 ```
 
-- [ ] **Step 5: Stop before deployment or merge**
+- [x] **Step 5: Stop before deployment or merge**
 
 Report the local preview URL, final commit, validation results, three output
 sizes, and the one known link state: Slow Steps has no public destination.
