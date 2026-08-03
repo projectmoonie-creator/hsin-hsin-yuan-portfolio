@@ -261,6 +261,86 @@ test("featured press entries carry audit metadata", () => {
   }
 });
 
+test("global press notes preserve audited Women Make Waves source metadata", () => {
+  const site = loadSiteData(root);
+
+  assert.equal(site.press.length, 2);
+  assert.deepEqual(
+    site.press.map((item) => item.id),
+    [
+      "wmw-28-selection-guide-part-1",
+      "wmw-28-selection-guide-part-2",
+    ],
+  );
+  assert.equal(
+    site.press[0].canonicalUrl,
+    "https://www.facebook.com/watch/?v=257310076279164",
+  );
+  assert.equal(
+    site.press[1].canonicalUrl,
+    "https://www.facebook.com/watch/?v=412888580196820",
+  );
+  assert.equal(site.press[0].sourcePageUrl, "https://www.wmw.org.tw/tw/title/733");
+  assert.equal(site.press[1].sourcePageUrl, "https://www.wmw.org.tw/tw/title/734");
+  assert.equal(site.press[0].participationStatus, "verified-speaker");
+  assert.equal(site.press[1].participationStatus, "companion-event-archive");
+  for (const item of site.press) {
+    assert.match(item.canonicalUrl, /^https:\/\//);
+    assert.match(item.sourcePageUrl, /^https:\/\//);
+    assert.equal(item.titleSource, "official Women Make Waves event record");
+    assert.equal(item.imageSource, "none; Facebook returned generic Watch metadata");
+    assert.equal(item.metadataCheckedAt, "2026-08-03");
+    assert.equal("image" in item, false);
+  }
+});
+
+test("global press notes render as a low-priority text-only section after Archive", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const en = renderPage({ lang: "en", site, works });
+  const zh = renderPage({ lang: "zh", site, works });
+  const archivePosition = en.indexOf('class="section archive-section"');
+  const pressPosition = en.indexOf('class="section press-notes-section"');
+  const contactPosition = en.indexOf('class="section contact"');
+  const pressSection = en.match(
+    /<section class="section press-notes-section">[\s\S]*?<\/section>/,
+  )?.[0];
+
+  assert.ok(archivePosition >= 0 && pressPosition > archivePosition);
+  assert.ok(contactPosition > pressPosition);
+  assert.ok(pressSection);
+  assert.equal((pressSection.match(/class="press-note-card"/g) || []).length, 2);
+  assert.doesNotMatch(pressSection, /<img/);
+  assert.match(pressSection, /Press &amp; Conversations/);
+  assert.match(pressSection, /28th Women Make Waves Film Festival Selection Guide/);
+  assert.match(pressSection, /PART 1/);
+  assert.match(pressSection, /Featuring Hsin-Hsin Yuan/);
+  assert.match(pressSection, /Companion event archive/);
+  assert.match(
+    pressSection,
+    /href="https:\/\/www\.facebook\.com\/watch\/\?v=257310076279164"[^>]*data-metadata-checked-at="2026-08-03"/,
+  );
+  assert.match(zh, /訪談與對談/);
+  assert.match(zh, /第 28 屆女性影展選片指南/);
+  assert.match(zh, /袁欣欣參與對談/);
+  assert.match(zh, /同場活動紀錄/);
+});
+
+test("global press notes use the existing 40/60 rhythm with mobile and focus fallbacks", () => {
+  const css = readFileSync(join(root, "src/styles.css"), "utf8");
+
+  assert.match(
+    css,
+    /\.press-notes-layout \{[^}]*display: grid;[^}]*grid-template-columns: minmax\(0, 2fr\) minmax\(0, 3fr\);[^}]*\}/,
+  );
+  assert.match(css, /\.press-note-list \{[^}]*border-top: 1px solid var\(--line\);/);
+  assert.match(css, /\.press-note-card:focus-visible \{[^}]*outline: 2px solid var\(--acid\);/);
+  assert.match(
+    css,
+    /@media \(max-width: 820px\) \{[\s\S]*?\.press-notes-layout \{[^}]*grid-template-columns: 1fr;[^}]*\}/,
+  );
+});
+
 test("site copy has no retired section fields in active data", () => {
   const site = loadSiteData(root).site;
   const retiredFields = [

@@ -61,6 +61,8 @@ export function loadSiteData(baseDir = root) {
     site: JSON.parse(readFileSync(join(baseDir, "data/site.json"), "utf8")),
     collaborations: JSON.parse(readFileSync(join(baseDir, "data/collaborations.json"), "utf8")),
     archive: loadMarkdownCollection(join(baseDir, "content/archive")),
+    press: JSON.parse(readFileSync(join(baseDir, "data/press.json"), "utf8"))
+      .sort((a, b) => a.order - b.order),
   };
 }
 
@@ -442,6 +444,42 @@ function renderArchive(archive, lang) {
   `;
 }
 
+function renderPressNotes(items = [], lang, copy) {
+  if (!items.length) return "";
+
+  const notes = items
+    .map((item) => {
+      const url = item.canonicalUrl || item.url;
+
+      return `
+        <a class="press-note-card" href="${escapeHtml(url)}" target="_blank" rel="noreferrer" data-metadata-checked-at="${escapeHtml(item.metadataCheckedAt)}" data-title-source="${escapeHtml(item.titleSource)}" data-image-source="${escapeHtml(item.imageSource)}" data-source-page-url="${escapeHtml(item.sourcePageUrl)}">
+          <span class="press-note-part">${escapeHtml(localize(item.part, lang))}</span>
+          <span class="press-note-main">
+            <span class="press-note-kicker">${escapeHtml(localize(item.type, lang))} / ${escapeHtml(item.year)}</span>
+            <strong>${escapeHtml(localize(item.title, lang))}</strong>
+            <span class="press-note-meta">${escapeHtml(localize(item.context, lang))} · ${escapeHtml(localize(item.source, lang))}</span>
+          </span>
+          <span class="press-note-arrow" aria-hidden="true">↗</span>
+        </a>
+      `;
+    })
+    .join("");
+
+  return `
+    <section class="section press-notes-section">
+      <div class="press-notes-layout">
+        <div class="press-notes-intro">
+          <h2 class="section-title">${escapeHtml(copy.pressNotesTitle)}</h2>
+          <p>${escapeHtml(copy.pressNotesSubcopy)}</p>
+        </div>
+        <div class="press-note-list">
+          ${notes}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 function renderCollaborations(items = [], lang) {
   return items
     .map((item) => {
@@ -676,6 +714,8 @@ export function renderPage({ lang, site, works }) {
           </div>
           ${renderArchive(site.archive, lang)}
         </section>
+
+        ${renderPressNotes(site.press, lang, copy)}
 
         <section class="section contact" id="contact">
           <div class="contact-content">

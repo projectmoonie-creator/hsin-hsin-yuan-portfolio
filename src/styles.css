@@ -1024,6 +1024,91 @@ a.archive-card-media-link:focus-visible {
   outline-offset: 3px;
 }
 
+.press-notes-section {
+  padding-top: clamp(3rem, 7vw, 6rem);
+}
+
+.press-notes-layout {
+  display: grid;
+  gap: clamp(2rem, 6vw, 6rem);
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+}
+
+.press-notes-intro {
+  max-width: 25rem;
+}
+
+.press-notes-intro p {
+  color: var(--muted);
+  font-size: clamp(0.92rem, 1.3vw, 1.08rem);
+  line-height: 1.55;
+  margin: 1rem 0 0;
+}
+
+.press-note-list {
+  border-top: 1px solid var(--line);
+  display: grid;
+}
+
+.press-note-card {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  display: grid;
+  gap: clamp(1rem, 2vw, 1.8rem);
+  grid-template-columns: minmax(4.5rem, 0.25fr) minmax(0, 1fr) auto;
+  padding: clamp(1.25rem, 2.5vw, 2rem) 0;
+  text-decoration: none;
+}
+
+.press-note-part,
+.press-note-kicker {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.press-note-part {
+  color: var(--acid);
+}
+
+.press-note-main {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.press-note-kicker,
+.press-note-meta {
+  color: var(--muted);
+}
+
+.press-note-main strong {
+  font-size: clamp(1.05rem, 1.65vw, 1.45rem);
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+}
+
+.press-note-meta {
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.press-note-arrow {
+  color: var(--muted);
+  font-size: 1.15rem;
+}
+
+.press-note-card:hover .press-note-arrow {
+  color: var(--acid);
+}
+
+.press-note-card:focus-visible {
+  outline: 2px solid var(--acid);
+  outline-offset: 3px;
+}
+
 .collab-grid {
   align-items: center;
   display: flex;
@@ -1350,6 +1435,10 @@ a.archive-card-media-link:focus-visible {
     max-width: none;
   }
 
+  .press-notes-layout {
+    grid-template-columns: 1fr;
+  }
+
   .watch-loop-card {
     min-height: 176px;
     width: min(78vw, 320px);
@@ -1423,6 +1512,11 @@ a.archive-card-media-link:focus-visible {
 
   .archive-card-action {
     letter-spacing: 0.04em;
+  }
+
+  .press-note-card {
+    gap: 0.75rem;
+    grid-template-columns: 3.8rem minmax(0, 1fr) auto;
   }
 
 }
