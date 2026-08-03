@@ -152,8 +152,7 @@ function renderPress(items = [], lang) {
   const label = lang === "en" ? "Press & Interviews" : "媒體報導與訪談";
 
   return `
-    <div class="press-preview">
-      <p class="press-preview-title">${escapeHtml(label)}</p>
+    <div class="press-preview" role="group" aria-label="${escapeHtml(label)}">
       <div class="press-preview-grid">
         ${items
           .map((item) => {

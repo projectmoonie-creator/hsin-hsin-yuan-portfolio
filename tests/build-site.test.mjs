@@ -1062,7 +1062,9 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, />LG \/ Samsung<\/strong>/);
   assert.match(html, />Taiwanese<\/span>/);
   assert.doesNotMatch(html, /↗/);
-  assert.match(html, /Press &amp; Interviews/);
+  assert.match(html, /<div class="press-preview" role="group" aria-label="Press &amp; Interviews">/);
+  assert.match(html, /Official page/);
+  assert.match(html, /Project press/);
   assert.match(html, /Official program page/);
   assert.doesNotMatch(html, /24 artist groups/);
   assert.doesNotMatch(html, />24<\/span>/);
@@ -1083,6 +1085,45 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /styles\.css\?v=[a-f0-9]{12}/);
   assert.match(html, /main\.js\?v=[a-f0-9]{12}/);
   assert.doesNotMatch(html, /old English CV|source materials/i);
+});
+
+test("work Press keeps entry labels but hides its group heading", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const css = readFileSync(join(root, "src/styles.css"), "utf8");
+  const en = renderPage({ lang: "en", site, works });
+  const zh = renderPage({ lang: "zh", site, works });
+  const hasLocalizedPressType = (html, label, type) => {
+    const groupStart = `<div class="press-preview" role="group" aria-label="${label}">`;
+    const typeElement = `<span class="press-preview-type">${type}</span>`;
+
+    return html
+      .split(groupStart)
+      .slice(1)
+      .some((remainder) => {
+        const groupEnd = remainder.indexOf("\n    </div>");
+        return groupEnd !== -1 && remainder.slice(0, groupEnd).includes(typeElement);
+      });
+  };
+
+  assert.doesNotMatch(en, /<p class="press-preview-title"/);
+  assert.doesNotMatch(zh, /<p class="press-preview-title"/);
+  assert.doesNotMatch(en, />\s*Press &amp; Interviews\s*</);
+  assert.doesNotMatch(zh, />\s*媒體報導與訪談\s*</);
+  assert.ok(
+    en.includes(
+      '<div class="press-preview" role="group" aria-label="Press &amp; Interviews">',
+    ),
+  );
+  assert.ok(
+    zh.includes('<div class="press-preview" role="group" aria-label="媒體報導與訪談">'),
+  );
+  assert.equal(hasLocalizedPressType(en, "Press &amp; Interviews", "Official page"), true);
+  assert.equal(hasLocalizedPressType(en, "Press &amp; Interviews", "Project press"), true);
+  assert.equal(hasLocalizedPressType(zh, "媒體報導與訪談", "官方節目頁"), true);
+  assert.equal(hasLocalizedPressType(zh, "媒體報導與訪談", "專案報導"), true);
+  assert.match(css, /\.press-preview \{/);
+  assert.doesNotMatch(css, /\.press-preview-title/);
 });
 
 test("renderPage escapes image URLs for inline CSS contexts", () => {
@@ -1289,8 +1330,9 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /連續四週全國同時段第一/);
   assert.doesNotMatch(zh, /觀看精選影片/);
   assert.match(zh, /代表影像作品/);
-  assert.match(zh, /媒體報導與訪談/);
+  assert.match(zh, /<div class="press-preview" role="group" aria-label="媒體報導與訪談">/);
   assert.match(zh, /官方節目頁/);
+  assert.match(zh, /專案報導/);
   assert.match(zh, /文化奧運紀錄片《My Art, My Voice》　台法藝術家跨國對話/);
   assert.match(zh, /鏡週刊 Mirror Media/);
   assert.match(zh, /真誠地往前走，走進創作的大海/);

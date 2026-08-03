@@ -753,15 +753,6 @@ a {
   padding-top: 1rem;
 }
 
-.press-preview-title {
-  color: var(--acid);
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  margin: 0 0 0.75rem;
-  text-transform: uppercase;
-}
-
 .press-preview-grid {
   display: grid;
   gap: 0.7rem;
