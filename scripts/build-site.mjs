@@ -710,7 +710,7 @@ export function renderPage({ lang, site, works }) {
         <section class="section archive-section">
           <div class="section-intro">
             <h2 class="section-title">${escapeHtml(copy.archiveTitle)}</h2>
-            <p>${escapeHtml(copy.archiveSubcopy)}</p>
+            ${copy.archiveSubcopy ? `<p>${escapeHtml(copy.archiveSubcopy)}</p>` : ""}
           </div>
           ${renderArchive(site.archive, lang)}
         </section>

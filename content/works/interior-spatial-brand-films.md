@@ -51,7 +51,7 @@
   "featuredReelUrl": "/assets/showreel/interior-spatial-card-reel.mp4",
   "featuredReelMode": "in-view",
   "featuredReelPoster": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
-  "tags": ["interior design", "branded content", "lifestyle", "editing"],
+  "tags": ["interior design", "branded content", "lifestyle"],
   "metrics": [
     {"value": "LG / Samsung", "label": {"en": "brand contexts", "zh": "品牌合作情境"}}
   ],

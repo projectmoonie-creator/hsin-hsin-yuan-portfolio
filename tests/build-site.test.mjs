@@ -987,9 +987,9 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Director/);
   assert.doesNotMatch(html, /China-side Director/);
   assert.doesNotMatch(html, /Oriental Satellite TV/);
-  assert.match(
+  assert.doesNotMatch(
     html,
-    /<div class="media-label media-label-lines"><span>Top Gear China<\/span><span>UK Special<\/span><\/div>/,
+    /<article class="work-panel" id="top-gear-china-uk-special">[\s\S]*?<div class="media-label/,
   );
   assert.doesNotMatch(html, /<span>Top Gear<\/span><span>China: UK<\/span><span>Special<\/span>/);
   assert.doesNotMatch(html, />car show</i);
@@ -1112,6 +1112,29 @@ test("Design title propagates to the English screening-strip card", () => {
   assert.ok(card);
   assert.match(card, /<strong>Design &amp; Brand Films<\/strong>/);
   assert.doesNotMatch(card, /Interior Design &amp; Branded Films/);
+});
+
+test("archive and Design remove redundant copy without losing credit", () => {
+  const loaded = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const design = works.find((work) => work.slug === "interior-spatial-brand-films");
+  const en = renderPage({ lang: "en", site: loaded, works });
+  const zh = renderPage({ lang: "zh", site: loaded, works });
+  const designPanel = en.match(
+    /<article class="work-panel work-panel-wide-media" id="interior-spatial-brand-films">[\s\S]*?<\/article>/,
+  )?.[0];
+  const archiveSection = en.match(
+    /<section class="section archive-section">[\s\S]*?<\/section>/,
+  )?.[0];
+
+  assert.equal("archiveSubcopy" in loaded.site.en, false);
+  assert.equal("archiveSubcopy" in loaded.site.zh, false);
+  assert.doesNotMatch(en, /Earlier scripted, factual, and international work/);
+  assert.doesNotMatch(zh, /早期戲劇、科學節目與國際合作/);
+  assert.doesNotMatch(archiveSection, /<p><\/p>/);
+  assert.deepEqual(design.tags, ["interior design", "branded content", "lifestyle"]);
+  assert.match(designPanel, /Director \/ Editor/);
+  assert.doesNotMatch(designPanel, /<span class="tag">editing<\/span>/);
 });
 
 test("English Figma handoff uses the localized Gorgeous Space label", () => {
