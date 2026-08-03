@@ -86,6 +86,14 @@
 
 ## Visual Direction
 
+- The canonical current layout and component-format rules live in
+  `docs/design-contract.md`. Intentional differences require a named variant,
+  responsive behavior, fallback, regression evidence, and rollback. Historical
+  concepts and dated reviews do not override that contract.
+- Governance/refactor packages for an approved layout must first freeze a
+  public-output baseline. A compatibility migration is not complete while it
+  changes generated HTML, CSS, JavaScript, or matched browser geometry without
+  separate visual approval.
 - Before implementing a design reference, translate it into project-specific rules: what to borrow, what to avoid, which parts serve the portfolio goal, and how it should behave on desktop and mobile.
 - Do not copy a reference site's surface style literally when the user's content needs another rhythm. Use references to derive decisions about typography, spacing, motion, image treatment, logo treatment, and section order.
 - Motion should guide attention without becoming a second product. Subtle ambient light is acceptable only when it preserves readability, keeps the site fast, and is verified on mobile.

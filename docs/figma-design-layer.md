@@ -57,7 +57,8 @@ Map the Figma frames to the current site sections:
 5. `Available For`
 6. `Featured Works`
 7. `FROM THE ARCHIVE`
-8. `Contact`
+8. `PRESS`
+9. `Contact`
 
 ## Design Tokens
 
@@ -130,7 +131,6 @@ Required controls:
 - Image crop position
 - Hero title size
 - Role line breaks
-- Slash accent color
 - CTA spacing
 
 Current hero copy:
@@ -139,14 +139,14 @@ Current hero copy:
 HSIN-HSIN
 YUAN
 Documentary Director / Writer / Producer
-/ Cross-Cultural Storyteller
+Cross-Cultural Storyteller
 ```
 
 Chinese role copy:
 
 ```text
 紀錄片導演 / 編劇 / 製作人
-/ 跨文化敘事者
+跨文化敘事者
 ```
 
 ### `Logo Wall`
@@ -168,11 +168,11 @@ Rules:
 
 Variants:
 
-- With image
-- With video embed
-- Coming soon
-- Desktop compact card
-- Mobile full-width card
+- Desktop `fill-card`
+- Desktop `centered-16x9`
+- Mobile 16:9
+- Static image
+- Approved in-view reel or video embed
 
 Content fields:
 
@@ -193,12 +193,12 @@ Fields:
 - Label
 - Detail
 
-### `Archive Media Card`
+### `Archive Card`
 
 Variants:
 
-- Lead card
-- Supporting card
+- Standard card with poster
+- Standard card with index fallback
 - Static poster with public watch link
 
 Fields:
@@ -209,13 +209,21 @@ Fields:
 - Metrics
 - Public watch label
 
-### `Archive Row`
+All Archive entries use the same outer card family and internal copy/media
+split. Missing media changes the capability, not the card size or hierarchy.
+The fifth desktop entry remains a half-row card and never spans.
+
+### `Global Press Note`
+
+Variants:
+
+- Text-only note
 
 Fields:
 
-- Year / role / platform
+- Part label / year
 - Title
-- Metrics
+- Source
 
 ### `Contact Block`
 
@@ -236,7 +244,7 @@ Figma should not become the source of truth for final text. Final content lives 
 - Collaborations: `data/collaborations.json`
 - Featured works: `content/works/*.md`
 - Archive: `content/archive/*.md`
-- Lab: `content/lab/*.md`
+- Global Press: `data/press.json`
 
 Use Figma for layout and short copy experiments. Once approved, sync final text back to the repo.
 
@@ -277,7 +285,8 @@ Create desktop and mobile frames for:
 4. Available For
 5. Featured Works
 6. FROM THE ARCHIVE
-7. Contact
+7. PRESS
+8. Contact
 
 Do not create a generic landing page. This is a real portfolio site for work inquiries.
 
@@ -285,9 +294,9 @@ Hero text:
 HSIN-HSIN
 YUAN
 Documentary Director / Writer / Producer
-/ Cross-Cultural Storyteller
+Cross-Cultural Storyteller
 
-The slash marks should use the acid green accent.
+Keep the second role line clean, without a leading decorative slash.
 
 Prioritize:
 - mobile readability

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-08-03",
+  "baselineCommit": "90b5d1ae5e32126c78672df33c4c6f4eaa7f0642",
+  "implementationBranch": "codex/portfolio-design-contract-governance",
+  "commands": ["npm test", "npm run build", "npm run figma:export"],
+  "testResult": {"passed": 42, "failed": 0},
+  "publicWebsiteFreeze": true,
+  "publicWebsiteSha256": {
+    "dist/index.html": "57991f78d70a6b5e78a1dab9bcec2a06957cbec38164059aec60f24acb3f7d00",
+    "dist/en/index.html": "c02fba348f90d7aabccf044dfff71b0bbb921040301b0eb47da7f189d59ae315",
+    "dist/zh/index.html": "d7e2ff8110dd985f2ff6f0d9f04842ae348b8c1165d39e24209bafb266b1cb4d",
+    "dist/styles.css": "82ef5295b2b1218bc3ad1fb2fa88b983c884b624e533ef1561a1ad835536afe0",
+    "dist/main.js": "79831f5936f8e42846f6dc53e8f27e49fe6c079ceef2758fe49effcc4fbff1b7",
+    "dist/robots.txt": "443358875e1a31953480f7085d8d392e75c4cb07c225a58a004eb22b72f2890d",
+    "dist/sitemap.xml": "291dd88016d22f2e8f4cb72e88d732fa77426d5ea35e493563b4e187a6fa7317"
+  },
+  "figmaReferenceSha256": {
+    "figma-export/01-desktop-home.svg": "88cf6381da379d3d082576323e7cc92d2626eca1cdd0d41eb9b17edd9dc4759f",
+    "figma-export/02-desktop-works-logos.svg": "26825c1241d8150e357f2b8d6bff008d98ab5b218a54c5001d07d54a8d4670d2",
+    "figma-export/03-mobile-home.svg": "60084a22c4dc34b6e2efd2bd1f43d0ca22142a4ea3f20679da24b556a7cdbd73",
+    "figma-export/README.md": "faeaae8f01ef396541f5a80a073f9cb53a7122f0b5454c535bc4c69ee6529a0e"
+  },
+  "figmaReferencePolicy": "Evidence only. Package 2 may change these four files solely to remove documented current-reference drift; this does not permit a public website change.",
+  "sectionOrder": [
+    "hero",
+    "platforms-and-collaborations",
+    "screening-strip",
+    "available-for",
+    "featured-works",
+    "archive",
+    "press",
+    "contact"
+  ],
+  "featuredWorkOrder": [
+    "slow-steps",
+    "tech-dreamers",
+    "my-art-my-voice",
+    "interior-spatial-brand-films",
+    "pts-taigi-bus",
+    "top-gear-china-uk-special"
+  ],
+  "archiveOrder": [
+    "ghost-hand-divine-car",
+    "three-minute-micro-drama",
+    "heart-of-steel",
+    "lying-game",
+    "overclocking"
+  ],
+  "protectedUntrackedFile": "docs/reviews/screening-strip-media-contract-v1-2026-07-29 2.md"
+}

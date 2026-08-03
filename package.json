@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "audit:design-contract": "node scripts/audit-design-contract.mjs",
+    "audit:design-contract:json": "node scripts/audit-design-contract.mjs --json",
     "build": "node scripts/build-site.mjs",
     "figma:export": "node scripts/build-figma-export.mjs",
     "test": "node --test tests/*.test.mjs",

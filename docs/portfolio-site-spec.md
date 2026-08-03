@@ -1,4 +1,9 @@
-# Hsin-Hsin Yuan Portfolio Website Spec
+# Hsin-Hsin Yuan Portfolio Website Spec — Historical V1 Concept
+
+> Historical only. This file records the initial concept before the portfolio's
+> iterative layout work. It is not an active implementation contract and must
+> not restore the horizontal gallery or retired section order. The current
+> approved rules live in [`docs/design-contract.md`](design-contract.md).
 
 ## Goal
 
@@ -51,4 +56,3 @@ Each work reserves a 16:9 media area.
 ## Deployment
 
 Static site output in `dist/`. Can be deployed to Netlify, Vercel, or Cloudflare Pages using `npm run build` and publish directory `dist`.
-
