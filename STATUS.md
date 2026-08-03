@@ -7,7 +7,8 @@ State: `PASS_WITH_OPEN_ITEMS`
 ## Current Work Package
 
 - Package: `Mobile Featured Media Parity v1`
-- Active branch: `codex/contact-archive-entrypoints`
+- Integrated branch: local `main`
+- Retained source branch: `codex/contact-archive-entrypoints`
 - Implementation and exact deployed checkout:
   `533347ba9d369e1f7695d29b9ee86c91c192191c`
 - Review:
@@ -59,9 +60,9 @@ authorized.
 
 1. Manually open the latest Preview on a phone and inspect Tech Dreamers,
    My Art, My Voice, and Top Gear. Do not submit the contact form.
-2. The user selected local merge to `main`. Complete that fast-forward and
-   verify the merged checkout; retain the host-owned worktree and feature
-   branch. Do not push, create a PR, delete branches, or promote Production.
+2. The completed feature branch has been fast-forwarded into local `main` and
+   verified there. The host-owned worktree and feature branch are retained.
+   Nothing was pushed; no PR was created and Production was not promoted.
 3. The remaining Facebook destination is a public third-party availability and
    logged-out access risk. The page does not depend on its images or metadata.
 4. Top Gear's `0.81` value remains CV-sourced. The first-five-episode audience,
@@ -83,9 +84,8 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Fast-forward the completed feature branch into local `main`, verify tests and
-build there, then record the local integration. Do not modify production
-routing without separate explicit approval.
+Have the user inspect the latest full-site Preview on a phone. Do not modify
+production routing without separate explicit approval.
 
 ## Cold Resume
 

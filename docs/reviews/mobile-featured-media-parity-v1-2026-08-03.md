@@ -113,6 +113,20 @@ reversible responsive-CSS ownership correction backed by a focused regression
 test and a full browser matrix. It does not change data, media, APIs, security,
 or production routing.
 
+## Local main integration
+
+The user selected local merge. After the Preview and closeout records were
+committed at `4e42e9b9595e7cf7d9e41166ba538a8b34bfa3db`, local `main` was
+fast-forwarded from `5cdb8420b3abc05404c7613f462d8cdffd939284` to that completed
+feature tip. The merged `main` checkout then passed all 40 tests and
+`npm run build`.
+
+The pre-existing primary worktree was on a different branch and contained two
+uncommitted user document edits. It was not switched or modified. Integration
+instead used an isolated, disposable `main` worktree. The host-owned portfolio
+worktree and source feature branch were retained. No remote fetch, pull, push,
+PR, branch deletion, tag, or Production promotion occurred.
+
 ## Accepted open items and next action
 
 1. Manually inspect the new Preview on a phone, especially Tech Dreamers,
@@ -121,6 +135,5 @@ or production routing.
    logged-out access risk.
 3. Top Gear's `0.81` value remains CV-sourced; the other audience context is
    recorded in the preceding annotated-content review.
-4. Fast-forward the completed feature branch into local `main`, re-run the
-   complete tests and build there, and retain the host-owned worktree and local
-   feature branch. Do not push or promote Production.
+4. The completed package is integrated into local `main`; keep Production
+   unchanged until the user gives separate explicit approval.
