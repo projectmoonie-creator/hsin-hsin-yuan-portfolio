@@ -12,7 +12,7 @@
 2026-08-04 推 `backup/main-2026-08-04` 止血）。本案目標：**砍防未發生風險的
 過重儀式，鎖住已發生過的真風險**。
 
-## 修訂條文（七條，皆為對 PROJECT_BIBLE.md 的精確修改）
+## 修訂條文（八條；R1–R7 對 PROJECT_BIBLE.md，R8 對 AGENTS.md與STATUS 用語）
 
 ### R1 計畫與交付成比例（Roadmap Discipline 增補＋收斂）
 - 增：套件計畫以 ≤60 行為上限（目標/檔案/非目標/驗證/回滾）；**計畫行數
@@ -52,6 +52,16 @@
   重新架構須製作人明文同意。
 - 子代理派工帶摘要不帶全量對話史（憲章 三-10，Codex 具體形＝`fork_turns:
   none`）。
+
+### R8 掛上工作憲章＋備份與上線解綁（AGENTS.md＋STATUS 用語修正）
+- AGENTS.md 讀取鏈補一行：`~/Documents/Claude/Projects/_SHARED/WORK-CHARTER.md`
+  （上位法）。立案事實：憲章 四-21「備份與審查是兩件事」2026-08-02 已入典
+  （TriTrack 42 commit 判例），但本 repo 讀取鏈只有 AGENTS→Bible→STATUS，
+  憲章從未被讀到——**法律存在，法域讀不到**。
+- 「push／deploy／merge 需明文授權」條款改為只約束 `origin/main` 與正式
+  部署；**推 `backup/*` 分支＝憲章要求的義務，不需授權**（`backup/*` 不接
+  Vercel production，備份≠上線）。立案事實：STATUS.md 現行第 220–221 行把
+  三者綁成同一禁令，導致 99 個 commit 五週無遠端副本。
 
 ## 驗收標準（定版時檢查）
 
