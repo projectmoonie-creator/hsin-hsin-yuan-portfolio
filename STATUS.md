@@ -6,11 +6,13 @@ State: `PASS_WITH_OPEN_ITEMS`
 
 ## Current Work Package
 
-- Package: `Final Content Cleanup v1`
+- Package: `Portfolio Design Contract Governance v1` — decision pending
 - Active branch: `codex/final-content-cleanup`
 - Base local `main`: `da91e25f9f306f526ede45a53c5d542be93088ba`
-- Current implementation checkpoint: `dfdffa2`
-- Review: `docs/reviews/final-content-cleanup-v1-2026-08-03.md`
+- Final content implementation checkpoint: `dfdffa2`
+- Final content closeout checkpoint: `cbed4a9`
+- Current audit: `docs/reviews/portfolio-design-contract-audit-v1-2026-08-03.md`
+- Final content review: `docs/reviews/final-content-cleanup-v1-2026-08-03.md`
 - Latest Vercel Preview:
   `https://hsin-hsin-yuan-portfolio-preview-2qb5bbn2s.vercel.app`
 - Deployment ID: `dpl_BQ4CziQ9G9q2Xj27uffnLff4AYtb`
@@ -19,12 +21,13 @@ State: `PASS_WITH_OPEN_ITEMS`
   `https://vercel.com/projectmoonie-creators-projects/hsin-hsin-yuan-portfolio-preview/BQ4CziQ9G9q2Xj27uffnLff4AYtb`
 - Original production website/domain: unchanged.
 
-This local package removes the second site-owned title layer from the four
-requested Featured Works cards while preserving text embedded in source
-artwork. It moves the 2025 Very Mulan interview to the global text-only Press
-section above the 2021 Women Make Waves Part 1 row, removes redundant Press and
-Archive descriptions, and removes the Design `editing` tag without removing the
-credited `Director / Editor` role. No media asset changed.
+The final content cleanup is complete and verified locally. The current
+follow-up is a read-only design/content-contract governance audit prompted by
+the repeated effort needed to make card fields, media treatment, Archive,
+Press, Figma, and responsive rules consistent. The audit recommends a hybrid
+source-record → normalized public view-model → named component-variant
+architecture. No governance implementation or shared-skill edit has begun;
+producer selection is required first.
 
 ## Verification
 
@@ -49,8 +52,9 @@ credited `Director / Editor` role. No media asset changed.
 
 1. The current cleanup remains local on `codex/final-content-cleanup`; the
    latest Preview does not contain it. Nothing was merged, pushed, or promoted.
-2. The next requested phase is a project-wide design-contract audit followed by
-   evaluation of reusable additions to `portfolio-narrative-builder`.
+2. The design-contract audit is complete. The producer must choose between:
+   Option A hybrid/two-package governance (recommended), Option B documentation
+   only, or Option C full strict migration now.
 3. The remaining Facebook destination is a public third-party availability and
    logged-out access risk. The page does not depend on its images or metadata.
 4. Top Gear's `0.81` value remains CV-sourced. The first-five-episode audience,
@@ -72,15 +76,17 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Complete the design and content contract audit. Use multi-AI brainstorming for
-the governance/skill architecture decision, present the proposed split between
-project-specific rules and reusable skill principles, and wait for approval
-before implementing that architecture. Do not deploy or modify Production.
+Ask the producer to choose the design-governance option. If Option A is
+approved, write the project contract and report-only inspector first with no
+visual change. Only after that project contract proves useful should the
+general principles be added to `portfolio-narrative-builder`. Do not deploy or
+modify Production.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, and this file.
-2. Verify the branch, implementation commit, latest Preview metadata, closed
+2. Verify the branch, implementation/closeout commits, latest Preview metadata, closed
    tag object/peeled commit, and protected untracked file.
-3. Read `docs/reviews/final-content-cleanup-v1-2026-08-03.md`.
+3. Read `docs/reviews/portfolio-design-contract-audit-v1-2026-08-03.md` and
+   `docs/reviews/final-content-cleanup-v1-2026-08-03.md`.
 4. Do not rely on old chat history or rewrite historical review files.
