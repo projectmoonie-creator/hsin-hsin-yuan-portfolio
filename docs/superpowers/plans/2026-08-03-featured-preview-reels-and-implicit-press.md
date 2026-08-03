@@ -650,7 +650,9 @@ npm run audit:design-contract
 npm run build
 npm run figma:export
 git diff --check
-if git grep -n -I -E '/Users/|/tmp/codex-remote-attachments'; then exit 1; fi
+private_home='/''Users/'
+remote_attachment_root='/tmp/''codex-remote-attachments'
+if git grep -n -I -E "${private_home}|${remote_attachment_root}"; then exit 1; fi
 ```
 
 Expected: all tests pass; audit/build/export pass; privacy search returns no
