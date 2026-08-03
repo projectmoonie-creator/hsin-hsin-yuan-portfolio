@@ -57,7 +57,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     works[3].featuredReelUrl,
     "/assets/showreel/interior-spatial-card-reel.mp4",
   );
-  assert.equal(works[3].featuredReelMode, "in-view");
+  assert.equal(works[3].featuredReelMode, "after-hold");
   assert.equal(works[3].featuredMediaAspect, "16:9");
   assert.equal(
     works[3].featuredReelPoster,
@@ -116,7 +116,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     works[4].featuredReelUrl,
     "/assets/showreel/nothing-by-bus-card-reel.mp4",
   );
-  assert.equal(works[4].featuredReelMode, "in-view");
+  assert.equal(works[4].featuredReelMode, "after-hold");
   assert.equal(works[4].featuredMediaAspect, "16:9");
   assert.equal(
     works[4].featuredReelPoster,
@@ -233,6 +233,43 @@ test("screening strip stays static while approved reels render in featured panel
     html,
     /<article class="work-panel work-panel-wide-media" id="pts-taigi-bus">[\s\S]*?class="media-frame media-frame-wide media-frame-unlabeled media-frame-link"[\s\S]*?data-featured-reel-video[\s\S]*?src="\/assets\/showreel\/nothing-by-bus-card-reel\.mp4"/,
   );
+});
+
+test("all approved Featured reels hold their existing poster before muted playback", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const html = renderPage({ lang: "en", site, works });
+  const videoTags = html.match(/<video\b(?=[^>]*data-featured-reel-video)[^>]*>/g) || [];
+
+  assert.equal(videoTags.length, 5);
+  for (const videoTag of videoTags) {
+    assert.match(videoTag, /data-featured-reel-mode="after-hold"/);
+    assert.match(videoTag, /\smuted(?:\s|>)/);
+    assert.match(videoTag, /\sloop(?:\s|>)/);
+    assert.match(videoTag, /\splaysinline(?:\s|>)/);
+    assert.match(videoTag, /\swebkit-playsinline(?:\s|>)/);
+    assert.match(videoTag, /preload="none"/);
+    assert.match(videoTag, /poster="[^"]+"/);
+    assert.doesNotMatch(videoTag, /\scontrols(?:\s|>)/);
+  }
+
+  assert.match(
+    html,
+    /<article class="work-panel" id="tech-dreamers">[\s\S]*?<a class="media-frame media-frame-unlabeled media-frame-link" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers" target="_blank" rel="noreferrer" aria-label="Play video: Tech Dreamers"[\s\S]*?data-featured-reel-video/,
+  );
+  assert.match(
+    html,
+    /<article class="work-panel" id="my-art-my-voice">[\s\S]*?<a class="media-frame media-frame-unlabeled media-frame-link" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/arts\/410\/my-art-my-voice\/250220001\/whats-the-vibe-in-taiwan-my-art-my-voice" target="_blank" rel="noreferrer" aria-label="Play video: My Art, My Voice"[\s\S]*?data-featured-reel-video/,
+  );
+
+  const slowStepsPanel = html.match(
+    /<article class="work-panel" id="slow-steps">([\s\S]*?)<\/article>/,
+  )?.[1] || "";
+  assert.match(slowStepsPanel, /<div class="media-frame media-frame-unlabeled"/);
+  assert.match(slowStepsPanel, /data-featured-reel-video/);
+  assert.doesNotMatch(slowStepsPanel, /<a class="media-frame/);
+  assert.doesNotMatch(slowStepsPanel, /aria-label="Play video:/);
+  assert.doesNotMatch(slowStepsPanel, /class="work-media-play"/);
 });
 
 test("wide media semantics apply to embedded work frames", () => {
@@ -920,7 +957,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   );
   assert.match(
     html,
-    /<video[\s\S]*?muted[\s\S]*?loop[\s\S]*?playsinline[\s\S]*?preload="metadata"/,
+    /<video[\s\S]*?muted[\s\S]*?loop[\s\S]*?playsinline[\s\S]*?preload="none"/,
   );
   assert.match(html, /href="#slow-steps"/);
   assert.match(
@@ -1375,9 +1412,20 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.doesNotMatch(js, /data-watch-loop-video/);
   assert.match(js, /data-featured-reel-video/);
   assert.doesNotMatch(js, /WATCH_LOOP_REEL_HOLD_MS|watchLoopVideoTimers/);
+  assert.match(js, /const FEATURED_REEL_HOLD_MS = 1400;/);
   assert.match(js, /const visibleFeaturedReels = new Set\(\);/);
+  assert.match(js, /const featuredReelTimers = new Map\(\);/);
+  assert.match(js, /function clearFeaturedReelTimer\(video\)/);
+  assert.match(
+    js,
+    /setTimeout\(\(\) => playFeaturedReel\(video\), FEATURED_REEL_HOLD_MS\)/,
+  );
   assert.match(js, /const activeFeaturedReel = visibleFeaturedReels\.size[\s\S]*?featuredReelVideos\.filter[\s\S]*?\.at\(-1\)/);
-  assert.match(js, /video === activeFeaturedReel[\s\S]*?playFeaturedReel\(video\)[\s\S]*?resetFeaturedReel\(video\)/);
+  assert.match(js, /video === activeFeaturedReel[\s\S]*?scheduleFeaturedReel\(video\)[\s\S]*?resetFeaturedReel\(video\)/);
+  assert.match(
+    js,
+    /function resetFeaturedReel\(video\) \{[\s\S]*?clearFeaturedReelTimer\(video\);/,
+  );
   assert.match(js, /video\.currentTime = 0;/);
   assert.match(js, /video\.classList\.add\("is-playing"\)/);
   assert.match(js, /video\.classList\.remove\("is-playing"\)/);

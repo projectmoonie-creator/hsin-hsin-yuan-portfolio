@@ -207,7 +207,7 @@ function mediaFrameContainer({ work, lang, className, style = "", content }) {
 
 function renderFeaturedReel(work) {
   const hasApprovedFeaturedReel =
-    work.featuredReelMode === "in-view" &&
+    work.featuredReelMode === "after-hold" &&
     work.featuredReelUrl &&
     work.featuredReelPoster;
 
@@ -217,11 +217,12 @@ function renderFeaturedReel(work) {
     <video
       class="featured-reel-video"
       data-featured-reel-video
+      data-featured-reel-mode="after-hold"
       muted
       loop
       playsinline
       webkit-playsinline
-      preload="metadata"
+      preload="none"
       poster="${escapeHtml(work.featuredReelPoster)}"
       aria-hidden="true"
       tabindex="-1"
