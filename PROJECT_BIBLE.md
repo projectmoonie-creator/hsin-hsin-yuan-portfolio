@@ -32,6 +32,13 @@
 ## Press Cards
 
 - Press cards must represent the press source, not the portfolio project.
+- Work Press remains optional structured data inside its Featured Work. Use a
+  localized accessible label for the semantic group name; do not render a
+  second visible field heading named `PRESS & INTERVIEWS`.
+- A Work Press thumbnail card's visible `type` is its classification. Preserve
+  card types, titles, sources, thumbnails, links, and audit metadata.
+- Global Press is a separate page-level component and keeps its visible section
+  heading; the hidden Work Press group name does not change that hierarchy.
 - For any press/interview/news URL, first inspect source-page metadata: `og:title`, `og:image`, `og:description`, canonical URL, and JSON-LD when available.
 - Use the source page's headline/title for the card title unless it is unusable or misleading.
 - Use the source page's `og:image` or main article image for the thumbnail. Do not substitute a portfolio still or project photo by default.
@@ -72,6 +79,19 @@
   treatments may change card size but must not move an older work ahead of a
   newer one.
 - On homepage Featured Work cards, the linked media image is the primary watch action. Do not normally repeat that destination with a text CTA.
+- Approved Featured reels opt in only with canonical
+  `featuredReelMode: "after-hold"`. Eligibility begins at 35% visibility; if
+  multiple reels qualify, only the last visible reel in DOM order is active.
+- Hold the canonical poster for 1.4 seconds after activation and keep it visible
+  until the video actually emits `playing`. Leaving eligibility, hiding the
+  page, a media error, or `pagehide` must cancel the hold, pause, seek to time
+  zero, and restore the poster. A persisted BFCache restore must safely rebind
+  observation.
+- Featured reel videos are muted, looped, inline, `preload="none"`,
+  pointer-transparent, and non-interactive. The existing media wrapper owns
+  navigation. Reduced-motion and no-JavaScript states remain static posters.
+- Existing Featured posters and external watch destinations are canonical.
+  Slow Steps has no public destination and stays unlinked; do not invent one.
 - A deliberate exception is allowed for a user-curated full-series playlist that gathers fragmented episodes or a substantial body of related work. Mark it with `watchMode: "series"` and `showWatchCta: true`, use "Watch the full series" / "觀看完整系列", and protect the exact count and destinations with regression tests. Do not enable this exception for a single episode, trailer, representative segment, or ordinary program page.
 - Do not use the global coming-soon label for every work without a `watchUrl`. Completed or in-progress collections need their own truthful `statusLabel`, such as "Selected reel" / "精選短片" once a public card reel exists.
 - Keep the homepage clean. If a work has trailers, press, full episodes, metrics, and many related links, move deeper material into a future detail page.

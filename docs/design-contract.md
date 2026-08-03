@@ -136,6 +136,25 @@ The linked media surface is the normal primary action. Text actions exist only
 for the approved curated selection/full-series exceptions: Design & Brand
 Films and Nothing by Bus.
 
+### Featured reel behavior
+
+- Only canonical `featuredReelMode: "after-hold"` approves a Featured reel;
+  absence of that approval leaves the static poster.
+- A reel becomes eligible at 35% visibility. When more than one reel is
+  eligible, only the last visible reel in DOM order is active.
+- The canonical poster holds for 1.4 seconds after activation and remains
+  visible until the video actually emits `playing`.
+- Leaving eligibility, hiding the page, a media error, or `pagehide` resets the
+  reel: cancel its hold, pause it, seek it to time zero, and restore its poster.
+  A persisted BFCache restore rebinds observation safely before reels may
+  become eligible again.
+- Reduced-motion and no-JavaScript states remain static posters.
+- Reel videos are muted, looped, inline, `preload="none"`, pointer-transparent,
+  and non-interactive. The existing media wrapper owns navigation.
+- Existing posters and external watch destinations remain canonical. Slow
+  Steps has no public destination and stays unlinked; no destination is
+  invented for it.
+
 ## FROM THE ARCHIVE
 
 Archive is one descending chronology controlled by canonical `order`.
@@ -160,6 +179,11 @@ Work Press and global Press are different schemas.
 ### Work Press
 
 - Variant: `thumbnail-card`.
+- Work Press is optional structured data. Its group name is semantic-only via
+  a localized accessible label; it does not render a second visible field
+  heading named `PRESS & INTERVIEWS`.
+- Each thumbnail card's visible `type` is its classification. Preserve its
+  type, title, source, thumbnail, link, and audit metadata.
 - Required: bilingual type/title, source, canonical URL, title source, image
   source, and metadata checked date.
 - Optional: verified source thumbnail.
@@ -167,6 +191,8 @@ Work Press and global Press are different schemas.
 
 ### Global Press
 
+- Global Press remains a distinct page-level component with its visible
+  section heading.
 - Variant: `text-note`.
 - Required: id, order, year, bilingual part label/title/source, canonical URL,
   title source, image source statement, and metadata checked date.
