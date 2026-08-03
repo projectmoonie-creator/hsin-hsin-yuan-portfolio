@@ -197,7 +197,7 @@ Run from the repository root with the same session variable:
 
 ```bash
 ffmpeg -hide_banner -i "$TOP_GEAR_SOURCE" \
-  -filter_complex "[0:v]trim=start=52:end=55.5,setpts=PTS-STARTPTS[v0];[0:v]trim=start=221.5:end=225,setpts=PTS-STARTPTS[v1];[0:v]trim=start=576:end=580,setpts=PTS-STARTPTS[v2];[0:v]trim=start=957.5:end=960.5,setpts=PTS-STARTPTS[v3];[0:v]trim=start=1678:end=1682,setpts=PTS-STARTPTS[v4];[0:v]trim=start=2014:end=2018,setpts=PTS-STARTPTS[v5];[0:v]trim=start=2399:end=2403,setpts=PTS-STARTPTS[v6];[0:v]trim=start=2035:end=2039,setpts=PTS-STARTPTS[v7];[v0][v1][v2][v3][v4][v5][v6][v7]concat=n=8:v=1:a=0,scale=1280:720:flags=lanczos,fps=25,format=yuv420p[v]" \
+  -filter_complex "[0:v]trim=start=52:end=55.5,setpts=PTS-STARTPTS[v0];[0:v]trim=start=221.5:end=225,setpts=PTS-STARTPTS[v1];[0:v]trim=start=576:end=580,setpts=PTS-STARTPTS[v2];[0:v]trim=start=957.60:end=960.60,setpts=PTS-STARTPTS[v3];[0:v]trim=start=1678:end=1682,setpts=PTS-STARTPTS[v4];[0:v]trim=start=2014:end=2018,setpts=PTS-STARTPTS[v5];[0:v]trim=start=2399.28:end=2403.28,setpts=PTS-STARTPTS[v6];[0:v]trim=start=2035:end=2039,setpts=PTS-STARTPTS[v7];[v0][v1][v2][v3][v4][v5][v6][v7]concat=n=8:v=1:a=0,scale=1280:720:flags=lanczos,fps=25,format=yuv420p[v]" \
   -map "[v]" \
   -c:v libx264 -preset slow -crf 22 -maxrate 2800k -bufsize 5600k \
   -pix_fmt yuv420p -colorspace bt709 -color_primaries bt709 -color_trc bt709 \
@@ -209,6 +209,9 @@ The cuts total exactly 30 seconds: `3.5 + 3.5 + 4 + 3 + 4 + 4 + 4 + 4`.
 The editorial order is London/hosts, microcar reveal, London driving,
 architectural movement, a British-estate vehicle exchange, sports-car action,
 an aircraft exterior and cockpit exchange, and a road-action loop close.
+After quality review, the fourth range was advanced from `957.5–960.5` to
+`957.60–960.60` and the seventh from `2399–2403` to `2399.28–2403.28` to
+exclude brief embedded source-shot flashes while preserving each cut's length.
 
 - [ ] **Step 5: Inspect the actual moving draft and contact sheet**
 
