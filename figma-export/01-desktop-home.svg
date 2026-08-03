@@ -26,10 +26,7 @@
       <text x="768" y="382" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="104" font-weight="900">YUAN</text>
     </g>
     <text id="layer-hero-role-1" x="772" y="420" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="650" letter-spacing="0" transform=""><tspan x="772" dy="0">Documentary Director / Writer / Producer</tspan></text>
-<g id="layer-hero-role-2">
-        <text x="772" y="454" fill="#D8FF3E" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="800">/</text>
-        <text x="794" y="454" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="650">Cross-Cultural Storyteller</text>
-      </g>
+<text id="layer-hero-role-2" x="772" y="454" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="25" font-weight="650" letter-spacing="0" transform=""><tspan x="772" dy="0">Cross-Cultural Storyteller</tspan></text>
     <text id="layer-hero-subcopy" x="772" y="526" fill="#B8B0A3" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="500" letter-spacing="0" transform=""><tspan x="772" dy="0">I direct and develop documentary stories for artists,</tspan><tspan x="772" dy="28">culture, and technology teams working across Taiwan and</tspan><tspan x="772" dy="28">international contexts. I help complex subjects become</tspan><tspan x="772" dy="28">human, cinematic, and clear enough to travel.</tspan></text>
   </g>
   <g id="layer-logo-wall">

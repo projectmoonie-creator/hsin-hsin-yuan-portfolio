@@ -32,11 +32,8 @@
   "featuredReelUrl": "/assets/showreel/nothing-by-bus-card-reel.mp4",
   "featuredReelMode": "in-view",
   "featuredReelPoster": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
-  "tags": ["public media", "travel factual", "Taiwanese language", "local culture"],
-  "metrics": [
-    {"value": "3+", "label": {"en": "episode leads archived", "zh": "已整理集數線索"}},
-    {"value": "PTS", "label": {"en": "public media", "zh": "公共媒體"}}
-  ],
+  "tags": ["travel factual", "Taiwanese", "local culture"],
+  "metrics": [],
   "sourceNote": "docs/source-materials/pts-taigi-bus.md; English title, 2021 air year, and role wording confirmed by user",
   "accent": "violet"
 }

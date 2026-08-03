@@ -829,6 +829,20 @@ a {
   margin: 1rem 0 1.2rem;
 }
 
+.mini-metrics-context {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  margin: 1rem 0 0.7rem;
+  text-transform: uppercase;
+}
+
+.mini-metrics-context + .mini-metrics {
+  margin-top: 0;
+}
+
 .mini-metric {
   border-top: 1px solid var(--line);
   min-width: 110px;
@@ -1038,13 +1052,6 @@ a.archive-card-media-link:focus-visible {
   max-width: 25rem;
 }
 
-.press-notes-intro p {
-  color: var(--muted);
-  font-size: clamp(0.92rem, 1.3vw, 1.08rem);
-  line-height: 1.55;
-  margin: 1rem 0 0;
-}
-
 .press-note-list {
   border-top: 1px solid var(--line);
   display: grid;
@@ -1056,7 +1063,7 @@ a.archive-card-media-link:focus-visible {
   color: var(--ink);
   display: grid;
   gap: clamp(1rem, 2vw, 1.8rem);
-  grid-template-columns: minmax(4.5rem, 0.25fr) minmax(0, 1fr) auto;
+  grid-template-columns: minmax(4.5rem, 0.25fr) minmax(0, 1fr);
   padding: clamp(1.25rem, 2.5vw, 2rem) 0;
   text-decoration: none;
 }
@@ -1093,15 +1100,6 @@ a.archive-card-media-link:focus-visible {
 .press-note-meta {
   font-size: 0.82rem;
   line-height: 1.4;
-}
-
-.press-note-arrow {
-  color: var(--muted);
-  font-size: 1.15rem;
-}
-
-.press-note-card:hover .press-note-arrow {
-  color: var(--acid);
 }
 
 .press-note-card:focus-visible {
@@ -1516,7 +1514,7 @@ a.archive-card-media-link:focus-visible {
 
   .press-note-card {
     gap: 0.75rem;
-    grid-template-columns: 3.8rem minmax(0, 1fr) auto;
+    grid-template-columns: 3.8rem minmax(0, 1fr);
   }
 
 }

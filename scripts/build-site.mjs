@@ -117,10 +117,11 @@ function renderAvailabilityPills(items = []) {
   return items.map((item) => `<span>${escapeHtml(item)}</span>`).join("");
 }
 
-function renderMetrics(metrics = [], lang) {
+function renderMetrics(metrics = [], lang, context = "") {
   if (!metrics.length) return "";
 
   return `
+    ${context ? `<p class="mini-metrics-context">${escapeHtml(context)}</p>` : ""}
     <div class="mini-metrics">
       ${metrics
         .map(
@@ -285,8 +286,9 @@ function renderWork(work, lang, copy) {
   const role = work.role[lang];
   const platform = localize(work.platform, lang);
   const statusLabel = noWatchStatusLabel(work, lang, copy);
+  const watchLabel = localize(work.watchLabel, lang) || (lang === "en" ? "Watch the full series" : "觀看完整系列");
   const watchAction = work.showWatchCta && work.watchUrl
-    ? `<a class="button-link" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer">${lang === "en" ? "Watch the full series" : "觀看完整系列"}</a>`
+    ? `<a class="button-link" href="${escapeHtml(work.watchUrl)}" target="_blank" rel="noreferrer">${escapeHtml(watchLabel)}</a>`
     : "";
   const statusAction = statusLabel
     ? `<span class="status-badge">${escapeHtml(statusLabel)}</span>`
@@ -307,7 +309,7 @@ function renderWork(work, lang, copy) {
         <p class="work-tagline">${escapeHtml(tagline)}</p>
         <p class="work-description">${escapeHtml(description)}</p>
         ${renderTags(work.tags)}
-        ${renderMetrics(work.metrics, lang)}
+        ${renderMetrics(work.metrics, lang, localize(work.metricsContext, lang))}
         ${renderPress(work.press, lang)}
         ${action}
       </div>
@@ -391,11 +393,11 @@ function renderArchiveCard(item, lang) {
     : "";
   const watchAction = hasWatch
     ? hasCredit
-      ? `<a class="archive-card-action" href="${escapeHtml(item.watchUrl)}" target="_blank" rel="noreferrer">${escapeHtml(watchLabel)} <span aria-hidden="true">↗</span></a>`
-      : `<span class="archive-card-action">${escapeHtml(watchLabel)} <span aria-hidden="true">↗</span></span>`
+      ? `<a class="archive-card-action" href="${escapeHtml(item.watchUrl)}" target="_blank" rel="noreferrer">${escapeHtml(watchLabel)}</a>`
+      : `<span class="archive-card-action">${escapeHtml(watchLabel)}</span>`
     : "";
   const creditAction = hasCredit
-    ? `<a class="archive-card-action archive-card-action-secondary" href="${escapeHtml(item.creditUrl)}" target="_blank" rel="noreferrer">${escapeHtml(creditLabel)} <span aria-hidden="true">↗</span></a>`
+    ? `<a class="archive-card-action archive-card-action-secondary" href="${escapeHtml(item.creditUrl)}" target="_blank" rel="noreferrer">${escapeHtml(creditLabel)}</a>`
     : "";
   const actions = watchAction || creditAction
     ? hasCredit
@@ -459,7 +461,6 @@ function renderPressNotes(items = [], lang, copy) {
             <strong>${escapeHtml(localize(item.title, lang))}</strong>
             <span class="press-note-meta">${escapeHtml(localize(item.context, lang))} · ${escapeHtml(localize(item.source, lang))}</span>
           </span>
-          <span class="press-note-arrow" aria-hidden="true">↗</span>
         </a>
       `;
     })
@@ -470,7 +471,6 @@ function renderPressNotes(items = [], lang, copy) {
       <div class="press-notes-layout">
         <div class="press-notes-intro">
           <h2 class="section-title">${escapeHtml(copy.pressNotesTitle)}</h2>
-          <p>${escapeHtml(copy.pressNotesSubcopy)}</p>
         </div>
         <div class="press-note-list">
           ${notes}

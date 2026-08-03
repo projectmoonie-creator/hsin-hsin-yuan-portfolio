@@ -80,8 +80,16 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[3].posterSourceTimecode, "00:00:28");
   assert.equal(works[3].posterFit, "contain");
   assert.equal(works[3].hideMediaLabel, true);
-  assert.equal(works[3].watchMode, "series");
+  assert.equal(works[3].watchMode, "selection");
   assert.equal(works[3].showWatchCta, true);
+  assert.equal(Object.hasOwn(works[3], "statusLabel"), false);
+  assert.deepEqual(works[3].watchLabel, {
+    en: "Watch selected reel",
+    zh: "觀看精選短片",
+  });
+  assert.deepEqual(works[3].metrics, [
+    { value: "LG / Samsung", label: { en: "brand contexts", zh: "品牌合作情境" } },
+  ]);
   assert.equal(
     works[3].watchUrl,
     "https://www.youtube.com/playlist?list=PLJCU8axtQoPI",
@@ -114,6 +122,8 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     works[4].featuredReelPoster,
     works[4].posterImage,
   );
+  assert.deepEqual(works[4].tags, ["travel factual", "Taiwanese", "local culture"]);
+  assert.deepEqual(works[4].metrics, []);
   assert.equal(works[5].role.en, "Director");
   assert.equal(works[5].platform, "China Dragon TV");
   assert.deepEqual(works[5].mediaTitleLines, ["Top Gear China", "UK Special"]);
@@ -125,6 +135,19 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(
     works[5].description.zh,
     "擔任《巔峰拍檔》中國版第二季第五期英國篇導演，負責英國拍攝內容，協調播出端、中國製作端與英國原版 Top Gear 團隊之間的製作需求。",
+  );
+  assert.deepEqual(works[5].metricsContext, {
+    en: "Season 2 audience, reported across television and online",
+    zh: "第二季播出表現（電視與線上）",
+  });
+  assert.deepEqual(
+    works[5].metrics.map((metric) => [metric.value, metric.label.en]),
+    [
+      ["200M", "first five episodes / TV + online"],
+      ["9M", "average weekly live audience"],
+      ["0.81", "reported TV rating"],
+      ["#1", "national time slot / four weeks"],
+    ],
   );
   assert.equal(works[0].posterImage, "/assets/portfolio/slow-steps-poster.webp");
   assert.equal(works[0].posterVariant, "no-title");
@@ -264,26 +287,14 @@ test("featured press entries carry audit metadata", () => {
 test("global press notes preserve audited Women Make Waves source metadata", () => {
   const site = loadSiteData(root);
 
-  assert.equal(site.press.length, 2);
-  assert.deepEqual(
-    site.press.map((item) => item.id),
-    [
-      "wmw-28-selection-guide-part-1",
-      "wmw-28-selection-guide-part-2",
-    ],
-  );
+  assert.equal(site.press.length, 1);
+  assert.deepEqual(site.press.map((item) => item.id), ["wmw-28-selection-guide-part-1"]);
   assert.equal(
     site.press[0].canonicalUrl,
     "https://www.facebook.com/watch/?v=257310076279164",
   );
-  assert.equal(
-    site.press[1].canonicalUrl,
-    "https://www.facebook.com/watch/?v=412888580196820",
-  );
   assert.equal(site.press[0].sourcePageUrl, "https://www.wmw.org.tw/tw/title/733");
-  assert.equal(site.press[1].sourcePageUrl, "https://www.wmw.org.tw/tw/title/734");
   assert.equal(site.press[0].participationStatus, "verified-speaker");
-  assert.equal(site.press[1].participationStatus, "companion-event-archive");
   for (const item of site.press) {
     assert.match(item.canonicalUrl, /^https:\/\//);
     assert.match(item.sourcePageUrl, /^https:\/\//);
@@ -309,21 +320,22 @@ test("global press notes render as a low-priority text-only section after Archiv
   assert.ok(archivePosition >= 0 && pressPosition > archivePosition);
   assert.ok(contactPosition > pressPosition);
   assert.ok(pressSection);
-  assert.equal((pressSection.match(/class="press-note-card"/g) || []).length, 2);
+  assert.equal((pressSection.match(/class="press-note-card"/g) || []).length, 1);
   assert.doesNotMatch(pressSection, /<img/);
-  assert.match(pressSection, /Press &amp; Conversations/);
+  assert.match(pressSection, />PRESS</);
   assert.match(pressSection, /28th Women Make Waves Film Festival Selection Guide/);
   assert.match(pressSection, /PART 1/);
   assert.match(pressSection, /Featuring Hsin-Hsin Yuan/);
-  assert.match(pressSection, /Companion event archive/);
+  assert.doesNotMatch(pressSection, /Companion event archive|Selected interviews and festival conversations/);
+  assert.doesNotMatch(pressSection, /412888580196820|press-note-arrow|↗/);
   assert.match(
     pressSection,
     /href="https:\/\/www\.facebook\.com\/watch\/\?v=257310076279164"[^>]*data-metadata-checked-at="2026-08-03"/,
   );
-  assert.match(zh, /訪談與對談/);
+  assert.match(zh, />PRESS</);
   assert.match(zh, /第 28 屆女性影展選片指南/);
   assert.match(zh, /袁欣欣參與對談/);
-  assert.match(zh, /同場活動紀錄/);
+  assert.doesNotMatch(zh, /同場活動紀錄|陸續收錄訪談與影展對談/);
 });
 
 test("global press notes use the existing 40/60 rhythm with mobile and focus fallbacks", () => {
@@ -339,6 +351,7 @@ test("global press notes use the existing 40/60 rhythm with mobile and focus fal
     css,
     /@media \(max-width: 820px\) \{[\s\S]*?\.press-notes-layout \{[^}]*grid-template-columns: 1fr;[^}]*\}/,
   );
+  assert.doesNotMatch(css, /\.press-note-arrow/);
 });
 
 test("site copy has no retired section fields in active data", () => {
@@ -351,6 +364,7 @@ test("site copy has no retired section fields in active data", () => {
     "aboutBody",
     "aboutNotes",
     "availabilityDetails",
+    "pressNotesSubcopy",
     "workWithMeTitle",
     "workWithMeSubcopy",
     "workModes",
@@ -521,6 +535,7 @@ test("archive renders five equal cards with one 40/60 contract", () => {
     /archive-media-card|archive-media-card-lead|archive-item|archive-media-summary|mini-metrics/,
   );
   assert.doesNotMatch(archiveMarkup, /200M|250M|NT\$6M|600K|66%/);
+  assert.doesNotMatch(archiveMarkup, /↗/);
 });
 
 test("archive drama cards keep trailer viewing and public credit proof separate", () => {
@@ -727,7 +742,8 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /for artists, culture, and technology stories/i);
   assert.match(html, /<span>HSIN-HSIN<\/span><span>YUAN<\/span>/);
   assert.match(html, /Documentary Director <span class="role-slash">\/<\/span> Writer <span class="role-slash">\/<\/span> Producer/);
-  assert.match(html, /<span><span class="role-slash">\/<\/span> Cross-Cultural Storyteller<\/span>/);
+  assert.match(html, /<span>Cross-Cultural Storyteller<\/span>/);
+  assert.doesNotMatch(html, /<span><span class="role-slash">\/<\/span> Cross-Cultural Storyteller<\/span>/);
   assert.doesNotMatch(html, /<div class="hero-roles">.*AI-Language Creative.*<\/div>/s);
   assert.match(html, /<div class="hero-media" id="showreel">/);
   assert.doesNotMatch(html, /light-beam-layer|light-beam-right|ambient-canvas/);
@@ -879,7 +895,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
     /<article class="work-panel work-panel-wide-media" id="interior-spatial-brand-films">[\s\S]*?class="media-frame media-frame-wide media-frame-unlabeled media-frame-link"[\s\S]*?aria-label="Play video: Design &amp; Brand Films"[\s\S]*?linear-gradient\(180deg, rgba\(9,9,10,.04\), rgba\(9,9,10,.26\)\)[\s\S]*?gorgeous-space-sunny-wang-frontal\.webp[\s\S]*?background-size: cover, contain;[\s\S]*?background-repeat: no-repeat;[^>]*>[\s\S]*?class="work-media-play"/,
   );
   assert.match(html, /Director \/ Editor/);
-  assert.match(html, /Selected reel/);
+  assert.doesNotMatch(html, /<span class="status-badge">Selected reel<\/span>/);
   assert.doesNotMatch(html, /3 yrs/);
   assert.doesNotMatch(html, /Interior Design &amp; Branded Films[\s\S]*?Coming 2026/);
   assert.match(html, /Nothing by Bus/);
@@ -901,17 +917,21 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, />UK production</i);
   assert.match(html, />factual entertainment</i);
   assert.match(html, /200M/);
-  assert.match(html, /previous series average/);
+  assert.match(html, /Season 2 audience, reported across television and online/);
+  assert.match(html, /first five episodes \/ TV \+ online/);
+  assert.match(html, /average weekly live audience/);
+  assert.match(html, /national time slot \/ four weeks/);
   assert.match(html, /0\.81/);
   assert.match(html, /href="#top-gear-china-uk-special"/);
   assert.match(html, /href="#pts-taigi-bus"/);
   assert.match(html, /href="#interior-spatial-brand-films"/);
   assert.match(html, /https:\/\/youtu\.be\/M_eXe9HRD9Y\?si=YZ_3JZ7FJY4vVcZv/);
-  assert.equal((html.match(/>Watch the full series<\/a>/g) || []).length, 2);
+  assert.equal((html.match(/>Watch the full series<\/a>/g) || []).length, 1);
+  assert.equal((html.match(/>Watch selected reel<\/a>/g) || []).length, 1);
   assert.equal((html.match(/<a class="button-link"/g) || []).length, 2);
   assert.match(
     html,
-    /href="https:\/\/www\.youtube\.com\/playlist\?list=PLJCU8axtQoPI"[\s\S]*?>Watch the full series<\/a>/,
+    /href="https:\/\/www\.youtube\.com\/playlist\?list=PLJCU8axtQoPI"[\s\S]*?>Watch selected reel<\/a>/,
   );
   assert.match(
     html,
@@ -920,6 +940,10 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Watch the full episode/);
   assert.doesNotMatch(html, />Watch the series<\/a>/);
   assert.doesNotMatch(html, /Watch representative segment/);
+  assert.doesNotMatch(html, /20\+|public links archived|episode leads archived|>PTS<\/strong>|>public media<|>Taiwanese language</);
+  assert.match(html, />LG \/ Samsung<\/strong>/);
+  assert.match(html, />Taiwanese<\/span>/);
+  assert.doesNotMatch(html, /↗/);
   assert.match(html, /Press &amp; Interviews/);
   assert.match(html, /Official program page/);
   assert.doesNotMatch(html, /24 artist groups/);
@@ -1107,7 +1131,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /觀看官方宣傳片/);
   assert.match(zh, /<h2 class="contact-title"><span class="contact-title-line">一起把故事<\/span><span class="contact-title-line"><span class="contact-title-accent">做出來。<\/span><\/span><\/h2>/);
   assert.doesNotMatch(zh, /觀看完整單集/);
-  assert.equal((zh.match(/>觀看完整系列<\/a>/g) || []).length, 2);
+  assert.equal((zh.match(/>觀看完整系列<\/a>/g) || []).length, 1);
+  assert.equal((zh.match(/>觀看精選短片<\/a>/g) || []).length, 1);
   assert.match(zh, /href="https:\/\/www\.youtube\.com\/playlist\?list=PLJCU8axtQoPI"/);
   assert.match(zh, /href="https:\/\/www\.youtube\.com\/playlist\?list=PLfuPqJAlXvCs"/);
   assert.doesNotMatch(zh, /觀看代表片段/);
@@ -1120,7 +1145,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /China Dragon TV/);
   assert.match(zh, /汽車節目與紀實娛樂/);
   assert.doesNotMatch(zh, /中方導演/);
-  assert.match(zh, /同時段綜藝類冠軍/);
+  assert.match(zh, /連續四週全國同時段第一/);
   assert.doesNotMatch(zh, /觀看精選影片/);
   assert.match(zh, /代表影像作品/);
   assert.match(zh, /媒體報導與訪談/);

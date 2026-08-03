@@ -4,10 +4,6 @@
   "featured": true,
   "order": 4,
   "status": "in-progress",
-  "statusLabel": {
-    "en": "Selected reel",
-    "zh": "精選短片"
-  },
   "year": "2021-2024",
   "title": {
     "en": "Design & Brand Films",
@@ -29,8 +25,12 @@
     "en": "Films about residential design and brand collaborations, following how homes are planned, renovated, and lived in—from a designer’s choices to the routines that fill the finished space.",
     "zh": "我為住宅設計、老屋翻新、設計師作品、居家品牌與廚電業配內容擔任導演 / 剪輯。"
   },
-  "watchMode": "series",
+  "watchMode": "selection",
   "watchUrl": "https://www.youtube.com/playlist?list=PLJCU8axtQoPI",
+  "watchLabel": {
+    "en": "Watch selected reel",
+    "zh": "觀看精選短片"
+  },
   "showWatchCta": true,
   "videoEmbedUrl": "",
   "posterImage": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
@@ -53,7 +53,6 @@
   "featuredReelPoster": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
   "tags": ["interior design", "branded content", "lifestyle", "editing"],
   "metrics": [
-    {"value": "20+", "label": {"en": "public links archived", "zh": "已整理公開連結"}},
     {"value": "LG / Samsung", "label": {"en": "brand contexts", "zh": "品牌合作情境"}}
   ],
   "sourceNote": "docs/source-materials/interior-spatial-films.md; user-confirmed Director / Editor credit",

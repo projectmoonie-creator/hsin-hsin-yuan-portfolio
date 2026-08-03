@@ -28,13 +28,19 @@
   "videoEmbedUrl": "",
   "posterImage": "/assets/portfolio/top-gear-uk-special-car.jpg",
   "tags": ["factual entertainment"],
+  "metricsContext": {
+    "en": "Season 2 audience, reported across television and online",
+    "zh": "第二季播出表現（電視與線上）"
+  },
   "metrics": [
-    {"value": "200M", "label": {"en": "viewers", "zh": "觀眾"}},
-    {"value": "9M", "label": {"en": "previous series average", "zh": "此前系列平均觀眾"}},
-    {"value": "0.81", "label": {"en": "series rating record", "zh": "系列收視紀錄"}},
-    {"value": "#1", "label": {"en": "variety slot", "zh": "同時段綜藝類冠軍"}}
+    {"value": "200M", "label": {"en": "first five episodes / TV + online", "zh": "前五集／電視＋線上"}},
+    {"value": "9M", "label": {"en": "average weekly live audience", "zh": "每週電視平均觀眾"}},
+    {"value": "0.81", "label": {"en": "reported TV rating", "zh": "履歷記載電視收視率"}},
+    {"value": "#1", "label": {"en": "national time slot / four weeks", "zh": "連續四週全國同時段第一"}}
   ],
-  "sourceNote": "Hsin hsin Yuan CV.docx; 袁欣欣 简历.docx; user-provided YouTube link 2026-07-12",
+  "metricsSourceUrl": "https://www.advanced-television.com/2015/11/20/top-gear-china-draws-217m-viewers/",
+  "metricsCheckedAt": "2026-08-03",
+  "sourceNote": "Hsin hsin Yuan CV.docx; 袁欣欣 简历.docx; user-provided YouTube link 2026-07-12. Advanced Television confirms 217M across the first five Season 2 episodes, a 9M weekly live average, and four weeks at number one nationally in the time slot; the 0.81 figure remains resume-sourced.",
   "accent": "amber"
 }
 ---
