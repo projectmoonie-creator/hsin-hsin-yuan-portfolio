@@ -365,7 +365,9 @@ function renderArchiveCard(item, lang) {
   const title = localize(item.title, lang);
   const role = localize(item.role, lang);
   const watchLabel = localize(item.watchLabel, lang);
+  const creditLabel = localize(item.creditLabel, lang);
   const hasWatch = Boolean(item.watchUrl && watchLabel);
+  const hasCredit = Boolean(item.creditUrl && creditLabel);
   const hasPoster = Boolean(item.posterImage);
   const indexLabel = String(item.order).padStart(2, "0");
   const focalPoint = item.posterFocalPoint;
@@ -376,35 +378,58 @@ function renderArchiveCard(item, lang) {
     item.cardReelMode === "after-hold" &&
     item.cardReelUrl &&
     item.cardReelPoster;
+  const imageClass = item.posterFit === "contain"
+    ? "archive-card-image archive-card-image-contain"
+    : "archive-card-image";
   const image = hasPoster
-    ? `<img class="archive-card-image" src="${escapeHtml(item.posterImage)}" alt="${escapeHtml(localize(item.imageAlt, lang))}" loading="lazy" decoding="async" onerror="this.remove()"${focalStyle}>`
+    ? `<img class="${imageClass}" src="${escapeHtml(item.posterImage)}" alt="${escapeHtml(localize(item.imageAlt, lang))}" loading="lazy" decoding="async" onerror="this.remove()"${focalStyle}>`
     : "";
   const reel = hasApprovedCardReel
     ? `<video class="archive-card-reel" data-archive-reel-video data-archive-reel-mode="after-hold" muted loop playsinline webkit-playsinline preload="none" poster="${escapeHtml(item.cardReelPoster)}" aria-hidden="true" tabindex="-1"${focalStyle}><source src="${escapeHtml(item.cardReelUrl)}" type="video/mp4"></video>`
     : "";
-  const action = hasWatch
-    ? `<span class="archive-card-action">${escapeHtml(watchLabel)} <span aria-hidden="true">↗</span></span>`
+  const watchAction = hasWatch
+    ? hasCredit
+      ? `<a class="archive-card-action" href="${escapeHtml(item.watchUrl)}" target="_blank" rel="noreferrer">${escapeHtml(watchLabel)} <span aria-hidden="true">↗</span></a>`
+      : `<span class="archive-card-action">${escapeHtml(watchLabel)} <span aria-hidden="true">↗</span></span>`
     : "";
-  const tag = hasWatch ? "a" : "article";
-  const linkAttrs = hasWatch
+  const creditAction = hasCredit
+    ? `<a class="archive-card-action archive-card-action-secondary" href="${escapeHtml(item.creditUrl)}" target="_blank" rel="noreferrer">${escapeHtml(creditLabel)} <span aria-hidden="true">↗</span></a>`
+    : "";
+  const actions = watchAction || creditAction
+    ? hasCredit
+      ? `<span class="archive-card-actions">${watchAction}${creditAction}</span>`
+      : watchAction
+    : "";
+  const tag = hasCredit ? "article" : hasWatch ? "a" : "article";
+  const linkAttrs = hasWatch && !hasCredit
     ? ` href="${escapeHtml(item.watchUrl)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(`${watchLabel}: ${title}`)}"`
     : "";
+  const cardClass = hasCredit
+    ? "archive-card archive-card-with-actions"
+    : "archive-card";
   const mediaClass = hasPoster
     ? "archive-card-media"
     : "archive-card-media archive-card-media-placeholder";
+  const mediaTag = hasCredit && hasWatch ? "a" : "span";
+  const mediaLinkClass = hasCredit && hasWatch
+    ? `${mediaClass} archive-card-media-link`
+    : mediaClass;
+  const mediaLinkAttrs = hasCredit && hasWatch
+    ? ` href="${escapeHtml(item.watchUrl)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(`${watchLabel}: ${title}`)}"`
+    : "";
 
   return `
-    <${tag} class="archive-card"${linkAttrs}>
+    <${tag} class="${cardClass}"${linkAttrs}>
       <span class="archive-card-copy">
         <span class="work-meta">${escapeHtml(item.year)} / ${escapeHtml(role)}</span>
         <strong>${escapeHtml(title)}</strong>
-        ${action}
+        ${actions}
       </span>
-      <span class="${mediaClass}">
+      <${mediaTag} class="${mediaLinkClass}"${mediaLinkAttrs}>
         <span class="archive-card-index" aria-hidden="true">${indexLabel}</span>
         ${image}
         ${reel}
-      </span>
+      </${mediaTag}>
     </${tag}>
   `;
 }

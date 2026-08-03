@@ -356,6 +356,36 @@ test("loadSiteData keeps retired lab content out of the public site model", () =
   const lyingGame = archive.find((item) => item.slug === "lying-game");
   assert.equal(heartOfSteel.watchUrl, "https://www.youtube.com/watch?v=6g9YLv30DyU");
   assert.equal(lyingGame.watchUrl, "https://www.youtube.com/watch?v=DVzQf5COsyk");
+  assert.equal(
+    heartOfSteel.posterImage,
+    "https://upload.wikimedia.org/wikipedia/zh/4/46/%E9%8B%BC%E9%90%B5%E4%B9%8B%E5%BF%83.jpg",
+  );
+  assert.equal(
+    lyingGame.posterImage,
+    "https://upload.wikimedia.org/wikipedia/zh/7/7c/%E8%AC%8A%E8%A8%80%E9%81%8A%E6%88%B2.jpg",
+  );
+  assert.equal(heartOfSteel.posterFit, "contain");
+  assert.equal(lyingGame.posterFit, "contain");
+  assert.equal(heartOfSteel.posterRightsStatus, "public-link-only");
+  assert.equal(lyingGame.posterRightsStatus, "public-link-only");
+  assert.equal(
+    heartOfSteel.creditUrl,
+    "https://zh.wikipedia.org/zh-tw/%E9%8B%BC%E9%90%B5%E4%B9%8B%E5%BF%83",
+  );
+  assert.equal(
+    heartOfSteel.officialSourceUrl,
+    "http://www.dds.com.tw/portfolio-item/heart-of-steel/",
+  );
+  assert.equal(heartOfSteel.officialSourceStatus, "public-http-only");
+  assert.equal(
+    lyingGame.creditUrl,
+    "https://zh.wikipedia.org/zh-tw/%E8%AC%8A%E8%A8%80%E9%81%8A%E6%88%B2",
+  );
+  assert.equal(
+    lyingGame.officialSourceUrl,
+    "http://www.dds.com.tw/portfolio-item/the-lying-game/",
+  );
+  assert.equal(lyingGame.officialSourceStatus, "public-http-only");
   assert.ok(
     archive.every((item) => !Object.hasOwn(item, "archiveFeature")),
     "visual hierarchy must not live in Archive content",
@@ -398,9 +428,9 @@ test("archive renders five equal cards with one 40/60 contract", () => {
   )?.[0];
 
   assert.ok(archiveMarkup, "Archive section renders");
-  assert.equal((archiveMarkup.match(/class="archive-card"/g) || []).length, 5);
-  assert.equal((archiveMarkup.match(/<a class="archive-card"/g) || []).length, 3);
-  assert.equal((archiveMarkup.match(/<article class="archive-card"/g) || []).length, 2);
+  assert.equal((archiveMarkup.match(/class="archive-card(?:\s|")/g) || []).length, 5);
+  assert.equal((archiveMarkup.match(/<a class="archive-card"/g) || []).length, 1);
+  assert.equal((archiveMarkup.match(/<article class="archive-card/g) || []).length, 4);
   assert.match(archiveMarkup, /archive-card-copy/);
   assert.match(archiveMarkup, /archive-card-media archive-card-media-placeholder/);
   assert.match(archiveMarkup, /class="archive-card-index" aria-hidden="true">01/);
@@ -411,6 +441,41 @@ test("archive renders five equal cards with one 40/60 contract", () => {
     /archive-media-card|archive-media-card-lead|archive-item|archive-media-summary|mini-metrics/,
   );
   assert.doesNotMatch(archiveMarkup, /200M|250M|NT\$6M|600K|66%/);
+});
+
+test("archive drama cards keep trailer viewing and public credit proof separate", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const html = renderPage({ lang: "en", site, works });
+  const archiveMarkup = html.match(
+    /<section class="section archive-section">[\s\S]*?<div class="archive-chronology">[\s\S]*?<\/section>/,
+  )?.[0];
+
+  assert.ok(archiveMarkup, "Archive section renders");
+  assert.equal(
+    (archiveMarkup.match(/class="archive-card archive-card-with-actions"/g) || []).length,
+    2,
+  );
+  assert.equal(
+    (archiveMarkup.match(/class="archive-card-image archive-card-image-contain"/g) || []).length,
+    2,
+  );
+  assert.match(
+    archiveMarkup,
+    /class="archive-card-action" href="https:\/\/www\.youtube\.com\/watch\?v=6g9YLv30DyU"[^>]*>Watch official trailer/,
+  );
+  assert.match(
+    archiveMarkup,
+    /class="archive-card-action archive-card-action-secondary" href="https:\/\/zh\.wikipedia\.org\/zh-tw\/%E9%8B%BC%E9%90%B5%E4%B9%8B%E5%BF%83"[^>]*>View credited role/,
+  );
+  assert.match(
+    archiveMarkup,
+    /class="archive-card-media archive-card-media-link" href="https:\/\/www\.youtube\.com\/watch\?v=DVzQf5COsyk"/,
+  );
+  assert.match(
+    archiveMarkup,
+    /class="archive-card-action archive-card-action-secondary" href="https:\/\/zh\.wikipedia\.org\/zh-tw\/%E8%AC%8A%E8%A8%80%E9%81%8A%E6%88%B2"[^>]*>View credited role/,
+  );
 });
 
 test("Overclocking archive data uses the approved local poster and reel", () => {
