@@ -1453,10 +1453,6 @@ a.archive-card-media-link:focus-visible {
   }
 
   .media-frame {
-    min-height: auto;
-  }
-
-  .media-frame-unlabeled {
     aspect-ratio: 16 / 9;
     min-height: 0;
   }

@@ -250,6 +250,19 @@ test("wide media semantics apply to embedded work frames", () => {
   );
 });
 
+test("all featured media keeps 16:9 prominence at the mobile breakpoint", () => {
+  const css = readFileSync(join(root, "src/styles.css"), "utf8");
+
+  assert.match(
+    css,
+    /@media \(max-width: 820px\) \{[\s\S]*?\.media-frame \{[^}]*aspect-ratio: 16 \/ 9;[^}]*min-height: 0;[^}]*\}/,
+  );
+  assert.doesNotMatch(
+    css,
+    /@media \(max-width: 820px\) \{[\s\S]*?\.media-frame-unlabeled \{[^}]*aspect-ratio: 16 \/ 9;/,
+  );
+});
+
 test("website visual reel closes on the same focused contact invitation as the page", () => {
   const reelSource = readFileSync(
     join(root, "showreel/website-visual-reel/index.html"),
