@@ -216,6 +216,28 @@ if (!prefersReducedMotion) {
   );
   const visibleFeaturedReels = new Set();
   const featuredReelTimers = new Map();
+  const featuredReelActivationGenerations = new WeakMap();
+  const featuredReelPlayGenerations = new WeakMap();
+  let activeFeaturedReel = null;
+  let featuredReelLifecycleBound = false;
+
+  function getFeaturedReelGeneration(video) {
+    return featuredReelActivationGenerations.get(video) || 0;
+  }
+
+  function invalidateFeaturedReelGeneration(video) {
+    const generation = getFeaturedReelGeneration(video) + 1;
+    featuredReelActivationGenerations.set(video, generation);
+    featuredReelPlayGenerations.delete(video);
+    return generation;
+  }
+
+  function isCurrentFeaturedReelActivation(video, generation) {
+    return getFeaturedReelGeneration(video) === generation
+      && activeFeaturedReel === video
+      && visibleFeaturedReels.has(video)
+      && document.visibilityState === "visible";
+  }
 
   function clearFeaturedReelTimer(video) {
     const timer = featuredReelTimers.get(video);
@@ -225,6 +247,7 @@ if (!prefersReducedMotion) {
 
   function resetFeaturedReel(video) {
     clearFeaturedReelTimer(video);
+    invalidateFeaturedReelGeneration(video);
     video.classList.remove("is-playing");
     video.pause();
     try {
@@ -234,35 +257,53 @@ if (!prefersReducedMotion) {
     }
   }
 
-  function playFeaturedReel(video) {
+  function playFeaturedReel(video, generation) {
     clearFeaturedReelTimer(video);
-    if (document.visibilityState !== "visible") {
-      resetFeaturedReel(video);
-      return;
-    }
+    if (!isCurrentFeaturedReelActivation(video, generation) || !video.paused) return;
+    featuredReelPlayGenerations.set(video, generation);
     video.muted = true;
-    video.play().catch(() => resetFeaturedReel(video));
+    video.play().catch(() => {
+      if (isCurrentFeaturedReelActivation(video, generation)
+        && featuredReelPlayGenerations.get(video) === generation) {
+        resetFeaturedReel(video);
+      }
+    });
   }
 
   function scheduleFeaturedReel(video) {
     if (featuredReelTimers.has(video) || !video.paused) return;
-    if (document.visibilityState !== "visible") {
+    if (activeFeaturedReel !== video
+      || !visibleFeaturedReels.has(video)
+      || document.visibilityState !== "visible") {
       resetFeaturedReel(video);
       return;
     }
-    const timer = setTimeout(() => playFeaturedReel(video), FEATURED_REEL_HOLD_MS);
+    const generation = invalidateFeaturedReelGeneration(video);
+    const timer = setTimeout(() => {
+      featuredReelTimers.delete(video);
+      if (!isCurrentFeaturedReelActivation(video, generation) || !video.paused) return;
+      playFeaturedReel(video, generation);
+    }, FEATURED_REEL_HOLD_MS);
     featuredReelTimers.set(video, timer);
   }
 
   featuredReelVideos.forEach((video) => {
-    video.addEventListener("playing", () => video.classList.add("is-playing"));
+    video.addEventListener("playing", () => {
+      const generation = featuredReelPlayGenerations.get(video);
+      if (generation != null
+        && isCurrentFeaturedReelActivation(video, generation)
+        && !video.paused) {
+        video.classList.add("is-playing");
+      }
+    });
     video.addEventListener("error", () => resetFeaturedReel(video));
   });
 
   function syncActiveFeaturedReel() {
-    const activeFeaturedReel = visibleFeaturedReels.size
+    const nextActiveFeaturedReel = visibleFeaturedReels.size
       ? featuredReelVideos.filter((video) => visibleFeaturedReels.has(video)).at(-1)
       : null;
+    activeFeaturedReel = nextActiveFeaturedReel;
 
     featuredReelVideos.forEach((video) => {
       if (video === activeFeaturedReel) {
@@ -290,8 +331,6 @@ if (!prefersReducedMotion) {
         )
       : null;
 
-  featuredReelVideos.forEach((video) => featuredReelObserver?.observe(video));
-
   function handleFeaturedReelVisibility() {
     if (document.visibilityState !== "visible") {
       featuredReelVideos.forEach(resetFeaturedReel);
@@ -300,13 +339,39 @@ if (!prefersReducedMotion) {
     }
   }
 
-  document.addEventListener("visibilitychange", handleFeaturedReelVisibility);
-  window.addEventListener("pagehide", () => {
+  function bindFeaturedReelLifecycle() {
+    if (featuredReelLifecycleBound) return;
+    featuredReelLifecycleBound = true;
+    document.addEventListener("visibilitychange", handleFeaturedReelVisibility);
+    featuredReelVideos.forEach((video) => featuredReelObserver?.observe(video));
+  }
+
+  function suspendFeaturedReelLifecycle() {
+    activeFeaturedReel = null;
     visibleFeaturedReels.clear();
     featuredReelVideos.forEach(resetFeaturedReel);
     featuredReelObserver?.disconnect();
-    document.removeEventListener("visibilitychange", handleFeaturedReelVisibility);
-  });
+    if (featuredReelLifecycleBound) {
+      document.removeEventListener("visibilitychange", handleFeaturedReelVisibility);
+      featuredReelLifecycleBound = false;
+    }
+  }
+
+  function handleFeaturedReelPageShow(event) {
+    if (event.persisted) bindFeaturedReelLifecycle();
+  }
+
+  function handleFeaturedReelPageHide(event) {
+    suspendFeaturedReelLifecycle();
+    if (!event.persisted) {
+      window.removeEventListener("pagehide", handleFeaturedReelPageHide);
+      window.removeEventListener("pageshow", handleFeaturedReelPageShow);
+    }
+  }
+
+  bindFeaturedReelLifecycle();
+  window.addEventListener("pagehide", handleFeaturedReelPageHide);
+  window.addEventListener("pageshow", handleFeaturedReelPageShow);
 
   const ARCHIVE_REEL_HOLD_MS = 1400;
   const archiveReelVideos = Array.from(
