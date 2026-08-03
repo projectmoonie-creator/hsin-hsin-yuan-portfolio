@@ -133,13 +133,26 @@ test("Figma SVG export keeps portfolio layers editable and named", () => {
   }
   assert.match(generator, /function validateFeaturedWorks\(works\)/);
   assert.match(generator, /validateFeaturedWorks\(works\);/);
+  assert.match(generator, /import \{ loadSiteData, loadWorks \} from "\.\/build-site\.mjs"/);
+  assert.doesNotMatch(generator, /readdirSync\(join\(root, "content\/works"\)\)/);
 
   assert.match(mobileHome, /id="frame-mobile-home"/);
   assert.match(mobileHome, /viewBox="0 0 390 844"/);
   assert.match(mobileHome, /id="layer-mobile-available"/);
   assert.match(mobileHome, /AVAILABLE FOR/i);
+  assert.match(
+    mobileHome,
+    /<text x="24" y="558"[^>]*>Cross-Cultural Storyteller<\/text>/,
+  );
+  assert.doesNotMatch(mobileHome, />\/ <tspan[^>]*>Cross-Cultural Storyteller/);
 
   assert.match(readme, /Drag the SVG files into Figma/);
   assert.match(readme, /editable text layers/i);
+  assert.match(readme, /Global Press/);
+  assert.match(readme, /fill-card/);
+  assert.match(readme, /centered-16x9/);
+  assert.match(readme, /one standard Archive card family/);
+  assert.match(worksLogos, /id="token-color-panel"[^>]*fill="rgba\(255, 255, 255, 0\.055\)"/);
+  assert.match(worksLogos, /id="component-work-card-slow-steps">\s*<rect[^>]*fill="#171719"/);
   assert.doesNotMatch(desktopHome, /<foreignObject/);
 });

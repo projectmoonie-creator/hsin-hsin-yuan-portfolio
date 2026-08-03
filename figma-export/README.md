@@ -22,3 +22,17 @@ This folder is a free Figma import package for the Hsin-Hsin Yuan portfolio desi
 - Photos are embedded as image layers to keep the package portable.
 - Text, rectangles, logo wordmarks, cards, and color token swatches remain editable SVG layers, including editable text layers after import.
 - This is a design control layer, not the production source of truth.
+
+## Current Contract Map
+
+The public order is Hero, Platforms & Collaborations, Screening Strip,
+Available For, Featured Works, FROM THE ARCHIVE, Global Press, and Contact.
+
+- Featured Works uses the named desktop variants `fill-card` and
+  `centered-16x9`; every mobile media frame is 16:9.
+- Source artwork may contain its own title, but the site adds no second title
+  overlay.
+- FROM THE ARCHIVE uses one standard Archive card family; missing media changes
+  capability, not card size.
+- Global Press is a separate text-only note family. Work Press may retain a
+  verified thumbnail inside its project card.

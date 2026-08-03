@@ -8,10 +8,10 @@ import {
 
 const rootDir = process.cwd();
 
-test("design contract audit inventories the current project without writing", () => {
+test("design contract audit inventories an aligned project without writing", () => {
   const report = auditDesignContract({ rootDir });
 
-  assert.equal(report.status, "migration-warnings");
+  assert.equal(report.status, "pass");
   assert.deepEqual(report.summary, {
     featuredWorks: 6,
     archiveItems: 5,
@@ -72,15 +72,10 @@ test("design contract audit inventories the current project without writing", ()
   });
 
   const findingIds = report.findings.map((finding) => finding.id);
-  assert.deepEqual(findingIds, [
-    "figma.featured-source.duplicated",
-    "figma.mobile-role-slash.stale",
-    "figma.press-map.missing",
-    "figma.tokens.drift",
-  ]);
+  assert.deepEqual(findingIds, []);
 
   const text = formatAuditReport(report);
-  assert.match(text, /Portfolio design contract audit: migration-warnings/);
+  assert.match(text, /Portfolio design contract audit: pass/);
   assert.match(text, /6 Featured \/ 5 Archive \/ 2 global Press/);
-  assert.match(text, /figma\.featured-source\.duplicated/);
+  assert.match(text, /No active contract drift found\./);
 });

@@ -1,6 +1,8 @@
-import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { basename, extname, join } from "node:path";
 import { pathToFileURL } from "node:url";
+
+import { loadSiteData, loadWorks } from "./build-site.mjs";
 
 const root = process.cwd();
 const outDir = join(root, "figma-export");
@@ -10,25 +12,12 @@ const tokens = {
   ink: "#F7F2E8",
   muted: "#B8B0A3",
   line: "rgba(247, 242, 232, 0.18)",
-  panel: "#19191B",
-  panelStrong: "#242428",
+  panel: "rgba(255, 255, 255, 0.055)",
+  panelStrong: "rgba(255, 255, 255, 0.095)",
+  workPanel: "#171719",
   acid: "#D8FF3E",
   heat: "#FF4D1F",
-  blue: "#7CC7FF",
 };
-
-function readJson(path) {
-  return JSON.parse(readFileSync(join(root, path), "utf8"));
-}
-
-function parseFrontmatter(path) {
-  const raw = readFileSync(join(root, path), "utf8").trim();
-  const match = raw.match(/^---\n([\s\S]*?)\n---/);
-  if (!match) {
-    throw new Error(`Missing JSON frontmatter in ${path}`);
-  }
-  return JSON.parse(match[1]);
-}
 
 export function validateFeaturedWorks(works) {
   const slugs = new Set();
@@ -142,7 +131,9 @@ function svgFrame({ id, width, height, title, body }) {
   <g id="tokens">
     <rect id="color-accent-acid" x="-100" y="-100" width="10" height="10" fill="${tokens.acid}"/>
     <rect id="color-accent-heat" x="-120" y="-100" width="10" height="10" fill="${tokens.heat}"/>
-    <rect id="color-accent-blue" x="-140" y="-100" width="10" height="10" fill="${tokens.blue}"/>
+    <rect id="token-color-panel" x="-140" y="-100" width="10" height="10" fill="${tokens.panel}"/>
+    <rect id="token-color-panel-strong" x="-160" y="-100" width="10" height="10" fill="${tokens.panelStrong}"/>
+    <rect id="token-color-work-panel" x="-180" y="-100" width="10" height="10" fill="${tokens.workPanel}"/>
   </g>
 ${body}
 </svg>
@@ -164,7 +155,7 @@ function workCard({ work, x, y, width }) {
   const desc = work.description.en;
   const safeSlug = work.slug.replace(/[^a-z0-9-]/gi, "-");
   return `<g id="component-work-card-${safeSlug}">
-    <rect x="${x}" y="${y}" width="${width}" height="410" rx="8" fill="${tokens.panel}" stroke="${tokens.line}"/>
+    <rect x="${x}" y="${y}" width="${width}" height="410" rx="8" fill="${tokens.workPanel}" stroke="${tokens.line}"/>
     ${imageLayer({ id: `image-work-${safeSlug}`, href: work.figmaPosterImage || work.posterImage, x: x + 14, y: y + 14, width: width - 28, height: 160, opacity: 0.88 })}
     <text x="${x + 24}" y="${y + 210}" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="800" letter-spacing="1.3">${escapeXml(`${work.year} / ${work.role.en} / ${englishText(work.platform)}`.toUpperCase())}</text>
     <text x="${x + 24}" y="${y + 252}" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="850">${escapeXml(title)}</text>
@@ -202,7 +193,7 @@ function buildDesktopHome(site, works, collaborations) {
     body: `
   <g id="layer-topbar">
     <text x="72" y="54" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="850" letter-spacing="1.4">HSIN-HSIN YUAN</text>
-    <text x="1050" y="54" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="750" letter-spacing="1.1">WORKS / ABOUT / CONTACT / 中文</text>
+    <text x="980" y="54" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="750" letter-spacing="1.1">AVAILABLE FOR / WORKS / CONTACT / 中文</text>
   </g>
   <g id="layer-hero">
     ${imageLayer({ id: "layer-hero-image", href: featured.posterImage, x: 72, y: 104, width: 610, height: 520, opacity: 0.96 })}
@@ -269,6 +260,9 @@ function buildDesktopWorksLogos(site, works, collaborations) {
 
 function buildMobileHome(site, works, collaborations) {
   const hero = site.en;
+  const firstRoleLine = escapeXml(hero.heroRoleLines[0])
+    .replaceAll(" / ", ` <tspan fill="${tokens.acid}">/</tspan> `);
+  const secondRoleLine = escapeXml(hero.heroRoleLines[1]);
   const logos = collaborations
     .slice(0, 4)
     .map((item, index) => logoWordmark({ item, x: 28 + (index % 2) * 168, y: 614 + Math.floor(index / 2) * 62, width: 118 }))
@@ -291,8 +285,8 @@ function buildMobileHome(site, works, collaborations) {
       <text x="22" y="436" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="900">HSIN-HSIN</text>
       <text x="22" y="492" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="900">YUAN</text>
     </g>
-    <text x="24" y="532" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="650">Documentary Director <tspan fill="${tokens.acid}">/</tspan> Writer <tspan fill="${tokens.acid}">/</tspan> Producer</text>
-    <text x="24" y="558" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="800">/ <tspan fill="${tokens.ink}">Cross-Cultural Storyteller</tspan></text>
+    <text x="24" y="532" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="650">${firstRoleLine}</text>
+    <text x="24" y="558" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="650">${secondRoleLine}</text>
   </g>
   <g id="layer-logo-wall">
     <text x="24" y="596" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="800" letter-spacing="1.2">${escapeXml(hero.collabTitle.toUpperCase())}</text>
@@ -330,18 +324,29 @@ This folder is a free Figma import package for the Hsin-Hsin Yuan portfolio desi
 - Photos are embedded as image layers to keep the package portable.
 - Text, rectangles, logo wordmarks, cards, and color token swatches remain editable SVG layers, including editable text layers after import.
 - This is a design control layer, not the production source of truth.
+
+## Current Contract Map
+
+The public order is Hero, Platforms & Collaborations, Screening Strip,
+Available For, Featured Works, FROM THE ARCHIVE, Global Press, and Contact.
+
+- Featured Works uses the named desktop variants \`fill-card\` and
+  \`centered-16x9\`; every mobile media frame is 16:9.
+- Source artwork may contain its own title, but the site adds no second title
+  overlay.
+- FROM THE ARCHIVE uses one standard Archive card family; missing media changes
+  capability, not card size.
+- Global Press is a separate text-only note family. Work Press may retain a
+  verified thumbnail inside its project card.
 `;
 }
 
 function main() {
-  const site = readJson("data/site.json");
-  const collaborations = readJson("data/collaborations.json");
-  const works = readdirSync(join(root, "content/works"))
-    .filter((file) => file.endsWith(".md"))
-    .map((file) => parseFrontmatter(`content/works/${file}`))
-    .filter((work) => work.featured);
+  const siteData = loadSiteData(root);
+  const site = siteData.site;
+  const collaborations = siteData.collaborations;
+  const works = loadWorks(join(root, "content/works"));
   validateFeaturedWorks(works);
-  works.sort((a, b) => a.order - b.order || a.slug.localeCompare(b.slug));
 
   rmSync(outDir, { recursive: true, force: true });
   mkdirSync(outDir, { recursive: true });

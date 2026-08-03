@@ -202,19 +202,19 @@ Run `npm test` and `npm run build`; compare all five frozen website hashes. Any 
 - Modify: `tests/figma-export.test.mjs`
 - Regenerate: `figma-export/*.svg`
 
-- [ ] **Step 1: Write failing Figma parity assertions**
+- [x] **Step 1: Write failing Figma parity assertions**
 
 Require the exporter to consume normalized Featured records, source mobile hero role lines from canonical data, omit the retired slash before `Cross-Cultural Storyteller`, include global Press in its current-reference map/README, and describe equal Archive cards plus named Featured variants.
 
-- [ ] **Step 2: Implement only current-reference fixes**
+- [x] **Step 2: Implement only current-reference fixes**
 
 Import the shared loader/normalizer instead of reparsing Featured content independently. Preserve all existing frame geometry except the retired mobile slash text. Update README/current-reference metadata; do not change live CSS or site HTML.
 
-- [ ] **Step 3: Regenerate and inspect the bounded Figma diff**
+- [x] **Step 3: Regenerate and inspect the bounded Figma diff**
 
 Run `npm run figma:export` and `git diff -- figma-export scripts/build-figma-export.mjs tests/figma-export.test.mjs`. Confirm differences correspond only to the declared Figma drift corrections.
 
-- [ ] **Step 4: Re-prove website byte parity and commit**
+- [x] **Step 4: Re-prove website byte parity and commit**
 
 Run `npm run build` and compare all five website hashes again. Commit `align figma references with design contract`.
 
