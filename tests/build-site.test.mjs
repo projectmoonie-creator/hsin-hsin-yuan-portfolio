@@ -263,6 +263,41 @@ test("all featured media keeps 16:9 prominence at the mobile breakpoint", () => 
   );
 });
 
+test("featured media keeps source artwork without a second HTML title layer", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const html = renderPage({ lang: "en", site, works });
+  const expected = new Map([
+    ["tech-dreamers", "Play video: Tech Dreamers"],
+    ["my-art-my-voice", "Play video: My Art, My Voice"],
+    ["pts-taigi-bus", "Play video: Nothing by Bus"],
+    ["top-gear-china-uk-special", "Play video: Top Gear China: UK Special"],
+  ]);
+
+  for (const [slug, ariaLabel] of expected) {
+    const work = works.find((item) => item.slug === slug);
+    const panel = html.match(
+      new RegExp(
+        `<article class="[^"]*work-panel[^"]*" id="${slug}">[\\s\\S]*?<\\/article>`,
+      ),
+    )?.[0];
+
+    assert.equal(work.hideMediaLabel, true, slug);
+    assert.ok(panel, slug);
+    assert.match(
+      panel,
+      /class="media-frame[^"]*media-frame-unlabeled[^"]*media-frame-link"/,
+    );
+    assert.match(panel, new RegExp(`aria-label="${ariaLabel}"`));
+    assert.doesNotMatch(panel, /class="media-label(?: |")/);
+  }
+
+  const topGear = works.find(
+    (item) => item.slug === "top-gear-china-uk-special",
+  );
+  assert.equal("mediaTitleLines" in topGear, false);
+});
+
 test("website visual reel closes on the same focused contact invitation as the page", () => {
   const reelSource = readFileSync(
     join(root, "showreel/website-visual-reel/index.html"),
