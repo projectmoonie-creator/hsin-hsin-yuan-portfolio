@@ -3,28 +3,17 @@
   "provider": "google-gemini-api",
   "routingPolicy": "highest-capability-generally-released-at-execution",
   "exactPin": null,
-  "requestedModel": null,
-  "observedModel": null,
-  "completedModel": null,
-  "status": "incomplete",
-  "modelRequestSent": false,
-  "failureClass": "network-dns-then-external-transmission-authorization-denied",
-  "attempts": [
-    {
-      "lane": "project Gemini REST wrapper in restricted sandbox",
-      "result": "incomplete",
-      "failureClass": "network-dns",
-      "detail": "Official model catalog lookup could not resolve the Google endpoint; no model was selected and no review response was produced."
-    },
-    {
-      "lane": "project Gemini REST wrapper with requested network escalation",
-      "result": "not-run",
-      "failureClass": "external-transmission-authorization-denied",
-      "detail": "The safety reviewer denied transmitting the repository remediation packet without separate explicit user authorization. No workaround or model request followed."
-    }
+  "eligibleModels": [
+    "gemini-3.6-flash",
+    "gemini-3.5-flash",
+    "gemini-2.5-pro",
+    "gemini-2.5-flash",
+    "gemini-2.0-flash"
   ],
-  "prompt": "docs/reviews/hero-media-closeout-remediation-cross-review-packet-2026-08-04.md",
-  "intendedOutput": "docs/reviews/hero-media-closeout-remediation-gemini-review-2026-08-04.md",
-  "apiEquivalentCostUsd": null,
-  "actualSpendUsd": null
+  "requestedModel": "gemini-3.6-flash",
+  "observedModel": "gemini-3.6-flash",
+  "completedModel": "gemini-3.6-flash",
+  "status": "completed",
+  "resolvedAt": "2026-08-04T14:18:43.925Z",
+  "completedAt": "2026-08-04T14:19:03.173Z"
 }

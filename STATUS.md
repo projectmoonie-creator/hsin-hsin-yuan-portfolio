@@ -24,10 +24,12 @@ State: `PASS_WITH_OPEN_ITEMS`
   overflow, console, page, or request errors.
 - Frozen review packet SHA-256:
   `368e0fe6909791c854f217c80dcdc9499b66b30a3e2a664626ec2ff74ca113fd`.
-  Gemini is honestly incomplete after restricted DNS failure and denial of
-  external packet transmission without separate explicit user authorization;
-  no model was selected or called. Claude is `handoff-to-active-session` with
-  no model request sent. No external-review consensus is claimed.
+  Gemini completed `PASS` with no findings on requested/observed/completed
+  `gemini-3.6-flash`; local adjudication closes all four original findings as
+  `already-fixed`. The raw response's conflicting self-label was rejected in
+  favor of the wrapper's machine provenance. Claude remains
+  `handoff-to-active-session` with no model request sent, so no dual-review
+  consensus is claimed.
 - `origin/main`, Vercel Preview, aliases, Contact, and Production remain
   untouched. The protected untracked review file remains unmodified and outside
   Git.
@@ -311,10 +313,10 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Obtain explicit producer authorization before transmitting the frozen packet to
-Gemini, complete and adjudicate the required privacy/mechanism review, then ask
-for one bounded decision: create a feature Preview or merge the remediation
-into local `main`. Production remains separate and requires another explicit
+Ask for one bounded producer decision: create a feature Preview or merge the
+remediation into local `main`. The usable Gemini review plus local gates close
+this package; the same frozen packet remains available for the incomplete
+Claude follow-up. Production remains separate and requires another explicit
 instruction.
 
 ## Cold Resume
