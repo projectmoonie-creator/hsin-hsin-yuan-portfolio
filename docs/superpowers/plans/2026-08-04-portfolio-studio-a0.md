@@ -18,16 +18,16 @@
 - [x] GREEN: implement `loadMediaManifest`, `validateMediaManifest`, `resolvePublicAssetPath`, `probeMediaAsset`, and `verifyMediaAsset`; seed all six current Featured reels plus Overclocking reel/poster without weakening any exact size/hash/codec check.
 - [x] Refactor `tests/media-assets.test.mjs` to iterate the manifest; run both focused tests and `npm test`.
 - [x] Run `npm run build`; `diff -rq /private/tmp/portfolio-studio-a0-baseline.xxp1Ee/dist dist` must print nothing.
-- [ ] Commit and push the coherent foundation; read back the exact remote branch tip.
+- [x] Commit and push the coherent foundation; read back the exact remote branch tip.
 
 ### Task 2: Dry-run Archive media-package planner
 
 **Files:** Create `scripts/lib/media-package-plan.mjs`, `scripts/plan-archive-media-package.mjs`, `tests/media-package-plan.test.mjs`; modify `package.json`.
 
-- [ ] RED: test that an absolute reel/poster input produces a deterministic JSON plan containing only basenames/public targets, bilingual alt text, rights, timecode, manifest entries, and a frontmatter patch; assert missing rights/alt/timecode fails and no file is written.
-- [ ] Run `node --test tests/media-package-plan.test.mjs`; observe the missing-module failure.
-- [ ] GREEN: implement pure plan assembly plus real `ffprobe`/SHA probing through the Task 1 library; expose `npm run media:plan -- ...` as dry-run only.
-- [ ] Run the focused test, `npm test`, `npm run build`, and the unchanged-output diff.
+- [x] RED: test that an absolute reel/poster input produces a deterministic JSON plan containing only basenames/public targets, bilingual alt text, rights, timecode, manifest entries, and a frontmatter patch; assert missing rights/alt/timecode fails and no file is written.
+- [x] Run `node --test tests/media-package-plan.test.mjs`; observe the missing-module failure.
+- [x] GREEN: implement pure plan assembly plus real `ffprobe`/SHA probing through the Task 1 library; expose `npm run media:plan -- ...` as dry-run only.
+- [x] Run the focused test, `npm test`, `npm run build`, and the unchanged-output diff.
 - [ ] Commit and push the coherent planner; read back the exact remote branch tip.
 
 ### Task 3: Three-Minute Micro Drama steel thread

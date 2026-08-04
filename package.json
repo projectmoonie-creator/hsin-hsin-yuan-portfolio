@@ -8,6 +8,7 @@
     "audit:design-contract:json": "node scripts/audit-design-contract.mjs --json",
     "build": "node scripts/build-site.mjs",
     "figma:export": "node scripts/build-figma-export.mjs",
+    "media:plan": "node scripts/plan-archive-media-package.mjs",
     "test": "node --test tests/*.test.mjs",
     "serve": "python3 -m http.server 4173 -d dist"
   }
