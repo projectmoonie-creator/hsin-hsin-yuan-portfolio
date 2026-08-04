@@ -6,8 +6,13 @@ State: `PASS_WITH_OPEN_ITEMS`
 
 ## Current Work Package — HeroMedia Component And Showreel Retirement
 
-- Branch: `codex/hero-media-component`; package base and full rollback point:
-  `fb6517591e34b9cb20d814891c0177cf2ac9ba2c`.
+- Reviewed feature branch: `codex/hero-media-component`; package base and full
+  rollback point: `fb6517591e34b9cb20d814891c0177cf2ac9ba2c`.
+- Local `main` was fast-forwarded to validated behavior head
+  `0d110353a9b0133878271f5eebc1ab69bcc9d6cd` on 2026-08-04. This local
+  integration has not been pushed; `origin/main` remains
+  `382e02a21fbcf6ffef68881b7e497235eaf8a7a8`. The documentation-only status
+  commit is reported externally after commit.
 - The parity-preserving extraction commit is
   `5539c43373ac6d024d51b8f27c8aa8e1577991b3`; reverting the subsequent
   behavior commit reported externally after commit restores Play/showreel
@@ -31,9 +36,8 @@ State: `PASS_WITH_OPEN_ITEMS`
   Gemini completed `PASS` with no findings on `gemini-3.6-flash`; Claude is
   honestly `incomplete` at subscription-session handoff, so no dual-review
   consensus is claimed.
-- `origin/main`, merges, Preview, aliases, Contact, and Production are
-  untouched. The protected untracked review file remains unmodified and
-  outside Git.
+- Vercel Preview, aliases, Contact, and Production are untouched. The protected
+  untracked review file remains unmodified and outside Git.
 
 ## HeroMedia Open Item
 
