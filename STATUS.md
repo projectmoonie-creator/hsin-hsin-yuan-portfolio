@@ -14,7 +14,38 @@ State: `PASS_WITH_OPEN_ITEMS`
 - `origin/main`, merges, Preview, and Production unchanged; those still
   require separate explicit producer authorization.
 
-## Current Work Package
+## Current Work Package — Portfolio Studio A0
+
+- Package: repo-backed Archive media manifest + dry-run planner, carried
+  end-to-end by the approved Three-Minute Micro Drama reel and poster.
+- Branch: `codex/portfolio-studio-a0`; baseline and rollback checkpoint:
+  `382e02a21fbcf6ffef68881b7e497235eaf8a7a8`.
+- Validated implementation head and pushed remote readback:
+  `9fb0f2c929ad497100baba11cade6fd618d3ac08`.
+- Coherent commits: `d82c0ba` manifest foundation, `c0b33d5` dry-run planner,
+  and `9fb0f2c` Three-Minute steel-thread integration. The documentation-only
+  closeout commit is reported externally after commit.
+- The exact 10-second silent H.264 1280×720 reel and 1280×720 WebP poster are
+  protected by size, SHA-256, profile, owner, and content-link checks. Source
+  masters and absolute source paths remain outside Git.
+- `npm test` 71/71, design audit, build, Figma export, diff check, full decode,
+  manifest verification, and desktop/mobile browser QA passed.
+- Frozen review packet SHA-256:
+  `2e1780988bc43b0972ff1fc82e57fc2012cfdb50af2a4a78187b0f0fc6bec88b`.
+  Gemini completed `PASS` with no findings on `gemini-3.6-flash`; Claude is
+  honestly `incomplete` at subscription-session handoff, so no dual-review
+  consensus is claimed.
+- `origin/main`, Vercel Preview, aliases, Contact, and Production are untouched.
+  The protected untracked review file remains unmodified and outside Git.
+
+## A0 Open Item
+
+Submit the same frozen packet to the active Claude subscription lane when it is
+available. Under the Work Charter, the usable Gemini lane plus local gates may
+close this producer-gated feature package, but the missing lane must be recorded
+and later supplemented without regenerating the packet.
+
+## Prior Accepted Work Package — Top Gear
 
 - Package: `Top Gear Featured Preview Reel v1` — implemented and reviewed
   locally with deterministic, media, bilingual browser, fallback, privacy, and
@@ -57,7 +88,7 @@ State: `PASS_WITH_OPEN_ITEMS`
 - No Vercel Preview or Production deployment, push, main merge, Contact
   submission, external message, or source-file move/deletion occurred.
 
-## Current Package Verification
+## Prior Top Gear Verification
 
 - `npm test`: `61/61` passed; Featured lifecycle: `6/6` passed.
 - Design audit passed with `6` Featured, `5` Archive, `2` global Press, and
@@ -86,7 +117,7 @@ State: `PASS_WITH_OPEN_ITEMS`
   The protected untracked file retained SHA-256
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
 
-## Current Package Open Risks
+## Prior Top Gear Open Risks
 
 - The Top Gear-specific adapted harness, JSON results, and screenshots existed
   only under `/private/tmp/top-gear-browser-qa.9Ab009`; they are not durably
@@ -100,9 +131,8 @@ State: `PASS_WITH_OPEN_ITEMS`
   not a local product defect; unchanged Figma hashes support but do not replace
   the unavailable comparison.
 
-The branch remains local and unpushed by explicit scope. The next user decision
-is whether to accept the retained feature branch and separately authorize any
-push, deployment, or merge.
+This historical section is superseded by the current A0 baseline and retained
+only as prior verification evidence.
 
 ## Prior Accepted Work Package
 
@@ -212,20 +242,17 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Review and accept the retained local branch
-`codex/top-gear-featured-preview-reel` at its externally reported closeout
-commit. Any push, deployment, or merge requires a separate explicit user
-instruction.
+Review and accept `codex/portfolio-studio-a0` at its externally reported
+closeout tip. The next bounded decision is either a feature Preview or merge to
+`main`; Production remains separate and requires another explicit instruction.
 
 ## Cold Resume
 
-1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and the Top Gear design
-   specification.
-2. Verify branch `codex/top-gear-featured-preview-reel`, validated
-   implementation head `c4c284707edd1f6560081ef9df3b56b0ba5f9bc5`, the
-   externally reported closeout commit, and the protected untracked file.
-3. Read the dated Top Gear closeout record for exact media and browser
-   evidence; the port `4873` preview is stopped and inactive.
-4. Ask whether the user accepts the retained local package and wants a
-   separately authorized push, deployment, or merge.
-5. Do not deploy, push, change Production, submit Contact, or merge implicitly.
+1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and the A0 implementation
+   plan.
+2. Verify branch `codex/portfolio-studio-a0`, implementation head `9fb0f2c`,
+   the externally reported closeout tip, remote readback, and protected file.
+3. Read the A0 frozen packet, Gemini review, and adjudication; Claude remains a
+   same-packet follow-up, not a completed lane.
+4. Ask whether the user wants a feature Preview or merge to `main`.
+5. Do not deploy Production, submit Contact, or merge implicitly.

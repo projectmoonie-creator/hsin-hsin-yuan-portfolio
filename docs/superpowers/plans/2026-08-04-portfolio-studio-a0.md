@@ -38,8 +38,8 @@
 - [x] RED: apply only the generated Three-Minute frontmatter patch, then run the Task 1 coverage test and observe missing manifest/assets failures.
 - [x] Copy the exact approved derivatives and add only the generated manifest entries; do not modify source masters or the protected untracked review file.
 - [x] Run focused manifest/package tests, `npm test`, `npm run audit:design-contract`, `npm run build`, `npm run figma:export`, `git diff --check`, full decode, and desktop/mobile local visual checks.
-- [ ] Run privacy/rights review under the project review tier; record provider status honestly and keep Preview/Production untouched.
-- [ ] Add the bounded rights closeout/status entry, commit, push the branch, read back the exact tip, and report the producer's next Preview/merge decision.
+- [x] Run privacy/rights review under the project review tier; record provider status honestly and keep Preview/Production untouched.
+- [x] Add the bounded rights closeout/status entry, commit, push the branch, read back the exact tip, and report the producer's next Preview/merge decision.
 
 ### Rollback and non-goals
 
