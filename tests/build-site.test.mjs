@@ -346,9 +346,13 @@ test("featured media keeps source artwork without a second HTML title layer", ()
   assert.equal("mediaTitleLines" in topGear, false);
 });
 
-test("website visual reel closes on the same focused contact invitation as the page", () => {
+test("retired website visual reel remains recoverable authoring evidence only", () => {
   const reelSource = readFileSync(
     join(root, "showreel/website-visual-reel/index.html"),
+    "utf8",
+  );
+  const retirement = readFileSync(
+    join(root, "showreel/website-visual-reel/RETIRED.md"),
     "utf8",
   );
 
@@ -360,9 +364,10 @@ test("website visual reel closes on the same focused contact invitation as the p
   assert.doesNotMatch(reelSource, /Let’s build a story with signal\./);
   assert.doesNotMatch(reelSource, /Artists and cultural institutions/);
   assert.doesNotMatch(reelSource, /AI-language editorial workflows/);
-  assert.ok(
-    existsSync(join(root, "public/assets/showreel/website-visual-reel.mp4")),
-  );
+  assert.match(retirement, /retired/i);
+  assert.match(retirement, /not an active build source/i);
+  assert.equal(existsSync(join(root, "public/assets/showreel/website-visual-reel.mp4")), false);
+  assert.equal(existsSync(join(root, "public/assets/showreel/website-visual-reel-poster.png")), false);
 });
 
 test("featured press entries carry audit metadata", () => {
@@ -498,6 +503,8 @@ test("site copy has no retired section fields in active data", () => {
     "workModes",
     "showreelEyebrow",
     "showreelSubcopy",
+    "showreelTitle",
+    "showreelCta",
     "watchShelfKicker",
     "watchShelfTitle",
     "watchShelfHint",
@@ -877,7 +884,8 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /<div class="hero-roles">.*AI-Language Creative.*<\/div>/s);
   assert.equal(site.site.heroMedia.contract.kind, "hero-media");
   assert.match(html, /<link rel="preload" as="image" href="\/assets\/portfolio\/hsin-working-white-space\.jpg">/);
-  assert.match(html, /<div class="hero-media hero-media--slow-push" id="showreel"[^>]*data-hero-media-id="site\.hero"/);
+  assert.match(html, /<div class="hero-media hero-media--slow-push"[^>]*data-hero-media-id="site\.hero"[^>]*role="img"/);
+  assert.doesNotMatch(html, /id="showreel"/);
   assert.match(html, /aria-label="Hsin-Hsin Yuan working on a laptop in a bright white studio"/);
   assert.match(zhHtml, /aria-label="袁欣欣在明亮的白色工作空間使用筆記型電腦"/);
   assert.match(html, /data-hero-width="1920" data-hero-height="1440"/);
@@ -887,19 +895,15 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /--hero-stacked-x: 38%; --hero-stacked-y: 77%/);
   assert.match(html, /--hero-mobile-x: 38%; --hero-mobile-y: 78%/);
   assert.doesNotMatch(html, /light-beam-layer|light-beam-right|ambient-canvas/);
-  assert.match(html, /<video[\s\S]*class="hero-showreel-video"[\s\S]*data-showreel-video/);
-  assert.match(html, /muted/);
-  assert.match(html, /webkit-playsinline/);
-  assert.match(html, /preload="none"/);
-  assert.doesNotMatch(html, /<video[\s\S]*controls[\s\S]*data-showreel-video/);
-  assert.match(html, /aria-label="Watch reel"/);
+  assert.doesNotMatch(html, /hero-showreel-video|data-showreel-video|data-showreel-play/);
+  assert.doesNotMatch(html, /aria-label="Watch reel"/);
   assert.doesNotMatch(html, /<span class="hero-media-caption">/);
   assert.doesNotMatch(html, /hero-actions/);
   assert.doesNotMatch(html, /href="#showreel">Reel<\/a>/);
-  assert.match(html, /<source src="\/assets\/showreel\/website-visual-reel\.mp4" type="video\/mp4">/);
+  assert.doesNotMatch(html, /website-visual-reel\.(?:mp4|png)/);
   assert.doesNotMatch(html, /showreel-modal/);
   assert.doesNotMatch(html, /showreel-section/);
-  assert.ok(html.indexOf('id="showreel"') < html.indexOf("collab-section-early"));
+  assert.ok(html.indexOf('data-hero-media-id="site.hero"') < html.indexOf("collab-section-early"));
   assert.match(html, /Available for/);
   assert.match(html, /I can enter a project early as a story partner/);
   assert.match(html, /available-simple/);
@@ -1272,8 +1276,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.equal(existsSync(join(root, "dist/sitemap.xml")), true);
   assert.equal(existsSync(join(root, "dist/vendor/anime.esm.min.js")), false);
   assert.equal(existsSync(join(root, "dist/vendor/ogl/src/index.js")), false);
-  assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel.mp4")), true);
-  assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel-poster.png")), true);
+  assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel.mp4")), false);
+  assert.equal(existsSync(join(root, "dist/assets/showreel/website-visual-reel-poster.png")), false);
   assert.equal(
     existsSync(join(root, "dist/assets/showreel/interior-spatial-card-reel.mp4")),
     true,
@@ -1308,7 +1312,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /紀錄片導演/);
   assert.match(zh, /<span class="brand-desktop">袁欣欣 \/ HSIN-HSIN YUAN<\/span>/);
   assert.match(zh, /<span class="brand-mobile">袁欣欣<\/span>/);
-  assert.match(zh, /觀看 showreel/);
+  assert.doesNotMatch(zh, /觀看 showreel|網站視覺 Showreel|website-visual-reel/);
   assert.match(zh, /精選短片/);
   assert.doesNotMatch(zh, /data-about-tabs/);
   assert.match(zh, /可合作項目/);
@@ -1381,8 +1385,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /var\(--hero-wide-x\) var\(--hero-wide-y\)/);
   assert.match(css, /var\(--hero-stacked-x\) var\(--hero-stacked-y\)/);
   assert.match(css, /var\(--hero-mobile-x\) var\(--hero-mobile-y\)/);
-  assert.match(css, /\.hero-play-button \{/);
-  assert.match(css, /\.hero-showreel-video \{/);
+  assert.doesNotMatch(css, /\.hero-play-button|\.hero-play-icon|\.hero-showreel-video|\.hero-media\.is-playing|\.hero-media:focus-visible/);
   assert.doesNotMatch(css, /\.hero-actions/);
   assert.doesNotMatch(css, /\.hero-media-caption/);
   assert.doesNotMatch(css, /\.about-tab/);
@@ -1411,6 +1414,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.brand-mobile \{\n  display: none;/);
   assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*\.brand-desktop \{[\s\S]*display: none;[\s\S]*\.brand-mobile \{[\s\S]*display: inline;/);
   assert.doesNotMatch(css, /showreel-modal/);
+  assert.doesNotMatch(js, /playShowreel|showreelMedia|showreelPlay|showreelVideo|data-showreel|#showreel/);
   assert.match(css, /\.collab-grid \{\n  align-items: center;\n  display: flex;/);
   assert.match(css, /\.collab-item \{\n  align-items: center;\n  background: transparent;\n  border: 0;/);
   assert.match(css, /\.partner-name \{\n  display: none;/);

@@ -4,6 +4,43 @@ Updated: 2026-08-04
 
 State: `PASS_WITH_OPEN_ITEMS`
 
+## Current Work Package — HeroMedia Component And Showreel Retirement
+
+- Branch: `codex/hero-media-component`; package base and full rollback point:
+  `fb6517591e34b9cb20d814891c0177cf2ac9ba2c`.
+- The parity-preserving extraction commit is
+  `5539c43373ac6d024d51b8f27c8aa8e1577991b3`; reverting the subsequent
+  behavior commit reported externally after commit restores Play/showreel
+  while keeping the canonical HeroMedia component.
+- Hero is now one validated, localized, non-interactive image component shared
+  by the website and authoritative Figma SVG export. The exact approved
+  18-second slow push remains; reduced motion is static.
+- The active Hero Play/video path, bilingual showreel copy, playback JS/CSS,
+  and public website reel MP4/poster are retired. Authoring evidence remains
+  recoverable under `showreel/website-visual-reel/` with an explicit note.
+- The public 1920×1440 JPEG now has SHA-256
+  `756c072edb8f760718d903b8bd5cfc9e53a343efec69bc2821b78e3043f67bac`.
+  Removing 5,848 metadata bytes did not change decoded pixels; before/after
+  frame MD5 is `374cfe5ba6ee18ea0a402016f8a160aa`.
+- Focused suites passed 53/53; full `npm test` passed 78/78. Design audit,
+  build, Figma export, diff check, English/Chinese desktop/mobile browser QA,
+  reduced-motion, no-JS, console/request checks, and protected-file recheck
+  passed.
+- Frozen review packet SHA-256:
+  `fed9a94679092b2f5f0f0c13640d02574d21c186cbfd81591290c6330188e959`.
+  Gemini completed `PASS` with no findings on `gemini-3.6-flash`; Claude is
+  honestly `incomplete` at subscription-session handoff, so no dual-review
+  consensus is claimed.
+- `origin/main`, merges, Preview, aliases, Contact, and Production are
+  untouched. The protected untracked review file remains unmodified and
+  outside Git.
+
+## HeroMedia Open Item
+
+Submit the same frozen packet to the active Claude subscription lane when it is
+available. The usable Gemini lane plus local gates close this producer-gated
+feature package; the missing lane remains a recorded review follow-up.
+
 ## 2026-08-04 Process Diet Finalized
 
 - `PROJECT_BIBLE.md` and `AGENTS.md` amended per
@@ -14,7 +51,7 @@ State: `PASS_WITH_OPEN_ITEMS`
 - `origin/main`, merges, Preview, and Production unchanged; those still
   require separate explicit producer authorization.
 
-## Current Work Package — Portfolio Studio A0
+## Prior Work Package — Portfolio Studio A0
 
 - Package: repo-backed Archive media manifest + dry-run planner, carried
   end-to-end by the approved Three-Minute Micro Drama reel and poster.

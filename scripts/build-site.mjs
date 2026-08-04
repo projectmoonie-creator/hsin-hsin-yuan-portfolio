@@ -106,7 +106,7 @@ function focalPercent(value) {
   return `${Number((value * 100).toFixed(4))}%`;
 }
 
-export function renderHeroMedia({ heroMedia, lang, copy }) {
+export function renderHeroMedia({ heroMedia, lang }) {
   const media = heroMedia.contract.public;
   const focal = media.focalPoint;
   const style = [
@@ -119,22 +119,7 @@ export function renderHeroMedia({ heroMedia, lang, copy }) {
     `--hero-mobile-y: ${focalPercent(focal.mobile.y)}`,
   ].join("; ");
 
-  return `<div class="hero-media hero-media--${escapeHtml(media.motion)}" id="showreel" data-hero-media-id="${escapeHtml(media.id)}" data-hero-width="${media.dimensions.width}" data-hero-height="${media.dimensions.height}" data-hero-motion="${escapeHtml(media.motion)}" aria-label="${escapeHtml(media.alt[lang])}" style="${style}">
-            <video
-              class="hero-showreel-video"
-              data-showreel-video
-              muted
-              playsinline
-              webkit-playsinline
-              preload="none"
-              aria-label="${escapeHtml(copy.showreelTitle)}"
-            >
-              <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
-            </video>
-            <button class="hero-play-button" type="button" data-showreel-play aria-label="${escapeHtml(copy.showreelCta)}">
-              <span class="hero-play-icon"></span>
-            </button>
-          </div>`;
+  return `<div class="hero-media hero-media--${escapeHtml(media.motion)}" data-hero-media-id="${escapeHtml(media.id)}" data-hero-width="${media.dimensions.width}" data-hero-height="${media.dimensions.height}" data-hero-motion="${escapeHtml(media.motion)}" role="img" aria-label="${escapeHtml(media.alt[lang])}" style="${style}"></div>`;
 }
 
 function otherLang(lang) {
@@ -702,7 +687,7 @@ export function renderPage({ lang, site, works }) {
 
       <main>
         <section class="hero">
-          ${renderHeroMedia({ heroMedia, lang, copy })}
+          ${renderHeroMedia({ heroMedia, lang })}
           <div class="hero-content">
             <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
             <h1 aria-label="${escapeHtml(copy.heroTitle)}">${heroTitleLines}</h1>

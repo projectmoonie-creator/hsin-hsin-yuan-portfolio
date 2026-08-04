@@ -159,6 +159,6 @@
 
 - Packages affecting runtime or public output run `npm test` plus an eyeball pass at one relevant desktop width and one mobile width; docs/governance-only packages run targeted validation and `git diff --check` with no browser; changes directly touching bilingual output, reduced-motion, no-JS, BFCache, or media lifecycle add that focused scenario in the same package; the full bilingual × viewport × fallback matrix runs only at phase closeout and before production deployment.
 - After removing or renaming a public section, run a repo search for the old label, CSS classes, data file names, generator functions, Figma importer code, Figma export files, and tests. Confirm remaining hits are only historical docs or negative regression tests.
-- Check that the hero starts at the top on refresh, the showreel plays inline, the screening strip loops without a visible blank gap, and Featured Works remains reachable.
+- Check that the hero starts at the top on refresh, keeps its approved slow push when motion is allowed and stays static for reduced motion, has no Play/video affordance, the screening strip loops without a visible blank gap, and Featured Works remains reachable.
 - Check that press thumbnails come from press metadata or approved replacements.
 - Check that no private source material appears in generated output.

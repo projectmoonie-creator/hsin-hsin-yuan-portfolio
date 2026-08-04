@@ -204,6 +204,19 @@ Work Press and global Press are different schemas.
 
 ## Hero, Contact, and responsive invariants
 
+- `data/site.json.heroMedia` is the single current-reference Hero image record.
+  Its required-rendered fields are `id`, `src`, bilingual `alt`, intrinsic
+  `dimensions`, named `focalPoint` values, and `motion`; `rightsStatus` is
+  mandatory evidence-only data and must not enter public HTML.
+- The website and `npm run figma:export` consume the same normalized HeroMedia
+  contract. The website keeps the approved `slow-push` background treatment;
+  the Figma SVG shows its static starting crop. Hero has no Play control,
+  video, hover action, or keyboard target.
+- To replace the Hero, first prepare a local JPEG, then run
+  `npm run hero:sanitize -- --input SOURCE_JPEG --output public/assets/portfolio/OUTPUT.jpg`.
+  Update only the HeroMedia asset path, localized alt, intrinsic dimensions,
+  and focal points, then run the website and Figma verification suites. Public
+  JPEGs must contain no APP1, APP13, or COM metadata segments.
 - Above `1280px`, Hero uses the approved two-column composition.
 - At `1280px` and below, Hero stacks to one column.
 - At `980px` and below, Archive becomes one column.
@@ -235,10 +248,11 @@ Work Press and global Press are different schemas.
 ## Figma parity
 
 Current-reference exports must use canonical site copy and normalized
-Featured records. Their map includes global Press. They show the current Hero
-role treatment, the two named Featured variants, one equal Archive family, and
-the same optional-module rules. Experimental Figma frames must be labeled as
-experiments and cannot be mistaken for the current reference.
+HeroMedia and Featured records. Their map includes global Press. They show the
+current Hero photograph and role treatment, the two named Featured variants,
+one equal Archive family, and the same optional-module rules. Experimental
+Figma frames must be labeled as experiments and cannot be mistaken for the
+current reference.
 
 The hardcoded plugin under `figma/hsin-portfolio-importer/` is a retained
 legacy experiment, not an active current-reference consumer and not a

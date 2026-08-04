@@ -2,7 +2,7 @@
 
 Date: 2026-08-04
 
-Status: producer-approved design; awaiting written-spec review
+Status: producer-approved; implemented and locally validated on the feature branch
 
 Work package branch: `codex/hero-media-component`
 

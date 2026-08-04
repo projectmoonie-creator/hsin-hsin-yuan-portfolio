@@ -472,49 +472,6 @@ if (!prefersReducedMotion) {
   });
 }
 
-const showreelMedia = document.querySelector("#showreel");
-const showreelPlay = document.querySelector("[data-showreel-play]");
-const showreelVideo = document.querySelector("[data-showreel-video]");
-
-function playShowreel() {
-  if (!showreelVideo) return;
-
-  showreelVideo.muted = true;
-  showreelVideo.defaultMuted = true;
-  showreelVideo.controls = true;
-  showreelMedia?.classList.add("is-playing");
-  showreelVideo.play().catch(() => {
-    // Browser policies can still block scripted play; keep native controls visible.
-  });
-}
-
-showreelPlay?.addEventListener("click", (event) => {
-  event.stopPropagation();
-  playShowreel();
-});
-
-showreelMedia?.addEventListener("click", (event) => {
-  if (event.target === showreelPlay || showreelPlay?.contains(event.target)) return;
-  if (!showreelVideo?.paused) return;
-  playShowreel();
-});
-
-showreelVideo?.addEventListener("play", () => {
-  showreelMedia?.classList.add("is-playing");
-});
-
-showreelVideo?.addEventListener("pause", () => {
-  if (showreelVideo.currentTime === 0 || showreelVideo.ended) {
-    showreelMedia?.classList.remove("is-playing");
-  }
-});
-
-showreelVideo?.addEventListener("ended", () => {
-  showreelMedia?.classList.remove("is-playing");
-  showreelVideo.currentTime = 0;
-  showreelVideo.controls = false;
-});
-
 document.querySelectorAll("[data-contact-form]").forEach((form) => {
   const startedAt = form.querySelector("[data-contact-started-at]");
   const status = form.querySelector("[data-contact-status]");

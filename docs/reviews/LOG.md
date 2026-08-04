@@ -4,6 +4,14 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-04 — HeroMedia component and showreel retirement
+- Branch/commit: `codex/hero-media-component`; extraction `5539c43`; behavior commit reported externally after commit.
+- Change: canonical website/Figma HeroMedia; Play/showreel retired; lossless JPEG metadata sanitization and repeatable replacement command.
+- Validation: focused 53/53; full 78/78; audit/build/Figma/diff/browser/reduced-motion/no-JS passed; decoded Hero pixels unchanged.
+- Review: frozen packet `fed9a946…`; Gemini `gemini-3.6-flash` PASS/no findings; Claude handoff incomplete, so no dual consensus.
+- Rule retirement: replaced the stale inline-showreel QA rule with slow-push, reduced-motion, and no-Play/video checks.
+- External state: no main merge, Preview, Production, Contact, or protected-file change; Claude frozen-packet follow-up remains open.
+
 ## 2026-08-04 — visual-lofi / deploy-cadence / extract-on-touch rules (docs/governance-only)
 
 - Branch/commit: `main` (this commit); proposal `2026-08-04-visual-lofi-deploy-cadence-proposal.md` v2, producer-approved.

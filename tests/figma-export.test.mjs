@@ -3,7 +3,15 @@ import { existsSync, readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { spawnSync } from "node:child_process";
 import test from "node:test";
-import { imageData, validateFeaturedWorks } from "../scripts/build-figma-export.mjs";
+import {
+  buildDesktopHome,
+  buildMobileHome,
+  imageData,
+  objectCoverGeometry,
+  validateFeaturedWorks,
+} from "../scripts/build-figma-export.mjs";
+import { loadSiteData, loadWorks, renderPage } from "../scripts/build-site.mjs";
+import { normalizeHeroMedia } from "../scripts/lib/portfolio-contract.mjs";
 
 const root = process.cwd();
 const exportDir = join(root, "figma-export");
@@ -15,6 +23,34 @@ function workCardBlock(svg, slug) {
   const end = next === -1 ? svg.indexOf('<g id="layer-logo-wall">', start) : next;
   return svg.slice(start, end);
 }
+
+function heroImageBlock(svg, id) {
+  return svg.match(new RegExp(`<g id="${id}"[\\s\\S]*?<\\/g>`))?.[0] || "";
+}
+
+test("Figma object-cover geometry uses intrinsic dimensions and focal points", () => {
+  const desktop = objectCoverGeometry({
+    sourceWidth: 1920,
+    sourceHeight: 1440,
+    frameX: 72,
+    frameY: 104,
+    frameWidth: 610,
+    frameHeight: 520,
+    focalPoint: { x: 0.38, y: 0.78 },
+  });
+  const mobile = objectCoverGeometry({
+    sourceWidth: 1920,
+    sourceHeight: 1440,
+    frameX: 24,
+    frameY: 76,
+    frameWidth: 342,
+    frameHeight: 252,
+    focalPoint: { x: 0.38, y: 0.78 },
+  });
+
+  assert.deepEqual(desktop, { x: 40.3333, y: 104, width: 693.3333, height: 520 });
+  assert.deepEqual(mobile, { x: 24, y: 72.49, width: 342, height: 256.5 });
+});
 
 test("Figma export helpers reject remote images and invalid featured work metadata", () => {
   assert.throws(
@@ -68,8 +104,16 @@ test("Figma SVG export keeps portfolio layers editable and named", () => {
   );
   assert.doesNotMatch(desktopHome, /<g id="layer-hero-role-2">/);
   assert.match(desktopHome, /#D8FF3E/);
-  assert.match(desktopHome, /slow-steps-poster\.webp/);
-  assert.doesNotMatch(desktopHome, /hsin-working-white-space\.jpg/);
+  const desktopHeroImage = heroImageBlock(desktopHome, "layer-hero-image");
+  const mobileHeroImage = heroImageBlock(mobileHome, "layer-mobile-hero-image");
+  assert.match(desktopHeroImage, /data-source="hsin-working-white-space\.jpg"/);
+  assert.match(desktopHeroImage, /data-focal-x="0\.38" data-focal-y="0\.78"/);
+  assert.match(desktopHeroImage, /<clipPath id="layer-hero-image-clip">/);
+  assert.match(desktopHeroImage, /<image[^>]*x="40\.3333" y="104" width="693\.3333" height="520"[^>]*clip-path="url\(#layer-hero-image-clip\)"/);
+  assert.match(mobileHeroImage, /data-source="hsin-working-white-space\.jpg"/);
+  assert.match(mobileHeroImage, /<image[^>]*x="24" y="72\.49" width="342" height="256\.5"/);
+  assert.doesNotMatch(desktopHeroImage, /slow-steps-poster\.webp/);
+  assert.doesNotMatch(mobileHeroImage, /slow-steps-poster\.webp/);
   assert.doesNotMatch(desktopHome, /paris-cultural-olympiad-team\.jpg/);
 
   assert.match(worksLogos, /id="layer-logo-wall"/);
@@ -155,4 +199,26 @@ test("Figma SVG export keeps portfolio layers editable and named", () => {
   assert.match(worksLogos, /id="token-color-panel"[^>]*fill="rgba\(255, 255, 255, 0\.055\)"/);
   assert.match(worksLogos, /id="component-work-card-slow-steps">\s*<rect[^>]*fill="#171719"/);
   assert.doesNotMatch(desktopHome, /<foreignObject/);
+});
+
+test("one HeroMedia source mutation reaches website and both Figma frames", () => {
+  const loaded = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const current = loaded.site.heroMedia;
+  const replacementSrc = "/assets/portfolio/slow-steps-poster.webp";
+  const replacement = normalizeHeroMedia({
+    ...current.contract.public,
+    src: replacementSrc,
+    rightsStatus: current.contract.evidence.rightsStatus,
+  });
+  const mutatedSite = { ...loaded.site, heroMedia: replacement };
+  const loadedWithMutation = { ...loaded, site: mutatedSite };
+  const website = renderPage({ lang: "en", site: loadedWithMutation, works });
+  const desktop = buildDesktopHome(mutatedSite, works, loaded.collaborations);
+  const mobile = buildMobileHome(mutatedSite, works, loaded.collaborations);
+
+  for (const output of [website, desktop, mobile]) {
+    assert.match(output, /slow-steps-poster\.webp/);
+    assert.doesNotMatch(output, /hsin-working-white-space\.jpg/);
+  }
 });

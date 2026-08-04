@@ -107,7 +107,41 @@ export function imageData(path) {
   return `data:${mime};base64,${readFileSync(fullPath).toString("base64")}`;
 }
 
-function imageLayer({ id, href, x, y, width, height, opacity = 1 }) {
+function roundSvg(value) {
+  return Number(value.toFixed(4));
+}
+
+export function objectCoverGeometry({
+  sourceWidth,
+  sourceHeight,
+  frameX,
+  frameY,
+  frameWidth,
+  frameHeight,
+  focalPoint,
+}) {
+  const scale = Math.max(frameWidth / sourceWidth, frameHeight / sourceHeight);
+  const width = sourceWidth * scale;
+  const height = sourceHeight * scale;
+  return {
+    x: roundSvg(frameX - (width - frameWidth) * focalPoint.x),
+    y: roundSvg(frameY - (height - frameHeight) * focalPoint.y),
+    width: roundSvg(width),
+    height: roundSvg(height),
+  };
+}
+
+function imageLayer({
+  id,
+  href,
+  x,
+  y,
+  width,
+  height,
+  opacity = 1,
+  dimensions,
+  focalPoint,
+}) {
   if (!href) {
     return `<g id="${id}" data-source="placeholder">
     <rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${tokens.panelStrong}"/>
@@ -115,6 +149,23 @@ function imageLayer({ id, href, x, y, width, height, opacity = 1 }) {
   </g>`;
   }
   const filename = basename(href);
+  if (dimensions && focalPoint) {
+    const image = objectCoverGeometry({
+      sourceWidth: dimensions.width,
+      sourceHeight: dimensions.height,
+      frameX: x,
+      frameY: y,
+      frameWidth: width,
+      frameHeight: height,
+      focalPoint,
+    });
+    return `<g id="${id}" data-source="${escapeXml(filename)}" data-focal-x="${focalPoint.x}" data-focal-y="${focalPoint.y}">
+    <defs><clipPath id="${id}-clip"><rect x="${x}" y="${y}" width="${width}" height="${height}"/></clipPath></defs>
+    <rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${tokens.panelStrong}"/>
+    <image href="${imageData(href)}" x="${image.x}" y="${image.y}" width="${image.width}" height="${image.height}" clip-path="url(#${id}-clip)" preserveAspectRatio="none" opacity="${opacity}"/>
+    <text x="${x + 18}" y="${y + height - 18}" fill="${tokens.ink}" opacity="0.55" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="700">${escapeXml(filename)}</text>
+  </g>`;
+  }
   return `<g id="${id}" data-source="${escapeXml(filename)}">
     <rect x="${x}" y="${y}" width="${width}" height="${height}" fill="${tokens.panelStrong}"/>
     <image href="${imageData(href)}" x="${x}" y="${y}" width="${width}" height="${height}" preserveAspectRatio="xMidYMid slice" opacity="${opacity}"/>
@@ -164,9 +215,9 @@ function workCard({ work, x, y, width }) {
   </g>`;
 }
 
-function buildDesktopHome(site, works, collaborations) {
+export function buildDesktopHome(site, works, collaborations) {
   const hero = site.en;
-  const featured = works.find((work) => work.posterImage) || works[0];
+  const heroMedia = site.heroMedia.contract.public;
   const logoRow = collaborations
     .slice(0, 7)
     .map((item, index) => logoWordmark({ item, x: 92 + index * 180, y: 690, width: 132 }))
@@ -196,7 +247,7 @@ function buildDesktopHome(site, works, collaborations) {
     <text x="980" y="54" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="750" letter-spacing="1.1">AVAILABLE FOR / WORKS / CONTACT / 中文</text>
   </g>
   <g id="layer-hero">
-    ${imageLayer({ id: "layer-hero-image", href: featured.posterImage, x: 72, y: 104, width: 610, height: 520, opacity: 0.96 })}
+    ${imageLayer({ id: "layer-hero-image", href: heroMedia.src, x: 72, y: 104, width: 610, height: 520, opacity: 0.96, dimensions: heroMedia.dimensions, focalPoint: heroMedia.focalPoint.wide })}
     <rect x="72" y="104" width="610" height="520" fill="${tokens.bg}" opacity="0.08"/>
     <text id="layer-hero-eyebrow" x="772" y="148" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.5">${escapeXml(hero.heroEyebrow.toUpperCase())}</text>
     <g id="layer-hero-title">
@@ -258,8 +309,9 @@ function buildDesktopWorksLogos(site, works, collaborations) {
   });
 }
 
-function buildMobileHome(site, works, collaborations) {
+export function buildMobileHome(site, works, collaborations) {
   const hero = site.en;
+  const heroMedia = site.heroMedia.contract.public;
   const firstRoleLine = escapeXml(hero.heroRoleLines[0])
     .replaceAll(" / ", ` <tspan fill="${tokens.acid}">/</tspan> `);
   const secondRoleLine = escapeXml(hero.heroRoleLines[1]);
@@ -279,7 +331,7 @@ function buildMobileHome(site, works, collaborations) {
     <text x="308" y="42" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="750">中文</text>
   </g>
   <g id="layer-mobile-hero">
-    ${imageLayer({ id: "layer-mobile-hero-image", href: works[0].posterImage, x: 24, y: 76, width: 342, height: 252, opacity: 0.94 })}
+    ${imageLayer({ id: "layer-mobile-hero-image", href: heroMedia.src, x: 24, y: 76, width: 342, height: 252, opacity: 0.94, dimensions: heroMedia.dimensions, focalPoint: heroMedia.focalPoint.mobile })}
     <text id="layer-mobile-eyebrow" x="24" y="370" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="850" letter-spacing="1.3">DOCUMENTARY / CULTURE / TECHNOLOGY</text>
     <g id="layer-hero-title">
       <text x="22" y="436" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="900">HSIN-HSIN</text>
@@ -321,6 +373,7 @@ This folder is a free Figma import package for the Hsin-Hsin Yuan portfolio desi
 ## Notes
 
 - The SVGs are generated from current site content, so re-run \`npm run figma:export\` after major content changes.
+- Hero imagery comes from the same normalized \`data/site.json.heroMedia\` record as the website. Replace its asset, localized alt, intrinsic dimensions, and focal points there, sanitize the public JPEG, then regenerate this package.
 - Photos are embedded as image layers to keep the package portable.
 - Text, rectangles, logo wordmarks, cards, and color token swatches remain editable SVG layers, including editable text layers after import.
 - This is a design control layer, not the production source of truth.
@@ -332,6 +385,8 @@ Available For, Featured Works, FROM THE ARCHIVE, Global Press, and Contact.
 
 - Featured Works uses the named desktop variants \`fill-card\` and
   \`centered-16x9\`; every mobile media frame is 16:9.
+- Hero is one non-interactive image component. The SVG records the approved
+  animation's static starting crop; it has no Play or video layer.
 - Source artwork may contain its own title, but the site adds no second title
   overlay.
 - FROM THE ARCHIVE uses one standard Archive card family; missing media changes
