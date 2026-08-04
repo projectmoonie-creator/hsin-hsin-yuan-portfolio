@@ -48,8 +48,8 @@ claims reproduce locally:
 - the CLI writes no file in an empty working directory and its approved output
   contains no absolute source path;
 - the committed WebP exposes no ffprobe stream/format tags; scans of the public
-  build and the two new derivatives found no `/Users/`, `/private/`, or
-  `Downloads/` string;
+  build and the two new derivatives found no private absolute-path or source-
+  folder marker string;
 - 71 tests, design audit, build, Figma export, diff check, full video decode,
   exact manifest verification, and feature-branch remote SHA readback passed;
 - desktop 1440×900 and mobile 390×844 showed poster-first, delayed playback,
