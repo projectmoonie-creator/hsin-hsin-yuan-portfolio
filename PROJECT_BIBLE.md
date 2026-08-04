@@ -14,9 +14,7 @@
 - Do not translate press headlines or source titles too freely. If an English title is editorially translated from a Chinese source, keep it factual and close to the source.
 - Keep homepage language concise. Move richer, warmer explanation into work details, press, archive, or future case-study pages.
 - Treat the screening-strip tagline and Featured Work description as two different reading moments: the tagline is one memorable invitation; the description names the recognizable program type, subject, and contribution without reading like a production inventory.
-- For English portfolio-grouping titles, use natural, searchable industry
-  language. Do not publish literal internal category labels that an
-  English-speaking viewer would not know to search.
+- For English portfolio-grouping titles, use natural, searchable industry language. Do not publish literal internal category labels that an English-speaking viewer would not know to search.
 - Elegance must remain evidence-led. Prefer concrete images, places, materials,
   and human stakes over adjective stacking, and do not introduce unsupported
   facts merely to make a work sound more cinematic.
@@ -39,8 +37,7 @@
 - Use the source page's `og:image` or main article image for the thumbnail. Do not substitute a portfolio still or project photo by default.
 - If the source page has no usable image, leave the card text-only or ask for a screenshot/local image. Do not silently invent or reuse unrelated artwork.
 - Prefer linking to the canonical non-AMP URL when both AMP and canonical URLs exist.
-- When adding press, record enough metadata to audit later: canonical URL, source name, title source, image source, and the date the metadata was checked.
-- Every public press entry must include `canonicalUrl`, `titleSource`, `imageSource`, and `metadataCheckedAt`. Do not add a press card without those audit fields.
+- When adding press, record enough metadata to audit later: every public press entry must include `source`, `canonicalUrl`, `titleSource`, `imageSource`, and `metadataCheckedAt`. Do not add a press card without those audit fields.
 
 ## Media Rights
 
@@ -112,12 +109,12 @@
   public-output baseline. A compatibility migration is not complete while it
   changes generated HTML, CSS, JavaScript, or matched browser geometry without
   separate visual approval.
-- Before implementing a design reference, translate it into project-specific rules: what to borrow, what to avoid, which parts serve the portfolio goal, and how it should behave on desktop and mobile.
-- Do not copy a reference site's surface style literally when the user's content needs another rhythm. Use references to derive decisions about typography, spacing, motion, image treatment, logo treatment, and section order.
+- Before implementing a design reference, translate it into project-specific rules — what to borrow, what to avoid, which parts serve the portfolio goal, and how it behaves on desktop and mobile; never copy a reference site's surface style literally when the user's content needs another rhythm. Use references to derive typography, spacing, motion, image, logo, and section-order decisions.
 - Motion should guide attention without becoming a second product. Subtle ambient light is acceptable only when it preserves readability, keeps the site fast, and is verified on mobile.
 - The moving work strip may use subtle black edge gradients, but they must stay fixed on a non-scrolling outer frame. Never attach edge-fade pseudo-elements to the scrollable viewport or moving track.
 - If a work has no approved image, use an explicit placeholder or text-first layout. Do not borrow an unrelated project still just to fill a card or design export.
 - Design-layer artifacts must follow the same content rules as the live site. Figma SVG exports and importer plugins are not allowed to reintroduce removed sections, old metrics, or borrowed images.
+- New visual-direction experiments (new layout, motion, effect, or style; not defect repair, responsive parity, or implementation of an approved contract) run lo-fi first: record a text/wireframe or plain structural mock, the baseline commit, and owned paths; obtain producer approval for the proposal, then timebox detailed implementation to 90 minutes of active work. At expiry, stop; without final producer acceptance, keep the result isolated or restore only the owned paths to the recorded baseline, never unrelated work. Log scope, baseline, active minutes, producer decision, and disposition in `docs/reviews/LOG.md`; waiting time does not consume the box and momentum does not extend it.
 
 ## Detail Pages
 
@@ -133,6 +130,7 @@
 - Mobile navigation must keep a path to Contact visible at 820px and below. The portfolio is a hiring supplement, so the conversion route cannot disappear on phones.
 - Canonical URLs, Open Graph URLs, `robots.txt`, and `sitemap.xml` must come from the same `SITE_ORIGIN` build value. Do not keep a second hardcoded sitemap or robots file in `public/`.
 - `dist/` is generated build output for Vercel and must stay ignored by git. Commit source files, not generated pages or copied assets.
+- Deployment cadence: when a changed `main` HEAD is releasable under the applicable QA and review gates, surface a Production decision to the producer within seven calendar days; every Production deployment still requires separate explicit producer authorization, and a missed target or silence is never authorization. Unfinished or unapproved work stays off the release candidate (an existing tested default-off flag may be used); a `backup/*` push is not a deploy. After 14 days without a recorded decision, raise a closeout open item to the producer; calendar age alone is not `BLOCKED`.
 
 ## Roadmap Discipline
 
@@ -144,6 +142,7 @@
 - When adding a Bible rule, the same change records in `docs/reviews/LOG.md` a retire/downgrade/keep-with-reason verdict for one existing rule; superseded active instructions are deleted or merged (Git history is the archive), `docs/archive/` is only for material with ongoing reference value that is not a dated review, and dated reviews are never relocated to fake reduction.
 - Subtractive instructions (delete/trim/simplify) follow Work Charter §3-9: work as a diff against the existing base; re-architecture requires explicit producer approval.
 - Sub-agent tasking follows Work Charter §3-10: pass a scoped task summary, never the full conversation history (Codex concrete form: `fork_turns: none`).
+- Extract on touch applies only to an explicitly named feature whose implementation is entangled with unrelated behavior in a shared generator or stylesheet: within the same package, make one smallest-applicable, behavior-preserving extraction in a separate commit, with relevant tests green at baseline and after extraction, then apply the requested change and test again. Use data, template/module, style, and focused-test boundaries only as the feature needs; do not extract untouched features. A subtractive or fix-only task remains a diff against the existing base, and any extraction that materially expands its scope requires explicit producer approval for that package under Work Charter §3-9.
 
 ## Phase Closeout And Cold Resume
 

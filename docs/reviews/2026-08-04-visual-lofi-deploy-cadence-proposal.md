@@ -1,6 +1,6 @@
 # 修訂案 v2：視覺低保真先行＋部署節奏＋動到即抽取（依 Codex 單審修文）
 
-狀態：**待製作人定版**｜稽核：`2026-08-04-visual-lofi-deploy-cadence-codex-audit.md`
+狀態：**已定版（2026-08-04 製作人拍板，條文已入 Bible）**｜稽核：`2026-08-04-visual-lofi-deploy-cadence-codex-audit.md`
 （結論「修文後定版」；該報告同時構成本包降級為低風險單審的獨立覆核者
 concurrence——**不得稱雙審或全輪轉共識**）
 
