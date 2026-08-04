@@ -5,12 +5,13 @@ Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
 ## 2026-08-04 — HeroMedia closeout remediation
-- Branch/base: `codex/hero-media-closeout-remediation` from `e2d75f0`; implementation `63e51bf` and backup `backup/2026-08-04/e2d75f0` pushed/read back.
+- Branch/base: `codex/hero-media-closeout-remediation` from `e2d75f0`; implementation `63e51bf`, reviewed closeout `bba4ea0`, and backup `backup/2026-08-04/e2d75f0` pushed/read back.
 - Change: fail-closed JPEG APP/COM policy, one derived slow-push profile for website/Figma, breakpoint-active focal variables, and current cold resume.
 - TDD: original four-finding RED `47/54`; GREEN `54/54`; malformed-JFIF-tail RED `3/4`; GREEN `4/4`.
 - Validation: full `79/79`, design audit, build, Figma export, diff/SHA checks, and three-case responsive/reduced-motion browser QA passed.
 - Review: packet `368e0fe…13fd`; Gemini `gemini-3.6-flash` PASS/no findings; all four closures locally upheld; raw provenance self-label rejected; Claude handoff incomplete, so no dual consensus.
-- External state: backup ref only; no `origin/main`, Preview, Production, alias, Contact, or protected-file change.
+- Local integration: producer authorized fast-forward of local `main` to `bba4ea0`; focused `4/4`, full `79/79`, audit, build, and Figma export passed; this docs-only status follow-up skips external review because it changes no current rule or public output.
+- External state: local `main` only; no `origin/main`, Preview, Production, alias, Contact, or protected-file change.
 
 ## 2026-08-04 — HeroMedia component and showreel retirement
 - Branch/commit: `codex/hero-media-component`; extraction `5539c43`; behavior commit reported externally after commit.

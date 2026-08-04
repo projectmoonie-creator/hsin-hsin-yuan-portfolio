@@ -4,16 +4,21 @@ Updated: 2026-08-04
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — HeroMedia Closeout Remediation
+## Current Integrated Baseline — HeroMedia Closeout Remediation
 
-- Branch: `codex/hero-media-closeout-remediation`; base and rollback checkpoint:
-  local `main` at `e2d75f0e57ff0d6f0d64ff5381a04a3314b35481`.
+- Local `main` was fast-forwarded from
+  `e2d75f0e57ff0d6f0d64ff5381a04a3314b35481` to reviewed closeout head
+  `bba4ea0d32b60121ada26ae1b2dfaf20af4dedc1` on 2026-08-04. This
+  documentation-only integration status follow-up is reported externally after
+  commit.
+- Source branch `codex/hero-media-closeout-remediation` was pushed and read
+  back exactly at `bba4ea0d32b60121ada26ae1b2dfaf20af4dedc1` before the local
+  merge.
 - Remote backup ref `backup/2026-08-04/e2d75f0` was created before remediation
-  and read back at the exact base commit above.
-- Validated implementation head
-  `63e51bf0f93cc8b4da3894dac091dd0ad5e2978b` was pushed and read back exactly
-  from `origin/codex/hero-media-closeout-remediation`. This documentation-only
-  status follow-up is reported externally after commit.
+  and read back at the exact pre-remediation commit above.
+- Validated implementation head is
+  `63e51bf0f93cc8b4da3894dac091dd0ad5e2978b`; the later commits add durable
+  handoff, reviewer provenance, and adjudication only.
 - The bounded TDD package closes four review findings: fail-closed JPEG APP
   metadata, Figma/live Hero starting-crop parity, responsive focal points during
   motion, and this cold-resume record.
@@ -313,20 +318,19 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Ask for one bounded producer decision: create a feature Preview or merge the
-remediation into local `main`. The usable Gemini review plus local gates close
-this package; the same frozen packet remains available for the incomplete
-Claude follow-up. Production remains separate and requires another explicit
-instruction.
+Ask whether to create a feature Preview on Vercel from the locally integrated
+`main` for producer visual acceptance. The same frozen packet remains available
+for the incomplete Claude follow-up. Do not push `origin/main`.
+Production remains separate and requires another explicit instruction.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and the HeroMedia design
    contract.
-2. Verify branch `codex/hero-media-closeout-remediation`, its current head,
-   remote backup `backup/2026-08-04/e2d75f0`, `origin/main`, and the protected
-   untracked file.
+2. Verify local `main` contains reviewed closeout head `bba4ea0`, then verify
+   source branch `codex/hero-media-closeout-remediation`, remote backup
+   `backup/2026-08-04/e2d75f0`, `origin/main`, and the protected untracked file.
 3. Read the remediation diff, focused/full validation, frozen review packet,
    completed reviewer result, and any honestly incomplete review lane.
-4. Ask whether the user wants a feature Preview or a local `main` merge.
-5. Do not deploy Production, submit Contact, push `main`, or merge implicitly.
+4. Ask whether the user wants a feature Preview from local `main`.
+5. Do not deploy Production, submit Contact, or push `main` implicitly.
