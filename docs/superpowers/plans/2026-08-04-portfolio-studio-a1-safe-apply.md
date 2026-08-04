@@ -25,15 +25,15 @@
 
 - [x] RED: test that `media:apply` exists, requires each option once, rejects unknown/duplicate/positional input, emits one redacted JSON receipt, and never prompts or performs Git/network/deploy actions.
 - [x] GREEN: add the thin CLI and `media:apply` package script; pass only approved plan bytes and the three explicit values to the library.
-- [ ] Run the focused tests and `npm test`; commit and push the coherent implementation, then read back the exact remote branch tip.
+- [x] Run the focused tests and `npm test`; commit and push the coherent implementation, then read back the exact remote branch tip.
 
 ### Task 3: Repository validation and closeout
 
 **Files:** Modify `STATUS.md` and `docs/reviews/LOG.md`; add a dated A1 recovery/security review only if required by the review tier.
 
-- [ ] Capture a pre-implementation `dist` baseline; run `npm run audit:design-contract`, `npm run build`, `npm run figma:export`, `git diff --check`, and prove public output parity.
-- [ ] If approved private Three-Minute sources remain, run the CLI against the preserved A0 plan and prove `already-applied` plus zero tracked changes.
-- [ ] Run the required write/recovery review; record provider/model status honestly and do not claim unavailable reviewers.
+- [x] Capture a pre-implementation `dist` baseline; run `npm run audit:design-contract`, `npm run build`, `npm run figma:export`, `git diff --check`, and prove public output parity.
+- [x] If approved private Three-Minute sources remain, run the CLI against a canonical serialization of the unchanged A0 plan and prove `already-applied` plus zero tracked changes.
+- [ ] Complete the required write/recovery review; Gemini is `incomplete / policy-approval-denied` and Claude is `incomplete / handoff-required`, so no independent verdict is claimed.
 - [ ] Update bounded status/log records, verify the protected untracked file hash, commit/push A1, and read back the exact branch tip.
 
 ### Rollback and non-goals

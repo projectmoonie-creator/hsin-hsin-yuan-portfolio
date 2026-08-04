@@ -20,3 +20,11 @@ packages.
 - External review: Codex read-only audit (`2026-08-04-process-diet-codex-audit.md`), verdict "修文後定版" applied.
 - Rule-retirement verdict (per new retire/downgrade rule): **downgrade** — per-package dated closeout reports → LOG entries; **retire** — duplicate removed-section bullets in Content Rules merged into one.
 - Open items: R3 charter amendment recorded in WORK-CHARTER v1.17; next subtractive task doubles as Charter §3-9 live test.
+
+## 2026-08-04 — Portfolio Studio A1-1 safe apply
+
+- Branch/commit: `codex/portfolio-studio-a1`; implementation `fc90e53`; rollback `fb65175`.
+- Change: canonical-plan apply, four-state fail-closed preflight, byte-preserving manifest/content edits, staged install, and handled-error recovery; public output unchanged.
+- Validation: focused 19/19, full 90/90, design audit/build/Figma/syntax/diff passed, exact `dist` parity, real Three-Minute rerun `already-applied`.
+- External review: frozen packet `6010b94c…dc965`; Gemini incomplete after export approval denial, Claude incomplete at active-session handoff; no model completed and no independent verdict is claimed.
+- Open item: obtain one independent findings-only review before A1 merge; `origin/main`, Preview, and Production remain unchanged.

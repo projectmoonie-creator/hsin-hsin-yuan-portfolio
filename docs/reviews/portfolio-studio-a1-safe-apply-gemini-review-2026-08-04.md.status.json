@@ -1,0 +1,18 @@
+{
+  "provider": "Gemini",
+  "requestedModel": null,
+  "modelSelectionPolicy": "highest-capability-generally-released-at-execution",
+  "exactModelPinned": false,
+  "observedModel": null,
+  "completedModel": null,
+  "lane": "parent review-with-gemini wrapper to controlled REST reviewer",
+  "result": "incomplete",
+  "failureClass": "sandbox-dns-then-policy-approval-denied",
+  "modelRequestSent": false,
+  "usage": null,
+  "apiEquivalentCostUsd": null,
+  "actualSpendUsd": null,
+  "packet": "docs/reviews/portfolio-studio-a1-safe-apply-cross-review-packet-2026-08-04.md",
+  "packetSha256": "6010b94cb914b6c856644444909ff0a1fd13ca39baa89debf2b054809afdc965",
+  "note": "The sandboxed wrapper could not resolve the official Gemini endpoint, so no model was selected or called. The required unsandboxed retry was not executed because the environment approval gate denied exporting repository implementation details. No workaround or provider substitution was attempted."
+}

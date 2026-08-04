@@ -1,0 +1,19 @@
+{
+  "provider": "Claude",
+  "requestedModel": null,
+  "modelSelectionPolicy": "highest-capability-generally-released-at-submission",
+  "exactModelPinned": false,
+  "observedModel": null,
+  "completedModel": null,
+  "lane": "active Claude Code subscription session",
+  "result": "incomplete",
+  "failureClass": "handoff-required",
+  "handoffStatus": "handoff-to-active-session",
+  "modelRequestSent": false,
+  "billingFallbackAllowed": false,
+  "apiEquivalentCostUsd": null,
+  "actualSpendUsd": null,
+  "packet": "docs/reviews/portfolio-studio-a1-safe-apply-cross-review-packet-2026-08-04.md",
+  "packetSha256": "6010b94cb914b6c856644444909ff0a1fd13ca39baa89debf2b054809afdc965",
+  "note": "The compatibility wrapper created a local handoff record only. No Claude process or model request was started, and no paid credential fallback was used."
+}

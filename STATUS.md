@@ -14,7 +14,36 @@ State: `PASS_WITH_OPEN_ITEMS`
 - `origin/main`, merges, Preview, and Production unchanged; those still
   require separate explicit producer authorization.
 
-## Current Work Package — Portfolio Studio A0
+## Current Work Package — Portfolio Studio A1-1
+
+- Package: fail-closed local apply for one canonically approved A0 Archive
+  reel/poster plan; no public site or content change.
+- Branch: `codex/portfolio-studio-a1`; base / rollback checkpoint:
+  `fb6517591e34b9cb20d814891c0177cf2ac9ba2c`.
+- Validated implementation commit:
+  `fc90e53a4580fd3b6c26ac9d63bfa02ceabead9e`; frozen packet commit:
+  `02ad0a0`; the documentation checkpoint is reported after commit.
+- TDD: missing-module RED, focused 19/19, full 90/90. Design audit, build,
+  Figma export, syntax, diff check, and exact pre/post `dist` parity passed.
+- A real Three-Minute CLI rerun returned `already-applied` with no tracked or
+  target-file change. Handled failure recovery is covered after reel, poster,
+  manifest, and content installation.
+- Frozen packet SHA-256:
+  `6010b94cb914b6c856644444909ff0a1fd13ca39baa89debf2b054809afdc965`.
+- Independent review is open: Gemini was not sent after the environment
+  approval gate denied repository-detail export; Claude is handoff-only. No
+  provider/model completed, no findings exist, and no external PASS is claimed.
+- `origin/main`, Preview, aliases, Contact, and Production remain untouched.
+  The protected untracked file remains unmodified and outside Git.
+
+## A1-1 Open Item
+
+Obtain one independent findings-only review of the exact frozen packet, then
+adjudicate and rerun gates. A1-1 is not merge-ready until that review passes or
+the producer explicitly rules on the review tier. See
+`docs/reviews/portfolio-studio-a1-safe-apply-v1-2026-08-04.md`.
+
+## Prior Accepted Work Package — Portfolio Studio A0
 
 - Package: repo-backed Archive media manifest + dry-run planner, carried
   end-to-end by the approved Three-Minute Micro Drama reel and poster.
@@ -242,17 +271,18 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Review and accept `codex/portfolio-studio-a0` at its externally reported
-closeout tip. The next bounded decision is either a feature Preview or merge to
-`main`; Production remains separate and requires another explicit instruction.
+Complete one independent review of the exact A1-1 frozen packet. After local
+adjudication and green reruns, ask for a separate A1 merge decision; Production
+remains separate and requires another explicit instruction.
 
 ## Cold Resume
 
-1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and the A0 implementation
-   plan.
-2. Verify branch `codex/portfolio-studio-a0`, implementation head `9fb0f2c`,
-   the externally reported closeout tip, remote readback, and protected file.
-3. Read the A0 frozen packet, Gemini review, and adjudication; Claude remains a
-   same-packet follow-up, not a completed lane.
-4. Ask whether the user wants a feature Preview or merge to `main`.
-5. Do not deploy Production, submit Contact, or merge implicitly.
+1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and the A1-1 design/plan.
+2. Verify branch `codex/portfolio-studio-a1`, implementation commit `fc90e53`,
+   the externally reported documentation tip, remote readback, and protected
+   file.
+3. Read the A1-1 frozen packet, both incomplete lane records, and the
+   implementation checkpoint; do not infer an external verdict.
+4. Complete one independent findings-only review, adjudicate, and rerun gates.
+5. Ask for an A1 merge decision only after the review gate passes; do not
+   deploy Production, submit Contact, or merge implicitly.
