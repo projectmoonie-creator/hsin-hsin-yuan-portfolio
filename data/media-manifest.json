@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "profiles": {
+    "silent-h264-720p-bt709": {
+      "kind": "video",
+      "codecName": "h264",
+      "width": 1280,
+      "height": 720,
+      "pixelFormat": "yuv420p",
+      "colorSpace": "bt709",
+      "colorTransfer": "bt709",
+      "colorPrimaries": "bt709",
+      "streamCount": 1,
+      "audioStreamCount": 0,
+      "faststart": true
+    },
+    "webp-1280x720": {
+      "kind": "image",
+      "codecName": "webp",
+      "width": 1280,
+      "height": 720,
+      "pixelFormat": "yuv420p",
+      "streamCount": 1,
+      "audioStreamCount": 0
+    }
+  },
+  "assets": [
+    {
+      "id": "featured.slow-steps.reel",
+      "publicPath": "/assets/showreel/slow-steps-card-reel.mp4",
+      "profile": "silent-h264-720p-bt709",
+      "owner": {"collection": "featured", "slug": "slow-steps", "field": "featuredReelUrl"},
+      "size": 7427742,
+      "sha256": "6061dceb6e583a5fc20d695b6cb555f4e02a80970b41bda8ec787acb3f3f1174",
+      "duration": 30.03
+    },
+    {
+      "id": "featured.tech-dreamers.reel",
+      "publicPath": "/assets/showreel/tech-dreamers-card-reel.mp4",
+      "profile": "silent-h264-720p-bt709",
+      "owner": {"collection": "featured", "slug": "tech-dreamers", "field": "featuredReelUrl"},
+      "size": 6441958,
+      "sha256": "4c6c1070902b9d6dd8b170c8021c3bca303a9e2c9a1abca05a7911264f23835c",
+      "duration": 30.03
+    },
+    {
+      "id": "featured.my-art-my-voice.reel",
+      "publicPath": "/assets/showreel/my-art-my-voice-card-reel.mp4",
+      "profile": "silent-h264-720p-bt709",
+      "owner": {"collection": "featured", "slug": "my-art-my-voice", "field": "featuredReelUrl"},
+      "size": 32662721,
+      "sha256": "f5e79c8e8e13b62b337b75190f25b7d034d6059e297f8044da56d6e00a682e93",
+      "duration": 100.033267
+    },
+    {
+      "id": "featured.interior-spatial-brand-films.reel",
+      "publicPath": "/assets/showreel/interior-spatial-card-reel.mp4",
+      "profile": "silent-h264-720p-bt709",
+      "owner": {"collection": "featured", "slug": "interior-spatial-brand-films", "field": "featuredReelUrl"},
+      "size": 2527829,
+      "sha256": "7c384e94439cdd15971ac50f9cbae84507c180967c5c86d636fcc3e9c667cbf4",
+      "duration": 14
+    },
+    {
+      "id": "featured.pts-taigi-bus.reel",
+      "publicPath": "/assets/showreel/nothing-by-bus-card-reel.mp4",
+      "profile": "silent-h264-720p-bt709",
+      "owner": {"collection": "featured", "slug": "pts-taigi-bus", "field": "featuredReelUrl"},
+      "size": 2424055,
+      "sha256": "417c3345b97c30704f6440725c3f0eeafec1aba5c2b047f77e493a57cec7e27c",
+      "duration": 10
+    },
+    {
+      "id": "featured.top-gear-china-uk-special.reel",
+      "publicPath": "/assets/showreel/top-gear-china-uk-special-card-reel.mp4",
+      "profile": "silent-h264-720p-bt709",
+      "owner": {"collection": "featured", "slug": "top-gear-china-uk-special", "field": "featuredReelUrl"},
+      "size": 8651457,
+      "sha256": "4d57e75a81e2ebf0e398a08b57c8e99ddcb0973bc1562db8036221b9a014db72",
+      "duration": 29.96
+    },
+    {
+      "id": "archive.overclocking.reel",
+      "publicPath": "/assets/showreel/overclocking-card-reel.mp4",
+      "profile": "silent-h264-720p-bt709",
+      "owner": {"collection": "archive", "slug": "overclocking", "field": "cardReelUrl"},
+      "size": 4085025,
+      "sha256": "c5b4a2d83454b00edcd24e5ab14f29056f1586d12b79d9aa8a9e58cf51f75a1f",
+      "duration": 10
+    },
+    {
+      "id": "archive.overclocking.poster",
+      "publicPath": "/assets/showreel/overclocking-card-reel-poster.webp",
+      "profile": "webp-1280x720",
+      "owner": {"collection": "archive", "slug": "overclocking", "field": "posterImage"},
+      "size": 83424,
+      "sha256": "0cfcfff0e8967e518538d3489b882eb09152c040bd58e886e7036f46a9b97f66"
+    }
+  ]
+}
