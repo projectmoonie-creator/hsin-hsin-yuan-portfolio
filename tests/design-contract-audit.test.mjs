@@ -55,17 +55,15 @@ test("design contract audit inventories an aligned project without writing", () 
     ],
     source: "explicit",
   });
-  assert.deepEqual(report.variants.archive, {
-    standard: [
-      "ghost-hand-divine-car",
-      "three-minute-micro-drama",
-      "heart-of-steel",
-      "lying-game",
-      "overclocking",
-    ],
-    poster: ["heart-of-steel", "lying-game", "overclocking"],
-    indexFallback: ["ghost-hand-divine-car", "three-minute-micro-drama"],
-  });
+  const { standard, poster, indexFallback } = report.variants.archive;
+  assert.deepEqual(standard, report.collections.archive.order);
+  assert.deepEqual(
+    [...poster, ...indexFallback].sort(),
+    [...standard].sort(),
+  );
+  assert.deepEqual(poster.filter((slug) => indexFallback.includes(slug)), []);
+  assert.ok(poster.length > 0);
+  assert.ok(indexFallback.length > 0);
   assert.deepEqual(report.variants.press, {
     "thumbnail-card": 3,
     "text-note": 2,

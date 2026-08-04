@@ -95,6 +95,23 @@
       "owner": {"collection": "archive", "slug": "overclocking", "field": "posterImage"},
       "size": 83424,
       "sha256": "0cfcfff0e8967e518538d3489b882eb09152c040bd58e886e7036f46a9b97f66"
+    },
+    {
+      "id": "archive.three-minute-micro-drama.reel",
+      "publicPath": "/assets/showreel/three-minute-micro-drama-card-reel.mp4",
+      "profile": "silent-h264-720p-bt709",
+      "owner": {"collection": "archive", "slug": "three-minute-micro-drama", "field": "cardReelUrl"},
+      "size": 8833199,
+      "sha256": "7a98ab3ff0d8c840c35e160f434cf6cb7fe1fe1f1547ba30e68a12b5216afc6f",
+      "duration": 10
+    },
+    {
+      "id": "archive.three-minute-micro-drama.poster",
+      "publicPath": "/assets/showreel/three-minute-micro-drama-card-reel-poster.webp",
+      "profile": "webp-1280x720",
+      "owner": {"collection": "archive", "slug": "three-minute-micro-drama", "field": "posterImage"},
+      "size": 32828,
+      "sha256": "d3cb8e2dc7ab913a43532558e8a21dbb6aa6e9353f742a0d14de8fe8a88fe035"
     }
   ]
 }

@@ -791,7 +791,11 @@ test("archive reel markup renders only for explicit after-hold approval", () => 
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
   const html = renderPage({ lang: "en", site, works });
+  const approvedArchiveReelCount = site.archive.filter(
+    (item) => item.cardReelMode === "after-hold" && item.cardReelUrl && item.cardReelPoster,
+  ).length;
 
+  assert.equal((html.match(/data-archive-reel-video/g) || []).length, approvedArchiveReelCount);
   assert.match(
     html,
     /<a class="archive-card"[^>]*>[\s\S]*?data-archive-reel-video[\s\S]*?data-archive-reel-mode="after-hold"[\s\S]*?poster="\/assets\/showreel\/overclocking-card-reel-poster\.webp"[\s\S]*?<source src="\/assets\/showreel\/overclocking-card-reel\.mp4" type="video\/mp4">[\s\S]*?<\/a>/,
@@ -801,10 +805,7 @@ test("archive reel markup renders only for explicit after-hold approval", () => 
   assert.doesNotMatch(html, /india-overclocking-production/i);
 
   const staticSite = structuredClone(site);
-  const staticOverclocking = staticSite.archive.find(
-    (item) => item.slug === "overclocking",
-  );
-  delete staticOverclocking.cardReelMode;
+  for (const item of staticSite.archive) delete item.cardReelMode;
   const staticHtml = renderPage({ lang: "en", site: staticSite, works });
 
   assert.doesNotMatch(staticHtml, /data-archive-reel-video/);
