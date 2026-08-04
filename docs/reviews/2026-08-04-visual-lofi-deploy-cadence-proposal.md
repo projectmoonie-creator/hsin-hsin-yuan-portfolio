@@ -1,52 +1,55 @@
-# 修訂案：視覺低保真先行＋部署節奏＋動到即抽取（源：2026-08-04 Gemini 評估＋製作人架構討論）
+# 修訂案 v2：視覺低保真先行＋部署節奏＋動到即抽取（依 Codex 單審修文）
 
-狀態：**待 Codex 單審（低風險治理包，新分級制首用）→ 製作人定版**
+狀態：**待製作人定版**｜稽核：`2026-08-04-visual-lofi-deploy-cadence-codex-audit.md`
+（結論「修文後定版」；該報告同時構成本包降級為低風險單審的獨立覆核者
+concurrence——**不得稱雙審或全輪轉共識**）
 
-## 新增條文（各一行，Bible 風格長行）
+## 定版條文（＝Codex 建議文字逐字採用）
 
 ### A. Visual Direction 節尾新增
-> - Visual experiments run lo-fi first: propose the layout or effect as text or plain structural blocks, get producer approval, then code the detail pass. Each visual experiment is timeboxed at 1.5 hours — when the box expires without approval, revert to the last approved state and log the attempt in `docs/reviews/LOG.md`; do not extend by momentum.
+> - New visual-direction experiments (new layout, motion, effect, or style; not defect repair, responsive parity, or implementation of an approved contract) run lo-fi first: record a text/wireframe or plain structural mock, the baseline commit, and owned paths; obtain producer approval for the proposal, then timebox detailed implementation to 90 minutes of active work. At expiry, stop; without final producer acceptance, keep the result isolated or restore only the owned paths to the recorded baseline, never unrelated work. Log scope, baseline, active minutes, producer decision, and disposition in `docs/reviews/LOG.md`; waiting time does not consume the box and momentum does not extend it.
 
 ### B. Contact And Deployment 節尾新增
-> - Deployment cadence: once `main` is deployable, target at least one producer-authorized Production deploy per week; unfinished features ship behind flags or stay on branches. A `backup/*` push is not a deploy. Going more than two weeks undeployed becomes a closeout blocker raised explicitly to the producer.
+> - Deployment cadence: when a changed `main` HEAD is releasable under the applicable QA and review gates, surface a Production decision to the producer within seven calendar days; every Production deployment still requires separate explicit producer authorization, and a missed target or silence is never authorization. Unfinished or unapproved work stays off the release candidate (an existing tested default-off flag may be used); a `backup/*` push is not a deploy. After 14 days without a recorded decision, raise a closeout open item to the producer; calendar age alone is not `BLOCKED`.
 
-### C. Roadmap Discipline 節尾新增（動到即抽取）
-> - Extract on touch: no big-bang refactors, but when a package modifies a feature that lives inline in the shared generator or stylesheet, first extract that feature into its own bounded unit (data field + template/module block + focused test), then apply the change in the same package with tests green before and after. One feature per extraction; features never touched are never extracted preemptively.
+### C. Roadmap Discipline 節尾新增
+> - Extract on touch applies only to an explicitly named feature whose implementation is entangled with unrelated behavior in a shared generator or stylesheet: within the same package, make one smallest-applicable, behavior-preserving extraction in a separate commit, with relevant tests green at baseline and after extraction, then apply the requested change and test again. Use data, template/module, style, and focused-test boundaries only as the feature needs; do not extract untouched features. A subtractive or fix-only task remains a diff against the existing base, and any extraction that materially expands its scope requires explicit producer approval for that package under Work Charter §3-9.
 
-## 行數抵銷（Bible 淨行數不得增加；+3 需 ≥−3）
+## 行數抵銷（預期定版 164 行，淨 −1）
 
-1. Visual Direction 兩條 design-reference 條文合併為一（−1）：
-   - 原：「Before implementing a design reference, translate it into
-     project-specific rules…」＋「Do not copy a reference site's surface
-     style literally…」
-   - 併：「Before implementing a design reference, translate it into project-specific rules — what to borrow, what to avoid, how it behaves on desktop and mobile; never copy a reference site's surface style literally when the content needs another rhythm. Use references to derive typography, spacing, motion, image, logo, and section-order decisions.」
-2. Bilingual Voice「For English portfolio-grouping titles…」三行繞排收單行（−2，語義不變）。
-3. Press Cards「When adding press, record enough metadata…」與「Every public
-   press entry must include `canonicalUrl`…」兩條合併為一（−1，欄位清單
-   以必填條為準，語義不變）。
+1. design-reference 兩條併一（補回 `which parts serve the portfolio goal`，
+   採稽核給定合併句）：
+> - Before implementing a design reference, translate it into project-specific rules — what to borrow, what to avoid, which parts serve the portfolio goal, and how it behaves on desktop and mobile; never copy a reference site's surface style literally when the user's content needs another rhythm. Use references to derive typography, spacing, motion, image, logo, and section-order decisions.
+2. Bilingual Voice「For English portfolio-grouping titles…」繞排收單行
+   （字元內容不變）。
+3. press metadata 兩條併一（補回 `source`，採稽核給定合併句）：
+> - When adding press, record enough metadata to audit later: every public press entry must include `source`, `canonicalUrl`, `titleSource`, `imageSource`, and `metadataCheckedAt`. Do not add a press card without those audit fields.
 
 ## R5 退役裁決（入 LOG）
 
-- **retire/merge**：兩條 design-reference 條文 → 一條（抵銷項 1）；兩條
-  press metadata 條文 → 一條（抵銷項 3）。
-- **keep（附理由）**：「Until a custom domain is confirmed, Vercel's project
-  domain is acceptable」——部署節奏條生效後此條仍有效，不衝突。
+- **retire/merge ×2**：design-reference 兩條→一條；press metadata 兩條→一條
+  （均保語義，補漏欄位後合併）。
+- **keep（附理由）**：「Until a custom domain is confirmed…」與 cadence 不衝突。
 
-## 立案事實
+## 立案事實（v2 依稽核修正口徑）
 
-- 光效 4.5 小時建、18 天後 −729 行全刪；規則 6 分鐘內寫入又反轉——
-  病根是視覺規格在動工前不存在（Gemini 指出的「修法管了 AI 的手、
-  沒管指令模糊度」缺口）。
-- 備份已機械化但站點五週未部署；備份閘不治部署停滯。
-- 全站由單一 ~2,000 行產生器輸出：158 commit 內 build-site.mjs 改 67 次、
-  styles.css 59 次、測試檔 82 次——無元件邊界，任何改動都落同三檔
-  （製作人 2026-08-04 拍板「動到即抽取」，禁止大爆炸重構）。
+- 視覺決策曾靠建了再拆收斂：光效系列 Git 可見跨度 2026-07-11 17:33 至
+  07-29 18:54（約 18 天），刪除 commit 為 15 insertions／729 deletions；
+  「4.5 小時建成」「規則 6 分鐘反轉」為外部評估轉述，未附可重跑計時證據。
+- Production 實況（稽核日 live readback）：最新 Production＝`68d6116`
+  （07-29，Remove portfolio light effects），約六天前；另有 5 分鐘至 5 天
+  內多筆 Preview。**「五週未部署」不成立**；成立的說法是「Production 約
+  六天未更新，local `main` 已累積後續變更」。此前 `origin/main` 曾自
+  07-12 停在 `5cdb842` 至 07-29——中段約 17 天無 Production 更新。
+- 結構現況：`scripts/build-site.mjs` 為 **769 行**，已有 renderPress／
+  renderWork／renderArchive／renderPage 等函式邊界——診斷降級為
+  「**尚未拆成檔案級模組**」。共享檔修改頻繁（固定最後 158 commit：
+  build-site 57／styles 48／tests 72；全 175 commit 含 root：67／59／83）；
+  三檔同 commit 出現為 41/158——「任何改動都落同三檔」全稱句撤回。
 
-## Codex 派工單（read-only）
+## 定版程序（製作人拍板後執行）
 
-單審本案（A/B/C 三條）：條文歧義／機械可檢性／與現行 Bible、61 測試、
-AGENTS.md 授權條款的衝突；特別驗證 B 條與「Production 需製作人授權」
-不矛盾（節奏=浮上檯面的義務，非自動部署授權）；C 條與「減法任務禁止
-重寫」（憲章三-9）不矛盾（抽取=同包內結構搬移，測試前後全綠，非重寫）。
-輸出 `docs/reviews/2026-08-04-visual-lofi-deploy-cadence-codex-audit.md`，
-結論：可定版／修文後定版／退回。
+1. 依上文改 `PROJECT_BIBLE.md`（A/B/C＋三處合併）；Bible 目標 164 行。
+2. docs/governance gate：目標文字搜尋、Bible 行數、`git diff --check`
+   （純治理包，無需 browser）；LOG 記兩項 R5＋驗證＋單審降級 concurrence。
+3. 任何實際 Production deployment 另開包，走完整 QA／review 與逐次授權。
