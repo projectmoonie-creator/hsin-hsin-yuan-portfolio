@@ -1,84 +1,89 @@
-# 流程減重修訂案（Process Diet）v1
+# 流程減重修訂案（Process Diet）v2（依 Codex 稽核修文）
 
-日期：2026-08-04｜提案：Claude（外部稽核官）｜狀態：**待 Codex 稽核 → 製作人定版**
+日期：2026-08-04｜起草：Claude｜稽核：Codex（`2026-08-04-process-diet-codex-audit.md`，
+結論「修文後定版」）｜狀態：**待製作人定版**
 
-## 背景（稽核摘要）
+## 背景（v2 已依稽核更正）
 
-製作人委託對本專案 Codex 工時做外部稽核（三路深讀 2026-07 session 思考鏈）。
-量化結論：repo 內流程文件 11,832 行 vs 產品程式碼 6,764 行（1.75:1）；
-最近 100 個 commit 有 64 個只動文件；為調整卡片順序寫過 1,335 行實施計畫；
-雙 AI 交叉審查一輪成本約 USD 5.7＋管線功夫，實測收穫 1 條低優先文案建議；
-同時唯一成真的風險（本地 99 commit 無遠端副本）沒有被任何閘擋下（已於
-2026-08-04 推 `backup/main-2026-08-04` 止血）。本案目標：**砍防未發生風險的
-過重儀式，鎖住已發生過的真風險**。
+製作人委託對本專案工時做外部稽核。修正後的量化基礎：
 
-## 修訂條文（八條；R1–R7 對 PROJECT_BIBLE.md，R8 對 AGENTS.md與STATUS 用語）
+- 流程文件 `docs/**/*.md` 於稽核基線為 11,809 行；產品碼（`src/`、`scripts/`、
+  `tests/` 之 JS/MJS/CSS）6,764 行。
+- 以提案前 `6692aee` 為終點，最近 100 commit 中 **48** 個只動 `docs/`／`*.md`。
+- `docs/superpowers/plans/2026-08-03-archive-uniformity-and-english-copy.md` 為
+  1,335 行，涵蓋文案/媒體/幾何/Figma/測試多項（非單一排序任務）——問題是
+  計畫體積，不是任務單一性。
+- 2026-07-19 外審輪：Claude 撞 monthly spend limit 未完成、無可用發現；Gemini
+  六條中四條被現地證據駁回、一條低優先、一條待證。成本應記
+  `apiEquivalentCostUsd`，且 status（5.675496）與 raw artifact（6.722925）不一致。
+- 備份：local `main` 曾比 `origin/main` 超前 99 commit，HEAD 存在於 remote
+  feature branch 但未以 main/backup 命名集中回讀；2026-08-04 已補 backup ref，
+  實際曝險窗約五天。**「只在本機」的舊敘述不成立，已撤回。**
 
-### R1 計畫與交付成比例（Roadmap Discipline 增補＋收斂）
-- 增：套件計畫以 ≤60 行為上限（目標/檔案/非目標/驗證/回滾）；**計畫行數
-  超過它所規劃的 diff 行數＝拆包或砍計畫**。
-- 改：**逐包結案報告廢止**，改為在 `docs/reviews/LOG.md` 追加 ≤10 行
-  （日期/分支/commit/驗證方式/未盡事項）；正式結案報告保留給**階段**收尾。
-- 立案事實：26 份逐包結案報告共 3,305 行；1,335 行計畫規劃一次卡片重排。
+## 修訂條文（定版文字＝Codex 建議條文）
 
-### R2 QA 分級（QA Checklist 改寫）
-- 每包：`npm test`＋改動面 1 桌面寬＋1 行動寬目視。
-- 全案矩陣（雙語 × 多視口 × reduced-motion × no-JS × BFCache）：**只在
-  階段收尾與正式部署前跑**。
-- 立案事實：全矩陣被當每包例行，為單次文案修改的最大固定成本。
+### R1 計畫與交付成比例 — 修文採納
+> 一般工作包的 implementation plan 以 60 個 nonblank logical lines 為上限，
+> 只含目標、affected files、非目標、驗證與回滾；壓不進 60 行就拆包，例外須由
+> 製作人明文批准。不得以預估 diff 行數作 pass/fail。普通包結束後只在
+> `docs/reviews/LOG.md` 追加至多 10 行（日期、branch/commit、驗證、外審使用或
+> skip reason、未盡事項）。只有 phase closeout，以及涉及 production 部署、
+> 隱私/權利/安全、破壞性遷移或需保存 frozen external-review evidence 的包，
+> 才另建 dated report。
 
-### R3 外部審查改抽查制（Roadmap Discipline 末條改寫）
-- 雙 AI 交叉審查僅用於：動到事實宣稱/版權/隱私的階段，或單階段 diff
-  超過 500 行。一般文案/版面包：免外審或單審。
-- 立案事實：2026-07-19 一輪雙審，六條發現四條事實錯誤，淨收穫 1 條低優先。
+### R2 QA 分級 — 修文採納
+> 會影響 runtime/public output 的包跑 `npm test`，並目視一個相關桌面寬與一個
+> 相關行動寬；純文件/治理包跑 targeted validation 與 `git diff --check`，免瀏覽器。
+> 若改動直接碰 bilingual、reduced-motion、no-JS、BFCache 或 media lifecycle，
+> 同包加跑該 focused scenario。完整雙語×多視口×fallback 矩陣只在 phase closeout
+> 與正式部署前跑。
 
-### R4 媒體帳目分級（Media Rights 增補一句）
-- SHA-256／byte 級帳目只記**第三方或版權敏感媒體**；自有素材記來源與
-  時長即可。立案事實：30 秒自有 showreel 記到 8,651,457 bytes/六位小數秒。
+### R3 外部審查抽查制 — **自本案撤下**
+Codex 判定：只改 Bible 會靜默牴觸工作憲章四-19（三 AI 輪轉收斂制）。
+本條撤出本案；是否於憲章層增設風險分級（四-19/四-23 同步修法，低風險
+user-visible 包固定一位獨立覆核者、docs-only 才可免審記 skip reason），
+**另案請製作人裁決**。
 
-### R5 規則退役制（新增於 Roadmap Discipline）
-- 每新增一條 Bible 規則，同 commit 檢視一條既有規則是否退役/降級並記錄
-  結論；被取代的流程文件移入 `docs/archive/`。**流程文件不是只增不減的。**
-- 立案事實：流程文件累計 +10,589 行、−98 行，淨 append-only。
+### R4 媒體帳目分級 — 修文採納
+> 權利帳：第三方或權利敏感媒體記 canonical source、rights basis/status；若本地化
+> 或重製，再記 SHA-256。使用者自有/提供素材只記 approved basename/source、
+> rights basis 與 duration。技術完整性帳另論：凡 checked-in runtime asset 已由
+> 測試以 size/hash/codec 保護者，保留該機械回歸；不得以權利帳減重為由移除。
 
-### R6 備份閘機械化（Phase Closeout 增補）
-- 任何收尾宣告前必須貼上 `git rev-list --count origin/main..HEAD` 實際輸出；
-  大於 0 ⇒ 先推 `backup/<日期>` 分支並回讀遠端，否則一律 `BLOCKED`。
-- 立案事實：unpushed-work 條款文字早已存在（現行 §Phase Closeout），但
-  91→99 個 commit 連續五週停在本機——文字閘不夠，要機械輸出。
+### R5 規則退役制 — 修文採納
+> 新增 Bible 規則時，同一 change 在 `docs/reviews/LOG.md` 記錄一條既有規則的
+> `retire`／`downgrade`／`keep（附理由）` 裁決。被取代的 active instruction 直接
+> 刪除或收斂，Git history 即為歷史；只有仍有查考價值且不屬 dated review 的材料
+> 才移入 `docs/archive/`。不得搬動既有 dated review 來製造減量表象。
 
-### R7 上位法引用（新增兩行，正文在工作憲章）
-- 減法任務禁止重寫（憲章 三-9）：刪/修/精簡指令必須以現有基底出 diff，
-  重新架構須製作人明文同意。
-- 子代理派工帶摘要不帶全量對話史（憲章 三-10，Codex 具體形＝`fork_turns:
-  none`）。
+### R6 備份閘機械化 — 修文採納
+> 每個 coherent commit 後、phase closeout 前再檢一次：先記
+> `git status --short`；再跑 `git rev-list --count HEAD --not --remotes=origin`。
+> 大於 0 才代表目前沒有已知 origin ref 可達的 commit，須以 non-force push 推到
+> 唯一命名的 `backup/YYYY-MM-DD/<shortsha>`，再用 `git ls-remote` 回讀並逐字比對
+> remote tip＝`HEAD`；不等即 `BLOCKED`。`git rev-list --count origin/main..HEAD`
+> 另記為 main divergence，只管 merge/release 狀態，不得冒充備份計數。
 
-### R8 掛上工作憲章＋備份與上線解綁（AGENTS.md＋STATUS 用語修正）
-- AGENTS.md 讀取鏈補一行：`~/Documents/Claude/Projects/_SHARED/WORK-CHARTER.md`
-  （上位法）。立案事實：憲章 四-21「備份與審查是兩件事」2026-08-02 已入典
-  （TriTrack 42 commit 判例），但本 repo 讀取鏈只有 AGENTS→Bible→STATUS，
-  憲章從未被讀到——**法律存在，法域讀不到**。
-- 「push／deploy／merge 需明文授權」條款改為只約束 `origin/main` 與正式
-  部署；**推 `backup/*` 分支＝憲章要求的義務，不需授權**（`backup/*` 不接
-  Vercel production，備份≠上線）。立案事實：STATUS.md 現行第 220–221 行把
-  三者綁成同一禁令，導致 99 個 commit 五週無遠端副本。
+### R7 上位法引用 — 採納（pointer-only）
+Bible 加兩行指向工作憲章 三-9（減法任務禁止重寫）、三-10（子代理帶摘要
+不帶全量對話史），不複製上位法全文。
 
-## 驗收標準（定版時檢查）
+### R8 掛上憲章＋備份與上線解綁 — 修文採納
+`AGENTS.md` 加入（durable rule 住 AGENTS，不住可變的 STATUS）：
+> Read `~/Documents/Claude/Projects/_SHARED/WORK-CHARTER.md` before the Bible and
+> Status. Pushes to `origin/main`, merges, aliases, and Production deployments
+> require explicit producer authorization. A non-force push of the current
+> privacy-checked committed `HEAD` to a uniquely named `backup/*` ref is the
+> charter-mandated durability action, not a deployment, and requires live remote
+> tip readback.
 
-1. **PROJECT_BIBLE.md 淨行數不得增加**（新增條文的行數，由收斂 R1/R2/R3
-   原有段落與 Roadmap 建議順序段的冗詞抵銷）。
-2. R6 的機械輸出在下一次收尾實際出現一次。
-3. 本案自身 ≤120 行（治 append-only 的藥不准 append 超量）。
+`STATUS.md` 只記本次事實（backup ref 回讀結果；`origin/main`／Preview／
+Production 未變），不另立永久規則副本。
 
-## Codex 稽核派工單（read-only）
+## 定版程序（製作人拍板後執行）
 
-依工作憲章 四-1（覆核者≠修正作者）：本案由 Claude 起草，請 Codex 以
-唯讀模式稽核，**不代改任何檔案**，輸出到
-`docs/reviews/2026-08-04-process-diet-codex-audit.md`：
-
-1. 逐條（R1–R8）判：採納／修文（附具體措辭）／駁回（附理由）。
-2. 檢查點：條文是否有歧義、是否機械可檢、是否與既有 Bible 條文或現行
-   測試衝突、立案事實是否與 repo 實況相符。
-3. 特別驗證 R6：在本 worktree 實跑 `git rev-list --count origin/main..HEAD`
-   並記錄輸出。
-4. 結尾給單一結論：`可定版` / `修文後定版` / `退回重擬`。
+1. 依 R1/R2/R4/R5/R6/R7/R8 修 `PROJECT_BIBLE.md` 與 `AGENTS.md`；
+   **Bible 淨行數不得增加**。
+2. 修後跑 `npm test`＋`git diff --check`；以 R6 新命令驗證 backup reachability
+   並回讀 remote tip。
+3. R3 另案：製作人裁決是否修憲章四-19/四-23。
