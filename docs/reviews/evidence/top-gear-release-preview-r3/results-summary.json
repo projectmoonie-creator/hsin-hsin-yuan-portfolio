@@ -1,0 +1,1109 @@
+{
+  "status": "PASS",
+  "pass": true,
+  "environment": {
+    "python": "3.9.6",
+    "playwright": "1.60.0",
+    "chromium": "148.0.7778.96"
+  },
+  "inputs": {
+    "repo": "hsin-hsin-yuan-portfolio-remove-lights",
+    "baseUrl": "http://127.0.0.1:4173",
+    "baselineUrl": null
+  },
+  "matrix": [
+    {
+      "language": "en",
+      "viewport": "1440x900",
+      "pass": true,
+      "checks": {
+        "navigation": true,
+        "noOverflow": true,
+        "featuredContract": true,
+        "semanticWorkPress": true,
+        "visibleWorkPressGroupLabelAbsent": true,
+        "exactLocalizedEntryTypes": true,
+        "globalPress": true,
+        "destinations": true,
+        "contactNeverSubmitted": true,
+        "cleanEvents": true
+      },
+      "navigation": {
+        "status": 200,
+        "networkIdle": true,
+        "finalUrl": "http://127.0.0.1:4173/en/",
+        "finalEvidence": {
+          "status": 200,
+          "hostname": "127.0.0.1",
+          "pathname": "/en/",
+          "redirectClassification": "other"
+        },
+        "error": null
+      },
+      "posters": {
+        "slow-steps": "/assets/portfolio/slow-steps-poster.webp",
+        "tech-dreamers": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+        "my-art-my-voice": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+        "interior-spatial-brand-films": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+        "pts-taigi-bus": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+        "top-gear-china-uk-special": "/assets/portfolio/top-gear-uk-special-car.jpg"
+      },
+      "pressTypes": [
+        "Official page",
+        "Official page",
+        "Project press"
+      ],
+      "events": {
+        "requestCount": 12,
+        "documentRequestCount": 1,
+        "responseCount": 12,
+        "contactPosts": 0,
+        "consoleWarningsErrors": 0,
+        "pageErrors": 0,
+        "requestFailures": [],
+        "httpErrors": []
+      },
+      "topGearContract": {
+        "pass": true,
+        "checks": {
+          "sixReels": true,
+          "exactSource": true,
+          "exactPoster": true,
+          "exactDestination": true,
+          "mediaOwnership": true,
+          "wrapperOwnsGeometry": true,
+          "centeredObjectPosition": true,
+          "noSiteTitleOverlay": true
+        }
+      }
+    },
+    {
+      "language": "en",
+      "viewport": "1200x900",
+      "pass": true,
+      "checks": {
+        "navigation": true,
+        "noOverflow": true,
+        "featuredContract": true,
+        "semanticWorkPress": true,
+        "visibleWorkPressGroupLabelAbsent": true,
+        "exactLocalizedEntryTypes": true,
+        "globalPress": true,
+        "destinations": true,
+        "contactNeverSubmitted": true,
+        "cleanEvents": true
+      },
+      "navigation": {
+        "status": 200,
+        "networkIdle": true,
+        "finalUrl": "http://127.0.0.1:4173/en/",
+        "finalEvidence": {
+          "status": 200,
+          "hostname": "127.0.0.1",
+          "pathname": "/en/",
+          "redirectClassification": "other"
+        },
+        "error": null
+      },
+      "posters": {
+        "slow-steps": "/assets/portfolio/slow-steps-poster.webp",
+        "tech-dreamers": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+        "my-art-my-voice": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+        "interior-spatial-brand-films": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+        "pts-taigi-bus": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+        "top-gear-china-uk-special": "/assets/portfolio/top-gear-uk-special-car.jpg"
+      },
+      "pressTypes": [
+        "Official page",
+        "Official page",
+        "Project press"
+      ],
+      "events": {
+        "requestCount": 11,
+        "documentRequestCount": 1,
+        "responseCount": 11,
+        "contactPosts": 0,
+        "consoleWarningsErrors": 0,
+        "pageErrors": 0,
+        "requestFailures": [],
+        "httpErrors": []
+      },
+      "topGearContract": {
+        "pass": true,
+        "checks": {
+          "sixReels": true,
+          "exactSource": true,
+          "exactPoster": true,
+          "exactDestination": true,
+          "mediaOwnership": true,
+          "wrapperOwnsGeometry": true,
+          "centeredObjectPosition": true,
+          "noSiteTitleOverlay": true
+        }
+      }
+    },
+    {
+      "language": "en",
+      "viewport": "834x1112",
+      "pass": true,
+      "checks": {
+        "navigation": true,
+        "noOverflow": true,
+        "featuredContract": true,
+        "semanticWorkPress": true,
+        "visibleWorkPressGroupLabelAbsent": true,
+        "exactLocalizedEntryTypes": true,
+        "globalPress": true,
+        "destinations": true,
+        "contactNeverSubmitted": true,
+        "cleanEvents": true
+      },
+      "navigation": {
+        "status": 200,
+        "networkIdle": true,
+        "finalUrl": "http://127.0.0.1:4173/en/",
+        "finalEvidence": {
+          "status": 200,
+          "hostname": "127.0.0.1",
+          "pathname": "/en/",
+          "redirectClassification": "other"
+        },
+        "error": null
+      },
+      "posters": {
+        "slow-steps": "/assets/portfolio/slow-steps-poster.webp",
+        "tech-dreamers": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+        "my-art-my-voice": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+        "interior-spatial-brand-films": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+        "pts-taigi-bus": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+        "top-gear-china-uk-special": "/assets/portfolio/top-gear-uk-special-car.jpg"
+      },
+      "pressTypes": [
+        "Official page",
+        "Official page",
+        "Project press"
+      ],
+      "events": {
+        "requestCount": 12,
+        "documentRequestCount": 1,
+        "responseCount": 12,
+        "contactPosts": 0,
+        "consoleWarningsErrors": 0,
+        "pageErrors": 0,
+        "requestFailures": [],
+        "httpErrors": []
+      },
+      "topGearContract": {
+        "pass": true,
+        "checks": {
+          "sixReels": true,
+          "exactSource": true,
+          "exactPoster": true,
+          "exactDestination": true,
+          "mediaOwnership": true,
+          "wrapperOwnsGeometry": true,
+          "centeredObjectPosition": true,
+          "noSiteTitleOverlay": true
+        }
+      }
+    },
+    {
+      "language": "en",
+      "viewport": "390x844",
+      "pass": true,
+      "checks": {
+        "navigation": true,
+        "noOverflow": true,
+        "featuredContract": true,
+        "semanticWorkPress": true,
+        "visibleWorkPressGroupLabelAbsent": true,
+        "exactLocalizedEntryTypes": true,
+        "globalPress": true,
+        "destinations": true,
+        "contactNeverSubmitted": true,
+        "cleanEvents": true
+      },
+      "navigation": {
+        "status": 200,
+        "networkIdle": true,
+        "finalUrl": "http://127.0.0.1:4173/en/",
+        "finalEvidence": {
+          "status": 200,
+          "hostname": "127.0.0.1",
+          "pathname": "/en/",
+          "redirectClassification": "other"
+        },
+        "error": null
+      },
+      "posters": {
+        "slow-steps": "/assets/portfolio/slow-steps-poster.webp",
+        "tech-dreamers": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+        "my-art-my-voice": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+        "interior-spatial-brand-films": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+        "pts-taigi-bus": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+        "top-gear-china-uk-special": "/assets/portfolio/top-gear-uk-special-car.jpg"
+      },
+      "pressTypes": [
+        "Official page",
+        "Official page",
+        "Project press"
+      ],
+      "events": {
+        "requestCount": 12,
+        "documentRequestCount": 1,
+        "responseCount": 12,
+        "contactPosts": 0,
+        "consoleWarningsErrors": 0,
+        "pageErrors": 0,
+        "requestFailures": [],
+        "httpErrors": []
+      },
+      "topGearContract": {
+        "pass": true,
+        "checks": {
+          "sixReels": true,
+          "exactSource": true,
+          "exactPoster": true,
+          "exactDestination": true,
+          "mediaOwnership": true,
+          "wrapperOwnsGeometry": true,
+          "centeredObjectPosition": true,
+          "noSiteTitleOverlay": true
+        }
+      }
+    },
+    {
+      "language": "en",
+      "viewport": "360x800",
+      "pass": true,
+      "checks": {
+        "navigation": true,
+        "noOverflow": true,
+        "featuredContract": true,
+        "semanticWorkPress": true,
+        "visibleWorkPressGroupLabelAbsent": true,
+        "exactLocalizedEntryTypes": true,
+        "globalPress": true,
+        "destinations": true,
+        "contactNeverSubmitted": true,
+        "cleanEvents": true
+      },
+      "navigation": {
+        "status": 200,
+        "networkIdle": true,
+        "finalUrl": "http://127.0.0.1:4173/en/",
+        "finalEvidence": {
+          "status": 200,
+          "hostname": "127.0.0.1",
+          "pathname": "/en/",
+          "redirectClassification": "other"
+        },
+        "error": null
+      },
+      "posters": {
+        "slow-steps": "/assets/portfolio/slow-steps-poster.webp",
+        "tech-dreamers": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+        "my-art-my-voice": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+        "interior-spatial-brand-films": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+        "pts-taigi-bus": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+        "top-gear-china-uk-special": "/assets/portfolio/top-gear-uk-special-car.jpg"
+      },
+      "pressTypes": [
+        "Official page",
+        "Official page",
+        "Project press"
+      ],
+      "events": {
+        "requestCount": 12,
+        "documentRequestCount": 1,
+        "responseCount": 12,
+        "contactPosts": 0,
+        "consoleWarningsErrors": 0,
+        "pageErrors": 0,
+        "requestFailures": [],
+        "httpErrors": []
+      },
+      "topGearContract": {
+        "pass": true,
+        "checks": {
+          "sixReels": true,
+          "exactSource": true,
+          "exactPoster": true,
+          "exactDestination": true,
+          "mediaOwnership": true,
+          "wrapperOwnsGeometry": true,
+          "centeredObjectPosition": true,
+          "noSiteTitleOverlay": true
+        }
+      }
+    },
+    {
+      "language": "zh",
+      "viewport": "1440x900",
+      "pass": true,
+      "checks": {
+        "navigation": true,
+        "noOverflow": true,
+        "featuredContract": true,
+        "semanticWorkPress": true,
+        "visibleWorkPressGroupLabelAbsent": true,
+        "exactLocalizedEntryTypes": true,
+        "globalPress": true,
+        "destinations": true,
+        "contactNeverSubmitted": true,
+        "cleanEvents": true
+      },
+      "navigation": {
+        "status": 200,
+        "networkIdle": true,
+        "finalUrl": "http://127.0.0.1:4173/zh/",
+        "finalEvidence": {
+          "status": 200,
+          "hostname": "127.0.0.1",
+          "pathname": "/zh/",
+          "redirectClassification": "other"
+        },
+        "error": null
+      },
+      "posters": {
+        "slow-steps": "/assets/portfolio/slow-steps-poster.webp",
+        "tech-dreamers": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+        "my-art-my-voice": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+        "interior-spatial-brand-films": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+        "pts-taigi-bus": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+        "top-gear-china-uk-special": "/assets/portfolio/top-gear-uk-special-car.jpg"
+      },
+      "pressTypes": [
+        "官方節目頁",
+        "官方節目頁",
+        "專案報導"
+      ],
+      "events": {
+        "requestCount": 12,
+        "documentRequestCount": 1,
+        "responseCount": 12,
+        "contactPosts": 0,
+        "consoleWarningsErrors": 0,
+        "pageErrors": 0,
+        "requestFailures": [],
+        "httpErrors": []
+      },
+      "topGearContract": {
+        "pass": true,
+        "checks": {
+          "sixReels": true,
+          "exactSource": true,
+          "exactPoster": true,
+          "exactDestination": true,
+          "mediaOwnership": true,
+          "wrapperOwnsGeometry": true,
+          "centeredObjectPosition": true,
+          "noSiteTitleOverlay": true
+        }
+      }
+    },
+    {
+      "language": "zh",
+      "viewport": "1200x900",
+      "pass": true,
+      "checks": {
+        "navigation": true,
+        "noOverflow": true,
+        "featuredContract": true,
+        "semanticWorkPress": true,
+        "visibleWorkPressGroupLabelAbsent": true,
+        "exactLocalizedEntryTypes": true,
+        "globalPress": true,
+        "destinations": true,
+        "contactNeverSubmitted": true,
+        "cleanEvents": true
+      },
+      "navigation": {
+        "status": 200,
+        "networkIdle": true,
+        "finalUrl": "http://127.0.0.1:4173/zh/",
+        "finalEvidence": {
+          "status": 200,
+          "hostname": "127.0.0.1",
+          "pathname": "/zh/",
+          "redirectClassification": "other"
+        },
+        "error": null
+      },
+      "posters": {
+        "slow-steps": "/assets/portfolio/slow-steps-poster.webp",
+        "tech-dreamers": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+        "my-art-my-voice": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+        "interior-spatial-brand-films": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+        "pts-taigi-bus": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+        "top-gear-china-uk-special": "/assets/portfolio/top-gear-uk-special-car.jpg"
+      },
+      "pressTypes": [
+        "官方節目頁",
+        "官方節目頁",
+        "專案報導"
+      ],
+      "events": {
+        "requestCount": 11,
+        "documentRequestCount": 1,
+        "responseCount": 11,
+        "contactPosts": 0,
+        "consoleWarningsErrors": 0,
+        "pageErrors": 0,
+        "requestFailures": [],
+        "httpErrors": []
+      },
+      "topGearContract": {
+        "pass": true,
+        "checks": {
+          "sixReels": true,
+          "exactSource": true,
+          "exactPoster": true,
+          "exactDestination": true,
+          "mediaOwnership": true,
+          "wrapperOwnsGeometry": true,
+          "centeredObjectPosition": true,
+          "noSiteTitleOverlay": true
+        }
+      }
+    },
+    {
+      "language": "zh",
+      "viewport": "834x1112",
+      "pass": true,
+      "checks": {
+        "navigation": true,
+        "noOverflow": true,
+        "featuredContract": true,
+        "semanticWorkPress": true,
+        "visibleWorkPressGroupLabelAbsent": true,
+        "exactLocalizedEntryTypes": true,
+        "globalPress": true,
+        "destinations": true,
+        "contactNeverSubmitted": true,
+        "cleanEvents": true
+      },
+      "navigation": {
+        "status": 200,
+        "networkIdle": true,
+        "finalUrl": "http://127.0.0.1:4173/zh/",
+        "finalEvidence": {
+          "status": 200,
+          "hostname": "127.0.0.1",
+          "pathname": "/zh/",
+          "redirectClassification": "other"
+        },
+        "error": null
+      },
+      "posters": {
+        "slow-steps": "/assets/portfolio/slow-steps-poster.webp",
+        "tech-dreamers": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+        "my-art-my-voice": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+        "interior-spatial-brand-films": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+        "pts-taigi-bus": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+        "top-gear-china-uk-special": "/assets/portfolio/top-gear-uk-special-car.jpg"
+      },
+      "pressTypes": [
+        "官方節目頁",
+        "官方節目頁",
+        "專案報導"
+      ],
+      "events": {
+        "requestCount": 12,
+        "documentRequestCount": 1,
+        "responseCount": 12,
+        "contactPosts": 0,
+        "consoleWarningsErrors": 0,
+        "pageErrors": 0,
+        "requestFailures": [],
+        "httpErrors": []
+      },
+      "topGearContract": {
+        "pass": true,
+        "checks": {
+          "sixReels": true,
+          "exactSource": true,
+          "exactPoster": true,
+          "exactDestination": true,
+          "mediaOwnership": true,
+          "wrapperOwnsGeometry": true,
+          "centeredObjectPosition": true,
+          "noSiteTitleOverlay": true
+        }
+      }
+    },
+    {
+      "language": "zh",
+      "viewport": "390x844",
+      "pass": true,
+      "checks": {
+        "navigation": true,
+        "noOverflow": true,
+        "featuredContract": true,
+        "semanticWorkPress": true,
+        "visibleWorkPressGroupLabelAbsent": true,
+        "exactLocalizedEntryTypes": true,
+        "globalPress": true,
+        "destinations": true,
+        "contactNeverSubmitted": true,
+        "cleanEvents": true
+      },
+      "navigation": {
+        "status": 200,
+        "networkIdle": true,
+        "finalUrl": "http://127.0.0.1:4173/zh/",
+        "finalEvidence": {
+          "status": 200,
+          "hostname": "127.0.0.1",
+          "pathname": "/zh/",
+          "redirectClassification": "other"
+        },
+        "error": null
+      },
+      "posters": {
+        "slow-steps": "/assets/portfolio/slow-steps-poster.webp",
+        "tech-dreamers": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+        "my-art-my-voice": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+        "interior-spatial-brand-films": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+        "pts-taigi-bus": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+        "top-gear-china-uk-special": "/assets/portfolio/top-gear-uk-special-car.jpg"
+      },
+      "pressTypes": [
+        "官方節目頁",
+        "官方節目頁",
+        "專案報導"
+      ],
+      "events": {
+        "requestCount": 12,
+        "documentRequestCount": 1,
+        "responseCount": 12,
+        "contactPosts": 0,
+        "consoleWarningsErrors": 0,
+        "pageErrors": 0,
+        "requestFailures": [],
+        "httpErrors": []
+      },
+      "topGearContract": {
+        "pass": true,
+        "checks": {
+          "sixReels": true,
+          "exactSource": true,
+          "exactPoster": true,
+          "exactDestination": true,
+          "mediaOwnership": true,
+          "wrapperOwnsGeometry": true,
+          "centeredObjectPosition": true,
+          "noSiteTitleOverlay": true
+        }
+      }
+    },
+    {
+      "language": "zh",
+      "viewport": "360x800",
+      "pass": true,
+      "checks": {
+        "navigation": true,
+        "noOverflow": true,
+        "featuredContract": true,
+        "semanticWorkPress": true,
+        "visibleWorkPressGroupLabelAbsent": true,
+        "exactLocalizedEntryTypes": true,
+        "globalPress": true,
+        "destinations": true,
+        "contactNeverSubmitted": true,
+        "cleanEvents": true
+      },
+      "navigation": {
+        "status": 200,
+        "networkIdle": true,
+        "finalUrl": "http://127.0.0.1:4173/zh/",
+        "finalEvidence": {
+          "status": 200,
+          "hostname": "127.0.0.1",
+          "pathname": "/zh/",
+          "redirectClassification": "other"
+        },
+        "error": null
+      },
+      "posters": {
+        "slow-steps": "/assets/portfolio/slow-steps-poster.webp",
+        "tech-dreamers": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+        "my-art-my-voice": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+        "interior-spatial-brand-films": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+        "pts-taigi-bus": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+        "top-gear-china-uk-special": "/assets/portfolio/top-gear-uk-special-car.jpg"
+      },
+      "pressTypes": [
+        "官方節目頁",
+        "官方節目頁",
+        "專案報導"
+      ],
+      "events": {
+        "requestCount": 12,
+        "documentRequestCount": 1,
+        "responseCount": 12,
+        "contactPosts": 0,
+        "consoleWarningsErrors": 0,
+        "pageErrors": 0,
+        "requestFailures": [],
+        "httpErrors": []
+      },
+      "topGearContract": {
+        "pass": true,
+        "checks": {
+          "sixReels": true,
+          "exactSource": true,
+          "exactPoster": true,
+          "exactDestination": true,
+          "mediaOwnership": true,
+          "wrapperOwnsGeometry": true,
+          "centeredObjectPosition": true,
+          "noSiteTitleOverlay": true
+        }
+      }
+    }
+  ],
+  "interaction": {
+    "pass": true,
+    "checks": {
+      "navigation": true,
+      "posterHoldAtOneSecond": true,
+      "actualPlayingAfterMinimumHold": true,
+      "playingAndAdvance": true,
+      "exitReset": true,
+      "reentry": true,
+      "naturalArbitration": true,
+      "syntheticMediaError": true,
+      "syntheticPersistedBFCache": true,
+      "controlledVisibility": true,
+      "cleanEventsAndNoSubmit": true
+    },
+    "timing": {
+      "eligibilityAndPlaying": {
+        "eligibilityAt": 1015.8000000119209,
+        "playingAt": 2455.199999988079,
+        "playingElapsedFromEligibilityMs": 1439.3999999761581
+      },
+      "hold": {
+        "playing": false,
+        "paused": true,
+        "currentTime": 0,
+        "opacity": "0",
+        "muted": true,
+        "loop": true,
+        "playsInline": true,
+        "elapsedFromEligibilityMs": 1016.3000000119209
+      },
+      "playing": {
+        "playing": true,
+        "paused": false,
+        "currentTime": 0.008332,
+        "opacity": "0",
+        "muted": true,
+        "loop": true,
+        "playsInline": true,
+        "elapsedFromEligibilityMs": 1439.3999999761581
+      },
+      "advanced": {
+        "playing": true,
+        "paused": false,
+        "currentTime": 0.614946,
+        "opacity": "1",
+        "muted": true,
+        "loop": true,
+        "playsInline": true,
+        "deltaCurrentTime": 0.606614
+      }
+    },
+    "exit": {
+      "playing": false,
+      "paused": true,
+      "currentTime": 0,
+      "opacity": "0",
+      "muted": true,
+      "loop": true,
+      "playsInline": true
+    },
+    "reentry": {
+      "hold": {
+        "playing": false,
+        "paused": true,
+        "currentTime": 0,
+        "opacity": "0",
+        "muted": true,
+        "loop": true,
+        "playsInline": true
+      },
+      "playing": {
+        "playing": true,
+        "paused": false,
+        "currentTime": 0.013552,
+        "opacity": "0",
+        "muted": true,
+        "loop": true,
+        "playsInline": true
+      }
+    },
+    "arbitration": {
+      "scan": {
+        "found": true,
+        "y": 1880,
+        "ratios": [
+          0.9774517725482275,
+          0.35705989294010704,
+          0,
+          0,
+          0,
+          0
+        ],
+        "eligible": [
+          {
+            "value": 0.9774517725482275,
+            "index": 0
+          },
+          {
+            "value": 0.35705989294010704,
+            "index": 1
+          }
+        ]
+      },
+      "snapshot": [
+        {
+          "index": 0,
+          "ratio": 1,
+          "playing": false,
+          "paused": true
+        },
+        {
+          "index": 1,
+          "ratio": 0.35705989294010704,
+          "playing": true,
+          "paused": false
+        },
+        {
+          "index": 2,
+          "ratio": 0,
+          "playing": false,
+          "paused": true
+        },
+        {
+          "index": 3,
+          "ratio": 0,
+          "playing": false,
+          "paused": true
+        },
+        {
+          "index": 4,
+          "ratio": 0,
+          "playing": false,
+          "paused": true
+        },
+        {
+          "index": 5,
+          "ratio": 0,
+          "playing": false,
+          "paused": true
+        }
+      ],
+      "pass": true
+    },
+    "mediaError": {
+      "method": "synthetic error event",
+      "before": {
+        "playing": true,
+        "paused": false,
+        "currentTime": 0.01878,
+        "opacity": "0",
+        "muted": true,
+        "loop": true,
+        "playsInline": true
+      },
+      "after": {
+        "playing": false,
+        "paused": true,
+        "currentTime": 0,
+        "opacity": "0",
+        "muted": true,
+        "loop": true,
+        "playsInline": true
+      }
+    },
+    "pageLifecycle": {
+      "method": "synthetic persisted PageTransitionEvent",
+      "afterHide": {
+        "playing": false,
+        "paused": true,
+        "currentTime": 0,
+        "opacity": "0",
+        "muted": true,
+        "loop": true,
+        "playsInline": true
+      },
+      "afterShow": {
+        "playing": true,
+        "paused": false,
+        "currentTime": 0.01776,
+        "opacity": "0",
+        "muted": true,
+        "loop": true,
+        "playsInline": true
+      }
+    },
+    "visibility": {
+      "method": "controlled reversible visibilityState",
+      "reset": {
+        "playing": false,
+        "paused": true,
+        "currentTime": 0
+      },
+      "restored": "visible",
+      "replayed": {
+        "playing": true,
+        "paused": false,
+        "currentTime": 0.012111,
+        "opacity": "0",
+        "muted": true,
+        "loop": true,
+        "playsInline": true
+      }
+    },
+    "events": {
+      "requestCount": 14,
+      "documentRequestCount": 1,
+      "responseCount": 14,
+      "contactPosts": 0,
+      "consoleWarningsErrors": 0,
+      "pageErrors": 0,
+      "requestFailures": [],
+      "httpErrors": []
+    }
+  },
+  "fallbacks": {
+    "reducedMotion": {
+      "pass": true,
+      "checks": {
+        "navigation": true,
+        "motionStatic": true,
+        "cleanEventsAndNoSubmit": true,
+        "sixPosters": true
+      },
+      "wrappers": [
+        {
+          "id": "slow-steps",
+          "visible": true,
+          "background": true,
+          "poster": "/assets/portfolio/slow-steps-poster.webp",
+          "videoDisplay": "none",
+          "paused": true,
+          "currentTime": 0,
+          "playing": false
+        },
+        {
+          "id": "tech-dreamers",
+          "visible": true,
+          "background": true,
+          "poster": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+          "videoDisplay": "none",
+          "paused": true,
+          "currentTime": 0,
+          "playing": false
+        },
+        {
+          "id": "my-art-my-voice",
+          "visible": true,
+          "background": true,
+          "poster": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+          "videoDisplay": "none",
+          "paused": true,
+          "currentTime": 0,
+          "playing": false
+        },
+        {
+          "id": "interior-spatial-brand-films",
+          "visible": true,
+          "background": true,
+          "poster": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+          "videoDisplay": "none",
+          "paused": true,
+          "currentTime": 0,
+          "playing": false
+        },
+        {
+          "id": "pts-taigi-bus",
+          "visible": true,
+          "background": true,
+          "poster": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+          "videoDisplay": "none",
+          "paused": true,
+          "currentTime": 0,
+          "playing": false
+        },
+        {
+          "id": "top-gear-china-uk-special",
+          "visible": true,
+          "background": true,
+          "poster": "/assets/portfolio/top-gear-uk-special-car.jpg",
+          "videoDisplay": "none",
+          "paused": true,
+          "currentTime": 0,
+          "playing": false
+        }
+      ]
+    },
+    "noJavaScript": {
+      "pass": true,
+      "checks": {
+        "navigation": true,
+        "keyboardToWorks": true,
+        "noNavigationOrContactPost": true,
+        "cleanEvents": true,
+        "sixStaticPosters": true
+      },
+      "fragment": "works",
+      "worksRect": {
+        "top": 0.421875,
+        "bottom": 4420.421875,
+        "left": 0,
+        "right": 1200,
+        "intersectsViewport": true
+      },
+      "documentRequestsBefore": 1,
+      "documentRequestsAfter": 1,
+      "posters": {
+        "slow-steps": "/assets/portfolio/slow-steps-poster.webp",
+        "tech-dreamers": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+        "my-art-my-voice": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+        "interior-spatial-brand-films": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+        "pts-taigi-bus": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+        "top-gear-china-uk-special": "/assets/portfolio/top-gear-uk-special-car.jpg"
+      },
+      "wrappers": [
+        {
+          "id": "slow-steps",
+          "visible": true,
+          "background": true,
+          "poster": "/assets/portfolio/slow-steps-poster.webp",
+          "videoDisplay": "block",
+          "paused": true,
+          "currentTime": 0,
+          "playing": false
+        },
+        {
+          "id": "tech-dreamers",
+          "visible": true,
+          "background": true,
+          "poster": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+          "videoDisplay": "block",
+          "paused": true,
+          "currentTime": 0,
+          "playing": false
+        },
+        {
+          "id": "my-art-my-voice",
+          "visible": true,
+          "background": true,
+          "poster": "/assets/portfolio/my-art-my-voice-performance-2.jpg",
+          "videoDisplay": "block",
+          "paused": true,
+          "currentTime": 0,
+          "playing": false
+        },
+        {
+          "id": "interior-spatial-brand-films",
+          "visible": true,
+          "background": true,
+          "poster": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+          "videoDisplay": "block",
+          "paused": true,
+          "currentTime": 0,
+          "playing": false
+        },
+        {
+          "id": "pts-taigi-bus",
+          "visible": true,
+          "background": true,
+          "poster": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+          "videoDisplay": "block",
+          "paused": true,
+          "currentTime": 0,
+          "playing": false
+        },
+        {
+          "id": "top-gear-china-uk-special",
+          "visible": true,
+          "background": true,
+          "poster": "/assets/portfolio/top-gear-uk-special-car.jpg",
+          "videoDisplay": "block",
+          "paused": true,
+          "currentTime": 0,
+          "playing": false
+        }
+      ]
+    },
+    "keyboard": {
+      "pass": true,
+      "checks": {
+        "navigation": true,
+        "techFocusedWithExactOutline": true,
+        "contactReached": true,
+        "videosNeverFocused": true,
+        "videoOwnership": true,
+        "cleanEventsAndNoSubmit": true
+      },
+      "techFocus": {
+        "tag": "A",
+        "href": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
+        "name": null,
+        "className": "media-frame media-frame-unlabeled media-frame-link",
+        "isVideo": false,
+        "rect": {
+          "x": 144.59375,
+          "y": 641.046875,
+          "width": 533.75,
+          "height": 618.8125
+        },
+        "intersects": true,
+        "outline": {
+          "style": "solid",
+          "width": "2px",
+          "color": "rgb(216, 255, 62)",
+          "offset": "4px"
+        }
+      },
+      "videoMeta": [
+        {
+          "tabIndex": -1,
+          "controls": false,
+          "pointerEvents": "none"
+        },
+        {
+          "tabIndex": -1,
+          "controls": false,
+          "pointerEvents": "none"
+        },
+        {
+          "tabIndex": -1,
+          "controls": false,
+          "pointerEvents": "none"
+        },
+        {
+          "tabIndex": -1,
+          "controls": false,
+          "pointerEvents": "none"
+        },
+        {
+          "tabIndex": -1,
+          "controls": false,
+          "pointerEvents": "none"
+        },
+        {
+          "tabIndex": -1,
+          "controls": false,
+          "pointerEvents": "none"
+        }
+      ]
+    }
+  },
+  "baseline": [],
+  "matchedBaselineClaim": false
+}
