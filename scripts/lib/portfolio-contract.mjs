@@ -29,6 +29,11 @@ export const FEATURED_REEL_EVIDENCE_FIELDS = Object.freeze([
   "featuredReelRightsStatus",
 ]);
 
+export const HERO_MEDIA_MOTIONS = Object.freeze(["slow-push"]);
+export const HERO_MEDIA_RIGHTS_STATUSES = Object.freeze([
+  "user-supplied-local-source",
+]);
+
 export const FIELD_CLASSIFICATION = Object.freeze({
   featured: Object.freeze({
     requiredRendered: Object.freeze([
@@ -132,6 +137,26 @@ function pick(source, fields) {
   return result;
 }
 
+function requireObject(value, kind) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new Error(`${kind} must be an object`);
+  }
+}
+
+function rejectUnknownFields(source, allowedFields, kind) {
+  for (const field of Object.keys(source)) {
+    if (!allowedFields.includes(field)) {
+      throw new Error(`${kind} has unknown field ${field}`);
+    }
+  }
+}
+
+function freezeDeep(value) {
+  if (!value || typeof value !== "object" || Object.isFrozen(value)) return value;
+  for (const nested of Object.values(value)) freezeDeep(nested);
+  return Object.freeze(value);
+}
+
 function contractFor(kind, source, classification, presentation) {
   return {
     kind,
@@ -218,6 +243,85 @@ function validateFeaturedReel(source) {
     || typeof dimensions.height !== "number" || !Number.isFinite(dimensions.height) || dimensions.height <= 0) {
     throw new Error(`${kind} featuredReelSourceDimensions must contain positive numbers`);
   }
+}
+
+export function normalizeHeroMedia(source) {
+  const kind = "HeroMedia";
+  requireObject(source, kind);
+  rejectUnknownFields(
+    source,
+    ["id", "src", "alt", "dimensions", "focalPoint", "motion", "rightsStatus"],
+    kind,
+  );
+  for (const field of ["id", "src", "alt", "dimensions", "focalPoint", "motion"]) {
+    requireField(source, field, kind);
+  }
+  if (source.id !== "site.hero") {
+    throw new Error(`${kind} id must be site.hero`);
+  }
+
+  const srcSegments = String(source.src).split("/");
+  if (!/^\/assets\/portfolio\/[^?#]+$/.test(source.src)
+    || source.src.includes("\\")
+    || source.src.includes("//")
+    || srcSegments.some((segment) => segment === "." || segment === "..")) {
+    throw new Error(`${kind} src must be a normalized local portfolio asset`);
+  }
+
+  requireObject(source.alt, `${kind} alt`);
+  rejectUnknownFields(source.alt, ["en", "zh"], `${kind} alt`);
+  requireLocalized(source, "alt", kind);
+
+  requireObject(source.dimensions, `${kind} dimensions`);
+  rejectUnknownFields(source.dimensions, ["width", "height"], `${kind} dimensions`);
+  for (const field of ["width", "height"]) {
+    if (!Number.isInteger(source.dimensions[field]) || source.dimensions[field] <= 0) {
+      throw new Error(`${kind} dimensions ${field} must be a positive integer`);
+    }
+  }
+
+  requireObject(source.focalPoint, `${kind} focalPoint`);
+  rejectUnknownFields(source.focalPoint, ["wide", "stacked", "mobile"], `${kind} focalPoint`);
+  for (const layout of ["wide", "stacked", "mobile"]) {
+    if (!Object.hasOwn(source.focalPoint, layout)) {
+      throw new Error(`${kind} focalPoint is missing ${layout}`);
+    }
+    const focal = source.focalPoint[layout];
+    requireObject(focal, `${kind} focalPoint ${layout}`);
+    rejectUnknownFields(focal, ["x", "y"], `${kind} focalPoint ${layout}`);
+    for (const axis of ["x", "y"]) {
+      if (!Number.isFinite(focal[axis]) || focal[axis] < 0 || focal[axis] > 1) {
+        throw new Error(`${kind} focalPoint ${layout} ${axis} must be between 0 and 1`);
+      }
+    }
+  }
+
+  if (!HERO_MEDIA_MOTIONS.includes(source.motion)) {
+    throw new Error(`${kind} motion must be one of: ${HERO_MEDIA_MOTIONS.join(", ")}`);
+  }
+  if (!HERO_MEDIA_RIGHTS_STATUSES.includes(source.rightsStatus)) {
+    throw new Error(`${kind} rightsStatus must be one of: ${HERO_MEDIA_RIGHTS_STATUSES.join(", ")}`);
+  }
+
+  const publicFields = {
+    id: source.id,
+    src: source.src,
+    alt: { ...source.alt },
+    dimensions: { ...source.dimensions },
+    focalPoint: Object.fromEntries(
+      Object.entries(source.focalPoint).map(([layout, focal]) => [layout, { ...focal }]),
+    ),
+    motion: source.motion,
+  };
+  return freezeDeep({
+    ...publicFields,
+    rightsStatus: source.rightsStatus,
+    contract: {
+      kind: "hero-media",
+      public: publicFields,
+      evidence: { rightsStatus: source.rightsStatus },
+    },
+  });
 }
 
 export function normalizeWorkPressItem(source) {

@@ -867,6 +867,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
   const html = renderPage({ lang: "en", site, works });
+  const zhHtml = renderPage({ lang: "zh", site, works });
 
   assert.match(html, /for artists, culture, and technology stories/i);
   assert.match(html, /<span>HSIN-HSIN<\/span><span>YUAN<\/span>/);
@@ -874,7 +875,17 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /<span>Cross-Cultural Storyteller<\/span>/);
   assert.doesNotMatch(html, /<span><span class="role-slash">\/<\/span> Cross-Cultural Storyteller<\/span>/);
   assert.doesNotMatch(html, /<div class="hero-roles">.*AI-Language Creative.*<\/div>/s);
-  assert.match(html, /<div class="hero-media" id="showreel">/);
+  assert.equal(site.site.heroMedia.contract.kind, "hero-media");
+  assert.match(html, /<link rel="preload" as="image" href="\/assets\/portfolio\/hsin-working-white-space\.jpg">/);
+  assert.match(html, /<div class="hero-media hero-media--slow-push" id="showreel"[^>]*data-hero-media-id="site\.hero"/);
+  assert.match(html, /aria-label="Hsin-Hsin Yuan working on a laptop in a bright white studio"/);
+  assert.match(zhHtml, /aria-label="袁欣欣在明亮的白色工作空間使用筆記型電腦"/);
+  assert.match(html, /data-hero-width="1920" data-hero-height="1440"/);
+  assert.match(html, /data-hero-motion="slow-push"/);
+  assert.match(html, /--hero-image: url\(&quot;\/assets\/portfolio\/hsin-working-white-space\.jpg&quot;\)/);
+  assert.match(html, /--hero-wide-x: 38%; --hero-wide-y: 78%/);
+  assert.match(html, /--hero-stacked-x: 38%; --hero-stacked-y: 77%/);
+  assert.match(html, /--hero-mobile-x: 38%; --hero-mobile-y: 78%/);
   assert.doesNotMatch(html, /light-beam-layer|light-beam-right|ambient-canvas/);
   assert.match(html, /<video[\s\S]*class="hero-showreel-video"[\s\S]*data-showreel-video/);
   assert.match(html, /muted/);
@@ -1365,7 +1376,11 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /@media \(max-width: 1280px\) \{\n  \.hero \{\n    grid-template-columns: 1fr;/);
   assert.doesNotMatch(css, /\.impact-grid/);
   assert.doesNotMatch(css, /\.impact-item/);
-  assert.match(css, /url\(\"\/assets\/portfolio\/hsin-working-white-space\.jpg\"\)/);
+  assert.doesNotMatch(css, /url\(\"\/assets\/portfolio\/hsin-working-white-space\.jpg\"\)/);
+  assert.match(css, /var\(--hero-image\)/);
+  assert.match(css, /var\(--hero-wide-x\) var\(--hero-wide-y\)/);
+  assert.match(css, /var\(--hero-stacked-x\) var\(--hero-stacked-y\)/);
+  assert.match(css, /var\(--hero-mobile-x\) var\(--hero-mobile-y\)/);
   assert.match(css, /\.hero-play-button \{/);
   assert.match(css, /\.hero-showreel-video \{/);
   assert.doesNotMatch(css, /\.hero-actions/);
@@ -1401,7 +1416,9 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.partner-name \{\n  display: none;/);
   assert.match(css, /\.hero h1 span \{\n  display: block;\n  white-space: nowrap;/);
   assert.match(css, /@keyframes heroStillPush/);
-  assert.match(css, /\.hero-media \{\n    animation: heroStillPush/);
+  assert.match(css, /\.hero-media--slow-push \{\n    animation: heroStillPush/);
+  assert.match(css, /calc\(var\(--hero-wide-x\) \+ 4%\)/);
+  assert.match(css, /calc\(var\(--hero-wide-y\) - 4%\)/);
   assert.match(css, /\.hero-roles \.role-slash \{\n  color: var\(--acid\);/);
   assert.match(css, /\.media-frame-link \{/);
   assert.match(css, /\.work-media-play \{/);

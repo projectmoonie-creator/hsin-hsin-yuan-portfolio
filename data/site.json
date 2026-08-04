@@ -1,4 +1,20 @@
 {
+  "heroMedia": {
+    "id": "site.hero",
+    "src": "/assets/portfolio/hsin-working-white-space.jpg",
+    "alt": {
+      "en": "Hsin-Hsin Yuan working on a laptop in a bright white studio",
+      "zh": "袁欣欣在明亮的白色工作空間使用筆記型電腦"
+    },
+    "dimensions": {"width": 1920, "height": 1440},
+    "focalPoint": {
+      "wide": {"x": 0.38, "y": 0.78},
+      "stacked": {"x": 0.38, "y": 0.77},
+      "mobile": {"x": 0.38, "y": 0.78}
+    },
+    "motion": "slow-push",
+    "rightsStatus": "user-supplied-local-source"
+  },
   "en": {
     "metaTitle": "Hsin-Hsin Yuan | Documentary Director & AI-Language Creative",
     "metaDescription": "International portfolio of Hsin-Hsin Yuan, a documentary director, cross-cultural storyteller, and AI-language creative.",

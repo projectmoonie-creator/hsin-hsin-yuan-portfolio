@@ -12,6 +12,7 @@ import {
   normalizeArchiveItem,
   normalizeFeaturedWork,
   normalizeGlobalPressItem,
+  normalizeHeroMedia,
   normalizeWorkPressItem,
   validatePortfolioCollections,
 } from "../scripts/lib/portfolio-contract.mjs";
@@ -53,6 +54,84 @@ function featured(overrides = {}) {
     ...overrides,
   };
 }
+
+function heroMedia(overrides = {}) {
+  return {
+    id: "site.hero",
+    src: "/assets/portfolio/hsin-working-white-space.jpg",
+    alt: localized(
+      "Hsin-Hsin Yuan working on a laptop in a bright white studio",
+      "袁欣欣在明亮的白色工作空間使用筆記型電腦",
+    ),
+    dimensions: { width: 1920, height: 1440 },
+    focalPoint: {
+      wide: { x: 0.38, y: 0.78 },
+      stacked: { x: 0.38, y: 0.77 },
+      mobile: { x: 0.38, y: 0.78 },
+    },
+    motion: "slow-push",
+    rightsStatus: "user-supplied-local-source",
+    ...overrides,
+  };
+}
+
+test("HeroMedia normalization freezes one public contract and keeps rights evidence private", () => {
+  const normalized = normalizeHeroMedia(heroMedia());
+
+  assert.equal(normalized.contract.kind, "hero-media");
+  assert.deepEqual(normalized.contract.public, {
+    id: "site.hero",
+    src: "/assets/portfolio/hsin-working-white-space.jpg",
+    alt: localized(
+      "Hsin-Hsin Yuan working on a laptop in a bright white studio",
+      "袁欣欣在明亮的白色工作空間使用筆記型電腦",
+    ),
+    dimensions: { width: 1920, height: 1440 },
+    focalPoint: {
+      wide: { x: 0.38, y: 0.78 },
+      stacked: { x: 0.38, y: 0.77 },
+      mobile: { x: 0.38, y: 0.78 },
+    },
+    motion: "slow-push",
+  });
+  assert.deepEqual(normalized.contract.evidence, {
+    rightsStatus: "user-supplied-local-source",
+  });
+  assert.equal(Object.hasOwn(normalized.contract.public, "rightsStatus"), false);
+  assert.equal(Object.isFrozen(normalized), true);
+  assert.equal(Object.isFrozen(normalized.alt), true);
+  assert.equal(Object.isFrozen(normalized.dimensions), true);
+  assert.equal(Object.isFrozen(normalized.focalPoint), true);
+  assert.equal(Object.isFrozen(normalized.focalPoint.wide), true);
+  assert.equal(Object.isFrozen(normalized.contract.public), true);
+  assert.equal(Object.isFrozen(normalized.contract.evidence), true);
+});
+
+test("HeroMedia normalization rejects unknown, missing, unsafe, and unsupported values", () => {
+  const cases = [
+    [heroMedia({ surprise: true }), /unknown field surprise/],
+    [heroMedia({ id: "site.other" }), /id must be site\.hero/],
+    [heroMedia({ src: 42 }), /src must be a normalized local portfolio asset/],
+    [heroMedia({ src: "https://example.com/hero.jpg" }), /src must be a normalized local portfolio asset/],
+    [heroMedia({ src: "/assets/portfolio/../private/hero.jpg" }), /src must be a normalized local portfolio asset/],
+    [heroMedia({ alt: { en: "English only" } }), /requires bilingual alt/],
+    [heroMedia({ dimensions: { width: 1920, height: 0 } }), /dimensions height must be a positive integer/],
+    [heroMedia({ dimensions: { width: 1920, height: 1440, depth: 8 } }), /dimensions has unknown field depth/],
+    [heroMedia({ focalPoint: { wide: { x: 0.38, y: 0.78 }, mobile: { x: 0.38, y: 0.78 } } }), /focalPoint is missing stacked/],
+    [heroMedia({ focalPoint: { wide: { x: -0.1, y: 0.78 }, stacked: { x: 0.38, y: 0.77 }, mobile: { x: 0.38, y: 0.78 } } }), /focalPoint wide x must be between 0 and 1/],
+    [heroMedia({ focalPoint: { wide: { x: 0.38, y: 0.78, z: 1 }, stacked: { x: 0.38, y: 0.77 }, mobile: { x: 0.38, y: 0.78 } } }), /focalPoint wide has unknown field z/],
+    [heroMedia({ motion: "pan-and-zoom" }), /motion must be one of: slow-push/],
+    [heroMedia({ rightsStatus: "" }), /rightsStatus must be one of: user-supplied-local-source/],
+  ];
+
+  for (const [source, expected] of cases) {
+    assert.throws(() => normalizeHeroMedia(source), expected);
+  }
+
+  const missing = heroMedia();
+  delete missing.src;
+  assert.throws(() => normalizeHeroMedia(missing), /is missing src/);
+});
 
 test("featured normalization requires public anatomy and explicit presentation", () => {
   for (const key of ["slug", "order", "year", "title", "role", "platform", "tagline", "description", "presentation"]) {

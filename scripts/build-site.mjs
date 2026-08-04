@@ -7,6 +7,7 @@ import {
   normalizeArchiveItem,
   normalizeFeaturedWork,
   normalizeGlobalPressItem,
+  normalizeHeroMedia,
 } from "./lib/portfolio-contract.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -64,8 +65,10 @@ export function loadMarkdownCollection(dir) {
 }
 
 export function loadSiteData(baseDir = root) {
+  const site = JSON.parse(readFileSync(join(baseDir, "data/site.json"), "utf8"));
+  site.heroMedia = normalizeHeroMedia(site.heroMedia);
   return {
-    site: JSON.parse(readFileSync(join(baseDir, "data/site.json"), "utf8")),
+    site,
     collaborations: JSON.parse(readFileSync(join(baseDir, "data/collaborations.json"), "utf8")),
     archive: loadMarkdownCollection(join(baseDir, "content/archive"))
       .map(normalizeArchiveItem),
@@ -97,6 +100,41 @@ function escapeCssUrl(value) {
 
 function cssUrl(value) {
   return `url(&quot;${escapeHtml(escapeCssUrl(value))}&quot;)`;
+}
+
+function focalPercent(value) {
+  return `${Number((value * 100).toFixed(4))}%`;
+}
+
+export function renderHeroMedia({ heroMedia, lang, copy }) {
+  const media = heroMedia.contract.public;
+  const focal = media.focalPoint;
+  const style = [
+    `--hero-image: ${cssUrl(media.src)}`,
+    `--hero-wide-x: ${focalPercent(focal.wide.x)}`,
+    `--hero-wide-y: ${focalPercent(focal.wide.y)}`,
+    `--hero-stacked-x: ${focalPercent(focal.stacked.x)}`,
+    `--hero-stacked-y: ${focalPercent(focal.stacked.y)}`,
+    `--hero-mobile-x: ${focalPercent(focal.mobile.x)}`,
+    `--hero-mobile-y: ${focalPercent(focal.mobile.y)}`,
+  ].join("; ");
+
+  return `<div class="hero-media hero-media--${escapeHtml(media.motion)}" id="showreel" data-hero-media-id="${escapeHtml(media.id)}" data-hero-width="${media.dimensions.width}" data-hero-height="${media.dimensions.height}" data-hero-motion="${escapeHtml(media.motion)}" aria-label="${escapeHtml(media.alt[lang])}" style="${style}">
+            <video
+              class="hero-showreel-video"
+              data-showreel-video
+              muted
+              playsinline
+              webkit-playsinline
+              preload="none"
+              aria-label="${escapeHtml(copy.showreelTitle)}"
+            >
+              <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
+            </video>
+            <button class="hero-play-button" type="button" data-showreel-play aria-label="${escapeHtml(copy.showreelCta)}">
+              <span class="hero-play-icon"></span>
+            </button>
+          </div>`;
 }
 
 function otherLang(lang) {
@@ -616,6 +654,7 @@ function renderSitemap(lastmod = new Date().toISOString().slice(0, 10)) {
 
 export function renderPage({ lang, site, works }) {
   const copy = site.site[lang];
+  const heroMedia = site.site.heroMedia;
   const switchLang = otherLang(lang);
   const heroTitleLines = (copy.heroTitleLines || [copy.heroTitle]).map((line) => `<span>${escapeHtml(line)}</span>`).join("");
   const heroRoles = (copy.heroRoleLines || copy.heroRoles).map((role) => `<span>${renderHeroRoleLine(role)}</span>`).join("");
@@ -647,7 +686,7 @@ export function renderPage({ lang, site, works }) {
     <meta name="twitter:card" content="summary_large_image">
     <script type="application/ld+json">${escapeJsonForHtml(renderPersonJsonLd(site))}</script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="preload" as="image" href="/assets/portfolio/hsin-working-white-space.jpg">
+    <link rel="preload" as="image" href="${escapeHtml(heroMedia.src)}">
     <link rel="stylesheet" href="/styles.css?v=${ASSET_VERSION}">
     <script type="module" src="/main.js?v=${ASSET_VERSION}"></script>
   </head>
@@ -663,22 +702,7 @@ export function renderPage({ lang, site, works }) {
 
       <main>
         <section class="hero">
-          <div class="hero-media" id="showreel">
-            <video
-              class="hero-showreel-video"
-              data-showreel-video
-              muted
-              playsinline
-              webkit-playsinline
-              preload="none"
-              aria-label="${escapeHtml(copy.showreelTitle)}"
-            >
-              <source src="/assets/showreel/website-visual-reel.mp4" type="video/mp4">
-            </video>
-            <button class="hero-play-button" type="button" data-showreel-play aria-label="${escapeHtml(copy.showreelCta)}">
-              <span class="hero-play-icon"></span>
-            </button>
-          </div>
+          ${renderHeroMedia({ heroMedia, lang, copy })}
           <div class="hero-content">
             <p class="eyebrow">${escapeHtml(copy.heroEyebrow)}</p>
             <h1 aria-label="${escapeHtml(copy.heroTitle)}">${heroTitleLines}</h1>
