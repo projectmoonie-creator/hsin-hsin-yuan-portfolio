@@ -14,17 +14,17 @@
 
 **Files:** Create `tests/media-package-apply.test.mjs` and `scripts/lib/media-package-apply.mjs`.
 
-- [ ] RED: test fresh apply, exact rerun, canonical-byte approval, strict schema/patch allowlist, confirm mismatch, partial/conflict refusal, source-target aliasing, redacted output, and injected recovery; observe the missing-module failure.
-- [ ] GREEN: implement canonical plan parsing, exact A0 recomputation, deterministic target resolution, full-package state classification, and sanitized receipts/errors without writing.
-- [ ] GREEN: implement targeted manifest/content candidate generation, target-adjacent staging, exact asset verification, ordered installation, and handled-error recovery.
-- [ ] REFACTOR: keep exported surface narrow and prove exact rerun makes zero writes through test hooks and byte/mtime assertions.
+- [x] RED: test fresh apply, exact rerun, canonical-byte approval, strict schema/patch allowlist, confirm mismatch, partial/conflict refusal, source-target aliasing, redacted output, and injected recovery; observe the missing-module failure.
+- [x] GREEN: implement canonical plan parsing, exact A0 recomputation, deterministic target resolution, full-package state classification, and sanitized receipts/errors without writing.
+- [x] GREEN: implement targeted manifest/content candidate generation, target-adjacent staging, exact asset verification, ordered installation, and handled-error recovery.
+- [x] REFACTOR: keep exported surface narrow and prove exact rerun makes zero writes through test hooks and byte/mtime assertions.
 
 ### Task 2: Strict local CLI
 
 **Files:** Create `scripts/apply-archive-media-package.mjs`; modify `package.json` and `tests/media-package-apply.test.mjs`.
 
-- [ ] RED: test that `media:apply` exists, requires each option once, rejects unknown/duplicate/positional input, emits one redacted JSON receipt, and never prompts or performs Git/network/deploy actions.
-- [ ] GREEN: add the thin CLI and `media:apply` package script; pass only approved plan bytes and the three explicit values to the library.
+- [x] RED: test that `media:apply` exists, requires each option once, rejects unknown/duplicate/positional input, emits one redacted JSON receipt, and never prompts or performs Git/network/deploy actions.
+- [x] GREEN: add the thin CLI and `media:apply` package script; pass only approved plan bytes and the three explicit values to the library.
 - [ ] Run the focused tests and `npm test`; commit and push the coherent implementation, then read back the exact remote branch tip.
 
 ### Task 3: Repository validation and closeout
