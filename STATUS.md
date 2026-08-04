@@ -1,8 +1,18 @@
 # Portfolio Status
 
-Updated: 2026-08-03
+Updated: 2026-08-04
 
 State: `PASS_WITH_OPEN_ITEMS`
+
+## 2026-08-04 Process Diet Finalized
+
+- `PROJECT_BIBLE.md` and `AGENTS.md` amended per
+  `docs/reviews/2026-08-04-process-diet-proposal.md` (v2, Codex-audited);
+  Bible stays at 165 lines; `npm test` 61/61; `git diff --check` clean.
+- Backup refs read back verbatim: `backup/main-2026-08-04`,
+  `backup/2026-08-04/f13a70c`, `backup/2026-08-04/d04e7f1`.
+- `origin/main`, merges, Preview, and Production unchanged; those still
+  require separate explicit producer authorization.
 
 ## Current Work Package
 

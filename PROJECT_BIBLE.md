@@ -3,11 +3,9 @@
 ## Content Rules
 
 - Do not move CV text directly into the site. First classify each line by function: identity, proof, role, service, warmth, metric, CTA, archive, or SEO.
-- Remove content repetition when two sections do the same job. Keep repetition only when it serves a different scanning moment.
+- Remove content repetition when two sections do the same job; keep it only when it serves a different scanning moment. Before adding new copy, identify what it proves, who it helps, whether it repeats an existing section, and where it belongs.
 - Homepage copy should be scannable. Put detailed context in work cards, press cards, archive entries, or future detail pages.
-- If a section is removed from the public layout, also remove or clearly mark its unused source fields. Do not leave old copy in data files where a future edit might accidentally revive it.
-- If a section is removed from the website, check every parallel output layer too: generated HTML, source data, CSS/JS, tests, Figma export SVGs, Figma importer plugin code, docs that act as current specs, and review prompts. Historical review/spec files may mention old sections, but active generators must not recreate them.
-- Before adding new copy, run a text consolidation pass: identify what the text proves, who it helps, whether it repeats an existing section, and where it belongs.
+- If a section is removed, also remove or clearly mark its unused source fields and check every parallel output layer: generated HTML, source data, CSS/JS, tests, Figma export SVGs, Figma importer plugin code, docs that act as current specs, and review prompts. Historical review/spec files may mention old sections, but active generators must not recreate them; do not leave old copy where a future edit might revive it.
 
 ## Bilingual Voice
 
@@ -15,10 +13,7 @@
 - Partner, publisher, and platform labels must be localizable at the data source. English pages and English design handoffs should use the English label without leaking a Chinese wordmark; Chinese pages may preserve the official Chinese name. Historical source titles are exempt when the title itself is evidence.
 - Do not translate press headlines or source titles too freely. If an English title is editorially translated from a Chinese source, keep it factual and close to the source.
 - Keep homepage language concise. Move richer, warmer explanation into work details, press, archive, or future case-study pages.
-- Treat the screening-strip tagline and Featured Work description as two
-  different reading moments. The tagline should be one memorable invitation;
-  the description should name the recognizable program type, subject, and
-  contribution without reading like a production inventory.
+- Treat the screening-strip tagline and Featured Work description as two different reading moments: the tagline is one memorable invitation; the description names the recognizable program type, subject, and contribution without reading like a production inventory.
 - For English portfolio-grouping titles, use natural, searchable industry
   language. Do not publish literal internal category labels that an
   English-speaking viewer would not know to search.
@@ -57,6 +52,7 @@
 - When the user approves a local portfolio still derived from a public video of her confirmed work, record the canonical source URL, exact timecode, output dimensions, focal point, and rights status. Keep the public watch destination attached to the work, and use only editorial crop/resize unless a generative edit is separately approved.
 - If a remote image breaks, blocks hotlinking, or creates mixed-content issues, use a text-only press card or ask the user for a replacement image. Do not silently swap in an unrelated still.
 - The showreel may use local footage only when the rights status is acceptable. If rights are uncertain, prefer a link-based or still-based reel until the user confirms.
+- Rights ledger vs integrity ledger: third-party or rights-sensitive media record canonical source and rights basis/status, plus SHA-256 only when localized or re-encoded; owned or user-provided assets record approved basename/source, rights basis, and duration. Integrity regressions that already protect checked-in runtime assets by size/hash/codec stay in the tests and are not removed in the name of rights-ledger dieting.
 
 ## Private Evidence Boundary
 
@@ -141,9 +137,13 @@
 ## Roadmap Discipline
 
 - Separate the fast prototype from the refined portfolio. A strong first version is allowed to be rough, but every later iteration should declare which layer it is changing: content, IA, visual system, media/showreel, interaction, SEO, contact, deployment, or design handoff.
-- Use work packages instead of open-ended polishing. Each package should have a short goal, affected files, non-goals, validation steps, and a rollback path.
-- Suggested roadmap order for this site: stabilize content and public claims; refine visual system and motion; add work detail pages for dense projects; replace temporary media with approved images/video; improve SEO/social previews; add analytics only when the user wants behavior data; then package the workflow as a reusable skill/service.
+- A normal work package's implementation plan is capped at 60 nonblank logical lines (goal, affected files, non-goals, validation, rollback); if it does not fit, split the package — exceptions need explicit producer approval, and estimated diff size is never a pass/fail. After a normal package, append at most 10 lines to `docs/reviews/LOG.md` (date, branch/commit, validation, external-review use or skip reason, open items); dated reports are reserved for phase closeouts and packages touching production deployment, privacy/rights/security, destructive migration, or frozen external-review evidence.
+- Suggested roadmap order: stabilize content and public claims → visual system and motion → detail pages for dense projects → approved media → SEO/social previews → analytics only on request → reusable skill/service packaging.
 - External reviewers such as Claude Code or Gemini should first produce findings, not edit the repo directly, unless the change scope is mechanical and approved.
+- External-review tiering (per Work Charter §4-23 as amended 2026-08-04): packages touching truth/rights/privacy claims, production deployment, or large phase scope use the full rotation review; low-risk user-visible packages use one independent reviewer; only docs-only packages that change no current rules and no public output may skip external review, with the skip reason recorded in LOG.md. The implementer never self-selects a lower tier — downgrades need the independent reviewer's concurrence or a producer ruling.
+- When adding a Bible rule, the same change records in `docs/reviews/LOG.md` a retire/downgrade/keep-with-reason verdict for one existing rule; superseded active instructions are deleted or merged (Git history is the archive), `docs/archive/` is only for material with ongoing reference value that is not a dated review, and dated reviews are never relocated to fake reduction.
+- Subtractive instructions (delete/trim/simplify) follow Work Charter §3-9: work as a diff against the existing base; re-architecture requires explicit producer approval.
+- Sub-agent tasking follows Work Charter §3-10: pass a scoped task summary, never the full conversation history (Codex concrete form: `fork_turns: none`).
 
 ## Phase Closeout And Cold Resume
 
@@ -153,13 +153,13 @@
 - Every formal closeout records the reviewed branch and commit, preview/production state, deterministic and visual evidence, external-review use or skip reason, accepted open items, and one exact next action in a dated file under `docs/reviews/`.
 - A substantial closed phase receives a named Git tag after the closeout package is committed. Push the branch and tag, then read back the remote tips.
 - Before declaring closeout complete, answer: "What changed in this phase that is not in a repository, durably backed up, or pushed?" Any remaining item must be listed as a risk.
+- After each coherent commit and again before closeout: record `git status --short`, then run `git rev-list --count HEAD --not --remotes=origin`; a value above 0 means commits are unreachable from every origin ref and must be non-force pushed to a uniquely named `backup/YYYY-MM-DD/<shortsha>`, read back with `git ls-remote`, and the remote tip compared verbatim to `HEAD` — mismatch is `BLOCKED`. `git rev-list --count origin/main..HEAD` is main divergence only and must not pose as a backup count.
 - Begin the next phase as a bounded work package from the recorded checkpoint. Do not rewrite historical closeout reports.
 
 ## QA Checklist
 
-- After content or layout changes, run `npm test`.
+- Packages affecting runtime or public output run `npm test` plus an eyeball pass at one relevant desktop width and one mobile width; docs/governance-only packages run targeted validation and `git diff --check` with no browser; changes directly touching bilingual output, reduced-motion, no-JS, BFCache, or media lifecycle add that focused scenario in the same package; the full bilingual × viewport × fallback matrix runs only at phase closeout and before production deployment.
 - After removing or renaming a public section, run a repo search for the old label, CSS classes, data file names, generator functions, Figma importer code, Figma export files, and tests. Confirm remaining hits are only historical docs or negative regression tests.
-- For visual changes, inspect desktop and mobile widths before pushing.
 - Check that the hero starts at the top on refresh, the showreel plays inline, the screening strip loops without a visible blank gap, and Featured Works remains reachable.
 - Check that press thumbnails come from press metadata or approved replacements.
 - Check that no private source material appears in generated output.
