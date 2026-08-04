@@ -4,6 +4,14 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-04 — HeroMedia closeout remediation
+- Branch/base: `codex/hero-media-closeout-remediation` from local `main` `e2d75f0`; remote rollback ref `backup/2026-08-04/e2d75f0` verified first.
+- Change: fail-closed JPEG APP/COM policy, one derived slow-push profile for website/Figma, breakpoint-active focal variables, and current cold resume.
+- TDD: original four-finding RED `47/54`; GREEN `54/54`; malformed-JFIF-tail RED `3/4`; GREEN `4/4`.
+- Validation: full `79/79`, design audit, build, Figma export, diff/SHA checks, and three-case responsive/reduced-motion browser QA passed.
+- Review packet: `368e0fe…13fd`; Gemini incomplete (DNS then external-transmission authorization denied, no model call); Claude handoff incomplete, no model request.
+- External state: backup ref only; no `origin/main`, Preview, Production, alias, Contact, or protected-file change.
+
 ## 2026-08-04 — HeroMedia component and showreel retirement
 - Branch/commit: `codex/hero-media-component`; extraction `5539c43`; behavior commit reported externally after commit.
 - Change: canonical website/Figma HeroMedia; Play/showreel retired; lossless JPEG metadata sanitization and repeatable replacement command.

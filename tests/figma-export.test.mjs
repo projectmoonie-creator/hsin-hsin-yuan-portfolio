@@ -28,7 +28,7 @@ function heroImageBlock(svg, id) {
   return svg.match(new RegExp(`<g id="${id}"[\\s\\S]*?<\\/g>`))?.[0] || "";
 }
 
-test("Figma object-cover geometry uses intrinsic dimensions and focal points", () => {
+test("Figma Hero geometry matches the live motion start crop", () => {
   const desktop = objectCoverGeometry({
     sourceWidth: 1920,
     sourceHeight: 1440,
@@ -37,6 +37,7 @@ test("Figma object-cover geometry uses intrinsic dimensions and focal points", (
     frameWidth: 610,
     frameHeight: 520,
     focalPoint: { x: 0.38, y: 0.78 },
+    heightScale: 1.4,
   });
   const mobile = objectCoverGeometry({
     sourceWidth: 1920,
@@ -46,10 +47,11 @@ test("Figma object-cover geometry uses intrinsic dimensions and focal points", (
     frameWidth: 342,
     frameHeight: 252,
     focalPoint: { x: 0.38, y: 0.78 },
+    heightScale: 1.4,
   });
 
-  assert.deepEqual(desktop, { x: 40.3333, y: 104, width: 693.3333, height: 520 });
-  assert.deepEqual(mobile, { x: 24, y: 72.49, width: 342, height: 256.5 });
+  assert.deepEqual(desktop, { x: -65.0533, y: -58.24, width: 970.6667, height: 728 });
+  assert.deepEqual(mobile, { x: -24.792, y: -2.624, width: 470.4, height: 352.8 });
 });
 
 test("Figma export helpers reject remote images and invalid featured work metadata", () => {
@@ -109,9 +111,9 @@ test("Figma SVG export keeps portfolio layers editable and named", () => {
   assert.match(desktopHeroImage, /data-source="hsin-working-white-space\.jpg"/);
   assert.match(desktopHeroImage, /data-focal-x="0\.38" data-focal-y="0\.78"/);
   assert.match(desktopHeroImage, /<clipPath id="layer-hero-image-clip">/);
-  assert.match(desktopHeroImage, /<image[^>]*x="40\.3333" y="104" width="693\.3333" height="520"[^>]*clip-path="url\(#layer-hero-image-clip\)"/);
+  assert.match(desktopHeroImage, /<image[^>]*x="-65\.0533" y="-58\.24" width="970\.6667" height="728"[^>]*clip-path="url\(#layer-hero-image-clip\)"/);
   assert.match(mobileHeroImage, /data-source="hsin-working-white-space\.jpg"/);
-  assert.match(mobileHeroImage, /<image[^>]*x="24" y="72\.49" width="342" height="256\.5"/);
+  assert.match(mobileHeroImage, /<image[^>]*x="-24\.792" y="-2\.624" width="470\.4" height="352\.8"/);
   assert.doesNotMatch(desktopHeroImage, /slow-steps-poster\.webp/);
   assert.doesNotMatch(mobileHeroImage, /slow-steps-poster\.webp/);
   assert.doesNotMatch(desktopHome, /paris-cultural-olympiad-team\.jpg/);

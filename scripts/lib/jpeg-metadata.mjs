@@ -1,4 +1,34 @@
-const PRIVATE_METADATA_MARKERS = new Set([0xe1, 0xed, 0xfe]);
+const COMMENT_MARKER = 0xfe;
+
+function isApplicationMarker(marker) {
+  return marker >= 0xe0 && marker <= 0xef;
+}
+
+function isJfifApp0(bytes, marker, payloadStart, segmentEnd, sawJfifApp0) {
+  if (marker !== 0xe0) return false;
+  if (sawJfifApp0 || segmentEnd - payloadStart < 14) return false;
+  if (bytes[payloadStart] !== 0x4a
+    || bytes[payloadStart + 1] !== 0x46
+    || bytes[payloadStart + 2] !== 0x49
+    || bytes[payloadStart + 3] !== 0x46
+    || bytes[payloadStart + 4] !== 0x00) return false;
+
+  const versionMajor = bytes[payloadStart + 5];
+  const versionMinor = bytes[payloadStart + 6];
+  const densityUnits = bytes[payloadStart + 7];
+  const xDensity = bytes.readUInt16BE(payloadStart + 8);
+  const yDensity = bytes.readUInt16BE(payloadStart + 10);
+  const thumbnailWidth = bytes[payloadStart + 12];
+  const thumbnailHeight = bytes[payloadStart + 13];
+  const expectedPayloadLength = 14 + (3 * thumbnailWidth * thumbnailHeight);
+
+  return versionMajor === 1
+    && versionMinor <= 2
+    && densityUnits <= 2
+    && xDensity > 0
+    && yDensity > 0
+    && segmentEnd - payloadStart === expectedPayloadLength;
+}
 
 function isStandaloneMarker(marker) {
   return marker === 0x01 || (marker >= 0xd0 && marker <= 0xd9);
@@ -18,6 +48,7 @@ function processJpeg(input, { stripPrivateMetadata }) {
   const privateMarkers = [];
   let offset = 2;
   let sawEnd = false;
+  let sawJfifApp0 = false;
 
   while (offset < bytes.length) {
     const markerStart = offset;
@@ -51,7 +82,17 @@ function processJpeg(input, { stripPrivateMetadata }) {
     const segmentEnd = markerEnd + segmentLength;
     if (segmentEnd > bytes.length) throw jpegError("truncated segment payload");
 
-    const isPrivate = PRIVATE_METADATA_MARKERS.has(marker);
+    const payloadStart = markerEnd + 2;
+    const approvedJfif = isJfifApp0(
+      bytes,
+      marker,
+      payloadStart,
+      segmentEnd,
+      sawJfifApp0,
+    );
+    if (approvedJfif) sawJfifApp0 = true;
+    const isPrivate = marker === COMMENT_MARKER
+      || (isApplicationMarker(marker) && !approvedJfif);
     if (isPrivate) privateMarkers.push(marker);
     if (!stripPrivateMetadata || !isPrivate) {
       chunks.push(bytes.subarray(markerStart, segmentEnd));

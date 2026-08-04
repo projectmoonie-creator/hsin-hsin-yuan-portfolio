@@ -134,12 +134,14 @@ a {
 }
 
 .hero-media {
+  --hero-active-x: var(--hero-wide-x);
+  --hero-active-y: var(--hero-wide-y);
   background-image:
     linear-gradient(180deg, rgba(11, 11, 12, 0.02), rgba(11, 11, 12, 0.45)),
     var(--hero-image);
   background-position:
     center,
-    var(--hero-wide-x) var(--hero-wide-y);
+    var(--hero-active-x) var(--hero-active-y);
   background-repeat: no-repeat;
   background-size:
     cover,
@@ -1249,6 +1251,8 @@ a.archive-card-media-link:focus-visible {
   }
 
   .hero-media {
+    --hero-active-x: var(--hero-stacked-x);
+    --hero-active-y: var(--hero-stacked-y);
     aspect-ratio: 16 / 10.4;
     background-position:
       center,
@@ -1324,6 +1328,8 @@ a.archive-card-media-link:focus-visible {
   }
 
   .hero-media {
+    --hero-active-x: var(--hero-mobile-x);
+    --hero-active-y: var(--hero-mobile-y);
     aspect-ratio: 1 / 0.94;
     background-position:
       center,
@@ -1465,18 +1471,18 @@ a.archive-card-media-link:focus-visible {
     from {
       background-position:
         center,
-        var(--hero-wide-x) var(--hero-wide-y);
+        var(--hero-active-x) var(--hero-active-y);
       background-size:
         cover,
-        auto 140%;
+        auto var(--hero-motion-start-scale);
     }
     to {
       background-position:
         center,
-        calc(var(--hero-wide-x) + 4%) calc(var(--hero-wide-y) - 4%);
+        calc(var(--hero-active-x) + 4%) calc(var(--hero-active-y) - 4%);
       background-size:
         cover,
-        auto 148%;
+        auto var(--hero-motion-end-scale);
     }
   }
 

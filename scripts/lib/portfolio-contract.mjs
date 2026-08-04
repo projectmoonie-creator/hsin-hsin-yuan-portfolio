@@ -30,6 +30,9 @@ export const FEATURED_REEL_EVIDENCE_FIELDS = Object.freeze([
 ]);
 
 export const HERO_MEDIA_MOTIONS = Object.freeze(["slow-push"]);
+export const HERO_MEDIA_MOTION_PROFILES = Object.freeze({
+  "slow-push": Object.freeze({ startScale: 1.4, endScale: 1.48 }),
+});
 export const HERO_MEDIA_RIGHTS_STATUSES = Object.freeze([
   "user-supplied-local-source",
 ]);
@@ -250,7 +253,7 @@ export function normalizeHeroMedia(source) {
   requireObject(source, kind);
   rejectUnknownFields(
     source,
-    ["id", "src", "alt", "dimensions", "focalPoint", "motion", "rightsStatus"],
+    ["id", "src", "alt", "dimensions", "focalPoint", "motion", "motionProfile", "rightsStatus"],
     kind,
   );
   for (const field of ["id", "src", "alt", "dimensions", "focalPoint", "motion"]) {
@@ -299,6 +302,15 @@ export function normalizeHeroMedia(source) {
   if (!HERO_MEDIA_MOTIONS.includes(source.motion)) {
     throw new Error(`${kind} motion must be one of: ${HERO_MEDIA_MOTIONS.join(", ")}`);
   }
+  const motionProfile = HERO_MEDIA_MOTION_PROFILES[source.motion];
+  if (Object.hasOwn(source, "motionProfile")) {
+    requireObject(source.motionProfile, `${kind} motionProfile`);
+    rejectUnknownFields(source.motionProfile, ["startScale", "endScale"], `${kind} motionProfile`);
+    if (source.motionProfile.startScale !== motionProfile.startScale
+      || source.motionProfile.endScale !== motionProfile.endScale) {
+      throw new Error(`${kind} motionProfile must match motion ${source.motion}`);
+    }
+  }
   if (!HERO_MEDIA_RIGHTS_STATUSES.includes(source.rightsStatus)) {
     throw new Error(`${kind} rightsStatus must be one of: ${HERO_MEDIA_RIGHTS_STATUSES.join(", ")}`);
   }
@@ -312,6 +324,7 @@ export function normalizeHeroMedia(source) {
       Object.entries(source.focalPoint).map(([layout, focal]) => [layout, { ...focal }]),
     ),
     motion: source.motion,
+    motionProfile: { ...motionProfile },
   };
   return freezeDeep({
     ...publicFields,

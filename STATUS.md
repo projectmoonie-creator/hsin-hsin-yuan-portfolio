@@ -4,7 +4,31 @@ Updated: 2026-08-04
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — HeroMedia Component And Showreel Retirement
+## Current Work Package — HeroMedia Closeout Remediation
+
+- Branch: `codex/hero-media-closeout-remediation`; base and rollback checkpoint:
+  local `main` at `e2d75f0e57ff0d6f0d64ff5381a04a3314b35481`.
+- Remote backup ref `backup/2026-08-04/e2d75f0` was created before remediation
+  and read back at the exact base commit above.
+- The bounded TDD package closes four review findings: fail-closed JPEG APP
+  metadata, Figma/live Hero starting-crop parity, responsive focal points during
+  motion, and this cold-resume record.
+- Focused tests passed `54/54`; the full suite passed `79/79`. Design audit,
+  build, Figma export, `git diff --check`, public-Hero integrity, and protected
+  file integrity passed. Local browser QA passed English desktop, Chinese
+  stacked, and English mobile reduced-motion cases with no Play/video,
+  overflow, console, page, or request errors.
+- Frozen review packet SHA-256:
+  `368e0fe6909791c854f217c80dcdc9499b66b30a3e2a664626ec2ff74ca113fd`.
+  Gemini is honestly incomplete after restricted DNS failure and denial of
+  external packet transmission without separate explicit user authorization;
+  no model was selected or called. Claude is `handoff-to-active-session` with
+  no model request sent. No external-review consensus is claimed.
+- `origin/main`, Vercel Preview, aliases, Contact, and Production remain
+  untouched. The protected untracked review file remains unmodified and outside
+  Git.
+
+## Prior Accepted Work Package — HeroMedia Component And Showreel Retirement
 
 - Reviewed feature branch: `codex/hero-media-component`; package base and full
   rollback point: `fb6517591e34b9cb20d814891c0177cf2ac9ba2c`.
@@ -39,7 +63,7 @@ State: `PASS_WITH_OPEN_ITEMS`
 - Vercel Preview, aliases, Contact, and Production are untouched. The protected
   untracked review file remains unmodified and outside Git.
 
-## HeroMedia Open Item
+## Prior HeroMedia Open Item
 
 Submit the same frozen packet to the active Claude subscription lane when it is
 available. The usable Gemini lane plus local gates close this producer-gated
@@ -283,17 +307,20 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Review and accept `codex/portfolio-studio-a0` at its externally reported
-closeout tip. The next bounded decision is either a feature Preview or merge to
-`main`; Production remains separate and requires another explicit instruction.
+Obtain explicit producer authorization before transmitting the frozen packet to
+Gemini, complete and adjudicate the required privacy/mechanism review, then ask
+for one bounded decision: create a feature Preview or merge the remediation
+into local `main`. Production remains separate and requires another explicit
+instruction.
 
 ## Cold Resume
 
-1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and the A0 implementation
-   plan.
-2. Verify branch `codex/portfolio-studio-a0`, implementation head `9fb0f2c`,
-   the externally reported closeout tip, remote readback, and protected file.
-3. Read the A0 frozen packet, Gemini review, and adjudication; Claude remains a
-   same-packet follow-up, not a completed lane.
-4. Ask whether the user wants a feature Preview or merge to `main`.
-5. Do not deploy Production, submit Contact, or merge implicitly.
+1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and the HeroMedia design
+   contract.
+2. Verify branch `codex/hero-media-closeout-remediation`, its current head,
+   remote backup `backup/2026-08-04/e2d75f0`, `origin/main`, and the protected
+   untracked file.
+3. Read the remediation diff, focused/full validation, frozen review packet,
+   completed reviewer result, and any honestly incomplete review lane.
+4. Ask whether the user wants a feature Preview or a local `main` merge.
+5. Do not deploy Production, submit Contact, push `main`, or merge implicitly.

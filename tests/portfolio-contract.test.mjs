@@ -93,6 +93,7 @@ test("HeroMedia normalization freezes one public contract and keeps rights evide
       mobile: { x: 0.38, y: 0.78 },
     },
     motion: "slow-push",
+    motionProfile: { startScale: 1.4, endScale: 1.48 },
   });
   assert.deepEqual(normalized.contract.evidence, {
     rightsStatus: "user-supplied-local-source",
@@ -103,6 +104,7 @@ test("HeroMedia normalization freezes one public contract and keeps rights evide
   assert.equal(Object.isFrozen(normalized.dimensions), true);
   assert.equal(Object.isFrozen(normalized.focalPoint), true);
   assert.equal(Object.isFrozen(normalized.focalPoint.wide), true);
+  assert.equal(Object.isFrozen(normalized.contract.public.motionProfile), true);
   assert.equal(Object.isFrozen(normalized.contract.public), true);
   assert.equal(Object.isFrozen(normalized.contract.evidence), true);
 });
@@ -121,6 +123,7 @@ test("HeroMedia normalization rejects unknown, missing, unsafe, and unsupported 
     [heroMedia({ focalPoint: { wide: { x: -0.1, y: 0.78 }, stacked: { x: 0.38, y: 0.77 }, mobile: { x: 0.38, y: 0.78 } } }), /focalPoint wide x must be between 0 and 1/],
     [heroMedia({ focalPoint: { wide: { x: 0.38, y: 0.78, z: 1 }, stacked: { x: 0.38, y: 0.77 }, mobile: { x: 0.38, y: 0.78 } } }), /focalPoint wide has unknown field z/],
     [heroMedia({ motion: "pan-and-zoom" }), /motion must be one of: slow-push/],
+    [heroMedia({ motionProfile: { startScale: 1.41, endScale: 1.48 } }), /motionProfile must match motion slow-push/],
     [heroMedia({ rightsStatus: "" }), /rightsStatus must be one of: user-supplied-local-source/],
   ];
 

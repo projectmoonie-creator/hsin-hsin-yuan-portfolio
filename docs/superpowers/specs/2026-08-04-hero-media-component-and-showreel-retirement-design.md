@@ -82,8 +82,10 @@ module. It must reject:
 - motion values other than the named `slow-push` variant;
 - unsupported or empty rights status.
 
-The normalized public contract includes the rendered fields but does not emit
-rights evidence into public HTML.
+The normalized public contract includes the rendered fields plus a derived,
+frozen `motionProfile`. `slow-push` resolves to `startScale: 1.4` and
+`endScale: 1.48`; callers do not maintain a second free-form scale map. The
+contract does not emit rights evidence into public HTML.
 
 ## Website Consumer
 
@@ -94,7 +96,9 @@ or renderer contains the literal filename.
 To preserve the approved crop and motion exactly, retain the background-media
 implementation for this package. Render the Hero as a non-interactive image
 surface with a localized accessible name and data-driven CSS custom properties
-for the source and the three focal points. Apply a named
+for the source, three focal points, and derived motion scales. An active focal
+pair maps to `wide`, `stacked`, or `mobile` at the same layout breakpoints, so
+the animation keyframes never bypass the declared narrow crop. Apply a named
 `hero-media--slow-push` class. The existing animation duration, scale range,
 gradient, radius, aspect ratios, layout breakpoints, and focal positions remain
 the baseline. Reduced motion continues to suppress the animation.
@@ -109,8 +113,10 @@ The current `npm run figma:export` path consumes the same normalized
 `heroMedia` record for English/Chinese desktop and mobile Hero frames. Replace
 the existing first-Featured-poster substitution with the actual Hero source.
 
-Extend the export image helper to compute a clipped object-cover rectangle from
-the intrinsic dimensions, frame dimensions, and the applicable focal point.
+Extend the export image helper to compute a clipped rectangle from the
+intrinsic dimensions, frame dimensions, applicable focal point, and the named
+motion profile's `1.4` starting scale. Ordinary object-cover geometry is not
+the live starting crop and is therefore not sufficient for a Hero frame.
 Desktop uses `wide`; stacked/mobile reference frames use the declared narrow
 focal value appropriate to their layout. The Figma Hero is a static view of the
 live animation's starting crop; it does not attempt to simulate motion.
@@ -151,9 +157,10 @@ user-supplied HEIC or another private source master.
 
 Add a dependency-free regression check that the referenced public Hero bytes
 contain no EXIF, GPS, XMP, IPTC, device, creator, comment, or location metadata
-payload. Retaining container-identification data needed to decode the image is
-allowed. Record the sanitized public derivative's exact SHA-256 after it is
-created.
+payload. The sanitizer fails closed on every APP0–APP15 segment except the
+first structurally identified APP0/JFIF segment, and on every COM segment;
+unclassified application metadata is never implicitly allowed. Record the
+sanitized public derivative's exact SHA-256 after it is created.
 
 Future replacements must start from an approved local asset, produce a public
 metadata-free derivative, update the single HeroMedia record, and pass the

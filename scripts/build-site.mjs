@@ -117,6 +117,8 @@ export function renderHeroMedia({ heroMedia, lang }) {
     `--hero-stacked-y: ${focalPercent(focal.stacked.y)}`,
     `--hero-mobile-x: ${focalPercent(focal.mobile.x)}`,
     `--hero-mobile-y: ${focalPercent(focal.mobile.y)}`,
+    `--hero-motion-start-scale: ${focalPercent(media.motionProfile.startScale)}`,
+    `--hero-motion-end-scale: ${focalPercent(media.motionProfile.endScale)}`,
   ].join("; ");
 
   return `<div class="hero-media hero-media--${escapeHtml(media.motion)}" data-hero-media-id="${escapeHtml(media.id)}" data-hero-width="${media.dimensions.width}" data-hero-height="${media.dimensions.height}" data-hero-motion="${escapeHtml(media.motion)}" role="img" aria-label="${escapeHtml(media.alt[lang])}" style="${style}"></div>`;

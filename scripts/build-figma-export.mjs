@@ -119,8 +119,12 @@ export function objectCoverGeometry({
   frameWidth,
   frameHeight,
   focalPoint,
+  heightScale = 1,
 }) {
-  const scale = Math.max(frameWidth / sourceWidth, frameHeight / sourceHeight);
+  const scale = Math.max(
+    frameWidth / sourceWidth,
+    (frameHeight * heightScale) / sourceHeight,
+  );
   const width = sourceWidth * scale;
   const height = sourceHeight * scale;
   return {
@@ -141,6 +145,7 @@ function imageLayer({
   opacity = 1,
   dimensions,
   focalPoint,
+  heightScale = 1,
 }) {
   if (!href) {
     return `<g id="${id}" data-source="placeholder">
@@ -158,6 +163,7 @@ function imageLayer({
       frameWidth: width,
       frameHeight: height,
       focalPoint,
+      heightScale,
     });
     return `<g id="${id}" data-source="${escapeXml(filename)}" data-focal-x="${focalPoint.x}" data-focal-y="${focalPoint.y}">
     <defs><clipPath id="${id}-clip"><rect x="${x}" y="${y}" width="${width}" height="${height}"/></clipPath></defs>
@@ -247,7 +253,7 @@ export function buildDesktopHome(site, works, collaborations) {
     <text x="980" y="54" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="750" letter-spacing="1.1">AVAILABLE FOR / WORKS / CONTACT / 中文</text>
   </g>
   <g id="layer-hero">
-    ${imageLayer({ id: "layer-hero-image", href: heroMedia.src, x: 72, y: 104, width: 610, height: 520, opacity: 0.96, dimensions: heroMedia.dimensions, focalPoint: heroMedia.focalPoint.wide })}
+    ${imageLayer({ id: "layer-hero-image", href: heroMedia.src, x: 72, y: 104, width: 610, height: 520, opacity: 0.96, dimensions: heroMedia.dimensions, focalPoint: heroMedia.focalPoint.wide, heightScale: heroMedia.motionProfile.startScale })}
     <rect x="72" y="104" width="610" height="520" fill="${tokens.bg}" opacity="0.08"/>
     <text id="layer-hero-eyebrow" x="772" y="148" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="850" letter-spacing="1.5">${escapeXml(hero.heroEyebrow.toUpperCase())}</text>
     <g id="layer-hero-title">
@@ -331,7 +337,7 @@ export function buildMobileHome(site, works, collaborations) {
     <text x="308" y="42" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="12" font-weight="750">中文</text>
   </g>
   <g id="layer-mobile-hero">
-    ${imageLayer({ id: "layer-mobile-hero-image", href: heroMedia.src, x: 24, y: 76, width: 342, height: 252, opacity: 0.94, dimensions: heroMedia.dimensions, focalPoint: heroMedia.focalPoint.mobile })}
+    ${imageLayer({ id: "layer-mobile-hero-image", href: heroMedia.src, x: 24, y: 76, width: 342, height: 252, opacity: 0.94, dimensions: heroMedia.dimensions, focalPoint: heroMedia.focalPoint.mobile, heightScale: heroMedia.motionProfile.startScale })}
     <text id="layer-mobile-eyebrow" x="24" y="370" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="850" letter-spacing="1.3">DOCUMENTARY / CULTURE / TECHNOLOGY</text>
     <g id="layer-hero-title">
       <text x="22" y="436" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="900">HSIN-HSIN</text>

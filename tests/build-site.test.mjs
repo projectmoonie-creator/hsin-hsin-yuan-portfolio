@@ -894,6 +894,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /--hero-wide-x: 38%; --hero-wide-y: 78%/);
   assert.match(html, /--hero-stacked-x: 38%; --hero-stacked-y: 77%/);
   assert.match(html, /--hero-mobile-x: 38%; --hero-mobile-y: 78%/);
+  assert.match(html, /--hero-motion-start-scale: 140%; --hero-motion-end-scale: 148%/);
   assert.doesNotMatch(html, /light-beam-layer|light-beam-right|ambient-canvas/);
   assert.doesNotMatch(html, /hero-showreel-video|data-showreel-video|data-showreel-play/);
   assert.doesNotMatch(html, /aria-label="Watch reel"/);
@@ -1382,9 +1383,12 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.doesNotMatch(css, /\.impact-item/);
   assert.doesNotMatch(css, /url\(\"\/assets\/portfolio\/hsin-working-white-space\.jpg\"\)/);
   assert.match(css, /var\(--hero-image\)/);
-  assert.match(css, /var\(--hero-wide-x\) var\(--hero-wide-y\)/);
+  assert.match(css, /--hero-active-x: var\(--hero-wide-x\);/);
+  assert.match(css, /--hero-active-y: var\(--hero-wide-y\);/);
   assert.match(css, /var\(--hero-stacked-x\) var\(--hero-stacked-y\)/);
   assert.match(css, /var\(--hero-mobile-x\) var\(--hero-mobile-y\)/);
+  assert.match(css, /@media \(max-width: 1280px\) \{[\s\S]*?\.hero-media \{[^}]*--hero-active-x: var\(--hero-stacked-x\);[^}]*--hero-active-y: var\(--hero-stacked-y\);/);
+  assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*?\.hero-media \{[^}]*--hero-active-x: var\(--hero-mobile-x\);[^}]*--hero-active-y: var\(--hero-mobile-y\);/);
   assert.doesNotMatch(css, /\.hero-play-button|\.hero-play-icon|\.hero-showreel-video|\.hero-media\.is-playing|\.hero-media:focus-visible/);
   assert.doesNotMatch(css, /\.hero-actions/);
   assert.doesNotMatch(css, /\.hero-media-caption/);
@@ -1421,8 +1425,11 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.hero h1 span \{\n  display: block;\n  white-space: nowrap;/);
   assert.match(css, /@keyframes heroStillPush/);
   assert.match(css, /\.hero-media--slow-push \{\n    animation: heroStillPush/);
-  assert.match(css, /calc\(var\(--hero-wide-x\) \+ 4%\)/);
-  assert.match(css, /calc\(var\(--hero-wide-y\) - 4%\)/);
+  assert.match(css, /calc\(var\(--hero-active-x\) \+ 4%\)/);
+  assert.match(css, /calc\(var\(--hero-active-y\) - 4%\)/);
+  assert.match(css, /auto var\(--hero-motion-start-scale\)/);
+  assert.match(css, /auto var\(--hero-motion-end-scale\)/);
+  assert.doesNotMatch(css, /@keyframes heroStillPush[\s\S]*?var\(--hero-wide-[xy]\)/);
   assert.match(css, /\.hero-roles \.role-slash \{\n  color: var\(--acid\);/);
   assert.match(css, /\.media-frame-link \{/);
   assert.match(css, /\.work-media-play \{/);
