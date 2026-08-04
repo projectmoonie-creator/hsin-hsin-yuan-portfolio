@@ -10,6 +10,10 @@ State: `PASS_WITH_OPEN_ITEMS`
   local `main` at `e2d75f0e57ff0d6f0d64ff5381a04a3314b35481`.
 - Remote backup ref `backup/2026-08-04/e2d75f0` was created before remediation
   and read back at the exact base commit above.
+- Validated implementation head
+  `63e51bf0f93cc8b4da3894dac091dd0ad5e2978b` was pushed and read back exactly
+  from `origin/codex/hero-media-closeout-remediation`. This documentation-only
+  status follow-up is reported externally after commit.
 - The bounded TDD package closes four review findings: fail-closed JPEG APP
   metadata, Figma/live Hero starting-crop parity, responsive focal points during
   motion, and this cold-resume record.

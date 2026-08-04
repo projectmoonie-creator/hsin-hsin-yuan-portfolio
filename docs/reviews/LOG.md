@@ -5,7 +5,7 @@ Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
 ## 2026-08-04 — HeroMedia closeout remediation
-- Branch/base: `codex/hero-media-closeout-remediation` from local `main` `e2d75f0`; remote rollback ref `backup/2026-08-04/e2d75f0` verified first.
+- Branch/base: `codex/hero-media-closeout-remediation` from `e2d75f0`; implementation `63e51bf` and backup `backup/2026-08-04/e2d75f0` pushed/read back.
 - Change: fail-closed JPEG APP/COM policy, one derived slow-push profile for website/Figma, breakpoint-active focal variables, and current cold resume.
 - TDD: original four-finding RED `47/54`; GREEN `54/54`; malformed-JFIF-tail RED `3/4`; GREEN `4/4`.
 - Validation: full `79/79`, design audit, build, Figma export, diff/SHA checks, and three-case responsive/reduced-motion browser QA passed.
