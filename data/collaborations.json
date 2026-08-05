@@ -3,13 +3,33 @@
     "id": "taiwanplus",
     "name": "TaiwanPlus",
     "label": "TaiwanPlus",
-    "url": "https://www.taiwanplus.com/"
+    "url": "https://www.taiwanplus.com/",
+    "logo": {
+      "src": "/assets/logos/taiwanplus-mono.svg",
+      "sourceFile": "assets/collaboration-logos/sources/taiwanplus.svg",
+      "dimensions": { "width": 166, "height": 50 },
+      "opticalSize": "wide",
+      "sourceUrl": "https://www.taiwanplus.com/imgs/header/logo-light.svg",
+      "sourceSha256": "494bc7efb79c834934c4cbafd551754e88c01e7ab473184894369cd6bf02c546",
+      "sourceCheckedAt": "2026-08-06",
+      "rightsStatus": "official-mark-nominative-use"
+    }
   },
   {
     "id": "pts",
     "name": "Public Television Service Taiwan",
     "label": "PTS",
-    "url": "https://www.pts.org.tw/"
+    "url": "https://www.pts.org.tw/",
+    "logo": {
+      "src": "/assets/logos/pts-mono.svg",
+      "sourceFile": "assets/collaboration-logos/sources/pts.png",
+      "dimensions": { "width": 2378, "height": 809 },
+      "opticalSize": "standard",
+      "sourceUrl": "https://www.pts.org.tw/uploads/site/site_logo/67a324283673761a67eaedf8/logo__4_-01.png",
+      "sourceSha256": "050740470d1838553e28df84618b82fb255e1744d5b47b6ad0c19cabe2dd3291",
+      "sourceCheckedAt": "2026-08-06",
+      "rightsStatus": "official-mark-nominative-use"
+    }
   },
   {
     "id": "dragon-tv",
@@ -27,7 +47,17 @@
     "id": "ticff",
     "name": "Taiwan International Children's Film Festival",
     "label": "TICFF",
-    "url": "https://www.ticff.org.tw/"
+    "url": "https://www.ticff.org.tw/",
+    "logo": {
+      "src": "/assets/logos/ticff-mono.svg",
+      "sourceFile": "assets/collaboration-logos/sources/ticff.svg",
+      "dimensions": { "width": 173, "height": 24 },
+      "opticalSize": "wide",
+      "sourceUrl": "https://www.ticff.org.tw/uploads/asset/data/6740190236737693d3c91a52/logo-ticff-d.svg",
+      "sourceSha256": "3210dac65f5a84a2473782cd421282b0ca984d89ed1c071226ae052f2d9e6282",
+      "sourceCheckedAt": "2026-08-06",
+      "rightsStatus": "official-mark-nominative-use"
+    }
   },
   {
     "id": "screenhouse",
@@ -41,6 +71,16 @@
       "en": "Gorgeous Space",
       "zh": "幸福空間"
     },
-    "url": "https://www.hhh.com.tw/"
+    "url": "https://www.hhh.com.tw/",
+    "logo": {
+      "src": "/assets/logos/gorgeous-space-mono.svg",
+      "sourceFile": "assets/collaboration-logos/sources/gorgeous-space.svg",
+      "dimensions": { "width": 151, "height": 44 },
+      "opticalSize": "standard",
+      "sourceUrl": "https://hhh.com.tw/images/logo-color.svg",
+      "sourceSha256": "15a13c5460e42f361ebe344bf00df7cc4957574612103b8062dd8169fe044610",
+      "sourceCheckedAt": "2026-08-06",
+      "rightsStatus": "official-mark-nominative-use"
+    }
   }
 ]
