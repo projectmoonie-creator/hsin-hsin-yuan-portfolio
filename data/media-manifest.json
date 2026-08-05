@@ -93,8 +93,8 @@
       "publicPath": "/assets/showreel/overclocking-card-reel-poster.webp",
       "profile": "webp-1280x720",
       "owner": {"collection": "archive", "slug": "overclocking", "field": "posterImage"},
-      "size": 83424,
-      "sha256": "0cfcfff0e8967e518538d3489b882eb09152c040bd58e886e7036f46a9b97f66"
+      "size": 68144,
+      "sha256": "d892d7a8c8375c6097952551b121cfa2ba98c410816b4430b69b1a0e6d38490c"
     },
     {
       "id": "archive.three-minute-micro-drama.reel",

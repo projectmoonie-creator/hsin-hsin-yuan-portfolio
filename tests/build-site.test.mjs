@@ -708,7 +708,7 @@ test("archive drama cards keep trailer viewing and public credit proof separate"
   );
 });
 
-test("Overclocking archive data uses the approved local poster and reel", () => {
+test("Overclocking archive data uses the approved static production photo and reel", () => {
   const archive = loadMarkdownCollection(join(root, "content/archive"));
   const overclocking = archive.find((item) => item.slug === "overclocking");
 
@@ -725,9 +725,14 @@ test("Overclocking archive data uses the approved local poster and reel", () => 
   assert.equal(overclocking.cardReelPoster, overclocking.posterImage);
   assert.equal(overclocking.posterRightsStatus, "user-supplied-local-source");
   assert.deepEqual(overclocking.posterDimensions, { width: 1280, height: 720 });
-  assert.equal(overclocking.posterSourceTimecode, "00:29:46");
-  assert.match(overclocking.imageAlt.en, /green water-bike frame and chain drive/i);
-  assert.match(overclocking.imageAlt.zh, /綠色水上腳踏車車架與鏈條傳動/);
+  assert.equal(overclocking.posterSourceTimecode, undefined);
+  assert.match(overclocking.imageAlt.en, /illuminated Overclocking installation/i);
+  assert.match(overclocking.imageAlt.zh, /發光的 Overclocking 裝置/);
+  assert.match(overclocking.sourceNote, /P1070715\.jpg/);
+  assert.match(
+    overclocking.sourceNote,
+    /fa87cb8c20e5199068fc5a8873a0108866ea8e084833deb6c32f1764b73189ea/,
+  );
 });
 
 test("Overclocking reel package records the approved six-cut local-source edit", () => {
