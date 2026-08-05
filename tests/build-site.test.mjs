@@ -246,6 +246,7 @@ test("CollaborationMark renders four verified logos and three intentional fallba
   }
   assert.match(english, /data-collaboration-id="gorgeous-space"[^>]*aria-label="Gorgeous Space"/);
   assert.match(chinese, /data-collaboration-id="gorgeous-space"[^>]*aria-label="幸福空間"/);
+  assert.match(english, /<div class="collab-item" data-collaboration-id="screenhouse"[^>]*role="img"[^>]*aria-label="ScreenHouse"/);
 });
 
 test("CollaborationMark layout uses reusable four-slot and two-slot rules", () => {

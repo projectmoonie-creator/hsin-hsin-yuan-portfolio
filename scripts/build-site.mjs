@@ -529,12 +529,13 @@ function renderCollaborations(items = [], lang) {
         : `<span class="partner-wordmark" aria-hidden="true">${escapeHtml(label)}</span>`;
       const tag = collaboration.url ? "a" : "div";
       const href = collaboration.url ? ` href="${escapeHtml(collaboration.url)}" target="_blank" rel="noreferrer"` : "";
+      const role = collaboration.url ? "" : ' role="img"';
       const logoAttributes = logo
         ? ` data-logo-size="${logo.opticalSize}" style="--partner-logo-height: ${logo.opticalToken.height}px; --partner-logo-max-width: ${logo.opticalToken.maxWidth}px"`
         : " data-logo-size=\"fallback\"";
 
       return `
-        <${tag} class="collab-item" data-collaboration-id="${escapeHtml(collaboration.id)}"${logoAttributes}${href} aria-label="${escapeHtml(name)}">
+        <${tag} class="collab-item" data-collaboration-id="${escapeHtml(collaboration.id)}"${logoAttributes}${href}${role} aria-label="${escapeHtml(name)}">
           ${content}
         </${tag}>
       `;
