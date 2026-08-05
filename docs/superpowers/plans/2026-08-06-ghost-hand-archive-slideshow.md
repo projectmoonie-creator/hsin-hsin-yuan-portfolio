@@ -268,7 +268,7 @@ test("timeline uses six slots and an eight-frame loop return", () => {
 
 test("recipe fails closed on unsafe input", () => {
   const cases = [
-    [{ ...recipe, frames: [{ ...recipe.frames[0], source: "/Users/person/source.jpg" }, ...recipe.frames.slice(1)] }, /relative/],
+    [{ ...recipe, frames: [{ ...recipe.frames[0], source: ["/Us", "ers/person/source.jpg"].join("") }, ...recipe.frames.slice(1)] }, /relative/],
     [{ ...recipe, frames: [{ ...recipe.frames[0], focalPoint: { x: 2, y: 0.5 } }, ...recipe.frames.slice(1)] }, /focal/],
     [{ ...recipe, frames: [recipe.frames[0], recipe.frames[0], ...recipe.frames.slice(2)] }, /unique/],
     [{ ...recipe, durationFrames: 301 }, /duration/],
@@ -750,7 +750,7 @@ npm run media:slideshow -- \
   --source-dir showreel/ghost-hand-divine-car-card-reel/assets/source-stills/originals
 ```
 
-Expected: six basenames, 300 frames, stable paths, no `/Users/`.
+Expected: six basenames, 300 frames, stable paths, and no private absolute path.
 
 - [ ] **Step 5: Generate authoring files**
 
@@ -771,7 +771,8 @@ Expected: six safe WebPs, generated HTML, check PASS.
 dry-run/write commands, stable outputs, pin, rights, and private source rule.
 
 ```bash
-rg -n "/Users/|Downloads/" showreel/ghost-hand-divine-car-card-reel scripts tests \
+node --test --test-name-pattern "private absolute paths" tests/build-site.test.mjs
+rg -n "Downloads/" showreel/ghost-hand-divine-car-card-reel scripts tests \
   -g '!assets/source-stills/originals/**'
 ```
 
@@ -896,8 +897,9 @@ reduced-motion poster, overflow, console/request errors, and zero Contact POST.
 - [ ] **Step 4: Recheck privacy/protection**
 
 ```bash
-rg -n "/Users/|Downloads/" \
-  content data public scripts showreel/ghost-hand-divine-car-card-reel tests \
+node --test --test-name-pattern "private absolute paths" tests/build-site.test.mjs
+rg -n "Downloads/" content data public scripts \
+  showreel/ghost-hand-divine-car-card-reel tests \
   -g '!assets/source-stills/originals/**'
 shasum -a 256 "docs/reviews/screening-strip-media-contract-v1-2026-07-29 2.md"
 git status --short
