@@ -197,14 +197,49 @@ ${body}
 `;
 }
 
-function logoWordmark({ item, x, y, width = 150 }) {
-  const name = englishText(item.name);
-  const display = englishText(item.label) || name;
-  return `<g id="logo-${escapeXml(name).toLowerCase().replace(/[^a-z0-9]+/g, "-")}" opacity="0.7">
-    <text x="${x}" y="${y}" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="800">${escapeXml(display)}</text>
-    <text x="${x}" y="${y + 18}" fill="${tokens.muted}" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="700">${escapeXml(name)}</text>
-    <line x1="${x}" y1="${y + 28}" x2="${x + width}" y2="${y + 28}" stroke="${tokens.ink}" stroke-opacity="0.2"/>
+function collaborationMark({ item, x, y, slotWidth, slotHeight }) {
+  const collaboration = item.contract.public;
+  const name = englishText(collaboration.name);
+  const display = englishText(collaboration.label) || name;
+  const logo = collaboration.logo;
+  if (!logo) {
+    return `<g id="component-collaboration-${escapeXml(collaboration.id)}" transform="translate(${x} ${y})" data-render-mode="fallback" opacity="0.7">
+    <text x="${slotWidth / 2}" y="${slotHeight / 2}" text-anchor="middle" dominant-baseline="middle" fill="${tokens.ink}" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="800" letter-spacing="0.6">${escapeXml(display)}</text>
   </g>`;
+  }
+
+  const token = logo.opticalToken;
+  let height = Math.min(token.height, slotHeight);
+  let width = height * (logo.dimensions.width / logo.dimensions.height);
+  const maxWidth = Math.min(token.maxWidth, slotWidth);
+  if (width > maxWidth) {
+    height *= maxWidth / width;
+    width = maxWidth;
+  }
+  const imageX = roundSvg((slotWidth - width) / 2);
+  const imageY = roundSvg((slotHeight - height) / 2);
+  return `<g id="component-collaboration-${escapeXml(collaboration.id)}" transform="translate(${x} ${y})" data-render-mode="logo" data-logo-size="${logo.opticalSize}" data-source="${escapeXml(basename(logo.src))}" opacity="0.62">
+    <image href="${imageData(logo.src)}" x="${imageX}" y="${imageY}" width="${roundSvg(width)}" height="${roundSvg(height)}" preserveAspectRatio="xMidYMid meet"/>
+  </g>`;
+}
+
+function collaborationWall({ items, startX, startY, columns, slotWidth, slotHeight, columnGap, rowGap }) {
+  const fullRowWidth = columns * slotWidth + (columns - 1) * columnGap;
+  return items.map((item, index) => {
+    const row = Math.floor(index / columns);
+    const rowStart = row * columns;
+    const rowCount = Math.min(columns, items.length - rowStart);
+    const rowWidth = rowCount * slotWidth + (rowCount - 1) * columnGap;
+    const rowOffset = (fullRowWidth - rowWidth) / 2;
+    const column = index - rowStart;
+    return collaborationMark({
+      item,
+      x: startX + rowOffset + column * (slotWidth + columnGap),
+      y: startY + row * (slotHeight + rowGap),
+      slotWidth,
+      slotHeight,
+    });
+  }).join("\n");
 }
 
 function workCard({ work, x, y, width }) {
@@ -224,10 +259,16 @@ function workCard({ work, x, y, width }) {
 export function buildDesktopHome(site, works, collaborations) {
   const hero = site.en;
   const heroMedia = site.heroMedia.contract.public;
-  const logoRow = collaborations
-    .slice(0, 7)
-    .map((item, index) => logoWordmark({ item, x: 92 + index * 180, y: 690, width: 132 }))
-    .join("\n");
+  const logoRow = collaborationWall({
+    items: collaborations,
+    startX: 72,
+    startY: 690,
+    columns: 4,
+    slotWidth: 260,
+    slotHeight: 56,
+    columnGap: 64,
+    rowGap: 18,
+  });
 
   const slashLines = hero.heroRoleLines
     .map((line, index) => {
@@ -289,9 +330,16 @@ function buildDesktopWorksLogos(site, works, collaborations) {
       width: 390,
     }))
     .join("\n");
-  const logos = collaborations
-    .map((item, index) => logoWordmark({ item, x: 72 + (index % 4) * 330, y: 1370 + Math.floor(index / 4) * 92, width: 220 }))
-    .join("\n");
+  const logos = collaborationWall({
+    items: collaborations,
+    startX: 72,
+    startY: 1370,
+    columns: 4,
+    slotWidth: 250,
+    slotHeight: 58,
+    columnGap: 80,
+    rowGap: 24,
+  });
 
   return svgFrame({
     id: "frame-desktop-works-logos",
@@ -321,15 +369,21 @@ export function buildMobileHome(site, works, collaborations) {
   const firstRoleLine = escapeXml(hero.heroRoleLines[0])
     .replaceAll(" / ", ` <tspan fill="${tokens.acid}">/</tspan> `);
   const secondRoleLine = escapeXml(hero.heroRoleLines[1]);
-  const logos = collaborations
-    .slice(0, 4)
-    .map((item, index) => logoWordmark({ item, x: 28 + (index % 2) * 168, y: 614 + Math.floor(index / 2) * 62, width: 118 }))
-    .join("\n");
+  const logos = collaborationWall({
+    items: collaborations,
+    startX: 28,
+    startY: 610,
+    columns: 2,
+    slotWidth: 150,
+    slotHeight: 50,
+    columnGap: 34,
+    rowGap: 16,
+  });
 
   return svgFrame({
     id: "frame-mobile-home",
     width: 390,
-    height: 844,
+    height: 1040,
     title: "Mobile Home",
     body: `
   <g id="layer-mobile-topbar">
@@ -351,8 +405,8 @@ export function buildMobileHome(site, works, collaborations) {
     ${logos}
   </g>
   <g id="layer-mobile-available">
-    <text x="24" y="748" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="850" letter-spacing="1.2">${escapeXml(hero.availabilityLabel.toUpperCase())}</text>
-    ${textBlock({ id: "layer-mobile-available-intro", x: 24, y: 782, lines: textLines(hero.availabilityIntro, 36).slice(0, 3), size: 18, weight: 760, fill: tokens.ink, lineHeight: 24 })}
+    <text x="24" y="900" fill="${tokens.acid}" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="850" letter-spacing="1.2">${escapeXml(hero.availabilityLabel.toUpperCase())}</text>
+    ${textBlock({ id: "layer-mobile-available-intro", x: 24, y: 934, lines: textLines(hero.availabilityIntro, 36).slice(0, 3), size: 18, weight: 760, fill: tokens.ink, lineHeight: 24 })}
   </g>`,
   });
 }
@@ -381,7 +435,7 @@ This folder is a free Figma import package for the Hsin-Hsin Yuan portfolio desi
 - The SVGs are generated from current site content, so re-run \`npm run figma:export\` after major content changes.
 - Hero imagery comes from the same normalized \`data/site.json.heroMedia\` record as the website. Replace its asset, localized alt, intrinsic dimensions, and focal points there, sanitize the public JPEG, then regenerate this package.
 - Photos are embedded as image layers to keep the package portable.
-- Text, rectangles, logo wordmarks, cards, and color token swatches remain editable SVG layers, including editable text layers after import.
+- Text, rectangles, collaboration marks, cards, and color token swatches remain editable SVG layers, including editable text layers for fallbacks after import.
 - This is a design control layer, not the production source of truth.
 
 ## Current Contract Map
@@ -393,6 +447,9 @@ Available For, Featured Works, FROM THE ARCHIVE, Global Press, and Contact.
   \`centered-16x9\`; every mobile media frame is 16:9.
 - Hero is one non-interactive image component. The SVG records the approved
   animation's static starting crop; it has no Play or video layer.
+- Platforms & Collaborations uses the complete canonical data order. Verified
+  monochrome marks and visible text fallbacks share one named component family,
+  with four desktop slots, two mobile slots, and a centered incomplete row.
 - Source artwork may contain its own title, but the site adds no second title
   overlay.
 - FROM THE ARCHIVE uses one standard Archive card family; missing media changes

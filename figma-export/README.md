@@ -21,7 +21,7 @@ This folder is a free Figma import package for the Hsin-Hsin Yuan portfolio desi
 - The SVGs are generated from current site content, so re-run `npm run figma:export` after major content changes.
 - Hero imagery comes from the same normalized `data/site.json.heroMedia` record as the website. Replace its asset, localized alt, intrinsic dimensions, and focal points there, sanitize the public JPEG, then regenerate this package.
 - Photos are embedded as image layers to keep the package portable.
-- Text, rectangles, logo wordmarks, cards, and color token swatches remain editable SVG layers, including editable text layers after import.
+- Text, rectangles, collaboration marks, cards, and color token swatches remain editable SVG layers, including editable text layers for fallbacks after import.
 - This is a design control layer, not the production source of truth.
 
 ## Current Contract Map
@@ -33,6 +33,9 @@ Available For, Featured Works, FROM THE ARCHIVE, Global Press, and Contact.
   `centered-16x9`; every mobile media frame is 16:9.
 - Hero is one non-interactive image component. The SVG records the approved
   animation's static starting crop; it has no Play or video layer.
+- Platforms & Collaborations uses the complete canonical data order. Verified
+  monochrome marks and visible text fallbacks share one named component family,
+  with four desktop slots, two mobile slots, and a centered incomplete row.
 - Source artwork may contain its own title, but the site adds no second title
   overlay.
 - FROM THE ARCHIVE uses one standard Archive card family; missing media changes

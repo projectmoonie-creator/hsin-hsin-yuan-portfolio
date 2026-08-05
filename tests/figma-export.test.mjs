@@ -67,6 +67,37 @@ test("Figma export helpers reject remote images and invalid featured work metada
   assert.throws(() => validateFeaturedWorks([{ slug: "first", order: 1 }, { slug: "second", order: 1 }]), /order must be unique/);
 });
 
+test("Figma CollaborationMark components keep the complete canonical wall", () => {
+  const loaded = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const desktop = buildDesktopHome(loaded.site, works, loaded.collaborations);
+  const mobile = buildMobileHome(loaded.site, works, loaded.collaborations);
+  const ids = loaded.collaborations.map((item) => item.id);
+
+  for (const svg of [desktop, mobile]) {
+    let previous = -1;
+    for (const id of ids) {
+      const index = svg.indexOf(`id="component-collaboration-${id}"`);
+      assert.ok(index > previous, `${id} should render once in canonical order`);
+      previous = index;
+    }
+    assert.equal((svg.match(/data-render-mode="logo"/g) || []).length, 4);
+    assert.equal((svg.match(/data-render-mode="fallback"/g) || []).length, 3);
+    assert.match(svg, /data-source="taiwanplus-mono\.svg"/);
+    assert.match(svg, /data-source="pts-mono\.svg"/);
+    assert.match(svg, /data-source="ticff-mono\.svg"/);
+    assert.match(svg, /data-source="gorgeous-space-mono\.svg"/);
+    assert.doesNotMatch(svg, /sourceSha256|sourceCheckedAt|official-mark-nominative-use/);
+    assert.doesNotMatch(svg, /494bc7efb79c834934c4cbafd551754e88c01e7ab473184894369cd6bf02c546/);
+  }
+  assert.match(desktop, /id="component-collaboration-ticff" transform="translate\(234 764\)"/);
+  assert.match(desktop, /id="component-collaboration-gorgeous-space" transform="translate\(882 764\)"/);
+  assert.match(mobile, /id="component-collaboration-gorgeous-space" transform="translate\(120 808\)"/);
+  assert.match(mobile, /height="1040" viewBox="0 0 390 1040"/);
+  const generator = readFileSync(join(root, "scripts/build-figma-export.mjs"), "utf8");
+  assert.doesNotMatch(generator, /collaborations\s*\n?\s*\.slice\(0, 4\)/);
+});
+
 test("Figma SVG export package can be generated from site content", () => {
   rmSync(exportDir, { recursive: true, force: true });
 
@@ -119,9 +150,10 @@ test("Figma SVG export keeps portfolio layers editable and named", () => {
   assert.doesNotMatch(desktopHome, /paris-cultural-olympiad-team\.jpg/);
 
   assert.match(worksLogos, /id="layer-logo-wall"/);
-  assert.match(worksLogos, /TaiwanPlus/);
-  assert.match(worksLogos, /Public Television Service Taiwan/);
-  assert.match(worksLogos, /Gorgeous Space/);
+  assert.match(worksLogos, /id="component-collaboration-taiwanplus"/);
+  assert.match(worksLogos, /data-source="pts-mono\.svg"/);
+  assert.match(worksLogos, /id="component-collaboration-gorgeous-space"/);
+  assert.match(worksLogos, /id="component-collaboration-women-make-waves"[^>]*data-render-mode="fallback"/);
   assert.doesNotMatch(worksLogos, /Happy Space/);
   for (const slug of [
     "slow-steps",
@@ -183,7 +215,7 @@ test("Figma SVG export keeps portfolio layers editable and named", () => {
   assert.doesNotMatch(generator, /readdirSync\(join\(root, "content\/works"\)\)/);
 
   assert.match(mobileHome, /id="frame-mobile-home"/);
-  assert.match(mobileHome, /viewBox="0 0 390 844"/);
+  assert.match(mobileHome, /viewBox="0 0 390 1040"/);
   assert.match(mobileHome, /id="layer-mobile-available"/);
   assert.match(mobileHome, /AVAILABLE FOR/i);
   assert.match(
