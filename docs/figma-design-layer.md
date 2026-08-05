@@ -167,7 +167,14 @@ Rules:
 - No visible card backgrounds
 - No heavy borders
 - Logos follow page background
-- Monochrome / muted treatment unless the specific logo needs color
+- The complete canonical order comes from `data/collaborations.json`; Figma
+  must not maintain or truncate a second list
+- Verified records embed the repo-generated monochrome derivative; unresolved
+  identities remain honest editable text fallbacks
+- Use the same `compact`, `standard`, and `wide` optical tokens as the website
+- Four centered slots per desktop row, two per mobile row, with the incomplete
+  final row centered
+- No collaborator-specific coordinates or presentation rules
 
 ### `Featured Work Card`
 
@@ -247,7 +254,8 @@ Figma should not become the source of truth for final text. Final content lives 
 
 - Site copy: `data/site.json`
 - Metrics live with the work or archive item they explain. There is no standalone Selected Impact section.
-- Collaborations: `data/collaborations.json`
+- Collaborations: normalized `data/collaborations.json` records; verified
+  public derivatives are regenerated with `npm run collabs:prepare`
 - Featured works: `content/works/*.md`
 - Archive: `content/archive/*.md`
 - Global Press: `data/press.json`

@@ -1,18 +1,22 @@
 # Collaboration Logo Wall Source Notes
 
-Updated: 2026-07-30
+Updated: 2026-08-06
 
 ## Presentation Decision To Implement
 
-- Replace normal-state text labels in `Platforms & Collaborations` with the
-  collaborators' official marks.
-- Preserve the original downloaded SVG or PNG locally. Apply grayscale,
-  opacity, and hover treatment in CSS rather than destructively recoloring the
-  source file.
+- Use verified official marks in `Platforms & Collaborations`; keep visible
+  text fallbacks for identities without a trustworthy standalone mark.
+- Preserve verified SVG/PNG downloads under
+  `assets/collaboration-logos/sources/`. They are private build inputs, not
+  public website files.
+- Generate deterministic cream monochrome derivatives with
+  `npm run collabs:prepare`. The command verifies the recorded source hash,
+  rejects unsafe SVG structures, and performs no network access.
 - Normalize logos by optical height, not identical width. Keep their accessible
   names and official destinations even when visible text is removed.
-- Use a text fallback only when an asset fails to load or no trustworthy mark
-  has been verified.
+- Use a text fallback when no trustworthy mark has been verified. A verified
+  derivative that fails to load is a build/QA failure, not permission to hide
+  a second hand-maintained name in the component.
 - `data/collaborations.json` remains the canonical owner for website and Figma
   output. Do not create a second hand-maintained logo list.
 - The wall identifies past platforms and collaborators; it must not imply
@@ -22,13 +26,30 @@ Updated: 2026-07-30
 
 | Entry | Status | Source |
 | --- | --- | --- |
-| TaiwanPlus | Official asset verified | `https://www.taiwanplus.com/imgs/header/logo-light.svg` |
-| PTS | Official asset verified | `https://www.pts.org.tw/uploads/site/site_logo/67a324283673761a67eaedf8/logo__4_-01.png` |
-| Gorgeous Space | Official inline SVG verified; extraction pending | `https://www.hhh.com.tw/` |
-| TICFF | Official site verified; asset extraction pending | `https://www.ticff.org.tw/` |
-| Women Make Waves | Official site verified; no standalone downloadable mark confirmed in the first pass | `https://www.wmw.org.tw/` |
-| Dragon TV | Pending | The previously recorded domain failed DNS during this pass; do not use an unverified download. |
-| ScreenHouse | Pending identity check | Confirm the exact collaborator and official domain before selecting a mark. |
+| TaiwanPlus | Complete: official SVG preserved and monochrome derivative generated | `https://www.taiwanplus.com/imgs/header/logo-light.svg` |
+| PTS | Complete: official PNG preserved and monochrome derivative generated | `https://www.pts.org.tw/uploads/site/site_logo/67a324283673761a67eaedf8/logo__4_-01.png` |
+| TICFF | Complete: official SVG preserved and monochrome derivative generated | `https://www.ticff.org.tw/uploads/asset/data/6740190236737693d3c91a52/logo-ticff-d.svg` |
+| Gorgeous Space | Complete: official SVG preserved and monochrome derivative generated | `https://hhh.com.tw/images/logo-color.svg` |
+| Women Make Waves | Text fallback | Official site confirmed, but no clean standalone asset was verified. |
+| Dragon TV | Text fallback | No trustworthy official standalone asset was established; do not use an unverified download. |
+| ScreenHouse | Text fallback | Exact identity/domain still requires producer confirmation; do not substitute a similarly named organization. |
+
+Exact source hashes, checked dates, intrinsic dimensions, rights status, and
+optical tokens live with each complete logo record in
+`data/collaborations.json`. Public renderers receive only normalized
+presentation data.
+
+## Maintenance Workflow
+
+1. Add, remove, rename, or reorder the stable record in
+   `data/collaborations.json`.
+2. For a verified mark, preserve the official original in
+   `assets/collaboration-logos/sources/` and add the complete source evidence,
+   public derivative path, dimensions, and optical token to that record.
+3. Run `npm run collabs:prepare`, `npm test`, `npm run build`, and
+   `npm run figma:export`.
+4. Review English and Chinese at desktop/mobile widths. No component or CSS
+   edit should be necessary for an ordinary data-only addition or removal.
 
 ## Rights Boundary
 

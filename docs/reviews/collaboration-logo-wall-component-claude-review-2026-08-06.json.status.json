@@ -1,0 +1,21 @@
+{
+  "provider": "Claude",
+  "requestedModel": null,
+  "modelSelectionPolicy": "highest-capability-generally-released-at-submission",
+  "exactModelPinned": false,
+  "observedModel": null,
+  "completedModel": null,
+  "lane": "active Claude Code subscription session",
+  "result": "incomplete",
+  "failureClass": "handoff-required",
+  "handoffStatus": "handoff-to-active-session",
+  "modelRequestSent": false,
+  "billingFallbackAllowed": false,
+  "paidCredentialEnvironmentDetected": false,
+  "apiEquivalentCostUsd": null,
+  "actualSpendUsd": null,
+  "note": "No Claude process was started. Submit the preserved packet inside an already-running Claude Code subscription session and resolve the highest currently available model under AGENTS.md at submission time.",
+  "prompt": "docs/reviews/collaboration-logo-wall-component-review-packet-2026-08-06.md",
+  "intendedOutput": "docs/reviews/collaboration-logo-wall-component-claude-review-2026-08-06.json",
+  "repo": "."
+}

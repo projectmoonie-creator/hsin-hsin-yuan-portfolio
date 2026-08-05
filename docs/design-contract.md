@@ -63,6 +63,39 @@ Unknown fields are audit findings until they are classified. Presentation may
 not be inferred from an absent field, record length, media availability, or a
 slug-specific CSS exception.
 
+## Platforms & Collaborations
+
+`data/collaborations.json` is the only authored collaboration list. Each entry
+has a stable `id`, localized accessible name/label, optional official
+destination, and an optional complete `logo` record. The normalizer produces a
+`collaboration-mark` contract with public presentation separated from
+source/rights evidence; source URLs, source hashes, checked dates, and rights
+status must never enter public HTML or generated Figma layers.
+
+- The canonical seven-entry order is shared by English, Chinese, desktop,
+  mobile, and `npm run figma:export`; no consumer may truncate or reorder it.
+- A verified mark uses a repo-owned monochrome SVG derivative. An unresolved
+  identity uses a visible text fallback; the renderer must not invent or
+  imitate a logo.
+- Verified originals live under `assets/collaboration-logos/sources/` and are
+  never served directly. `npm run collabs:prepare` verifies their recorded
+  SHA-256 values and deterministically regenerates only
+  `public/assets/logos/*-mono.svg`; normal builds perform no network fetch.
+- The three named optical tokens (`compact`, `standard`, `wide`) govern height
+  and maximum width in both consumers. Layout code contains no collaborator-
+  specific selectors or coordinates.
+- The website wall has four centered slots per desktop row and two at `820px`
+  and below. An incomplete final row remains centered. Figma exports use the
+  same four/two component family and complete data order.
+- Marks are nominative identifiers of past platforms and collaborators, not
+  claims of endorsement or current representation.
+
+To add, remove, or replace an entry, edit the canonical JSON; for a new mark,
+preserve a verified official source, record its complete evidence and optical
+token, run `npm run collabs:prepare`, then rebuild the website and Figma export.
+No renderer or CSS change is needed unless the shared component contract
+itself changes.
+
 ## Screening Strip
 
 Purpose: a lightweight visual index, not a duplicate case study.
@@ -248,11 +281,11 @@ Work Press and global Press are different schemas.
 ## Figma parity
 
 Current-reference exports must use canonical site copy and normalized
-HeroMedia and Featured records. Their map includes global Press. They show the
-current Hero photograph and role treatment, the two named Featured variants,
-one equal Archive family, and the same optional-module rules. Experimental
-Figma frames must be labeled as experiments and cannot be mistaken for the
-current reference.
+HeroMedia, CollaborationMark, and Featured records. Their map includes global
+Press. They show the current Hero photograph and role treatment, the complete
+collaboration wall, the two named Featured variants, one equal Archive family,
+and the same optional-module rules. Experimental Figma frames must be labeled
+as experiments and cannot be mistaken for the current reference.
 
 The hardcoded plugin under `figma/hsin-portfolio-importer/` is a retained
 legacy experiment, not an active current-reference consumer and not a

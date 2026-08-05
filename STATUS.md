@@ -4,7 +4,39 @@ Updated: 2026-08-06
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Overclocking Static Poster And Mobile Reel Diagnosis
+## Current Work Package — Collaboration Logo Wall Component
+
+- Branch `codex/collaboration-logo-wall` starts from inherited package head
+  `c33b2f810e95ba2a38146b2daf7ff1220b0d1712`; validated implementation head is
+  `90e713cd1431a7dba5fc05150fd7698e71206709`.
+- `data/collaborations.json` now owns one normalized seven-entry collection
+  consumed by both website and Figma export. TaiwanPlus, PTS, TICFF, and
+  Gorgeous Space use verified official sources plus deterministic local cream
+  derivatives; Dragon TV, Women Make Waves, and ScreenHouse remain visible text
+  fallbacks pending trustworthy standalone identities/assets.
+- The shared component provides strict public/evidence separation, three
+  optical tokens, accessible logo/fallback semantics, four desktop slots, two
+  mobile slots, centered incomplete rows, and no collaborator-specific layout
+  code. Normal add/remove work is data-only; verified mark replacement uses the
+  offline SHA-locked `npm run collabs:prepare` path.
+- TDD passed for contract, asset safety/integrity, website, Figma parity, and
+  unlinked fallback semantics. Full `npm test` passed `92/92`; asset prepare,
+  build, Figma export, design audit, and `git diff --check` passed.
+- English/Chinese Chromium QA passed at 1440×900 and 390×844: complete images,
+  canonical order, exact 4+3 / 2+2+2+1 rows, centered final rows, visible focus,
+  no horizontal overflow or evidence leak, and no console/page/request errors.
+- Frozen review packet SHA-256 is
+  `483023e5b58e0c113d30ef4b3aa7d259734d92f98cbde09c601ee128affc6615`.
+  Gemini requested/observed/completed `gemini-3.6-flash` and returned PASS with
+  no actionable findings. Claude remains `handoff-to-active-session`; no model
+  request was sent and no dual-review consensus is claimed.
+- No backup push, merge, new Preview, Production deployment, alias change, or
+  Contact submission occurred. Twelve current commits are not reachable from
+  an `origin/*` ref, so the branch is locally complete but not remotely backed
+  up. The protected untracked file remains outside Git at SHA-256
+  `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+
+## Prior Work Package — Overclocking Static Poster And Mobile Reel Diagnosis
 
 - Branch `codex/overclocking-static-poster` starts from backed-up local `main`
   `58a57511825fb54edd53f7883483abb2bfa8b50e`; implementation commit is
@@ -350,23 +382,24 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Review the new Overclocking poster locally on `/en/` and `/zh/`, then decide
-whether to keep the current reduced-motion static fallback (recommended) or
-request a separate accessible manual-play affordance. If the poster is
-accepted, explicitly authorize local-main integration and/or a new Preview.
-Do not push `origin/main`; Production remains separate and requires another
-explicit instruction.
+Review the new Collaboration Logo Wall locally on `/en/` and `/zh/`. If it is
+accepted, explicitly authorize a uniquely named remote backup ref for the final
+branch head and specify whether to fast-forward this combined branch into local
+`main`. A new Preview is optional and separate. Do not push `origin/main`;
+Production remains separate and requires another explicit instruction.
 
 ## Cold Resume
 
-1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and the HeroMedia design
-   contract.
-2. Verify `codex/overclocking-static-poster` at `7dddff9` from local `main`
-   `58a5751`, then verify `origin/main`, backup ref
-   `backup/2026-08-05/58a5751`, and the protected untracked file.
-3. Confirm the local bilingual Overclocking poster decision and ask whether the
-   existing reduced-motion static fallback should remain unchanged.
+1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, the Collaboration closeout,
+   and `docs/design-contract.md`.
+2. Verify branch `codex/collaboration-logo-wall`, implementation head
+   `90e713c`, local `main` `58a5751`, `origin/main` `382e02a`, and the protected
+   untracked file/hash before changing anything.
+3. Confirm `npm test` is `92/92`, four mono derivatives exist, all seven IDs
+   appear in English/Chinese output and desktop/mobile Figma output, and
+   `git rev-list --count HEAD --not --remotes=origin` remains nonzero until an
+   explicit backup push is authorized.
 4. Treat Preview deployment `dpl_8vwDEtrbrG5vzqreik78rnqMH4Ax` as the prior
-   build until a new Preview is explicitly authorized.
-5. Do not deploy Production, submit Contact, push `main`, or merge locally
-   without explicit producer authorization.
+   build; it does not contain this combined branch.
+5. Do not push, merge locally, create a Preview, deploy Production, change an
+   alias, or submit Contact without the corresponding explicit authorization.

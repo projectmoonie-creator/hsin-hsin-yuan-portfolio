@@ -1307,7 +1307,7 @@ test("archive and Design remove redundant copy without losing credit", () => {
   assert.doesNotMatch(designPanel, /<span class="tag">editing<\/span>/);
 });
 
-test("English Figma handoff uses the localized Gorgeous Space label", () => {
+test("Figma handoff keeps the canonical Gorgeous Space collaboration identity", () => {
   execFileSync("node", ["scripts/build-figma-export.mjs"], { cwd: root, stdio: "pipe" });
 
   const desktopHome = readFileSync(
@@ -1323,10 +1323,13 @@ test("English Figma handoff uses the localized Gorgeous Space label", () => {
     "utf8",
   );
 
-  for (const artifact of [desktopHome, desktopWorks, figmaImporter]) {
-    assert.match(artifact, /Gorgeous Space/);
+  for (const artifact of [desktopHome, desktopWorks]) {
+    assert.match(artifact, /id="component-collaboration-gorgeous-space"/);
+    assert.match(artifact, /data-source="gorgeous-space-mono\.svg"/);
     assert.doesNotMatch(artifact, /幸福空間|\[object Object\]/i);
   }
+  assert.match(figmaImporter, /Gorgeous Space/);
+  assert.doesNotMatch(figmaImporter, /幸福空間|\[object Object\]/i);
 });
 
 test("build generates English, Chinese, CSS, and JS assets", () => {
