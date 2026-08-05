@@ -1,6 +1,6 @@
 # Portfolio Status
 
-Updated: 2026-08-04
+Updated: 2026-08-05
 
 State: `PASS_WITH_OPEN_ITEMS`
 
@@ -35,9 +35,16 @@ State: `PASS_WITH_OPEN_ITEMS`
   favor of the wrapper's machine provenance. Claude remains
   `handoff-to-active-session` with no model request sent, so no dual-review
   consensus is claimed.
-- `origin/main`, Vercel Preview, aliases, Contact, and Production remain
-  untouched. The protected untracked review file remains unmodified and outside
-  Git.
+- A mobile-ready feature Preview was created from the committed public `dist/`
+  generated at local `main` commit
+  `e9f09afdd8de220c4c4455dfc4e9a3dccd584164`:
+  `https://hsin-hsin-yuan-portfolio-mve5a1pl9.vercel.app`. Vercel deployment
+  `dpl_8vwDEtrbrG5vzqreik78rnqMH4Ax` was read back as target `preview`, status
+  `Ready`, on 2026-08-05. The upload contained only 33 public build files; repo
+  sources, internal review docs, the protected file, and `api/contact.js` were
+  not uploaded.
+- `origin/main`, aliases, Contact submission, and Production remain untouched.
+  The protected untracked review file remains unmodified and outside Git.
 
 ## Prior Accepted Work Package — HeroMedia Component And Showreel Retirement
 
@@ -318,10 +325,11 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Ask whether to create a feature Preview on Vercel from the locally integrated
-`main` for producer visual acceptance. The same frozen packet remains available
-for the incomplete Claude follow-up. Do not push `origin/main`.
-Production remains separate and requires another explicit instruction.
+Open the feature Preview on a real phone and review both `/en/` and `/zh/`.
+Report any visual change request or explicitly approve the Preview as the
+release candidate. This static Preview is not a Contact-delivery test. Do not
+push `origin/main`; Production remains separate and requires another explicit
+instruction.
 
 ## Cold Resume
 
@@ -330,7 +338,7 @@ Production remains separate and requires another explicit instruction.
 2. Verify local `main` contains reviewed closeout head `bba4ea0`, then verify
    source branch `codex/hero-media-closeout-remediation`, remote backup
    `backup/2026-08-04/e2d75f0`, `origin/main`, and the protected untracked file.
-3. Read the remediation diff, focused/full validation, frozen review packet,
-   completed reviewer result, and any honestly incomplete review lane.
-4. Ask whether the user wants a feature Preview from local `main`.
+3. Read back Preview deployment `dpl_8vwDEtrbrG5vzqreik78rnqMH4Ax` and confirm
+   it remains target `preview`, status `Ready`, without inferring Production.
+4. Ask for the producer's real-phone English/Chinese visual decision.
 5. Do not deploy Production, submit Contact, or push `main` implicitly.

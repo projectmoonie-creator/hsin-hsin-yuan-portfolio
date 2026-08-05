@@ -11,7 +11,8 @@ packages.
 - Validation: full `79/79`, design audit, build, Figma export, diff/SHA checks, and three-case responsive/reduced-motion browser QA passed.
 - Review: packet `368e0fe…13fd`; Gemini `gemini-3.6-flash` PASS/no findings; all four closures locally upheld; raw provenance self-label rejected; Claude handoff incomplete, so no dual consensus.
 - Local integration: producer authorized fast-forward of local `main` to `bba4ea0`; focused `4/4`, full `79/79`, audit, build, and Figma export passed; this docs-only status follow-up skips external review because it changes no current rule or public output.
-- External state: local `main` only; no `origin/main`, Preview, Production, alias, Contact, or protected-file change.
+- Mobile Preview: public `dist/` from local main `e9f09af`, 33 files, deployment `dpl_8vwDEtrbrG5vzqreik78rnqMH4Ax`, target Preview, `Ready`; repo sources/internal docs/API were excluded, so Contact delivery is intentionally unavailable.
+- External state: Preview only; no `origin/main`, Production, alias, Contact submission, or protected-file change.
 
 ## 2026-08-04 — HeroMedia component and showreel retirement
 - Branch/commit: `codex/hero-media-component`; extraction `5539c43`; behavior commit reported externally after commit.
