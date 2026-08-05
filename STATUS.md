@@ -1,8 +1,33 @@
 # Portfolio Status
 
-Updated: 2026-08-05
+Updated: 2026-08-06
 
 State: `PASS_WITH_OPEN_ITEMS`
+
+## Current Work Package — Overclocking Static Poster And Mobile Reel Diagnosis
+
+- Branch `codex/overclocking-static-poster` starts from backed-up local `main`
+  `58a57511825fb54edd53f7883483abb2bfa8b50e`; implementation commit is
+  `7dddff985727840afd796ddccfa6d41a9c4b8b5c`.
+- The user-approved local production photo `P1070715.jpg` is now the canonical
+  Overclocking poster derivative. The public WebP remains on the stable
+  1280×720 path, is 68,144 bytes, and has SHA-256
+  `d892d7a8c8375c6097952551b121cfa2ba98c410816b4430b69b1a0e6d38490c`.
+  The source basename and SHA are retained as evidence without storing its
+  private absolute path; the obsolete video timecode was removed.
+- TDD observed the replacement contract fail against the old poster evidence,
+  then pass. Full `npm test` passed `79/79`; build, Figma export, design audit,
+  manifest integrity, `git diff --check`, and a 390×664 mobile poster-load
+  probe passed.
+- Three-Minute Micro Drama was diagnosed without changing playback code. At
+  mobile size with normal motion preference, the existing 1.4-second hold
+  resolves `video.play()` and advances the 10-second muted inline reel. With
+  `prefers-reduced-motion: reduce`, the current accessibility contract hides
+  the reel and keeps the poster static, so no autoplay request is made.
+- The recorded Vercel Preview remains protected by Vercel login for automated
+  QA. It was not replaced or redeployed in this package and therefore does not
+  contain the new Overclocking poster. `origin/main`, Production, aliases,
+  Contact, and the protected untracked file remain untouched.
 
 ## Current Integrated Baseline — HeroMedia Closeout Remediation
 
@@ -325,20 +350,23 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Open the feature Preview on a real phone and review both `/en/` and `/zh/`.
-Report any visual change request or explicitly approve the Preview as the
-release candidate. This static Preview is not a Contact-delivery test. Do not
-push `origin/main`; Production remains separate and requires another explicit
-instruction.
+Review the new Overclocking poster locally on `/en/` and `/zh/`, then decide
+whether to keep the current reduced-motion static fallback (recommended) or
+request a separate accessible manual-play affordance. If the poster is
+accepted, explicitly authorize local-main integration and/or a new Preview.
+Do not push `origin/main`; Production remains separate and requires another
+explicit instruction.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and the HeroMedia design
    contract.
-2. Verify local `main` contains reviewed closeout head `bba4ea0`, then verify
-   source branch `codex/hero-media-closeout-remediation`, remote backup
-   `backup/2026-08-04/e2d75f0`, `origin/main`, and the protected untracked file.
-3. Read back Preview deployment `dpl_8vwDEtrbrG5vzqreik78rnqMH4Ax` and confirm
-   it remains target `preview`, status `Ready`, without inferring Production.
-4. Ask for the producer's real-phone English/Chinese visual decision.
-5. Do not deploy Production, submit Contact, or push `main` implicitly.
+2. Verify `codex/overclocking-static-poster` at `7dddff9` from local `main`
+   `58a5751`, then verify `origin/main`, backup ref
+   `backup/2026-08-05/58a5751`, and the protected untracked file.
+3. Confirm the local bilingual Overclocking poster decision and ask whether the
+   existing reduced-motion static fallback should remain unchanged.
+4. Treat Preview deployment `dpl_8vwDEtrbrG5vzqreik78rnqMH4Ax` as the prior
+   build until a new Preview is explicitly authorized.
+5. Do not deploy Production, submit Contact, push `main`, or merge locally
+   without explicit producer authorization.

@@ -4,6 +4,14 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-06 — Overclocking static poster and mobile reel diagnosis
+- Branch/base/implementation: `codex/overclocking-static-poster` from backed-up local main `58a5751`; implementation `7dddff9`.
+- Change: user-approved `P1070715.jpg` became the stable-path 1280×720 Overclocking WebP poster; alt/evidence/manifest updated and obsolete video timecode removed.
+- TDD: replacement contract RED against old evidence, then GREEN; exact public derivative is 68,144 bytes, SHA-256 `d892d7a…8490c`.
+- Validation: full `79/79`, manifest checks, build, Figma export, design audit, diff check, and mobile poster-load/crop probe passed.
+- Diagnosis: Three-Minute plays after the normal 1.4-second mobile hold; `prefers-reduced-motion: reduce` intentionally keeps the static poster and makes no play request.
+- External state: prior Preview remains login-protected and unchanged; no push, merge, new Preview, Production, alias, Contact, or protected-file change.
+
 ## 2026-08-04 — HeroMedia closeout remediation
 - Branch/base: `codex/hero-media-closeout-remediation` from `e2d75f0`; implementation `63e51bf`, reviewed closeout `bba4ea0`, and backup `backup/2026-08-04/e2d75f0` pushed/read back.
 - Change: fail-closed JPEG APP/COM policy, one derived slow-push profile for website/Figma, breakpoint-active focal variables, and current cold resume.
