@@ -520,18 +520,22 @@ function renderPressNotes(items = [], lang, copy) {
 function renderCollaborations(items = [], lang) {
   return items
     .map((item) => {
-      const name = localize(item.name, lang);
-      const label = localize(item.label, lang) || name;
-      const content = item.logo
-        ? `<img class="partner-logo" src="${escapeHtml(item.logo)}" alt="${escapeHtml(name)} logo" loading="lazy">`
-        : `<span class="partner-wordmark">${escapeHtml(label)}</span>`;
-      const tag = item.url ? "a" : "div";
-      const href = item.url ? ` href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer"` : "";
+      const collaboration = item.contract.public;
+      const name = localize(collaboration.name, lang);
+      const label = localize(collaboration.label, lang) || name;
+      const logo = collaboration.logo;
+      const content = logo
+        ? `<img class="partner-logo" src="${escapeHtml(logo.src)}" width="${logo.dimensions.width}" height="${logo.dimensions.height}" alt="" aria-hidden="true" loading="lazy">`
+        : `<span class="partner-wordmark" aria-hidden="true">${escapeHtml(label)}</span>`;
+      const tag = collaboration.url ? "a" : "div";
+      const href = collaboration.url ? ` href="${escapeHtml(collaboration.url)}" target="_blank" rel="noreferrer"` : "";
+      const logoAttributes = logo
+        ? ` data-logo-size="${logo.opticalSize}" style="--partner-logo-height: ${logo.opticalToken.height}px; --partner-logo-max-width: ${logo.opticalToken.maxWidth}px"`
+        : " data-logo-size=\"fallback\"";
 
       return `
-        <${tag} class="collab-item"${href} aria-label="${escapeHtml(name)}">
+        <${tag} class="collab-item" data-collaboration-id="${escapeHtml(collaboration.id)}"${logoAttributes}${href} aria-label="${escapeHtml(name)}">
           ${content}
-          <span class="partner-name">${escapeHtml(name)}</span>
         </${tag}>
       `;
     })

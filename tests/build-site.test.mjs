@@ -217,6 +217,46 @@ test("loadSiteData returns one normalized collaboration collection", () => {
   assert.equal(collaborations.every((item) => item.contract.kind === "collaboration-mark"), true);
 });
 
+test("CollaborationMark renders four verified logos and three intentional fallbacks", () => {
+  const loaded = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const english = renderPage({ lang: "en", site: loaded, works });
+  const chinese = renderPage({ lang: "zh", site: loaded, works });
+  const ids = loaded.collaborations.map((item) => item.id);
+
+  for (const html of [english, chinese]) {
+    let previous = -1;
+    for (const id of ids) {
+      const index = html.indexOf(`data-collaboration-id="${id}"`);
+      assert.ok(index > previous, `${id} should render once in canonical order`);
+      previous = index;
+    }
+    assert.equal((html.match(/class="partner-logo"/g) || []).length, 4);
+    assert.equal((html.match(/class="partner-wordmark"/g) || []).length, 3);
+    assert.match(html, /src="\/assets\/logos\/taiwanplus-mono\.svg"/);
+    assert.match(html, /src="\/assets\/logos\/pts-mono\.svg"/);
+    assert.match(html, /src="\/assets\/logos\/ticff-mono\.svg"/);
+    assert.match(html, /src="\/assets\/logos\/gorgeous-space-mono\.svg"/);
+    assert.match(html, /data-logo-size="wide"/);
+    assert.match(html, /--partner-logo-height: 28px; --partner-logo-max-width: 164px/);
+    assert.match(html, /<img class="partner-logo"[^>]*alt=""[^>]*aria-hidden="true"/);
+    assert.doesNotMatch(html, /partner-name/);
+    assert.doesNotMatch(html, /sourceSha256|sourceCheckedAt|official-mark-nominative-use/);
+    assert.doesNotMatch(html, /494bc7efb79c834934c4cbafd551754e88c01e7ab473184894369cd6bf02c546/);
+  }
+  assert.match(english, /data-collaboration-id="gorgeous-space"[^>]*aria-label="Gorgeous Space"/);
+  assert.match(chinese, /data-collaboration-id="gorgeous-space"[^>]*aria-label="幸福空間"/);
+});
+
+test("CollaborationMark layout uses reusable four-slot and two-slot rules", () => {
+  const css = readFileSync(join(root, "src/styles.css"), "utf8");
+
+  assert.match(css, /\.collab-item \{[\s\S]*?flex: 0 1 calc\(25% - var\(--collab-slot-gap\)\);/);
+  assert.match(css, /\.partner-logo \{[\s\S]*?height: var\(--partner-logo-height\);[\s\S]*?max-width: min\(100%, var\(--partner-logo-max-width\)\);/);
+  assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*?\.collab-item \{[\s\S]*?flex-basis: calc\(50% - var\(--collab-slot-gap\)\);/);
+  assert.doesNotMatch(css, /taiwanplus|dragon-tv|women-make-waves|gorgeous-space/i);
+});
+
 test("English output uses Gorgeous Space while Chinese output preserves 幸福空間", () => {
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
@@ -975,7 +1015,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Send inquiry/);
   assert.doesNotMatch(html, /mailto:/);
   assert.match(html, /partner-wordmark/);
-  assert.doesNotMatch(html, /\/assets\/logos\/taiwanplus.svg/);
+  assert.match(html, /\/assets\/logos\/taiwanplus-mono\.svg/);
   assert.match(html, /Gorgeous Space/);
   assert.doesNotMatch(html, /Happy Space/);
   assert.ok(html.indexOf("collab-grid") < html.indexOf("watch-loop"));
@@ -1442,9 +1482,9 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*\.brand-desktop \{[\s\S]*display: none;[\s\S]*\.brand-mobile \{[\s\S]*display: inline;/);
   assert.doesNotMatch(css, /showreel-modal/);
   assert.doesNotMatch(js, /playShowreel|showreelMedia|showreelPlay|showreelVideo|data-showreel|#showreel/);
-  assert.match(css, /\.collab-grid \{\n  align-items: center;\n  display: flex;/);
+  assert.match(css, /\.collab-grid \{[\s\S]*?align-items: center;[\s\S]*?display: flex;/);
   assert.match(css, /\.collab-item \{\n  align-items: center;\n  background: transparent;\n  border: 0;/);
-  assert.match(css, /\.partner-name \{\n  display: none;/);
+  assert.doesNotMatch(css, /\.partner-name/);
   assert.match(css, /\.hero h1 span \{\n  display: block;\n  white-space: nowrap;/);
   assert.match(css, /@keyframes heroStillPush/);
   assert.match(css, /\.hero-media--slow-push \{\n    animation: heroStillPush/);
