@@ -199,6 +199,24 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   );
 });
 
+test("loadSiteData returns one normalized collaboration collection", () => {
+  const { collaborations } = loadSiteData(root);
+
+  assert.deepEqual(
+    collaborations.map((item) => item.id),
+    [
+      "taiwanplus",
+      "pts",
+      "dragon-tv",
+      "women-make-waves",
+      "ticff",
+      "screenhouse",
+      "gorgeous-space",
+    ],
+  );
+  assert.equal(collaborations.every((item) => item.contract.kind === "collaboration-mark"), true);
+});
+
 test("English output uses Gorgeous Space while Chinese output preserves 幸福空間", () => {
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));

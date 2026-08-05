@@ -37,6 +37,12 @@ export const HERO_MEDIA_RIGHTS_STATUSES = Object.freeze([
   "user-supplied-local-source",
 ]);
 
+export const COLLABORATION_LOGO_OPTICAL_TOKENS = Object.freeze({
+  compact: Object.freeze({ height: 40, maxWidth: 116 }),
+  standard: Object.freeze({ height: 34, maxWidth: 142 }),
+  wide: Object.freeze({ height: 28, maxWidth: 164 }),
+});
+
 export const FIELD_CLASSIFICATION = Object.freeze({
   featured: Object.freeze({
     requiredRendered: Object.freeze([
@@ -170,6 +176,126 @@ function contractFor(kind, source, classification, presentation) {
     },
     evidence: pick(source, classification.evidenceOnly),
   };
+}
+
+export function normalizeCollaboration(source) {
+  const kind = "CollaborationMark";
+  requireObject(source, kind);
+  rejectUnknownFields(source, ["id", "name", "label", "url", "logo"], kind);
+  for (const field of ["id", "name", "label"]) requireField(source, field, kind);
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(source.id)) {
+    throw new Error(`${kind} id must use lowercase kebab-case`);
+  }
+  requireLocalizable(source, "name", kind);
+  requireLocalizable(source, "label", kind);
+  if (source.url && !isHttpsUrl(source.url)) {
+    throw new Error(`${kind} ${source.id} url must be an HTTPS URL`);
+  }
+
+  let logo = null;
+  let logoEvidence = null;
+  if (source.logo) {
+    requireObject(source.logo, `${kind} ${source.id} logo`);
+    rejectUnknownFields(
+      source.logo,
+      [
+        "src", "sourceFile", "dimensions", "opticalSize", "sourceUrl",
+        "sourceSha256", "sourceCheckedAt", "rightsStatus",
+      ],
+      `${kind} ${source.id} logo`,
+    );
+    for (const field of [
+      "src", "sourceFile", "dimensions", "opticalSize", "sourceUrl",
+      "sourceSha256", "sourceCheckedAt", "rightsStatus",
+    ]) {
+      requireField(source.logo, field, `${kind} ${source.id} logo`);
+    }
+    const publicPathSegments = String(source.logo.src).split("/");
+    if (!/^\/assets\/logos\/[a-z0-9-]+-mono\.svg$/.test(source.logo.src)
+      || source.logo.src.includes("\\")
+      || source.logo.src.includes("//")
+      || publicPathSegments.some((segment) => segment === "." || segment === "..")) {
+      throw new Error(`${kind} ${source.id} logo src must be a normalized local logo asset`);
+    }
+    if (!/^assets\/collaboration-logos\/sources\/[a-z0-9-]+\.(?:png|svg)$/.test(source.logo.sourceFile)
+      || source.logo.sourceFile.includes("\\")
+      || source.logo.sourceFile.includes("//")) {
+      throw new Error(`${kind} ${source.id} logo sourceFile must be a normalized collaboration source asset`);
+    }
+    requireObject(source.logo.dimensions, `${kind} ${source.id} logo dimensions`);
+    rejectUnknownFields(source.logo.dimensions, ["width", "height"], `${kind} ${source.id} logo dimensions`);
+    for (const field of ["width", "height"]) {
+      if (!Number.isInteger(source.logo.dimensions[field]) || source.logo.dimensions[field] <= 0) {
+        throw new Error(`${kind} ${source.id} logo dimensions ${field} must be a positive integer`);
+      }
+    }
+    const token = COLLABORATION_LOGO_OPTICAL_TOKENS[source.logo.opticalSize];
+    if (!token) {
+      throw new Error(`${kind} ${source.id} logo opticalSize must be one of: ${Object.keys(COLLABORATION_LOGO_OPTICAL_TOKENS).join(", ")}`);
+    }
+    if (!isHttpsUrl(source.logo.sourceUrl)) {
+      throw new Error(`${kind} ${source.id} logo sourceUrl must be an HTTPS URL`);
+    }
+    if (!/^[0-9a-f]{64}$/.test(source.logo.sourceSha256)) {
+      throw new Error(`${kind} ${source.id} logo sourceSha256 must be a lowercase SHA-256`);
+    }
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(source.logo.sourceCheckedAt)) {
+      throw new Error(`${kind} ${source.id} logo sourceCheckedAt must use YYYY-MM-DD`);
+    }
+    if (source.logo.rightsStatus !== "official-mark-nominative-use") {
+      throw new Error(`${kind} ${source.id} logo rightsStatus must be official-mark-nominative-use`);
+    }
+    logo = {
+      src: source.logo.src,
+      dimensions: { ...source.logo.dimensions },
+      opticalSize: source.logo.opticalSize,
+      opticalToken: { ...token },
+    };
+    logoEvidence = {
+      sourceFile: source.logo.sourceFile,
+      sourceUrl: source.logo.sourceUrl,
+      sourceSha256: source.logo.sourceSha256,
+      sourceCheckedAt: source.logo.sourceCheckedAt,
+      rightsStatus: source.logo.rightsStatus,
+    };
+  }
+
+  const publicFields = {
+    id: source.id,
+    name: typeof source.name === "object" ? { ...source.name } : source.name,
+    label: typeof source.label === "object" ? { ...source.label } : source.label,
+    ...(source.url ? { url: source.url } : {}),
+    logo,
+  };
+  return freezeDeep({
+    ...publicFields,
+    contract: {
+      kind: "collaboration-mark",
+      public: publicFields,
+      evidence: { logo: logoEvidence },
+    },
+  });
+}
+
+function isHttpsUrl(value) {
+  try {
+    return new URL(value).protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+export function normalizeCollaborations(items) {
+  if (!Array.isArray(items)) throw new Error("CollaborationMark collection must be an array");
+  const ids = new Set();
+  return items.map((item) => {
+    const normalized = normalizeCollaboration(item);
+    if (ids.has(normalized.id)) {
+      throw new Error(`CollaborationMark id must be unique: ${normalized.id}`);
+    }
+    ids.add(normalized.id);
+    return normalized;
+  });
 }
 
 function validatePresentation(presentation, workLabel) {

@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 
 import {
   normalizeArchiveItem,
+  normalizeCollaborations,
   normalizeFeaturedWork,
   normalizeGlobalPressItem,
   normalizeHeroMedia,
@@ -69,7 +70,9 @@ export function loadSiteData(baseDir = root) {
   site.heroMedia = normalizeHeroMedia(site.heroMedia);
   return {
     site,
-    collaborations: JSON.parse(readFileSync(join(baseDir, "data/collaborations.json"), "utf8")),
+    collaborations: normalizeCollaborations(
+      JSON.parse(readFileSync(join(baseDir, "data/collaborations.json"), "utf8")),
+    ),
     archive: loadMarkdownCollection(join(baseDir, "content/archive"))
       .map(normalizeArchiveItem),
     press: JSON.parse(readFileSync(join(baseDir, "data/press.json"), "utf8"))

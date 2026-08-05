@@ -3,6 +3,8 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
 
+import * as portfolioContract from "../scripts/lib/portfolio-contract.mjs";
+
 import {
   FEATURED_REEL_EVIDENCE_FIELDS,
   FEATURED_REEL_MODES,
@@ -18,6 +20,93 @@ import {
 } from "../scripts/lib/portfolio-contract.mjs";
 
 const localized = (en, zh) => ({ en, zh });
+
+test("CollaborationMark keeps render fields public and provenance private", () => {
+  assert.equal(typeof portfolioContract.normalizeCollaboration, "function");
+
+  const normalized = portfolioContract.normalizeCollaboration({
+    id: "example",
+    name: "Example",
+    label: "EXAMPLE",
+    url: "https://example.test/",
+    logo: {
+      src: "/assets/logos/example-mono.svg",
+      sourceFile: "assets/collaboration-logos/sources/example.svg",
+      dimensions: { width: 160, height: 40 },
+      opticalSize: "wide",
+      sourceUrl: "https://example.test/example.svg",
+      sourceSha256: "a".repeat(64),
+      sourceCheckedAt: "2026-08-06",
+      rightsStatus: "official-mark-nominative-use",
+    },
+  });
+
+  assert.equal(normalized.contract.kind, "collaboration-mark");
+  assert.deepEqual(normalized.contract.public.logo, {
+    src: "/assets/logos/example-mono.svg",
+    dimensions: { width: 160, height: 40 },
+    opticalSize: "wide",
+    opticalToken: { height: 28, maxWidth: 164 },
+  });
+  assert.deepEqual(normalized.contract.evidence.logo, {
+    sourceFile: "assets/collaboration-logos/sources/example.svg",
+    sourceUrl: "https://example.test/example.svg",
+    sourceSha256: "a".repeat(64),
+    sourceCheckedAt: "2026-08-06",
+    rightsStatus: "official-mark-nominative-use",
+  });
+  assert.equal(Object.hasOwn(normalized.contract.public.logo, "sourceUrl"), false);
+  assert.equal(Object.isFrozen(normalized), true);
+});
+
+test("CollaborationMark rejects unsafe, partial, and unsupported logo records", () => {
+  const logo = {
+    src: "/assets/logos/example-mono.svg",
+    sourceFile: "assets/collaboration-logos/sources/example.svg",
+    dimensions: { width: 160, height: 40 },
+    opticalSize: "wide",
+    sourceUrl: "https://example.test/example.svg",
+    sourceSha256: "a".repeat(64),
+    sourceCheckedAt: "2026-08-06",
+    rightsStatus: "official-mark-nominative-use",
+  };
+  const collaboration = (overrides = {}) => ({
+    id: "example",
+    name: "Example",
+    label: "EXAMPLE",
+    url: "https://example.test/",
+    logo,
+    ...overrides,
+  });
+
+  const cases = [
+    [collaboration({ surprise: true }), /unknown field surprise/],
+    [collaboration({ id: "Example Mark" }), /id must use lowercase kebab-case/],
+    [collaboration({ url: "javascript:alert(1)" }), /url must be an HTTPS URL/],
+    [collaboration({ logo: { ...logo, src: "https://example.test/logo.svg" } }), /src must be a normalized local logo asset/],
+    [collaboration({ logo: { ...logo, sourceFile: "../private.svg" } }), /sourceFile must be a normalized collaboration source asset/],
+    [collaboration({ logo: { ...logo, dimensions: { width: 160, height: 0 } } }), /dimensions height must be a positive integer/],
+    [collaboration({ logo: { ...logo, opticalSize: "hero" } }), /opticalSize must be one of/],
+    [collaboration({ logo: { ...logo, sourceSha256: "bad" } }), /sourceSha256 must be a lowercase SHA-256/],
+    [collaboration({ logo: { ...logo, sourceCheckedAt: "06-08-2026" } }), /sourceCheckedAt must use YYYY-MM-DD/],
+    [collaboration({ logo: { ...logo, rightsStatus: "unknown" } }), /rightsStatus must be official-mark-nominative-use/],
+  ];
+
+  for (const [source, expected] of cases) {
+    assert.throws(() => portfolioContract.normalizeCollaboration(source), expected);
+  }
+});
+
+test("CollaborationMark collection rejects duplicate stable IDs", () => {
+  assert.equal(typeof portfolioContract.normalizeCollaborations, "function");
+  assert.throws(
+    () => portfolioContract.normalizeCollaborations([
+      { id: "same", name: "First", label: "FIRST" },
+      { id: "same", name: "Second", label: "SECOND" },
+    ]),
+    /CollaborationMark id must be unique: same/,
+  );
+});
 
 function readWorkSources() {
   return readdirSync(join(process.cwd(), "content/works"))
