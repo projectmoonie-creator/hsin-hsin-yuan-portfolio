@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "slug": "ghost-hand-divine-car",
+  "rightsStatus": "user-supplied-local-source",
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "durationFrames": 300,
+  "outputProfiles": {
+    "reel": "silent-h264-720p-bt709",
+    "poster": "webp-1280x720"
+  },
+  "publicPaths": {
+    "reel": "/assets/showreel/ghost-hand-divine-car-card-reel.mp4",
+    "poster": "/assets/showreel/ghost-hand-divine-car-card-reel-poster.webp"
+  },
+  "posterFrameId": "lead-portrait",
+  "posterFocalPoint": {"x": 0.56, "y": 0.42},
+  "alt": {
+    "en": "Two lead characters pose in a racing workshop, one holding a white helmet",
+    "zh": "賽車工作室裡，兩位主要角色合影，其中一人手持白色安全帽"
+  },
+  "frames": [
+    {
+      "id": "lead-portrait",
+      "source": "assets/stills/01-lead-portrait.webp",
+      "sourceBasename": "4arUG0s6.jpg",
+      "sourceSha256": "173a68ec11ef9ad5e5c73a52d724961aabcaa19896595d0aea42d9d12ff12243",
+      "sourceDimensions": {"width": 4240, "height": 2832},
+      "cropMode": "cover",
+      "durationFrames": 50,
+      "focalPoint": {"x": 0.56, "y": 0.42},
+      "scale": {"from": 1, "to": 1.035},
+      "transition": {"kind": "dissolve", "frames": 8}
+    },
+    {
+      "id": "racer-monitor",
+      "source": "assets/stills/02-racer-monitor.webp",
+      "sourceBasename": "HDHnSa6p.jpg",
+      "sourceSha256": "af2a489f66ce17e34cd21b404fe1284fc76c71cddbf9fc69081517fec72c9bbe",
+      "sourceDimensions": {"width": 4032, "height": 3024},
+      "cropMode": "cover",
+      "durationFrames": 50,
+      "focalPoint": {"x": 0.58, "y": 0.44},
+      "scale": {"from": 1, "to": 1.035},
+      "transition": {"kind": "dissolve", "frames": 8}
+    },
+    {
+      "id": "action-monitor",
+      "source": "assets/stills/03-action-monitor.webp",
+      "sourceBasename": "tDISn7O1.jpg",
+      "sourceSha256": "522ef38033b5b3eeeafc36ee6338af566a5d982a2e66ab56fe24fb5b703766c8",
+      "sourceDimensions": {"width": 4032, "height": 3024},
+      "cropMode": "cover",
+      "durationFrames": 50,
+      "focalPoint": {"x": 0.49, "y": 0.44},
+      "scale": {"from": 1, "to": 1.035},
+      "transition": {"kind": "dissolve", "frames": 8}
+    },
+    {
+      "id": "four-person-night",
+      "source": "assets/stills/04-four-person-night.webp",
+      "sourceBasename": "gCBfY42A.jpg",
+      "sourceSha256": "ee96d988a8a84b1c046ecfee3c78167f6cbb60c543f33fd9a00b3c4e0a961f4f",
+      "sourceDimensions": {"width": 4032, "height": 3024},
+      "cropMode": "cover",
+      "durationFrames": 50,
+      "focalPoint": {"x": 0.55, "y": 0.45},
+      "scale": {"from": 1, "to": 1.035},
+      "transition": {"kind": "dissolve", "frames": 8}
+    },
+    {
+      "id": "night-team",
+      "source": "assets/stills/05-night-team.webp",
+      "sourceBasename": "LJMe3s4e.jpg",
+      "sourceSha256": "d230908d93c9666b7a6a4212f37e6ff86d4b467ece5ebd421b3b29da97241282",
+      "sourceDimensions": {"width": 4032, "height": 3024},
+      "cropMode": "cover",
+      "durationFrames": 50,
+      "focalPoint": {"x": 0.52, "y": 0.49},
+      "scale": {"from": 1, "to": 1.035},
+      "transition": {"kind": "dissolve", "frames": 8}
+    },
+    {
+      "id": "full-cast-crew",
+      "source": "assets/stills/06-full-cast-crew.webp",
+      "sourceBasename": "UQZej4eu.jpg",
+      "sourceSha256": "191d61a36851fd69067b7d97808606f7cb6ba03d13f857a093c5fa6d87c0218c",
+      "sourceDimensions": {"width": 3959, "height": 2548},
+      "cropMode": "cover",
+      "durationFrames": 50,
+      "focalPoint": {"x": 0.53, "y": 0.5},
+      "scale": {"from": 1, "to": 1.035},
+      "transition": {"kind": "dissolve", "frames": 8}
+    }
+  ]
+}
