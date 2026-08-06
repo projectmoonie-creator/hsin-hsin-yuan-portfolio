@@ -12,7 +12,8 @@ packages.
 - HyperFrames: requested plan pin `0.7.88`; upgrade check observed `0.7.94`; strict check and completed render used pinned `0.7.94`.
 - Validation: TDD RED/GREEN, `111/111`, build, Figma export, design audit, exact manifest/media, privacy, strict HyperFrames, and diff checks pass.
 - Browser: English desktop and Chinese 390×664 play Ghost Hand after 1.4s; mobile scroll hands off to Three-Minute; reduced motion stays static; zero console/local-request/Contact errors.
-- Integration: producer approved the local Preview; local `main` fast-forwarded to package head `233abbc`. No push, new Preview, Production, alias, or Contact action; this docs-only follow-up skips external review because it changes no current rule or public output.
+- Integration: producer approved the local Preview; local `main` fast-forwarded to package head `233abbc`. No `origin/main`, new Preview, Production, alias, or Contact action; this docs-only follow-up skips external review because it changes no current rule or public output.
+- Durability: pre-record backup `backup/2026-08-06/ghost-hand-main-ae20130` read back at `ae20130`; final docs-inclusive backup is `backup/2026-08-06/pre-shutdown-final`. Legacy unbacked commit `b29b745` was separately preserved at `backup/2026-08-06/cinematic-b29b745`.
 
 ## 2026-08-06 — pre-lighting GitHub checkpoint
 - Release: checkpoint `4d4a27a` containing logo completion `f900e7b` is preserved by remote `backup/2026-08-06/pre-lighting-zh-refinement` and annotated tag `portfolio-baseline-2026-08-06-pre-lighting`; `origin/main` contains it plus the docs-only deployment record.

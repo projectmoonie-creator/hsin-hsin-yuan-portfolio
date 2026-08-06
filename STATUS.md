@@ -40,16 +40,23 @@ State: `PASS_WITH_OPEN_ITEMS`
   Hand to Three-Minute. Reduced motion keeps the static poster. Console errors,
   same-origin request failures, and Contact POSTs are all zero.
 - The producer approved the local Preview and authorized the local-main merge
-  on 2026-08-06. The merge is complete; no feature-ref push, `origin/main`
-  push, new Preview, Production deployment, alias change, or Contact submission
-  occurred. The protected untracked review file remains user-owned, unmodified,
-  and outside Git; its SHA-256 remains the required
+  on 2026-08-06. The merge is complete. Remote backup
+  `backup/2026-08-06/ghost-hand-main-ae20130` read back at the pre-record
+  checkpoint `ae201300c6925b46097fbfca57319495a0a5a4e5`; final backup ref
+  `backup/2026-08-06/pre-shutdown-final` preserves this documentation follow-up.
+  Separate legacy backup `backup/2026-08-06/cinematic-b29b745` read back at
+  `b29b7459860844f462f1e1bb8a166bb4ba0e4a25`. `origin/main` remains
+  `03ad08ac4dd3a47d300cab99f2dd569353e13ec9`; no new Preview, Production
+  deployment, alias change, or Contact submission occurred. The protected
+  untracked review file remains user-owned, unmodified, and outside Git; its
+  SHA-256 remains the required
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
 - Next action: start a separate bounded Chinese-copy and bilingual-layout
   normalization package from local `main`, preserving the approved English
   baseline. Lighting remains a later visual package after bilingual geometry
-  approval. Any GitHub push, new Preview, or Production action requires a
-  separate explicit authorization; a `main` push is Production-affecting.
+  approval. Any feature or `main` push, new Preview, or Production action
+  requires a separate explicit authorization; a `main` push is
+  Production-affecting. Backup refs are durability-only and are not releases.
 
 ## Prior Work Package — Collaboration Logo Wall Component
 
@@ -453,16 +460,17 @@ Create a bounded Chinese-copy and bilingual-layout normalization branch from
 local `main` at the integrated Ghost Hand checkpoint. Preserve the approved
 English copy and current visual output; move intentional language differences
 into canonical localized data and named variants. Do not combine lighting with
-that package. Before any release, separately decide whether to push a backup or
-feature ref, create a Preview, or promote through `main`; any `main` push is
+that package. Before any release, separately decide whether to push a feature
+ref, create a Preview, or promote through `main`; any `main` push is
 Production-affecting because the GitHub integration deploys it automatically.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, the Ghost Hand approved
    design/plan, and `docs/design-contract.md`.
-2. Verify local `main` contains integrated Ghost Hand head `233abbc` while
-   `origin/main` remains at checkpoint `03ad08a`; verify
+2. Verify remote backup `backup/2026-08-06/pre-shutdown-final` matches local
+   `main`, legacy backup `backup/2026-08-06/cinematic-b29b745` resolves to
+   `b29b745`, and `origin/main` remains at checkpoint `03ad08a`; verify
    remote backup `backup/2026-08-06/pre-lighting-zh-refinement` and annotated
    tag `portfolio-baseline-2026-08-06-pre-lighting` still resolve exactly to
    `4d4a27a`; verify the protected untracked file/hash before changing anything.
