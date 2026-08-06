@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-State: `READY_PROTECTED_PREVIEW`
+State: `READY_SHAREABLE_PREVIEW`
 
 ## Adopted Preview
 
@@ -28,10 +28,12 @@ intentionally unavailable in this Preview.
 
 Project metadata reports Vercel SSO protection for
 `all_except_custom_domains`. The direct Preview URL therefore requires Vercel
-access and is not yet a no-login external-review link. The deployment Share
-dialog offers `Anyone with the link`, but the Hobby account permits only one
-shareable link and warns that confirming would revoke the existing link. No
-replacement was confirmed; the exact producer decision is pending.
+access. The producer explicitly authorized replacing the Hobby account's sole
+existing shareable link. Vercel confirmed `Anyone with the link can view and
+comment`, revoked the old shareable link, and generated a new protected-bypass
+URL for this deployment. The full access URL is delivered only in the producer
+conversation rather than committed to Git; its SHA-256 is
+`c262013b2f03a8485b29a42c45f8308f80700ee9d607dc571e778dd619b4f4f3`.
 
 ## Validation And Boundaries
 
@@ -67,9 +69,7 @@ the independent Vercel metadata readback; both report `READY` and `preview`.
 
 ## Next Action
 
-Decide whether the new Ghost Hand Preview may replace the account's existing
-shareable link. If approved, confirm `Anyone with the link`, copy the generated
-protected-bypass URL, and record it without changing project-wide SSO. Then
-share that generated URL for Chinese-copy feedback and consolidate responses
-into the separate Chinese-copy and named bilingual-layout package. Lighting
-remains later, after bilingual geometry approval.
+Share the generated protected-bypass URL for Chinese-copy feedback and
+consolidate responses into the separate Chinese-copy and named bilingual-layout
+package. Lighting remains later, after bilingual geometry approval. Revoke the
+shareable link in Vercel when external review is complete.

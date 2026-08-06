@@ -13,7 +13,7 @@ packages.
 - Validation: TDD RED/GREEN, `111/111`, build, Figma export, design audit, exact manifest/media, privacy, strict HyperFrames, and diff checks pass.
 - Browser: English desktop and Chinese 390×664 play Ghost Hand after 1.4s; mobile scroll hands off to Three-Minute; reduced motion stays static; zero console/local-request/Contact errors.
 - Review: frozen packet `c075e4f…293f`; Gemini requested/observed/completed `gemini-3.6-flash`, PASS/no findings; Claude handoff incomplete, so no dual consensus; local adjudication requires no remediation.
-- Integration/Preview: local `main` reaches deploy source `b7d3fe1`; adopted dist-only deployment `dpl_Gy96AtLGzKzLyAwQEzVhwbtUw7Rz` is `READY` / Preview at `https://hsin-hsin-yuan-portfolio-ku5d9znnk.vercel.app`; direct URL is SSO-protected and replacing the Hobby account's sole existing shareable link awaits producer approval; no Production, alias, `origin/main`, or Contact action.
+- Integration/Preview: local `main` reaches deploy source `b7d3fe1`; adopted dist-only deployment `dpl_Gy96AtLGzKzLyAwQEzVhwbtUw7Rz` is `READY` / Preview; producer-authorized `Anyone with the link` replaced the Hobby account's old shareable link, while project SSO remains; access URL stays out of Git (`c262013…b4f4f3` SHA-256); no Production, alias, `origin/main`, or Contact action.
 - Durability: pre-record backup `backup/2026-08-06/ghost-hand-main-ae20130` read back at `ae20130`; final docs-inclusive backup is `backup/2026-08-06/pre-shutdown-final`. Legacy unbacked commit `b29b745` was separately preserved at `backup/2026-08-06/cinematic-b29b745`.
 
 ## 2026-08-06 — pre-lighting GitHub checkpoint
