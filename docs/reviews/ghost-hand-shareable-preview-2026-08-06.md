@@ -2,7 +2,7 @@
 
 Date: 2026-08-06
 
-State: `READY_PREVIEW`
+State: `READY_PROTECTED_PREVIEW`
 
 ## Adopted Preview
 
@@ -25,6 +25,13 @@ images, logos, and showreel media. It excludes repository source, internal
 review documents, environment files, `api/contact.js`, and the protected
 user-owned untracked review document. Contact delivery is therefore
 intentionally unavailable in this Preview.
+
+Project metadata reports Vercel SSO protection for
+`all_except_custom_domains`. The direct Preview URL therefore requires Vercel
+access and is not yet a no-login external-review link. The deployment Share
+dialog offers `Anyone with the link`, but the Hobby account permits only one
+shareable link and warns that confirming would revoke the existing link. No
+replacement was confirmed; the exact producer decision is pending.
 
 ## Validation And Boundaries
 
@@ -60,6 +67,9 @@ the independent Vercel metadata readback; both report `READY` and `preview`.
 
 ## Next Action
 
-Share the adopted Preview for Chinese-copy feedback. Consolidate that feedback
+Decide whether the new Ghost Hand Preview may replace the account's existing
+shareable link. If approved, confirm `Anyone with the link`, copy the generated
+protected-bypass URL, and record it without changing project-wide SSO. Then
+share that generated URL for Chinese-copy feedback and consolidate responses
 into the separate Chinese-copy and named bilingual-layout package. Lighting
-remains a later visual package after bilingual geometry approval.
+remains later, after bilingual geometry approval.

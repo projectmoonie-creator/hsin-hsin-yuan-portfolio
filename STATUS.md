@@ -54,7 +54,10 @@ State: `PASS_WITH_OPEN_ITEMS`
   with no serverless-function output:
   `https://hsin-hsin-yuan-portfolio-ku5d9znnk.vercel.app`. It excludes repo
   source, internal reviews, environments, `api/contact.js`, and the protected
-  file; Contact delivery is intentionally unavailable.
+  file; Contact delivery is intentionally unavailable. Project SSO protects
+  the direct URL. Vercel offers an `Anyone with the link` bypass, but Hobby
+  permits only one such link and confirming would revoke the existing one; no
+  replacement was confirmed, so a no-login share URL is still pending.
 - The producer approved the local Preview and authorized the local-main merge
   on 2026-08-06. The merge is complete. Remote backup
   `backup/2026-08-06/ghost-hand-main-ae20130` read back at the pre-record
@@ -67,13 +70,15 @@ State: `PASS_WITH_OPEN_ITEMS`
   protected untracked review file remains user-owned, unmodified, and outside
   Git; its SHA-256 remains the required
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
-- Next action: share the adopted Preview for outside Chinese-copy feedback,
-  consolidate responses, then start a separate bounded Chinese-copy and
-  bilingual-layout normalization package while preserving the approved
-  English baseline. Lighting remains later, after bilingual geometry approval.
-  Any further Preview, feature or `main` push, or Production action requires
-  separate explicit authorization; a `main` push is Production-affecting.
-  Backup refs and checkpoint tags are durability-only and are not releases.
+- Next action: decide whether the Ghost Hand Preview may replace the account's
+  existing shareable link. If approved, confirm `Anyone with the link`, copy
+  the generated URL, and use it for outside Chinese-copy feedback. Then start
+  a separate bounded Chinese-copy and bilingual-layout normalization package
+  while preserving the approved English baseline. Lighting remains later,
+  after bilingual geometry approval. Any further Preview, feature or `main`
+  push, or Production action requires separate explicit authorization; a
+  `main` push is Production-affecting. Backup refs and checkpoint tags are
+  durability-only and are not releases.
 
 ## Prior Work Package — Collaboration Logo Wall Component
 
