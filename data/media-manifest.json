@@ -112,6 +112,23 @@
       "owner": {"collection": "archive", "slug": "three-minute-micro-drama", "field": "posterImage"},
       "size": 32828,
       "sha256": "d3cb8e2dc7ab913a43532558e8a21dbb6aa6e9353f742a0d14de8fe8a88fe035"
+    },
+    {
+      "id": "archive.ghost-hand-divine-car.reel",
+      "publicPath": "/assets/showreel/ghost-hand-divine-car-card-reel.mp4",
+      "profile": "silent-h264-720p-bt709",
+      "owner": {"collection": "archive", "slug": "ghost-hand-divine-car", "field": "cardReelUrl"},
+      "size": 3838732,
+      "sha256": "9a602f249559cbb613180e4c6eb173ea10060818a69a11b5907789cf16b62b52",
+      "duration": 10
+    },
+    {
+      "id": "archive.ghost-hand-divine-car.poster",
+      "publicPath": "/assets/showreel/ghost-hand-divine-car-card-reel-poster.webp",
+      "profile": "webp-1280x720",
+      "owner": {"collection": "archive", "slug": "ghost-hand-divine-car", "field": "posterImage"},
+      "size": 144878,
+      "sha256": "fadb961b9eed9ec4f4f4e77e0afa0a9ac25050a7a95398d2d19b407adcbca5f3"
     }
   ]
 }

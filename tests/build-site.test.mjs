@@ -796,6 +796,23 @@ test("Overclocking archive data uses the approved static production photo and re
   );
 });
 
+test("Ghost Hand archive data uses the approved still slideshow package", () => {
+  const archive = loadMarkdownCollection(join(root, "content/archive"));
+  const item = archive.find((record) => record.slug === "ghost-hand-divine-car");
+
+  assert.equal(item.posterImage, "/assets/showreel/ghost-hand-divine-car-card-reel-poster.webp");
+  assert.equal(item.cardReelUrl, "/assets/showreel/ghost-hand-divine-car-card-reel.mp4");
+  assert.equal(item.cardReelPoster, item.posterImage);
+  assert.equal(item.cardReelMode, "after-hold");
+  assert.equal(item.cardReelDuration, 10);
+  assert.equal(item.posterRightsStatus, "user-supplied-local-source");
+  assert.equal(item.cardReelRightsStatus, "user-supplied-local-source");
+  assert.deepEqual(item.posterDimensions, { width: 1280, height: 720 });
+  assert.equal(item.posterSourceTimecode, undefined);
+  assert.match(item.imageAlt.en, /two lead characters/i);
+  assert.match(item.imageAlt.zh, /兩位主要角色/);
+});
+
 test("Overclocking reel package records the approved six-cut local-source edit", () => {
   const reelRoot = join(root, "showreel/overclocking-card-reel");
   const expectedFiles = [

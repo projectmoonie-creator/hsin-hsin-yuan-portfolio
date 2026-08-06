@@ -35,6 +35,15 @@ function relativePath(root, path) {
   return relative(root, path).replaceAll("\\", "/");
 }
 
+function serializeMediaManifest(manifest) {
+  const expanded = JSON.stringify(manifest, null, 2);
+  const compactOwners = expanded.replace(
+    /"owner": \{\n\s+"collection": "([^"]+)",\n\s+"slug": "([^"]+)",\n\s+"field": "([^"]+)"\n\s+\}/g,
+    '"owner": {"collection": "$1", "slug": "$2", "field": "$3"}',
+  );
+  return `${compactOwners}\n`;
+}
+
 function replaceTargetsAtomically({ repoRoot, targets, beforeRename }) {
   const sequence = `${process.pid}-${writeSequence += 1}`;
   const prepared = targets.map((target, index) => {
@@ -129,7 +138,7 @@ export function writeArchiveMediaPackage({
     targets: [
       { path: reelTarget, bytes: readFileSync(stagedReelPath) },
       { path: posterTarget, bytes: readFileSync(stagedPosterPath) },
-      { path: manifestPath, bytes: `${JSON.stringify(nextManifest, null, 2)}\n` },
+      { path: manifestPath, bytes: serializeMediaManifest(nextManifest) },
       { path: archivePath, bytes: nextArchive },
     ],
   });

@@ -81,6 +81,10 @@ test("writer commits reel poster manifest and frontmatter", () => {
     assert.equal(result.writesFiles, true);
     assert.equal(readArchive(fixture.root).posterImage, "/assets/showreel/sample-card-reel-poster.webp");
     assert.equal(loadMediaManifest(fixture.root).assets.filter((entry) => entry.owner.slug === "sample").length, 2);
+    assert.match(
+      readFileSync(join(fixture.root, "data/media-manifest.json"), "utf8"),
+      /"owner": \{"collection": "archive", "slug": "sample", "field": "cardReelUrl"\}/,
+    );
     assert.equal(JSON.stringify(result).includes(fixture.root), false);
     assert.equal(readFileSync(join(fixture.root, "content/archive/sample.md"), "utf8").endsWith("Body bytes stay exact.\n"), true);
   } finally {
