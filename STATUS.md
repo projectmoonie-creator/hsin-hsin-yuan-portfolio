@@ -46,6 +46,15 @@ State: `PASS_WITH_OPEN_ITEMS`
   with no findings. Claude remains `handoff-to-active-session`; no model
   request was sent and no dual-review consensus is claimed. Local adjudication
   requires no remediation.
+- The producer authorized a shareable Preview on 2026-08-06. Exact source
+  commit `b7d3fe142b3c82fbcaeb384adc7209fc3089ab75` fixes the closeout artifact's
+  private-path regression and passes `111/111` plus build. Vercel dry-run
+  enumerated exactly 42 public `dist/` files / 80,016,741 bytes. Adopted
+  deployment `dpl_Gy96AtLGzKzLyAwQEzVhwbtUw7Rz` is `READY`, target `preview`,
+  with no serverless-function output:
+  `https://hsin-hsin-yuan-portfolio-ku5d9znnk.vercel.app`. It excludes repo
+  source, internal reviews, environments, `api/contact.js`, and the protected
+  file; Contact delivery is intentionally unavailable.
 - The producer approved the local Preview and authorized the local-main merge
   on 2026-08-06. The merge is complete. Remote backup
   `backup/2026-08-06/ghost-hand-main-ae20130` read back at the pre-record
@@ -53,19 +62,18 @@ State: `PASS_WITH_OPEN_ITEMS`
   `backup/2026-08-06/pre-shutdown-final` preserves this documentation follow-up.
   Separate legacy backup `backup/2026-08-06/cinematic-b29b745` read back at
   `b29b7459860844f462f1e1bb8a166bb4ba0e4a25`. `origin/main` remains
-  `03ad08ac4dd3a47d300cab99f2dd569353e13ec9`; no new Preview, Production
-  deployment, alias change, or Contact submission occurred. The protected
-  untracked review file remains user-owned, unmodified, and outside Git; its
-  SHA-256 remains the required
+  `03ad08ac4dd3a47d300cab99f2dd569353e13ec9`. No Production promotion,
+  Production deployment, alias change, or Contact submission occurred. The
+  protected untracked review file remains user-owned, unmodified, and outside
+  Git; its SHA-256 remains the required
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
-- Next action: if the producer wants a link for outside Chinese-copy feedback,
-  explicitly authorize a new Vercel Preview from the reviewed local baseline;
-  `localhost` is not shareable. Then start a separate bounded Chinese-copy and
-  bilingual-layout normalization package, preserving the approved English
-  baseline. Lighting remains later, after bilingual geometry approval. Any
-  feature or `main` push, new Preview, or Production action requires separate
-  explicit authorization; a `main` push is Production-affecting. Backup refs
-  are durability-only and are not releases.
+- Next action: share the adopted Preview for outside Chinese-copy feedback,
+  consolidate responses, then start a separate bounded Chinese-copy and
+  bilingual-layout normalization package while preserving the approved
+  English baseline. Lighting remains later, after bilingual geometry approval.
+  Any further Preview, feature or `main` push, or Production action requires
+  separate explicit authorization; a `main` push is Production-affecting.
+  Backup refs and checkpoint tags are durability-only and are not releases.
 
 ## Prior Work Package — Collaboration Logo Wall Component
 
