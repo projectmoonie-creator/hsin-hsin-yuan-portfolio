@@ -4,7 +4,10 @@ import { join } from "node:path";
 import test from "node:test";
 import vm from "node:vm";
 
-const mainSource = readFileSync(join(process.cwd(), "src/main.js"), "utf8");
+import { selectClosestVisibleArchiveReel } from "../src/archive-reel-selection.js";
+
+const mainSource = readFileSync(join(process.cwd(), "src/main.js"), "utf8")
+  .replace(/^import \{ selectClosestVisibleArchiveReel \} from "\.\/archive-reel-selection\.js";\n\n/, "");
 
 class EventHub {
   constructor() {
@@ -167,6 +170,7 @@ function createRuntime(videoCount = 1) {
     replaceState() {},
   };
   window.location = { hash: "", pathname: "/en/", search: "" };
+  window.innerWidth = 1440;
   window.innerHeight = 900;
   window.IntersectionObserver = FakeIntersectionObserver;
   window.matchMedia = () => ({
@@ -182,6 +186,7 @@ function createRuntime(videoCount = 1) {
     console,
     document,
     IntersectionObserver: FakeIntersectionObserver,
+    selectClosestVisibleArchiveReel,
     setTimeout: (callback, delay) => clock.setTimeout(callback, delay),
     URLSearchParams,
     window,

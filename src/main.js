@@ -1,3 +1,5 @@
+import { selectClosestVisibleArchiveReel } from "./archive-reel-selection.js";
+
 if ("scrollRestoration" in window.history) {
   window.history.scrollRestoration = "manual";
 }
@@ -423,9 +425,11 @@ if (!prefersReducedMotion) {
   });
 
   function syncActiveArchiveReel() {
-    const activeArchiveReel = visibleArchiveReels.size
-      ? archiveReelVideos.filter((video) => visibleArchiveReels.has(video)).at(-1)
-      : null;
+    const activeArchiveReel = selectClosestVisibleArchiveReel(
+      archiveReelVideos,
+      visibleArchiveReels,
+      { width: window.innerWidth, height: window.innerHeight },
+    );
 
     archiveReelVideos.forEach((video) => {
       if (video === activeArchiveReel) {
@@ -455,6 +459,18 @@ if (!prefersReducedMotion) {
 
   archiveReelVideos.forEach((video) => archiveReelObserver?.observe(video));
 
+  let archiveReelViewportFrame = 0;
+  function handleArchiveReelViewportChange() {
+    if (archiveReelViewportFrame) return;
+    archiveReelViewportFrame = window.requestAnimationFrame(() => {
+      archiveReelViewportFrame = 0;
+      syncActiveArchiveReel();
+    });
+  }
+
+  window.addEventListener("scroll", handleArchiveReelViewportChange, { passive: true });
+  window.addEventListener("resize", handleArchiveReelViewportChange);
+
   function handleArchiveReelVisibility() {
     if (document.visibilityState !== "visible") {
       archiveReelVideos.forEach(resetArchiveReel);
@@ -468,6 +484,10 @@ if (!prefersReducedMotion) {
     visibleArchiveReels.clear();
     archiveReelVideos.forEach(resetArchiveReel);
     archiveReelObserver?.disconnect();
+    if (archiveReelViewportFrame) window.cancelAnimationFrame(archiveReelViewportFrame);
+    archiveReelViewportFrame = 0;
+    window.removeEventListener("scroll", handleArchiveReelViewportChange);
+    window.removeEventListener("resize", handleArchiveReelViewportChange);
     document.removeEventListener("visibilitychange", handleArchiveReelVisibility);
   });
 }

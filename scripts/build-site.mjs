@@ -18,6 +18,7 @@ const SITE_ORIGIN = (process.env.SITE_ORIGIN || "https://hsin-hsin-yuan-portfoli
 const ASSET_VERSION = createHash("sha256")
   .update(readFileSync(join(root, "src/styles.css")))
   .update(readFileSync(join(root, "src/main.js")))
+  .update(readFileSync(join(root, "src/archive-reel-selection.js")))
   .digest("hex")
   .slice(0, 12);
 
@@ -774,6 +775,7 @@ function build() {
   writeFileSync(join(dist, "index.html"), '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=/en/">');
   cpSync(join(root, "src/styles.css"), join(dist, "styles.css"));
   cpSync(join(root, "src/main.js"), join(dist, "main.js"));
+  cpSync(join(root, "src/archive-reel-selection.js"), join(dist, "archive-reel-selection.js"));
 
   if (existsSync(join(root, "public"))) {
     cpSync(join(root, "public"), dist, { recursive: true });

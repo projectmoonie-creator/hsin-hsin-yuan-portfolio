@@ -919,6 +919,9 @@ test("archive reels wait on the poster and reset when playback is no longer allo
   assert.match(mainSource, /video\.currentTime = 0/);
   assert.match(mainSource, /document\.visibilityState !== "visible"/);
   assert.match(mainSource, /document\.addEventListener\("visibilitychange"/);
+  assert.match(mainSource, /function handleArchiveReelViewportChange\(\)/);
+  assert.match(mainSource, /window\.addEventListener\("scroll", handleArchiveReelViewportChange/);
+  assert.match(mainSource, /window\.addEventListener\("resize", handleArchiveReelViewportChange/);
   assert.match(mainSource, /window\.addEventListener\("pagehide"/);
 });
 
@@ -1359,6 +1362,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.equal(existsSync(join(root, "dist/zh/index.html")), true);
   assert.equal(existsSync(join(root, "dist/styles.css")), true);
   assert.equal(existsSync(join(root, "dist/main.js")), true);
+  assert.equal(existsSync(join(root, "dist/archive-reel-selection.js")), true);
   assert.equal(existsSync(join(root, "dist/ambient-background.js")), false);
   assert.equal(existsSync(join(root, "dist/robots.txt")), true);
   assert.equal(existsSync(join(root, "dist/sitemap.xml")), true);
