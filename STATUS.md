@@ -4,6 +4,36 @@ Updated: 2026-08-06
 
 State: `PASS_WITH_OPEN_ITEMS`
 
+## Current Local Work Package — Three-Minute Full-Series Link
+
+- Branch `codex/three-minute-watch-link` starts from local `main`
+  `8b183320b7e96cdf065ef8d727e2049224eba097`. The exact pre-change state is
+  preserved and read back at remote backup
+  `backup/2026-08-06/pre-three-minute-watch-link-8b18332`.
+- The Three-Minute Micro Drama Series Archive card now uses the existing
+  repo-configured `watchUrl` / `watchLabel` contract to open the producer-
+  supplied public playlist
+  `https://www.youtube.com/playlist?list=PLDTnN3czXyG8`. Its localized actions
+  are exactly `Watch the full series` and `觀看完整系列`; no renderer, CSS,
+  JavaScript, media, Figma, card-order, or slideshow behavior changed.
+- TDD observed the missing URL and one-link Archive count fail, then pass.
+  Focused tests pass `2/2`, the build-site suite passes `38/38`, and the full
+  suite passes `111/111`; build, Figma export, design audit, and diff checks
+  pass with no tracked Figma delta.
+- English desktop and Chinese mobile browser QA verify the exact destination,
+  localized visible text and accessible name, dispatched click target, zero
+  horizontal overflow, and zero console, same-origin-request, or Contact
+  errors.
+- Frozen review packet SHA-256 is
+  `484262875809a7cfcc5602d8faa6f69bbfd67916313bc46796bf558eab859cd1`.
+  Gemini requested/observed/completed `gemini-3.6-flash` and returned `PASS`
+  with no findings. Local adjudication accepts the sole residual risk: future
+  YouTube availability and playlist visibility remain external dependencies.
+- This package is local only. It has not been merged into `main`, pushed to
+  `origin/main`, deployed to Preview or Production, aliased, or used to submit
+  Contact. The protected untracked review file remains user-owned, unmodified,
+  and outside Git.
+
 ## Current Integrated Work Package — Ghost Hand Archive Slideshow
 
 - Source branch `codex/ghost-hand-archive-slideshow` starts from local and remote

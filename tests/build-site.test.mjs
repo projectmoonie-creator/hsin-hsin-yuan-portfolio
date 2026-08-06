@@ -641,6 +641,14 @@ test("loadSiteData keeps retired lab content out of the public site model", () =
   assert.equal(archive[1].metrics[0].value, "200M");
   assert.equal(archive[1].metrics[1].value, "250M");
   assert.match(archive[1].summary.en, /Short-form web drama work/);
+  assert.equal(
+    archive[1].watchUrl,
+    "https://www.youtube.com/playlist?list=PLDTnN3czXyG8",
+  );
+  assert.deepEqual(archive[1].watchLabel, {
+    en: "Watch the full series",
+    zh: "觀看完整系列",
+  });
 
   const heartOfSteel = archive.find((item) => item.slug === "heart-of-steel");
   const lyingGame = archive.find((item) => item.slug === "lying-game");
@@ -719,13 +727,17 @@ test("archive renders five equal cards with one 40/60 contract", () => {
 
   assert.ok(archiveMarkup, "Archive section renders");
   assert.equal((archiveMarkup.match(/class="archive-card(?:\s|")/g) || []).length, 5);
-  assert.equal((archiveMarkup.match(/<a class="archive-card"/g) || []).length, 1);
-  assert.equal((archiveMarkup.match(/<article class="archive-card/g) || []).length, 4);
+  assert.equal((archiveMarkup.match(/<a class="archive-card"/g) || []).length, 2);
+  assert.equal((archiveMarkup.match(/<article class="archive-card/g) || []).length, 3);
   assert.match(archiveMarkup, /archive-card-copy/);
   assert.doesNotMatch(archiveMarkup, /archive-card-media-placeholder/);
   assert.match(archiveMarkup, /object-position: 56% 42%/);
   assert.match(archiveMarkup, /class="archive-card-index" aria-hidden="true">01/);
   assert.match(archiveMarkup, /class="archive-card-index" aria-hidden="true">02/);
+  assert.match(
+    archiveMarkup,
+    /href="https:\/\/www\.youtube\.com\/playlist\?list=PLDTnN3czXyG8"[^>]*aria-label="Watch the full series: Three-Minute Micro Drama Series"[\s\S]*?<span class="archive-card-action">Watch the full series<\/span>/,
+  );
   assert.match(archiveMarkup, /data-archive-reel-video/);
   assert.doesNotMatch(
     archiveMarkup,
@@ -1158,7 +1170,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /href="#pts-taigi-bus"/);
   assert.match(html, /href="#interior-spatial-brand-films"/);
   assert.match(html, /https:\/\/youtu\.be\/M_eXe9HRD9Y\?si=YZ_3JZ7FJY4vVcZv/);
-  assert.equal((html.match(/>Watch the full series<\/a>/g) || []).length, 1);
+  assert.equal((html.match(/>Watch the full series<\/(?:a|span)>/g) || []).length, 2);
   assert.equal((html.match(/>Watch selected reel<\/a>/g) || []).length, 1);
   assert.equal((html.match(/<a class="button-link"/g) || []).length, 2);
   assert.match(
@@ -1168,6 +1180,10 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(
     html,
     /href="https:\/\/www\.youtube\.com\/playlist\?list=PLfuPqJAlXvCs"[\s\S]*?>Watch the full series<\/a>/,
+  );
+  assert.match(
+    html,
+    /href="https:\/\/www\.youtube\.com\/playlist\?list=PLDTnN3czXyG8"[^>]*aria-label="Watch the full series: Three-Minute Micro Drama Series"/,
   );
   assert.doesNotMatch(html, /Watch the full episode/);
   assert.doesNotMatch(html, />Watch the series<\/a>/);
@@ -1431,10 +1447,14 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /觀看官方宣傳片/);
   assert.match(zh, /<h2 class="contact-title"><span class="contact-title-line">一起把故事<\/span><span class="contact-title-line"><span class="contact-title-accent">做出來。<\/span><\/span><\/h2>/);
   assert.doesNotMatch(zh, /觀看完整單集/);
-  assert.equal((zh.match(/>觀看完整系列<\/a>/g) || []).length, 1);
+  assert.equal((zh.match(/>觀看完整系列<\/(?:a|span)>/g) || []).length, 2);
   assert.equal((zh.match(/>觀看精選短片<\/a>/g) || []).length, 1);
   assert.match(zh, /href="https:\/\/www\.youtube\.com\/playlist\?list=PLJCU8axtQoPI"/);
   assert.match(zh, /href="https:\/\/www\.youtube\.com\/playlist\?list=PLfuPqJAlXvCs"/);
+  assert.match(
+    zh,
+    /href="https:\/\/www\.youtube\.com\/playlist\?list=PLDTnN3czXyG8"[^>]*aria-label="觀看完整系列: 三分超微劇系列"/,
+  );
   assert.doesNotMatch(zh, /觀看代表片段/);
   assert.match(zh, /幸福空間與室內設計影像/);
   assert.match(zh, /導演 \/ 剪輯/);

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "provider": "google-gemini-api",
+  "routingPolicy": "highest-capability-generally-released-at-execution",
+  "exactPin": null,
+  "eligibleModels": [
+    "gemini-3.6-flash",
+    "gemini-3.5-flash",
+    "gemini-2.5-pro",
+    "gemini-2.5-flash",
+    "gemini-2.0-flash"
+  ],
+  "requestedModel": "gemini-3.6-flash",
+  "observedModel": "gemini-3.6-flash",
+  "completedModel": "gemini-3.6-flash",
+  "status": "completed",
+  "resolvedAt": "2026-08-06T09:28:08.807Z",
+  "completedAt": "2026-08-06T09:28:15.849Z"
+}

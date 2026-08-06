@@ -30,6 +30,11 @@
     "en": "Short-form web drama work across food, fantasy, comedy, suspense, and youth romance formats.",
     "zh": "涵蓋美食、奇幻、喜劇、懸疑與青春愛情的網路短劇系列。"
   },
+  "watchUrl": "https://www.youtube.com/playlist?list=PLDTnN3czXyG8",
+  "watchLabel": {
+    "en": "Watch the full series",
+    "zh": "觀看完整系列"
+  },
   "metrics": [
     {"value": "200M", "label": {"en": "flagship series plays", "zh": "《不作不愛》累積播放"}},
     {"value": "250M", "label": {"en": "flagship Weibo views", "zh": "《不作不愛》微博瀏覽"}}

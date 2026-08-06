@@ -4,6 +4,14 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-06 — Three-Minute full-series link
+- Branch/base: `codex/three-minute-watch-link` from local `main` `8b18332`; pre-change backup `backup/2026-08-06/pre-three-minute-watch-link-8b18332` read back exactly.
+- Change: the Three-Minute Archive card now uses the existing data contract to open producer-supplied playlist `PLDTnN3czXyG8`, with exact actions `Watch the full series` / `觀看完整系列`.
+- Scope: data and regression tests only; no renderer, CSS, JavaScript, media, Figma, ordering, slideshow, or reel behavior changed.
+- TDD/validation: RED for missing URL/count, then GREEN; focused `2/2`, build-site `38/38`, full `111/111`, build, Figma export, design audit, diff check, and bilingual desktop/mobile browser QA passed.
+- Review: frozen packet `4842628…9cd1`; Gemini requested/observed/completed `gemini-3.6-flash`, `PASS`/no findings; external YouTube availability is the only residual risk and needs no remediation.
+- External state: local only; no `main` merge, `origin/main` push, Preview, Production, alias, Contact action, or protected-file change.
+
 ## 2026-08-06 — Ghost Hand Archive slideshow
 - Branch/base/behavior: `codex/ghost-hand-archive-slideshow` from `03ad08a`; validated behavior `9d84132`; docs follow-up reported externally.
 - Change: six approved production stills now drive a generic 10-second recipe/HyperFrames slideshow, stable poster/MP4 paths, manifest/frontmatter integration, and nearest-visible one-reel arbitration.
