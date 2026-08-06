@@ -7,33 +7,40 @@ State: `PASS_WITH_OPEN_ITEMS`
 ## Current Work Package — Collaboration Logo Wall Component
 
 - Branch `codex/collaboration-logo-wall` starts from inherited package head
-  `c33b2f810e95ba2a38146b2daf7ff1220b0d1712`; validated implementation head is
-  `90e713cd1431a7dba5fc05150fd7698e71206709`.
+  `c33b2f810e95ba2a38146b2daf7ff1220b0d1712`; the logo-completion increment
+  starts from `7ba8a6215bd49714c3690e66b3a5ba74b44c3b1e` and its validated
+  implementation commit is `f900e7b31321e7b702d4c659340c6b4c85e5f02e`.
 - `data/collaborations.json` now owns one normalized seven-entry collection
-  consumed by both website and Figma export. TaiwanPlus, PTS, TICFF, and
-  Gorgeous Space use verified official sources plus deterministic local cream
-  derivatives; Dragon TV, Women Make Waves, and ScreenHouse remain visible text
-  fallbacks pending trustworthy standalone identities/assets.
+  consumed by both website and Figma export. Six entries use verified or
+  producer-supplied SHA-locked sources plus deterministic local cream
+  derivatives. Women Make Waves remains the sole visible text fallback pending
+  a trustworthy standalone asset.
 - The shared component provides strict public/evidence separation, three
   optical tokens, accessible logo/fallback semantics, four desktop slots, two
   mobile slots, centered incomplete rows, and no collaborator-specific layout
   code. Normal add/remove work is data-only; verified mark replacement uses the
-  offline SHA-locked `npm run collabs:prepare` path.
+  offline SHA-locked `npm run collabs:prepare` path. ScreenHouse exercises one
+  allowlisted evidence-only SVG treatment that removes its two opaque
+  background rectangles without editing the preserved official source.
 - TDD passed for contract, asset safety/integrity, website, Figma parity, and
-  unlinked fallback semantics. Full `npm test` passed `92/92`; asset prepare,
-  build, Figma export, design audit, and `git diff --check` passed.
+  fallback semantics. Full `npm test` passed `93/93`; asset prepare produced six
+  derivatives; build, Figma export, and design audit passed. Implementation
+  paths pass `git diff --check`; the immutable frozen packet retains four
+  intentional Markdown hard-break spaces and is recorded by exact SHA-256.
 - English/Chinese Chromium QA passed at 1440×900 and 390×844: complete images,
   canonical order, exact 4+3 / 2+2+2+1 rows, centered final rows, visible focus,
   no horizontal overflow or evidence leak, and no console/page/request errors.
 - Frozen review packet SHA-256 is
-  `483023e5b58e0c113d30ef4b3aa7d259734d92f98cbde09c601ee128affc6615`.
+  `531d94258ebb6c4ec3762cc336aaa07f873802a75323e53091ff475d4deba7e8`.
   Gemini requested/observed/completed `gemini-3.6-flash` and returned PASS with
   no actionable findings. Claude remains `handoff-to-active-session`; no model
   request was sent and no dual-review consensus is claimed.
-- No backup push, merge, new Preview, Production deployment, alias change, or
-  Contact submission occurred. Twelve current commits are not reachable from
-  an `origin/*` ref, so the branch is locally complete but not remotely backed
-  up. The protected untracked file remains outside Git at SHA-256
+- The producer authorized local integration; local `main` is fast-forwarded to
+  the closeout head containing `f900e7b`. No backup push, `origin/main` push,
+  new Preview, Production deployment, alias change, or Contact submission
+  occurred. The integrated head remains unreachable from any `origin/*` ref,
+  so the result is not remotely backed up. The
+  protected untracked file remains outside Git at SHA-256
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
 
 ## Prior Work Package — Overclocking Static Poster And Mobile Reel Diagnosis
@@ -382,24 +389,24 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Review the new Collaboration Logo Wall locally on `/en/` and `/zh/`. If it is
-accepted, explicitly authorize a uniquely named remote backup ref for the final
-branch head and specify whether to fast-forward this combined branch into local
-`main`. A new Preview is optional and separate. Do not push `origin/main`;
-Production remains separate and requires another explicit instruction.
+Verify local `main` contains `f900e7b`, then decide whether to create a uniquely
+named remote backup ref and whether the next public checkpoint should be a new
+Preview. Do not push `origin/main`; Production remains separate and requires
+another explicit instruction. WMW may remain a text fallback indefinitely
+until a trustworthy standalone mark is supplied.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, the Collaboration closeout,
    and `docs/design-contract.md`.
-2. Verify branch `codex/collaboration-logo-wall`, implementation head
-   `90e713c`, local `main` `58a5751`, `origin/main` `382e02a`, and the protected
+2. Verify branch `codex/collaboration-logo-wall`, local `main` contains
+   implementation `f900e7b`, `origin/main` remains `382e02a`, and the protected
    untracked file/hash before changing anything.
-3. Confirm `npm test` is `92/92`, four mono derivatives exist, all seven IDs
+3. Confirm `npm test` is `93/93`, six mono derivatives exist, all seven IDs
    appear in English/Chinese output and desktop/mobile Figma output, and
    `git rev-list --count HEAD --not --remotes=origin` remains nonzero until an
    explicit backup push is authorized.
 4. Treat Preview deployment `dpl_8vwDEtrbrG5vzqreik78rnqMH4Ax` as the prior
    build; it does not contain this combined branch.
-5. Do not push, merge locally, create a Preview, deploy Production, change an
-   alias, or submit Contact without the corresponding explicit authorization.
+5. Do not push, create a Preview, deploy Production, change an alias, or submit
+   Contact without the corresponding explicit authorization.

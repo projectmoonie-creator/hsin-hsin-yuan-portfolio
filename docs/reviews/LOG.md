@@ -13,12 +13,12 @@ packages.
 - External state: prior Preview remains login-protected and unchanged; no push, merge, new Preview, Production, alias, Contact, or protected-file change.
 
 ## 2026-08-06 — Collaboration Logo Wall component
-- Branch/base/implementation: `codex/collaboration-logo-wall` from `c33b2f8`; validated implementation `90e713c`.
-- Change: one normalized seven-entry website/Figma component, four verified offline monochrome marks, and three honest text fallbacks.
-- Validation: TDD, `92/92`, build, Figma export, design audit, diff check, and English/Chinese desktop/mobile Chromium QA passed.
-- Review: frozen packet `483023e…f6615`; Gemini requested/observed/completed `gemini-3.6-flash`, PASS/no findings; Claude handoff incomplete, so no dual consensus.
-- Open items: Dragon TV, WMW, and ScreenHouse remain fallbacks; future official-asset changes require source/hash re-verification.
-- External state: no backup push, merge, Preview, Production, alias, Contact, or protected-file change.
+- Branch/base/implementation: `codex/collaboration-logo-wall`; component `90e713c`; logo completion from `7ba8a62` at `f900e7b`.
+- Change: one normalized seven-entry website/Figma component now has six SHA-locked monochrome marks and one honest WMW text fallback; Dragon TV is producer-supplied and ScreenHouse is the official homepage SVG.
+- TDD/validation: source-treatment RED then GREEN; full `93/93`, six-asset prepare, build, Figma export, design audit, and English/Chinese desktop/mobile Chromium QA passed.
+- Review: frozen increment packet `531d942…ba7e8`; Gemini requested/observed/completed `gemini-3.6-flash`, PASS/no findings; Claude handoff incomplete, so no dual consensus.
+- Local integration: producer authorized fast-forward of local `main` to this closeout head; post-merge tests and generators passed.
+- Open/external: WMW remains a fallback; no remote backup, `origin/main` push, Preview, Production, alias, Contact, or protected-file change.
 
 ## 2026-08-04 — HeroMedia closeout remediation
 - Branch/base: `codex/hero-media-closeout-remediation` from `e2d75f0`; implementation `63e51bf`, reviewed closeout `bba4ea0`, and backup `backup/2026-08-04/e2d75f0` pushed/read back.
