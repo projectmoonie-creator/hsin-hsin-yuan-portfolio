@@ -217,7 +217,7 @@ test("loadSiteData returns one normalized collaboration collection", () => {
   assert.equal(collaborations.every((item) => item.contract.kind === "collaboration-mark"), true);
 });
 
-test("CollaborationMark renders four verified logos and three intentional fallbacks", () => {
+test("CollaborationMark renders six verified logos and one intentional fallback", () => {
   const loaded = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
   const english = renderPage({ lang: "en", site: loaded, works });
@@ -231,11 +231,13 @@ test("CollaborationMark renders four verified logos and three intentional fallba
       assert.ok(index > previous, `${id} should render once in canonical order`);
       previous = index;
     }
-    assert.equal((html.match(/class="partner-logo"/g) || []).length, 4);
-    assert.equal((html.match(/class="partner-wordmark"/g) || []).length, 3);
+    assert.equal((html.match(/class="partner-logo"/g) || []).length, 6);
+    assert.equal((html.match(/class="partner-wordmark"/g) || []).length, 1);
     assert.match(html, /src="\/assets\/logos\/taiwanplus-mono\.svg"/);
     assert.match(html, /src="\/assets\/logos\/pts-mono\.svg"/);
+    assert.match(html, /src="\/assets\/logos\/dragon-tv-mono\.svg"/);
     assert.match(html, /src="\/assets\/logos\/ticff-mono\.svg"/);
+    assert.match(html, /src="\/assets\/logos\/screenhouse-mono\.svg"/);
     assert.match(html, /src="\/assets\/logos\/gorgeous-space-mono\.svg"/);
     assert.match(html, /data-logo-size="wide"/);
     assert.match(html, /--partner-logo-height: 28px; --partner-logo-max-width: 164px/);
@@ -246,7 +248,7 @@ test("CollaborationMark renders four verified logos and three intentional fallba
   }
   assert.match(english, /data-collaboration-id="gorgeous-space"[^>]*aria-label="Gorgeous Space"/);
   assert.match(chinese, /data-collaboration-id="gorgeous-space"[^>]*aria-label="幸福空間"/);
-  assert.match(english, /<div class="collab-item" data-collaboration-id="screenhouse"[^>]*role="img"[^>]*aria-label="ScreenHouse"/);
+  assert.match(english, /<a class="collab-item" data-collaboration-id="screenhouse"[^>]*href="https:\/\/www\.screenhouse\.co\.uk\/"[^>]*aria-label="ScreenHouse"/);
 });
 
 test("CollaborationMark layout uses reusable four-slot and two-slot rules", () => {

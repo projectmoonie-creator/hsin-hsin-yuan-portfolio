@@ -37,7 +37,26 @@ export function verifySourceSha256(source, expected, label) {
   return actual;
 }
 
-export function buildMonochromeSvg({ source, mime, width, height }) {
+function applySourceTreatment(source, mime, sourceTreatment) {
+  if (!sourceTreatment) return source;
+  if (sourceTreatment !== "remove-background-rects") {
+    throw new Error(`unsupported collaboration logo source treatment: ${sourceTreatment}`);
+  }
+  if (mime !== "image/svg+xml") {
+    throw new Error("remove-background-rects requires an SVG source");
+  }
+  const value = source.toString("utf8");
+  const treated = value.replace(
+    /<rect\b[^>]*\/\s*>|<rect\b[^>]*>[\s\S]*?<\/rect\s*>/gi,
+    "",
+  );
+  if (treated === value) {
+    throw new Error("remove-background-rects found no SVG rect elements");
+  }
+  return Buffer.from(treated);
+}
+
+export function buildMonochromeSvg({ source, mime, width, height, sourceTreatment }) {
   if (!Buffer.isBuffer(source)) throw new Error("logo source must be a Buffer");
   if (!Number.isInteger(width) || width <= 0 || !Number.isInteger(height) || height <= 0) {
     throw new Error("logo dimensions must be positive integers");
@@ -46,6 +65,8 @@ export function buildMonochromeSvg({ source, mime, width, height }) {
     throw new Error(`unsupported collaboration logo MIME type: ${mime}`);
   }
   if (mime === "image/svg+xml") assertSafeSvg(source.toString("utf8"));
+  const preparedSource = applySourceTreatment(source, mime, sourceTreatment);
+  if (mime === "image/svg+xml") assertSafeSvg(preparedSource.toString("utf8"));
 
   const matrix = [
     `0 0 0 0 ${MONO_RGB.r.toFixed(6)}`,
@@ -53,7 +74,7 @@ export function buildMonochromeSvg({ source, mime, width, height }) {
     `0 0 0 0 ${MONO_RGB.b.toFixed(6)}`,
     "0 0 0 1 0",
   ].join(" ");
-  const data = source.toString("base64");
+  const data = preparedSource.toString("base64");
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img">
   <defs>
     <filter id="monochrome" color-interpolation-filters="sRGB">
@@ -84,6 +105,7 @@ export function prepareCollaborationLogos({ baseDir, collaborations }) {
       mime,
       width: publicLogo.dimensions.width,
       height: publicLogo.dimensions.height,
+      sourceTreatment: evidence.sourceTreatment,
     });
     const outputRelative = join("public", publicLogo.src.replace(/^\//, ""));
     const outputPath = join(baseDir, outputRelative);

@@ -38,6 +38,7 @@ test("CollaborationMark keeps render fields public and provenance private", () =
       sourceSha256: "a".repeat(64),
       sourceCheckedAt: "2026-08-06",
       rightsStatus: "official-mark-nominative-use",
+      sourceTreatment: "remove-background-rects",
     },
   });
 
@@ -54,6 +55,7 @@ test("CollaborationMark keeps render fields public and provenance private", () =
     sourceSha256: "a".repeat(64),
     sourceCheckedAt: "2026-08-06",
     rightsStatus: "official-mark-nominative-use",
+    sourceTreatment: "remove-background-rects",
   });
   assert.equal(Object.hasOwn(normalized.contract.public.logo, "sourceUrl"), false);
   assert.equal(Object.isFrozen(normalized), true);
@@ -90,6 +92,8 @@ test("CollaborationMark rejects unsafe, partial, and unsupported logo records", 
     [collaboration({ logo: { ...logo, sourceSha256: "bad" } }), /sourceSha256 must be a lowercase SHA-256/],
     [collaboration({ logo: { ...logo, sourceCheckedAt: "06-08-2026" } }), /sourceCheckedAt must use YYYY-MM-DD/],
     [collaboration({ logo: { ...logo, rightsStatus: "unknown" } }), /rightsStatus must be official-mark-nominative-use/],
+    [collaboration({ logo: { ...logo, sourceTreatment: "erase-logo" } }), /sourceTreatment must be one of/],
+    [collaboration({ logo: { ...logo, sourceFile: "assets/collaboration-logos/sources/example.png", sourceTreatment: "remove-background-rects" } }), /sourceTreatment requires an SVG source/],
   ];
 
   for (const [source, expected] of cases) {

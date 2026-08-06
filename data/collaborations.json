@@ -35,7 +35,17 @@
     "id": "dragon-tv",
     "name": "Dragon TV",
     "label": "DRAGON TV",
-    "url": "https://www.dragontv.cn/"
+    "url": "https://www.dragontv.cn/",
+    "logo": {
+      "src": "/assets/logos/dragon-tv-mono.svg",
+      "sourceFile": "assets/collaboration-logos/sources/dragon-tv.png",
+      "dimensions": { "width": 170, "height": 122 },
+      "opticalSize": "compact",
+      "sourceUrl": "https://www.dragontv.cn/",
+      "sourceSha256": "0d56ec84ea9c29768628e71b7fb2c41332a25154f4f995940944a701cb6b35ff",
+      "sourceCheckedAt": "2026-08-06",
+      "rightsStatus": "official-mark-nominative-use"
+    }
   },
   {
     "id": "women-make-waves",
@@ -62,7 +72,19 @@
   {
     "id": "screenhouse",
     "name": "ScreenHouse",
-    "label": "ScreenHouse"
+    "label": "ScreenHouse",
+    "url": "https://www.screenhouse.co.uk/",
+    "logo": {
+      "src": "/assets/logos/screenhouse-mono.svg",
+      "sourceFile": "assets/collaboration-logos/sources/screenhouse.svg",
+      "dimensions": { "width": 126, "height": 63 },
+      "opticalSize": "compact",
+      "sourceUrl": "https://www.screenhouse.co.uk/",
+      "sourceSha256": "0aba4f30ef39a812a903f48a1c9d7a5f9cb4ad9ecb975993662b602e8a20940d",
+      "sourceCheckedAt": "2026-08-06",
+      "rightsStatus": "official-mark-nominative-use",
+      "sourceTreatment": "remove-background-rects"
+    }
   },
   {
     "id": "gorgeous-space",

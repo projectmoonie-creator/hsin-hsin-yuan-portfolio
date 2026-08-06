@@ -81,11 +81,13 @@ test("Figma CollaborationMark components keep the complete canonical wall", () =
       assert.ok(index > previous, `${id} should render once in canonical order`);
       previous = index;
     }
-    assert.equal((svg.match(/data-render-mode="logo"/g) || []).length, 4);
-    assert.equal((svg.match(/data-render-mode="fallback"/g) || []).length, 3);
+    assert.equal((svg.match(/data-render-mode="logo"/g) || []).length, 6);
+    assert.equal((svg.match(/data-render-mode="fallback"/g) || []).length, 1);
     assert.match(svg, /data-source="taiwanplus-mono\.svg"/);
     assert.match(svg, /data-source="pts-mono\.svg"/);
+    assert.match(svg, /data-source="dragon-tv-mono\.svg"/);
     assert.match(svg, /data-source="ticff-mono\.svg"/);
+    assert.match(svg, /data-source="screenhouse-mono\.svg"/);
     assert.match(svg, /data-source="gorgeous-space-mono\.svg"/);
     assert.doesNotMatch(svg, /sourceSha256|sourceCheckedAt|official-mark-nominative-use/);
     assert.doesNotMatch(svg, /494bc7efb79c834934c4cbafd551754e88c01e7ab473184894369cd6bf02c546/);

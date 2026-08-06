@@ -35,6 +35,32 @@ test("monochrome derivatives are deterministic, self-contained, and preserve alp
   assert.doesNotMatch(first, /(?:href|src)=["']https?:\/\//);
 });
 
+test("SVG background removal preserves the official paths on transparency", () => {
+  const derivative = logoAssets.buildMonochromeSvg({
+    source: Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"><rect width="100" height="50"/><path d="M0 0h10v10z"/></svg>'),
+    mime: "image/svg+xml",
+    width: 100,
+    height: 50,
+    sourceTreatment: "remove-background-rects",
+  });
+  const encoded = derivative.match(/data:image\/svg\+xml;base64,([^"']+)/)?.[1];
+  assert.ok(encoded);
+  const embedded = Buffer.from(encoded, "base64").toString("utf8");
+
+  assert.doesNotMatch(embedded, /<rect\b/);
+  assert.match(embedded, /<path d="M0 0h10v10z"\/>/);
+  assert.throws(
+    () => logoAssets.buildMonochromeSvg({
+      source: Buffer.from("png bytes"),
+      mime: "image/png",
+      width: 100,
+      height: 50,
+      sourceTreatment: "remove-background-rects",
+    }),
+    /remove-background-rects requires an SVG source/,
+  );
+});
+
 test("SVG source guard rejects executable and externally referenced content", () => {
   assert.equal(typeof logoAssets.assertSafeSvg, "function");
 
@@ -95,19 +121,21 @@ test("offline preparation reads verified sources and writes only public derivati
   }
 });
 
-test("canonical data registers four verified sources and three honest fallbacks", () => {
+test("canonical data registers six verified sources and one honest fallback", () => {
   const collaborations = JSON.parse(
     readFileSync(join(root, "data/collaborations.json"), "utf8"),
   );
 
   assert.deepEqual(
     collaborations.filter((item) => item.logo).map((item) => item.id),
-    ["taiwanplus", "pts", "ticff", "gorgeous-space"],
+    ["taiwanplus", "pts", "dragon-tv", "ticff", "screenhouse", "gorgeous-space"],
   );
   assert.deepEqual(
     collaborations.filter((item) => !item.logo).map((item) => item.id),
-    ["dragon-tv", "women-make-waves", "screenhouse"],
+    ["women-make-waves"],
   );
+  assert.deepEqual(collaborations.find((item) => item.id === "dragon-tv").logo.dimensions, { width: 170, height: 122 });
+  assert.equal(collaborations.find((item) => item.id === "screenhouse").url, "https://www.screenhouse.co.uk/");
   for (const item of collaborations.filter((record) => record.logo)) {
     const source = readFileSync(join(root, item.logo.sourceFile));
     const actual = createHash("sha256").update(source).digest("hex");

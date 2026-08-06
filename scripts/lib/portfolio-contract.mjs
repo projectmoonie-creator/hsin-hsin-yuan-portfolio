@@ -42,6 +42,9 @@ export const COLLABORATION_LOGO_OPTICAL_TOKENS = Object.freeze({
   standard: Object.freeze({ height: 34, maxWidth: 142 }),
   wide: Object.freeze({ height: 28, maxWidth: 164 }),
 });
+export const COLLABORATION_LOGO_SOURCE_TREATMENTS = Object.freeze([
+  "remove-background-rects",
+]);
 
 export const FIELD_CLASSIFICATION = Object.freeze({
   featured: Object.freeze({
@@ -200,7 +203,7 @@ export function normalizeCollaboration(source) {
       source.logo,
       [
         "src", "sourceFile", "dimensions", "opticalSize", "sourceUrl",
-        "sourceSha256", "sourceCheckedAt", "rightsStatus",
+        "sourceSha256", "sourceCheckedAt", "rightsStatus", "sourceTreatment",
       ],
       `${kind} ${source.id} logo`,
     );
@@ -245,6 +248,13 @@ export function normalizeCollaboration(source) {
     if (source.logo.rightsStatus !== "official-mark-nominative-use") {
       throw new Error(`${kind} ${source.id} logo rightsStatus must be official-mark-nominative-use`);
     }
+    if (source.logo.sourceTreatment
+      && !COLLABORATION_LOGO_SOURCE_TREATMENTS.includes(source.logo.sourceTreatment)) {
+      throw new Error(`${kind} ${source.id} logo sourceTreatment must be one of: ${COLLABORATION_LOGO_SOURCE_TREATMENTS.join(", ")}`);
+    }
+    if (source.logo.sourceTreatment && !source.logo.sourceFile.endsWith(".svg")) {
+      throw new Error(`${kind} ${source.id} logo sourceTreatment requires an SVG source`);
+    }
     logo = {
       src: source.logo.src,
       dimensions: { ...source.logo.dimensions },
@@ -257,6 +267,7 @@ export function normalizeCollaboration(source) {
       sourceSha256: source.logo.sourceSha256,
       sourceCheckedAt: source.logo.sourceCheckedAt,
       rightsStatus: source.logo.rightsStatus,
+      ...(source.logo.sourceTreatment ? { sourceTreatment: source.logo.sourceTreatment } : {}),
     };
   }
 
