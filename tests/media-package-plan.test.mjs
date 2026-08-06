@@ -75,6 +75,25 @@ test("Archive media planner requires explicit publication metadata", () => {
   }
 });
 
+test("Archive media planner supports still-sourced posters without a false timecode", () => {
+  const plan = createArchiveMediaPackagePlan({
+    ...baseInput,
+    posterSourceKind: "still",
+    posterSourceTimecode: undefined,
+  });
+  assert.equal(plan.posterSourceKind, "still");
+  assert.equal(Object.hasOwn(plan.frontmatterPatch, "posterSourceTimecode"), false);
+  assert.equal(JSON.stringify(plan).includes(root), false);
+});
+
+test("Archive media planner keeps video-frame timecodes mandatory", () => {
+  assert.throws(() => createArchiveMediaPackagePlan({
+    ...baseInput,
+    posterSourceKind: "video-frame",
+    posterSourceTimecode: undefined,
+  }), /timecode/);
+});
+
 test("media:plan CLI prints JSON without writing in its working directory", () => {
   const emptyWorkingDirectory = mkdtempSync(join(tmpdir(), "portfolio-media-plan-"));
   const cliPath = join(root, "scripts/plan-archive-media-package.mjs");

@@ -12,6 +12,7 @@ const RIGHTS_STATUSES = new Set([
   "public-source-user-confirmed-work",
   "user-supplied-local-source",
 ]);
+const POSTER_SOURCE_KINDS = new Set(["video-frame", "still"]);
 
 function requireText(value, label) {
   if (typeof value !== "string" || !value.trim()) throw new Error(`${label} is required`);
@@ -19,6 +20,23 @@ function requireText(value, label) {
 
 function normalizeDuration(duration) {
   return Number(duration.toFixed(3));
+}
+
+function normalizePosterSource(input) {
+  const kind = input.posterSourceKind || "video-frame";
+  if (!POSTER_SOURCE_KINDS.has(kind)) {
+    throw new Error("poster source kind must be video-frame or still");
+  }
+  if (kind === "video-frame") {
+    if (!/^\d{2}:\d{2}:\d{2}(?:\.\d{3})?$/.test(input.posterSourceTimecode || "")) {
+      throw new Error("timecode must use HH:MM:SS or HH:MM:SS.mmm");
+    }
+    return { kind, timecode: input.posterSourceTimecode };
+  }
+  if (input.posterSourceTimecode != null && input.posterSourceTimecode !== "") {
+    throw new Error("still poster source must not declare a timecode");
+  }
+  return { kind };
 }
 
 function manifestEntry({ id, publicPath, profile, owner, probe }) {
@@ -43,9 +61,7 @@ export function createArchiveMediaPackagePlan(input, { repoRoot = process.cwd() 
   if (!RIGHTS_STATUSES.has(input.rightsStatus)) throw new Error("rights status is required and supported");
   requireText(input.imageAlt?.en, "English alt");
   requireText(input.imageAlt?.zh, "Chinese alt");
-  if (!/^\d{2}:\d{2}:\d{2}(?:\.\d{3})?$/.test(input.posterSourceTimecode || "")) {
-    throw new Error("timecode must use HH:MM:SS or HH:MM:SS.mmm");
-  }
+  const posterSource = normalizePosterSource(input);
   const focal = input.posterFocalPoint;
   if (!focal || !Number.isFinite(focal.x) || !Number.isFinite(focal.y)
     || focal.x < 0 || focal.x > 1 || focal.y < 0 || focal.y > 1) {
@@ -84,11 +100,28 @@ export function createArchiveMediaPackagePlan(input, { repoRoot = process.cwd() 
     filePath: input.posterPath,
   });
 
+  const frontmatterPatch = {
+    posterImage: posterPublicPath,
+    imageAlt: { ...input.imageAlt },
+    posterRightsStatus: input.rightsStatus,
+    posterDimensions: { width: posterProbe.video.width, height: posterProbe.video.height },
+    posterFocalPoint: { ...focal },
+    ...(posterSource.kind === "video-frame"
+      ? { posterSourceTimecode: posterSource.timecode }
+      : {}),
+    cardReelUrl: reelPublicPath,
+    cardReelPoster: posterPublicPath,
+    cardReelMode: "after-hold",
+    cardReelDuration: normalizeDuration(reelProbe.duration),
+    cardReelRightsStatus: input.rightsStatus,
+  };
+
   return {
     schemaVersion: 1,
     mode: "dry-run",
     collection: "archive",
     slug: input.slug,
+    posterSourceKind: posterSource.kind,
     writesFiles: false,
     assets: [
       {
@@ -104,18 +137,6 @@ export function createArchiveMediaPackagePlan(input, { repoRoot = process.cwd() 
         manifestEntry: posterEntry,
       },
     ],
-    frontmatterPatch: {
-      posterImage: posterPublicPath,
-      imageAlt: { ...input.imageAlt },
-      posterRightsStatus: input.rightsStatus,
-      posterDimensions: { width: posterProbe.video.width, height: posterProbe.video.height },
-      posterFocalPoint: { ...focal },
-      posterSourceTimecode: input.posterSourceTimecode,
-      cardReelUrl: reelPublicPath,
-      cardReelPoster: posterPublicPath,
-      cardReelMode: "after-hold",
-      cardReelDuration: normalizeDuration(reelProbe.duration),
-      cardReelRightsStatus: input.rightsStatus,
-    },
+    frontmatterPatch,
   };
 }
