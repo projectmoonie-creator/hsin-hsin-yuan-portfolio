@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
+import { mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
@@ -8,6 +10,7 @@ import {
   validateArchiveStillSlideshowRecipe,
 } from "../scripts/lib/archive-still-slideshow.mjs";
 import { renderArchiveStillSlideshowHtml } from "../scripts/lib/archive-still-slideshow-html.mjs";
+import { assertPublicWebpMetadataSafe } from "../scripts/lib/webp-metadata.mjs";
 
 const root = process.cwd();
 const frame = (id) => ({
@@ -89,4 +92,67 @@ test("generic composition renders six stills plus loop return", () => {
 test("generic renderer has no Ghost Hand special case", () => {
   const source = readFileSync(join(root, "scripts/lib/archive-still-slideshow-html.mjs"), "utf8");
   assert.doesNotMatch(source, /ghost-hand-divine-car|4arUG0s6|HDHnSa6p/);
+});
+
+test("generic renderer accepts a second recipe without code changes", () => {
+  const secondRecipe = {
+    ...recipe,
+    slug: "second-archive",
+    publicPaths: {
+      reel: "/assets/showreel/second-archive-card-reel.mp4",
+      poster: "/assets/showreel/second-archive-card-reel-poster.webp",
+    },
+  };
+  const html = renderArchiveStillSlideshowHtml(secondRecipe);
+  assert.match(html, /assets\/stills\/frame-06\.webp/);
+  assert.equal((html.match(/class="still-frame"/g) || []).length, 7);
+});
+
+function webpWithChunks(chunkNames) {
+  const chunks = chunkNames.map((name) => {
+    const payload = name === "VP8X" ? Buffer.alloc(10) : Buffer.alloc(0);
+    const chunk = Buffer.alloc(8 + payload.length + (payload.length % 2));
+    chunk.write(name, 0, 4, "ascii");
+    chunk.writeUInt32LE(payload.length, 4);
+    payload.copy(chunk, 8);
+    return chunk;
+  });
+  const body = Buffer.concat([Buffer.from("WEBP", "ascii"), ...chunks]);
+  const riff = Buffer.alloc(8);
+  riff.write("RIFF", 0, 4, "ascii");
+  riff.writeUInt32LE(body.length, 4);
+  return Buffer.concat([riff, body]);
+}
+
+test("media:slideshow defaults to a redacted no-write plan", () => {
+  const configDirectory = mkdtempSync(join(tmpdir(), "portfolio-slideshow-config-"));
+  const emptyWorkingDirectory = mkdtempSync(join(tmpdir(), "portfolio-slideshow-cwd-"));
+  const fixtureConfig = join(configDirectory, "slideshow.json");
+  writeFileSync(fixtureConfig, `${JSON.stringify(recipe)}\n`);
+  try {
+    const output = execFileSync(process.execPath, [
+      join(root, "scripts/build-archive-still-slideshow.mjs"),
+      "--config", fixtureConfig,
+    ], { cwd: emptyWorkingDirectory, encoding: "utf8" });
+    const plan = JSON.parse(output);
+    assert.equal(plan.mode, "dry-run");
+    assert.equal(plan.writesFiles, false);
+    assert.equal(output.includes(configDirectory), false);
+    assert.deepEqual(readdirSync(emptyWorkingDirectory), []);
+  } finally {
+    rmSync(configDirectory, { recursive: true, force: true });
+    rmSync(emptyWorkingDirectory, { recursive: true, force: true });
+  }
+});
+
+test("package exposes the stable slideshow command", () => {
+  const packageJson = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
+  assert.equal(packageJson.scripts["media:slideshow"], "node scripts/build-archive-still-slideshow.mjs");
+});
+
+test("authoring WebP privacy check fails closed on metadata and unknown chunks", () => {
+  assert.doesNotThrow(() => assertPublicWebpMetadataSafe(webpWithChunks(["VP8 "])));
+  for (const chunk of ["EXIF", "XMP ", "ICCP", "JUNK"]) {
+    assert.throws(() => assertPublicWebpMetadataSafe(webpWithChunks(["VP8 ", chunk])), /metadata/);
+  }
 });

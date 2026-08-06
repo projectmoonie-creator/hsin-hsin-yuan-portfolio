@@ -11,6 +11,7 @@
     "figma:export": "node scripts/build-figma-export.mjs",
     "hero:sanitize": "node scripts/sanitize-public-hero-image.mjs",
     "media:plan": "node scripts/plan-archive-media-package.mjs",
+    "media:slideshow": "node scripts/build-archive-still-slideshow.mjs",
     "test": "node --test tests/*.test.mjs",
     "serve": "python3 -m http.server 4173 -d dist"
   }

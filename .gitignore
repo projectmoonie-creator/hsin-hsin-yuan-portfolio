@@ -5,6 +5,7 @@ dist/
 npm-debug.log*
 showreel/**/.thumbnails/
 showreel/**/assets/source-clips/
+showreel/**/assets/source-stills/originals/
 showreel/**/renders/
 showreel/**/snapshots/
 .superpowers/
