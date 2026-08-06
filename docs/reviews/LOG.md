@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-06 — Ghost Hand Archive slideshow
+- Branch/base/behavior: `codex/ghost-hand-archive-slideshow` from `03ad08a`; validated behavior `9d84132`; docs follow-up reported externally.
+- Change: six approved production stills now drive a generic 10-second recipe/HyperFrames slideshow, stable poster/MP4 paths, manifest/frontmatter integration, and nearest-visible one-reel arbitration.
+- Safety: dry-run by default, SHA/dimension gates, metadata-safe authoring WebPs, no raw originals in Git, and four-target rollback writer; protected file remains untouched.
+- Media: poster 144,878 bytes / `fadb961…ca5f3`; MP4 3,838,732 bytes / `9a602f2…2b52`, H.264 1280×720 yuv420p BT.709, silent, faststart, full decode.
+- HyperFrames: requested plan pin `0.7.88`; upgrade check observed `0.7.94`; strict check and completed render used pinned `0.7.94`.
+- Validation: TDD RED/GREEN, `111/111`, build, Figma export, design audit, exact manifest/media, privacy, strict HyperFrames, and diff checks pass.
+- Browser: English desktop and Chinese 390×664 play Ghost Hand after 1.4s; mobile scroll hands off to Three-Minute; reduced motion stays static; zero console/local-request/Contact errors.
+- External state: no local-main merge, push, Preview, Production, alias, or Contact action; next action is local producer approval and a separately authorized release decision.
+
 ## 2026-08-06 — pre-lighting GitHub checkpoint
 - Release: checkpoint `4d4a27a` containing logo completion `f900e7b` is preserved by remote `backup/2026-08-06/pre-lighting-zh-refinement` and annotated tag `portfolio-baseline-2026-08-06-pre-lighting`; `origin/main` contains it plus the docs-only deployment record.
 - Validation: post-integration `93/93`, six-asset prepare, build, Figma export, design audit, clean tracked worktree, and protected-file SHA check passed.

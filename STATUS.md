@@ -2,9 +2,51 @@
 
 Updated: 2026-08-06
 
-State: `PASS_WITH_OPEN_ITEMS`
+State: `PASS_AWAITING_LOCAL_APPROVAL`
 
-## Current Work Package — Collaboration Logo Wall Component
+## Current Work Package — Ghost Hand Archive Slideshow
+
+- Branch `codex/ghost-hand-archive-slideshow` starts from local and remote
+  baseline `03ad08ac4dd3a47d300cab99f2dd569353e13ec9`. Validated behavior head is
+  `9d84132e650027ad1dbfeb4211ead9a99f776e3c`; the documentation follow-up is
+  reported externally after commit.
+- The approved six-still `Gui Shou Shen Che` package is now one repo-configured
+  vertical slice: `slideshow.json` owns order, source fingerprints, dimensions,
+  focal points, 50-frame slots, 1→1.035 motion, eight-frame dissolves, poster,
+  stable public paths, rights, and bilingual alt. The generic recipe validator,
+  HyperFrames HTML generator, guarded CLI, WebP privacy parser, and rollback
+  writer contain no Ghost Hand special case.
+- Raw producer-approved originals remain ignored and outside Git. Six tracked
+  1280×720 metadata-safe WebPs are authoring derivatives only. The public poster
+  is 144,878 bytes, SHA-256
+  `fadb961b9eed9ec4f4f4e77e0afa0a9ac25050a7a95398d2d19b407adcbca5f3`;
+  the silent 10-second MP4 is 3,838,732 bytes, SHA-256
+  `9a602f249559cbb613180e4c6eb173ea10060818a69a11b5907789cf16b62b52`.
+- HyperFrames provenance: initial plan/scaffold pin requested `0.7.88`; the
+  official upgrade check observed `0.7.94`; authoring check and completed render
+  used pinned `0.7.94`. The output is H.264 1280×720 yuv420p BT.709, one video
+  stream, zero audio, faststart, and full-decode clean.
+- TDD covered still-vs-video poster provenance, recipe/timeline safety, generic
+  composition reuse, redacted dry-run, metadata fail-closed behavior, atomic
+  rollback, exact media integration, normalized focal CSS, and nearest-visible
+  Archive reel arbitration. Full `npm test` passes `111/111`; build, Figma
+  export, design audit, manifest/media integrity, HyperFrames strict check,
+  privacy scan, and `git diff --check` pass.
+- English desktop 1440×1000 and Chinese mobile 390×664 Playwright QA confirm
+  poster hold, Ghost Hand playing after 1.4 seconds, exactly one active Archive
+  reel, successful poster/MP4 requests, and mobile scroll handoff from Ghost
+  Hand to Three-Minute. Reduced motion keeps the static poster. Console errors,
+  same-origin request failures, and Contact POSTs are all zero.
+- No local-main merge, push, new Preview, Production deployment, alias change,
+  or Contact submission occurred. The protected untracked review file remains
+  user-owned, unmodified, and outside this feature worktree; its host-worktree
+  SHA-256 remains the required
+  `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+- Next action: producer reviews the persistent local Preview. Any merge back to
+  local `main`, GitHub push, Preview, or Production action requires a separate
+  explicit authorization; a `main` push is Production-affecting.
+
+## Prior Work Package — Collaboration Logo Wall Component
 
 - Branch `codex/collaboration-logo-wall` starts from inherited package head
   `c33b2f810e95ba2a38146b2daf7ff1220b0d1712`; the logo-completion increment
@@ -402,27 +444,26 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Start one bounded Chinese-copy and bilingual-normalization package from
-`portfolio-baseline-2026-08-06-pre-lighting`. Inventory only real English/Chinese
-asymmetries, preserve intentional differences, and represent reusable ones as
-localized data or named variants before touching lighting. Preview and approve
-that bilingual geometry; then start a separate lo-fi-first lighting package.
-Any future `main` push must be treated as a Production-affecting action because
-the GitHub integration deploys it automatically.
+Review the local Ghost Hand Preview on English desktop and Chinese/mobile. If
+accepted, separately authorize local-main merge and decide whether to preserve
+only locally, push a feature ref, create a Preview, or promote through `main`.
+Do not combine that release decision with the later Chinese-copy or lighting
+packages. Any future `main` push is Production-affecting because the GitHub
+integration deploys it automatically.
 
 ## Cold Resume
 
-1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, the Collaboration closeout,
-   and `docs/design-contract.md`.
-2. Verify local `main` and `origin/main` contain checkpoint `4d4a27a`; verify
+1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, the Ghost Hand approved
+   design/plan, and `docs/design-contract.md`.
+2. Verify local `main` and `origin/main` contain checkpoint `03ad08a`; verify
    remote backup `backup/2026-08-06/pre-lighting-zh-refinement` and annotated
    tag `portfolio-baseline-2026-08-06-pre-lighting` still resolve exactly to
    `4d4a27a`; verify the protected untracked file/hash before changing anything.
-3. Confirm `npm test` is `93/93`, six mono derivatives exist, all seven IDs
-   appear in English/Chinese output and desktop/mobile Figma output, and
-   the public website/Figma outputs remain synchronized.
-4. Treat Preview deployment `dpl_8vwDEtrbrG5vzqreik78rnqMH4Ax` as the prior
-   build; it does not contain this combined branch.
+3. Confirm feature head contains `9d84132`, `npm test` is `111/111`, the six
+   safe still derivatives and exact public Ghost Hand poster/MP4 match the
+   manifest, and the ignored originals remain outside Git.
+4. Treat Preview deployment `dpl_8vwDEtrbrG5vzqreik78rnqMH4Ax` as a prior
+   build; it does not contain this Ghost Hand feature branch.
 5. Do not push `main`, create a Preview, deploy Production, change an alias, or
    submit Contact without the corresponding explicit authorization; `main`
    pushes are now known to trigger Production automatically.
