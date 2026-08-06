@@ -4,6 +4,34 @@ Updated: 2026-08-06
 
 State: `PASS_WITH_OPEN_ITEMS`
 
+## Current Editorial Artifact — Chinese-copy Workbook
+
+- The producer-edited workbook at
+  `../outputs/hsin-hsin-yuan-zh-copy-2026-08-06/Hsin-Hsin-Yuan-Portfolio-Chinese-Copy-2026-08-06.xlsx`
+  has been rebuilt on the current bilingual schema and verified at SHA-256
+  `1d0210cf39a688e417c67edb3b0c2d3ccf9201c3485c055c2d6a541ed6ac9600`.
+  It contains 169 stable fields: all 168 prior editable rows were preserved by
+  stable key and the missing
+  `archive.three-minute-micro-drama.watchLabel` row was added with
+  `Watch the full series` / `觀看完整系列`.
+- The exact pre-merge user-edited workbook is recoverable at
+  `../outputs/hsin-hsin-yuan-zh-copy-2026-08-06/backups/Hsin-Hsin-Yuan-Portfolio-Chinese-Copy-2026-08-06.pre-schema-merge-user-edits.xlsx`,
+  SHA-256
+  `21b11eb53641987a33824fd4783fb5a8f245d30cd32a16ca3f3d67384693a73c`.
+- Round-trip verification found no missing, duplicate, or stale mapped keys and
+  no formula errors. All seven sheets passed rendered visual inspection. The
+  workbook now contains 65 effective Chinese-copy differences; two preserved
+  user values equal the latest canonical website text and therefore no longer
+  count as differences.
+- This is an editorial artifact only. None of the 65 revisions has been applied
+  to website source, Figma output, Preview, Production, or `main`. Independent
+  AI review was skipped because the package only merges an offline workbook
+  schema without changing public output or project rules.
+- Next action: create a separate guarded Excel-to-repo dry-run package, review
+  the proposed 65 stable-key changes and bilingual layout effects, then apply
+  only producer-approved copy. Do not auto-import the workbook. Lighting stays
+  later, after bilingual content and geometry approval.
+
 ## Current Local Work Package — Three-Minute Full-Series Link
 
 - Branch `codex/three-minute-watch-link` starts from local `main`

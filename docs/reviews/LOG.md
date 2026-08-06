@@ -4,6 +4,14 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-06 — Chinese-copy workbook schema merge
+- Artifact: rebuilt the producer-edited Excel on the current 169-field bilingual schema; final SHA-256 `1d0210c…c9600`.
+- Preservation: all 168 prior editable rows mapped exactly by stable key; added only `archive.three-minute-micro-drama.watchLabel` with `Watch the full series` / `觀看完整系列`.
+- Recovery: exact pre-merge workbook is retained under `outputs/.../backups/`, SHA-256 `21b11eb…a73c`.
+- Verification: no missing/duplicate/stale mapped keys, no formula errors, and all seven rendered sheets passed visual inspection; 65 effective Chinese-copy differences remain.
+- Review: external AI review skipped because this is an offline editorial schema merge with no public-output or governance change.
+- External state/next: no website/Figma change, `main` merge/push, Preview, Production, alias, or Contact action; next package must dry-run and review the 65 stable-key revisions before any import.
+
 ## 2026-08-06 — Three-Minute full-series link
 - Branch/base: `codex/three-minute-watch-link` from local `main` `8b18332`; pre-change backup `backup/2026-08-06/pre-three-minute-watch-link-8b18332` read back exactly.
 - Change: the Three-Minute Archive card now uses the existing data contract to open producer-supplied playlist `PLDTnN3czXyG8`, with exact actions `Watch the full series` / `觀看完整系列`.
