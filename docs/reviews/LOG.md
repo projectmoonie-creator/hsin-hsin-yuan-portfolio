@@ -5,10 +5,10 @@ Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
 ## 2026-08-06 — pre-lighting GitHub checkpoint
-- Release: local `main`, `origin/main`, remote `backup/2026-08-06/pre-lighting-zh-refinement`, and annotated tag `portfolio-baseline-2026-08-06-pre-lighting` read back to one head containing logo completion `f900e7b`.
+- Release: checkpoint `4d4a27a` containing logo completion `f900e7b` is preserved by remote `backup/2026-08-06/pre-lighting-zh-refinement` and annotated tag `portfolio-baseline-2026-08-06-pre-lighting`; `origin/main` contains it plus the docs-only deployment record.
 - Validation: post-integration `93/93`, six-asset prepare, build, Figma export, design audit, clean tracked worktree, and protected-file SHA check passed.
 - Review: inherits the frozen logo-completion Gemini PASS and incomplete Claude handoff; this promotion record is docs/ref-only and changes no public output, so no new external review was run.
-- Deployment: no manual Preview/Production deployment, alias, or Contact action; GitHub checkpoint does not itself claim a verified Production replacement.
+- Deployment: `main` push auto-created GitHub Production deployment `5774226594` for `4d4a27a`; verified `success` at `https://hsin-hsin-yuan-portfolio-vvbwab0q9.vercel.app`; no manual Vercel command, alias, or Contact action.
 - Next: Chinese copy plus bilingual named-variant normalization first; lighting follows as a separate lo-fi-first package after geometry approval.
 
 ## 2026-08-06 — Overclocking static poster and mobile reel diagnosis

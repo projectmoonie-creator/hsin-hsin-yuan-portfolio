@@ -35,11 +35,19 @@ State: `PASS_WITH_OPEN_ITEMS`
   Gemini requested/observed/completed `gemini-3.6-flash` and returned PASS with
   no actionable findings. Claude remains `handoff-to-active-session`; no model
   request was sent and no dual-review consensus is claimed.
-- The producer authorized GitHub preservation on 2026-08-06. `origin/main`,
-  remote backup ref `backup/2026-08-06/pre-lighting-zh-refinement`, and annotated
-  tag `portfolio-baseline-2026-08-06-pre-lighting` were pushed and read back at
-  the same release head containing `f900e7b`. No manual Preview or Production
-  deployment, alias change, or Contact submission occurred. The protected
+- The producer authorized GitHub preservation and a temporary formal release on
+  2026-08-06. Remote backup ref
+  `backup/2026-08-06/pre-lighting-zh-refinement` and annotated tag
+  `portfolio-baseline-2026-08-06-pre-lighting` were pushed and read back at
+  checkpoint `4d4a27ae23fa6950000dedaeb3883da52c352b84`, which contains
+  implementation `f900e7b`. `origin/main` first reached that checkpoint and
+  then received only this deployment-record follow-up; public source output is
+  unchanged by the follow-up.
+- The `origin/main` push automatically triggered GitHub deployment
+  `5774226594` for Production at exact checkpoint `4d4a27a`; GitHub reported
+  `success` / `Deployment has completed` with environment URL
+  `https://hsin-hsin-yuan-portfolio-vvbwab0q9.vercel.app`. No manual Vercel
+  command, alias change, or Contact submission occurred. The protected
   untracked file remains outside Git at SHA-256
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
 - Accepted next-phase direction: normalize Chinese copy and bilingual layout
@@ -399,21 +407,22 @@ Start one bounded Chinese-copy and bilingual-normalization package from
 asymmetries, preserve intentional differences, and represent reusable ones as
 localized data or named variants before touching lighting. Preview and approve
 that bilingual geometry; then start a separate lo-fi-first lighting package.
-Production remains separate and requires explicit deployment authorization.
+Any future `main` push must be treated as a Production-affecting action because
+the GitHub integration deploys it automatically.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, the Collaboration closeout,
    and `docs/design-contract.md`.
-2. Verify local `main`, `origin/main`, remote backup
-   `backup/2026-08-06/pre-lighting-zh-refinement`, and annotated tag
-   `portfolio-baseline-2026-08-06-pre-lighting` resolve to the recorded release
-   head containing implementation `f900e7b`; verify the protected untracked
-   file/hash before changing anything.
+2. Verify local `main` and `origin/main` contain checkpoint `4d4a27a`; verify
+   remote backup `backup/2026-08-06/pre-lighting-zh-refinement` and annotated
+   tag `portfolio-baseline-2026-08-06-pre-lighting` still resolve exactly to
+   `4d4a27a`; verify the protected untracked file/hash before changing anything.
 3. Confirm `npm test` is `93/93`, six mono derivatives exist, all seven IDs
    appear in English/Chinese output and desktop/mobile Figma output, and
    the public website/Figma outputs remain synchronized.
 4. Treat Preview deployment `dpl_8vwDEtrbrG5vzqreik78rnqMH4Ax` as the prior
    build; it does not contain this combined branch.
-5. Do not create a Preview, deploy Production, change an alias, or submit
-   Contact without the corresponding explicit authorization.
+5. Do not push `main`, create a Preview, deploy Production, change an alias, or
+   submit Contact without the corresponding explicit authorization; `main`
+   pushes are now known to trigger Production automatically.

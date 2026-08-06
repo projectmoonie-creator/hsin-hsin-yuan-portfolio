@@ -103,13 +103,15 @@ test("package exposes the repeatable Hero sanitizer command", () => {
   );
 });
 
-test("STATUS cold resume names the backup and current remediation decision", () => {
+test("STATUS cold resume preserves backup and Production authorization boundaries", () => {
   const status = readFileSync(join(root, "STATUS.md"), "utf8");
 
   assert.match(status, /backup\/2026-08-04\/e2d75f0/);
   assert.match(status, /codex\/hero-media-closeout-remediation/);
   assert.match(status, /feature Preview/);
-  assert.match(status, /Production remains separate/);
+  assert.match(status, /backup\/2026-08-06\/pre-lighting-zh-refinement/);
+  assert.match(status, /portfolio-baseline-2026-08-06-pre-lighting/);
+  assert.match(status, /`main`\s+pushes are now known to trigger Production automatically/);
   assert.doesNotMatch(status, /Review and accept `codex\/portfolio-studio-a0`/);
   assert.doesNotMatch(status, /Read the A0 implementation plan/);
 });

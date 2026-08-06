@@ -11,11 +11,15 @@ Wall as the recoverable baseline before Chinese refinement and a later lighting
 experiment. The release head contains validated logo-completion implementation
 `f900e7b31321e7b702d4c659340c6b4c85e5f02e`.
 
-The following refs were pushed and read back to the same release head:
+The following durable checkpoint refs were pushed and read back to exact commit
+`4d4a27ae23fa6950000dedaeb3883da52c352b84`:
 
-- `refs/heads/main`
 - `refs/heads/backup/2026-08-06/pre-lighting-zh-refinement`
 - annotated tag `portfolio-baseline-2026-08-06-pre-lighting`
+
+`refs/heads/main` first reached the same checkpoint, then advanced only by the
+docs-only deployment-record follow-up that contains this report. The public
+site source and generated design inputs are unchanged by that follow-up.
 
 ## Validation And Boundaries
 
@@ -28,9 +32,12 @@ The following refs were pushed and read back to the same release head:
   documentation only. It inherits the frozen logo-completion Gemini PASS;
   Claude remains a handoff without a model request. No new external review was
   required for the docs/ref-only promotion.
-- No manual Vercel Preview/Production deployment, alias change, or Contact
-  submission was performed. GitHub preservation alone is not recorded as a
-  verified Production replacement.
+- No manual Vercel command was run. The `main` push automatically created
+  GitHub Production deployment `5774226594` for exact SHA `4d4a27a`; readback
+  reported `success` / `Deployment has completed` at
+  `https://hsin-hsin-yuan-portfolio-vvbwab0q9.vercel.app`. No alias change or
+  Contact submission was performed. Future `main` pushes must therefore be
+  treated as Production-affecting actions.
 - The protected user-owned untracked file remains outside Git at SHA-256
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
 
