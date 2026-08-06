@@ -39,6 +39,13 @@ State: `PASS_WITH_OPEN_ITEMS`
   reel, successful poster/MP4 requests, and mobile scroll handoff from Ghost
   Hand to Three-Minute. Reduced motion keeps the static poster. Console errors,
   same-origin request failures, and Contact POSTs are all zero.
+- Formal closeout reviewed local-main checkpoint
+  `4dab6d77c87ddddd5564bf709016ada99c6e0b57`. Frozen packet SHA-256 is
+  `c075e4f486b66d272ac00b88ceba253faf6193a404dcfd0d536ca4d98ef4293f`.
+  Gemini requested/observed/completed `gemini-3.6-flash` and returned `PASS`
+  with no findings. Claude remains `handoff-to-active-session`; no model
+  request was sent and no dual-review consensus is claimed. Local adjudication
+  requires no remediation.
 - The producer approved the local Preview and authorized the local-main merge
   on 2026-08-06. The merge is complete. Remote backup
   `backup/2026-08-06/ghost-hand-main-ae20130` read back at the pre-record
@@ -51,12 +58,14 @@ State: `PASS_WITH_OPEN_ITEMS`
   untracked review file remains user-owned, unmodified, and outside Git; its
   SHA-256 remains the required
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
-- Next action: start a separate bounded Chinese-copy and bilingual-layout
-  normalization package from local `main`, preserving the approved English
-  baseline. Lighting remains a later visual package after bilingual geometry
-  approval. Any feature or `main` push, new Preview, or Production action
-  requires a separate explicit authorization; a `main` push is
-  Production-affecting. Backup refs are durability-only and are not releases.
+- Next action: if the producer wants a link for outside Chinese-copy feedback,
+  explicitly authorize a new Vercel Preview from the reviewed local baseline;
+  `localhost` is not shareable. Then start a separate bounded Chinese-copy and
+  bilingual-layout normalization package, preserving the approved English
+  baseline. Lighting remains later, after bilingual geometry approval. Any
+  feature or `main` push, new Preview, or Production action requires separate
+  explicit authorization; a `main` push is Production-affecting. Backup refs
+  are durability-only and are not releases.
 
 ## Prior Work Package — Collaboration Logo Wall Component
 
