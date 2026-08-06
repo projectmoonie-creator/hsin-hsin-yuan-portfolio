@@ -609,7 +609,7 @@ test("public tracked artifacts do not expose the direct contact address", () => 
 
 test("public tracked artifacts do not expose private absolute paths", () => {
   const privatePathPattern = [
-    ["/Us", "ers/"].join(""),
+    [["/Us", "ers/"].join(""), "[^/[:space:]]+/"].join(""),
     ["/tmp/codex-", "remote-attachments"].join(""),
   ].join("|");
   let matches = "";

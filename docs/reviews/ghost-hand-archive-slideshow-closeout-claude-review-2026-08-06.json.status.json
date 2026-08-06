@@ -15,7 +15,7 @@
   "apiEquivalentCostUsd": null,
   "actualSpendUsd": null,
   "note": "No Claude process was started. Submit the preserved packet inside an already-running Claude Code subscription session and resolve the highest currently available model under AGENTS.md at submission time.",
-  "prompt": "/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V/hsin-hsin-yuan-portfolio-remove-lights/docs/reviews/ghost-hand-archive-slideshow-closeout-review-packet-2026-08-06.md",
-  "intendedOutput": "/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V/hsin-hsin-yuan-portfolio-remove-lights/docs/reviews/ghost-hand-archive-slideshow-closeout-claude-review-2026-08-06.json",
-  "repo": "/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V/hsin-hsin-yuan-portfolio-remove-lights"
+  "prompt": "docs/reviews/ghost-hand-archive-slideshow-closeout-review-packet-2026-08-06.md",
+  "intendedOutput": "docs/reviews/ghost-hand-archive-slideshow-closeout-claude-review-2026-08-06.json",
+  "repo": "."
 }
