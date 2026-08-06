@@ -4,6 +4,13 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-06 — pre-lighting GitHub checkpoint
+- Release: local `main`, `origin/main`, remote `backup/2026-08-06/pre-lighting-zh-refinement`, and annotated tag `portfolio-baseline-2026-08-06-pre-lighting` read back to one head containing logo completion `f900e7b`.
+- Validation: post-integration `93/93`, six-asset prepare, build, Figma export, design audit, clean tracked worktree, and protected-file SHA check passed.
+- Review: inherits the frozen logo-completion Gemini PASS and incomplete Claude handoff; this promotion record is docs/ref-only and changes no public output, so no new external review was run.
+- Deployment: no manual Preview/Production deployment, alias, or Contact action; GitHub checkpoint does not itself claim a verified Production replacement.
+- Next: Chinese copy plus bilingual named-variant normalization first; lighting follows as a separate lo-fi-first package after geometry approval.
+
 ## 2026-08-06 — Overclocking static poster and mobile reel diagnosis
 - Branch/base/implementation: `codex/overclocking-static-poster` from backed-up local main `58a5751`; implementation `7dddff9`.
 - Change: user-approved `P1070715.jpg` became the stable-path 1280×720 Overclocking WebP poster; alt/evidence/manifest updated and obsolete video timecode removed.

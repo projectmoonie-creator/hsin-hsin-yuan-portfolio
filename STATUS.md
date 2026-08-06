@@ -35,13 +35,18 @@ State: `PASS_WITH_OPEN_ITEMS`
   Gemini requested/observed/completed `gemini-3.6-flash` and returned PASS with
   no actionable findings. Claude remains `handoff-to-active-session`; no model
   request was sent and no dual-review consensus is claimed.
-- The producer authorized local integration; local `main` is fast-forwarded to
-  the closeout head containing `f900e7b`. No backup push, `origin/main` push,
-  new Preview, Production deployment, alias change, or Contact submission
-  occurred. The integrated head remains unreachable from any `origin/*` ref,
-  so the result is not remotely backed up. The
-  protected untracked file remains outside Git at SHA-256
+- The producer authorized GitHub preservation on 2026-08-06. `origin/main`,
+  remote backup ref `backup/2026-08-06/pre-lighting-zh-refinement`, and annotated
+  tag `portfolio-baseline-2026-08-06-pre-lighting` were pushed and read back at
+  the same release head containing `f900e7b`. No manual Preview or Production
+  deployment, alias change, or Contact submission occurred. The protected
+  untracked file remains outside Git at SHA-256
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+- Accepted next-phase direction: normalize Chinese copy and bilingual layout
+  variants before reintroducing light effects. Preserve English copy as the
+  approved baseline; move intentional language differences into canonical
+  localized data and named component/layout variants, then add lighting as a
+  separate visual package against the stabilized bilingual geometry.
 
 ## Prior Work Package — Overclocking Static Poster And Mobile Reel Diagnosis
 
@@ -389,24 +394,26 @@ The sole untracked file remains user-owned and untouched:
 
 ## Exact Next Action
 
-Verify local `main` contains `f900e7b`, then decide whether to create a uniquely
-named remote backup ref and whether the next public checkpoint should be a new
-Preview. Do not push `origin/main`; Production remains separate and requires
-another explicit instruction. WMW may remain a text fallback indefinitely
-until a trustworthy standalone mark is supplied.
+Start one bounded Chinese-copy and bilingual-normalization package from
+`portfolio-baseline-2026-08-06-pre-lighting`. Inventory only real English/Chinese
+asymmetries, preserve intentional differences, and represent reusable ones as
+localized data or named variants before touching lighting. Preview and approve
+that bilingual geometry; then start a separate lo-fi-first lighting package.
+Production remains separate and requires explicit deployment authorization.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, the Collaboration closeout,
    and `docs/design-contract.md`.
-2. Verify branch `codex/collaboration-logo-wall`, local `main` contains
-   implementation `f900e7b`, `origin/main` remains `382e02a`, and the protected
-   untracked file/hash before changing anything.
+2. Verify local `main`, `origin/main`, remote backup
+   `backup/2026-08-06/pre-lighting-zh-refinement`, and annotated tag
+   `portfolio-baseline-2026-08-06-pre-lighting` resolve to the recorded release
+   head containing implementation `f900e7b`; verify the protected untracked
+   file/hash before changing anything.
 3. Confirm `npm test` is `93/93`, six mono derivatives exist, all seven IDs
    appear in English/Chinese output and desktop/mobile Figma output, and
-   `git rev-list --count HEAD --not --remotes=origin` remains nonzero until an
-   explicit backup push is authorized.
+   the public website/Figma outputs remain synchronized.
 4. Treat Preview deployment `dpl_8vwDEtrbrG5vzqreik78rnqMH4Ax` as the prior
    build; it does not contain this combined branch.
-5. Do not push, create a Preview, deploy Production, change an alias, or submit
+5. Do not create a Preview, deploy Production, change an alias, or submit
    Contact without the corresponding explicit authorization.
