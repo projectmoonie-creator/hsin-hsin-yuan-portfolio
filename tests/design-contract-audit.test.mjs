@@ -62,8 +62,8 @@ test("design contract audit inventories an aligned project without writing", () 
     [...standard].sort(),
   );
   assert.deepEqual(poster.filter((slug) => indexFallback.includes(slug)), []);
-  assert.ok(poster.length > 0);
-  assert.ok(indexFallback.length > 0);
+  assert.deepEqual(poster, standard);
+  assert.deepEqual(indexFallback, []);
   assert.deepEqual(report.variants.press, {
     "thumbnail-card": 3,
     "text-note": 2,

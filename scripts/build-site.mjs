@@ -413,7 +413,7 @@ function renderArchiveCard(item, lang) {
   const indexLabel = String(item.order).padStart(2, "0");
   const focalPoint = item.posterFocalPoint;
   const focalStyle = focalPoint
-    ? ` style="object-position: ${Number(focalPoint.x) * 100}% ${Number(focalPoint.y) * 100}%"`
+    ? ` style="object-position: ${Number((Number(focalPoint.x) * 100).toFixed(4))}% ${Number((Number(focalPoint.y) * 100).toFixed(4))}%"`
     : "";
   const hasApprovedCardReel =
     item.cardReelMode === "after-hold" &&

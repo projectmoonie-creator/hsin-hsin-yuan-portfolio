@@ -722,7 +722,8 @@ test("archive renders five equal cards with one 40/60 contract", () => {
   assert.equal((archiveMarkup.match(/<a class="archive-card"/g) || []).length, 1);
   assert.equal((archiveMarkup.match(/<article class="archive-card/g) || []).length, 4);
   assert.match(archiveMarkup, /archive-card-copy/);
-  assert.match(archiveMarkup, /archive-card-media archive-card-media-placeholder/);
+  assert.doesNotMatch(archiveMarkup, /archive-card-media-placeholder/);
+  assert.match(archiveMarkup, /object-position: 56% 42%/);
   assert.match(archiveMarkup, /class="archive-card-index" aria-hidden="true">01/);
   assert.match(archiveMarkup, /class="archive-card-index" aria-hidden="true">02/);
   assert.match(archiveMarkup, /data-archive-reel-video/);
