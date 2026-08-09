@@ -294,6 +294,17 @@ test("loadSiteData returns one normalized collaboration collection", () => {
   assert.equal(collaborations.every((item) => item.contract.kind === "collaboration-mark"), true);
 });
 
+test("primary navigation accessibility label comes from localized canonical copy", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  site.site.zh.navPrimaryAria = "測試用主要導覽";
+
+  const zh = renderPage({ lang: "zh", site, works });
+
+  assert.match(zh, /<nav class="nav-links" aria-label="測試用主要導覽">/);
+  assert.doesNotMatch(zh, /<nav class="nav-links" aria-label="Primary">/);
+});
+
 test("site copy uses the approved bilingual Taiwan positioning", () => {
   const copy = loadSiteData(root).site;
   const positioning = (locale) => ({

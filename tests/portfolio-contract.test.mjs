@@ -279,8 +279,8 @@ test("featured taglines keep their bilingual field while allowing one locale to 
 
 test("site availability keeps a shared positional shape while each locale may intentionally blank a slot", () => {
   const source = {
-    en: { availability: ["Research", "Editing"] },
-    zh: { availability: ["研究", ""] },
+    en: { navPrimaryAria: "Primary", availability: ["Research", "Editing"] },
+    zh: { navPrimaryAria: "主要導覽", availability: ["研究", ""] },
   };
 
   assert.equal(validateSiteCopy(source), source);
@@ -288,17 +288,24 @@ test("site availability keeps a shared positional shape while each locale may in
   assert.equal(source.zh.availability[1], "");
   assert.throws(
     () => validateSiteCopy({
-      en: { availability: ["Research", "Editing"] },
-      zh: { availability: ["研究"] },
+      en: { navPrimaryAria: "Primary", availability: ["Research", "Editing"] },
+      zh: { navPrimaryAria: "主要導覽", availability: ["研究"] },
     }),
     /matching availability shape/,
   );
   assert.throws(
     () => validateSiteCopy({
-      en: { availability: ["Research", "Editing"] },
-      zh: { availability: ["研究", "   "] },
+      en: { navPrimaryAria: "Primary", availability: ["Research", "Editing"] },
+      zh: { navPrimaryAria: "主要導覽", availability: ["研究", "   "] },
     }),
     /availability\[1\].*empty string/,
+  );
+  assert.throws(
+    () => validateSiteCopy({
+      en: { navPrimaryAria: "Primary", availability: ["Research"] },
+      zh: { availability: ["研究"] },
+    }),
+    /zh.*navPrimaryAria/,
   );
 });
 

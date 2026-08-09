@@ -177,6 +177,9 @@ export function validateSiteCopy(source) {
   const availabilityByLocale = {};
   for (const locale of ["en", "zh"]) {
     requireObject(source[locale], `${kind} ${locale}`);
+    if (typeof source[locale].navPrimaryAria !== "string" || !source[locale].navPrimaryAria.trim()) {
+      throw new Error(`${kind} ${locale} requires navPrimaryAria`);
+    }
     const availability = source[locale].availability;
     if (!Array.isArray(availability) || availability.length === 0) {
       throw new Error(`${kind} ${locale} availability must be a non-empty array`);

@@ -54,11 +54,30 @@ function validateStableTarget(entry, index) {
     return;
   }
 
-  const featured = entry.stableKey.match(/^featured\.([a-z0-9]+(?:-[a-z0-9]+)*)\.(.+)$/);
-  if (!featured) fail(`entry ${index} uses an unsupported stable key family`);
-  if (entry.sourceFile !== `content/works/${featured[1]}.md`) {
-    fail(`entry ${index} featured stable key and source file disagree`);
+  if (entry.stableKey === "system.nav.primaryAria") {
+    if (entry.sourceFile !== "data/site.json") {
+      fail(`entry ${index} system navigation stable key must use data/site.json`);
+    }
+    return;
   }
+
+  const featured = entry.stableKey.match(/^featured\.([a-z0-9]+(?:-[a-z0-9]+)*)\.(.+)$/);
+  if (featured) {
+    if (entry.sourceFile !== `content/works/${featured[1]}.md`) {
+      fail(`entry ${index} featured stable key and source file disagree`);
+    }
+    return;
+  }
+
+  const archive = entry.stableKey.match(/^archive\.([a-z0-9]+(?:-[a-z0-9]+)*)\.(.+)$/);
+  if (archive) {
+    if (entry.sourceFile !== `content/archive/${archive[1]}.md`) {
+      fail(`entry ${index} archive stable key and source file disagree`);
+    }
+    return;
+  }
+
+  fail(`entry ${index} uses an unsupported stable key family`);
 }
 
 export function validateCopyWorkOrder(input) {
@@ -157,11 +176,19 @@ function resolveValue(root, tokens, stableKey, locale) {
 }
 
 function targetTokens(entry, locale, parsed) {
+  if (entry.stableKey === "site.heroMedia.alt") {
+    const tokens = ["heroMedia", "alt", locale];
+    return { root: parsed, tokens, documentTokens: tokens };
+  }
   if (entry.stableKey.startsWith("site.")) {
     const tokens = parsePropertyPath(entry.stableKey.slice("site.".length));
     return { root: parsed[locale], tokens, documentTokens: [locale, ...tokens] };
   }
-  const [, slug, propertyPath] = entry.stableKey.match(/^featured\.([a-z0-9-]+)\.(.+)$/);
+  if (entry.stableKey === "system.nav.primaryAria") {
+    const tokens = ["navPrimaryAria"];
+    return { root: parsed[locale], tokens, documentTokens: [locale, ...tokens] };
+  }
+  const [, , slug, propertyPath] = entry.stableKey.match(/^(featured|archive)\.([a-z0-9-]+)\.(.+)$/);
   if (parsed.slug !== slug) fail(`${entry.stableKey} does not match frontmatter slug`);
   const tokens = [...parsePropertyPath(propertyPath), locale];
   return { root: parsed, tokens, documentTokens: tokens };

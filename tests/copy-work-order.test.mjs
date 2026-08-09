@@ -52,20 +52,30 @@ function writeFixtureRepo({ duplicateSiteToken = false } = {}) {
   const root = mkdtempSync(join(tmpdir(), "portfolio-copy-work-order-"));
   const sitePath = join(root, "data/site.json");
   const workPath = join(root, "content/works/sample-work.md");
+  const archivePath = join(root, "content/archive/sample-archive.md");
   mkdirSync(dirname(sitePath), { recursive: true });
   mkdirSync(dirname(workPath), { recursive: true });
+  mkdirSync(dirname(archivePath), { recursive: true });
   writeFileSync(sitePath, `${JSON.stringify({
+    heroMedia: {
+      alt: { en: "Old hero alt", zh: "舊首頁替代文字" },
+    },
     en: {
       heroEyebrow: "Old English",
+      navPrimaryAria: "Primary",
       ...(duplicateSiteToken ? { duplicate: "Old English" } : {}),
     },
-    zh: { heroEyebrow: "舊中文" },
+    zh: { heroEyebrow: "舊中文", navPrimaryAria: "Primary" },
   }, null, 2)}\n`);
   writeFileSync(workPath, `---\n${JSON.stringify({
     slug: "sample-work",
     tagline: { en: "Existing English", zh: "原有中文" },
   }, null, 2)}\n---\nFixture body stays byte-identical.\n`);
-  return { root, sitePath, workPath };
+  writeFileSync(archivePath, `---\n${JSON.stringify({
+    slug: "sample-archive",
+    role: { en: "Writer", zh: "編劇" },
+  }, null, 2)}\n---\nArchive body stays byte-identical.\n`);
+  return { root, sitePath, workPath, archivePath };
 }
 
 test("copy work order validates a paired, explicit operation contract", () => {
@@ -184,8 +194,75 @@ test("copy work order uses the stable path when the same raw token appears elsew
 
 test("copy work order fails closed on unsupported stable-key families", () => {
   const invalid = workOrder();
-  invalid.entries[0].stableKey = "archive.sample.title";
+  invalid.entries[0].stableKey = "global.sample.title";
   assert.throws(() => validateCopyWorkOrder(invalid), /stable key family/i);
+});
+
+test("copy work order resolves shared HeroMedia, system copy, and Archive stable keys", () => {
+  const fixture = writeFixtureRepo();
+  try {
+    const order = workOrder();
+    order.entries = [
+      {
+        priority: "P0",
+        sourceFile: "data/site.json",
+        stableKey: "site.heroMedia.alt",
+        changes: {
+          en: { op: "keep", expected: "Old hero alt" },
+          zh: { op: "replace", expected: "舊首頁替代文字", value: "新首頁替代文字" },
+        },
+      },
+      {
+        priority: "P0",
+        sourceFile: "data/site.json",
+        stableKey: "system.nav.primaryAria",
+        changes: {
+          en: { op: "keep", expected: "Primary" },
+          zh: { op: "replace", expected: "Primary", value: "主要導覽" },
+        },
+      },
+      {
+        priority: "P1",
+        sourceFile: "content/archive/sample-archive.md",
+        stableKey: "archive.sample-archive.role",
+        changes: {
+          en: { op: "keep", expected: "Writer" },
+          zh: { op: "replace", expected: "編劇", value: "共同編劇" },
+        },
+      },
+    ];
+
+    assert.deepEqual(
+      applyCopyWorkOrder({ repoRoot: fixture.root, workOrder: order, priority: "P0" }),
+      {
+        schemaVersion: 1,
+        mode: "dry-run",
+        priority: "P0",
+        entries: 2,
+        replacements: 2,
+        keeps: 2,
+        conflicts: 0,
+        files: ["data/site.json"],
+        writesFiles: false,
+      },
+    );
+
+    applyCopyWorkOrder({ repoRoot: fixture.root, workOrder: order, priority: "P0", write: true });
+    applyCopyWorkOrder({ repoRoot: fixture.root, workOrder: order, priority: "P1", write: true });
+    const site = JSON.parse(readFileSync(fixture.sitePath, "utf8"));
+    const archive = JSON.parse(
+      readFileSync(fixture.archivePath, "utf8").match(/^---\n([\s\S]*?)\n---/)?.[1],
+    );
+
+    assert.equal(site.heroMedia.alt.en, "Old hero alt");
+    assert.equal(site.heroMedia.alt.zh, "新首頁替代文字");
+    assert.equal(site.en.navPrimaryAria, "Primary");
+    assert.equal(site.zh.navPrimaryAria, "主要導覽");
+    assert.equal(archive.role.en, "Writer");
+    assert.equal(archive.role.zh, "共同編劇");
+  } finally {
+    rmSync(fixture.root, { recursive: true, force: true });
+  }
 });
 
 test("copy work order CLI defaults to dry-run and rejects unsafe write arguments", () => {

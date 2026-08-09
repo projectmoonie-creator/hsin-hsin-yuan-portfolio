@@ -704,7 +704,7 @@ export function renderPage({ lang, site, works }) {
     <div class="site-shell">
       <header class="topbar">
         <div class="brand"><span class="brand-desktop">${escapeHtml(copy.navName)}</span><span class="brand-mobile">${escapeHtml(copy.navMobileName || copy.navName)}</span></div>
-        <nav class="nav-links" aria-label="Primary">
+        <nav class="nav-links" aria-label="${escapeHtml(copy.navPrimaryAria)}">
           ${navItems.map((item) => `<a${item.className ? ` class="${escapeHtml(item.className)}"` : ""} href="${escapeHtml(item.href)}">${escapeHtml(item.label)}</a>`).join("")}
           <a class="language-switch" href="/${switchLang}/">${switchLang === "en" ? "EN" : "中"}</a>
         </nav>
