@@ -174,33 +174,37 @@ State: `PASS_WITH_OPEN_ITEMS`
   JSON-LD `jobTitle` retain the older taxonomy because they were not among the
   31 approved keys. Either follow-up requires a new bounded approval.
 
-## Current Editorial Artifact — Chinese-copy Workbook
+## Current Editorial Artifact — Chinese Interface Manager
 
-- The producer-edited workbook at
-  `../outputs/hsin-hsin-yuan-zh-copy-2026-08-06/Hsin-Hsin-Yuan-Portfolio-Chinese-Copy-2026-08-06.xlsx`
-  has been rebuilt on the current bilingual schema and verified at SHA-256
-  `1d0210cf39a688e417c67edb3b0c2d3ccf9201c3485c055c2d6a541ed6ac9600`.
-  It contains 169 stable fields: all 168 prior editable rows were preserved by
-  stable key and the missing
-  `archive.three-minute-micro-drama.watchLabel` row was added with
-  `Watch the full series` / `觀看完整系列`.
-- The exact pre-merge user-edited workbook is recoverable at
-  `../outputs/hsin-hsin-yuan-zh-copy-2026-08-06/backups/Hsin-Hsin-Yuan-Portfolio-Chinese-Copy-2026-08-06.pre-schema-merge-user-edits.xlsx`,
+- Final producer-editable workbook:
+  `../outputs/hsin-hsin-yuan-zh-manager-2026-08-09/Hsin-Hsin-Yuan-Portfolio-Chinese-Interface-Manager-2026-08-09.xlsx`,
   SHA-256
-  `21b11eb53641987a33824fd4783fb5a8f245d30cd32a16ca3f3d67384693a73c`.
-- Round-trip verification found no missing, duplicate, or stale mapped keys and
-  no formula errors. All seven sheets passed rendered visual inspection. The
-  workbook now contains 65 effective Chinese-copy differences; two preserved
-  user values equal the latest canonical website text and therefore no longer
-  count as differences.
-- This original workbook remains an editorial artifact and was not bulk
-  imported. A separate, newer producer-approved 31-entry selection has now
-  passed the guarded Excel-to-repo package above; its source hashes and exact
-  transport live in the repo rather than turning Excel into a runtime source.
-- Next action: obtain producer approval before preparing another work order for
-  any of the broader revision set's remaining 44 actual differences. Do not
-  auto-import either workbook. Lighting stays later, after bilingual content
-  and geometry approval.
+  `fceaaf17714ad6513d88c052b8e91b378553095f148455d3768ac8ef2d28326d`.
+- It merges the newer producer/ChatGPT proposal layer with the 169-key schema
+  and current repo at `8627640`. The 31 already-applied P0/P1 keys are rebased;
+  the remaining 44 actual Chinese differences are preserved as pending
+  proposals. The stale bilingual `Codex 套用清單` was removed.
+- Column G is the only Chinese edit surface. A blank means that locale's element
+  does not render while its stable key/field remains; English is a separate
+  read-only reference and does not move with Chinese. All nonblank intentions
+  are prefilled, so later producer-cleared cells are unambiguous.
+- Exactly eight Chinese proposal cells are blank: the six approved localized
+  omissions plus already-empty `site.worksHint` and
+  `site.contactTitleBridge`. Status totals are 44 `需修改`, 88 `已確認`, and
+  37 `保留原文`.
+- Verification passes seven sheets, 169 unique keys, 190 formulas, exact data
+  validations, filters/freeze panes, zero external links, zero formula-error
+  strings, and a valid XLSX package. LibreOffice calculated 169 / 44 / 125 and
+  rendered nine pages; every page passed visual inspection with Chinese text
+  and layout intact. The workbook uses `Arial Unicode MS` for cross-machine
+  CJK coverage while preserving the existing template styling.
+- Original sources remain unchanged at SHA-256 `1d0210c…c9600` and
+  `e047223…dd897`. Formal record:
+  `docs/reviews/chinese-interface-manager-workbook-2026-08-09.md`.
+- The workbook remains offline and outside Git; no website, English, Figma,
+  deployment, Contact, or protected-file action occurred. Exact next action:
+  the producer edits column G and returns the same XLSX for a guarded
+  Chinese-only dry-run before any repo write.
 
 ## Current Local Work Package — Three-Minute Full-Series Link
 

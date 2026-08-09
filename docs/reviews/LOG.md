@@ -4,6 +4,15 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-09 — Chinese interface manager workbook
+- Artifact: final producer-editable XLSX at `outputs/hsin-hsin-yuan-zh-manager-2026-08-09/`, SHA-256 `fceaaf1…28326d`; source repo checkpoint `8627640`.
+- Contract: edit only column G; blank Chinese suppresses only that locale's element while the stable field remains; English is read-only and never follows a Chinese edit.
+- Merge: 169-key schema plus latest proposal workbook; 31 applied P0/P1 keys rebased, six approved blanks retained, stale bilingual apply sheet removed, and 44 pending Chinese differences preserved.
+- State: eight blank proposals total—the six approved localized omissions plus already-empty `site.worksHint` and `site.contactTitleBridge`; all other Chinese intentions are prefilled.
+- Verification: seven sheets, 169 unique keys, 190 formulas, exact validations/filters/freeze panes, zero external links/error strings; LibreOffice calculated 169/44/125 and all nine rendered pages passed visual inspection.
+- Typography/safety: consistent `Arial Unicode MS` restores cross-machine Chinese coverage while retaining template styling; original source workbook/preview hashes remain unchanged.
+- External state/next: workbook stays offline/outside Git; no website, English, Figma, main, deployment, Contact, or protected-file change; producer returns the edited XLSX for guarded Chinese-only dry-run.
+
 ## 2026-08-09 — Mobile Featured reel trigger
 - Branch/base: `codex/three-minute-watch-link` from Production-aligned `d109bbd`; approved spec `2c5c6ca`, implementation `a20997a`.
 - Behavior: at ≤820px, 35%-eligible Featured reels use nearest-viewport-center ownership and a 700ms poster hold; desktop keeps last-DOM/1.4s and Archive keeps nearest-center/1.4s.
