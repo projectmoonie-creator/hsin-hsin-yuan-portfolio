@@ -1,4 +1,4 @@
-import { selectClosestVisibleArchiveReel } from "./archive-reel-selection.js";
+import { selectClosestVisibleReel } from "./archive-reel-selection.js";
 
 if ("scrollRestoration" in window.history) {
   window.history.scrollRestoration = "manual";
@@ -212,7 +212,9 @@ if (!prefersReducedMotion) {
     if (isVisible) startLoop();
   });
 
-  const FEATURED_REEL_HOLD_MS = 1400;
+  const FEATURED_REEL_DESKTOP_HOLD_MS = 1400;
+  const FEATURED_REEL_MOBILE_HOLD_MS = 700;
+  const featuredReelMobileMedia = window.matchMedia("(max-width: 820px)");
   const featuredReelVideos = Array.from(
     document.querySelectorAll("[data-featured-reel-video]"),
   );
@@ -222,6 +224,13 @@ if (!prefersReducedMotion) {
   const featuredReelPlayGenerations = new WeakMap();
   let activeFeaturedReel = null;
   let featuredReelLifecycleBound = false;
+  let featuredReelViewportFrame = 0;
+
+  function getFeaturedReelHoldMs() {
+    return featuredReelMobileMedia.matches
+      ? FEATURED_REEL_MOBILE_HOLD_MS
+      : FEATURED_REEL_DESKTOP_HOLD_MS;
+  }
 
   function getFeaturedReelGeneration(video) {
     return featuredReelActivationGenerations.get(video) || 0;
@@ -285,7 +294,7 @@ if (!prefersReducedMotion) {
       featuredReelTimers.delete(video);
       if (!isCurrentFeaturedReelActivation(video, generation) || !video.paused) return;
       playFeaturedReel(video, generation);
-    }, FEATURED_REEL_HOLD_MS);
+    }, getFeaturedReelHoldMs());
     featuredReelTimers.set(video, timer);
   }
 
@@ -302,9 +311,15 @@ if (!prefersReducedMotion) {
   });
 
   function syncActiveFeaturedReel() {
-    const nextActiveFeaturedReel = visibleFeaturedReels.size
-      ? featuredReelVideos.filter((video) => visibleFeaturedReels.has(video)).at(-1)
-      : null;
+    const nextActiveFeaturedReel = !visibleFeaturedReels.size
+      ? null
+      : featuredReelMobileMedia.matches
+        ? selectClosestVisibleReel(
+            featuredReelVideos,
+            visibleFeaturedReels,
+            { width: window.innerWidth, height: window.innerHeight },
+          )
+        : featuredReelVideos.filter((video) => visibleFeaturedReels.has(video)).at(-1);
     activeFeaturedReel = nextActiveFeaturedReel;
 
     featuredReelVideos.forEach((video) => {
@@ -341,20 +356,42 @@ if (!prefersReducedMotion) {
     }
   }
 
+  function handleFeaturedReelViewportChange() {
+    if (featuredReelViewportFrame) return;
+    featuredReelViewportFrame = window.requestAnimationFrame(() => {
+      featuredReelViewportFrame = 0;
+      syncActiveFeaturedReel();
+    });
+  }
+
+  function handleFeaturedReelModeChange() {
+    activeFeaturedReel = null;
+    featuredReelVideos.forEach(resetFeaturedReel);
+    syncActiveFeaturedReel();
+  }
+
   function bindFeaturedReelLifecycle() {
     if (featuredReelLifecycleBound) return;
     featuredReelLifecycleBound = true;
     document.addEventListener("visibilitychange", handleFeaturedReelVisibility);
+    window.addEventListener("scroll", handleFeaturedReelViewportChange, { passive: true });
+    window.addEventListener("resize", handleFeaturedReelViewportChange);
+    featuredReelMobileMedia.addEventListener?.("change", handleFeaturedReelModeChange);
     featuredReelVideos.forEach((video) => featuredReelObserver?.observe(video));
   }
 
   function suspendFeaturedReelLifecycle() {
+    if (featuredReelViewportFrame) window.cancelAnimationFrame(featuredReelViewportFrame);
+    featuredReelViewportFrame = 0;
     activeFeaturedReel = null;
     visibleFeaturedReels.clear();
     featuredReelVideos.forEach(resetFeaturedReel);
     featuredReelObserver?.disconnect();
     if (featuredReelLifecycleBound) {
       document.removeEventListener("visibilitychange", handleFeaturedReelVisibility);
+      window.removeEventListener("scroll", handleFeaturedReelViewportChange);
+      window.removeEventListener("resize", handleFeaturedReelViewportChange);
+      featuredReelMobileMedia.removeEventListener?.("change", handleFeaturedReelModeChange);
       featuredReelLifecycleBound = false;
     }
   }
@@ -425,7 +462,7 @@ if (!prefersReducedMotion) {
   });
 
   function syncActiveArchiveReel() {
-    const activeArchiveReel = selectClosestVisibleArchiveReel(
+    const activeArchiveReel = selectClosestVisibleReel(
       archiveReelVideos,
       visibleArchiveReels,
       { width: window.innerWidth, height: window.innerHeight },

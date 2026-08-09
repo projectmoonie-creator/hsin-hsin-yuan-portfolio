@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { selectClosestVisibleArchiveReel } from "../src/archive-reel-selection.js";
+import * as reelSelection from "../src/archive-reel-selection.js";
+
+const { selectClosestVisibleArchiveReel } = reelSelection;
 
 function video(id, rect) {
   return { id, getBoundingClientRect: () => rect };
@@ -16,6 +18,19 @@ test("two visible reels in one desktop row choose the one nearest viewport cente
     selectClosestVisibleArchiveReel([left, right], visible, { width: 1440, height: 1000 }),
     left,
   );
+});
+
+test("the generic nearest-center selector owns the shared geometry contract", () => {
+  assert.equal(typeof reelSelection.selectClosestVisibleReel, "function");
+
+  const near = video("near", { left: 140, right: 250, top: 360, bottom: 480 });
+  const far = video("far", { left: 140, right: 250, top: 650, bottom: 770 });
+  const videos = [far, near];
+  const visible = new Set(videos);
+  const viewport = { width: 390, height: 844 };
+
+  assert.equal(reelSelection.selectClosestVisibleReel(videos, visible, viewport), near);
+  assert.equal(selectClosestVisibleArchiveReel(videos, visible, viewport), near);
 });
 
 test("mobile selection follows the reel nearest the viewport center", () => {

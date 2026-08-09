@@ -1718,7 +1718,9 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.doesNotMatch(js, /data-watch-loop-video/);
   assert.match(js, /data-featured-reel-video/);
   assert.doesNotMatch(js, /WATCH_LOOP_REEL_HOLD_MS|watchLoopVideoTimers/);
-  assert.match(js, /const FEATURED_REEL_HOLD_MS = 1400;/);
+  assert.match(js, /const FEATURED_REEL_DESKTOP_HOLD_MS = 1400;/);
+  assert.match(js, /const FEATURED_REEL_MOBILE_HOLD_MS = 700;/);
+  assert.match(js, /const featuredReelMobileMedia = window\.matchMedia\("\(max-width: 820px\)"\);/);
   assert.match(js, /const visibleFeaturedReels = new Set\(\);/);
   assert.match(js, /const featuredReelTimers = new Map\(\);/);
   assert.match(js, /const featuredReelActivationGenerations = new WeakMap\(\);/);
@@ -1727,9 +1729,12 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(js, /function clearFeaturedReelTimer\(video\)/);
   assert.match(
     js,
-    /setTimeout\(\(\) => \{[\s\S]*?playFeaturedReel\(video, generation\);[\s\S]*?\}, FEATURED_REEL_HOLD_MS\)/,
+    /setTimeout\(\(\) => \{[\s\S]*?playFeaturedReel\(video, generation\);[\s\S]*?\}, getFeaturedReelHoldMs\(\)\)/,
   );
-  assert.match(js, /const nextActiveFeaturedReel = visibleFeaturedReels\.size[\s\S]*?featuredReelVideos\.filter[\s\S]*?\.at\(-1\)[\s\S]*?activeFeaturedReel = nextActiveFeaturedReel/);
+  assert.match(js, /featuredReelMobileMedia\.matches[\s\S]*?selectClosestVisibleReel[\s\S]*?featuredReelVideos\.filter[\s\S]*?\.at\(-1\)/);
+  assert.match(js, /function handleFeaturedReelViewportChange\(\)[\s\S]*?window\.requestAnimationFrame[\s\S]*?syncActiveFeaturedReel\(\)/);
+  assert.match(js, /window\.addEventListener\("scroll", handleFeaturedReelViewportChange, \{ passive: true \}\)/);
+  assert.match(js, /featuredReelMobileMedia\.addEventListener\?\.\("change", handleFeaturedReelModeChange\)/);
   assert.match(js, /video === activeFeaturedReel[\s\S]*?scheduleFeaturedReel\(video\)[\s\S]*?resetFeaturedReel\(video\)/);
   assert.match(
     js,

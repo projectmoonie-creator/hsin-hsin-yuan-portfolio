@@ -4,10 +4,13 @@ import { join } from "node:path";
 import test from "node:test";
 import vm from "node:vm";
 
-import { selectClosestVisibleArchiveReel } from "../src/archive-reel-selection.js";
+import * as reelSelection from "../src/archive-reel-selection.js";
 
 const mainSource = readFileSync(join(process.cwd(), "src/main.js"), "utf8")
-  .replace(/^import \{ selectClosestVisibleArchiveReel \} from "\.\/archive-reel-selection\.js";\n\n/, "");
+  .replace(
+    /^import \{ (?:selectClosestVisibleArchiveReel|selectClosestVisibleReel) \} from "\.\/archive-reel-selection\.js";\n\n/,
+    "",
+  );
 
 class EventHub {
   constructor() {
@@ -73,6 +76,15 @@ class FakeVideo extends EventHub {
     this.paused = true;
     this.pauseCalls = 0;
     this.playRequests = [];
+    this.rect = { left: 0, right: 100, top: 0, bottom: 100 };
+  }
+
+  getBoundingClientRect() {
+    return this.rect;
+  }
+
+  setRect(rect) {
+    this.rect = rect;
   }
 
   pause() {
@@ -126,10 +138,13 @@ class FakeClock {
   }
 }
 
-function createRuntime(videoCount = 1) {
+function createRuntime(videoCount = 1, options = {}) {
   const videos = Array.from({ length: videoCount }, (_, index) => new FakeVideo(`video-${index + 1}`));
   const clock = new FakeClock();
   const observers = [];
+  const animationFrames = new Map();
+  const mediaQueries = new Map();
+  let nextAnimationFrameId = 1;
 
   class FakeIntersectionObserver {
     constructor(callback, options) {
@@ -170,15 +185,24 @@ function createRuntime(videoCount = 1) {
     replaceState() {},
   };
   window.location = { hash: "", pathname: "/en/", search: "" };
-  window.innerWidth = 1440;
-  window.innerHeight = 900;
+  window.innerWidth = options.width || (options.mobile ? 390 : 1440);
+  window.innerHeight = options.height || (options.mobile ? 844 : 900);
   window.IntersectionObserver = FakeIntersectionObserver;
-  window.matchMedia = () => ({
-    matches: false,
-    addEventListener() {},
-  });
-  window.requestAnimationFrame = () => 1;
-  window.cancelAnimationFrame = () => {};
+  window.matchMedia = (query) => {
+    if (!mediaQueries.has(query)) {
+      const mediaQuery = new EventHub();
+      mediaQuery.matches = query === "(max-width: 820px)" && Boolean(options.mobile);
+      mediaQueries.set(query, mediaQuery);
+    }
+    return mediaQueries.get(query);
+  };
+  window.requestAnimationFrame = (callback) => {
+    const id = nextAnimationFrameId;
+    nextAnimationFrameId += 1;
+    animationFrames.set(id, callback);
+    return id;
+  };
+  window.cancelAnimationFrame = (id) => animationFrames.delete(id);
   window.scrollTo = () => {};
 
   vm.runInNewContext(mainSource, {
@@ -186,7 +210,8 @@ function createRuntime(videoCount = 1) {
     console,
     document,
     IntersectionObserver: FakeIntersectionObserver,
-    selectClosestVisibleArchiveReel,
+    selectClosestVisibleArchiveReel: reelSelection.selectClosestVisibleArchiveReel,
+    selectClosestVisibleReel: reelSelection.selectClosestVisibleReel,
     setTimeout: (callback, delay) => clock.setTimeout(callback, delay),
     URLSearchParams,
     window,
@@ -204,7 +229,22 @@ function createRuntime(videoCount = 1) {
     })));
   }
 
-  return { clock, document, featuredObserver, intersect, videos, window };
+  function flushAnimationFrames() {
+    const callbacks = [...animationFrames.values()];
+    animationFrames.clear();
+    callbacks.forEach((callback) => callback(clock.now));
+  }
+
+  return {
+    clock,
+    document,
+    featuredObserver,
+    flushAnimationFrames,
+    intersect,
+    mediaQueries,
+    videos,
+    window,
+  };
 }
 
 async function flushPromises() {
@@ -212,7 +252,7 @@ async function flushPromises() {
   await Promise.resolve();
 }
 
-test("35% entry holds for 1400ms and an early exit cancels playback", () => {
+test("desktop 35% entry holds for 1400ms and an early exit cancels playback", () => {
   const runtime = createRuntime();
   const [video] = runtime.videos;
 
@@ -239,6 +279,60 @@ test("the last qualifying Featured video in DOM order owns playback", () => {
   assert.equal(first.currentTime, 0);
   assert.equal(second.playRequests.length, 1);
   assert.equal(second.paused, false);
+});
+
+test("mobile gives the viewport-center Featured video a 700ms poster hold", () => {
+  const runtime = createRuntime(2, { mobile: true, width: 390, height: 844 });
+  const [first, second] = runtime.videos;
+  first.setRect({ left: 20, right: 370, top: 300, bottom: 500 });
+  second.setRect({ left: 20, right: 370, top: 560, bottom: 760 });
+
+  runtime.intersect([[first, 0.8], [second, 0.8]]);
+  runtime.clock.advance(699);
+  assert.equal(first.playRequests.length, 0);
+  assert.equal(second.playRequests.length, 0);
+
+  runtime.clock.advance(1);
+  assert.equal(first.playRequests.length, 1);
+  assert.equal(second.playRequests.length, 0);
+});
+
+test("mobile scroll hands Featured ownership to the new center without an observer event", () => {
+  const runtime = createRuntime(2, { mobile: true, width: 390, height: 844 });
+  const [first, second] = runtime.videos;
+  first.setRect({ left: 20, right: 370, top: 300, bottom: 500 });
+  second.setRect({ left: 20, right: 370, top: 560, bottom: 760 });
+  runtime.intersect([[first, 0.8], [second, 0.8]]);
+  runtime.clock.advance(400);
+
+  first.setRect({ left: 20, right: 370, top: 40, bottom: 240 });
+  second.setRect({ left: 20, right: 370, top: 320, bottom: 520 });
+  runtime.window.dispatch("scroll");
+  runtime.flushAnimationFrames();
+
+  runtime.clock.advance(699);
+  assert.equal(first.playRequests.length, 0);
+  assert.equal(second.playRequests.length, 0);
+  runtime.clock.advance(1);
+  assert.equal(second.playRequests.length, 1);
+  assert.equal(first.currentTime, 0);
+});
+
+test("crossing into mobile policy replaces an in-flight desktop hold", () => {
+  const runtime = createRuntime(1, { width: 900, height: 844 });
+  const [video] = runtime.videos;
+  video.setRect({ left: 20, right: 370, top: 300, bottom: 500 });
+  runtime.intersect([[video, 0.8]]);
+  runtime.clock.advance(400);
+
+  const mobileMedia = runtime.mediaQueries.get("(max-width: 820px)");
+  mobileMedia.matches = true;
+  mobileMedia.dispatch("change", { matches: true });
+
+  runtime.clock.advance(699);
+  assert.equal(video.playRequests.length, 0);
+  runtime.clock.advance(1);
+  assert.equal(video.playRequests.length, 1);
 });
 
 test("an old play rejection cannot reset a rapid exit and re-entry activation", async () => {

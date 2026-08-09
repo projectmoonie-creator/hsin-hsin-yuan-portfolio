@@ -1,4 +1,4 @@
-export function selectClosestVisibleArchiveReel(
+export function selectClosestVisibleReel(
   videos,
   visibleVideos,
   viewport,
@@ -22,3 +22,5 @@ export function selectClosestVisibleArchiveReel(
 
   return selected;
 }
+
+export const selectClosestVisibleArchiveReel = selectClosestVisibleReel;
