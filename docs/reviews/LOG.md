@@ -4,6 +4,13 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-10 — Portfolio phase closeout formalization
+- Scope: docs-only closeout of public baseline `eb444a6`; removes stale STATUS tail and records one current cold-resume path, with no public-source or deployment change.
+- Review: formal Claude subscription review requested dynamic `opus`, completed `claude-opus-5`, and returned `PASS_WITH_OPEN_ITEMS`; local adjudication confirms no public-product blocker.
+- Validation: 144/144, build, design-contract audit, Figma export, privacy/private-path/protected-file, and diff checks pass; prior 14/14 browser and four-screenshot evidence remains the released baseline.
+- Durability: final commit is preserved at `backup/2026-08-10/portfolio-phase-closeout` and annotated tag `portfolio-phase-2026-08-10-closed`; both are read back after commit, while `main` remains at `eb444a6`.
+- Boundary/next: protected document remains `945d4df9…d28fc` outside Git; next package is one lo-fi light/button interaction specification before any implementation, Preview, or deployment.
+
 ## 2026-08-09 — Chinese copy round 2 + mobile Contact spacing
 - Scope: producer-approved P0+P1 = nine stable-key changes; English and Chinese stay independent, including `The Mechanic`, `東方衛視`, `座談`, and six Chinese copy revisions.
 - Mechanism: guarded global Press-by-ID targeting plus allowlisted shared-scalar promotion; exact-current, structural-token, replay, rollback, path, and non-localizable-scalar rejection contracts remain fail-closed.

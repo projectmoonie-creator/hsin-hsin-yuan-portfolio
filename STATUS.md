@@ -1,48 +1,39 @@
 # Portfolio Status
 
-Updated: 2026-08-09
+Updated: 2026-08-10
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Chinese Copy Round 2 Production Release
+## Current Work Package — Portfolio Phase Closeout
 
-- Producer-approved P0+P1 work order applies nine stable-key changes: two site
-  strings, four Featured descriptions, one localized Top Gear platform, one
-  global Press label, and the English Archive title `The Mechanic`. Every
-  unchanged locale is an exact guarded keep; blank-field behavior is unchanged.
-- The reusable importer now resolves `press.<id>.<property>` by exactly one
-  Press ID and can promote only three explicitly localizable shared-scalar key
-  shapes into paired `{ en, zh }` values. A new negative contract rejects all
-  other scalar promotion; exact-current guards, replay rejection, structural
-  token targeting, rollback, and path safety remain intact.
-- Narrow-mobile Contact spacing remains the prior shared `line-height: 1.02`
-  contract at `max-width: 460px`; this release adds no new CSS or locale-only
-  layout branch.
-- Full `npm test` passes 144/144; build, Figma export, design-contract audit,
-  privacy, protected-file, and diff checks pass. Native Chromium passed 14/14
-  bilingual desktop/tablet/mobile, reduced-motion, and no-JavaScript scenarios
-  with exact copy, zero empty optional nodes/overflow/errors, and no Contact
-  submission. Four representative screenshots were visually inspected.
-- Frozen review packet originally hashed `acca559a…3a780`; its committed
-  whitespace-clean equivalent is `28442b6…a798f`. Gemini requested/observed/
-  completed `gemini-3.6-flash` and returned `PASS` with no findings. Claude is
-  an incomplete active-session handoff with no model request; no dual-review
-  consensus is claimed. Local adjudication is `APPROVE_PRODUCTION`.
-- Candidate `c716849fb8b644ac6b8977887f201a97a148ac7a` and pre-release main
-  `d109bbdede94a00b58ae8b0b7de0d1875dd627e4` were pushed and read back at
-  `backup/2026-08-09/chinese-round2-production-c716849` and
-  `backup/2026-08-09/pre-chinese-round2-main-d109bbd` before a non-force main
-  fast-forward.
-- Git-triggered Production `dpl_4i1jTqt3Qq9FjchMnMXEGKrEYwkv` is `Ready`,
-  target `production`, with `api/contact` and canonical alias
-  `https://hsin-hsin-yuan-portfolio.vercel.app`. Per deployment policy, the
-  deployed page was not fetched and no Contact POST occurred.
-- The protected untracked document remains outside Git and byte-identical at
+- Public-output baseline `eb444a6dade9a721d97adf239468bf22d3360bf8`
+  contains the producer-approved Chinese Copy Round 2 Production release.
+  `origin/main` remains exactly at that commit. The docs-only closeout evidence
+  is retained on `codex/three-minute-watch-link`; it changes no website source,
+  public build, deployment configuration, alias, media, or Contact behavior.
+- Full `npm test` passes 144/144. Build, Figma export, design-contract audit,
+  privacy, protected-file, and diff checks pass. The released package retains
+  its 14/14 bilingual desktop/tablet/mobile, reduced-motion, and no-JavaScript
+  browser evidence plus four visually inspected screenshots.
+- Gemini requested/observed/completed `gemini-3.6-flash` for the production
+  package and returned `PASS` with no findings. The formal phase-closeout
+  review later requested dynamic `opus`, observed/completed `claude-opus-5`,
+  and returned `PASS_WITH_OPEN_ITEMS`; its public-product assessment found no
+  truth, privacy, rights, accessibility, functional, or deployment blocker.
+  An earlier Chinese-package Claude timeout remains historical incomplete
+  evidence and is not counted as review coverage.
+- Production deployment `dpl_4i1jTqt3Qq9FjchMnMXEGKrEYwkv` remains recorded
+  `Ready`, target `production`, with `api/contact` and canonical alias
+  `https://hsin-hsin-yuan-portfolio.vercel.app`. This closeout package creates
+  no Preview or Production deployment and submits no Contact request.
+- Formal recovery names are
+  `backup/2026-08-10/portfolio-phase-closeout` and annotated tag
+  `portfolio-phase-2026-08-10-closed`, both pointing to the final docs-only
+  closeout commit after push/readback. `main` is not moved by this closeout.
+- The protected user-owned document remains outside Git and byte-identical at
   SHA-256
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
-  Exact next action: start a separate lo-fi-first UI package for one restrained
-  light treatment and/or button microinteraction, with mobile performance and
-  reduced-motion approval before implementation or deployment.
+  It is the only untracked file that must never be staged or committed.
 
 ## Prior Work Package — Final Chinese Interface Preview
 
@@ -264,12 +255,19 @@ State: `PASS_WITH_OPEN_ITEMS`
   JSON-LD `jobTitle` retain the older taxonomy because they were not among the
   31 approved keys. Either follow-up requires a new bounded approval.
 
-## Current Editorial Artifact — Chinese Interface Manager
+## Prior Editorial Artifact — Chinese Interface Manager
 
-- Final producer-editable workbook:
+- The originally delivered XLSX was recorded as
   `../outputs/hsin-hsin-yuan-zh-manager-2026-08-09/Hsin-Hsin-Yuan-Portfolio-Chinese-Interface-Manager-2026-08-09.xlsx`,
   SHA-256
   `fceaaf17714ad6513d88c052b8e91b378553095f148455d3768ac8ef2d28326d`.
+  That exact path is no longer present. The producer-owned offline directory
+  currently contains a Numbers file (SHA-256
+  `adf3e0dd5acc9dc34ac2bff901c193efc958565730e7b37e258b71ad1dac3ea0`)
+  and `Hsin-Hsin-Yuan-Portfolio-Chinese-Interface-Manager-2026-08-09-recovered.xlsx`
+  (SHA-256
+  `5efb3d319c1b0cc78778c3776edb1ddf55f85df8d742db2dda05b05a78cf17e5`).
+  This closeout does not modify or declare either file authoritative.
 - It merges the newer producer/ChatGPT proposal layer with the 169-key schema
   and current repo at `8627640`. The 31 already-applied P0/P1 keys are rebased;
   the remaining 44 actual Chinese differences are preserved as pending
@@ -291,12 +289,12 @@ State: `PASS_WITH_OPEN_ITEMS`
 - Original sources remain unchanged at SHA-256 `1d0210c…c9600` and
   `e047223…dd897`. Formal record:
   `docs/reviews/chinese-interface-manager-workbook-2026-08-09.md`.
-- The workbook remains offline and outside Git; no website, English, Figma,
-  deployment, Contact, or protected-file action occurred. Exact next action:
-  the producer edits column G and returns the same XLSX for a guarded
-  Chinese-only dry-run before any repo write.
+- The manager files remain offline and outside Git; no website, English,
+  Figma, deployment, Contact, or protected-file action occurred. Before a
+  future Chinese-copy package, the producer must select the authoritative
+  manager file and export one explicit XLSX for a guarded Chinese-only dry-run.
 
-## Current Local Work Package — Three-Minute Full-Series Link
+## Prior Local Work Package — Three-Minute Full-Series Link
 
 - Branch `codex/three-minute-watch-link` starts from local `main`
   `8b183320b7e96cdf065ef8d727e2049224eba097`. The exact pre-change state is
@@ -326,7 +324,7 @@ State: `PASS_WITH_OPEN_ITEMS`
   Contact. The protected untracked review file remains user-owned, unmodified,
   and outside Git.
 
-## Current Integrated Work Package — Ghost Hand Archive Slideshow
+## Prior Integrated Work Package — Ghost Hand Archive Slideshow
 
 - Source branch `codex/ghost-hand-archive-slideshow` starts from local and remote
   baseline `03ad08ac4dd3a47d300cab99f2dd569353e13ec9`. Local `main` was
@@ -480,7 +478,7 @@ State: `PASS_WITH_OPEN_ITEMS`
   contain the new Overclocking poster. `origin/main`, Production, aliases,
   Contact, and the protected untracked file remain untouched.
 
-## Current Integrated Baseline — HeroMedia Closeout Remediation
+## Prior Integrated Baseline — HeroMedia Closeout Remediation
 
 - Local `main` was fast-forwarded from
   `e2d75f0e57ff0d6f0d64ff5381a04a3314b35481` to reviewed closeout head
@@ -755,76 +753,52 @@ Current design/Figma rules are aligned and Figma output is unchanged.
   `418ece08fd3b13ec2a2f8f8d5e20794f82fc1fdcf9333f9a070d108394d6d1d6`.
 - No baseline pixel-diff claim is made.
 
-## Sole Open Item
+## Accepted Open Items
 
-> Matched pre-package browser comparison remains unavailable because the recorded historical Vercel Preview redirects unauthenticated QA contexts through Vercel SSO to the login page; no portfolio DOM, matched Featured screenshots, geometry/crop comparison, or pixel statistics could be obtained.
-
-This does not indicate a local product defect. Unchanged Figma hashes are
-supporting evidence, not a substitute for the unavailable comparison.
-
-## Existing External State
-
-- Latest existing Vercel Preview:
-  `https://hsin-hsin-yuan-portfolio-preview-5s4u5ncf6.vercel.app`
-- Recorded deployment ID: `dpl_HDN2GMNaGKxu6HLP91uZQ3vJBgK2`.
-- Unauthenticated QA sees Vercel SSO. This package made no deployment and
-  claims no current platform-metadata readback beyond the recorded state.
-- Production is unchanged. The contact form was not submitted and no email was
-  sent.
-
-## Accepted Prior History
-
-- Portfolio Design Contract Governance v1 is accepted on local `main` at
-  `8f4e19063f5e6bcfbd3a47b9840ee36518dfdb4e`; its source branch is retained.
-- The governance package's existing Preview metadata above is unchanged.
-- Original production website/domain remains unchanged.
-- Transitional renderer aliases may be removed only in a later bounded package
-  that reproduces the normalized public contract and frozen output.
-- The hardcoded Figma plugin remains a marked legacy experiment;
-  `npm run figma:export` is the current design-handoff path.
-- Top Gear's `0.81` remains CV-sourced; its other recorded audience context is
-  publicly corroborated in the preceding annotated-content review.
-- Preview mail configuration remains a separate authorized task.
-
-## Closed Baseline
-
-- Closed baseline tag: `portfolio-phase-2026-07-29-closed`
-- Annotated tag object: `68d99c13341f27ad388a8c9bc06df22b3d38bcf2`
-- Peeled commit: `7e6200106fe9feb10331e6558981b0314de00597`
-- The current branch preserves this baseline and all later approved work.
+- One restrained lighting treatment and/or one button microinteraction may be
+  explored in a new phase. This is optional refinement, not missing behavior in
+  the closed public baseline.
+- Any visual experiment begins lo-fi-first and separately defines desktop,
+  mobile performance, focus visibility, contrast, and reduced-motion behavior.
+  It remains off the website until the producer approves implementation and a
+  later Preview/Production decision.
+- The offline Chinese manager directory contains a Numbers file and a recovered
+  XLSX rather than the originally recorded XLSX path. Before any future
+  Chinese-copy import, the producer selects one authority and exports a fresh
+  explicit XLSX; this does not block the current public baseline.
 
 ## Protected Worktree Item
 
-The sole untracked file remains user-owned and untouched:
+The following user-owned file remains outside Git, byte-identical, and must
+never be staged or committed:
 
 `docs/reviews/screening-strip-media-contract-v1-2026-07-29 2.md`
 
+SHA-256:
+`945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`
+
 ## Exact Next Action
 
-Create a bounded Chinese-copy and bilingual-layout normalization branch from
-local `main` at the integrated Ghost Hand checkpoint. Preserve the approved
-English copy and current visual output; move intentional language differences
-into canonical localized data and named variants. Do not combine lighting with
-that package. Before any release, separately decide whether to push a feature
-ref, create a Preview, or promote through `main`; any `main` push is
-Production-affecting because the GitHub integration deploys it automatically.
+Start a separate lo-fi-first UI package whose first deliverable is one small
+desktop/mobile/reduced-motion interaction specification for a restrained light
+treatment and/or button microinteraction. Obtain producer approval of that
+specification before changing code, creating a Preview, or deploying.
 
 ## Cold Resume
 
-1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, the Ghost Hand approved
-   design/plan, and `docs/design-contract.md`.
-2. Verify remote backup `backup/2026-08-06/pre-shutdown-final` matches local
-   `main`, legacy backup `backup/2026-08-06/cinematic-b29b745` resolves to
-   `b29b745`, and `origin/main` remains at checkpoint `03ad08a`; verify
-   remote backup `backup/2026-08-06/pre-lighting-zh-refinement` and annotated
-   tag `portfolio-baseline-2026-08-06-pre-lighting` still resolve exactly to
-   `4d4a27a`; verify the protected untracked file/hash before changing anything.
-3. Confirm local `main` contains behavior head `9d84132`, `npm test` is
-   `111/111`, the six
-   safe still derivatives and exact public Ghost Hand poster/MP4 match the
-   manifest, and the ignored originals remain outside Git.
-4. Treat Preview deployment `dpl_8vwDEtrbrG5vzqreik78rnqMH4Ax` as a prior
-   build; it does not contain this Ghost Hand feature branch.
-5. Do not push `main`, create a Preview, deploy Production, change an alias, or
-   submit Contact without the corresponding explicit authorization; `main`
-   pushes are now known to trigger Production automatically.
+1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and
+   `docs/reviews/portfolio-phase-closeout-2026-08-10.md`.
+2. Verify annotated tag `portfolio-phase-2026-08-10-closed` and remote backup
+   `backup/2026-08-10/portfolio-phase-closeout` resolve to the same docs-only
+   closeout commit; verify `origin/main` remains at public baseline
+   `eb444a6dade9a721d97adf239468bf22d3360bf8` unless a later producer-approved
+   Production package records otherwise.
+3. Verify the protected file above remains untracked and matches its exact
+   SHA-256 before changing anything.
+4. Treat the recorded Production deployment as the current public baseline:
+   `dpl_4i1jTqt3Qq9FjchMnMXEGKrEYwkv`, canonical alias
+   `https://hsin-hsin-yuan-portfolio.vercel.app`, validation 144/144.
+5. Begin only the bounded lo-fi UI package named in the Exact Next Action. Do
+   not push `main`, create a Preview, deploy, change an alias, or submit Contact
+   without the corresponding explicit producer authorization.
+   `main` pushes are now known to trigger Production automatically.
