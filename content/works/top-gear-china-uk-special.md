@@ -16,11 +16,11 @@
   "platform": "China Dragon TV",
   "tagline": {
     "en": "A cross-border factual-entertainment production filmed in the UK with the original Top Gear team.",
-    "zh": "在英國拍攝，與原版 Top Gear 團隊完成跨國汽車節目製作。"
+    "zh": ""
   },
   "description": {
     "en": "Directed the UK episode of Top Gear China Season 2, leading the shoot in Britain and coordinating editorial and production requirements across Dragon TV, the Chinese production team, and the original Top Gear team.",
-    "zh": "擔任《巔峰拍檔》中國版第二季第五期「英國篇」導演，負責英國段落的內容與拍攝，並協調東方衛視、中國製作團隊與英國原版 Top Gear 團隊的製作需求。"
+    "zh": "《巔峰拍檔》中國版第二季第五期「英國篇」導演，負責英國段落的內容與拍攝，並協調東方衛視、中國製作團隊與英國原版 Top Gear 團隊的製作需求。"
   },
   "watchMode": "single",
   "watchUrl": "https://youtu.be/M_eXe9HRD9Y?si=YZ_3JZ7FJY4vVcZv",
@@ -43,12 +43,12 @@
   "tags": ["factual entertainment"],
   "metricsContext": {
     "en": "Season 2 audience, reported across television and online",
-    "zh": "第二季播出表現（電視與線上）"
+    "zh": "第二季播出數據（電視與線上）"
   },
   "metrics": [
-    {"value": "200M", "label": {"en": "first five episodes / TV + online", "zh": "前五集／電視＋線上"}},
-    {"value": "9M", "label": {"en": "average weekly live audience", "zh": "每週電視平均觀眾"}},
-    {"value": "0.81", "label": {"en": "reported TV rating", "zh": "履歷記載電視收視率"}},
+    {"value": "200M", "label": {"en": "first five episodes / TV + online", "zh": "前五集（電視＋線上）"}},
+    {"value": "9M", "label": {"en": "average weekly live audience", "zh": "每週平均電視觀眾"}},
+    {"value": "0.81", "label": {"en": "reported TV rating", "zh": "電視收視率（依履歷資料）"}},
     {"value": "#1", "label": {"en": "national time slot / four weeks", "zh": "連續四週全國同時段第一"}}
   ],
   "metricsSourceUrl": "https://www.advanced-television.com/2015/11/20/top-gear-china-draws-217m-viewers/",

@@ -44,10 +44,10 @@
   "metrics": [],
   "press": [
     {
-      "type": {"en": "Official page", "zh": "官方節目頁"},
+      "type": {"en": "Official page", "zh": "官方頁面"},
       "title": {
         "en": "Official program page",
-        "zh": "官方節目頁"
+        "zh": ""
       },
       "source": "TaiwanPlus",
       "url": "https://www.taiwanplus.com/shows/documentary/arts/410/my-art-my-voice/250220001/whats-the-vibe-in-taiwan-my-art-my-voice",
@@ -58,7 +58,7 @@
       "metadataCheckedAt": "2026-07-12"
     },
     {
-      "type": {"en": "Project press", "zh": "專案報導"},
+      "type": {"en": "Project press", "zh": "報導"},
       "title": {
         "en": "Cultural Olympiad documentary My Art, My Voice: Taiwan-France artist dialogue",
         "zh": "文化奧運紀錄片《My Art, My Voice》　台法藝術家跨國對話"

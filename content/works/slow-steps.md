@@ -20,7 +20,7 @@
   },
   "description": {
     "en": "Through encounters and pauses along the way, the film observes how people make sense of the world before them—and how the journey changes the observer.",
-    "zh": "以個人視角記錄旅途中的相遇與停留，慢慢看見人如何理解眼前的世界，又如何在路上改變。"
+    "zh": "將Walking tour影像化，以在地人的主觀視角記錄每個街區獨特的個人編年史。"
   },
   "watchUrl": "",
   "videoEmbedUrl": "",
@@ -41,7 +41,7 @@
   },
   "posterAlt": {
     "en": "Torn-paper collage of three travel documentary portraits: a man at work, a scooter rider at sunset, and a man in profile",
-    "zh": "三幅撕紙拼貼的旅行紀錄片人物畫面：工作中的男子、夕陽下騎車的人，以及側面人物"
+    "zh": "撕紙拼貼的三幅旅行紀錄片畫面：工作中的男子、夕陽下騎車的人，以及一名男子的側面"
   },
   "posterFocalPoint": {"x": 0.5, "y": 0.5},
   "posterDimensions": {"width": 1920, "height": 1080},

@@ -1,0 +1,881 @@
+{
+  "schemaVersion": 1,
+  "batchId": "final-chinese-interface",
+  "baselineCommit": "eaab7c49acc949989b21a584d13b38d56960d334",
+  "sourceArtifacts": [
+    {
+      "name": "Hsin-Hsin-Yuan-Portfolio-Chinese-Interface-Manager-2026-08-09-reconciled-v3.xlsx",
+      "sha256": "ebc35ed3ec878e6a9f4eaafcf9e1a04529eb4fc7bc436b44a31a7fb64959c2f4"
+    }
+  ],
+  "localeScope": [
+    "en",
+    "zh"
+  ],
+  "priorityOrder": [
+    "P0",
+    "P1"
+  ],
+  "entries": [
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.heroTitle",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Hsin-Hsin Yuan"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "Hsin-Hsin Yuan",
+          "value": "袁欣欣"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.heroTitleLines[0]",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "HSIN-HSIN"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "HSIN-HSIN",
+          "value": "袁欣欣"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.heroTitleLines[1]",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "YUAN"
+        },
+        "zh": {
+          "op": "blank",
+          "expected": "YUAN"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.heroRoles[1]",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Writer"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "編劇",
+          "value": "雙語製作人"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.heroRoles[2]",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Producer"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "製作人",
+          "value": "編劇"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.heroRoles[3]",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Cross-Cultural Storyteller"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "跨文化敘事者",
+          "value": "剪輯"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.heroSubcopy",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "I work across arts, culture, and technology, from research and story development through directing and editing. I also provide bilingual field production in Taiwan for international teams."
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "我拍攝藝術、文化與科技題材，從前期研究、現場導演到剪輯，把複雜內容整理成清楚、有節奏的紀實故事；也協助跨國團隊在台灣完成雙語研究與現場製作。",
+          "value": "我從小就是個愛聽故事的人，所以長大後決定將不同的題材，用我的方式轉換成迷人的紀實故事"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.worksLabel",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Featured Works"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "近年代表作",
+          "value": "精選作品"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.watchShelfAria",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Selected moving-image works"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "代表影像作品",
+          "value": "精選影像作品"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.learnLabel",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Learn more"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "了解更多",
+          "value": "查看作品"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.comingLabel",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Coming 2026"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "2026 待播",
+          "value": "2026 即將播出"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.archiveTitle",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "FROM THE ARCHIVE"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "FROM THE ARCHIVE",
+          "value": "歷年作品"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.pressNotesTitle",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "PRESS"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "PRESS",
+          "value": "媒體報導"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.collabTitle",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Platforms & Collaborations"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "合作與平台",
+          "value": "合作單位與平台"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.contactForm.email",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Email"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "回覆信箱",
+          "value": "電子信箱"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.contactForm.message",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Message"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "訊息",
+          "value": "企劃與合作需求"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.contactForm.error",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Something went wrong. Please try again later."
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "送出時發生問題，請稍後再試。",
+          "value": "訊息未能送出，請稍後再試。"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/slow-steps.md",
+      "stableKey": "featured.slow-steps.description",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Through encounters and pauses along the way, the film observes how people make sense of the world before them—and how the journey changes the observer."
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "以個人視角記錄旅途中的相遇與停留，慢慢看見人如何理解眼前的世界，又如何在路上改變。",
+          "value": "將Walking tour影像化，以在地人的主觀視角記錄每個街區獨特的個人編年史。"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/tech-dreamers.md",
+      "stableKey": "featured.tech-dreamers.description",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "From AI to deep tech, the series goes inside Silicon Valley startups to follow founders as they define problems, test ideas, and bring technology to market."
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "從 AI 到深科技，鏡頭走進矽谷新創現場，記錄創辦人如何定義問題、反覆試驗，再把技術帶向市場。",
+          "value": "從 AI 到深科技，鏡頭走進矽谷新創現場，記錄創辦人創業過程中克服困難，把技術帶向市場。"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/tech-dreamers.md",
+      "stableKey": "featured.tech-dreamers.press[0].type",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Official page"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "官方節目頁",
+          "value": "官方頁面"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/tech-dreamers.md",
+      "stableKey": "featured.tech-dreamers.press[0].title",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Official program page"
+        },
+        "zh": {
+          "op": "blank",
+          "expected": "官方節目頁"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/my-art-my-voice.md",
+      "stableKey": "featured.my-art-my-voice.press[0].type",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Official page"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "官方節目頁",
+          "value": "官方頁面"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/my-art-my-voice.md",
+      "stableKey": "featured.my-art-my-voice.press[0].title",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Official program page"
+        },
+        "zh": {
+          "op": "blank",
+          "expected": "官方節目頁"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/my-art-my-voice.md",
+      "stableKey": "featured.my-art-my-voice.press[1].type",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Project press"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "專案報導",
+          "value": "報導"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/interior-spatial-brand-films.md",
+      "stableKey": "featured.interior-spatial-brand-films.title",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Design & Brand Films"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "室內設計與品牌影像",
+          "value": "幸福空間與品牌影像"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/interior-spatial-brand-films.md",
+      "stableKey": "featured.interior-spatial-brand-films.platform",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Gorgeous Space"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "Gorgeous Space / 幸福空間",
+          "value": "幸福空間"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/interior-spatial-brand-films.md",
+      "stableKey": "featured.interior-spatial-brand-films.watchLabel",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Watch selected reel"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "觀看精選短片",
+          "value": "觀看精選影片"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/interior-spatial-brand-films.md",
+      "stableKey": "featured.interior-spatial-brand-films.metrics[0].label",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "brand contexts"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "品牌合作情境",
+          "value": "品牌合作案例"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/top-gear-china-uk-special.md",
+      "stableKey": "featured.top-gear-china-uk-special.tagline",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "A cross-border factual-entertainment production filmed in the UK with the original Top Gear team."
+        },
+        "zh": {
+          "op": "blank",
+          "expected": "在英國拍攝，與原版 Top Gear 團隊完成跨國汽車節目製作。"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/top-gear-china-uk-special.md",
+      "stableKey": "featured.top-gear-china-uk-special.description",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Directed the UK episode of Top Gear China Season 2, leading the shoot in Britain and coordinating editorial and production requirements across Dragon TV, the Chinese production team, and the original Top Gear team."
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "擔任《巔峰拍檔》中國版第二季第五期「英國篇」導演，負責英國段落的內容與拍攝，並協調東方衛視、中國製作團隊與英國原版 Top Gear 團隊的製作需求。",
+          "value": "《巔峰拍檔》中國版第二季第五期「英國篇」導演，負責英國段落的內容與拍攝，並協調東方衛視、中國製作團隊與英國原版 Top Gear 團隊的製作需求。"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/top-gear-china-uk-special.md",
+      "stableKey": "featured.top-gear-china-uk-special.metricsContext",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Season 2 audience, reported across television and online"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "第二季播出表現（電視與線上）",
+          "value": "第二季播出數據（電視與線上）"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/top-gear-china-uk-special.md",
+      "stableKey": "featured.top-gear-china-uk-special.metrics[0].label",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "first five episodes / TV + online"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "前五集／電視＋線上",
+          "value": "前五集（電視＋線上）"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/top-gear-china-uk-special.md",
+      "stableKey": "featured.top-gear-china-uk-special.metrics[1].label",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "average weekly live audience"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "每週電視平均觀眾",
+          "value": "每週平均電視觀眾"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/top-gear-china-uk-special.md",
+      "stableKey": "featured.top-gear-china-uk-special.metrics[2].label",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "reported TV rating"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "履歷記載電視收視率",
+          "value": "電視收視率（依履歷資料）"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/ghost-hand-divine-car.md",
+      "stableKey": "archive.ghost-hand-divine-car.role",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Producer / Assistant Director / Writer"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "製片 / 副導演 / 編劇",
+          "value": "製片／副導演／編劇"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/ghost-hand-divine-car.md",
+      "stableKey": "archive.ghost-hand-divine-car.summary",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "A scripted online-film production shot in China; final public release materials are still being reconstructed."
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "2018 年於中國完成拍攝的網路電影製作；公開版本與最終上線資料仍在整理。",
+          "value": "2018 年在中國拍攝的網路電影；公開版本與正式上線資訊仍在整理中。"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/three-minute-micro-drama.md",
+      "stableKey": "archive.three-minute-micro-drama.role",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Planner / Producer / Writer"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "策劃 / 製作人 / 編劇",
+          "value": "企劃／製作人／編劇"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/three-minute-micro-drama.md",
+      "stableKey": "archive.three-minute-micro-drama.summary",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Short-form web drama work across food, fantasy, comedy, suspense, and youth romance formats."
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "涵蓋美食、奇幻、喜劇、懸疑與青春愛情的網路短劇系列。",
+          "value": "涵蓋美食、奇幻、喜劇、懸疑與青春愛情等類型的網路短劇系列。"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/heart-of-steel.md",
+      "stableKey": "archive.heart-of-steel.watchLabel",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Watch official trailer"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "觀看官方預告",
+          "value": "觀看官方預告片"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/lying-game.md",
+      "stableKey": "archive.lying-game.metrics[1].label",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "grant equivalent"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "補助約當金額",
+          "value": "補助折合金額"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/overclocking.md",
+      "stableKey": "archive.overclocking.title",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Overclocking"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "Overclocking 科學節目",
+          "value": "土炮特攻隊"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/overclocking.md",
+      "stableKey": "archive.overclocking.role",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Writer / Producer"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "共同主創 / 編劇 / 製作人",
+          "value": "共同創作／編劇／製作人"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/overclocking.md",
+      "stableKey": "archive.overclocking.watchLabel",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Watch public program"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "觀看公開節目",
+          "value": "觀看節目"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/overclocking.md",
+      "stableKey": "archive.overclocking.metrics[1].label",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "South India viewers"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "印度南部觀眾",
+          "value": "印度南部觀眾人數"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/overclocking.md",
+      "stableKey": "archive.overclocking.metrics[2].label",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "reported rating"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "地區收視表現",
+          "value": "當地收視率"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.heroMedia.alt",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Hsin-Hsin Yuan working on a laptop in a bright white studio"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "袁欣欣在明亮的白色工作空間使用筆記型電腦",
+          "value": "袁欣欣坐在明亮的白色工作室裡使用筆記型電腦"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/slow-steps.md",
+      "stableKey": "featured.slow-steps.posterAlt",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Torn-paper collage of three travel documentary portraits: a man at work, a scooter rider at sunset, and a man in profile"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "三幅撕紙拼貼的旅行紀錄片人物畫面：工作中的男子、夕陽下騎車的人，以及側面人物",
+          "value": "撕紙拼貼的三幅旅行紀錄片畫面：工作中的男子、夕陽下騎車的人，以及一名男子的側面"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/tech-dreamers.md",
+      "stableKey": "featured.tech-dreamers.posterAlt",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Tech Dreamers official series artwork"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "Tech Dreamers 官方系列主視覺",
+          "value": "《Tech Dreamers》系列主視覺"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/ghost-hand-divine-car.md",
+      "stableKey": "archive.ghost-hand-divine-car.imageAlt",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Two lead characters pose in a racing workshop, one holding a white helmet"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "賽車工作室裡，兩位主要角色合影，其中一人手持白色安全帽",
+          "value": "賽車工作室內，兩名主要角色合影，其中一人拿著白色安全帽"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/three-minute-micro-drama.md",
+      "stableKey": "archive.three-minute-micro-drama.imageAlt",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Close-up of a long-haired woman with pink lipstick beside a convenience-store display"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "便利商店貨架旁，一名長髮女子擦著粉紅色口紅的近景",
+          "value": "便利商店貨架旁，一名擦著粉紅色口紅的長髮女子臉部近景"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/heart-of-steel.md",
+      "stableKey": "archive.heart-of-steel.imageAlt",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Heart of Steel series poster featuring the principal cast"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "《鋼鐵之心》主要演員系列海報",
+          "value": "《鋼鐵之心》主要演員海報"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/lying-game.md",
+      "stableKey": "archive.lying-game.imageAlt",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Lying Game series poster featuring the principal cast"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "《謊言遊戲》主要演員系列海報",
+          "value": "《謊言遊戲》主要演員海報"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/archive/overclocking.md",
+      "stableKey": "archive.overclocking.imageAlt",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Crew gathered around an illuminated Overclocking installation during a night shoot"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "夜間拍攝現場，工作人員圍繞發光的 Overclocking 裝置",
+          "value": "夜間拍攝現場，工作人員圍在發光的 Overclocking 裝置旁"
+        }
+      }
+    },
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "system.nav.primaryAria",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Primary"
+        },
+        "zh": {
+          "op": "replace",
+          "expected": "Primary",
+          "value": "主要導覽"
+        }
+      }
+    }
+  ]
+}

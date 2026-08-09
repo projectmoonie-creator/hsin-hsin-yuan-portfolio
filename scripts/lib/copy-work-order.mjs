@@ -389,6 +389,42 @@ export function planCopyWorkOrder({ repoRoot, workOrder, priority }) {
   };
 }
 
+export function verifyCopyWorkOrderResult({ repoRoot, workOrder }) {
+  assertNonemptyString(repoRoot, "repoRoot");
+  const validated = validateCopyWorkOrder(workOrder);
+  const sources = readSources(repoRoot, validated.entries);
+  let matches = 0;
+
+  for (const entry of validated.entries) {
+    const record = sources.get(entry.sourceFile);
+    for (const locale of validated.localeScope) {
+      const change = entry.changes[locale];
+      const target = targetTokens(entry, locale, record.parsed);
+      const current = resolveValue(target.root, target.tokens, entry.stableKey, locale);
+      const expected = change.op === "replace"
+        ? change.value
+        : change.op === "blank"
+          ? ""
+          : change.expected;
+      if (current !== expected) {
+        fail(`${entry.stableKey}.${locale} does not match the expected final value`);
+      }
+      matches += 1;
+    }
+  }
+
+  return {
+    schemaVersion: 1,
+    mode: "verify",
+    entries: validated.entries.length,
+    fields: validated.entries.length * validated.localeScope.length,
+    matches,
+    conflicts: 0,
+    files: [...new Set(validated.entries.map((entry) => entry.sourceFile))].sort(),
+    writesFiles: false,
+  };
+}
+
 export function applyCopyWorkOrder(options) {
   const plan = planCopyWorkOrder(options);
   if (options.write !== true) return plan.summary;

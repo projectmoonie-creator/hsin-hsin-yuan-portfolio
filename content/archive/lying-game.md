@@ -15,7 +15,7 @@
   "posterImage": "https://upload.wikimedia.org/wikipedia/zh/7/7c/%E8%AC%8A%E8%A8%80%E9%81%8A%E6%88%B2.jpg",
   "imageAlt": {
     "en": "Lying Game series poster featuring the principal cast",
-    "zh": "《謊言遊戲》主要演員系列海報"
+    "zh": "《謊言遊戲》主要演員海報"
   },
   "posterFit": "contain",
   "posterRightsStatus": "public-link-only",
@@ -34,7 +34,7 @@
   "officialSourceStatus": "public-http-only",
   "metrics": [
     {"value": "NT$6M", "label": {"en": "HD television grant", "zh": "高畫質電視節目補助"}},
-    {"value": "US$180K", "label": {"en": "grant equivalent", "zh": "補助約當金額"}}
+    {"value": "US$180K", "label": {"en": "grant equivalent", "zh": "補助折合金額"}}
   ],
   "sourceNote": "CV cross-check; public Wikipedia and the production-company page both list 袁欣欣 as screenwriter; production-company page is currently HTTP-only; docs/source-materials/early-works-public-video-inventory.md"
 }

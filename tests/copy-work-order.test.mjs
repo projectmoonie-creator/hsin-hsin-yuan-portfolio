@@ -9,6 +9,7 @@ import {
   applyCopyWorkOrder,
   planCopyWorkOrder,
   validateCopyWorkOrder,
+  verifyCopyWorkOrderResult,
 } from "../scripts/lib/copy-work-order.mjs";
 
 const sha256 = "a".repeat(64);
@@ -351,6 +352,40 @@ test("copy work order writes only the intended scalar tokens and enforces P0 bef
   }
 });
 
+test("copy work order verifies every final locale value after application", () => {
+  const fixture = writeFixtureRepo();
+  try {
+    applyCopyWorkOrder({
+      repoRoot: fixture.root,
+      workOrder: workOrder(),
+      priority: "P0",
+      write: true,
+    });
+    applyCopyWorkOrder({
+      repoRoot: fixture.root,
+      workOrder: workOrder(),
+      priority: "P1",
+      write: true,
+    });
+
+    assert.deepEqual(
+      verifyCopyWorkOrderResult({ repoRoot: fixture.root, workOrder: workOrder() }),
+      {
+        schemaVersion: 1,
+        mode: "verify",
+        entries: 2,
+        fields: 4,
+        matches: 4,
+        conflicts: 0,
+        files: ["content/works/sample-work.md", "data/site.json"],
+        writesFiles: false,
+      },
+    );
+  } finally {
+    rmSync(fixture.root, { recursive: true, force: true });
+  }
+});
+
 test("copy work order rolls every target back after an injected later-file failure", () => {
   const fixture = writeFixtureRepo();
   try {
@@ -457,4 +492,85 @@ test("intentional Chinese blank work order preserves six stable fields and rejec
     () => applyCopyWorkOrder({ repoRoot: projectRoot, workOrder: order, priority: "P0" }),
     /does not match the expected current value/,
   );
+});
+
+test("final Chinese interface work order preserves all 54 Excel differences with English keeps", () => {
+  const path = join(
+    projectRoot,
+    "editorial/copy-work-orders/2026-08-09-final-chinese-interface.json",
+  );
+  const order = validateCopyWorkOrder(JSON.parse(readFileSync(path, "utf8")));
+  const changes = order.entries.flatMap((entry) => Object.values(entry.changes));
+  const chineseChanges = order.entries.map((entry) => entry.changes.zh);
+
+  assert.equal(order.baselineCommit, "eaab7c49acc949989b21a584d13b38d56960d334");
+  assert.deepEqual(order.sourceArtifacts, [
+    {
+      name: "Hsin-Hsin-Yuan-Portfolio-Chinese-Interface-Manager-2026-08-09-reconciled-v3.xlsx",
+      sha256: "ebc35ed3ec878e6a9f4eaafcf9e1a04529eb4fc7bc436b44a31a7fb64959c2f4",
+    },
+  ]);
+  assert.equal(order.entries.length, 54);
+  assert.equal(order.entries.filter((entry) => entry.priority === "P0").length, 19);
+  assert.equal(order.entries.filter((entry) => entry.priority === "P1").length, 35);
+  assert.equal(changes.filter((change) => change.op === "keep").length, 54);
+  assert.equal(chineseChanges.filter((change) => change.op === "replace").length, 50);
+  assert.equal(chineseChanges.filter((change) => change.op === "blank").length, 4);
+  assert.equal(order.entries.every((entry) => entry.changes.en.op === "keep"), true);
+  assert.deepEqual(
+    order.entries.filter((entry) => entry.changes.zh.op === "blank").map((entry) => entry.stableKey),
+    [
+      "site.heroTitleLines[1]",
+      "featured.tech-dreamers.press[0].title",
+      "featured.my-art-my-voice.press[0].title",
+      "featured.top-gear-china-uk-special.tagline",
+    ],
+  );
+  assert.deepEqual(
+    [...new Set(order.entries.map((entry) => entry.sourceFile))].sort(),
+    [
+      "content/archive/ghost-hand-divine-car.md",
+      "content/archive/heart-of-steel.md",
+      "content/archive/lying-game.md",
+      "content/archive/overclocking.md",
+      "content/archive/three-minute-micro-drama.md",
+      "content/works/interior-spatial-brand-films.md",
+      "content/works/my-art-my-voice.md",
+      "content/works/slow-steps.md",
+      "content/works/tech-dreamers.md",
+      "content/works/top-gear-china-uk-special.md",
+      "data/site.json",
+    ],
+  );
+});
+
+test("repository matches every final Chinese interface work-order field", () => {
+  const path = join(
+    projectRoot,
+    "editorial/copy-work-orders/2026-08-09-final-chinese-interface.json",
+  );
+  const order = JSON.parse(readFileSync(path, "utf8"));
+
+  assert.deepEqual(verifyCopyWorkOrderResult({ repoRoot: projectRoot, workOrder: order }), {
+    schemaVersion: 1,
+    mode: "verify",
+    entries: 54,
+    fields: 108,
+    matches: 108,
+    conflicts: 0,
+    files: [
+      "content/archive/ghost-hand-divine-car.md",
+      "content/archive/heart-of-steel.md",
+      "content/archive/lying-game.md",
+      "content/archive/overclocking.md",
+      "content/archive/three-minute-micro-drama.md",
+      "content/works/interior-spatial-brand-films.md",
+      "content/works/my-art-my-voice.md",
+      "content/works/slow-steps.md",
+      "content/works/tech-dreamers.md",
+      "content/works/top-gear-china-uk-special.md",
+      "data/site.json",
+    ],
+    writesFiles: false,
+  });
 });

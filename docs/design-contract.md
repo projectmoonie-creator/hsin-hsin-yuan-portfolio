@@ -44,7 +44,10 @@ The public section order is fixed:
 8. Contact
 
 English and Chinese use the same structure and component order. Copy may wrap
-differently, but a language must not silently gain or lose a public module.
+differently. An approved exact-empty localized value retains its stable source
+field but omits that value's complete rendered element, so the next sibling
+flows upward without an empty spacer; this locale-specific omission does not
+remove the owning public module.
 
 ## Field classes
 
@@ -226,6 +229,10 @@ Work Press and global Press are different schemas.
   type, title, source, thumbnail, link, and audit metadata.
 - Required: bilingual type/title, source, canonical URL, title source, image
   source, and metadata checked date.
+- A localized title may be an approved exact-empty string. The stable title
+  field remains in canonical data, while that locale emits no `<strong>` title
+  element and leaves no visual gap; the type, source, thumbnail, destination,
+  and audit metadata remain intact.
 - Optional: verified source thumbnail.
 - It belongs inside its Featured Work and may use a verified image.
 

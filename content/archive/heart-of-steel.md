@@ -15,7 +15,7 @@
   "posterImage": "https://upload.wikimedia.org/wikipedia/zh/4/46/%E9%8B%BC%E9%90%B5%E4%B9%8B%E5%BF%83.jpg",
   "imageAlt": {
     "en": "Heart of Steel series poster featuring the principal cast",
-    "zh": "《鋼鐵之心》主要演員系列海報"
+    "zh": "《鋼鐵之心》主要演員海報"
   },
   "posterFit": "contain",
   "posterRightsStatus": "public-link-only",
@@ -23,7 +23,7 @@
   "watchUrl": "https://www.youtube.com/watch?v=6g9YLv30DyU",
   "watchLabel": {
     "en": "Watch official trailer",
-    "zh": "觀看官方預告"
+    "zh": "觀看官方預告片"
   },
   "creditUrl": "https://zh.wikipedia.org/zh-tw/%E9%8B%BC%E9%90%B5%E4%B9%8B%E5%BF%83",
   "creditLabel": {

@@ -4,7 +4,7 @@
     "src": "/assets/portfolio/hsin-working-white-space.jpg",
     "alt": {
       "en": "Hsin-Hsin Yuan working on a laptop in a bright white studio",
-      "zh": "袁欣欣在明亮的白色工作空間使用筆記型電腦"
+      "zh": "袁欣欣坐在明亮的白色工作室裡使用筆記型電腦"
     },
     "dimensions": {"width": 1920, "height": 1440},
     "focalPoint": {
@@ -64,24 +64,24 @@
     "name": "袁欣欣",
     "navName": "袁欣欣 / HSIN-HSIN YUAN",
     "navMobileName": "袁欣欣",
-    "navPrimaryAria": "Primary",
+    "navPrimaryAria": "主要導覽",
     "heroEyebrow": "立足台灣，參與跨國製作",
-    "heroTitle": "Hsin-Hsin Yuan",
-    "heroTitleLines": ["HSIN-HSIN", "YUAN"],
+    "heroTitle": "袁欣欣",
+    "heroTitleLines": ["袁欣欣", ""],
     "heroRoleLines": ["紀錄片導演 / 雙語製作人", "藝術 / 文化 / 科技"],
-    "heroRoles": ["紀錄片導演", "編劇", "製作人", "跨文化敘事者"],
-    "heroSubcopy": "我拍攝藝術、文化與科技題材，從前期研究、現場導演到剪輯，把複雜內容整理成清楚、有節奏的紀實故事；也協助跨國團隊在台灣完成雙語研究與現場製作。",
+    "heroRoles": ["紀錄片導演", "雙語製作人", "編劇", "剪輯"],
+    "heroSubcopy": "我從小就是個愛聽故事的人，所以長大後決定將不同的題材，用我的方式轉換成迷人的紀實故事",
     "availabilityLabel": "合作方式",
     "availabilityIntro": "可以從前期研究與敘事開發加入，也可以負責導演與剪輯。跨國團隊若在台灣拍攝，我能處理雙語溝通、敘事判斷與現場製作。",
     "availability": ["敘事開發", "導演", "剪輯", "研究與採訪", "雙語製作", ""],
-    "worksLabel": "近年代表作",
+    "worksLabel": "精選作品",
     "worksHint": "",
-    "watchShelfAria": "代表影像作品",
-    "learnLabel": "了解更多",
-    "comingLabel": "2026 待播",
-    "archiveTitle": "FROM THE ARCHIVE",
-    "pressNotesTitle": "PRESS",
-    "collabTitle": "合作與平台",
+    "watchShelfAria": "精選影像作品",
+    "learnLabel": "查看作品",
+    "comingLabel": "2026 即將播出",
+    "archiveTitle": "歷年作品",
+    "pressNotesTitle": "媒體報導",
+    "collabTitle": "合作單位與平台",
     "contactTitleLead": "一起把故事",
     "contactTitleBridge": "",
     "contactTitleAccent": "做出來。",
@@ -89,13 +89,13 @@
     "contactCta": "送出洽詢",
     "contactForm": {
       "name": "姓名",
-      "email": "回覆信箱",
+      "email": "電子信箱",
       "projectType": "合作類型",
-      "message": "訊息",
+      "message": "企劃與合作需求",
       "link": "參考連結（選填）",
       "submit": "送出洽詢",
       "success": "謝謝，訊息已送出。",
-      "error": "送出時發生問題，請稍後再試。"
+      "error": "訊息未能送出，請稍後再試。"
     },
     "contactLinks": [
       {"label": "GitHub", "href": "https://github.com/projectmoonie-creator"}

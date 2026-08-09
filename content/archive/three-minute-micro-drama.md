@@ -9,13 +9,13 @@
   },
   "role": {
     "en": "Planner / Producer / Writer",
-    "zh": "策劃 / 製作人 / 編劇"
+    "zh": "企劃／製作人／編劇"
   },
   "platform": "Chinese online platforms",
   "posterImage": "/assets/showreel/three-minute-micro-drama-card-reel-poster.webp",
   "imageAlt": {
     "en": "Close-up of a long-haired woman with pink lipstick beside a convenience-store display",
-    "zh": "便利商店貨架旁，一名長髮女子擦著粉紅色口紅的近景"
+    "zh": "便利商店貨架旁，一名擦著粉紅色口紅的長髮女子臉部近景"
   },
   "posterRightsStatus": "user-supplied-local-source",
   "posterDimensions": {"width": 1280, "height": 720},
@@ -28,7 +28,7 @@
   "cardReelRightsStatus": "user-supplied-local-source",
   "summary": {
     "en": "Short-form web drama work across food, fantasy, comedy, suspense, and youth romance formats.",
-    "zh": "涵蓋美食、奇幻、喜劇、懸疑與青春愛情的網路短劇系列。"
+    "zh": "涵蓋美食、奇幻、喜劇、懸疑與青春愛情等類型的網路短劇系列。"
   },
   "watchUrl": "https://www.youtube.com/playlist?list=PLDTnN3czXyG8",
   "watchLabel": {

@@ -505,7 +505,7 @@ export function normalizeHeroMedia(source) {
 export function normalizeWorkPressItem(source) {
   const kind = "Work Press item";
   requireLocalized(source, "type", kind);
-  requireLocalized(source, "title", kind);
+  requireLocalized(source, "title", kind, { allowBlank: true });
   requireLocalizable(source, "source", kind);
   for (const field of ["canonicalUrl", "titleSource", "imageSource", "metadataCheckedAt"]) {
     requireField(source, field, kind);

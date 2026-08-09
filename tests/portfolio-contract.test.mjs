@@ -579,6 +579,32 @@ test("Archive and Press normalize to separate named component families", () => {
   assert.equal(globalPress.presentation.cardVariant, "text-note");
 });
 
+test("Work Press retains its bilingual title field while one locale is intentionally blank", () => {
+  const normalized = normalizeWorkPressItem({
+    type: localized("Official page", "官方頁面"),
+    title: localized("Official program page", ""),
+    source: "TaiwanPlus",
+    url: "https://example.test/program",
+    canonicalUrl: "https://example.test/program",
+    titleSource: "official platform page",
+    imageSource: "official platform artwork",
+    metadataCheckedAt: "2026-08-09",
+  });
+
+  assert.deepEqual(normalized.title, { en: "Official program page", zh: "" });
+  assert.deepEqual(normalized.contract.public.title, {
+    en: "Official program page",
+    zh: "",
+  });
+  assert.throws(
+    () => normalizeWorkPressItem({
+      ...normalized,
+      title: { en: "Official program page", zh: "   " },
+    }),
+    /bilingual title/,
+  );
+});
+
 test("collection validation rejects duplicate identity and order", () => {
   const work = featured();
   const archive = {

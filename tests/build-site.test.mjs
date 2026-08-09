@@ -48,7 +48,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     works[3].description.en,
     "For Gorgeous Space and home brands, I directed and edited films on residential design, renovation, and product collaborations—bringing design ideas, everyday use, and the people who live there into the same story.",
   );
-  assert.equal(works[3].title.zh, "室內設計與品牌影像");
+  assert.equal(works[3].title.zh, "幸福空間與品牌影像");
   assert.equal(
     works[3].description.zh,
     "為幸福空間與居家品牌執導、剪輯住宅設計、老屋翻新與產品合作內容，把設計概念、使用方式與屋主的生活放進同一個故事裡。",
@@ -85,10 +85,10 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(Object.hasOwn(works[3], "statusLabel"), false);
   assert.deepEqual(works[3].watchLabel, {
     en: "Watch selected reel",
-    zh: "觀看精選短片",
+    zh: "觀看精選影片",
   });
   assert.deepEqual(works[3].metrics, [
-    { value: "LG / Samsung", label: { en: "brand contexts", zh: "品牌合作情境" } },
+    { value: "LG / Samsung", label: { en: "brand contexts", zh: "品牌合作案例" } },
   ]);
   assert.equal(
     works[3].watchUrl,
@@ -135,8 +135,9 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   );
   assert.equal(
     works[5].description.zh,
-    "擔任《巔峰拍檔》中國版第二季第五期「英國篇」導演，負責英國段落的內容與拍攝，並協調東方衛視、中國製作團隊與英國原版 Top Gear 團隊的製作需求。",
+    "《巔峰拍檔》中國版第二季第五期「英國篇」導演，負責英國段落的內容與拍攝，並協調東方衛視、中國製作團隊與英國原版 Top Gear 團隊的製作需求。",
   );
+  assert.equal(works[5].tagline.zh, "");
   assert.equal(works[5].featuredReelMode, "after-hold");
   assert.equal(
     works[5].featuredReelUrl,
@@ -149,7 +150,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   );
   assert.deepEqual(works[5].metricsContext, {
     en: "Season 2 audience, reported across television and online",
-    zh: "第二季播出表現（電視與線上）",
+    zh: "第二季播出數據（電視與線上）",
   });
   assert.deepEqual(
     works[5].metrics.map((metric) => [metric.value, metric.label.en]),
@@ -158,6 +159,15 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
       ["9M", "average weekly live audience"],
       ["0.81", "reported TV rating"],
       ["#1", "national time slot / four weeks"],
+    ],
+  );
+  assert.deepEqual(
+    works[5].metrics.map((metric) => metric.label.zh),
+    [
+      "前五集（電視＋線上）",
+      "每週平均電視觀眾",
+      "電視收視率（依履歷資料）",
+      "連續四週全國同時段第一",
     ],
   );
   assert.equal(works[0].posterImage, "/assets/portfolio/slow-steps-poster.webp");
@@ -180,8 +190,8 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[1].watchLoopTarget, "watch");
   assert.equal(Object.hasOwn(works[1], "mediaWatchUrl"), false);
   const techOfficialEntry = works[1].press[0];
-  assert.deepEqual(techOfficialEntry.type, { en: "Official page", zh: "官方節目頁" });
-  assert.deepEqual(techOfficialEntry.title, { en: "Official program page", zh: "官方節目頁" });
+  assert.deepEqual(techOfficialEntry.type, { en: "Official page", zh: "官方頁面" });
+  assert.deepEqual(techOfficialEntry.title, { en: "Official program page", zh: "" });
   assert.equal(techOfficialEntry.source, "TaiwanPlus");
   assert.equal(techOfficialEntry.url, works[1].watchUrl);
   assert.equal(techOfficialEntry.canonicalUrl, works[1].watchUrl);
@@ -206,22 +216,22 @@ test("Featured copy preserves approved English while producer-blank Chinese tagl
   const approved = [
     ["slow-steps", "role", "Director / Editor / Producer", "導演／剪輯／製作人"],
     ["slow-steps", "tagline", "A quiet travel documentary with a personal point of view.", ""],
-    ["slow-steps", "description", "Through encounters and pauses along the way, the film observes how people make sense of the world before them—and how the journey changes the observer.", "以個人視角記錄旅途中的相遇與停留，慢慢看見人如何理解眼前的世界，又如何在路上改變。"],
+    ["slow-steps", "description", "Through encounters and pauses along the way, the film observes how people make sense of the world before them—and how the journey changes the observer.", "將Walking tour影像化，以在地人的主觀視角記錄每個街區獨特的個人編年史。"],
     ["tech-dreamers", "role", "Director / Editor / Producer", "導演／剪輯／製作人"],
     ["tech-dreamers", "tagline", "Following Taiwanese founders as an idea takes shape, one decision at a time.", ""],
-    ["tech-dreamers", "description", "From AI to deep tech, the series goes inside Silicon Valley startups to follow founders as they define problems, test ideas, and bring technology to market.", "從 AI 到深科技，鏡頭走進矽谷新創現場，記錄創辦人如何定義問題、反覆試驗，再把技術帶向市場。"],
+    ["tech-dreamers", "description", "From AI to deep tech, the series goes inside Silicon Valley startups to follow founders as they define problems, test ideas, and bring technology to market.", "從 AI 到深科技，鏡頭走進矽谷新創現場，記錄創辦人創業過程中克服困難，把技術帶向市場。"],
     ["my-art-my-voice", "role", "Lead Documentary Director", "紀錄片總導演"],
     ["my-art-my-voice", "tagline", "Taiwanese artists take the stage in Paris—and speak about their work and who they are.", ""],
     ["my-art-my-voice", "description", "Filmed at the Taiwan Pavilion during the Paris Cultural Olympiad, the documentary moves between performance and backstage conversations about art, freedom, and identity.", "紀錄巴黎文化奧運台灣館的演出與幕後，也聽藝術家談創作、自由與身分。"],
-    ["interior-spatial-brand-films", "title", "Design & Brand Films", "室內設計與品牌影像"],
+    ["interior-spatial-brand-films", "title", "Design & Brand Films", "幸福空間與品牌影像"],
     ["interior-spatial-brand-films", "role", "Director / Editor", "導演／剪輯"],
     ["interior-spatial-brand-films", "tagline", "Films about design—and the way a home is actually lived in.", ""],
     ["interior-spatial-brand-films", "description", "For Gorgeous Space and home brands, I directed and edited films on residential design, renovation, and product collaborations—bringing design ideas, everyday use, and the people who live there into the same story.", "為幸福空間與居家品牌執導、剪輯住宅設計、老屋翻新與產品合作內容，把設計概念、使用方式與屋主的生活放進同一個故事裡。"],
     ["pts-taigi-bus", "role", "Episode Development / Writer", "單集企劃／企編"],
     ["pts-taigi-bus", "tagline", "One bus route at a time, into the everyday life of Taiwan.", ""],
     ["pts-taigi-bus", "description", "I developed and wrote individual episodes for this PTS Taigi travel series, using local bus routes to connect memory, food, markets, and the people along the way.", "擔任公視台語台行腳節目的單集企劃與企編，以公車路線串起地方記憶、飲食、市集，以及一路上遇見的人。"],
-    ["top-gear-china-uk-special", "tagline", "A cross-border factual-entertainment production filmed in the UK with the original Top Gear team.", "在英國拍攝，與原版 Top Gear 團隊完成跨國汽車節目製作。"],
-    ["top-gear-china-uk-special", "description", "Directed the UK episode of Top Gear China Season 2, leading the shoot in Britain and coordinating editorial and production requirements across Dragon TV, the Chinese production team, and the original Top Gear team.", "擔任《巔峰拍檔》中國版第二季第五期「英國篇」導演，負責英國段落的內容與拍攝，並協調東方衛視、中國製作團隊與英國原版 Top Gear 團隊的製作需求。"],
+    ["top-gear-china-uk-special", "tagline", "A cross-border factual-entertainment production filmed in the UK with the original Top Gear team.", ""],
+    ["top-gear-china-uk-special", "description", "Directed the UK episode of Top Gear China Season 2, leading the shoot in Britain and coordinating editorial and production requirements across Dragon TV, the Chinese production team, and the original Top Gear team.", "《巔峰拍檔》中國版第二季第五期「英國篇」導演，負責英國段落的內容與拍攝，並協調東方衛視、中國製作團隊與英國原版 Top Gear 團隊的製作需求。"],
   ];
 
   assert.equal(approved.length, 18);
@@ -241,6 +251,7 @@ test("intentional Chinese blanks keep source positions but emit no empty DOM or 
     "my-art-my-voice",
     "interior-spatial-brand-films",
     "pts-taigi-bus",
+    "top-gear-china-uk-special",
   ];
 
   assert.equal(loaded.site.en.availability.length, 6);
@@ -268,12 +279,30 @@ test("intentional Chinese blanks keep source positions but emit no empty DOM or 
   assert.equal((enAvailability?.match(/<span>/g) || []).length, 6);
   assert.equal((zhAvailability?.match(/<span>/g) || []).length, 5);
   assert.equal((en.match(/class="work-tagline"/g) || []).length, 6);
-  assert.equal((zh.match(/class="work-tagline"/g) || []).length, 1);
+  assert.equal((zh.match(/class="work-tagline"/g) || []).length, 0);
   assert.equal((en.match(/class="watch-loop-tagline"/g) || []).length, 6);
-  assert.equal((zh.match(/class="watch-loop-tagline"/g) || []).length, 1);
+  assert.equal((zh.match(/class="watch-loop-tagline"/g) || []).length, 0);
   assert.doesNotMatch(zh, /<p class="work-tagline">\s*<\/p>/);
   assert.doesNotMatch(zh, /<span class="watch-loop-tagline">\s*<\/span>/);
   assert.doesNotMatch(zhAvailability || "", /<span>\s*<\/span>/);
+});
+
+test("locale-specific Hero and Work Press blanks omit complete elements without changing English", () => {
+  const loaded = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  loaded.site.zh.heroTitle = "袁欣欣";
+  loaded.site.zh.heroTitleLines = ["袁欣欣", ""];
+  works.find((work) => work.slug === "tech-dreamers").press[0].title.zh = "";
+  works.find((work) => work.slug === "my-art-my-voice").press[0].title.zh = "";
+
+  const en = renderPage({ lang: "en", site: loaded, works });
+  const zh = renderPage({ lang: "zh", site: loaded, works });
+
+  assert.match(en, /<h1 aria-label="Hsin-Hsin Yuan"><span>HSIN-HSIN<\/span><span>YUAN<\/span><\/h1>/);
+  assert.match(zh, /<h1 aria-label="袁欣欣"><span>袁欣欣<\/span><\/h1>/);
+  assert.equal((en.match(/<strong>Official program page<\/strong>/g) || []).length, 2);
+  assert.equal((zh.match(/<strong>\s*<\/strong>/g) || []).length, 0);
+  assert.equal((zh.match(/<span class="press-preview-type">官方頁面<\/span>/g) || []).length, 2);
 });
 
 test("loadSiteData returns one normalized collaboration collection", () => {
@@ -335,7 +364,7 @@ test("site copy uses the approved bilingual Taiwan positioning", () => {
     metaDescription: "袁欣欣是台灣紀錄片導演與雙語製作人，專長藝術、文化、科技題材，以及需要台灣在地協作的跨國紀實製作。",
     heroEyebrow: "立足台灣，參與跨國製作",
     heroRoleLines: ["紀錄片導演 / 雙語製作人", "藝術 / 文化 / 科技"],
-    heroSubcopy: "我拍攝藝術、文化與科技題材，從前期研究、現場導演到剪輯，把複雜內容整理成清楚、有節奏的紀實故事；也協助跨國團隊在台灣完成雙語研究與現場製作。",
+    heroSubcopy: "我從小就是個愛聽故事的人，所以長大後決定將不同的題材，用我的方式轉換成迷人的紀實故事",
     availabilityLabel: "合作方式",
     availabilityIntro: "可以從前期研究與敘事開發加入，也可以負責導演與剪輯。跨國團隊若在台灣拍攝，我能處理雙語溝通、敘事判斷與現場製作。",
     availability: ["敘事開發", "導演", "剪輯", "研究與採訪", "雙語製作", ""],
@@ -650,7 +679,7 @@ test("global press notes render as a low-priority text-only section after Archiv
     pressSection,
     /href="https:\/\/www\.facebook\.com\/watch\/\?v=257310076279164"[^>]*data-metadata-checked-at="2026-08-03"/,
   );
-  assert.match(zh, />PRESS</);
+  assert.match(zh, />媒體報導</);
   assert.match(zh, /訪談/);
   assert.match(zh, /非常木蘭/);
   assert.match(zh, /第 28 屆女性影展選片指南/);
@@ -949,7 +978,7 @@ test("Ghost Hand archive data uses the approved still slideshow package", () => 
   assert.deepEqual(item.posterDimensions, { width: 1280, height: 720 });
   assert.equal(item.posterSourceTimecode, undefined);
   assert.match(item.imageAlt.en, /two lead characters/i);
-  assert.match(item.imageAlt.zh, /兩位主要角色/);
+  assert.match(item.imageAlt.zh, /兩名主要角色/);
 });
 
 test("Overclocking reel package records the approved six-cut local-source edit", () => {
@@ -1111,7 +1140,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /<div class="hero-media hero-media--slow-push"[^>]*data-hero-media-id="site\.hero"[^>]*role="img"/);
   assert.doesNotMatch(html, /id="showreel"/);
   assert.match(html, /aria-label="Hsin-Hsin Yuan working on a laptop in a bright white studio"/);
-  assert.match(zhHtml, /aria-label="袁欣欣在明亮的白色工作空間使用筆記型電腦"/);
+  assert.match(zhHtml, /aria-label="袁欣欣坐在明亮的白色工作室裡使用筆記型電腦"/);
   assert.match(html, /data-hero-width="1920" data-hero-height="1440"/);
   assert.match(html, /data-hero-motion="slow-push"/);
   assert.match(html, /--hero-image: url\(&quot;\/assets\/portfolio\/hsin-working-white-space\.jpg&quot;\)/);
@@ -1375,8 +1404,8 @@ test("work Press keeps entry labels but hides its group heading", () => {
   );
   assert.equal(hasLocalizedPressType(en, "Press &amp; Interviews", "Official page"), true);
   assert.equal(hasLocalizedPressType(en, "Press &amp; Interviews", "Project press"), true);
-  assert.equal(hasLocalizedPressType(zh, "媒體報導與訪談", "官方節目頁"), true);
-  assert.equal(hasLocalizedPressType(zh, "媒體報導與訪談", "專案報導"), true);
+  assert.equal(hasLocalizedPressType(zh, "媒體報導與訪談", "官方頁面"), true);
+  assert.equal(hasLocalizedPressType(zh, "媒體報導與訪談", "報導"), true);
   assert.match(css, /\.press-preview \{/);
   assert.doesNotMatch(css, /\.press-preview-title/);
 });
@@ -1426,13 +1455,14 @@ test("Tech Dreamers repeats its canonical TaiwanPlus destination as an audited o
     /<article class="work-panel" id="tech-dreamers">[\s\S]*?<\/article>/,
   )?.[0];
   const techOfficialCardZh = techPanelZh?.match(
-    /<a class="press-preview-card" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers"[^>]*>[\s\S]*?官方節目頁[\s\S]*?<\/a>/,
+    /<a class="press-preview-card" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers"[^>]*>[\s\S]*?官方頁面[\s\S]*?<\/a>/,
   )?.[0];
 
   assert.ok(techPanel);
   assert.ok(techOfficialCard);
   assert.ok(techPanelZh);
   assert.ok(techOfficialCardZh);
+  assert.doesNotMatch(techOfficialCardZh, /<strong>/);
 });
 
 test("Design title propagates to the English screening-strip card", () => {
@@ -1546,7 +1576,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /<span class="brand-desktop">袁欣欣 \/ HSIN-HSIN YUAN<\/span>/);
   assert.match(zh, /<span class="brand-mobile">袁欣欣<\/span>/);
   assert.doesNotMatch(zh, /觀看 showreel|網站視覺 Showreel|website-visual-reel/);
-  assert.match(zh, /精選短片/);
+  assert.match(zh, /觀看精選影片/);
   assert.doesNotMatch(zh, /data-about-tabs/);
   assert.doesNotMatch(zh, /可合作項目/);
   assert.doesNotMatch(zh, /<h2 class="section-title">關於我<\/h2>/);
@@ -1566,14 +1596,14 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.doesNotMatch(zh, /impact-grid/);
   assert.doesNotMatch(zh, /AI \/ Language Lab/);
   assert.doesNotMatch(zh, /future skill name/);
-  assert.match(zh, /FROM THE ARCHIVE/);
-  assert.match(zh, /觀看公開節目/);
-  assert.match(zh, /觀看官方預告/);
+  assert.match(zh, /歷年作品/);
+  assert.match(zh, /觀看節目/);
+  assert.match(zh, /觀看官方預告片/);
   assert.match(zh, /觀看官方宣傳片/);
   assert.match(zh, /<h2 class="contact-title"><span class="contact-title-line">一起把故事<\/span><span class="contact-title-line"><span class="contact-title-accent">做出來。<\/span><\/span><\/h2>/);
   assert.doesNotMatch(zh, /觀看完整單集/);
   assert.equal((zh.match(/>觀看完整系列<\/(?:a|span)>/g) || []).length, 2);
-  assert.equal((zh.match(/>觀看精選短片<\/a>/g) || []).length, 1);
+  assert.equal((zh.match(/>觀看精選影片<\/a>/g) || []).length, 1);
   assert.match(zh, /href="https:\/\/www\.youtube\.com\/playlist\?list=PLJCU8axtQoPI"/);
   assert.match(zh, /href="https:\/\/www\.youtube\.com\/playlist\?list=PLfuPqJAlXvCs"/);
   assert.match(
@@ -1581,21 +1611,20 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
     /href="https:\/\/www\.youtube\.com\/playlist\?list=PLDTnN3czXyG8"[^>]*aria-label="觀看完整系列: 三分超微劇系列"/,
   );
   assert.doesNotMatch(zh, /觀看代表片段/);
-  assert.match(zh, /室內設計與品牌影像/);
+  assert.match(zh, /幸福空間與品牌影像/);
   assert.match(zh, /導演／剪輯/);
   assert.doesNotMatch(zh, /3 yrs|三年間|約三年/);
   assert.match(zh, /無事坐巴士/);
   assert.match(zh, /單集企劃／企編/);
   assert.match(zh, /《巔峰拍檔》中國版：英國篇/);
   assert.match(zh, /China Dragon TV/);
-  assert.match(zh, /在英國拍攝，與原版 Top Gear 團隊完成跨國汽車節目製作。/);
+  assert.doesNotMatch(zh, /在英國拍攝，與原版 Top Gear 團隊完成跨國汽車節目製作。/);
   assert.doesNotMatch(zh, /中方導演/);
   assert.match(zh, /連續四週全國同時段第一/);
-  assert.doesNotMatch(zh, /觀看精選影片/);
-  assert.match(zh, /代表影像作品/);
+  assert.match(zh, /精選影像作品/);
   assert.match(zh, /<div class="press-preview" role="group" aria-label="媒體報導與訪談">/);
-  assert.match(zh, /官方節目頁/);
-  assert.match(zh, /專案報導/);
+  assert.match(zh, /官方頁面/);
+  assert.match(zh, /報導/);
   assert.match(zh, /文化奧運紀錄片《My Art, My Voice》　台法藝術家跨國對話/);
   assert.match(zh, /鏡週刊 Mirror Media/);
   assert.match(zh, /真誠地往前走，走進創作的大海/);

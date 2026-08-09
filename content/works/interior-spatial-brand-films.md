@@ -7,7 +7,7 @@
   "year": "2021-2024",
   "title": {
     "en": "Design & Brand Films",
-    "zh": "室內設計與品牌影像"
+    "zh": "幸福空間與品牌影像"
   },
   "role": {
     "en": "Director / Editor",
@@ -15,7 +15,7 @@
   },
   "platform": {
     "en": "Gorgeous Space",
-    "zh": "Gorgeous Space / 幸福空間"
+    "zh": "幸福空間"
   },
   "tagline": {
     "en": "Films about design—and the way a home is actually lived in.",
@@ -29,7 +29,7 @@
   "watchUrl": "https://www.youtube.com/playlist?list=PLJCU8axtQoPI",
   "watchLabel": {
     "en": "Watch selected reel",
-    "zh": "觀看精選短片"
+    "zh": "觀看精選影片"
   },
   "showWatchCta": true,
   "videoEmbedUrl": "",
@@ -57,7 +57,7 @@
   "featuredReelPoster": "/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
   "tags": ["interior design", "branded content", "lifestyle"],
   "metrics": [
-    {"value": "LG / Samsung", "label": {"en": "brand contexts", "zh": "品牌合作情境"}}
+    {"value": "LG / Samsung", "label": {"en": "brand contexts", "zh": "品牌合作案例"}}
   ],
   "sourceNote": "docs/source-materials/interior-spatial-films.md; user-confirmed Director / Editor credit",
   "accent": "cyan"

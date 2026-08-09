@@ -202,11 +202,15 @@ function renderPress(items = [], lang) {
             const image = item.image
               ? `<span class="press-preview-image"><img src="${escapeHtml(item.image)}" alt="" loading="lazy" decoding="async" onerror="this.parentElement.remove()"></span>`
               : "";
+            const title = localize(item.title, lang);
+            const titleElement = hasRenderableText(title)
+              ? `<strong>${escapeHtml(title)}</strong>`
+              : "";
             const body = `
               ${image}
               <span class="press-preview-copy">
                 <span class="press-preview-type">${escapeHtml(localize(item.type, lang))}</span>
-                <strong>${escapeHtml(localize(item.title, lang))}</strong>
+                ${titleElement}
                 <span>${escapeHtml(localize(item.source, lang))}</span>
               </span>
             `;
@@ -666,7 +670,10 @@ export function renderPage({ lang, site, works }) {
   const copy = site.site[lang];
   const heroMedia = site.site.heroMedia;
   const switchLang = otherLang(lang);
-  const heroTitleLines = (copy.heroTitleLines || [copy.heroTitle]).map((line) => `<span>${escapeHtml(line)}</span>`).join("");
+  const heroTitleLines = (copy.heroTitleLines || [copy.heroTitle])
+    .filter(hasRenderableText)
+    .map((line) => `<span>${escapeHtml(line)}</span>`)
+    .join("");
   const heroRoles = (copy.heroRoleLines || copy.heroRoles).map((role) => `<span>${renderHeroRoleLine(role)}</span>`).join("");
   const navItems = [
     { href: "#available", label: copy.availabilityLabel },

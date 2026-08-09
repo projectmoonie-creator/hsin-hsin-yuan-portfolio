@@ -20,7 +20,7 @@
   },
   "description": {
     "en": "From AI to deep tech, the series goes inside Silicon Valley startups to follow founders as they define problems, test ideas, and bring technology to market.",
-    "zh": "從 AI 到深科技，鏡頭走進矽谷新創現場，記錄創辦人如何定義問題、反覆試驗，再把技術帶向市場。"
+    "zh": "從 AI 到深科技，鏡頭走進矽谷新創現場，記錄創辦人創業過程中克服困難，把技術帶向市場。"
   },
   "watchMode": "series",
   "watchUrl": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
@@ -44,14 +44,14 @@
   },
   "posterAlt": {
     "en": "Tech Dreamers official series artwork",
-    "zh": "Tech Dreamers 官方系列主視覺"
+    "zh": "《Tech Dreamers》系列主視覺"
   },
   "posterFocalPoint": {"x": 0.5, "y": 0.5},
   "posterDimensions": {"width": 1280, "height": 720},
   "press": [
     {
-      "type": {"en": "Official page", "zh": "官方節目頁"},
-      "title": {"en": "Official program page", "zh": "官方節目頁"},
+      "type": {"en": "Official page", "zh": "官方頁面"},
+      "title": {"en": "Official program page", "zh": ""},
       "source": "TaiwanPlus",
       "url": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
       "canonicalUrl": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
