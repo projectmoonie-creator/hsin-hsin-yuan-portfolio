@@ -14,11 +14,11 @@
   "billingFallbackAllowed": false,
   "paidCredentialEnvironmentDetected": false,
   "packetSha256": "3221e10572b406a5e4466adbf493fa8bdb3f9b9a3020790af673f457e0079aa0",
-  "prompt": "/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V/hsin-hsin-yuan-portfolio-remove-lights/docs/reviews/portfolio-phase-closeout-claude-review-packet-2026-08-10.md",
-  "intendedOutput": "/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V/hsin-hsin-yuan-portfolio-remove-lights/docs/reviews/portfolio-phase-closeout-claude-review-2026-08-10.md",
-  "rawOutput": "/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V/hsin-hsin-yuan-portfolio-remove-lights/docs/reviews/portfolio-phase-closeout-claude-review-2026-08-10.md.raw.json",
+  "prompt": "docs/reviews/portfolio-phase-closeout-claude-review-packet-2026-08-10.md",
+  "intendedOutput": "docs/reviews/portfolio-phase-closeout-claude-review-2026-08-10.md",
+  "rawOutput": "docs/reviews/portfolio-phase-closeout-claude-review-2026-08-10.md.raw.json",
   "rawSha256": "0d8182e0af6e7fbd1624e6e745c1d7fac289c19b3b867f63b7b40ab41e9c4cf7",
-  "repo": "/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V/hsin-hsin-yuan-portfolio-remove-lights",
+  "repo": ".",
   "apiEquivalentCostUsd": 0.181418,
   "actualSpendUsd": null,
   "usage": {
@@ -51,7 +51,7 @@
     ],
     "speed": "standard"
   },
-  "completedAt": "2026-08-09T18:04:13.218Z",
+  "completedAt": "2026-08-09T18:07:31.295Z",
   "observedModels": [
     "claude-haiku-4-5-20251001",
     "claude-opus-5"
@@ -85,5 +85,5 @@
       "provider": "firstParty"
     }
   },
-  "reconciledFromRaw": false
+  "reconciledFromRaw": true
 }
