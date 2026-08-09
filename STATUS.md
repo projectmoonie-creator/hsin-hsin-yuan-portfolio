@@ -34,12 +34,30 @@ State: `PASS_WITH_OPEN_ITEMS`
 - Dated backup
   `backup/2026-08-09/mobile-featured-reel-trigger-local-b103409` was pushed and
   read back exactly at `b103409ed2264ffc39b830501313c5dcd496cc74`. This
-  package has not pushed `main`, created a Preview, deployed, changed an alias,
-  or submitted Contact. The protected untracked review remains byte-identical at SHA-256
+  local validation package was closed at `3a5bf52` and read back from
+  `backup/2026-08-09/mobile-featured-reel-trigger-final-3a5bf52` before the
+  later Preview authorization.
+- The authorized fresh dist-only package contained exactly 42 public files /
+  80,019,103 bytes, with sorted public path-list SHA-256
+  `0f377720c89e087b1898e84045b34fdc4f4b1a0243ce622a028556de6f351c05`.
+  Repo source, internal docs, environments, Contact API, and the protected file
+  were excluded; Vercel CLI 58.9's unsupported `--dry-run` flag failed before
+  any upload, so the local file-level privacy audit served as the release gate.
+- Deployment `dpl_BJ35n23AjLaDfevrDpmEJy6R1Xia` was read back by Vercel CLI as
+  `Ready`, target `preview`:
+  `https://hsin-hsin-yuan-portfolio-bj2vc0fqq.vercel.app`. The URL was not
+  fetched after deployment under the active deployment skill; no browser or
+  Contact request was made against it.
+- No `main`, Production, alias, shareable-link, or Contact action occurred.
+  External AI review was skipped as a narrow, reversible, fully tested
+  regression; the required parent `docs/TOOLING.md` reviewer source was absent,
+  no model request was sent, and no external-review claim is made. The formal
+  record is `docs/reviews/mobile-featured-reel-trigger-preview-2026-08-09.md`.
+  The protected untracked review remains byte-identical at SHA-256
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
-- Exact next action: the producer may review this local package. Any Preview or
-  `main` integration remains a separate explicit authorization and
-  public-release review checkpoint.
+- Exact next action: the producer should open the direct Preview while logged
+  into Vercel and manually check mobile autoplay/scroll handoff. Any `main` or
+  Production integration remains a separate explicit authorization.
 
 ## Prior Work Package — Intentional Localized Blanks
 

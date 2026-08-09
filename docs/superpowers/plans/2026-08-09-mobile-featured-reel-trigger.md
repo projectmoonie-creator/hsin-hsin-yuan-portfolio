@@ -178,6 +178,22 @@ Commit the reviewed implementation and local closeout, push a dated backup ref,
 and read it back exactly. Do not push `main`, create a Preview, deploy, change
 an alias, or submit Contact.
 
+### Task 4: Execute the separately authorized Preview follow-up
+
+The producer granted a later, explicit Preview-only authorization after Task 3
+closed. It did not retroactively expand the local-package boundary to `main` or
+Production.
+
+- [x] Re-run deterministic release gates and build a fresh dist-only staging
+  package.
+- [x] Audit the public file list, byte count, privacy markers, environment-file
+  absence, and protected-file hash.
+- [x] Deploy only to Vercel target `preview` and read back `Ready` plus the
+  exact deployment ID through the CLI.
+- [x] Record that the URL was not fetched after deployment, Contact was not
+  submitted, and `main`, Production, aliases, and shareable links were not
+  changed.
+
 ## Plan self-review
 
 - Spec coverage: mobile ownership, hold timing, scroll refresh, desktop and
