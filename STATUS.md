@@ -48,16 +48,23 @@ State: `PASS_WITH_OPEN_ITEMS`
   `https://hsin-hsin-yuan-portfolio-bj2vc0fqq.vercel.app`. The URL was not
   fetched after deployment under the active deployment skill; no browser or
   Contact request was made against it.
-- No `main`, Production, alias, shareable-link, or Contact action occurred.
+- A later producer authorization replaced the Hobby account's sole prior
+  Shareable Link for this exact Preview. Vercel confirmed
+  `Anyone with the link can view and comment`; login remains required only to
+  comment. The access-bearing URL stays outside Git at SHA-256
+  `6ad616ea8e08a003db1556245196d46c969afada15d838d3d106b3534c75e440`.
+  Project-level `Require Log In` remains enabled for direct Preview URLs.
+- No `main`, Production, alias, deployment-content, or Contact action occurred.
   External AI review was skipped as a narrow, reversible, fully tested
   regression; the required parent `docs/TOOLING.md` reviewer source was absent,
   no model request was sent, and no external-review claim is made. The formal
-  record is `docs/reviews/mobile-featured-reel-trigger-preview-2026-08-09.md`.
+  records are `docs/reviews/mobile-featured-reel-trigger-preview-2026-08-09.md`
+  and `docs/reviews/mobile-featured-reel-shareable-access-2026-08-09.md`.
   The protected untracked review remains byte-identical at SHA-256
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
-- Exact next action: the producer should open the direct Preview while logged
-  into Vercel and manually check mobile autoplay/scroll handoff. Any `main` or
-  Production integration remains a separate explicit authorization.
+- Exact next action: the producer should open the new share URL on the target
+  mobile browser and manually check the 700ms autoplay/scroll handoff. Any
+  `main` or Production integration remains a separate explicit authorization.
 
 ## Prior Work Package — Intentional Localized Blanks
 

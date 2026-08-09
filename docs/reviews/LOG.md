@@ -13,7 +13,7 @@ packages.
 - Accessibility/safety: reduced-motion and no-JS make zero MP4 requests; served-build identity, keyboard focus, overflow, console/page errors, same-origin failures, and Contact POST checks pass.
 - Review: external AI was skipped as a narrow reversible regression already covered by four RED→GREEN checkpoints, 132 tests, and bilingual browser QA; required parent `docs/TOOLING.md` was absent, so no model request or review claim was made.
 - Preview: authorized dist-only package = 42 files / 80,019,103 bytes / path-list `0f37772…51c05`; `dpl_BJ35n2…R1Xia` read back `Ready` / `preview` at `https://hsin-hsin-yuan-portfolio-bj2vc0fqq.vercel.app`; URL not fetched under deploy policy.
-- Durability/external state: local/final backups read back at `b103409` / `3a5bf52`; formal record is `mobile-featured-reel-trigger-preview-2026-08-09.md`; no `main`, Production, alias, share-link, Contact, or protected-file change.
+- Durability/external state: local/final backups read back at `b103409` / `3a5bf52`; authorized Hobby share-link replacement now grants anyone-with-link access, revokes the old link, and keeps the new URL outside Git at `6ad616e…5e440`; formal records cover Preview plus shareable access; no `main`, Production, alias, Contact, or protected-file change.
 
 ## 2026-08-09 — Intentional localized blanks
 - Branch/base: `codex/three-minute-watch-link` from reviewed bilingual-copy closeout `d9f93b9`; six producer-approved Chinese blanks only.

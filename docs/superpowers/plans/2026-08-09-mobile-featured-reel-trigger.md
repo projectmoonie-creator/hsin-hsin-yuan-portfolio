@@ -194,6 +194,21 @@ Production.
   submitted, and `main`, Production, aliases, and shareable links were not
   changed.
 
+### Task 5: Execute the separately authorized Shareable Link replacement
+
+After Task 4 closed, the producer confirmed that the direct Preview's Vercel
+Authentication blocked the browser used for review and explicitly authorized
+replacing the Hobby account's existing Shareable Link.
+
+- [x] Verify the Vercel CLI identity, Team/project ownership, Chrome session,
+  and project Deployment Protection state before changing access.
+- [x] Select `Anyone with the link` on the exact Preview deployment and accept
+  Vercel's one-link Hobby warning under the producer's explicit authorization.
+- [x] Confirm the generated-link success state and keep the access-bearing URL
+  outside Git with a SHA-256 fingerprint only.
+- [x] Preserve `main`, Production, aliases, deployment content, Contact, and the
+  protected untracked document unchanged.
+
 ## Plan self-review
 
 - Spec coverage: mobile ownership, hold timing, scroll refresh, desktop and
