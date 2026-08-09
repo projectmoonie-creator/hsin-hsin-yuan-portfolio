@@ -15,12 +15,12 @@
   },
   "platform": "China Dragon TV",
   "tagline": {
-    "en": "A world-renowned car show, reimagined for China.",
-    "zh": "與英國原版 Top Gear 團隊合作的汽車節目與紀實娛樂製作。"
+    "en": "A cross-border factual-entertainment production filmed in the UK with the original Top Gear team.",
+    "zh": "在英國拍攝，與原版 Top Gear 團隊完成跨國汽車節目製作。"
   },
   "description": {
-    "en": "For the UK Special, the Chinese production travelled to Britain to work with the original Top Gear team on a cross-border factual-entertainment shoot.",
-    "zh": "擔任《巔峰拍檔》中國版第二季第五期英國篇導演，負責英國拍攝內容，協調播出端、中國製作端與英國原版 Top Gear 團隊之間的製作需求。"
+    "en": "Directed the UK episode of Top Gear China Season 2, leading the shoot in Britain and coordinating editorial and production requirements across Dragon TV, the Chinese production team, and the original Top Gear team.",
+    "zh": "擔任《巔峰拍檔》中國版第二季第五期「英國篇」導演，負責英國段落的內容與拍攝，並協調東方衛視、中國製作團隊與英國原版 Top Gear 團隊的製作需求。"
   },
   "watchMode": "single",
   "watchUrl": "https://youtu.be/M_eXe9HRD9Y?si=YZ_3JZ7FJY4vVcZv",

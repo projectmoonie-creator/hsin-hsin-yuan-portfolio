@@ -43,15 +43,15 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[1].role.en, "Director / Editor / Producer");
   assert.equal(works[3].role.en, "Director / Editor");
   assert.equal(works[3].title.en, "Design & Brand Films");
-  assert.equal(works[3].tagline.en, "How design becomes part of everyday life.");
+  assert.equal(works[3].tagline.en, "Films about design—and the way a home is actually lived in.");
   assert.equal(
     works[3].description.en,
-    "Films about residential design and brand collaborations, following how homes are planned, renovated, and lived in—from a designer’s choices to the routines that fill the finished space.",
+    "For Gorgeous Space and home brands, I directed and edited films on residential design, renovation, and product collaborations—bringing design ideas, everyday use, and the people who live there into the same story.",
   );
-  assert.equal(works[3].title.zh, "幸福空間與室內設計影像");
+  assert.equal(works[3].title.zh, "室內設計與品牌影像");
   assert.equal(
     works[3].description.zh,
-    "我為住宅設計、老屋翻新、設計師作品、居家品牌與廚電業配內容擔任導演 / 剪輯。",
+    "為幸福空間與居家品牌執導、剪輯住宅設計、老屋翻新與產品合作內容，把設計概念、使用方式與屋主的生活放進同一個故事裡。",
   );
   assert.equal(
     works[3].featuredReelUrl,
@@ -97,14 +97,14 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[4].platform, "PTS Taigi");
   assert.equal(works[4].year, "2021");
   assert.equal(works[4].title.en, "Nothing by Bus");
-  assert.equal(works[4].tagline.en, "Taiwan, one bus route at a time.");
+  assert.equal(works[4].tagline.en, "One bus route at a time, into the everyday life of Taiwan.");
   assert.equal(
     works[4].description.en,
-    "A Taiwanese-language travel series following local buses off the main road and into the food, work, and daily life of each stop.",
+    "I developed and wrote individual episodes for this PTS Taigi travel series, using local bus routes to connect memory, food, markets, and the people along the way.",
   );
   assert.equal(
     works[4].description.zh,
-    "公視台語台行腳節目的單集企劃 / 企編工作，節目以公車路線串起地方記憶、飲食、市集與路上的人。",
+    "擔任公視台語台行腳節目的單集企劃與企編，以公車路線串起地方記憶、飲食、市集，以及一路上遇見的人。",
   );
   assert.equal(works[4].watchMode, "series");
   assert.equal(works[4].showWatchCta, true);
@@ -128,14 +128,14 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[5].platform, "China Dragon TV");
   assert.equal(works[5].hideMediaLabel, true);
   assert.equal(works[5].mediaTitleLines, undefined);
-  assert.equal(works[5].tagline.en, "A world-renowned car show, reimagined for China.");
+  assert.equal(works[5].tagline.en, "A cross-border factual-entertainment production filmed in the UK with the original Top Gear team.");
   assert.equal(
     works[5].description.en,
-    "For the UK Special, the Chinese production travelled to Britain to work with the original Top Gear team on a cross-border factual-entertainment shoot.",
+    "Directed the UK episode of Top Gear China Season 2, leading the shoot in Britain and coordinating editorial and production requirements across Dragon TV, the Chinese production team, and the original Top Gear team.",
   );
   assert.equal(
     works[5].description.zh,
-    "擔任《巔峰拍檔》中國版第二季第五期英國篇導演，負責英國拍攝內容，協調播出端、中國製作端與英國原版 Top Gear 團隊之間的製作需求。",
+    "擔任《巔峰拍檔》中國版第二季第五期「英國篇」導演，負責英國段落的內容與拍攝，並協調東方衛視、中國製作團隊與英國原版 Top Gear 團隊的製作需求。",
   );
   assert.equal(works[5].featuredReelMode, "after-hold");
   assert.equal(
@@ -197,6 +197,37 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     works.filter((work) => work.showWatchCta).map((work) => work.slug),
     ["interior-spatial-brand-films", "pts-taigi-bus"],
   );
+});
+
+test("Featured copy uses the approved bilingual P1 work order", () => {
+  const worksBySlug = new Map(
+    loadWorks(join(root, "content/works")).map((work) => [work.slug, work]),
+  );
+  const approved = [
+    ["slow-steps", "role", "Director / Editor / Producer", "導演／剪輯／製作人"],
+    ["slow-steps", "tagline", "A quiet travel documentary with a personal point of view.", "一部安靜、帶有個人視角的旅行紀錄片。"],
+    ["slow-steps", "description", "Through encounters and pauses along the way, the film observes how people make sense of the world before them—and how the journey changes the observer.", "以個人視角記錄旅途中的相遇與停留，慢慢看見人如何理解眼前的世界，又如何在路上改變。"],
+    ["tech-dreamers", "role", "Director / Editor / Producer", "導演／剪輯／製作人"],
+    ["tech-dreamers", "tagline", "Following Taiwanese founders as an idea takes shape, one decision at a time.", "跟著台灣創業者，看一個想法如何一步步成形。"],
+    ["tech-dreamers", "description", "From AI to deep tech, the series goes inside Silicon Valley startups to follow founders as they define problems, test ideas, and bring technology to market.", "從 AI 到深科技，鏡頭走進矽谷新創現場，記錄創辦人如何定義問題、反覆試驗，再把技術帶向市場。"],
+    ["my-art-my-voice", "role", "Lead Documentary Director", "紀錄片總導演"],
+    ["my-art-my-voice", "tagline", "Taiwanese artists take the stage in Paris—and speak about their work and who they are.", "台灣藝術家走上巴黎舞台，談創作，也談自己是誰。"],
+    ["my-art-my-voice", "description", "Filmed at the Taiwan Pavilion during the Paris Cultural Olympiad, the documentary moves between performance and backstage conversations about art, freedom, and identity.", "紀錄巴黎文化奧運台灣館的演出與幕後，也聽藝術家談創作、自由與身分。"],
+    ["interior-spatial-brand-films", "title", "Design & Brand Films", "室內設計與品牌影像"],
+    ["interior-spatial-brand-films", "role", "Director / Editor", "導演／剪輯"],
+    ["interior-spatial-brand-films", "tagline", "Films about design—and the way a home is actually lived in.", "拍設計，也拍一個家真正被使用的樣子。"],
+    ["interior-spatial-brand-films", "description", "For Gorgeous Space and home brands, I directed and edited films on residential design, renovation, and product collaborations—bringing design ideas, everyday use, and the people who live there into the same story.", "為幸福空間與居家品牌執導、剪輯住宅設計、老屋翻新與產品合作內容，把設計概念、使用方式與屋主的生活放進同一個故事裡。"],
+    ["pts-taigi-bus", "role", "Episode Development / Writer", "單集企劃／企編"],
+    ["pts-taigi-bus", "tagline", "One bus route at a time, into the everyday life of Taiwan.", "坐上公車，沿著一條路線認識一個地方。"],
+    ["pts-taigi-bus", "description", "I developed and wrote individual episodes for this PTS Taigi travel series, using local bus routes to connect memory, food, markets, and the people along the way.", "擔任公視台語台行腳節目的單集企劃與企編，以公車路線串起地方記憶、飲食、市集，以及一路上遇見的人。"],
+    ["top-gear-china-uk-special", "tagline", "A cross-border factual-entertainment production filmed in the UK with the original Top Gear team.", "在英國拍攝，與原版 Top Gear 團隊完成跨國汽車節目製作。"],
+    ["top-gear-china-uk-special", "description", "Directed the UK episode of Top Gear China Season 2, leading the shoot in Britain and coordinating editorial and production requirements across Dragon TV, the Chinese production team, and the original Top Gear team.", "擔任《巔峰拍檔》中國版第二季第五期「英國篇」導演，負責英國段落的內容與拍攝，並協調東方衛視、中國製作團隊與英國原版 Top Gear 團隊的製作需求。"],
+  ];
+
+  assert.equal(approved.length, 18);
+  for (const [slug, field, en, zh] of approved) {
+    assert.deepEqual(worksBySlug.get(slug)[field], { en, zh }, `${slug}.${field}`);
+  }
 });
 
 test("loadSiteData returns one normalized collaboration collection", () => {
@@ -1182,7 +1213,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Nothing by Bus/);
   assert.match(html, /Gui Shou Shen Che/);
   assert.doesNotMatch(html, /final public release materials are still being reconstructed/);
-  assert.match(html, /Planning \/ Script/);
+  assert.match(html, /Episode Development \/ Writer/);
   assert.match(html, /Top Gear China: UK Special/);
   assert.match(html, /China Dragon TV/);
   assert.match(html, /Director/);
@@ -1493,14 +1524,14 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
     /href="https:\/\/www\.youtube\.com\/playlist\?list=PLDTnN3czXyG8"[^>]*aria-label="觀看完整系列: 三分超微劇系列"/,
   );
   assert.doesNotMatch(zh, /觀看代表片段/);
-  assert.match(zh, /幸福空間與室內設計影像/);
-  assert.match(zh, /導演 \/ 剪輯/);
+  assert.match(zh, /室內設計與品牌影像/);
+  assert.match(zh, /導演／剪輯/);
   assert.doesNotMatch(zh, /3 yrs|三年間|約三年/);
   assert.match(zh, /無事坐巴士/);
-  assert.match(zh, /企劃 \/ 企編/);
+  assert.match(zh, /單集企劃／企編/);
   assert.match(zh, /《巔峰拍檔》中國版：英國篇/);
   assert.match(zh, /China Dragon TV/);
-  assert.match(zh, /汽車節目與紀實娛樂/);
+  assert.match(zh, /在英國拍攝，與原版 Top Gear 團隊完成跨國汽車節目製作。/);
   assert.doesNotMatch(zh, /中方導演/);
   assert.match(zh, /連續四週全國同時段第一/);
   assert.doesNotMatch(zh, /觀看精選影片/);

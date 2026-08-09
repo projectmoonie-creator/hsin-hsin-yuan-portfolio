@@ -7,23 +7,23 @@
   "year": "2021-2024",
   "title": {
     "en": "Design & Brand Films",
-    "zh": "幸福空間與室內設計影像"
+    "zh": "室內設計與品牌影像"
   },
   "role": {
     "en": "Director / Editor",
-    "zh": "導演 / 剪輯"
+    "zh": "導演／剪輯"
   },
   "platform": {
     "en": "Gorgeous Space",
     "zh": "Gorgeous Space / 幸福空間"
   },
   "tagline": {
-    "en": "How design becomes part of everyday life.",
-    "zh": "把設計、產品與家的故事，整理成觀眾願意停留的短影音。"
+    "en": "Films about design—and the way a home is actually lived in.",
+    "zh": "拍設計，也拍一個家真正被使用的樣子。"
   },
   "description": {
-    "en": "Films about residential design and brand collaborations, following how homes are planned, renovated, and lived in—from a designer’s choices to the routines that fill the finished space.",
-    "zh": "我為住宅設計、老屋翻新、設計師作品、居家品牌與廚電業配內容擔任導演 / 剪輯。"
+    "en": "For Gorgeous Space and home brands, I directed and edited films on residential design, renovation, and product collaborations—bringing design ideas, everyday use, and the people who live there into the same story.",
+    "zh": "為幸福空間與居家品牌執導、剪輯住宅設計、老屋翻新與產品合作內容，把設計概念、使用方式與屋主的生活放進同一個故事裡。"
   },
   "watchMode": "selection",
   "watchUrl": "https://www.youtube.com/playlist?list=PLJCU8axtQoPI",

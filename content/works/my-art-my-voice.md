@@ -11,16 +11,16 @@
   },
   "role": {
     "en": "Lead Documentary Director",
-    "zh": "紀錄片總導演 / 導演"
+    "zh": "紀錄片總導演"
   },
   "platform": "TaiwanPlus",
   "tagline": {
-    "en": "Artists. Identity. Taiwan on the world stage.",
-    "zh": "藝術家，身份，台灣走向世界的聲音。"
+    "en": "Taiwanese artists take the stage in Paris—and speak about their work and who they are.",
+    "zh": "台灣藝術家走上巴黎舞台，談創作，也談自己是誰。"
   },
   "description": {
-    "en": "A documentary on the Paris Cultural Olympiad, creative freedom, and the voices behind performance.",
-    "zh": "巴黎文化奧運紀錄片。關於創作、自由，以及人如何被聽見。"
+    "en": "Filmed at the Taiwan Pavilion during the Paris Cultural Olympiad, the documentary moves between performance and backstage conversations about art, freedom, and identity.",
+    "zh": "紀錄巴黎文化奧運台灣館的演出與幕後，也聽藝術家談創作、自由與身分。"
   },
   "watchMode": "single",
   "watchUrl": "https://www.taiwanplus.com/shows/documentary/arts/410/my-art-my-voice/250220001/whats-the-vibe-in-taiwan-my-art-my-voice",

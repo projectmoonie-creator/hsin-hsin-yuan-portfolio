@@ -263,7 +263,7 @@ test("copy work order rolls every target back after an injected later-file failu
   }
 });
 
-test("approved 31-entry bilingual work order is conflict-free at its frozen baseline", () => {
+test("approved 31-entry bilingual work order records frozen sources and rejects replay", () => {
   const path = join(
     projectRoot,
     "editorial/copy-work-orders/2026-08-09-priority-bilingual.json",
@@ -288,20 +288,16 @@ test("approved 31-entry bilingual work order is conflict-free at its frozen base
       sha256: "10f1a9fb511cc79de088f9b41b251e14ca2fbfedf5dc92e8de4455fbfa69933a",
     },
   ]);
-  const plan = applyCopyWorkOrder({
-    repoRoot: projectRoot,
-    workOrder: order,
-    priority: "P1",
-  });
-  assert.deepEqual(plan, {
-    schemaVersion: 1,
-    mode: "dry-run",
-    priority: "P1",
-    entries: 18,
-    replacements: 31,
-    keeps: 5,
-    conflicts: 0,
-    files: [
+  const validated = validateCopyWorkOrder(order);
+  const p1 = validated.entries.filter((entry) => entry.priority === "P1");
+  const p1Changes = p1.flatMap((entry) => Object.values(entry.changes));
+  assert.equal(order.entries.filter((entry) => entry.priority === "P0").length, 13);
+  assert.equal(p1.length, 18);
+  assert.equal(p1Changes.filter((change) => change.op === "replace").length, 31);
+  assert.equal(p1Changes.filter((change) => change.op === "keep").length, 5);
+  assert.deepEqual(
+    [...new Set(p1.map((entry) => entry.sourceFile))].sort(),
+    [
       "content/works/interior-spatial-brand-films.md",
       "content/works/my-art-my-voice.md",
       "content/works/pts-taigi-bus.md",
@@ -309,8 +305,9 @@ test("approved 31-entry bilingual work order is conflict-free at its frozen base
       "content/works/tech-dreamers.md",
       "content/works/top-gear-china-uk-special.md",
     ],
-    writesFiles: false,
-  });
-  assert.equal(order.entries.filter((entry) => entry.priority === "P0").length, 13);
-  assert.equal(order.entries.filter((entry) => entry.priority === "P1").length, 18);
+  );
+  assert.throws(
+    () => applyCopyWorkOrder({ repoRoot: projectRoot, workOrder: order, priority: "P1" }),
+    /does not match the expected current value/,
+  );
 });

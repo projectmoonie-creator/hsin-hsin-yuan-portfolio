@@ -11,16 +11,16 @@
   },
   "role": {
     "en": "Director / Editor / Producer",
-    "zh": "導演 / 剪輯 / 製作"
+    "zh": "導演／剪輯／製作人"
   },
   "platform": "TaiwanPlus / Travel",
   "tagline": {
-    "en": "A quiet travel documentary shaped through observation, time, and becoming.",
-    "zh": "一部以觀察、時間與成為自己為核心的安靜旅行紀錄片。"
+    "en": "A quiet travel documentary with a personal point of view.",
+    "zh": "一部安靜、帶有個人視角的旅行紀錄片。"
   },
   "description": {
-    "en": "A poetic personal work that follows travel as a way of paying attention.",
-    "zh": "一部帶有詩意與個人視角的作品，透過旅行靠近人如何觀看與改變。"
+    "en": "Through encounters and pauses along the way, the film observes how people make sense of the world before them—and how the journey changes the observer.",
+    "zh": "以個人視角記錄旅途中的相遇與停留，慢慢看見人如何理解眼前的世界，又如何在路上改變。"
   },
   "watchUrl": "",
   "videoEmbedUrl": "",

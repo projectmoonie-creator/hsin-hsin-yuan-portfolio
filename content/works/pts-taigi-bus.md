@@ -10,17 +10,17 @@
     "zh": "無事坐巴士"
   },
   "role": {
-    "en": "Planning / Script",
-    "zh": "企劃 / 企編"
+    "en": "Episode Development / Writer",
+    "zh": "單集企劃／企編"
   },
   "platform": "PTS Taigi",
   "tagline": {
-    "en": "Taiwan, one bus route at a time.",
-    "zh": "地方行旅、公共媒體，以及台語語境裡的紀實節目敘事。"
+    "en": "One bus route at a time, into the everyday life of Taiwan.",
+    "zh": "坐上公車，沿著一條路線認識一個地方。"
   },
   "description": {
-    "en": "A Taiwanese-language travel series following local buses off the main road and into the food, work, and daily life of each stop.",
-    "zh": "公視台語台行腳節目的單集企劃 / 企編工作，節目以公車路線串起地方記憶、飲食、市集與路上的人。"
+    "en": "I developed and wrote individual episodes for this PTS Taigi travel series, using local bus routes to connect memory, food, markets, and the people along the way.",
+    "zh": "擔任公視台語台行腳節目的單集企劃與企編，以公車路線串起地方記憶、飲食、市集，以及一路上遇見的人。"
   },
   "watchMode": "series",
   "watchUrl": "https://www.youtube.com/playlist?list=PLfuPqJAlXvCs",

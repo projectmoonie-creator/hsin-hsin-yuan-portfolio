@@ -11,16 +11,16 @@
   },
   "role": {
     "en": "Director / Editor / Producer",
-    "zh": "導演 / 剪輯 / 製作"
+    "zh": "導演／剪輯／製作人"
   },
   "platform": "TaiwanPlus",
   "tagline": {
-    "en": "Taiwanese founders building the future.",
-    "zh": "台灣創業者，正在打造未來。"
+    "en": "Following Taiwanese founders as an idea takes shape, one decision at a time.",
+    "zh": "跟著台灣創業者，看一個想法如何一步步成形。"
   },
   "description": {
-    "en": "From AI to deep tech, stories of people turning ideas into tomorrow.",
-    "zh": "從 AI 到深科技，拍攝創業者如何想像世界的下一步。"
+    "en": "From AI to deep tech, the series goes inside Silicon Valley startups to follow founders as they define problems, test ideas, and bring technology to market.",
+    "zh": "從 AI 到深科技，鏡頭走進矽谷新創現場，記錄創辦人如何定義問題、反覆試驗，再把技術帶向市場。"
   },
   "watchMode": "series",
   "watchUrl": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
