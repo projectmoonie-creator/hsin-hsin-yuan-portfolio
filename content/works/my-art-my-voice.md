@@ -20,7 +20,7 @@
   },
   "description": {
     "en": "Filmed at the Taiwan Pavilion during the Paris Cultural Olympiad, the documentary moves between performance and backstage conversations about art, freedom, and identity.",
-    "zh": "紀錄巴黎文化奧運台灣館的演出與幕後，也聽藝術家談創作、自由與身分。"
+    "zh": "巴黎文化奧運台灣館的演出與幕後，聽巴黎與台灣藝術家暢談創作、自由與身分。"
   },
   "watchMode": "single",
   "watchUrl": "https://www.taiwanplus.com/shows/documentary/arts/410/my-art-my-voice/250220001/whats-the-vibe-in-taiwan-my-art-my-voice",

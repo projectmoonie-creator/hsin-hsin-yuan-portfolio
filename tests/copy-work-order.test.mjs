@@ -52,6 +52,7 @@ function workOrder() {
 function writeFixtureRepo({ duplicateSiteToken = false } = {}) {
   const root = mkdtempSync(join(tmpdir(), "portfolio-copy-work-order-"));
   const sitePath = join(root, "data/site.json");
+  const pressPath = join(root, "data/press.json");
   const workPath = join(root, "content/works/sample-work.md");
   const archivePath = join(root, "content/archive/sample-archive.md");
   mkdirSync(dirname(sitePath), { recursive: true });
@@ -68,15 +69,22 @@ function writeFixtureRepo({ duplicateSiteToken = false } = {}) {
     },
     zh: { heroEyebrow: "舊中文", navPrimaryAria: "Primary" },
   }, null, 2)}\n`);
+  writeFileSync(pressPath, `${JSON.stringify([
+    {
+      id: "sample-press",
+      part: { en: "PART 1", zh: "上半場" },
+    },
+  ], null, 2)}\n`);
   writeFileSync(workPath, `---\n${JSON.stringify({
     slug: "sample-work",
+    platform: "Shared Platform",
     tagline: { en: "Existing English", zh: "原有中文" },
   }, null, 2)}\n---\nFixture body stays byte-identical.\n`);
   writeFileSync(archivePath, `---\n${JSON.stringify({
     slug: "sample-archive",
     role: { en: "Writer", zh: "編劇" },
   }, null, 2)}\n---\nArchive body stays byte-identical.\n`);
-  return { root, sitePath, workPath, archivePath };
+  return { root, sitePath, pressPath, workPath, archivePath };
 }
 
 test("copy work order validates a paired, explicit operation contract", () => {
@@ -261,6 +269,130 @@ test("copy work order resolves shared HeroMedia, system copy, and Archive stable
     assert.equal(site.zh.navPrimaryAria, "主要導覽");
     assert.equal(archive.role.en, "Writer");
     assert.equal(archive.role.zh, "共同編劇");
+  } finally {
+    rmSync(fixture.root, { recursive: true, force: true });
+  }
+});
+
+test("copy work order targets one localized global Press field by stable ID", () => {
+  const fixture = writeFixtureRepo();
+  try {
+    const order = workOrder();
+    order.entries = [
+      {
+        priority: "P1",
+        sourceFile: "data/press.json",
+        stableKey: "press.sample-press.part",
+        changes: {
+          en: { op: "keep", expected: "PART 1" },
+          zh: { op: "replace", expected: "上半場", value: "座談" },
+        },
+      },
+    ];
+    const before = readFileSync(fixture.pressPath);
+
+    assert.deepEqual(
+      applyCopyWorkOrder({ repoRoot: fixture.root, workOrder: order, priority: "P1" }),
+      {
+        schemaVersion: 1,
+        mode: "dry-run",
+        priority: "P1",
+        entries: 1,
+        replacements: 1,
+        keeps: 1,
+        conflicts: 0,
+        files: ["data/press.json"],
+        writesFiles: false,
+      },
+    );
+    assert.deepEqual(readFileSync(fixture.pressPath), before);
+
+    applyCopyWorkOrder({
+      repoRoot: fixture.root,
+      workOrder: order,
+      priority: "P1",
+      write: true,
+    });
+    const press = JSON.parse(readFileSync(fixture.pressPath, "utf8"));
+    assert.equal(press[0].part.en, "PART 1");
+    assert.equal(press[0].part.zh, "座談");
+  } finally {
+    rmSync(fixture.root, { recursive: true, force: true });
+  }
+});
+
+test("copy work order promotes one shared localizable scalar when locales diverge", () => {
+  const fixture = writeFixtureRepo();
+  try {
+    const order = workOrder();
+    order.entries = [
+      {
+        priority: "P1",
+        sourceFile: "content/works/sample-work.md",
+        stableKey: "featured.sample-work.platform",
+        changes: {
+          en: { op: "keep", expected: "Shared Platform" },
+          zh: { op: "replace", expected: "Shared Platform", value: "中文平台" },
+        },
+      },
+    ];
+    const before = readFileSync(fixture.workPath);
+
+    assert.deepEqual(
+      applyCopyWorkOrder({ repoRoot: fixture.root, workOrder: order, priority: "P1" }),
+      {
+        schemaVersion: 1,
+        mode: "dry-run",
+        priority: "P1",
+        entries: 1,
+        replacements: 1,
+        keeps: 1,
+        conflicts: 0,
+        files: ["content/works/sample-work.md"],
+        writesFiles: false,
+      },
+    );
+    assert.deepEqual(readFileSync(fixture.workPath), before);
+
+    applyCopyWorkOrder({
+      repoRoot: fixture.root,
+      workOrder: order,
+      priority: "P1",
+      write: true,
+    });
+    const parsed = JSON.parse(
+      readFileSync(fixture.workPath, "utf8").match(/^---\n([\s\S]*?)\n---/)?.[1],
+    );
+    assert.deepEqual(parsed.platform, { en: "Shared Platform", zh: "中文平台" });
+    assert.equal(
+      verifyCopyWorkOrderResult({ repoRoot: fixture.root, workOrder: order }).matches,
+      2,
+    );
+  } finally {
+    rmSync(fixture.root, { recursive: true, force: true });
+  }
+});
+
+test("copy work order rejects promotion of a non-localizable shared scalar", () => {
+  const fixture = writeFixtureRepo();
+  try {
+    const order = workOrder();
+    order.entries = [
+      {
+        priority: "P1",
+        sourceFile: "content/works/sample-work.md",
+        stableKey: "featured.sample-work.slug",
+        changes: {
+          en: { op: "keep", expected: "sample-work" },
+          zh: { op: "replace", expected: "sample-work", value: "錯誤的本地化 slug" },
+        },
+      },
+    ];
+
+    assert.throws(
+      () => applyCopyWorkOrder({ repoRoot: fixture.root, workOrder: order, priority: "P1" }),
+      /cannot promote a non-localizable shared scalar/i,
+    );
   } finally {
     rmSync(fixture.root, { recursive: true, force: true });
   }
@@ -544,33 +676,86 @@ test("final Chinese interface work order preserves all 54 Excel differences with
   );
 });
 
-test("repository matches every final Chinese interface work-order field", () => {
+test("round-two Chinese interface work order records all nine differences and rejects replay", () => {
   const path = join(
     projectRoot,
-    "editorial/copy-work-orders/2026-08-09-final-chinese-interface.json",
+    "editorial/copy-work-orders/2026-08-09-chinese-interface-round-2.json",
+  );
+  const order = validateCopyWorkOrder(JSON.parse(readFileSync(path, "utf8")));
+
+  assert.equal(order.baselineCommit, "40413dba3e9e2b850a8803fb9add4c8635374353");
+  assert.deepEqual(order.sourceArtifacts, [
+    {
+      name: "Hsin-Hsin-Yuan-Portfolio-Chinese-Interface-Manager-2026-08-09-round-2.xlsx",
+      sha256: "7776b75a3e261404609f6f34588e177772785338fdbcf54f954de12b69e3106e",
+    },
+    {
+      name: "Hsin-Hsin-Yuan-Portfolio-Chinese-Interface-Manager-2026-08-09-round-2-corrected.xlsx",
+      sha256: "e11149074243523b0276f5042831796d9c2737f3a80f4fea64603dbeed7bce3a",
+    },
+  ]);
+  assert.equal(order.entries.length, 9);
+  assert.equal(order.entries.filter((entry) => entry.priority === "P0").length, 2);
+  assert.equal(order.entries.filter((entry) => entry.priority === "P1").length, 7);
+  assert.deepEqual(order.entries.map((entry) => entry.stableKey), [
+    "site.heroSubcopy",
+    "site.contactTitleAccent",
+    "featured.tech-dreamers.description",
+    "featured.my-art-my-voice.description",
+    "featured.interior-spatial-brand-films.description",
+    "featured.pts-taigi-bus.description",
+    "featured.top-gear-china-uk-special.platform",
+    "press.wmw-28-selection-guide-part-1.part",
+    "archive.ghost-hand-divine-car.title",
+  ]);
+  assert.equal(
+    order.entries.find((entry) => entry.stableKey === "featured.my-art-my-voice.description")
+      .changes.zh.value,
+    "巴黎文化奧運台灣館的演出與幕後，聽巴黎與台灣藝術家暢談創作、自由與身分。",
+  );
+  assert.throws(
+    () => applyCopyWorkOrder({ repoRoot: projectRoot, workOrder: order }),
+    /does not match the expected current value/,
+  );
+});
+
+test("repository matches every round-two Chinese interface work-order field", () => {
+  const path = join(
+    projectRoot,
+    "editorial/copy-work-orders/2026-08-09-chinese-interface-round-2.json",
   );
   const order = JSON.parse(readFileSync(path, "utf8"));
 
   assert.deepEqual(verifyCopyWorkOrderResult({ repoRoot: projectRoot, workOrder: order }), {
     schemaVersion: 1,
     mode: "verify",
-    entries: 54,
-    fields: 108,
-    matches: 108,
+    entries: 9,
+    fields: 18,
+    matches: 18,
     conflicts: 0,
     files: [
       "content/archive/ghost-hand-divine-car.md",
-      "content/archive/heart-of-steel.md",
-      "content/archive/lying-game.md",
-      "content/archive/overclocking.md",
-      "content/archive/three-minute-micro-drama.md",
       "content/works/interior-spatial-brand-films.md",
       "content/works/my-art-my-voice.md",
-      "content/works/slow-steps.md",
+      "content/works/pts-taigi-bus.md",
       "content/works/tech-dreamers.md",
       "content/works/top-gear-china-uk-special.md",
+      "data/press.json",
       "data/site.json",
     ],
     writesFiles: false,
   });
+});
+
+test("round two supersedes the prior final Chinese interface work order", () => {
+  const path = join(
+    projectRoot,
+    "editorial/copy-work-orders/2026-08-09-final-chinese-interface.json",
+  );
+  const order = JSON.parse(readFileSync(path, "utf8"));
+
+  assert.throws(
+    () => verifyCopyWorkOrderResult({ repoRoot: projectRoot, workOrder: order }),
+    /does not match the expected final value/,
+  );
 });

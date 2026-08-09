@@ -23,7 +23,7 @@
   },
   "description": {
     "en": "For Gorgeous Space and home brands, I directed and edited films on residential design, renovation, and product collaborations—bringing design ideas, everyday use, and the people who live there into the same story.",
-    "zh": "為幸福空間與居家品牌執導、剪輯住宅設計、老屋翻新與產品合作內容，把設計概念、使用方式與屋主的生活放進同一個故事裡。"
+    "zh": "為幸福空間與居家品牌執導、看空間設計如何影響我們生活的每一處。"
   },
   "watchMode": "selection",
   "watchUrl": "https://www.youtube.com/playlist?list=PLJCU8axtQoPI",

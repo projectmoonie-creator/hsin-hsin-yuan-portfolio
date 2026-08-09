@@ -51,7 +51,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.equal(works[3].title.zh, "幸福空間與品牌影像");
   assert.equal(
     works[3].description.zh,
-    "為幸福空間與居家品牌執導、剪輯住宅設計、老屋翻新與產品合作內容，把設計概念、使用方式與屋主的生活放進同一個故事裡。",
+    "為幸福空間與居家品牌執導、看空間設計如何影響我們生活的每一處。",
   );
   assert.equal(
     works[3].featuredReelUrl,
@@ -104,7 +104,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   );
   assert.equal(
     works[4].description.zh,
-    "擔任公視台語台行腳節目的單集企劃與企編，以公車路線串起地方記憶、飲食、市集，以及一路上遇見的人。",
+    "以公車路線串起的地方記憶、飲食、市集，以及一路上遇見的人。",
   );
   assert.equal(works[4].watchMode, "series");
   assert.equal(works[4].showWatchCta, true);
@@ -125,7 +125,10 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   assert.deepEqual(works[4].tags, ["travel factual", "Taiwanese", "local culture"]);
   assert.deepEqual(works[4].metrics, []);
   assert.equal(works[5].role.en, "Director");
-  assert.equal(works[5].platform, "China Dragon TV");
+  assert.deepEqual(works[5].platform, {
+    en: "China Dragon TV",
+    zh: "東方衛視",
+  });
   assert.equal(works[5].hideMediaLabel, true);
   assert.equal(works[5].mediaTitleLines, undefined);
   assert.equal(works[5].tagline.en, "A cross-border factual-entertainment production filmed in the UK with the original Top Gear team.");
@@ -219,17 +222,17 @@ test("Featured copy preserves approved English while producer-blank Chinese tagl
     ["slow-steps", "description", "Through encounters and pauses along the way, the film observes how people make sense of the world before them—and how the journey changes the observer.", "將Walking tour影像化，以在地人的主觀視角記錄每個街區獨特的個人編年史。"],
     ["tech-dreamers", "role", "Director / Editor / Producer", "導演／剪輯／製作人"],
     ["tech-dreamers", "tagline", "Following Taiwanese founders as an idea takes shape, one decision at a time.", ""],
-    ["tech-dreamers", "description", "From AI to deep tech, the series goes inside Silicon Valley startups to follow founders as they define problems, test ideas, and bring technology to market.", "從 AI 到深科技，鏡頭走進矽谷新創現場，記錄創辦人創業過程中克服困難，把技術帶向市場。"],
+    ["tech-dreamers", "description", "From AI to deep tech, the series goes inside Silicon Valley startups to follow founders as they define problems, test ideas, and bring technology to market.", "從 AI 到深科技，鏡頭走進矽谷新創現場，訪談創始人的創業歷程。"],
     ["my-art-my-voice", "role", "Lead Documentary Director", "紀錄片總導演"],
     ["my-art-my-voice", "tagline", "Taiwanese artists take the stage in Paris—and speak about their work and who they are.", ""],
-    ["my-art-my-voice", "description", "Filmed at the Taiwan Pavilion during the Paris Cultural Olympiad, the documentary moves between performance and backstage conversations about art, freedom, and identity.", "紀錄巴黎文化奧運台灣館的演出與幕後，也聽藝術家談創作、自由與身分。"],
+    ["my-art-my-voice", "description", "Filmed at the Taiwan Pavilion during the Paris Cultural Olympiad, the documentary moves between performance and backstage conversations about art, freedom, and identity.", "巴黎文化奧運台灣館的演出與幕後，聽巴黎與台灣藝術家暢談創作、自由與身分。"],
     ["interior-spatial-brand-films", "title", "Design & Brand Films", "幸福空間與品牌影像"],
     ["interior-spatial-brand-films", "role", "Director / Editor", "導演／剪輯"],
     ["interior-spatial-brand-films", "tagline", "Films about design—and the way a home is actually lived in.", ""],
-    ["interior-spatial-brand-films", "description", "For Gorgeous Space and home brands, I directed and edited films on residential design, renovation, and product collaborations—bringing design ideas, everyday use, and the people who live there into the same story.", "為幸福空間與居家品牌執導、剪輯住宅設計、老屋翻新與產品合作內容，把設計概念、使用方式與屋主的生活放進同一個故事裡。"],
+    ["interior-spatial-brand-films", "description", "For Gorgeous Space and home brands, I directed and edited films on residential design, renovation, and product collaborations—bringing design ideas, everyday use, and the people who live there into the same story.", "為幸福空間與居家品牌執導、看空間設計如何影響我們生活的每一處。"],
     ["pts-taigi-bus", "role", "Episode Development / Writer", "單集企劃／企編"],
     ["pts-taigi-bus", "tagline", "One bus route at a time, into the everyday life of Taiwan.", ""],
-    ["pts-taigi-bus", "description", "I developed and wrote individual episodes for this PTS Taigi travel series, using local bus routes to connect memory, food, markets, and the people along the way.", "擔任公視台語台行腳節目的單集企劃與企編，以公車路線串起地方記憶、飲食、市集，以及一路上遇見的人。"],
+    ["pts-taigi-bus", "description", "I developed and wrote individual episodes for this PTS Taigi travel series, using local bus routes to connect memory, food, markets, and the people along the way.", "以公車路線串起的地方記憶、飲食、市集，以及一路上遇見的人。"],
     ["top-gear-china-uk-special", "tagline", "A cross-border factual-entertainment production filmed in the UK with the original Top Gear team.", ""],
     ["top-gear-china-uk-special", "description", "Directed the UK episode of Top Gear China Season 2, leading the shoot in Britain and coordinating editorial and production requirements across Dragon TV, the Chinese production team, and the original Top Gear team.", "《巔峰拍檔》中國版第二季第五期「英國篇」導演，負責英國段落的內容與拍攝，並協調東方衛視、中國製作團隊與英國原版 Top Gear 團隊的製作需求。"],
   ];
@@ -364,7 +367,7 @@ test("site copy uses the approved bilingual Taiwan positioning", () => {
     metaDescription: "袁欣欣是台灣紀錄片導演與雙語製作人，專長藝術、文化、科技題材，以及需要台灣在地協作的跨國紀實製作。",
     heroEyebrow: "立足台灣，參與跨國製作",
     heroRoleLines: ["紀錄片導演 / 雙語製作人", "藝術 / 文化 / 科技"],
-    heroSubcopy: "我從小就是個愛聽故事的人，所以長大後決定將不同的題材，用我的方式轉換成迷人的紀實故事",
+    heroSubcopy: "我從小就是個愛聽故事的人，所以長大後決定將不同的題材轉換成迷人的紀實故事",
     availabilityLabel: "合作方式",
     availabilityIntro: "可以從前期研究與敘事開發加入，也可以負責導演與剪輯。跨國團隊若在台灣拍攝，我能處理雙語溝通、敘事判斷與現場製作。",
     availability: ["敘事開發", "導演", "剪輯", "研究與採訪", "雙語製作", ""],
@@ -439,7 +442,7 @@ test("contact heading uses two explicit English lines with only together accente
   assert.doesNotMatch(en, /contact-title-lead">Let’s build a story/);
   assert.match(
     zh,
-    /<h2 class="contact-title"><span class="contact-title-line">一起把故事<\/span><span class="contact-title-line"><span class="contact-title-accent">做出來。<\/span><\/span><\/h2>/,
+    /<h2 class="contact-title"><span class="contact-title-line">一起把故事<\/span><span class="contact-title-line"><span class="contact-title-accent">說出來。<\/span><\/span><\/h2>/,
   );
 });
 
@@ -860,7 +863,7 @@ test("archive renders as one descending chronology independent of card treatment
   ]);
 
   const titlePositions = [
-    "Gui Shou Shen Che",
+    "The Mechanic",
     "Three-Minute Micro Drama Series",
     "Heart of Steel",
     "Lying Game",
@@ -1297,7 +1300,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /3 yrs/);
   assert.doesNotMatch(html, /Interior Design &amp; Branded Films[\s\S]*?Coming 2026/);
   assert.match(html, /Nothing by Bus/);
-  assert.match(html, /Gui Shou Shen Che/);
+  assert.match(html, /The Mechanic/);
   assert.doesNotMatch(html, /final public release materials are still being reconstructed/);
   assert.match(html, /Episode Development \/ Writer/);
   assert.match(html, /Top Gear China: UK Special/);
@@ -1600,7 +1603,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /觀看節目/);
   assert.match(zh, /觀看官方預告片/);
   assert.match(zh, /觀看官方宣傳片/);
-  assert.match(zh, /<h2 class="contact-title"><span class="contact-title-line">一起把故事<\/span><span class="contact-title-line"><span class="contact-title-accent">做出來。<\/span><\/span><\/h2>/);
+  assert.match(zh, /<h2 class="contact-title"><span class="contact-title-line">一起把故事<\/span><span class="contact-title-line"><span class="contact-title-accent">說出來。<\/span><\/span><\/h2>/);
   assert.doesNotMatch(zh, /觀看完整單集/);
   assert.equal((zh.match(/>觀看完整系列<\/(?:a|span)>/g) || []).length, 2);
   assert.equal((zh.match(/>觀看精選影片<\/a>/g) || []).length, 1);
@@ -1617,7 +1620,8 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(zh, /無事坐巴士/);
   assert.match(zh, /單集企劃／企編/);
   assert.match(zh, /《巔峰拍檔》中國版：英國篇/);
-  assert.match(zh, /China Dragon TV/);
+  assert.match(zh, /東方衛視/);
+  assert.doesNotMatch(zh, /China Dragon TV/);
   assert.doesNotMatch(zh, /在英國拍攝，與原版 Top Gear 團隊完成跨國汽車節目製作。/);
   assert.doesNotMatch(zh, /中方導演/);
   assert.match(zh, /連續四週全國同時段第一/);

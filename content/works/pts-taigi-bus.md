@@ -20,7 +20,7 @@
   },
   "description": {
     "en": "I developed and wrote individual episodes for this PTS Taigi travel series, using local bus routes to connect memory, food, markets, and the people along the way.",
-    "zh": "擔任公視台語台行腳節目的單集企劃與企編，以公車路線串起地方記憶、飲食、市集，以及一路上遇見的人。"
+    "zh": "以公車路線串起的地方記憶、飲食、市集，以及一路上遇見的人。"
   },
   "watchMode": "series",
   "watchUrl": "https://www.youtube.com/playlist?list=PLfuPqJAlXvCs",

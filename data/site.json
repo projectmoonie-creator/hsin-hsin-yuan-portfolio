@@ -70,7 +70,7 @@
     "heroTitleLines": ["袁欣欣", ""],
     "heroRoleLines": ["紀錄片導演 / 雙語製作人", "藝術 / 文化 / 科技"],
     "heroRoles": ["紀錄片導演", "雙語製作人", "編劇", "剪輯"],
-    "heroSubcopy": "我從小就是個愛聽故事的人，所以長大後決定將不同的題材，用我的方式轉換成迷人的紀實故事",
+    "heroSubcopy": "我從小就是個愛聽故事的人，所以長大後決定將不同的題材轉換成迷人的紀實故事",
     "availabilityLabel": "合作方式",
     "availabilityIntro": "可以從前期研究與敘事開發加入，也可以負責導演與剪輯。跨國團隊若在台灣拍攝，我能處理雙語溝通、敘事判斷與現場製作。",
     "availability": ["敘事開發", "導演", "剪輯", "研究與採訪", "雙語製作", ""],
@@ -84,7 +84,7 @@
     "collabTitle": "合作單位與平台",
     "contactTitleLead": "一起把故事",
     "contactTitleBridge": "",
-    "contactTitleAccent": "做出來。",
+    "contactTitleAccent": "說出來。",
     "contactSubcopy": "如果你正在籌備紀錄片、紀實節目，或需要台灣在地的雙語製作夥伴，歡迎來信。請簡單說明內容、目前階段、時程、預算範圍，以及希望我參與的方式。",
     "contactCta": "送出洽詢",
     "contactForm": {

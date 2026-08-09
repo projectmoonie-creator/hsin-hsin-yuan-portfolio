@@ -77,6 +77,14 @@ function validateStableTarget(entry, index) {
     return;
   }
 
+  const press = entry.stableKey.match(/^press\.([a-z0-9]+(?:-[a-z0-9]+)*)\.(.+)$/);
+  if (press) {
+    if (entry.sourceFile !== "data/press.json") {
+      fail(`entry ${index} Press stable key must use data/press.json`);
+    }
+    return;
+  }
+
   fail(`entry ${index} uses an unsupported stable key family`);
 }
 
@@ -139,14 +147,14 @@ export function validateCopyWorkOrder(input) {
 }
 
 function parseSource(sourceFile, source) {
-  if (sourceFile === "data/site.json") return JSON.parse(source);
+  if (["data/site.json", "data/press.json"].includes(sourceFile)) return JSON.parse(source);
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) fail(`${sourceFile} is missing JSON frontmatter`);
   return JSON.parse(match[1]);
 }
 
 function extractJsonDocument(sourceFile, source) {
-  if (sourceFile === "data/site.json") return { source, offset: 0 };
+  if (["data/site.json", "data/press.json"].includes(sourceFile)) return { source, offset: 0 };
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) fail(`${sourceFile} is missing JSON frontmatter`);
   return { source: match[1], offset: source.indexOf(match[1]) };
@@ -163,7 +171,7 @@ function parsePropertyPath(path) {
   return tokens;
 }
 
-function resolveValue(root, tokens, stableKey, locale) {
+function resolvePath(root, tokens, stableKey, locale) {
   let current = root;
   for (const token of tokens) {
     if (current == null || !Object.hasOwn(current, token)) {
@@ -171,8 +179,42 @@ function resolveValue(root, tokens, stableKey, locale) {
     }
     current = current[token];
   }
+  return current;
+}
+
+function resolveValue(root, tokens, stableKey, locale) {
+  const current = resolvePath(root, tokens, stableKey, locale);
   if (typeof current !== "string") fail(`${stableKey}.${locale} must resolve to a string`);
   return current;
+}
+
+function supportsSharedScalarPromotion(stableKey) {
+  return [
+    /^featured\.[a-z0-9-]+\.platform$/,
+    /^featured\.[a-z0-9-]+\.press\[\d+\]\.source$/,
+    /^press\.[a-z0-9-]+\.source$/,
+  ].some((pattern) => pattern.test(stableKey));
+}
+
+function localizableTarget({ root, tokens, documentTokens, stableKey, locale }) {
+  const current = resolvePath(root, tokens, stableKey, locale);
+  if (typeof current === "string") {
+    if (!supportsSharedScalarPromotion(stableKey)) {
+      fail(`${stableKey} cannot promote a non-localizable shared scalar`);
+    }
+    return {
+      root,
+      tokens,
+      documentTokens,
+      sharedScalar: true,
+    };
+  }
+  return {
+    root,
+    tokens: [...tokens, locale],
+    documentTokens: [...documentTokens, locale],
+    sharedScalar: false,
+  };
 }
 
 function targetTokens(entry, locale, parsed) {
@@ -188,10 +230,32 @@ function targetTokens(entry, locale, parsed) {
     const tokens = ["navPrimaryAria"];
     return { root: parsed[locale], tokens, documentTokens: [locale, ...tokens] };
   }
+  const press = entry.stableKey.match(/^press\.([a-z0-9-]+)\.(.+)$/);
+  if (press) {
+    const [, id, propertyPath] = press;
+    const matches = parsed
+      .map((record, index) => ({ record, index }))
+      .filter(({ record }) => record?.id === id);
+    if (matches.length !== 1) fail(`${entry.stableKey} must match one Press id`);
+    const tokens = parsePropertyPath(propertyPath);
+    return localizableTarget({
+      root: matches[0].record,
+      tokens,
+      documentTokens: [matches[0].index, ...tokens],
+      stableKey: entry.stableKey,
+      locale,
+    });
+  }
   const [, , slug, propertyPath] = entry.stableKey.match(/^(featured|archive)\.([a-z0-9-]+)\.(.+)$/);
   if (parsed.slug !== slug) fail(`${entry.stableKey} does not match frontmatter slug`);
-  const tokens = [...parsePropertyPath(propertyPath), locale];
-  return { root: parsed, tokens, documentTokens: tokens };
+  const tokens = parsePropertyPath(propertyPath);
+  return localizableTarget({
+    root: parsed,
+    tokens,
+    documentTokens: tokens,
+    stableKey: entry.stableKey,
+    locale,
+  });
 }
 
 function readSources(repoRoot, entries) {
@@ -343,9 +407,57 @@ export function planCopyWorkOrder({ repoRoot, workOrder, priority }) {
 
   for (const entry of selected) {
     const record = sources.get(entry.sourceFile);
+    const targets = validated.localeScope.map((locale) => ({
+      locale,
+      change: entry.changes[locale],
+      target: targetTokens(entry, locale, record.parsed),
+    }));
+    if (targets.every(({ target }) => target.sharedScalar === true)) {
+      const current = resolveValue(
+        targets[0].target.root,
+        targets[0].target.tokens,
+        entry.stableKey,
+        "shared",
+      );
+      const finalValues = {};
+      let changesSharedScalar = false;
+      for (const { locale, change } of targets) {
+        if (current !== change.expected) {
+          fail(`${entry.stableKey}.${locale} does not match the expected current value`);
+        }
+        if (change.op === "keep") {
+          keeps += 1;
+          finalValues[locale] = current;
+        } else {
+          changesSharedScalar = true;
+          finalValues[locale] = change.op === "blank" ? "" : change.value;
+        }
+      }
+      if (changesSharedScalar) {
+        const span = locateJsonStringSpan({
+          document: record.document,
+          tokens: targets[0].target.documentTokens,
+          expected: current,
+          stableKey: entry.stableKey,
+          locale: "shared",
+        });
+        const lineStart = record.source.lastIndexOf("\n", span.start - 1) + 1;
+        const indent = record.source.slice(lineStart, span.start).match(/^[ \t]*/)?.[0] || "";
+        const valueToken = JSON.stringify(finalValues, null, 2).replace(/\n/g, `\n${indent}`);
+        replacements.push({
+          sourceFile: entry.sourceFile,
+          stableKey: entry.stableKey,
+          locale: "en+zh",
+          valueToken,
+          start: span.start,
+          end: span.end,
+        });
+      }
+      continue;
+    }
     for (const locale of validated.localeScope) {
       const change = entry.changes[locale];
-      const target = targetTokens(entry, locale, record.parsed);
+      const target = targets.find((candidate) => candidate.locale === locale).target;
       const current = resolveValue(target.root, target.tokens, entry.stableKey, locale);
       if (current !== change.expected) {
         fail(`${entry.stableKey}.${locale} does not match the expected current value`);

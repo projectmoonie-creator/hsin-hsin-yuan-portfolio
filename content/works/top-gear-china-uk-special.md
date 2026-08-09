@@ -13,7 +13,10 @@
     "en": "Director",
     "zh": "導演"
   },
-  "platform": "China Dragon TV",
+  "platform": {
+    "en": "China Dragon TV",
+    "zh": "東方衛視"
+  },
   "tagline": {
     "en": "A cross-border factual-entertainment production filmed in the UK with the original Top Gear team.",
     "zh": ""
