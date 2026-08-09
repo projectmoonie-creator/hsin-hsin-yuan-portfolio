@@ -1429,6 +1429,7 @@ a.archive-card-media-link:focus-visible {
 
   .contact h2 {
     font-size: clamp(2.25rem, 11vw, 3.2rem);
+    line-height: 1.02;
     max-width: none;
   }
 

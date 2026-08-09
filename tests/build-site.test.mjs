@@ -1680,6 +1680,10 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.nav-contact \{/);
   assert.match(css, /\.contact-title-line \{[^}]*display: block;[^}]*white-space: nowrap;[^}]*\}/);
   assert.match(css, /\.contact-title-accent \{[\s\S]*?color: var\(--acid\);/);
+  assert.match(
+    css,
+    /@media \(max-width: 460px\) \{[\s\S]*?\.contact h2 \{[^}]*line-height: 1\.02;/,
+  );
   assert.match(css, /\.brand-mobile \{\n  display: none;/);
   assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*\.brand-desktop \{[\s\S]*display: none;[\s\S]*\.brand-mobile \{[\s\S]*display: inline;/);
   assert.doesNotMatch(css, /showreel-modal/);

@@ -4,7 +4,38 @@ Updated: 2026-08-09
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Final Chinese Interface Preview
+## Current Work Package — Chinese Copy Round 2 + Mobile Contact Spacing
+
+- Producer feedback identified cramped two-line Contact heading typography on
+  narrow mobile. The root cause was the desktop display setting
+  `line-height: 0.9` carrying into Chinese at the `460px` breakpoint.
+- TDD reproduced the missing narrow-screen contract, then the minimal shared
+  component fix set `line-height: 1.02` only at `max-width: 460px`. Desktop
+  remains unchanged and no locale-specific layout variant was introduced.
+- Full `npm test` passes 139/139; build, design-contract audit, and diff checks
+  pass. Native Chromium passes Chinese and English at 390×844 and 360×800:
+  exact 1.02 line-height ratio, two lines, zero horizontal overflow, and zero
+  console/page errors. All four screenshots were visually inspected.
+- The new offline workbook is
+  `../outputs/Hsin-Hsin-Yuan-Portfolio-Chinese-Interface-Manager-2026-08-09-round-2.xlsx`,
+  SHA-256
+  `f09e8e93321dfe7aeffd0db3c2b283d1c209954c758d099f19360a2ca7af80b9`.
+  It snapshots branch commit `92d8297b5dcd693fa684ef006c455b3719984306`
+  with 169 stable-key rows, zero initial Chinese differences, 359 formulas,
+  and zero formula errors. Column G remains the only copy-edit input; column H
+  now derives `已確認` / `需修改` automatically. Blank-Chinese and English-
+  independence rules are unchanged, and the original workbook typography,
+  dimensions, filters, freeze panes, comments, and seven-sheet structure are
+  preserved.
+- A pre-existing tracked Claude handoff status exposed three private absolute
+  paths. The existing privacy regression caught them; they are now repo-
+  relative without changing review state or claiming a completed model run.
+- No new online Preview, `main`, Production, alias, Contact POST, or protected-
+  file action occurred. Exact next action: producer edits only the workbook's
+  yellow G cells and returns the same XLSX; run a stable-key Chinese-only
+  guarded dry-run, then combine approved copy and spacing in one new Preview.
+
+## Prior Work Package — Final Chinese Interface Preview
 
 - Frozen release candidate `0ad90f2a2e6e244f986ae52e05ad657f6d605cd5`
   applies the final producer workbook through 54 stable-key entries: 19 P0,

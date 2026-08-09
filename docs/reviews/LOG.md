@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-09 — Chinese copy round 2 + mobile Contact spacing
+- Feedback/root cause: narrow-mobile Chinese Contact heading inherited the desktop `line-height: 0.9`, making its two display lines visually cramped.
+- TDD/change: RED contract then shared `max-width: 460px` line-height `1.02`; desktop and locale data remain unchanged, with no one-off Chinese variant.
+- Validation: 139/139, build, design audit, and diff checks pass; bilingual 390×844/360×800 browser QA = 4/4, two lines, zero overflow/errors, screenshots inspected.
+- Workbook: offline round-2 XLSX at `../outputs/`, SHA-256 `f09e8e…80b9`; snapshot `92d8297`, 169 stable keys, zero initial diffs, 359 formulas, zero errors, automatic status column.
+- Format: edit yellow G only; blank Chinese hides only that locale; English remains independent; seven-sheet template, typography, comments, filters, and freeze panes preserved.
+- Privacy: existing regression found three absolute paths in a tracked Claude handoff status; converted to repo-relative paths without changing its incomplete/no-request provenance.
+- Review/deployment: external AI skipped for this narrow reversible styling/workbook package; no new Preview, main, Production, alias, Contact, or protected-file action.
+- Next: producer returns the edited XLSX; perform a guarded Chinese-only stable-key dry-run, then publish copy plus spacing together in one new Preview.
+
 ## 2026-08-09 — Final Chinese interface Preview
 - Source: candidate `0ad90f2`; final workbook `ebc35ed…c2f4`; guarded work order = 54 keys / 50 Chinese replacements / 4 Chinese blanks / 54 English keeps / 108 final matches.
 - Contract: exact-empty locale values retain stable fields but omit complete Hero/Work Press/tagline elements; no empty DOM or spacer; whitespace-only fails; English remains independent and byte-identical at `84e7933…d7b3`.
