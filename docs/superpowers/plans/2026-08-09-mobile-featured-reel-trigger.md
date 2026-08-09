@@ -172,7 +172,7 @@ git status --short
 Expected: all checks pass; the protected file remains untracked at
 `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
 
-- [ ] **Step 5: Commit and back up only the feature branch**
+- [x] **Step 5: Commit and back up only the feature branch**
 
 Commit the reviewed implementation and local closeout, push a dated backup ref,
 and read it back exactly. Do not push `main`, create a Preview, deploy, change

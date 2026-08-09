@@ -31,13 +31,15 @@ State: `PASS_WITH_OPEN_ITEMS`
   failures, and Contact POST checks all passed. Two bilingual mobile screenshots
   were visually inspected; the existing poster-to-video crossfade and layout
   remain intact.
-- This package is local only pending its dated remote backup. It has not pushed
-  `main`, created a Preview, deployed, changed an alias, or submitted Contact.
-  The protected untracked review remains byte-identical at SHA-256
+- Dated backup
+  `backup/2026-08-09/mobile-featured-reel-trigger-local-b103409` was pushed and
+  read back exactly at `b103409ed2264ffc39b830501313c5dcd496cc74`. This
+  package has not pushed `main`, created a Preview, deployed, changed an alias,
+  or submitted Contact. The protected untracked review remains byte-identical at SHA-256
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
-- Exact next action: push and read back a dated backup of the local closeout.
-  Any Preview or `main` integration remains a separate explicit authorization
-  and public-release review checkpoint.
+- Exact next action: the producer may review this local package. Any Preview or
+  `main` integration remains a separate explicit authorization and
+  public-release review checkpoint.
 
 ## Prior Work Package — Intentional Localized Blanks
 

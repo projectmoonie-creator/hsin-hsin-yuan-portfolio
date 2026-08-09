@@ -11,7 +11,7 @@ packages.
 - TDD/validation: four RED checkpoints then focused 13/13 and full 132/132 GREEN; build, design audit, Figma export, and diff checks pass with no content, CSS, media, or Figma delta.
 - Browser: bilingual 390×844/360×800 plus 1440×900, 1200×900, and 834×1112 pass; mobile play events arrive in 821–994ms, only the center reel plays/advances, and scroll handoff resets the prior reel.
 - Accessibility/safety: reduced-motion and no-JS make zero MP4 requests; served-build identity, keyboard focus, overflow, console/page errors, same-origin failures, and Contact POST checks pass.
-- External state: local only pending dated backup; no `main`, Preview, Production, alias, Contact, or protected-file change. Public release still requires separate authorization and review.
+- Durability/external state: backup `backup/2026-08-09/mobile-featured-reel-trigger-local-b103409` read back at `b103409`; no `main`, Preview, Production, alias, Contact, or protected-file change. Public release still requires separate authorization and review.
 
 ## 2026-08-09 — Intentional localized blanks
 - Branch/base: `codex/three-minute-watch-link` from reviewed bilingual-copy closeout `d9f93b9`; six producer-approved Chinese blanks only.
