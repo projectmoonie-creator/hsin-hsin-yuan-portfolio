@@ -37,9 +37,14 @@ State: `PASS_WITH_OPEN_ITEMS`
 - No `main` change, hosted Preview, Production, alias, deployment, or Contact
   action occurred. The protected untracked file remains byte-identical at
   SHA-256 `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
-- Exact next action: commit this reviewed package, push the feature branch and
-  one unique dated backup with live-tip read-back, then request separate
-  producer approval before any of the remaining 44 Chinese differences.
+- Reviewed implementation commit
+  `e13c5d512ee8a942bbe895d040c320e911f38b11` was pushed and read back exactly
+  at both `codex/three-minute-watch-link` and
+  `backup/2026-08-09/intentional-zh-blanks-e13c5d5`. Live read-back also proves
+  `origin/main` remains `03ad08ac4dd3a47d300cab99f2dd569353e13ec9`.
+- Exact next action: let the producer inspect the local screenshot set. Any
+  hosted Preview, `main` change, deployment, or one of the remaining 44
+  Chinese differences requires a separately bounded approval.
 
 ## Prior Work Package — Guarded Bilingual Copy Work Order
 
