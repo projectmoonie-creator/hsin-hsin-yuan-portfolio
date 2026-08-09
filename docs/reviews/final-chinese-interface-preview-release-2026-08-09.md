@@ -65,7 +65,9 @@ shareable link. After the explicit Vercel warning, confirmation succeeded and
 the authoritative dialog changed to `Anyone with the link can view and
 comment`; Vercel also confirmed that a new shareable link was generated and
 copied. The old Hobby shareable link is revoked. The access-bearing clipboard
-value was not readable by the automation surface and was not persisted in Git.
+value was read once for producer delivery, remains outside Git, and has
+SHA-256
+`ef3b854bba5653caf6402fc35261254f98f464a13ac83dd22e6cb39c02902dff`.
 
 The source is recoverable at
 `backup/2026-08-09/final-chinese-portfolio-0ad90f2`, read back exactly at the

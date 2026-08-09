@@ -12,7 +12,7 @@ packages.
 - Review: local `APPROVE_PREVIEW`, no findings; Gemini external-payload escalation denied before execution and Claude handoff incomplete, so no model/spend/consensus claim.
 - Package: privacy-scanned dist-only 42 files / 80,018,591 bytes / path-list `bc6f8e2…f143`; repo, tests, reviews, environments, Contact API, and protected document excluded.
 - Preview: `dpl_H2i7G…6Rx9r2` read back `Ready` / `preview` at `https://hsin-hsin-yuan-portfolio-lujpvjbpo.vercel.app`; deployed page not fetched under deployment policy.
-- Access/durability: producer-authorized Hobby share replacement succeeded (`Anyone with the link`), old link revoked, access value not read/committed; exact backup `backup/2026-08-09/final-chinese-portfolio-0ad90f2` read back.
+- Access/durability: producer-authorized Hobby share replacement succeeded (`Anyone with the link`), old link revoked, access URL delivered but excluded from Git at `ef3b854…02dff`; exact backup `backup/2026-08-09/final-chinese-portfolio-0ad90f2` read back.
 - Boundary/next: no main, Production, alias, Contact, or protected-file change; producer must inspect Preview before explicit Production approval.
 
 ## 2026-08-09 — Chinese interface manager workbook

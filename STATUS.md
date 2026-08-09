@@ -44,7 +44,9 @@ State: `PASS_WITH_OPEN_ITEMS`
 - The producer-authorized Hobby share-link replacement succeeded. Vercel now
   displays `Anyone with the link can view and comment` and confirmed that a
   new shareable link was generated/copied; the prior shareable link is revoked.
-  The access-bearing clipboard value was not read or committed.
+  The access-bearing clipboard value was read once for producer delivery and
+  remains outside Git; its SHA-256 is
+  `ef3b854bba5653caf6402fc35261254f98f464a13ac83dd22e6cb39c02902dff`.
 - No `main`, Production, alias, Contact POST, or protected-file mutation
   occurred. The protected untracked review remains outside Git and
   byte-identical at SHA-256
