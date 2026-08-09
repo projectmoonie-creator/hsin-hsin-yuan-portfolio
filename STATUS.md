@@ -34,17 +34,36 @@ State: `PASS_WITH_OPEN_ITEMS`
   Gemini requested/observed/completed `gemini-3.6-flash`, returned PASS with no
   findings, and used 1,823 input / 130 output / 2,997 total tokens. Local
   adjudication requires no remediation.
-- No `main` change, hosted Preview, Production, alias, deployment, or Contact
-  action occurred. The protected untracked file remains byte-identical at
-  SHA-256 `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
-- Reviewed implementation commit
-  `e13c5d512ee8a942bbe895d040c320e911f38b11` was pushed and read back exactly
-  at both `codex/three-minute-watch-link` and
-  `backup/2026-08-09/intentional-zh-blanks-e13c5d5`. Live read-back also proves
-  `origin/main` remains `03ad08ac4dd3a47d300cab99f2dd569353e13ec9`.
-- Exact next action: let the producer inspect the local screenshot set. Any
-  hosted Preview, `main` change, deployment, or one of the remaining 44
-  Chinese differences requires a separately bounded approval.
+- The producer authorized an online Preview and `main` on 2026-08-09. The
+  privacy-audited dist-only Preview dry-run contained exactly 42 public files /
+  80,017,465 bytes. Deployment `dpl_7FFRu6wKnygpKymrCHHcquwqM4WX` is `READY`,
+  target `preview`, with no serverless output:
+  `https://hsin-hsin-yuan-portfolio-2bxarvj4o.vercel.app`. Project SSO remains;
+  the Hobby account's existing shareable link was not revoked or replaced.
+- Preview browser QA passed English and Chinese at 1440×900, 1200×900,
+  834×1112, 390×844, and 360×800: six Featured and five Archive records remain,
+  localized optional counts are exact, empty DOM nodes and horizontal overflow
+  are zero, keyboard order is usable, and console/page errors are zero.
+- Remote `main` was backed up first at
+  `backup/2026-08-09/pre-bilingual-main-03ad08a`, read back exactly at
+  `03ad08ac4dd3a47d300cab99f2dd569353e13ec9`, then fast-forwarded to reviewed
+  release source `332d9ed853516a9c192f0e5596fc6b2311a6e8ee`.
+- The Git integration created Production
+  `dpl_5C2gcfoRqjEmVb3DbZ1Kh57Hs1E4`, which is `READY` and owns canonical alias
+  `https://hsin-hsin-yuan-portfolio.vercel.app`. Production browser QA passed
+  14 English/Chinese cases: the same five viewport sizes plus reduced motion
+  and no JavaScript, with HTTP 200, no overflow, no same-origin failures, and
+  no console/page errors. Contact remained unsubmitted.
+- Reviewed implementation `e13c5d512ee8a942bbe895d040c320e911f38b11`
+  remains recoverable at the feature branch and implementation backup; the
+  source-plus-documentation checkpoint is preserved by the final dated backup
+  reported externally after this record commits. The protected untracked file
+  remains outside Git and byte-identical at SHA-256
+  `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+- Exact next action: producer review may use the direct Preview while logged in
+  to Vercel or the public Production alias. The remaining 44 Chinese
+  differences, role-taxonomy/JSON-LD alignment, lighting, or replacement of the
+  existing Hobby shareable link each requires a separate bounded approval.
 
 ## Prior Work Package — Guarded Bilingual Copy Work Order
 

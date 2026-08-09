@@ -11,7 +11,10 @@ packages.
 - TDD/validation: RED then focused 69/69 and full 128/128 GREEN; build, Figma export, design audit, and diff checks pass.
 - Browser: English/Chinese at 1440×1100 and 390×844 have zero empty tagline/pill nodes, console errors, or page errors; twelve section screenshots show Chinese content collapsing upward without a hole.
 - Review: packet `95ca9c4…46d9a`; Gemini requested/observed/completed `gemini-3.6-flash`, PASS/no findings, 1,823 in / 130 out / 2,997 total; local adjudication needs no remediation.
-- Durability/boundary: implementation `e13c5d5` read back exactly at the feature branch and `backup/2026-08-09/intentional-zh-blanks-e13c5d5`; `origin/main` remains `03ad08a`; no hosted Preview, deployment, alias, Contact, broader 44-copy changes, or protected-file mutation.
+- Preview: 42-file / 80,017,465-byte dist-only `dpl_7FFRu6…M4WX` is READY/Preview with no functions; direct URL keeps project SSO, and the prior Hobby shareable link was not revoked.
+- Production: pre-main backup `backup/2026-08-09/pre-bilingual-main-03ad08a` read back at `03ad08a`; authorized fast-forward to source `332d9ed` created READY Production `dpl_5C2gcf…s1E4` on the canonical alias.
+- Online QA: Preview passed both locales at five viewports plus keyboard/console checks; Production passed 14 locale/mode cases including reduced motion and no JavaScript, with HTTP 200, zero overflow/same-origin/console/page errors, and no Contact submission.
+- Durability/open: formal record is `intentional-localized-blanks-production-release-2026-08-09.md`; final docs-inclusive backup is reported externally after commit; the broader 44 copy items, taxonomy/JSON-LD, lighting, share-link replacement, and protected file remain untouched/producer-gated.
 
 ## 2026-08-09 — Guarded bilingual copy work order
 - Branch/base/commits: `codex/three-minute-watch-link` from frozen `2f56352`; reusable mechanism `6fb3501`, P0 site copy `e0c5e35`, reviewed P1 Featured copy `d5942d1`.
