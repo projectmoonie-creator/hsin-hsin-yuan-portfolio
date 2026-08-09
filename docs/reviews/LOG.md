@@ -5,14 +5,14 @@ Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
 ## 2026-08-09 — Chinese copy round 2 + mobile Contact spacing
-- Feedback/root cause: narrow-mobile Chinese Contact heading inherited the desktop `line-height: 0.9`, making its two display lines visually cramped.
-- TDD/change: RED contract then shared `max-width: 460px` line-height `1.02`; desktop and locale data remain unchanged, with no one-off Chinese variant.
-- Validation: 139/139, build, design audit, and diff checks pass; bilingual 390×844/360×800 browser QA = 4/4, two lines, zero overflow/errors, screenshots inspected.
-- Workbook: offline round-2 XLSX at `../outputs/`, SHA-256 `f09e8e…80b9`; snapshot `92d8297`, 169 stable keys, zero initial diffs, 359 formulas, zero errors, automatic status column.
-- Format: edit yellow G only; blank Chinese hides only that locale; English remains independent; seven-sheet template, typography, comments, filters, and freeze panes preserved.
-- Privacy: existing regression found three absolute paths in a tracked Claude handoff status; converted to repo-relative paths without changing its incomplete/no-request provenance.
-- Review/deployment: external AI skipped for this narrow reversible styling/workbook package; no new Preview, main, Production, alias, Contact, or protected-file action.
-- Next: producer returns the edited XLSX; perform a guarded Chinese-only stable-key dry-run, then publish copy plus spacing together in one new Preview.
+- Scope: producer-approved P0+P1 = nine stable-key changes; English and Chinese stay independent, including `The Mechanic`, `東方衛視`, `座談`, and six Chinese copy revisions.
+- Mechanism: guarded global Press-by-ID targeting plus allowlisted shared-scalar promotion; exact-current, structural-token, replay, rollback, path, and non-localizable-scalar rejection contracts remain fail-closed.
+- Layout: inherited mobile Contact fix remains `line-height: 1.02` at ≤460px; no new CSS, media, link, Contact API, light effect, or button change.
+- Validation: 144/144, build, Figma export, design audit, privacy/protected-file/diff checks, and 14/14 bilingual viewport/reduced-motion/no-JS browser cases pass; no overflow, empty optional node, error, or Contact POST.
+- Review: packet `acca559a…3a780` (committed whitespace-clean `28442b6…a798f`); Gemini requested/observed/completed `gemini-3.6-flash`, PASS/no findings; Claude handoff incomplete/no request; local `APPROVE_PRODUCTION` without dual consensus.
+- Durability: candidate `c716849` and pre-main `d109bbd` read back at dated candidate/pre-main backups before a non-force main fast-forward.
+- Production: `dpl_4i1jTq…EYwkv` is Ready/Production with `api/contact`; canonical alias is `https://hsin-hsin-yuan-portfolio.vercel.app`; deployed page was not fetched under policy.
+- Boundary/next: protected untracked doc remains `945d4df…d28fc`; next package is lo-fi-first lighting/button microinteraction with mobile and reduced-motion gates.
 
 ## 2026-08-09 — Final Chinese interface Preview
 - Source: candidate `0ad90f2`; final workbook `ebc35ed…c2f4`; guarded work order = 54 keys / 50 Chinese replacements / 4 Chinese blanks / 54 English keeps / 108 final matches.

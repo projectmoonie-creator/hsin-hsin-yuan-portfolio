@@ -4,36 +4,45 @@ Updated: 2026-08-09
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Chinese Copy Round 2 + Mobile Contact Spacing
+## Current Work Package — Chinese Copy Round 2 Production Release
 
-- Producer feedback identified cramped two-line Contact heading typography on
-  narrow mobile. The root cause was the desktop display setting
-  `line-height: 0.9` carrying into Chinese at the `460px` breakpoint.
-- TDD reproduced the missing narrow-screen contract, then the minimal shared
-  component fix set `line-height: 1.02` only at `max-width: 460px`. Desktop
-  remains unchanged and no locale-specific layout variant was introduced.
-- Full `npm test` passes 139/139; build, design-contract audit, and diff checks
-  pass. Native Chromium passes Chinese and English at 390×844 and 360×800:
-  exact 1.02 line-height ratio, two lines, zero horizontal overflow, and zero
-  console/page errors. All four screenshots were visually inspected.
-- The new offline workbook is
-  `../outputs/Hsin-Hsin-Yuan-Portfolio-Chinese-Interface-Manager-2026-08-09-round-2.xlsx`,
+- Producer-approved P0+P1 work order applies nine stable-key changes: two site
+  strings, four Featured descriptions, one localized Top Gear platform, one
+  global Press label, and the English Archive title `The Mechanic`. Every
+  unchanged locale is an exact guarded keep; blank-field behavior is unchanged.
+- The reusable importer now resolves `press.<id>.<property>` by exactly one
+  Press ID and can promote only three explicitly localizable shared-scalar key
+  shapes into paired `{ en, zh }` values. A new negative contract rejects all
+  other scalar promotion; exact-current guards, replay rejection, structural
+  token targeting, rollback, and path safety remain intact.
+- Narrow-mobile Contact spacing remains the prior shared `line-height: 1.02`
+  contract at `max-width: 460px`; this release adds no new CSS or locale-only
+  layout branch.
+- Full `npm test` passes 144/144; build, Figma export, design-contract audit,
+  privacy, protected-file, and diff checks pass. Native Chromium passed 14/14
+  bilingual desktop/tablet/mobile, reduced-motion, and no-JavaScript scenarios
+  with exact copy, zero empty optional nodes/overflow/errors, and no Contact
+  submission. Four representative screenshots were visually inspected.
+- Frozen review packet originally hashed `acca559a…3a780`; its committed
+  whitespace-clean equivalent is `28442b6…a798f`. Gemini requested/observed/
+  completed `gemini-3.6-flash` and returned `PASS` with no findings. Claude is
+  an incomplete active-session handoff with no model request; no dual-review
+  consensus is claimed. Local adjudication is `APPROVE_PRODUCTION`.
+- Candidate `c716849fb8b644ac6b8977887f201a97a148ac7a` and pre-release main
+  `d109bbdede94a00b58ae8b0b7de0d1875dd627e4` were pushed and read back at
+  `backup/2026-08-09/chinese-round2-production-c716849` and
+  `backup/2026-08-09/pre-chinese-round2-main-d109bbd` before a non-force main
+  fast-forward.
+- Git-triggered Production `dpl_4i1jTqt3Qq9FjchMnMXEGKrEYwkv` is `Ready`,
+  target `production`, with `api/contact` and canonical alias
+  `https://hsin-hsin-yuan-portfolio.vercel.app`. Per deployment policy, the
+  deployed page was not fetched and no Contact POST occurred.
+- The protected untracked document remains outside Git and byte-identical at
   SHA-256
-  `f09e8e93321dfe7aeffd0db3c2b283d1c209954c758d099f19360a2ca7af80b9`.
-  It snapshots branch commit `92d8297b5dcd693fa684ef006c455b3719984306`
-  with 169 stable-key rows, zero initial Chinese differences, 359 formulas,
-  and zero formula errors. Column G remains the only copy-edit input; column H
-  now derives `已確認` / `需修改` automatically. Blank-Chinese and English-
-  independence rules are unchanged, and the original workbook typography,
-  dimensions, filters, freeze panes, comments, and seven-sheet structure are
-  preserved.
-- A pre-existing tracked Claude handoff status exposed three private absolute
-  paths. The existing privacy regression caught them; they are now repo-
-  relative without changing review state or claiming a completed model run.
-- No new online Preview, `main`, Production, alias, Contact POST, or protected-
-  file action occurred. Exact next action: producer edits only the workbook's
-  yellow G cells and returns the same XLSX; run a stable-key Chinese-only
-  guarded dry-run, then combine approved copy and spacing in one new Preview.
+  `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+  Exact next action: start a separate lo-fi-first UI package for one restrained
+  light treatment and/or button microinteraction, with mobile performance and
+  reduced-motion approval before implementation or deployment.
 
 ## Prior Work Package — Final Chinese Interface Preview
 
