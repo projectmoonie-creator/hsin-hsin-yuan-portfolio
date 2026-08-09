@@ -173,10 +173,12 @@ Films and Nothing by Bus.
 
 - Only canonical `featuredReelMode: "after-hold"` approves a Featured reel;
   absence of that approval leaves the static poster.
-- A reel becomes eligible at 35% visibility. When more than one reel is
-  eligible, only the last eligible reel in DOM order is active.
-- The canonical poster holds for 1.4 seconds after activation and remains
-  visible until the video actually emits `playing`.
+- A reel becomes eligible at 35% visibility. At `820px` and below, only the
+  eligible reel nearest the viewport center is active and ownership is
+  recalculated during scroll and resize. Above `820px`, only the last eligible
+  reel in DOM order is active.
+- The canonical poster holds for 700ms at `820px` and below and 1.4 seconds
+  above `820px`, then remains visible until the video actually emits `playing`.
 - Leaving eligibility, hiding the page, a media error, a rejected current
   `video.play()` promise, or `pagehide` safely resets the reel: cancel its hold,
   pause it, seek it to time zero, and restore its poster. A rejected promise
@@ -202,6 +204,9 @@ Archive is one descending chronology controlled by canonical `order`.
 
 - Every entry uses the `standard` card family and the same internal copy/media
   split.
+- Approved Archive reels select the eligible video nearest the viewport center
+  and hold their poster for 1.4 seconds at every viewport. Featured's responsive
+  timing and ownership policy does not apply to Archive.
 - Poster absence changes capability, never card size or hierarchy.
 - The fifth single desktop entry remains an ordinary half-row card; it does
   not span.

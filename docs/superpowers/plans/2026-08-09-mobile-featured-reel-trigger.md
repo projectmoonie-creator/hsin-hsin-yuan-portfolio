@@ -30,13 +30,13 @@
 - Modify: `tests/featured-reel-runtime.test.mjs`
 - Modify: `tests/build-site.test.mjs`
 
-- [ ] **Step 1: Add a failing generic-selector test**
+- [x] **Step 1: Add a failing generic-selector test**
 
 Import `selectClosestVisibleReel` and assert it chooses the viewport-center
 candidate while `selectClosestVisibleArchiveReel` returns the same result for
 compatibility.
 
-- [ ] **Step 2: Add failing mobile runtime tests**
+- [x] **Step 2: Add failing mobile runtime tests**
 
 Extend the runtime fixture with configurable viewport width, video rectangles,
 matchMedia results, and a flushable animation-frame queue. Assert:
@@ -53,13 +53,13 @@ Use rectangles where the first DOM item is nearer the mobile viewport center,
 then change rectangles, dispatch `scroll`, flush animation frames, and prove
 ownership transfers to the second item without another intersection callback.
 
-- [ ] **Step 3: Update structural expectations before production code**
+- [x] **Step 3: Update structural expectations before production code**
 
 Require separate `FEATURED_REEL_MOBILE_HOLD_MS = 700` and
 `FEATURED_REEL_DESKTOP_HOLD_MS = 1400` constants, a responsive hold selector,
 the shared nearest-center selector, and throttled scroll/resize lifecycle.
 
-- [ ] **Step 4: Run focused tests and verify RED**
+- [x] **Step 4: Run focused tests and verify RED**
 
 Run:
 
@@ -80,7 +80,7 @@ viewport-refresh ownership do not exist yet.
 - Test: `tests/featured-reel-runtime.test.mjs`
 - Test: `tests/build-site.test.mjs`
 
-- [ ] **Step 1: Add the generic selector with compatibility alias**
+- [x] **Step 1: Add the generic selector with compatibility alias**
 
 Rename the function body to `selectClosestVisibleReel` and export:
 
@@ -88,19 +88,19 @@ Rename the function body to `selectClosestVisibleReel` and export:
 export const selectClosestVisibleArchiveReel = selectClosestVisibleReel;
 ```
 
-- [ ] **Step 2: Add responsive Featured policy**
+- [x] **Step 2: Add responsive Featured policy**
 
 Use the existing 820px breakpoint. Mobile selects via
 `selectClosestVisibleReel(...)` and uses `700ms`; desktop keeps last eligible
 DOM order and `1400ms`.
 
-- [ ] **Step 3: Add viewport and breakpoint lifecycle**
+- [x] **Step 3: Add viewport and breakpoint lifecycle**
 
 Add a requestAnimationFrame-throttled scroll/resize refresh. Bind and remove
 its listeners with the existing Featured lifecycle; on breakpoint change,
 reset current activations and reselect under the new policy.
 
-- [ ] **Step 4: Run focused tests and verify GREEN**
+- [x] **Step 4: Run focused tests and verify GREEN**
 
 Run:
 
@@ -111,7 +111,7 @@ node --test --test-name-pattern="generated site keeps the chosen visual system" 
 
 Expected: all focused tests pass without warnings.
 
-- [ ] **Step 5: Run the full deterministic suite**
+- [x] **Step 5: Run the full deterministic suite**
 
 Run:
 
@@ -136,13 +136,13 @@ content and geometry are unchanged.
 - Generated locally: `dist/` (ignored)
 - Disposable: `/private/tmp/portfolio_mobile_featured_reel_qa.py`
 
-- [ ] **Step 1: Update canonical documentation**
+- [x] **Step 1: Update canonical documentation**
 
 Record mobile nearest-center/700ms and desktop last-DOM/1400ms separately;
 state that Archive remains nearest-center/1400ms and reduced-motion remains
 static.
 
-- [ ] **Step 2: Run the browser matrix**
+- [x] **Step 2: Run the browser matrix**
 
 Serve `dist/` locally and verify `/en/` and `/zh/` at `390 × 844` and
 `360 × 800`: the nearest-center Featured reel alone plays after at least 700ms,
@@ -151,13 +151,13 @@ desktop at `1440 × 900` and `1200 × 900`, plus reduced-motion and no-JavaScrip
 Across all cases assert zero horizontal overflow, console errors, page errors,
 same-origin request failures, and Contact submissions.
 
-- [ ] **Step 3: Inspect mobile screenshots**
+- [x] **Step 3: Inspect mobile screenshots**
 
 Capture representative Featured sections in both languages, confirm motion
 does not alter layout or poster geometry, and check that the card visually
 nearest the center is the active one.
 
-- [ ] **Step 4: Re-run final checks and protect the user file**
+- [x] **Step 4: Re-run final checks and protect the user file**
 
 Run:
 

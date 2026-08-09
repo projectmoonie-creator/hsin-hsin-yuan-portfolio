@@ -4,7 +4,42 @@ Updated: 2026-08-09
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Intentional Localized Blanks
+## Current Work Package — Mobile Featured Reel Trigger
+
+- Approved design checkpoint `2c5c6ca` scopes the change to Featured reels at
+  `820px` and below: among 35%-eligible videos, the viewport-center reel owns
+  playback and holds its poster for 700ms. Desktop retains last-DOM ownership
+  and 1.4 seconds; Archive retains nearest-center ownership and 1.4 seconds.
+- Implementation `a20997a` reuses one generic center-distance selector for
+  Featured and Archive, keeps the Archive compatibility export, refreshes
+  Featured ownership through a requestAnimationFrame-throttled scroll/resize
+  listener, and safely replaces in-flight timers when crossing the breakpoint.
+  Content, media, links, card geometry, CSS, Figma output, and reduced-motion
+  behavior are unchanged.
+- TDD observed three initial contract failures plus a separate breakpoint-timer
+  failure, then passed 13/13 focused runtime/selection tests. Full `npm test`
+  passes 132/132; build, design-contract audit, Figma export, and diff checks
+  pass with no tracked Figma delta.
+- Native Chromium QA passed English and Chinese at 390×844 and 360×800,
+  desktop at 1440×900 and 1200×900, and tablet at 834×1112. Mobile `play`
+  events arrived in 821–994ms including browser/media startup; the selected
+  center reel alone gained `is-playing` and advanced past 0.1s, then reset and
+  handed off correctly on scroll. Desktop remained on the 1.4-second policy.
+- Reduced-motion hid all six Featured videos and made zero MP4 requests;
+  no-JavaScript also made zero MP4 requests. Served-build identity, ten-step
+  keyboard focus, horizontal overflow, console/page errors, same-origin request
+  failures, and Contact POST checks all passed. Two bilingual mobile screenshots
+  were visually inspected; the existing poster-to-video crossfade and layout
+  remain intact.
+- This package is local only pending its dated remote backup. It has not pushed
+  `main`, created a Preview, deployed, changed an alias, or submitted Contact.
+  The protected untracked review remains byte-identical at SHA-256
+  `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+- Exact next action: push and read back a dated backup of the local closeout.
+  Any Preview or `main` integration remains a separate explicit authorization
+  and public-release review checkpoint.
+
+## Prior Work Package — Intentional Localized Blanks
 
 - The producer approved six Chinese values as intentionally blank while
   retaining every field/key and allowing English to remain populated. Source

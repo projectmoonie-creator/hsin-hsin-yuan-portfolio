@@ -71,12 +71,18 @@
   both DOM and visual reading order; `lead`, `supporting`, and text-only
   treatments may change card size but must not move an older work ahead of a
   newer one.
+- Approved Archive reels retain nearest-viewport-center ownership and a
+  1.4-second poster hold at every viewport; the responsive Featured policy does
+  not change Archive timing or arbitration.
 - On homepage Featured Work cards, the linked media image is the primary watch action. Do not normally repeat that destination with a text CTA.
 - Approved Featured reels opt in only with canonical
-  `featuredReelMode: "after-hold"`. Eligibility begins at 35% visibility; if
-  multiple reels qualify, only the last eligible reel in DOM order is active.
-- Hold the canonical poster for 1.4 seconds after activation and keep it visible
-  until the video actually emits `playing`. Leaving eligibility, hiding the
+  `featuredReelMode: "after-hold"`. Eligibility begins at 35% visibility. At
+  `820px` and below, only the eligible reel nearest the viewport center is
+  active, with ownership recalculated during scroll and resize; above `820px`,
+  preserve last-eligible-in-DOM-order ownership.
+- Hold the canonical poster for 700ms on mobile and 1.4 seconds above `820px`,
+  and keep it visible until the video actually emits `playing`. Leaving
+  eligibility, hiding the
   page, a media error, a rejected current `video.play()` promise, or `pagehide`
   must cancel the hold, pause, seek to time zero, and restore the poster. A
   rejected promise does not schedule a retry, and a stale rejection must not
