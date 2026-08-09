@@ -16,7 +16,7 @@
   "platform": "TaiwanPlus",
   "tagline": {
     "en": "Following Taiwanese founders as an idea takes shape, one decision at a time.",
-    "zh": "跟著台灣創業者，看一個想法如何一步步成形。"
+    "zh": ""
   },
   "description": {
     "en": "From AI to deep tech, the series goes inside Silicon Valley startups to follow founders as they define problems, test ideas, and bring technology to market.",

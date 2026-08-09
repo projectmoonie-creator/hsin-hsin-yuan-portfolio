@@ -4,6 +4,15 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-09 — Intentional localized blanks
+- Branch/base: `codex/three-minute-watch-link` from reviewed bilingual-copy closeout `d9f93b9`; six producer-approved Chinese blanks only.
+- Contract: fields/locale keys/array positions remain; exact empty string suppresses only that locale's DOM element; English stays independent; no CSS/layout variant was added.
+- Mechanism/data: guarded work order adds explicit `blank` and refill from `expected: ""`; P0 = one availability slot, P1 = five Featured taglines, with six English keeps and zero conflicts.
+- TDD/validation: RED then focused 69/69 and full 128/128 GREEN; build, Figma export, design audit, and diff checks pass.
+- Browser: English/Chinese at 1440×1100 and 390×844 have zero empty tagline/pill nodes, console errors, or page errors; twelve section screenshots show Chinese content collapsing upward without a hole.
+- Review: packet `95ca9c4…46d9a`; Gemini requested/observed/completed `gemini-3.6-flash`, PASS/no findings, 1,823 in / 130 out / 2,997 total; local adjudication needs no remediation.
+- Boundary/next: no main, hosted Preview, deployment, alias, Contact, broader 44-copy changes, or protected-file mutation; feature/dated-backup push and exact read-back are the next action.
+
 ## 2026-08-09 — Guarded bilingual copy work order
 - Branch/base/commits: `codex/three-minute-watch-link` from frozen `2f56352`; reusable mechanism `6fb3501`, P0 site copy `e0c5e35`, reviewed P1 Featured copy `d5942d1`.
 - Mechanism: versioned schema-v1 work order with source hashes, stable semantic keys, paired `en`/`zh`, exact-current guards, replace/keep, dry-run default, P0-before-P1, handled rollback, and replay rejection.

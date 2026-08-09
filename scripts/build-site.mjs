@@ -9,6 +9,7 @@ import {
   normalizeFeaturedWork,
   normalizeGlobalPressItem,
   normalizeHeroMedia,
+  validateSiteCopy,
 } from "./lib/portfolio-contract.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -68,6 +69,7 @@ export function loadMarkdownCollection(dir) {
 
 export function loadSiteData(baseDir = root) {
   const site = JSON.parse(readFileSync(join(baseDir, "data/site.json"), "utf8"));
+  validateSiteCopy(site);
   site.heroMedia = normalizeHeroMedia(site.heroMedia);
   return {
     site,
@@ -151,8 +153,20 @@ function renderPills(items = []) {
   return items.map((item) => `<span class="pill">${escapeHtml(item)}</span>`).join("");
 }
 
+function hasRenderableText(value) {
+  return typeof value === "string" && Boolean(value.trim());
+}
+
+function renderOptionalText(tag, className, value) {
+  if (!hasRenderableText(value)) return "";
+  return `<${tag} class="${className}">${escapeHtml(value)}</${tag}>`;
+}
+
 function renderAvailabilityPills(items = []) {
-  return items.map((item) => `<span>${escapeHtml(item)}</span>`).join("");
+  return items
+    .filter(hasRenderableText)
+    .map((item) => `<span>${escapeHtml(item)}</span>`)
+    .join("");
 }
 
 function renderMetrics(metrics = [], lang, context = "") {
@@ -344,7 +358,7 @@ function renderWork(work, lang, copy) {
       <div class="work-copy">
         <div class="work-meta">${escapeHtml(work.year)} / ${escapeHtml(role)} / ${escapeHtml(platform)}</div>
         <h3>${escapeHtml(title)}</h3>
-        <p class="work-tagline">${escapeHtml(tagline)}</p>
+        ${renderOptionalText("p", "work-tagline", tagline)}
         <p class="work-description">${escapeHtml(description)}</p>
         ${renderTags(work.tags)}
         ${renderMetrics(work.metrics, lang, localize(work.metricsContext, lang))}
@@ -377,7 +391,7 @@ function renderWatchLoopItem(work, lang, copy) {
       <span class="watch-loop-meta">${escapeHtml(platform)} / ${escapeHtml(work.year)}</span>
       <strong>${escapeHtml(title)}</strong>
       <span class="watch-loop-role">${escapeHtml(role)}</span>
-      <span class="watch-loop-tagline">${escapeHtml(tagline)}</span>
+      ${renderOptionalText("span", "watch-loop-tagline", tagline)}
     </a>
   `;
 }

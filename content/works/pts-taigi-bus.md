@@ -16,7 +16,7 @@
   "platform": "PTS Taigi",
   "tagline": {
     "en": "One bus route at a time, into the everyday life of Taiwan.",
-    "zh": "坐上公車，沿著一條路線認識一個地方。"
+    "zh": ""
   },
   "description": {
     "en": "I developed and wrote individual episodes for this PTS Taigi travel series, using local bus routes to connect memory, food, markets, and the people along the way.",

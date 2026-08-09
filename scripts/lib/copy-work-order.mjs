@@ -9,7 +9,7 @@ import { isAbsolute, join, normalize, relative, sep } from "node:path";
 
 const ALLOWED_LOCALES = ["en", "zh"];
 const ALLOWED_PRIORITIES = ["P0", "P1"];
-const ALLOWED_OPERATIONS = new Set(["replace", "keep"]);
+const ALLOWED_OPERATIONS = new Set(["replace", "keep", "blank"]);
 
 function fail(message) {
   throw new Error(`Copy work order: ${message}`);
@@ -27,6 +27,12 @@ function assertExactKeys(value, allowed, label) {
 function assertNonemptyString(value, label) {
   if (typeof value !== "string" || value.length === 0) {
     fail(`${label} must be a non-empty string`);
+  }
+}
+
+function assertString(value, label) {
+  if (typeof value !== "string") {
+    fail(`${label} must be a string`);
   }
 }
 
@@ -97,10 +103,13 @@ export function validateCopyWorkOrder(input) {
       const change = entry.changes[locale];
       assertExactKeys(change, ["op", "expected", "value"], `${entry.stableKey}.${locale}`);
       if (!ALLOWED_OPERATIONS.has(change.op)) fail(`${entry.stableKey}.${locale} has unsupported operation`);
-      assertNonemptyString(change.expected, `${entry.stableKey}.${locale}.expected`);
+      assertString(change.expected, `${entry.stableKey}.${locale}.expected`);
       if (change.op === "replace") {
         assertNonemptyString(change.value, `${entry.stableKey}.${locale}.value`);
         if (change.value === change.expected) fail(`${entry.stableKey}.${locale} replace must change the value`);
+      } else if (change.op === "blank") {
+        if (change.expected === "") fail(`${entry.stableKey}.${locale} blank must change the value`);
+        if (Object.hasOwn(change, "value")) fail(`${entry.stableKey}.${locale} blank must not declare value`);
       } else if (Object.hasOwn(change, "value")) {
         fail(`${entry.stableKey}.${locale} keep must not declare value`);
       }
@@ -184,7 +193,11 @@ function assertPredecessorsApplied({ validated, priority, sources }) {
       const change = entry.changes[locale];
       const target = targetTokens(entry, locale, record.parsed);
       const current = resolveValue(target.root, target.tokens, entry.stableKey, locale);
-      const required = change.op === "replace" ? change.value : change.expected;
+      const required = change.op === "replace"
+        ? change.value
+        : change.op === "blank"
+          ? ""
+          : change.expected;
       if (current !== required) fail(`${priority} requires ${entry.priority} to be applied first`);
     }
   }
@@ -325,7 +338,7 @@ export function planCopyWorkOrder({ repoRoot, workOrder, priority }) {
         sourceFile: entry.sourceFile,
         stableKey: entry.stableKey,
         locale,
-        valueToken: JSON.stringify(change.value),
+        valueToken: JSON.stringify(change.op === "blank" ? "" : change.value),
         start: span.start,
         end: span.end,
       });

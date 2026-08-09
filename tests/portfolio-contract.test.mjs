@@ -16,6 +16,7 @@ import {
   normalizeGlobalPressItem,
   normalizeHeroMedia,
   normalizeWorkPressItem,
+  validateSiteCopy,
   validatePortfolioCollections,
 } from "../scripts/lib/portfolio-contract.mjs";
 
@@ -252,6 +253,52 @@ test("featured normalization requires public anatomy and explicit presentation",
       sourceArtworkTitle: "absent",
     } })),
     /desktopMediaVariant/,
+  );
+});
+
+test("featured taglines keep their bilingual field while allowing one locale to be intentionally blank", () => {
+  const normalized = normalizeFeaturedWork(featured({
+    tagline: { en: "English remains visible.", zh: "" },
+  }));
+
+  assert.equal(Object.hasOwn(normalized, "tagline"), true);
+  assert.deepEqual(normalized.tagline, { en: "English remains visible.", zh: "" });
+  assert.deepEqual(normalized.contract.public.tagline, {
+    en: "English remains visible.",
+    zh: "",
+  });
+  assert.throws(
+    () => normalizeFeaturedWork(featured({ tagline: { en: "English only." } })),
+    /bilingual tagline/,
+  );
+  assert.throws(
+    () => normalizeFeaturedWork(featured({ tagline: { en: "English.", zh: "   " } })),
+    /bilingual tagline/,
+  );
+});
+
+test("site availability keeps a shared positional shape while each locale may intentionally blank a slot", () => {
+  const source = {
+    en: { availability: ["Research", "Editing"] },
+    zh: { availability: ["研究", ""] },
+  };
+
+  assert.equal(validateSiteCopy(source), source);
+  assert.equal(source.zh.availability.length, 2);
+  assert.equal(source.zh.availability[1], "");
+  assert.throws(
+    () => validateSiteCopy({
+      en: { availability: ["Research", "Editing"] },
+      zh: { availability: ["研究"] },
+    }),
+    /matching availability shape/,
+  );
+  assert.throws(
+    () => validateSiteCopy({
+      en: { availability: ["Research", "Editing"] },
+      zh: { availability: ["研究", "   "] },
+    }),
+    /availability\[1\].*empty string/,
   );
 });
 

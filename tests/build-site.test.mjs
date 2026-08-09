@@ -199,26 +199,26 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
   );
 });
 
-test("Featured copy uses the approved bilingual P1 work order", () => {
+test("Featured copy preserves approved English while producer-blank Chinese taglines stay empty", () => {
   const worksBySlug = new Map(
     loadWorks(join(root, "content/works")).map((work) => [work.slug, work]),
   );
   const approved = [
     ["slow-steps", "role", "Director / Editor / Producer", "導演／剪輯／製作人"],
-    ["slow-steps", "tagline", "A quiet travel documentary with a personal point of view.", "一部安靜、帶有個人視角的旅行紀錄片。"],
+    ["slow-steps", "tagline", "A quiet travel documentary with a personal point of view.", ""],
     ["slow-steps", "description", "Through encounters and pauses along the way, the film observes how people make sense of the world before them—and how the journey changes the observer.", "以個人視角記錄旅途中的相遇與停留，慢慢看見人如何理解眼前的世界，又如何在路上改變。"],
     ["tech-dreamers", "role", "Director / Editor / Producer", "導演／剪輯／製作人"],
-    ["tech-dreamers", "tagline", "Following Taiwanese founders as an idea takes shape, one decision at a time.", "跟著台灣創業者，看一個想法如何一步步成形。"],
+    ["tech-dreamers", "tagline", "Following Taiwanese founders as an idea takes shape, one decision at a time.", ""],
     ["tech-dreamers", "description", "From AI to deep tech, the series goes inside Silicon Valley startups to follow founders as they define problems, test ideas, and bring technology to market.", "從 AI 到深科技，鏡頭走進矽谷新創現場，記錄創辦人如何定義問題、反覆試驗，再把技術帶向市場。"],
     ["my-art-my-voice", "role", "Lead Documentary Director", "紀錄片總導演"],
-    ["my-art-my-voice", "tagline", "Taiwanese artists take the stage in Paris—and speak about their work and who they are.", "台灣藝術家走上巴黎舞台，談創作，也談自己是誰。"],
+    ["my-art-my-voice", "tagline", "Taiwanese artists take the stage in Paris—and speak about their work and who they are.", ""],
     ["my-art-my-voice", "description", "Filmed at the Taiwan Pavilion during the Paris Cultural Olympiad, the documentary moves between performance and backstage conversations about art, freedom, and identity.", "紀錄巴黎文化奧運台灣館的演出與幕後，也聽藝術家談創作、自由與身分。"],
     ["interior-spatial-brand-films", "title", "Design & Brand Films", "室內設計與品牌影像"],
     ["interior-spatial-brand-films", "role", "Director / Editor", "導演／剪輯"],
-    ["interior-spatial-brand-films", "tagline", "Films about design—and the way a home is actually lived in.", "拍設計，也拍一個家真正被使用的樣子。"],
+    ["interior-spatial-brand-films", "tagline", "Films about design—and the way a home is actually lived in.", ""],
     ["interior-spatial-brand-films", "description", "For Gorgeous Space and home brands, I directed and edited films on residential design, renovation, and product collaborations—bringing design ideas, everyday use, and the people who live there into the same story.", "為幸福空間與居家品牌執導、剪輯住宅設計、老屋翻新與產品合作內容，把設計概念、使用方式與屋主的生活放進同一個故事裡。"],
     ["pts-taigi-bus", "role", "Episode Development / Writer", "單集企劃／企編"],
-    ["pts-taigi-bus", "tagline", "One bus route at a time, into the everyday life of Taiwan.", "坐上公車，沿著一條路線認識一個地方。"],
+    ["pts-taigi-bus", "tagline", "One bus route at a time, into the everyday life of Taiwan.", ""],
     ["pts-taigi-bus", "description", "I developed and wrote individual episodes for this PTS Taigi travel series, using local bus routes to connect memory, food, markets, and the people along the way.", "擔任公視台語台行腳節目的單集企劃與企編，以公車路線串起地方記憶、飲食、市集，以及一路上遇見的人。"],
     ["top-gear-china-uk-special", "tagline", "A cross-border factual-entertainment production filmed in the UK with the original Top Gear team.", "在英國拍攝，與原版 Top Gear 團隊完成跨國汽車節目製作。"],
     ["top-gear-china-uk-special", "description", "Directed the UK episode of Top Gear China Season 2, leading the shoot in Britain and coordinating editorial and production requirements across Dragon TV, the Chinese production team, and the original Top Gear team.", "擔任《巔峰拍檔》中國版第二季第五期「英國篇」導演，負責英國段落的內容與拍攝，並協調東方衛視、中國製作團隊與英國原版 Top Gear 團隊的製作需求。"],
@@ -228,6 +228,52 @@ test("Featured copy uses the approved bilingual P1 work order", () => {
   for (const [slug, field, en, zh] of approved) {
     assert.deepEqual(worksBySlug.get(slug)[field], { en, zh }, `${slug}.${field}`);
   }
+});
+
+test("intentional Chinese blanks keep source positions but emit no empty DOM or visual spacer", () => {
+  const loaded = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const en = renderPage({ lang: "en", site: loaded, works });
+  const zh = renderPage({ lang: "zh", site: loaded, works });
+  const blankTaglineSlugs = [
+    "slow-steps",
+    "tech-dreamers",
+    "my-art-my-voice",
+    "interior-spatial-brand-films",
+    "pts-taigi-bus",
+  ];
+
+  assert.equal(loaded.site.en.availability.length, 6);
+  assert.equal(loaded.site.zh.availability.length, 6);
+  assert.equal(loaded.site.en.availability[5], "AI-assisted editorial workflows");
+  assert.equal(loaded.site.zh.availability[5], "");
+  assert.equal(works.length, 6);
+  for (const slug of blankTaglineSlugs) {
+    const work = works.find((item) => item.slug === slug);
+    assert.equal(Object.hasOwn(work, "tagline"), true, slug);
+    assert.equal(typeof work.tagline.zh, "string", slug);
+    assert.equal(work.tagline.zh, "", slug);
+    assert.ok(work.tagline.en.length > 0, slug);
+
+    const article = zh.match(
+      new RegExp(`<article class="[^"]*" id="${slug}">[\\s\\S]*?<\\/article>`),
+    )?.[0];
+    assert.ok(article, `${slug} Chinese work detail should render`);
+    assert.doesNotMatch(article, /class="work-tagline"/, slug);
+    assert.match(article, /<h3>[^<]+<\/h3>\s*<p class="work-description">/, slug);
+  }
+
+  const enAvailability = en.match(/<div class="available-pill-list">([\s\S]*?)<\/div>/)?.[1];
+  const zhAvailability = zh.match(/<div class="available-pill-list">([\s\S]*?)<\/div>/)?.[1];
+  assert.equal((enAvailability?.match(/<span>/g) || []).length, 6);
+  assert.equal((zhAvailability?.match(/<span>/g) || []).length, 5);
+  assert.equal((en.match(/class="work-tagline"/g) || []).length, 6);
+  assert.equal((zh.match(/class="work-tagline"/g) || []).length, 1);
+  assert.equal((en.match(/class="watch-loop-tagline"/g) || []).length, 6);
+  assert.equal((zh.match(/class="watch-loop-tagline"/g) || []).length, 1);
+  assert.doesNotMatch(zh, /<p class="work-tagline">\s*<\/p>/);
+  assert.doesNotMatch(zh, /<span class="watch-loop-tagline">\s*<\/span>/);
+  assert.doesNotMatch(zhAvailability || "", /<span>\s*<\/span>/);
 });
 
 test("loadSiteData returns one normalized collaboration collection", () => {
@@ -281,7 +327,7 @@ test("site copy uses the approved bilingual Taiwan positioning", () => {
     heroSubcopy: "我拍攝藝術、文化與科技題材，從前期研究、現場導演到剪輯，把複雜內容整理成清楚、有節奏的紀實故事；也協助跨國團隊在台灣完成雙語研究與現場製作。",
     availabilityLabel: "合作方式",
     availabilityIntro: "可以從前期研究與敘事開發加入，也可以負責導演與剪輯。跨國團隊若在台灣拍攝，我能處理雙語溝通、敘事判斷與現場製作。",
-    availability: ["敘事開發", "導演", "剪輯", "研究與採訪", "雙語製作", "AI 輔助編輯流程"],
+    availability: ["敘事開發", "導演", "剪輯", "研究與採訪", "雙語製作", ""],
     contactSubcopy: "如果你正在籌備紀錄片、紀實節目，或需要台灣在地的雙語製作夥伴，歡迎來信。請簡單說明內容、目前階段、時程、預算範圍，以及希望我參與的方式。",
   });
 });

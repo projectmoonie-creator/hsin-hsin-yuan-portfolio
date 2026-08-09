@@ -4,7 +4,44 @@ Updated: 2026-08-09
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Guarded Bilingual Copy Work Order
+## Current Work Package — Intentional Localized Blanks
+
+- The producer approved six Chinese values as intentionally blank while
+  retaining every field/key and allowing English to remain populated. Source
+  data now keeps `zh.availability[5]` as the sixth array slot and five
+  `tagline.zh` properties as exact empty strings; no field was deleted or
+  reindexed.
+- `editorial/copy-work-orders/2026-08-09-intentional-zh-blanks.json` records
+  six English keeps and six explicit Chinese blanks with exact-current guards.
+  The reusable mechanism now supports named `blank` operations and guarded
+  refill from `expected: ""`.
+- Featured taglines remain structurally bilingual but may be empty per locale;
+  titles, roles, and descriptions remain non-empty. Site availability retains
+  matching bilingual array shape and accepts only populated or exact-empty
+  string slots. Missing, null, non-string, and whitespace-only values fail.
+- The renderer omits the complete empty tagline/pill element, not merely its
+  text. CSS and component geometry are unchanged, so the next sibling moves up
+  in normal flow and no empty DOM/spacer remains.
+- TDD reproduced the three old assumptions before implementation. Focused
+  tests pass 69/69; full `npm test` passes 128/128; build, Figma export,
+  design-contract audit, and diff checks pass.
+- Chromium QA passed `/en/` and `/zh/` at 1440×1100 and 390×844. English keeps
+  six availability/tagline outputs; Chinese renders five availability pills
+  and only the one still-populated Top Gear tagline. Empty elements, console
+  errors, and page errors are zero. Twelve section screenshots were inspected.
+- Final review packet SHA-256 is
+  `95ca9c4475824b33dd476c918e38c2174419fc9f7325eaa54030b075b7c46d9a`.
+  Gemini requested/observed/completed `gemini-3.6-flash`, returned PASS with no
+  findings, and used 1,823 input / 130 output / 2,997 total tokens. Local
+  adjudication requires no remediation.
+- No `main` change, hosted Preview, Production, alias, deployment, or Contact
+  action occurred. The protected untracked file remains byte-identical at
+  SHA-256 `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+- Exact next action: commit this reviewed package, push the feature branch and
+  one unique dated backup with live-tip read-back, then request separate
+  producer approval before any of the remaining 44 Chinese differences.
+
+## Prior Work Package — Guarded Bilingual Copy Work Order
 
 - Branch `codex/three-minute-watch-link` resumed at frozen baseline
   `2f56352cb3049ab8fb535c0ae3c1d0fa57cb599f`. Batch 0 mechanism is

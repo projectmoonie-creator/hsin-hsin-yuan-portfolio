@@ -19,7 +19,7 @@
   },
   "tagline": {
     "en": "Films about design—and the way a home is actually lived in.",
-    "zh": "拍設計，也拍一個家真正被使用的樣子。"
+    "zh": ""
   },
   "description": {
     "en": "For Gorgeous Space and home brands, I directed and edited films on residential design, renovation, and product collaborations—bringing design ideas, everyday use, and the people who live there into the same story.",

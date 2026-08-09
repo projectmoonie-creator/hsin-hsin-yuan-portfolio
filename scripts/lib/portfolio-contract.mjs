@@ -118,12 +118,14 @@ function requireInteger(source, field, kind) {
   }
 }
 
-function requireLocalized(source, field, kind) {
+function requireLocalized(source, field, kind, { allowBlank = false } = {}) {
   requireField(source, field, kind);
   const value = source[field];
+  const localeIsValid = (localeValue) => typeof localeValue === "string"
+    && (localeValue === "" ? allowBlank : Boolean(localeValue.trim()));
   if (!value || typeof value !== "object" || Array.isArray(value)
-    || typeof value.en !== "string" || !value.en.trim()
-    || typeof value.zh !== "string" || !value.zh.trim()) {
+    || !localeIsValid(value.en)
+    || !localeIsValid(value.zh)) {
     throw new Error(`${kind} ${labelFor(source, "<unknown>")} requires bilingual ${field}`);
   }
 }
@@ -167,6 +169,29 @@ function freezeDeep(value) {
   if (!value || typeof value !== "object" || Object.isFrozen(value)) return value;
   for (const nested of Object.values(value)) freezeDeep(nested);
   return Object.freeze(value);
+}
+
+export function validateSiteCopy(source) {
+  const kind = "Site copy";
+  requireObject(source, kind);
+  const availabilityByLocale = {};
+  for (const locale of ["en", "zh"]) {
+    requireObject(source[locale], `${kind} ${locale}`);
+    const availability = source[locale].availability;
+    if (!Array.isArray(availability) || availability.length === 0) {
+      throw new Error(`${kind} ${locale} availability must be a non-empty array`);
+    }
+    for (const [index, item] of availability.entries()) {
+      if (typeof item !== "string" || (item !== "" && !item.trim())) {
+        throw new Error(`${kind} ${locale} availability[${index}] must be content or an intentional empty string`);
+      }
+    }
+    availabilityByLocale[locale] = availability;
+  }
+  if (availabilityByLocale.en.length !== availabilityByLocale.zh.length) {
+    throw new Error(`${kind} locales must keep a matching availability shape`);
+  }
+  return source;
 }
 
 function contractFor(kind, source, classification, presentation) {
@@ -519,9 +544,10 @@ export function normalizeFeaturedWork(source) {
     requireField(source, field, kind);
   }
   requireInteger(source, "order", kind);
-  for (const field of ["title", "role", "tagline", "description"]) {
+  for (const field of ["title", "role", "description"]) {
     requireLocalized(source, field, kind);
   }
+  requireLocalized(source, "tagline", kind, { allowBlank: true });
   requireLocalizable(source, "platform", kind);
   requireField(source, "presentation", kind);
   validatePresentation(source.presentation, source.slug);

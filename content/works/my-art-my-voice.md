@@ -16,7 +16,7 @@
   "platform": "TaiwanPlus",
   "tagline": {
     "en": "Taiwanese artists take the stage in Paris—and speak about their work and who they are.",
-    "zh": "台灣藝術家走上巴黎舞台，談創作，也談自己是誰。"
+    "zh": ""
   },
   "description": {
     "en": "Filmed at the Taiwan Pavilion during the Paris Cultural Olympiad, the documentary moves between performance and backstage conversations about art, freedom, and identity.",

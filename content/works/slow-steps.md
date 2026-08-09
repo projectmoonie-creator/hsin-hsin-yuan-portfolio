@@ -16,7 +16,7 @@
   "platform": "TaiwanPlus / Travel",
   "tagline": {
     "en": "A quiet travel documentary with a personal point of view.",
-    "zh": "一部安靜、帶有個人視角的旅行紀錄片。"
+    "zh": ""
   },
   "description": {
     "en": "Through encounters and pauses along the way, the film observes how people make sense of the world before them—and how the journey changes the observer.",

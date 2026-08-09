@@ -105,6 +105,50 @@ test("copy work order dry-run resolves stable keys without changing source bytes
   }
 });
 
+test("copy work order records an intentional blank and can later refill the same stable field", () => {
+  const fixture = writeFixtureRepo();
+  try {
+    const blank = workOrder();
+    blank.entries = [blank.entries[0]];
+    blank.entries[0].changes = {
+      en: { op: "keep", expected: "Old English" },
+      zh: { op: "blank", expected: "舊中文" },
+    };
+
+    const blankResult = applyCopyWorkOrder({
+      repoRoot: fixture.root,
+      workOrder: blank,
+      priority: "P0",
+      write: true,
+    });
+    const blankSite = JSON.parse(readFileSync(fixture.sitePath, "utf8"));
+    assert.equal(blankResult.replacements, 1);
+    assert.equal(blankResult.keeps, 1);
+    assert.equal(blankSite.en.heroEyebrow, "Old English");
+    assert.equal(blankSite.zh.heroEyebrow, "");
+
+    const refill = workOrder();
+    refill.entries = [refill.entries[0]];
+    refill.entries[0].changes = {
+      en: { op: "keep", expected: "Old English" },
+      zh: { op: "replace", expected: "", value: "補回中文" },
+    };
+
+    applyCopyWorkOrder({
+      repoRoot: fixture.root,
+      workOrder: refill,
+      priority: "P0",
+      write: true,
+    });
+    assert.equal(
+      JSON.parse(readFileSync(fixture.sitePath, "utf8")).zh.heroEyebrow,
+      "補回中文",
+    );
+  } finally {
+    rmSync(fixture.root, { recursive: true, force: true });
+  }
+});
+
 test("copy work order rejects one stale value before planning any write", () => {
   const fixture = writeFixtureRepo();
   try {
@@ -308,6 +352,32 @@ test("approved 31-entry bilingual work order records frozen sources and rejects 
   );
   assert.throws(
     () => applyCopyWorkOrder({ repoRoot: projectRoot, workOrder: order, priority: "P1" }),
+    /does not match the expected current value|requires P0 to be applied first/,
+  );
+});
+
+test("intentional Chinese blank work order preserves six stable fields and rejects replay", () => {
+  const path = join(
+    projectRoot,
+    "editorial/copy-work-orders/2026-08-09-intentional-zh-blanks.json",
+  );
+  const order = validateCopyWorkOrder(JSON.parse(readFileSync(path, "utf8")));
+  const changes = order.entries.flatMap((entry) => Object.values(entry.changes));
+
+  assert.equal(order.baselineCommit, "d9f93b9b1751156ddb8a66c4f9ccf0950cc1dcb7");
+  assert.equal(order.entries.length, 6);
+  assert.equal(changes.filter((change) => change.op === "blank").length, 6);
+  assert.equal(changes.filter((change) => change.op === "keep").length, 6);
+  assert.deepEqual(order.entries.map((entry) => entry.stableKey), [
+    "site.availability[5]",
+    "featured.slow-steps.tagline",
+    "featured.tech-dreamers.tagline",
+    "featured.my-art-my-voice.tagline",
+    "featured.interior-spatial-brand-films.tagline",
+    "featured.pts-taigi-bus.tagline",
+  ]);
+  assert.throws(
+    () => applyCopyWorkOrder({ repoRoot: projectRoot, workOrder: order, priority: "P0" }),
     /does not match the expected current value/,
   );
 });

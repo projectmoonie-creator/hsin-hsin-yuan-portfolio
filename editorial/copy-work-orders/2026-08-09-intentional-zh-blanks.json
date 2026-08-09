@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "batchId": "portfolio-intentional-zh-blanks-2026-08-09",
+  "baselineCommit": "d9f93b9b1751156ddb8a66c4f9ccf0950cc1dcb7",
+  "sourceArtifacts": [
+    {
+      "name": "Hsin-Hsin-Yuan-Portfolio-Chinese-Copy-2026-08-06.xlsx",
+      "sha256": "1d0210cf39a688e417c67edb3b0c2d3ccf9201c3485c055c2d6a541ed6ac9600"
+    },
+    {
+      "name": "preview.xlsx",
+      "sha256": "e0472235778da5bb19c2108e1fe57a293ca5462fd28430699ff1ad4a7acdd897"
+    },
+    {
+      "name": "2026-08-09-priority-bilingual.json",
+      "sha256": "d9d7fa67bac96c3e3b62750744b6ad508e46bca664d61c8ac6cdc7e48ba13ae2"
+    }
+  ],
+  "localeScope": [
+    "en",
+    "zh"
+  ],
+  "priorityOrder": [
+    "P0",
+    "P1"
+  ],
+  "entries": [
+    {
+      "priority": "P0",
+      "sourceFile": "data/site.json",
+      "stableKey": "site.availability[5]",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "AI-assisted editorial workflows"
+        },
+        "zh": {
+          "op": "blank",
+          "expected": "AI 輔助編輯流程"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/slow-steps.md",
+      "stableKey": "featured.slow-steps.tagline",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "A quiet travel documentary with a personal point of view."
+        },
+        "zh": {
+          "op": "blank",
+          "expected": "一部安靜、帶有個人視角的旅行紀錄片。"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/tech-dreamers.md",
+      "stableKey": "featured.tech-dreamers.tagline",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Following Taiwanese founders as an idea takes shape, one decision at a time."
+        },
+        "zh": {
+          "op": "blank",
+          "expected": "跟著台灣創業者，看一個想法如何一步步成形。"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/my-art-my-voice.md",
+      "stableKey": "featured.my-art-my-voice.tagline",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Taiwanese artists take the stage in Paris—and speak about their work and who they are."
+        },
+        "zh": {
+          "op": "blank",
+          "expected": "台灣藝術家走上巴黎舞台，談創作，也談自己是誰。"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/interior-spatial-brand-films.md",
+      "stableKey": "featured.interior-spatial-brand-films.tagline",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "Films about design—and the way a home is actually lived in."
+        },
+        "zh": {
+          "op": "blank",
+          "expected": "拍設計，也拍一個家真正被使用的樣子。"
+        }
+      }
+    },
+    {
+      "priority": "P1",
+      "sourceFile": "content/works/pts-taigi-bus.md",
+      "stableKey": "featured.pts-taigi-bus.tagline",
+      "changes": {
+        "en": {
+          "op": "keep",
+          "expected": "One bus route at a time, into the everyday life of Taiwan."
+        },
+        "zh": {
+          "op": "blank",
+          "expected": "坐上公車，沿著一條路線認識一個地方。"
+        }
+      }
+    }
+  ]
+}
