@@ -135,7 +135,7 @@ test("Figma SVG export keeps portfolio layers editable and named", () => {
   assert.match(desktopHome, /Documentary Director/);
   assert.match(
     desktopHome,
-    /<text id="layer-hero-role-2" x="772"[^>]*><tspan[^>]*>Cross-Cultural Storyteller<\/tspan><\/text>/,
+    /<text id="layer-hero-role-2" x="772"[^>]*><tspan[^>]*>Arts \/ Culture \/ Technology<\/tspan><\/text>/,
   );
   assert.doesNotMatch(desktopHome, /<g id="layer-hero-role-2">/);
   assert.match(desktopHome, /#D8FF3E/);
@@ -219,12 +219,12 @@ test("Figma SVG export keeps portfolio layers editable and named", () => {
   assert.match(mobileHome, /id="frame-mobile-home"/);
   assert.match(mobileHome, /viewBox="0 0 390 1040"/);
   assert.match(mobileHome, /id="layer-mobile-available"/);
-  assert.match(mobileHome, /AVAILABLE FOR/i);
+  assert.match(mobileHome, /WAYS TO WORK TOGETHER/i);
   assert.match(
     mobileHome,
-    /<text x="24" y="558"[^>]*>Cross-Cultural Storyteller<\/text>/,
+    /<text x="24" y="558"[^>]*>Arts \/ Culture \/ Technology<\/text>/,
   );
-  assert.doesNotMatch(mobileHome, />\/ <tspan[^>]*>Cross-Cultural Storyteller/);
+  assert.doesNotMatch(mobileHome, />\/ <tspan[^>]*>Arts \/ Culture \/ Technology/);
 
   assert.match(readme, /Drag the SVG files into Figma/);
   assert.match(readme, /editable text layers/i);

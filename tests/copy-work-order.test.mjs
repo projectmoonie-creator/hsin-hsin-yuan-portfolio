@@ -288,13 +288,17 @@ test("approved 31-entry bilingual work order is conflict-free at its frozen base
       sha256: "10f1a9fb511cc79de088f9b41b251e14ca2fbfedf5dc92e8de4455fbfa69933a",
     },
   ]);
-  const plan = applyCopyWorkOrder({ repoRoot: projectRoot, workOrder: order });
+  const plan = applyCopyWorkOrder({
+    repoRoot: projectRoot,
+    workOrder: order,
+    priority: "P1",
+  });
   assert.deepEqual(plan, {
     schemaVersion: 1,
     mode: "dry-run",
-    priority: "all",
-    entries: 31,
-    replacements: 57,
+    priority: "P1",
+    entries: 18,
+    replacements: 31,
     keeps: 5,
     conflicts: 0,
     files: [
@@ -304,7 +308,6 @@ test("approved 31-entry bilingual work order is conflict-free at its frozen base
       "content/works/slow-steps.md",
       "content/works/tech-dreamers.md",
       "content/works/top-gear-china-uk-special.md",
-      "data/site.json",
     ],
     writesFiles: false,
   });

@@ -27,8 +27,8 @@
       <text x="22" y="436" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="900">HSIN-HSIN</text>
       <text x="22" y="492" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="900">YUAN</text>
     </g>
-    <text x="24" y="532" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="650">Documentary Director <tspan fill="#D8FF3E">/</tspan> Writer <tspan fill="#D8FF3E">/</tspan> Producer</text>
-    <text x="24" y="558" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="650">Cross-Cultural Storyteller</text>
+    <text x="24" y="532" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="650">Documentary Director <tspan fill="#D8FF3E">/</tspan> Bilingual Producer</text>
+    <text x="24" y="558" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="650">Arts / Culture / Technology</text>
   </g>
   <g id="layer-logo-wall">
     <text x="24" y="596" fill="#B8B0A3" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="800" letter-spacing="1.2">PLATFORMS &amp; COLLABORATIONS</text>
@@ -55,7 +55,7 @@
   </g>
   </g>
   <g id="layer-mobile-available">
-    <text x="24" y="900" fill="#D8FF3E" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="850" letter-spacing="1.2">AVAILABLE FOR</text>
-    <text id="layer-mobile-available-intro" x="24" y="934" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="760" letter-spacing="0" transform=""><tspan x="24" dy="0">I can enter a project early as a</tspan><tspan x="24" dy="24">story partner, direct the shoot,</tspan><tspan x="24" dy="24">shape the edit, or build repeatable</tspan></text>
+    <text x="24" y="900" fill="#D8FF3E" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="850" letter-spacing="1.2">WAYS TO WORK TOGETHER</text>
+    <text id="layer-mobile-available-intro" x="24" y="934" fill="#F7F2E8" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="760" letter-spacing="0" transform=""><tspan x="24" dy="0">I can join at the research and</tspan><tspan x="24" dy="24">story-development stage, direct the</tspan><tspan x="24" dy="24">shoot, or shape the edit. For</tspan></text>
   </g>
 </svg>

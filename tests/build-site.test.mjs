@@ -217,6 +217,44 @@ test("loadSiteData returns one normalized collaboration collection", () => {
   assert.equal(collaborations.every((item) => item.contract.kind === "collaboration-mark"), true);
 });
 
+test("site copy uses the approved bilingual Taiwan positioning", () => {
+  const copy = loadSiteData(root).site;
+  const positioning = (locale) => ({
+    metaTitle: copy[locale].metaTitle,
+    metaDescription: copy[locale].metaDescription,
+    heroEyebrow: copy[locale].heroEyebrow,
+    heroRoleLines: copy[locale].heroRoleLines,
+    heroSubcopy: copy[locale].heroSubcopy,
+    availabilityLabel: copy[locale].availabilityLabel,
+    availabilityIntro: copy[locale].availabilityIntro,
+    availability: copy[locale].availability,
+    contactSubcopy: copy[locale].contactSubcopy,
+  });
+
+  assert.deepEqual(positioning("en"), {
+    metaTitle: "Hsin-Hsin Yuan | Documentary Director & Bilingual Producer, Taiwan",
+    metaDescription: "Hsin-Hsin Yuan is a Taiwan-based documentary director and bilingual producer working across arts, culture, technology, and international factual production.",
+    heroEyebrow: "Based in Taiwan, working internationally",
+    heroRoleLines: ["Documentary Director / Bilingual Producer", "Arts / Culture / Technology"],
+    heroSubcopy: "I work across arts, culture, and technology, from research and story development through directing and editing. I also provide bilingual field production in Taiwan for international teams.",
+    availabilityLabel: "Ways to Work Together",
+    availabilityIntro: "I can join at the research and story-development stage, direct the shoot, or shape the edit. For international teams filming in Taiwan, I provide bilingual field production with editorial input.",
+    availability: ["Story development", "Directing", "Editing", "Research & interviews", "Bilingual production", "AI-assisted editorial workflows"],
+    contactSubcopy: "If you are developing a documentary or factual series, or need a bilingual production partner in Taiwan, share the project stage, timeline, budget range, and the role you have in mind.",
+  });
+  assert.deepEqual(positioning("zh"), {
+    metaTitle: "袁欣欣｜台灣紀錄片導演與雙語製作人",
+    metaDescription: "袁欣欣是台灣紀錄片導演與雙語製作人，專長藝術、文化、科技題材，以及需要台灣在地協作的跨國紀實製作。",
+    heroEyebrow: "立足台灣，參與跨國製作",
+    heroRoleLines: ["紀錄片導演 / 雙語製作人", "藝術 / 文化 / 科技"],
+    heroSubcopy: "我拍攝藝術、文化與科技題材，從前期研究、現場導演到剪輯，把複雜內容整理成清楚、有節奏的紀實故事；也協助跨國團隊在台灣完成雙語研究與現場製作。",
+    availabilityLabel: "合作方式",
+    availabilityIntro: "可以從前期研究與敘事開發加入，也可以負責導演與剪輯。跨國團隊若在台灣拍攝，我能處理雙語溝通、敘事判斷與現場製作。",
+    availability: ["敘事開發", "導演", "剪輯", "研究與採訪", "雙語製作", "AI 輔助編輯流程"],
+    contactSubcopy: "如果你正在籌備紀錄片、紀實節目，或需要台灣在地的雙語製作夥伴，歡迎來信。請簡單說明內容、目前階段、時程、預算範圍，以及希望我參與的方式。",
+  });
+});
+
 test("CollaborationMark renders six verified logos and one intentional fallback", () => {
   const loaded = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
@@ -975,11 +1013,10 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   const html = renderPage({ lang: "en", site, works });
   const zhHtml = renderPage({ lang: "zh", site, works });
 
-  assert.match(html, /for artists, culture, and technology stories/i);
+  assert.match(html, /Based in Taiwan, working internationally/);
   assert.match(html, /<span>HSIN-HSIN<\/span><span>YUAN<\/span>/);
-  assert.match(html, /Documentary Director <span class="role-slash">\/<\/span> Writer <span class="role-slash">\/<\/span> Producer/);
-  assert.match(html, /<span>Cross-Cultural Storyteller<\/span>/);
-  assert.doesNotMatch(html, /<span><span class="role-slash">\/<\/span> Cross-Cultural Storyteller<\/span>/);
+  assert.match(html, /Documentary Director <span class="role-slash">\/<\/span> Bilingual Producer/);
+  assert.match(html, /Arts <span class="role-slash">\/<\/span> Culture <span class="role-slash">\/<\/span> Technology/);
   assert.doesNotMatch(html, /<div class="hero-roles">.*AI-Language Creative.*<\/div>/s);
   assert.equal(site.site.heroMedia.contract.kind, "hero-media");
   assert.match(html, /<link rel="preload" as="image" href="\/assets\/portfolio\/hsin-working-white-space\.jpg">/);
@@ -1004,8 +1041,8 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /showreel-modal/);
   assert.doesNotMatch(html, /showreel-section/);
   assert.ok(html.indexOf('data-hero-media-id="site.hero"') < html.indexOf("collab-section-early"));
-  assert.match(html, /Available for/);
-  assert.match(html, /I can enter a project early as a story partner/);
+  assert.match(html, /Ways to Work Together/);
+  assert.match(html, /I can join at the research and story-development stage/);
   assert.match(html, /available-simple/);
   assert.match(html, /available-pill-list/);
   assert.match(html, /Editing/);
@@ -1423,9 +1460,9 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.doesNotMatch(zh, /觀看 showreel|網站視覺 Showreel|website-visual-reel/);
   assert.match(zh, /精選短片/);
   assert.doesNotMatch(zh, /data-about-tabs/);
-  assert.match(zh, /可合作項目/);
+  assert.doesNotMatch(zh, /可合作項目/);
   assert.doesNotMatch(zh, /<h2 class="section-title">關於我<\/h2>/);
-  assert.doesNotMatch(zh, /合作方式/);
+  assert.match(zh, /合作方式/);
   assert.doesNotMatch(zh, /我是來自台灣的紀錄片導演與創意製作人/);
   assert.doesNotMatch(zh, /情感質地/);
   assert.doesNotMatch(zh, /溫柔但準確地轉譯/);
