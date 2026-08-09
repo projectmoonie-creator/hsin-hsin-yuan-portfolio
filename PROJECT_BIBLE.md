@@ -137,6 +137,15 @@
 - Canonical URLs, Open Graph URLs, `robots.txt`, and `sitemap.xml` must come from the same `SITE_ORIGIN` build value. Do not keep a second hardcoded sitemap or robots file in `public/`.
 - `dist/` is generated build output for Vercel and must stay ignored by git. Commit source files, not generated pages or copied assets.
 - Deployment cadence: when a changed `main` HEAD is releasable under the applicable QA and review gates, surface a Production decision to the producer within seven calendar days; every Production deployment still requires separate explicit producer authorization, and a missed target or silence is never authorization. Unfinished or unapproved work stays off the release candidate (an existing tested default-off flag may be used); a `backup/*` push is not a deploy. After 14 days without a recorded decision, raise a closeout open item to the producer; calendar age alone is not `BLOCKED`.
+- After an explicitly authorized Preview or Production deployment is read back as
+  Ready, run the read-only post-publish PageSpeed review in
+  `docs/performance/README.md` against the exact accessible URL. Record the
+  deployment identity, tested URL, report time/link, CrUX availability, mobile
+  scores/metrics, transfer size, and three prioritized findings. A routine
+  release uses one diagnostic run; a performance package compares the median
+  of three fresh runs under matching conditions. One fluctuating lab score is
+  neither a release blocker nor permission to change code, deploy, bypass
+  Preview protection, or submit Contact.
 
 ## Roadmap Discipline
 

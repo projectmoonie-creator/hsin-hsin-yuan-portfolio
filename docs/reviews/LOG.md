@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-10 — Post-publish PageSpeed review workflow
+- Scope: docs/governance-only; records one reusable read-only performance check after an explicitly authorized Preview or Production deployment is read back as Ready, with no public-output or deployment change.
+- Canonical memory: Production uses the current `STATUS.md`/`SITE_ORIGIN` alias (`https://hsin-hsin-yuan-portfolio.vercel.app`); Preview uses its exact accessible deployment/share URL and never bypasses protection.
+- Record: deployment ID/target/commit, tested URL/language, timestamp/report URL, CrUX availability, mobile category scores, FCP/LCP/TBT/CLS/Speed Index, transfer size, three prioritized findings, and the producer-gated next decision.
+- Comparison: routine releases use one diagnostic run; performance packages use three fresh matching-condition runs and compare medians. A fluctuating lab score is not a release blocker or remediation authorization.
+- Current reference: 2026-08-10 mobile = Performance 75, other core categories 100, FCP 0.9s, LCP 6.7s, TBT 0ms, CLS 0, Speed Index 4.1s, about 3,197 KiB, no sufficient CrUX data; Hero LCP is the approved P0 next package.
+- Rule retirement verdict: **keep** the existing deployment-cadence rule because it governs producer authorization/timing; the new rule begins only after a separately authorized deployment is Ready and governs read-only observation.
+- Review: producer directly authorized this narrow workflow; external review skipped as a producer ruling for a reversible docs-only process addition with no public output, runtime, privacy, rights, security, or external-state mutation.
+- Boundary: no `main`, Preview, Production, alias, Contact, website/Figma, media, copy, or protected-file action; future recommendations open a separate bounded work package.
+
 ## 2026-08-10 — Portfolio phase closeout formalization
 - Scope: docs-only closeout of public baseline `eb444a6`; removes stale STATUS tail and records one current cold-resume path, with no public-source or deployment change.
 - Review: formal Claude subscription review requested dynamic `opus`, completed `claude-opus-5`, and returned `PASS_WITH_OPEN_ITEMS`; local adjudication confirms no public-product blocker.

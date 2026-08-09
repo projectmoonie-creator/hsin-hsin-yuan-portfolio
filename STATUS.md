@@ -4,7 +4,29 @@ Updated: 2026-08-10
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Portfolio Phase Closeout
+## Current Work Package — Post-Publish PageSpeed Review Workflow
+
+- The producer approved a standing read-only PageSpeed review after each
+  separately authorized Preview or Production deployment is read back as
+  Ready. This is now canonical in `PROJECT_BIBLE.md` and
+  `docs/performance/README.md`; it does not authorize a deployment, `main`
+  push, alias change, Contact request, protected-Preview bypass, or remediation.
+- Production checks use the current canonical alias recorded here and generated
+  from `SITE_ORIGIN`: `https://hsin-hsin-yuan-portfolio.vercel.app`. Preview
+  checks use the exact accessible deployment/share URL and stop honestly when
+  protection prevents PageSpeed from reaching the page.
+- The 2026-08-10 mobile PageSpeed reference is Performance 75,
+  Accessibility/Best Practices/SEO 100/100/100, FCP 0.9s, LCP 6.7s, TBT 0ms,
+  CLS 0, Speed Index 4.1s, and about 3,197 KiB transferred. It has no sufficient
+  CrUX field data and is diagnostic evidence, not a universal user measurement.
+- The primary finding is the Hero LCP path: the canonical Hero still is the LCP
+  element, its preload lacks high fetch priority, and `heroStillPush` animates
+  non-composited background position/size. The producer approved a separate P0
+  local Hero LCP/originalization package before optional lighting/button work.
+- This governance package changes no website source, generated public output,
+  deployment, alias, media, copy, Figma artifact, or Contact behavior.
+
+## Prior Work Package — Portfolio Phase Closeout
 
 - Public-output baseline `eb444a6dade9a721d97adf239468bf22d3360bf8`
   contains the producer-approved Chinese Copy Round 2 Production release.
@@ -755,9 +777,13 @@ Current design/Figma rules are aligned and Figma output is unchanged.
 
 ## Accepted Open Items
 
-- One restrained lighting treatment and/or one button microinteraction may be
-  explored in a new phase. This is optional refinement, not missing behavior in
-  the closed public baseline.
+- P0 is now a bounded Hero LCP/originalization package that preserves the
+  approved image, crop, focal point, geometry, bilingual content, and motion
+  feel while moving responsive image delivery and slow push into one canonical,
+  replaceable, compositor-safe HeroMedia component.
+- One restrained lighting treatment and/or one button microinteraction remains
+  deferred until after the Hero performance package. It is optional refinement,
+  not missing behavior in the closed public baseline.
 - Any visual experiment begins lo-fi-first and separately defines desktop,
   mobile performance, focus visibility, contrast, and reduced-motion behavior.
   It remains off the website until the producer approves implementation and a
@@ -779,10 +805,11 @@ SHA-256:
 
 ## Exact Next Action
 
-Start a separate lo-fi-first UI package whose first deliverable is one small
-desktop/mobile/reduced-motion interaction specification for a restrained light
-treatment and/or button microinteraction. Obtain producer approval of that
-specification before changing code, creating a Preview, or deploying.
+Start the producer-approved bounded local P0 Hero LCP/originalization package
+from the closed checkpoint. Preserve exact visual intent; test first for
+canonical responsive sources, high fetch priority, compositor-safe slow push,
+reduced motion, and website/Figma parity. Complete local before/after evidence
+and stop for producer review before any Preview, deployment, or `main` action.
 
 ## Cold Resume
 
@@ -798,7 +825,9 @@ specification before changing code, creating a Preview, or deploying.
 4. Treat the recorded Production deployment as the current public baseline:
    `dpl_4i1jTqt3Qq9FjchMnMXEGKrEYwkv`, canonical alias
    `https://hsin-hsin-yuan-portfolio.vercel.app`, validation 144/144.
-5. Begin only the bounded lo-fi UI package named in the Exact Next Action. Do
-   not push `main`, create a Preview, deploy, change an alias, or submit Contact
-   without the corresponding explicit producer authorization.
+5. Begin only the bounded local Hero LCP/originalization package named in the
+   Exact Next Action. Use the post-publish PageSpeed workflow only after a later
+   separately authorized deployment is Ready. Do not push `main`, create a
+   Preview, deploy, change an alias, or submit Contact without the corresponding
+   explicit producer authorization.
    `main` pushes are now known to trigger Production automatically.
