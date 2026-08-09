@@ -1,8 +1,55 @@
 # Portfolio Status
 
-Updated: 2026-08-06
+Updated: 2026-08-09
 
 State: `PASS_WITH_OPEN_ITEMS`
+
+## Current Work Package — Guarded Bilingual Copy Work Order
+
+- Branch `codex/three-minute-watch-link` resumed at frozen baseline
+  `2f56352cb3049ab8fb535c0ae3c1d0fa57cb599f`. Batch 0 mechanism is
+  `6fb3501cdce17902691d41c8aeaaf66c8cff5e36`; P0 site copy is
+  `e0c5e3566dc66c6556817d715de41df7f73bf695`; reviewed P1 Featured copy is
+  `d5942d13c7af212db8e63ff9fd5e180bae737198`.
+- The producer-approved Excel/JSON selection is preserved as schema-v1 work
+  order `editorial/copy-work-orders/2026-08-09-priority-bilingual.json` with
+  source SHA-256 records. Stable `site.*` and `featured.<slug>.*` keys,
+  paired `en`/`zh`, exact expected-current preconditions, explicit
+  replace/keep operations, dry-run default, P0-before-P1, sibling staging,
+  handled rollback, and replay rejection make later replacement repeatable.
+- P0 changed exactly 13 site keys / 26 bilingual values in `data/site.json`.
+  P1 changed exactly 18 Featured keys / 31 values, with five explicit English
+  keeps, across six canonical work files. Generated Figma handoff updated only
+  the corresponding editable text layers; layout/component geometry did not
+  change.
+- TDD covered schema, safe CLI, structural duplicate-token targeting,
+  P0/P1 preconditions, rollback cleanup, final bilingual postconditions, and
+  replay rejection. Full `npm test` passes `123/123`; build, Figma export,
+  design-contract audit, old-copy search, privacy, and diff checks pass.
+- English/Chinese Chromium QA passed at 1440×900 and 390×844. Hero,
+  collaboration copy, all six Featured works, and Contact remain within the
+  viewport; long English mobile copy wraps without clipping. Contact exposes
+  seven fields. Horizontal overflow, console errors, page errors, and failed
+  requests are all zero; no form was submitted.
+- Frozen final review packet SHA-256 is
+  `7049638fa070980def02e4b52b746d348766fe95833e3ab8f77073168b87246e`.
+  Gemini requested/observed/completed `gemini-3.6-flash` and returned `PASS`
+  with no findings (input 2,191 / output 162 / total 3,614 tokens). Local
+  adjudication requires no remediation. The architecture brainstorm's Claude
+  lane remains `handoff-to-active-session`; no Claude model request was sent,
+  no paid fallback was used, and no dual-review consensus is claimed.
+- Remote durability refs read back exactly: P0
+  `backup/2026-08-09/bilingual-copy-p0-e0c5e35` at `e0c5e35`, and P1
+  `backup/2026-08-09/bilingual-copy-p1-d5942d1` at `d5942d1`. Earlier Batch 0
+  is preserved at `backup/2026-08-09/bilingual-copy-work-order-6fb3501`.
+- This branch was not merged or pushed to `main`; no Preview, Production,
+  alias, deployment, or Contact action occurred. The protected untracked file
+  remains outside Git and byte-identical at SHA-256
+  `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+- Open producer decisions: the broader revised workbook retains 44 actual
+  Chinese differences outside this package; `site.heroRoles` and static
+  JSON-LD `jobTitle` retain the older taxonomy because they were not among the
+  31 approved keys. Either follow-up requires a new bounded approval.
 
 ## Current Editorial Artifact — Chinese-copy Workbook
 
@@ -23,14 +70,14 @@ State: `PASS_WITH_OPEN_ITEMS`
   workbook now contains 65 effective Chinese-copy differences; two preserved
   user values equal the latest canonical website text and therefore no longer
   count as differences.
-- This is an editorial artifact only. None of the 65 revisions has been applied
-  to website source, Figma output, Preview, Production, or `main`. Independent
-  AI review was skipped because the package only merges an offline workbook
-  schema without changing public output or project rules.
-- Next action: create a separate guarded Excel-to-repo dry-run package, review
-  the proposed 65 stable-key changes and bilingual layout effects, then apply
-  only producer-approved copy. Do not auto-import the workbook. Lighting stays
-  later, after bilingual content and geometry approval.
+- This original workbook remains an editorial artifact and was not bulk
+  imported. A separate, newer producer-approved 31-entry selection has now
+  passed the guarded Excel-to-repo package above; its source hashes and exact
+  transport live in the repo rather than turning Excel into a runtime source.
+- Next action: obtain producer approval before preparing another work order for
+  any of the broader revision set's remaining 44 actual differences. Do not
+  auto-import either workbook. Lighting stays later, after bilingual content
+  and geometry approval.
 
 ## Current Local Work Package — Three-Minute Full-Series Link
 

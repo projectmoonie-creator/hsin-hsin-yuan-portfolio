@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-09 — Guarded bilingual copy work order
+- Branch/base/commits: `codex/three-minute-watch-link` from frozen `2f56352`; reusable mechanism `6fb3501`, P0 site copy `e0c5e35`, reviewed P1 Featured copy `d5942d1`.
+- Mechanism: versioned schema-v1 work order with source hashes, stable semantic keys, paired `en`/`zh`, exact-current guards, replace/keep, dry-run default, P0-before-P1, handled rollback, and replay rejection.
+- Application: P0 = 13 keys / 26 replacements in `data/site.json`; P1 = 18 keys / 31 replacements + 5 English keeps across six works; Figma editable text handoff regenerated without geometry changes.
+- TDD/validation: final `123/123`, build, Figma export, design audit, old-copy/privacy/diff checks, and remote backup read-backs pass.
+- Browser: English/Chinese 1440×900 and 390×844 show no horizontal overflow or hidden copy clipping; Contact has seven visible fields; console/page/request errors and submissions are zero.
+- Review: packet `7049638…246e`; Gemini requested/observed/completed `gemini-3.6-flash`, PASS/no findings, usage 2,191 in / 162 out / 3,614 total; Claude brainstorm handoff stayed incomplete with no request/fallback/dual consensus; local adjudication needs no remediation.
+- External state: P0/P1 backups read back at `e0c5e35` / `d5942d1`; no main merge/push, Preview, Production, alias, deployment, Contact, or protected-file change.
+- Open: 44 broader Chinese differences plus role-taxonomy/JSON-LD unification remain producer-gated follow-ups; neither is authorized by this package.
+
 ## 2026-08-06 — Chinese-copy workbook schema merge
 - Artifact: rebuilt the producer-edited Excel on the current 169-field bilingual schema; final SHA-256 `1d0210c…c9600`.
 - Preservation: all 168 prior editable rows mapped exactly by stable key; added only `archive.three-minute-micro-drama.watchLabel` with `Watch the full series` / `觀看完整系列`.
