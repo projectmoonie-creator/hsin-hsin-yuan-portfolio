@@ -1,0 +1,27 @@
+{
+  "provider": "Gemini",
+  "requestedModel": null,
+  "modelSelectionPolicy": "highest-eligible-generally-released-at-execution",
+  "exactModelPinned": false,
+  "observedModel": null,
+  "completedModel": null,
+  "lane": "controlled Gemini REST reviewer",
+  "result": "incomplete",
+  "failureClass": "external-payload-approval-required",
+  "modelRequestSent": false,
+  "apiEquivalentCostUsd": null,
+  "actualSpendUsd": null,
+  "attempts": [
+    {
+      "result": "incomplete",
+      "failureClass": "sandbox-network-resolution",
+      "detail": "Official model-catalog resolution could not resolve the Google endpoint; no external request completed."
+    },
+    {
+      "result": "blocked-before-execution",
+      "failureClass": "external-payload-approval-required",
+      "detail": "Escalation was denied because the frozen packet contains repository paths, commit hashes, source-change details, and deployment context. No workaround or reduced packet was attempted."
+    }
+  ],
+  "note": "Gemini review remains incomplete. The packet was not exported, no model was selected or observed, and no cross-model consensus is claimed."
+}

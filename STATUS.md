@@ -4,7 +4,55 @@ Updated: 2026-08-09
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Mobile Featured Reel Trigger
+## Current Work Package — Final Chinese Interface Preview
+
+- Frozen release candidate `0ad90f2a2e6e244f986ae52e05ad657f6d605cd5`
+  applies the final producer workbook through 54 stable-key entries: 19 P0,
+  35 P1, 50 Chinese replacements, four Chinese blanks, and 54 English keeps.
+  The workbook SHA-256 is
+  `ebc35ed3ec878e6a9f4eaafcf9e1a04529eb4fc7bc436b44a31a7fb64959c2f4`.
+- All 108 final locale postconditions match. The four exact-empty Chinese
+  fields remain canonical but omit their complete rendered elements: the
+  second Hero title line, two official-page card titles, and the Top Gear
+  tagline. Whitespace-only remains invalid; later refill uses the same keys.
+- Chinese Hero now renders one `袁欣欣` line. Both official cards retain image,
+  `官方頁面`, source, destination, and audit metadata without an empty title
+  gap. English remains independently populated; built English HTML is exactly
+  unchanged at SHA-256
+  `84e7933a7c41fa5a867c0f6fd8423dbd57e1afeb41576eb97280ea74e548d7b3`.
+- Full `npm test` passes 139/139; build, Figma export, design-contract audit,
+  and diff checks pass. Native Chromium passes 16/16 bilingual desktop,
+  compact, tablet, mobile, reduced-motion, no-JavaScript, keyboard, overflow,
+  empty-element, error, and Contact-submission cases. Mobile Featured playback
+  began at about 740ms after the 700ms poster-hold contract.
+- Local adjudication is `APPROVE_PREVIEW` with no P0/P1/P2 findings. Gemini
+  remained incomplete because external-payload escalation was denied before
+  execution; Claude remained `handoff-to-active-session` with no request.
+  No external model, spend, or cross-model consensus is claimed.
+- Exact recovery ref
+  `backup/2026-08-09/final-chinese-portfolio-0ad90f2` was pushed and read back
+  at `0ad90f2a2e6e244f986ae52e05ad657f6d605cd5`.
+- The privacy-scanned dist-only package contains exactly 42 public files /
+  80,018,591 bytes; sorted path-list SHA-256 is
+  `bc6f8e208fd2ed414bd75212bc156c98cffe397d76374b49ea45a05e3b30f143`.
+  Repo source, tests, internal reviews, environments, Contact API, and the
+  protected document were not uploaded.
+- Vercel deployment `dpl_H2i7G3DdyWeqSfFLFLEubq6Rx9r2` was independently
+  read back as `Ready`, target `preview`:
+  `https://hsin-hsin-yuan-portfolio-lujpvjbpo.vercel.app`. Per deployment
+  policy, the deployed page itself was not fetched after creation.
+- The producer-authorized Hobby share-link replacement succeeded. Vercel now
+  displays `Anyone with the link can view and comment` and confirmed that a
+  new shareable link was generated/copied; the prior shareable link is revoked.
+  The access-bearing clipboard value was not read or committed.
+- No `main`, Production, alias, Contact POST, or protected-file mutation
+  occurred. The protected untracked review remains outside Git and
+  byte-identical at SHA-256
+  `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+  Exact next action: producer inspects this Preview; only an explicit approval
+  after inspection permits fast-forwarding `main` and Production.
+
+## Prior Work Package — Mobile Featured Reel Trigger
 
 - Approved design checkpoint `2c5c6ca` scopes the change to Featured reels at
   `820px` and below: among 35%-eligible videos, the viewport-center reel owns
