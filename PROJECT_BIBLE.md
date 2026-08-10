@@ -88,9 +88,8 @@
   rejected promise does not schedule a retry, and a stale rejection must not
   reset a newer activation. A persisted BFCache restore must safely rebind
   observation.
-- Featured reel videos are muted, looped, inline, `preload="none"`,
-  pointer-transparent, and non-interactive. The existing media wrapper owns
-  navigation. Reduced-motion and no-JavaScript states remain static posters.
+- Featured reel markup stays muted, looped, inline, `preload="none"`, pointer-transparent, and non-interactive. `data/media-manifest.json` is the single source/recipe ledger: builds emit its verified 960×540 mobile H.264 source before the existing 720p fallback; the existing wrapper still owns navigation.
+- Only after page `load`, mobile may metadata-warm one settled proximity candidate at a time; cancel on ownership/lifecycle change, never warm beside active playback, and skip desktop, reduced motion, no JavaScript, Save-Data, slow-2G, and 2G. Static posters and the cold fallback remain valid.
 - Existing Featured posters and external watch destinations are canonical.
   Slow Steps has no public destination and stays unlinked; do not invent one.
 - A deliberate exception is allowed for a user-curated full-series playlist that gathers fragmented episodes or a substantial body of related work. Mark it with `watchMode: "series"` and `showWatchCta: true`, use "Watch the full series" / "觀看完整系列", and protect the exact count and destinations with regression tests. Do not enable this exception for a single episode, trailer, representative segment, or ordinary program page.

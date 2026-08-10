@@ -191,6 +191,17 @@ Films and Nothing by Bus.
 - Reduced-motion and no-JavaScript states remain static posters.
 - Reel videos are muted, looped, inline, `preload="none"`, pointer-transparent,
   and non-interactive. The existing media wrapper owns navigation.
+- `data/media-manifest.json` owns one Featured delivery recipe and derives all
+  six 960×540 silent H.264 BT.709 faststart mobile paths; generated hashes and
+  source fingerprints must pass `npm run featured-reels:check`. Mobile HTML
+  places that media-qualified source before the existing 720p fallback.
+- Initial HTML never eagerly preloads video. After page `load`, mobile may warm
+  only the settled nearest reel within a one-viewport margin using native
+  metadata preload. Concurrency is one; ownership/lifecycle changes cancel the
+  old warm, active playback blocks another, and desktop, reduced motion,
+  no-JavaScript, Save-Data, slow-2G, and 2G remain conservative.
+- Delivery changes must preserve the poster, crop/focal point, card and text
+  geometry, 700ms/1.4s holds, 260ms reveal, navigation, copy, and Figma output.
 - Existing posters and external watch destinations remain canonical. Slow
   Steps has no public destination and stays unlinked; no destination is
   invented for it.

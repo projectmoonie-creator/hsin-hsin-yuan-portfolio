@@ -33,6 +33,34 @@ function sampleManifest(overrides = {}) {
         audioStreamCount: 0,
         faststart: true,
       },
+      "silent-h264-540p-mobile-bt709": {
+        kind: "video",
+        codecName: "h264",
+        width: 960,
+        height: 540,
+        pixelFormat: "yuv420p",
+        colorSpace: "bt709",
+        colorTransfer: "bt709",
+        colorPrimaries: "bt709",
+        streamCount: 1,
+        audioStreamCount: 0,
+        faststart: true,
+      },
+    },
+    featuredReelDelivery: {
+      sourceProfile: "silent-h264-720p-bt709",
+      mobileProfile: "silent-h264-540p-mobile-bt709",
+      directory: "/assets/showreel/mobile",
+      suffix: "-mobile",
+      media: "(max-width: 820px)",
+      encode: {
+        crf: 28,
+        maxRateKbps: 700,
+        bufferKbps: 1400,
+        preset: "slow",
+        keyframeIntervalSeconds: 2,
+        threads: 1,
+      },
     },
     assets: [{
       id: "featured.sample.reel",
@@ -69,6 +97,30 @@ test("media manifest validates one canonical safe asset inventory", () => {
       assets: [{ ...sampleManifest().assets[0], sourcePath: privateSourcePath }],
     })),
     /must not store sourcePath/,
+  );
+  assert.throws(
+    () => validateMediaManifest(sampleManifest({
+      featuredReelDelivery: {
+        ...sampleManifest().featuredReelDelivery,
+        mobileProfile: "missing-mobile-profile",
+      },
+    })),
+    /featuredReelDelivery mobileProfile is unknown/,
+  );
+  assert.throws(
+    () => validateMediaManifest(sampleManifest({
+      featuredReelDelivery: {
+        ...sampleManifest().featuredReelDelivery,
+        directory: "/private/mobile",
+      },
+    })),
+    /featuredReelDelivery directory must stay under \/assets\//,
+  );
+  assert.throws(
+    () => validateMediaManifest(sampleManifest({
+      assets: [{ ...sampleManifest().assets[0], mobilePublicPath: "/assets/duplicate.mp4" }],
+    })),
+    /must derive mobile delivery instead of storing mobilePublicPath/,
   );
 });
 

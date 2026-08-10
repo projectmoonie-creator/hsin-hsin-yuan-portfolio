@@ -1,0 +1,428 @@
+{
+  "baseUrl": "http://127.0.0.1:4195",
+  "cases": [
+    {
+      "name": "en-desktop",
+      "lang": "en",
+      "width": 1440,
+      "height": 900,
+      "motion": "no-preference",
+      "js": true,
+      "activate": true,
+      "details": {
+        "lang": "en",
+        "frameRect": {
+          "x": 144.59375,
+          "y": 138.953125,
+          "width": 533.75,
+          "height": 618.8125
+        },
+        "videoRect": {
+          "x": 144.59375,
+          "y": 138.953125,
+          "width": 533.75,
+          "height": 618.8125
+        },
+        "sourceCount": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)"
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": null
+          }
+        ],
+        "currentSrc": "http://127.0.0.1:4195/assets/showreel/slow-steps-card-reel.mp4",
+        "videoDisplay": "block",
+        "videoOpacity": "1",
+        "videoObjectFit": "cover",
+        "posterBackground": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4195/assets/portfolio/slow-steps-poster.webp\")",
+        "isPlaying": true,
+        "horizontalOverflow": false,
+        "activeTag": "A"
+      },
+      "mediaRequests": [
+        "http://127.0.0.1:4195/assets/showreel/slow-steps-card-reel.mp4"
+      ],
+      "pageErrors": [],
+      "localFailures": [],
+      "consoleErrors": [],
+      "contactPosts": [],
+      "keyboardFocus": [
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A",
+        "A"
+      ],
+      "checks": {
+        "language": true,
+        "responsiveSources": true,
+        "geometry": true,
+        "aspect": true,
+        "crop": true,
+        "poster": true,
+        "selection": true,
+        "staticFallback": true,
+        "noUnexpectedMedia": true,
+        "noOverflow": true,
+        "noPageErrors": true,
+        "noContactPost": true,
+        "keyboard": true
+      },
+      "passes": true,
+      "screenshot": "docs/reviews/evidence/featured-reel-mobile-performance/after/screenshots/en-desktop.png"
+    },
+    {
+      "name": "zh-desktop-no-js",
+      "lang": "zh",
+      "width": 1440,
+      "height": 900,
+      "motion": "no-preference",
+      "js": false,
+      "activate": false,
+      "details": {
+        "lang": "zh",
+        "frameRect": {
+          "x": 144.59375,
+          "y": 139.3125,
+          "width": 533.75,
+          "height": 618.8125
+        },
+        "videoRect": {
+          "x": 144.59375,
+          "y": 139.3125,
+          "width": 533.75,
+          "height": 618.8125
+        },
+        "sourceCount": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)"
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": null
+          }
+        ],
+        "currentSrc": "http://127.0.0.1:4195/assets/showreel/slow-steps-card-reel.mp4",
+        "videoDisplay": "block",
+        "videoOpacity": "0",
+        "videoObjectFit": "cover",
+        "posterBackground": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4195/assets/portfolio/slow-steps-poster.webp\")",
+        "isPlaying": false,
+        "horizontalOverflow": false,
+        "activeTag": "BODY"
+      },
+      "mediaRequests": [],
+      "pageErrors": [],
+      "localFailures": [],
+      "consoleErrors": [],
+      "contactPosts": [],
+      "keyboardFocus": [],
+      "checks": {
+        "language": true,
+        "responsiveSources": true,
+        "geometry": true,
+        "aspect": true,
+        "crop": true,
+        "poster": true,
+        "selection": true,
+        "staticFallback": true,
+        "noUnexpectedMedia": true,
+        "noOverflow": true,
+        "noPageErrors": true,
+        "noContactPost": true
+      },
+      "passes": true,
+      "screenshot": "docs/reviews/evidence/featured-reel-mobile-performance/after/screenshots/zh-desktop-no-js.png"
+    },
+    {
+      "name": "zh-tablet",
+      "lang": "zh",
+      "width": 834,
+      "height": 1112,
+      "motion": "no-preference",
+      "js": true,
+      "activate": false,
+      "details": {
+        "lang": "zh",
+        "frameRect": {
+          "x": 56.28125,
+          "y": 190.0946502685547,
+          "width": 333.828125,
+          "height": 730.8125
+        },
+        "videoRect": {
+          "x": 56.28125,
+          "y": 190.0946502685547,
+          "width": 333.828125,
+          "height": 730.8125
+        },
+        "sourceCount": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)"
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": null
+          }
+        ],
+        "currentSrc": "http://127.0.0.1:4195/assets/showreel/slow-steps-card-reel.mp4",
+        "videoDisplay": "block",
+        "videoOpacity": "0",
+        "videoObjectFit": "cover",
+        "posterBackground": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4195/assets/portfolio/slow-steps-poster.webp\")",
+        "isPlaying": false,
+        "horizontalOverflow": false,
+        "activeTag": "BODY"
+      },
+      "mediaRequests": [],
+      "pageErrors": [],
+      "localFailures": [],
+      "consoleErrors": [],
+      "contactPosts": [],
+      "keyboardFocus": [],
+      "checks": {
+        "language": true,
+        "responsiveSources": true,
+        "geometry": true,
+        "aspect": true,
+        "crop": true,
+        "poster": true,
+        "selection": true,
+        "staticFallback": true,
+        "noUnexpectedMedia": true,
+        "noOverflow": true,
+        "noPageErrors": true,
+        "noContactPost": true
+      },
+      "passes": true,
+      "screenshot": "docs/reviews/evidence/featured-reel-mobile-performance/after/screenshots/zh-tablet.png"
+    },
+    {
+      "name": "en-mobile",
+      "lang": "en",
+      "width": 390,
+      "height": 844,
+      "motion": "no-preference",
+      "js": true,
+      "activate": true,
+      "details": {
+        "lang": "en",
+        "frameRect": {
+          "x": 34.09375,
+          "y": 331.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "videoRect": {
+          "x": 34.09375,
+          "y": 331.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "sourceCount": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)"
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": null
+          }
+        ],
+        "currentSrc": "http://127.0.0.1:4195/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "videoDisplay": "block",
+        "videoOpacity": "1",
+        "videoObjectFit": "cover",
+        "posterBackground": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4195/assets/portfolio/slow-steps-poster.webp\")",
+        "isPlaying": true,
+        "horizontalOverflow": false,
+        "activeTag": "BODY"
+      },
+      "mediaRequests": [
+        "http://127.0.0.1:4195/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "http://127.0.0.1:4195/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "http://127.0.0.1:4195/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+      ],
+      "pageErrors": [],
+      "localFailures": [
+        {
+          "url": "http://127.0.0.1:4195/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "error": "net::ERR_ABORTED"
+        },
+        {
+          "url": "http://127.0.0.1:4195/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "consoleErrors": [],
+      "contactPosts": [],
+      "keyboardFocus": [],
+      "checks": {
+        "language": true,
+        "responsiveSources": true,
+        "geometry": true,
+        "aspect": true,
+        "crop": true,
+        "poster": true,
+        "selection": true,
+        "staticFallback": true,
+        "noUnexpectedMedia": true,
+        "noOverflow": true,
+        "noPageErrors": true,
+        "noContactPost": true
+      },
+      "passes": true,
+      "screenshot": "docs/reviews/evidence/featured-reel-mobile-performance/after/screenshots/en-mobile.png"
+    },
+    {
+      "name": "zh-narrow-no-js",
+      "lang": "zh",
+      "width": 360,
+      "height": 800,
+      "motion": "no-preference",
+      "js": false,
+      "activate": false,
+      "details": {
+        "lang": "zh",
+        "frameRect": {
+          "x": 32.59375,
+          "y": 317.15625,
+          "width": 294.8125,
+          "height": 165.828125
+        },
+        "videoRect": {
+          "x": 32.59375,
+          "y": 317.15625,
+          "width": 294.8125,
+          "height": 165.828125
+        },
+        "sourceCount": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)"
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": null
+          }
+        ],
+        "currentSrc": "http://127.0.0.1:4195/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "videoDisplay": "block",
+        "videoOpacity": "0",
+        "videoObjectFit": "cover",
+        "posterBackground": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4195/assets/portfolio/slow-steps-poster.webp\")",
+        "isPlaying": false,
+        "horizontalOverflow": false,
+        "activeTag": "BODY"
+      },
+      "mediaRequests": [],
+      "pageErrors": [],
+      "localFailures": [],
+      "consoleErrors": [],
+      "contactPosts": [],
+      "keyboardFocus": [],
+      "checks": {
+        "language": true,
+        "responsiveSources": true,
+        "geometry": true,
+        "aspect": true,
+        "crop": true,
+        "poster": true,
+        "selection": true,
+        "staticFallback": true,
+        "noUnexpectedMedia": true,
+        "noOverflow": true,
+        "noPageErrors": true,
+        "noContactPost": true
+      },
+      "passes": true,
+      "screenshot": "docs/reviews/evidence/featured-reel-mobile-performance/after/screenshots/zh-narrow-no-js.png"
+    },
+    {
+      "name": "en-mobile-reduced",
+      "lang": "en",
+      "width": 390,
+      "height": 844,
+      "motion": "reduce",
+      "js": true,
+      "activate": false,
+      "details": {
+        "lang": "en",
+        "frameRect": {
+          "x": 34.09375,
+          "y": 331.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "videoRect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "sourceCount": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)"
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": null
+          }
+        ],
+        "currentSrc": "http://127.0.0.1:4195/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "videoDisplay": "none",
+        "videoOpacity": "0",
+        "videoObjectFit": "cover",
+        "posterBackground": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4195/assets/portfolio/slow-steps-poster.webp\")",
+        "isPlaying": false,
+        "horizontalOverflow": false,
+        "activeTag": "BODY"
+      },
+      "mediaRequests": [],
+      "pageErrors": [],
+      "localFailures": [],
+      "consoleErrors": [],
+      "contactPosts": [],
+      "keyboardFocus": [],
+      "checks": {
+        "language": true,
+        "responsiveSources": true,
+        "geometry": true,
+        "aspect": true,
+        "crop": true,
+        "poster": true,
+        "selection": true,
+        "staticFallback": true,
+        "noUnexpectedMedia": true,
+        "noOverflow": true,
+        "noPageErrors": true,
+        "noContactPost": true
+      },
+      "passes": true,
+      "screenshot": "docs/reviews/evidence/featured-reel-mobile-performance/after/screenshots/en-mobile-reduced.png"
+    }
+  ],
+  "passes": true
+}

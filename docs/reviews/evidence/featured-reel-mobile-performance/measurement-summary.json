@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "baseline": {
+    "commit": "bb08d51d26d6a6c0e57bc6bc86ff8c4516245de3",
+    "branch": "detached local comparison worktree"
+  },
+  "candidate": {
+    "branch": "codex/featured-reel-mobile-performance",
+    "deployment": null
+  },
+  "conditions": {
+    "engine": "Playwright Chromium 148",
+    "viewport": "390x844",
+    "deviceScaleFactor": 3,
+    "cacheDisabled": true,
+    "latencyMs": 150,
+    "downloadThroughputBytesPerSecond": 209715,
+    "uploadThroughputBytesPerSecond": 96000,
+    "runsPerSide": 3,
+    "summaryStatistic": "median"
+  },
+  "immediateAfterLoad": {
+    "before": {
+      "playCallMs": 709.1,
+      "playingMs": 3471.3,
+      "videoBytesDuringObservation": 2238152,
+      "waitingCountDuringTenSeconds": 4,
+      "waitingMsDuringTenSeconds": 1238.9
+    },
+    "after": {
+      "playCallMs": 711,
+      "playingMs": 1791,
+      "videoBytesDuringObservation": 654000,
+      "waitingCountDuringTenSeconds": 0,
+      "waitingMsDuringTenSeconds": 0,
+      "selectedSource": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+    }
+  },
+  "proximityLead1500ms": {
+    "before": {
+      "playCallMs": 705.3,
+      "playingMs": 3468.7,
+      "preEligibilityVideoBytes": 0,
+      "videoBytesDuringObservation": 2236652,
+      "waitingCountDuringTenSeconds": 4,
+      "waitingMsDuringTenSeconds": 1239
+    },
+    "after": {
+      "playCallMs": 707.8,
+      "playingMs": 708.4,
+      "preEligibilityVideoBytes": 130500,
+      "videoBytesDuringObservation": 1791000,
+      "waitingCountDuringTenSeconds": 0,
+      "waitingMsDuringTenSeconds": 0,
+      "requestPriority": "Low"
+    }
+  },
+  "lighthouseMobileSimulate": {
+    "version": "13.4.1",
+    "runsPerSide": 3,
+    "beforeMedian": {
+      "performanceScore": 0.82,
+      "lcpMs": 4951.662,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 3238126
+    },
+    "afterMedian": {
+      "performanceScore": 0.82,
+      "lcpMs": 4951.728,
+      "tbtMs": 0,
+      "cls": 0,
+      "transferBytes": 3242865
+    },
+    "heroInitialPriorityAllRuns": "High",
+    "featuredVideoRequestsDuringPageLoadAllRuns": 0
+  },
+  "assetInventory": {
+    "desktopFallbackBytes": 60135762,
+    "mobileDerivativeBytes": 16708502,
+    "savedBytes": 43427260,
+    "reductionPercent": 72.215
+  },
+  "profileSelection": {
+    "representativeReel": "Slow Steps",
+    "candidates": [
+      {"width": 640, "height": 360, "dpr2Vmaf": 88.821314, "dpr3Vmaf": 80.415081},
+      {"width": 960, "height": 540, "dpr2Vmaf": 90.033662, "dpr3Vmaf": 84.212104}
+    ],
+    "selected": "960x540",
+    "reason": "Materially higher DPR3 fidelity while staying below the canonical 700kbps encoder ceiling."
+  },
+  "visualEquivalence": {
+    "staticBeforeSha256": "636f55e91c6f61e1cd10843c178b7b6e84a648746d5a71e56ee542e20db50df9",
+    "staticAfterSha256": "636f55e91c6f61e1cd10843c178b7b6e84a648746d5a71e56ee542e20db50df9",
+    "exactByteMatch": true,
+    "browserMatrixCases": 6,
+    "browserMatrixPassed": true,
+    "figmaTrackedDiff": false
+  },
+  "limitations": [
+    "These are synthetic Chromium laboratory results, not CrUX and not a claim about every visitor.",
+    "Real iPhone Mobile Safari and Low Power Mode remain producer-device checks before Production.",
+    "Native metadata preload is a browser hint; the measured 130500-byte warm is an observation, not a universal byte guarantee.",
+    "Chromium reports expected net::ERR_ABORTED transitions when it replaces metadata ranges with playback ranges; successful playing and zero unexpected failures were verified."
+  ]
+}

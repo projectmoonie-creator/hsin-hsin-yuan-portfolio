@@ -1,0 +1,74 @@
+{
+  "phase": "before",
+  "url": "http://127.0.0.1:4194/en/",
+  "conditions": {
+    "lighthouse": "13.4.1",
+    "category": "performance",
+    "formFactor": "mobile",
+    "throttlingMethod": "simulate",
+    "chromeBinary": "chrome-headless-shell",
+    "runs": 3
+  },
+  "medians": {
+    "performanceScore": 0.82,
+    "fcpMs": 1277.0774999999999,
+    "lcpMs": 4951.662,
+    "tbtMs": 0,
+    "cls": 0,
+    "speedIndexMs": 1277.0774999999999,
+    "transferBytes": 3238126
+  },
+  "runs": [
+    {
+      "run": 1,
+      "lighthouseVersion": "13.4.1",
+      "performanceScore": 0.82,
+      "fcpMs": 1277.0774999999999,
+      "lcpMs": 4951.662,
+      "tbtMs": 0,
+      "cls": 0,
+      "speedIndexMs": 1277.0774999999999,
+      "transferBytes": 3238126,
+      "hero": {
+        "url": "http://127.0.0.1:4194/assets/portfolio/hero/hsin-working-white-space-960.avif",
+        "priority": "High",
+        "transferSize": 4457
+      },
+      "reelRequestCount": 0
+    },
+    {
+      "run": 2,
+      "lighthouseVersion": "13.4.1",
+      "performanceScore": 0.82,
+      "fcpMs": 1276.63,
+      "lcpMs": 4951.304,
+      "tbtMs": 0,
+      "cls": 0,
+      "speedIndexMs": 1276.63,
+      "transferBytes": 3238126,
+      "hero": {
+        "url": "http://127.0.0.1:4194/assets/portfolio/hero/hsin-working-white-space-960.avif",
+        "priority": "High",
+        "transferSize": 4457
+      },
+      "reelRequestCount": 0
+    },
+    {
+      "run": 3,
+      "lighthouseVersion": "13.4.1",
+      "performanceScore": 0.82,
+      "fcpMs": 1277.645,
+      "lcpMs": 4952.116,
+      "tbtMs": 0,
+      "cls": 0,
+      "speedIndexMs": 1277.645,
+      "transferBytes": 3238116,
+      "hero": {
+        "url": "http://127.0.0.1:4194/assets/portfolio/hero/hsin-working-white-space-960.avif",
+        "priority": "High",
+        "transferSize": 4457
+      },
+      "reelRequestCount": 0
+    }
+  ]
+}

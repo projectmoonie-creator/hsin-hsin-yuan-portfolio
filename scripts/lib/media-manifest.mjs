@@ -29,6 +29,52 @@ function validatePublicPath(publicPath) {
   }
 }
 
+function validateFeaturedReelDelivery(manifest) {
+  if (!Object.hasOwn(manifest, "featuredReelDelivery")) return;
+  const delivery = manifest.featuredReelDelivery;
+  requireObject(delivery, "featuredReelDelivery");
+  for (const field of ["sourceProfile", "mobileProfile"]) {
+    requireString(delivery[field], `featuredReelDelivery ${field}`);
+    if (!Object.hasOwn(manifest.profiles, delivery[field])) {
+      throw new Error(`featuredReelDelivery ${field} is unknown: ${delivery[field]}`);
+    }
+    if (manifest.profiles[delivery[field]].kind !== "video") {
+      throw new Error(`featuredReelDelivery ${field} must reference a video profile`);
+    }
+  }
+  const sourceProfile = manifest.profiles[delivery.sourceProfile];
+  const mobileProfile = manifest.profiles[delivery.mobileProfile];
+  if (mobileProfile.width >= sourceProfile.width
+    || mobileProfile.width * sourceProfile.height !== mobileProfile.height * sourceProfile.width) {
+    throw new Error("featuredReelDelivery mobileProfile must be a smaller matching-aspect source profile");
+  }
+  requireString(delivery.directory, "featuredReelDelivery directory");
+  if (!delivery.directory.startsWith("/assets/")
+    || delivery.directory.includes("\\")
+    || posix.normalize(delivery.directory) !== delivery.directory) {
+    throw new Error("featuredReelDelivery directory must stay under /assets/");
+  }
+  requireString(delivery.suffix, "featuredReelDelivery suffix");
+  if (!/^-[a-z0-9-]+$/.test(delivery.suffix)) {
+    throw new Error("featuredReelDelivery suffix must be a normalized filename suffix");
+  }
+  if (delivery.media !== "(max-width: 820px)") {
+    throw new Error("featuredReelDelivery media must match the canonical 820px mobile breakpoint");
+  }
+  requireObject(delivery.encode, "featuredReelDelivery encode");
+  for (const field of ["crf", "maxRateKbps", "bufferKbps", "keyframeIntervalSeconds", "threads"]) {
+    if (!Number.isInteger(delivery.encode[field]) || delivery.encode[field] <= 0) {
+      throw new Error(`featuredReelDelivery encode.${field} must be a positive integer`);
+    }
+  }
+  if (delivery.encode.crf > 51) {
+    throw new Error("featuredReelDelivery encode.crf must not exceed 51");
+  }
+  if (!["slow", "medium", "fast"].includes(delivery.encode.preset)) {
+    throw new Error("featuredReelDelivery encode.preset is unsupported");
+  }
+}
+
 export function resolvePublicAssetPath(repoRoot, publicPath) {
   validatePublicPath(publicPath);
   return join(repoRoot, "public", publicPath.slice(1));
@@ -57,6 +103,7 @@ export function validateMediaManifest(manifest) {
       }
     }
   }
+  validateFeaturedReelDelivery(manifest);
   if (!Array.isArray(manifest.assets)) {
     throw new Error("media manifest assets must be an array");
   }
@@ -67,6 +114,9 @@ export function validateMediaManifest(manifest) {
     requireObject(asset, "media manifest asset");
     if (Object.hasOwn(asset, "sourcePath")) {
       throw new Error(`media manifest asset ${asset.id || "<unknown>"} must not store sourcePath`);
+    }
+    if (Object.hasOwn(asset, "mobilePublicPath")) {
+      throw new Error(`media manifest asset ${asset.id || "<unknown>"} must derive mobile delivery instead of storing mobilePublicPath`);
     }
     requireString(asset.id, "media asset id");
     if (ids.has(asset.id)) throw new Error(`media asset id must be unique: ${asset.id}`);
@@ -98,6 +148,12 @@ export function validateMediaManifest(manifest) {
     if (manifest.profiles[asset.profile].kind === "video"
       && (typeof asset.duration !== "number" || !Number.isFinite(asset.duration) || asset.duration <= 0)) {
       throw new Error(`media asset ${asset.id} duration must be a positive number`);
+    }
+    if (manifest.featuredReelDelivery
+      && asset.owner.collection === "featured"
+      && asset.owner.field === "featuredReelUrl"
+      && asset.profile !== manifest.featuredReelDelivery.sourceProfile) {
+      throw new Error(`media asset ${asset.id} must use featuredReelDelivery sourceProfile`);
     }
   }
   return manifest;

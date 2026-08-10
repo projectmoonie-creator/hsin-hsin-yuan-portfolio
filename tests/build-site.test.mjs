@@ -482,6 +482,18 @@ test("all approved Featured reels hold their existing poster before muted playba
     assert.doesNotMatch(videoTag, /\scontrols(?:\s|>)/);
   }
 
+  const featuredVideos = html.match(/<video\b(?=[^>]*data-featured-reel-video)[\s\S]*?<\/video>/g) || [];
+  assert.equal(featuredVideos.length, 6);
+  for (const video of featuredVideos) {
+    const sources = video.match(/<source\b[^>]*>/g) || [];
+    assert.equal(sources.length, 2);
+    assert.match(sources[0], /src="\/assets\/showreel\/mobile\/[^"]+-mobile\.mp4"/);
+    assert.match(sources[0], /type="video\/mp4"/);
+    assert.match(sources[0], /media="\(max-width: 820px\)"/);
+    assert.match(sources[1], /src="\/assets\/showreel\/(?!mobile\/)[^"]+\.mp4"/);
+    assert.doesNotMatch(video, /preload="metadata"|preload="auto"/);
+  }
+
   assert.match(
     html,
     /<article class="work-panel" id="tech-dreamers">[\s\S]*?<a class="media-frame media-frame-unlabeled media-frame-link" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers" target="_blank" rel="noreferrer" aria-label="Play video: Tech Dreamers"[\s\S]*?data-featured-reel-video/,
@@ -1775,11 +1787,18 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.doesNotMatch(js, /WATCH_LOOP_REEL_HOLD_MS|watchLoopVideoTimers/);
   assert.match(js, /const FEATURED_REEL_DESKTOP_HOLD_MS = 1400;/);
   assert.match(js, /const FEATURED_REEL_MOBILE_HOLD_MS = 700;/);
+  assert.match(js, /const FEATURED_REEL_WARM_SETTLE_MS = 180;/);
   assert.match(js, /const featuredReelMobileMedia = window\.matchMedia\("\(max-width: 820px\)"\);/);
   assert.match(js, /const visibleFeaturedReels = new Set\(\);/);
   assert.match(js, /const featuredReelTimers = new Map\(\);/);
   assert.match(js, /const featuredReelActivationGenerations = new WeakMap\(\);/);
   assert.match(js, /const featuredReelPlayGenerations = new WeakMap\(\);/);
+  assert.match(js, /const nearbyFeaturedReels = new Set\(\);/);
+  assert.match(js, /preload = "metadata"/);
+  assert.match(js, /navigator\?\.connection/);
+  assert.match(js, /saveData/);
+  assert.match(js, /slow-2g|2g/);
+  assert.match(js, /rootMargin: "100% 0px"/);
   assert.match(js, /let activeFeaturedReel = null;/);
   assert.match(js, /function clearFeaturedReelTimer\(video\)/);
   assert.match(

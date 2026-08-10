@@ -4,38 +4,42 @@ Updated: 2026-08-10
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Featured Reel Mobile Performance Decision Gate
+## Current Work Package — Featured Reel Mobile Performance Option B
 
-- Local-only branch `codex/featured-reel-mobile-performance` starts at P0
-  documentation correction head `ecec92c`; no remote push, Preview,
-  Production, alias, Contact, `main`, or deployment action has occurred.
-- Formal Production still serves `origin/main` baseline `eb444a6`. Its Featured
-  videos use approved 35% eligibility, one mobile center owner, 700ms hold,
-  `preload="none"`, and reveal only on `playing`; P0 does not alter this code.
-- Three fresh 390×844 Chromium cold runs at 150ms / 1.6Mbps / cache disabled
-  reproduce a `play()` median of 724.8ms but a `playing` median of 7535.2ms.
-  All MP4s are fast-start and Vercel Range/cache behavior is healthy.
-- A six-second page-idle control without video request improves visible startup
-  to 2244.5ms; a single-reel six-second metadata warm improves it to 727.8ms.
-  Thus page contention is primary and bounded warming still hides about 1.52s
-  after eligibility; neither result supports all-reel or full-file preload.
-- Runtime files are 2.4–32.7MB at 1.44–2.61Mbps; five of six exceed the tested
-  1.6Mbps link. A temporary uncommitted 640×360 / ~446Kbps Slow Steps spike is
-  1.67MB (-77.5%) and reduces the three-run local first-frame median to
-  5641.3ms, but does not solve cold startup by itself.
-- Frozen brainstorm packet `92256a…bf9d1` completed independent Codex, Gemini
-  (`gemini-3.6-flash`), and Claude (`claude-opus-5`) lanes. All reject full or
-  all-reel preload; synthesis recommends canonical mobile derivatives first,
-  then a post-Hero, single-reel bounded warm only if the measured residual
-  delay remains.
-- Evidence and provider provenance are in
-  `docs/reviews/featured-reel-mobile-performance-brainstorm-2026-08-10/`.
-  The producer must choose Option A (derivatives only), Option B (two-stage,
-  recommended), or Option C (warm only) before any implementation.
-- Exact next action: producer chooses the option. After Option B approval,
-  write RED contracts for canonical derivatives, responsive sources, unchanged
-  visual/runtime invariants, and matched performance gates before production
-  code. Preview and every integration/deployment action remain separately gated.
+- Local-only branch `codex/featured-reel-mobile-performance` starts at reviewed
+  decision head `bb08d51`; formal Production/`origin/main` remains `eb444a6`.
+  This package has made no push, Preview, Production, alias, Contact, `main`,
+  deployment, or closed-tag/history change.
+- `data/media-manifest.json` is the only authored delivery truth. It derives six
+  source-verified 960×540 silent H.264 BT.709 faststart mobile reels while
+  retaining the 720p desktop fallbacks; `featured-reels:prepare` is staged and
+  repeatable, and build/check fail on source, recipe, media, or hash drift.
+- The six mobile files total 16,708,502 bytes versus 60,135,762 bytes (-72.2%).
+  A 640/960 Slow Steps gate selected 960 because DPR3 VMAF improved 80.42→84.21
+  while measured average bitrate stayed about 611kbps.
+- Initial HTML remains `preload="none"` and emits one media-qualified mobile
+  source before the desktop fallback. After page `load`, mobile may metadata-
+  warm one settled nearby reel; it cancels on ownership/lifecycle changes,
+  never warms beside active playback, and skips detectable Save-Data/2G plus
+  desktop/reduced-motion/no-JavaScript states.
+- Three matched 390×844 DPR3 cold runs at 150ms/1.6Mbps show immediate
+  `playing` 3471→1791ms and ten-second waiting 4 events/1239ms→0. With 1500ms
+  proximity lead, `playing` is 3469→708ms with 130,500 pre-eligibility bytes;
+  native metadata byte volume remains a browser hint, not a universal budget.
+- Three Lighthouse 13.4.1 mobile-simulate runs per side remain Performance
+  0.82, TBT 0, CLS 0, and LCP 4951.662→4951.728ms. Hero priority is High and
+  initial Featured MP4 requests are zero in all six runs.
+- TDD RED/GREEN completes; full `npm test` passes 155/155 plus build, design
+  audit, Figma export/no-diff, delivery check, diff, and six-case bilingual
+  desktop/tablet/mobile/reduced-motion/no-JavaScript/keyboard/overflow/zero-
+  Contact browser QA. Static no-JS mobile output is byte-identical before/after.
+- Frozen implementation review completed requested/observed/completed
+  `gemini-3.6-flash`: `PASS`, no P0/P1/P2. Synthetic Chromium evidence is not
+  CrUX; unsupported Safari cannot expose Save-Data/2G signals.
+- Open/exact next action: producer inspects this local handoff. Real iPhone
+  Safari, Low Power Mode, and Wi-Fi/cellular switching are pre-Production
+  checks; any Preview, push, integration, or deployment requires a new explicit
+  decision for this package.
 
 ## Prior Open Work Package — P0 Hero LCP / Image Component Originalization
 

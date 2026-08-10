@@ -76,6 +76,8 @@ class FakeVideo extends EventHub {
     this.paused = true;
     this.pauseCalls = 0;
     this.playRequests = [];
+    this.preload = "none";
+    this.loadCalls = 0;
     this.rect = { left: 0, right: 100, top: 0, bottom: 100 };
   }
 
@@ -97,6 +99,10 @@ class FakeVideo extends EventHub {
     this.playRequests.push(request);
     this.paused = false;
     return request.promise;
+  }
+
+  load() {
+    this.loadCalls += 1;
   }
 }
 
@@ -174,6 +180,7 @@ function createRuntime(videoCount = 1, options = {}) {
 
   const document = new EventHub();
   document.activeElement = null;
+  document.readyState = options.readyState || "loading";
   document.visibilityState = "visible";
   document.querySelector = () => null;
   document.querySelectorAll = (selector) =>
@@ -188,10 +195,18 @@ function createRuntime(videoCount = 1, options = {}) {
   window.innerWidth = options.width || (options.mobile ? 390 : 1440);
   window.innerHeight = options.height || (options.mobile ? 844 : 900);
   window.IntersectionObserver = FakeIntersectionObserver;
+  const connection = new EventHub();
+  connection.saveData = Boolean(options.saveData);
+  connection.effectiveType = options.effectiveType || "4g";
+  window.navigator = { connection };
   window.matchMedia = (query) => {
     if (!mediaQueries.has(query)) {
       const mediaQuery = new EventHub();
-      mediaQuery.matches = query === "(max-width: 820px)" && Boolean(options.mobile);
+      mediaQuery.matches = query === "(max-width: 820px)"
+        ? Boolean(options.mobile)
+        : query === "(prefers-reduced-motion: reduce)"
+          ? Boolean(options.reducedMotion)
+          : false;
       mediaQueries.set(query, mediaQuery);
     }
     return mediaQueries.get(query);
@@ -218,14 +233,29 @@ function createRuntime(videoCount = 1, options = {}) {
   }, { filename: "src/main.js" });
 
   const featuredObserver = observers.find((observer) =>
-    videos.some((video) => observer.targets.has(video)));
-  assert.ok(featuredObserver, "the real Featured controller observes its videos");
+    Array.isArray(observer.options.threshold)
+      && videos.some((video) => observer.targets.has(video)));
+  const warmObserver = observers.find((observer) =>
+    observer.options.rootMargin === "100% 0px");
+  if (!options.reducedMotion) {
+    assert.ok(featuredObserver, "the real Featured controller observes its videos");
+  }
 
   function intersect(entries) {
+    assert.ok(featuredObserver, "Featured playback observer is available");
     featuredObserver.emit(entries.map(([target, ratio]) => ({
       target,
       isIntersecting: ratio > 0,
       intersectionRatio: ratio,
+    })));
+  }
+
+  function warmIntersect(entries) {
+    assert.ok(warmObserver, "Featured warm observer is available");
+    warmObserver.emit(entries.map(([target, isIntersecting]) => ({
+      target,
+      isIntersecting,
+      intersectionRatio: isIntersecting ? 1 : 0,
     })));
   }
 
@@ -237,12 +267,15 @@ function createRuntime(videoCount = 1, options = {}) {
 
   return {
     clock,
+    connection,
     document,
     featuredObserver,
     flushAnimationFrames,
     intersect,
     mediaQueries,
     videos,
+    warmIntersect,
+    warmObserver,
     window,
   };
 }
@@ -295,6 +328,84 @@ test("mobile gives the viewport-center Featured video a 700ms poster hold", () =
   runtime.clock.advance(1);
   assert.equal(first.playRequests.length, 1);
   assert.equal(second.playRequests.length, 0);
+});
+
+test("mobile proximity warm waits for page load and a settled nearest candidate", () => {
+  const runtime = createRuntime(2, { mobile: true, width: 390, height: 844 });
+  const [first, second] = runtime.videos;
+  first.setRect({ left: 20, right: 370, top: 900, bottom: 1100 });
+  second.setRect({ left: 20, right: 370, top: 1180, bottom: 1380 });
+
+  runtime.warmIntersect([[first, true], [second, true]]);
+  runtime.clock.advance(1000);
+  assert.equal(first.loadCalls, 0);
+  assert.equal(second.loadCalls, 0);
+
+  runtime.window.dispatch("load");
+  runtime.clock.advance(179);
+  assert.equal(first.loadCalls, 0);
+  runtime.clock.advance(1);
+  assert.equal(first.preload, "metadata");
+  assert.equal(first.loadCalls, 1);
+  assert.equal(second.preload, "none");
+  assert.equal(second.loadCalls, 0);
+});
+
+test("mobile warm handoff cancels the old request before warming one new candidate", () => {
+  const runtime = createRuntime(2, { mobile: true, width: 390, height: 844 });
+  const [first, second] = runtime.videos;
+  first.setRect({ left: 20, right: 370, top: 900, bottom: 1100 });
+  second.setRect({ left: 20, right: 370, top: 1180, bottom: 1380 });
+  runtime.window.dispatch("load");
+  runtime.warmIntersect([[first, true], [second, true]]);
+  runtime.clock.advance(180);
+
+  first.setRect({ left: 20, right: 370, top: -500, bottom: -300 });
+  second.setRect({ left: 20, right: 370, top: 700, bottom: 900 });
+  runtime.warmIntersect([[first, false], [second, true]]);
+  runtime.clock.advance(180);
+
+  assert.equal(first.preload, "none");
+  assert.equal(first.loadCalls, 2);
+  assert.equal(second.preload, "metadata");
+  assert.equal(second.loadCalls, 1);
+});
+
+test("desktop, data saver, 2G, and reduced motion never warm Featured media", () => {
+  const cases = [
+    createRuntime(1),
+    createRuntime(1, { mobile: true, saveData: true }),
+    createRuntime(1, { mobile: true, effectiveType: "2g" }),
+  ];
+  for (const runtime of cases) {
+    runtime.window.dispatch("load");
+    runtime.warmIntersect([[runtime.videos[0], true]]);
+    runtime.clock.advance(1000);
+    assert.equal(runtime.videos[0].loadCalls, 0);
+    assert.equal(runtime.videos[0].preload, "none");
+  }
+
+  const reduced = createRuntime(1, { mobile: true, reducedMotion: true });
+  reduced.window.dispatch("load");
+  reduced.clock.advance(1000);
+  assert.equal(reduced.warmObserver, undefined);
+  assert.equal(reduced.videos[0].loadCalls, 0);
+});
+
+test("active Featured playback blocks a second proximity warm", () => {
+  const runtime = createRuntime(2, { mobile: true, width: 390, height: 844 });
+  const [first, second] = runtime.videos;
+  first.setRect({ left: 20, right: 370, top: 300, bottom: 500 });
+  second.setRect({ left: 20, right: 370, top: 560, bottom: 760 });
+  runtime.window.dispatch("load");
+  runtime.warmIntersect([[first, true], [second, true]]);
+  runtime.intersect([[first, 0.8], [second, 0.8]]);
+  runtime.clock.advance(700);
+  assert.equal(first.playRequests.length, 1);
+
+  runtime.warmIntersect([[first, false], [second, true]]);
+  runtime.clock.advance(1000);
+  assert.equal(second.loadCalls, 0);
 });
 
 test("mobile scroll hands Featured ownership to the new center without an observer event", () => {

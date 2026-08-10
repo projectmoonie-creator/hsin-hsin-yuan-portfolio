@@ -12,9 +12,15 @@ import {
   validateSiteCopy,
 } from "./lib/portfolio-contract.mjs";
 import { verifyHeroDerivativeManifest } from "./lib/hero-image-delivery.mjs";
+import {
+  deriveFeaturedReelMobileSource,
+  verifyFeaturedReelDerivativeManifest,
+} from "./lib/featured-reel-delivery.mjs";
+import { loadMediaManifest } from "./lib/media-manifest.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
+const MEDIA_MANIFEST = loadMediaManifest(root);
 
 const SITE_ORIGIN = (process.env.SITE_ORIGIN || "https://hsin-hsin-yuan-portfolio.vercel.app").replace(/\/+$/, "");
 const ASSET_VERSION = createHash("sha256")
@@ -309,6 +315,11 @@ function renderFeaturedReel(work) {
     work.featuredReelPoster;
 
   if (!hasApprovedFeaturedReel) return "";
+  const mobileSource = deriveFeaturedReelMobileSource({
+    manifest: MEDIA_MANIFEST,
+    sourcePublicPath: work.featuredReelUrl,
+  });
+  const mobileMedia = MEDIA_MANIFEST.featuredReelDelivery.media;
 
   return `
     <video
@@ -324,6 +335,7 @@ function renderFeaturedReel(work) {
       aria-hidden="true"
       tabindex="-1"
     >
+      <source src="${escapeHtml(mobileSource)}" type="video/mp4" media="${escapeHtml(mobileMedia)}">
       <source src="${escapeHtml(work.featuredReelUrl)}" type="video/mp4">
     </video>
   `;
@@ -837,6 +849,7 @@ function build() {
   const rawSite = JSON.parse(readFileSync(join(root, "data/site.json"), "utf8"));
   normalizeHeroMedia(rawSite.heroMedia);
   verifyHeroDerivativeManifest({ root, heroMedia: rawSite.heroMedia });
+  verifyFeaturedReelDerivativeManifest({ root, manifest: MEDIA_MANIFEST });
 
   const dist = join(root, "dist");
   rmSync(dist, { force: true, recursive: true });
