@@ -39,10 +39,16 @@ State: `PASS_WITH_OPEN_ITEMS`
   `dpl_3zjGjz9fkpNnXiJjyBQ3MVJTq9iZ` independently reads `Ready`, target
   `preview`, at `https://hsin-hsin-yuan-portfolio-6rwcoi6j9.vercel.app`; its
   build is a static root with no functions, and the URL was not fetched.
-- Exact next action: producer opens the Preview and confirms the Tech Dreamers
-  small card scrolls to its large Featured card while both large-card official
-  links still open TaiwanPlus. Any share-link change, Production, alias,
-  Contact, push, or integration requires a separate decision.
+- After the direct URL required login, the producer authorized a directly
+  accessible check link. Vercel replaced the Hobby account's sole prior
+  Shareable Link and now confirms `Anyone with the link can view and comment`;
+  login is required only to comment. The access-bearing URL stays outside Git
+  at SHA-256
+  `9a29fc38348ef93ec9a72ad9eeb26d973d2bac07c2b089354729775eac2b83b1`.
+- Exact next action: producer opens the delivered Shareable Link and confirms
+  the Tech Dreamers small card scrolls to its large Featured card while both
+  large-card official links still open TaiwanPlus. Production, alias, Contact,
+  push, or integration requires a separate decision.
 
 ## Prior Open Work Package — Featured Reel Mobile Performance Option B
 

@@ -2,7 +2,7 @@
 
 Date: 2026-08-11
 
-State: `READY_PREVIEW`
+State: `READY_PUBLIC_SHARE`
 
 ## Authorization And Source
 
@@ -48,13 +48,32 @@ occurred.
   Online interaction remains awaiting the producer's manual inspection, and no
   Contact request was sent.
 
+## Shareable Access Follow-up
+
+The direct Preview URL required Vercel login, so the producer explicitly asked
+for a directly clickable check link. The deployment's Share dialog initially
+showed `Only people with access can view and comment`. Selecting
+`Anyone with the link` displayed the Hobby warning that only one Shareable Link
+may exist and continuing revokes the prior link; the producer's request covered
+that replacement.
+
+After confirmation, Vercel displayed
+`Anyone with the link can view and comment` and generated a new access-bearing
+URL. Login remains required only to comment. The old Hobby Shareable Link is
+revoked; the new URL was delivered to the producer outside Git and is recorded
+only by SHA-256 fingerprint
+`9a29fc38348ef93ec9a72ad9eeb26d973d2bac07c2b089354729775eac2b83b1`.
+The share operation did not change deployment files, source, Production,
+canonical alias, Contact, `main`, or the protected document. The access URL was
+not fetched after creation.
+
 ## Exact Next Action
 
-The producer opens the Preview and confirms that selecting the Tech Dreamers
-small Screening Strip card moves to its large Featured card without opening a
-new site, while the large card's media action and Official page still open
-TaiwanPlus. Any access/share-link change, Production release, alias change,
-Contact action, push, or integration requires a separate explicit decision.
+The producer opens the delivered Shareable Link and confirms that selecting the
+Tech Dreamers small Screening Strip card moves to its large Featured card
+without opening a new site, while the large card's media action and Official
+page still open TaiwanPlus. Any Production release, alias change, Contact
+action, push, or integration requires a separate explicit decision.
 
 The protected untracked document remains outside Git and is rechecked at
 closeout against SHA-256
