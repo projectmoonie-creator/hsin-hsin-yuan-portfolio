@@ -8,7 +8,8 @@ State: `PASS_WITH_OPEN_ITEMS`
 
 - Local branch `codex/screening-strip-navigation` starts from Featured Reel
   handoff `cad590e`; formal Production/`origin/main` remains `eb444a6`. No
-  push, Preview, deployment, alias, Contact, `main`, or tag action occurred.
+  push, Production, alias, Contact, `main`, or tag action occurred. The
+  producer separately authorized one dist-only Preview from source `66a40cd`.
 - Root cause: Tech Dreamers alone declared `watchLoopTarget: "watch"`, and the
   already-shared `renderWatchLoopItem()` honored it as an external link while
   existing tests explicitly protected that exception.
@@ -29,8 +30,19 @@ State: `PASS_WITH_OPEN_ITEMS`
   visible after activation, new windows and Contact POSTs are zero, and both
   intended large-card external links remain.
 - Independent review requested/observed/completed `gemini-3.6-flash`: `PASS`,
-  no P0/P1/P2. Exact next action: producer inspects this local handoff; any
-  Preview, push, integration, or deployment requires a separate decision.
+  no P0/P1/P2.
+- The audited Preview package contains 61 public files / 96,933,972 bytes;
+  sorted path-list SHA-256 is
+  `267394ea78521b69969304608b7c4d6a69e3386ce716679f085bc9be7dd678b0`.
+  It excludes source, tests, internal docs, environments, Contact API, and the
+  protected document. Vercel deployment
+  `dpl_3zjGjz9fkpNnXiJjyBQ3MVJTq9iZ` independently reads `Ready`, target
+  `preview`, at `https://hsin-hsin-yuan-portfolio-6rwcoi6j9.vercel.app`; its
+  build is a static root with no functions, and the URL was not fetched.
+- Exact next action: producer opens the Preview and confirms the Tech Dreamers
+  small card scrolls to its large Featured card while both large-card official
+  links still open TaiwanPlus. Any share-link change, Production, alias,
+  Contact, push, or integration requires a separate decision.
 
 ## Prior Open Work Package — Featured Reel Mobile Performance Option B
 
