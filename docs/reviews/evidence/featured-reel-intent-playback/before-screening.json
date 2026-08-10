@@ -1,0 +1,132 @@
+{
+  "summary": {
+    "scenario": "screening",
+    "runs": 3,
+    "lead_ms": 0,
+    "play_call_median_ms": null,
+    "playing_median_ms": null,
+    "first_video_request_median_ms": 1263.9,
+    "first_video_response_median_ms": 4929.7,
+    "video_bytes_median": 1441500,
+    "lcp_median_ms": 1168,
+    "tbt_median_ms": 0,
+    "cls_median": 0,
+    "timeouts": 3
+  },
+  "results": [
+    {
+      "run": 1,
+      "scenario": "screening",
+      "lead_ms": 0,
+      "network": {
+        "offline": false,
+        "latency": 150,
+        "downloadThroughput": 209715,
+        "uploadThroughput": 96000,
+        "connectionType": "cellular4g"
+      },
+      "activation_start": 1319.8,
+      "play_call_ms": null,
+      "playing_ms": null,
+      "first_video_request_ms": 1266.0,
+      "first_video_response_ms": 4929.7,
+      "video_bytes": 1474500,
+      "waiting_events": 0,
+      "current_time": 0,
+      "hero_response_end": 376.80000001192093,
+      "lcp": 1156,
+      "tbt": 0,
+      "cls": 0,
+      "timed_out": true,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:4201/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 2585.8,
+          "response_at": 6249.5,
+          "bytes": 1474500,
+          "status": 206,
+          "mime": "video/mp4",
+          "from_disk_cache": false
+        }
+      ],
+      "console_errors": [],
+      "page_errors": []
+    },
+    {
+      "run": 2,
+      "scenario": "screening",
+      "lead_ms": 0,
+      "network": {
+        "offline": false,
+        "latency": 150,
+        "downloadThroughput": 209715,
+        "uploadThroughput": 96000,
+        "connectionType": "cellular4g"
+      },
+      "activation_start": 1348.6,
+      "play_call_ms": null,
+      "playing_ms": null,
+      "first_video_request_ms": 1254.1,
+      "first_video_response_ms": 5084.1,
+      "video_bytes": 1441500,
+      "waiting_events": 0,
+      "current_time": 0,
+      "hero_response_end": 392.9000000357628,
+      "lcp": 1168,
+      "tbt": 0,
+      "cls": 0,
+      "timed_out": true,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:4201/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 2602.7,
+          "response_at": 6432.7,
+          "bytes": 1441500,
+          "status": 206,
+          "mime": "video/mp4",
+          "from_disk_cache": false
+        }
+      ],
+      "console_errors": [],
+      "page_errors": []
+    },
+    {
+      "run": 3,
+      "scenario": "screening",
+      "lead_ms": 0,
+      "network": {
+        "offline": false,
+        "latency": 150,
+        "downloadThroughput": 209715,
+        "uploadThroughput": 96000,
+        "connectionType": "cellular4g"
+      },
+      "activation_start": 1344.3,
+      "play_call_ms": null,
+      "playing_ms": null,
+      "first_video_request_ms": 1263.9,
+      "first_video_response_ms": 4921.0,
+      "video_bytes": 1441500,
+      "waiting_events": 0,
+      "current_time": 0,
+      "hero_response_end": 393.4000000357628,
+      "lcp": 1180,
+      "tbt": 0,
+      "cls": 0,
+      "timed_out": true,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:4201/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 2608.2,
+          "response_at": 6265.3,
+          "bytes": 1441500,
+          "status": 206,
+          "mime": "video/mp4",
+          "from_disk_cache": false
+        }
+      ],
+      "console_errors": [],
+      "page_errors": []
+    }
+  ]
+}

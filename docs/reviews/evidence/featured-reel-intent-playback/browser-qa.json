@@ -1,0 +1,115 @@
+{
+  "summary": {
+    "passed": true,
+    "cases": 9
+  },
+  "results": [
+    {
+      "name": "mobile linked media previews on first tap and opens on second",
+      "passed": true,
+      "contact_posts": [],
+      "mp4_requests": [
+        "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+        "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+      ],
+      "console_errors": [],
+      "page_errors": [],
+      "second_tap_url": "https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers",
+      "play_calls": [
+        {
+          "at": 159.10000002384186,
+          "id": "tech-dreamers"
+        }
+      ],
+      "overflow": 0
+    },
+    {
+      "name": "mobile touch movement preserves scroll and suppresses navigation",
+      "passed": true,
+      "contact_posts": [],
+      "mp4_requests": [
+        "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+        "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+      ],
+      "console_errors": [],
+      "page_errors": []
+    },
+    {
+      "name": "Screening Strip primes and opens the exact Tech Dreamers large card",
+      "passed": true,
+      "contact_posts": [],
+      "mp4_requests": [
+        "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+        "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+        "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+      ],
+      "console_errors": [],
+      "page_errors": [],
+      "target_request_count": 3,
+      "play_calls": [
+        {
+          "at": 402.89999997615814,
+          "id": "tech-dreamers"
+        }
+      ]
+    },
+    {
+      "name": "desktop hover and keyboard focus immediately request preview",
+      "passed": true,
+      "contact_posts": [],
+      "mp4_requests": [
+        "http://127.0.0.1:4194/assets/showreel/tech-dreamers-card-reel.mp4",
+        "http://127.0.0.1:4194/assets/showreel/tech-dreamers-card-reel.mp4"
+      ],
+      "console_errors": [],
+      "page_errors": [],
+      "hover_play_calls": 1,
+      "focus_kept_or_started_preview": true
+    },
+    {
+      "name": "mobile 35 percent plus 700ms automatic fallback remains",
+      "passed": true,
+      "contact_posts": [],
+      "mp4_requests": [
+        "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+      ],
+      "console_errors": [],
+      "page_errors": [],
+      "play_after_scroll_ms": 710.9
+    },
+    {
+      "name": "reduced motion remains static",
+      "passed": true,
+      "contact_posts": [],
+      "mp4_requests": [],
+      "console_errors": [],
+      "page_errors": []
+    },
+    {
+      "name": "Save-Data skips passive warm",
+      "passed": true,
+      "contact_posts": [],
+      "mp4_requests": [],
+      "console_errors": [],
+      "page_errors": []
+    },
+    {
+      "name": "2G skips passive warm",
+      "passed": true,
+      "contact_posts": [],
+      "mp4_requests": [],
+      "console_errors": [],
+      "page_errors": []
+    },
+    {
+      "name": "no JavaScript remains static",
+      "passed": true,
+      "contact_posts": [],
+      "mp4_requests": [],
+      "console_errors": [],
+      "page_errors": []
+    }
+  ]
+}

@@ -1,0 +1,604 @@
+{
+  "summary": {
+    "scenario": "screening",
+    "target": "tech-dreamers",
+    "runs": 3,
+    "lead_ms": 0,
+    "play_call_median_ms": 315.3,
+    "playing_median_ms": 6350.1,
+    "first_video_request_median_ms": 1.8,
+    "first_video_response_median_ms": 4739.2,
+    "video_bytes_median": 282000,
+    "lcp_median_ms": 1228,
+    "tbt_median_ms": 0,
+    "cls_median": 0,
+    "timeouts": 0
+  },
+  "results": [
+    {
+      "run": 1,
+      "scenario": "screening",
+      "target": "tech-dreamers",
+      "lead_ms": 0,
+      "network": {
+        "offline": false,
+        "latency": 150,
+        "downloadThroughput": 209715,
+        "uploadThroughput": 96000,
+        "connectionType": "cellular4g"
+      },
+      "activation_start": 1538.6,
+      "play_call_ms": 316.9,
+      "playing_ms": 6317.8,
+      "first_video_request_ms": 2.4,
+      "first_video_response_ms": 4677.7,
+      "video_bytes": 276807,
+      "waiting_events": 4,
+      "pause_events": 0,
+      "video_events": [
+        {
+          "type": "abort",
+          "at": 1541.5999999642372,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "emptied",
+          "at": 1541.699999988079,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "abort",
+          "at": 1563.699999988079,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "emptied",
+          "at": 1563.699999988079,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "abort",
+          "at": 1855.5999999642372,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "emptied",
+          "at": 1855.699999988079,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "waiting",
+          "at": 1856,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "stalled",
+          "at": 5089.099999964237,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "loadedmetadata",
+          "at": 7164.5,
+          "currentTime": 0,
+          "readyState": 1
+        },
+        {
+          "type": "loadeddata",
+          "at": 7856.199999988079,
+          "currentTime": 0.000245,
+          "readyState": 3
+        },
+        {
+          "type": "canplay",
+          "at": 7856.199999988079,
+          "currentTime": 0.000278,
+          "readyState": 3
+        },
+        {
+          "type": "playing",
+          "at": 7856.399999976158,
+          "currentTime": 0.000481,
+          "readyState": 3
+        },
+        {
+          "type": "waiting",
+          "at": 8371.599999964237,
+          "currentTime": 0.515432,
+          "readyState": 2
+        },
+        {
+          "type": "canplay",
+          "at": 8462.099999964237,
+          "currentTime": 0.515569,
+          "readyState": 3
+        },
+        {
+          "type": "playing",
+          "at": 8462.399999976158,
+          "currentTime": 0.515821,
+          "readyState": 3
+        },
+        {
+          "type": "waiting",
+          "at": 8730,
+          "currentTime": 0.783167,
+          "readyState": 2
+        },
+        {
+          "type": "canplay",
+          "at": 8947.599999964237,
+          "currentTime": 0.783365,
+          "readyState": 3
+        },
+        {
+          "type": "playing",
+          "at": 8948,
+          "currentTime": 0.783752,
+          "readyState": 3
+        },
+        {
+          "type": "waiting",
+          "at": 9379.300000011921,
+          "currentTime": 1.214929,
+          "readyState": 2
+        },
+        {
+          "type": "canplay",
+          "at": 9429.5,
+          "currentTime": 1.215015,
+          "readyState": 3
+        },
+        {
+          "type": "playing",
+          "at": 9429.599999964237,
+          "currentTime": 1.215143,
+          "readyState": 3
+        }
+      ],
+      "current_time": 2.653,
+      "hero_response_end": 400.0999999642372,
+      "lcp": 1188,
+      "tbt": 0,
+      "cls": 0,
+      "timed_out": false,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 1541.0,
+          "response_at": null,
+          "bytes": 0,
+          "status": null,
+          "mime": null,
+          "from_disk_cache": false
+        },
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 1541.9,
+          "response_at": null,
+          "bytes": 0,
+          "status": null,
+          "mime": null,
+          "from_disk_cache": false
+        },
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 1564.1,
+          "response_at": null,
+          "bytes": 0,
+          "status": null,
+          "mime": null,
+          "from_disk_cache": false
+        },
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 1856.0,
+          "response_at": 6216.3,
+          "bytes": 276807,
+          "status": 206,
+          "mime": "video/mp4",
+          "from_disk_cache": false
+        }
+      ],
+      "console_errors": [],
+      "page_errors": []
+    },
+    {
+      "run": 2,
+      "scenario": "screening",
+      "target": "tech-dreamers",
+      "lead_ms": 0,
+      "network": {
+        "offline": false,
+        "latency": 150,
+        "downloadThroughput": 209715,
+        "uploadThroughput": 96000,
+        "connectionType": "cellular4g"
+      },
+      "activation_start": 1561.4,
+      "play_call_ms": 315.3,
+      "playing_ms": 6366.8,
+      "first_video_request_ms": 1.8,
+      "first_video_response_ms": 4748.7,
+      "video_bytes": 282000,
+      "waiting_events": 4,
+      "pause_events": 0,
+      "video_events": [
+        {
+          "type": "abort",
+          "at": 1563.699999988079,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "emptied",
+          "at": 1563.800000011921,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "abort",
+          "at": 1593.300000011921,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "emptied",
+          "at": 1593.4000000357628,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "abort",
+          "at": 1876.800000011921,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "emptied",
+          "at": 1876.800000011921,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "waiting",
+          "at": 1877.1000000238419,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "stalled",
+          "at": 5115.300000011921,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "loadedmetadata",
+          "at": 7143.199999988079,
+          "currentTime": 0,
+          "readyState": 1
+        },
+        {
+          "type": "loadeddata",
+          "at": 7928.100000023842,
+          "currentTime": 0.000241,
+          "readyState": 3
+        },
+        {
+          "type": "canplay",
+          "at": 7928.100000023842,
+          "currentTime": 0.000278,
+          "readyState": 3
+        },
+        {
+          "type": "playing",
+          "at": 7928.199999988079,
+          "currentTime": 0.000452,
+          "readyState": 3
+        },
+        {
+          "type": "waiting",
+          "at": 8442.800000011921,
+          "currentTime": 0.514166,
+          "readyState": 2
+        },
+        {
+          "type": "canplay",
+          "at": 8562.900000035763,
+          "currentTime": 0.514289,
+          "readyState": 3
+        },
+        {
+          "type": "playing",
+          "at": 8562.900000035763,
+          "currentTime": 0.514383,
+          "readyState": 3
+        },
+        {
+          "type": "waiting",
+          "at": 8825.900000035763,
+          "currentTime": 0.777278,
+          "readyState": 2
+        },
+        {
+          "type": "canplay",
+          "at": 9035.600000023842,
+          "currentTime": 0.777562,
+          "readyState": 3
+        },
+        {
+          "type": "playing",
+          "at": 9036,
+          "currentTime": 0.778014,
+          "readyState": 3
+        },
+        {
+          "type": "waiting",
+          "at": 9467.300000011921,
+          "currentTime": 1.208995,
+          "readyState": 2
+        },
+        {
+          "type": "canplay",
+          "at": 9508,
+          "currentTime": 1.20919,
+          "readyState": 3
+        },
+        {
+          "type": "playing",
+          "at": 9508.300000011921,
+          "currentTime": 1.209484,
+          "readyState": 3
+        }
+      ],
+      "current_time": 2.639,
+      "hero_response_end": 401.4000000357628,
+      "lcp": 1232,
+      "tbt": 0,
+      "cls": 0,
+      "timed_out": false,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 1563.2,
+          "response_at": null,
+          "bytes": 0,
+          "status": null,
+          "mime": null,
+          "from_disk_cache": false
+        },
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 1563.9,
+          "response_at": null,
+          "bytes": 0,
+          "status": null,
+          "mime": null,
+          "from_disk_cache": false
+        },
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 1593.5,
+          "response_at": null,
+          "bytes": 0,
+          "status": null,
+          "mime": null,
+          "from_disk_cache": false
+        },
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 1877.0,
+          "response_at": 6310.1,
+          "bytes": 282000,
+          "status": 206,
+          "mime": "video/mp4",
+          "from_disk_cache": false
+        }
+      ],
+      "console_errors": [],
+      "page_errors": []
+    },
+    {
+      "run": 3,
+      "scenario": "screening",
+      "target": "tech-dreamers",
+      "lead_ms": 0,
+      "network": {
+        "offline": false,
+        "latency": 150,
+        "downloadThroughput": 209715,
+        "uploadThroughput": 96000,
+        "connectionType": "cellular4g"
+      },
+      "activation_start": 1564,
+      "play_call_ms": 310,
+      "playing_ms": 6350.1,
+      "first_video_request_ms": 1.4,
+      "first_video_response_ms": 4739.2,
+      "video_bytes": 282000,
+      "waiting_events": 4,
+      "pause_events": 0,
+      "video_events": [
+        {
+          "type": "abort",
+          "at": 1566.199999988079,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "emptied",
+          "at": 1566.2999999523163,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "abort",
+          "at": 1590.5,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "emptied",
+          "at": 1590.5999999642372,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "abort",
+          "at": 1874.0999999642372,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "emptied",
+          "at": 1874.199999988079,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "waiting",
+          "at": 1874.5999999642372,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "stalled",
+          "at": 5104.199999988079,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "loadedmetadata",
+          "at": 7244.199999988079,
+          "currentTime": 0,
+          "readyState": 1
+        },
+        {
+          "type": "loadeddata",
+          "at": 7913.799999952316,
+          "currentTime": 0.00022,
+          "readyState": 3
+        },
+        {
+          "type": "canplay",
+          "at": 7913.899999976158,
+          "currentTime": 0.000248,
+          "readyState": 3
+        },
+        {
+          "type": "playing",
+          "at": 7914.099999964237,
+          "currentTime": 0.00042,
+          "readyState": 3
+        },
+        {
+          "type": "waiting",
+          "at": 8424.199999988079,
+          "currentTime": 0.51031,
+          "readyState": 2
+        },
+        {
+          "type": "canplay",
+          "at": 8548.199999988079,
+          "currentTime": 0.510417,
+          "readyState": 3
+        },
+        {
+          "type": "playing",
+          "at": 8548.299999952316,
+          "currentTime": 0.510499,
+          "readyState": 3
+        },
+        {
+          "type": "waiting",
+          "at": 8814.399999976158,
+          "currentTime": 0.77634,
+          "readyState": 2
+        },
+        {
+          "type": "canplay",
+          "at": 9024.099999964237,
+          "currentTime": 0.776575,
+          "readyState": 3
+        },
+        {
+          "type": "playing",
+          "at": 9024.299999952316,
+          "currentTime": 0.776867,
+          "readyState": 3
+        },
+        {
+          "type": "waiting",
+          "at": 9464.799999952316,
+          "currentTime": 1.217252,
+          "readyState": 2
+        },
+        {
+          "type": "canplay",
+          "at": 9490.099999964237,
+          "currentTime": 1.217329,
+          "readyState": 3
+        },
+        {
+          "type": "playing",
+          "at": 9490.199999988079,
+          "currentTime": 1.217452,
+          "readyState": 3
+        }
+      ],
+      "current_time": 2.645,
+      "hero_response_end": 403.0999999642372,
+      "lcp": 1228,
+      "tbt": 0,
+      "cls": 0,
+      "timed_out": false,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 1565.4,
+          "response_at": null,
+          "bytes": 0,
+          "status": null,
+          "mime": null,
+          "from_disk_cache": false
+        },
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 1566.5,
+          "response_at": null,
+          "bytes": 0,
+          "status": null,
+          "mime": null,
+          "from_disk_cache": false
+        },
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 1590.8,
+          "response_at": null,
+          "bytes": 0,
+          "status": null,
+          "mime": null,
+          "from_disk_cache": false
+        },
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+          "request_at": 1874.5,
+          "response_at": 6303.2,
+          "bytes": 282000,
+          "status": 206,
+          "mime": "video/mp4",
+          "from_disk_cache": false
+        }
+      ],
+      "console_errors": [],
+      "page_errors": []
+    }
+  ]
+}

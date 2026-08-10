@@ -1,0 +1,280 @@
+{
+  "summary": {
+    "scenario": "passive",
+    "target": "slow-steps",
+    "runs": 3,
+    "lead_ms": 0,
+    "play_call_median_ms": null,
+    "playing_median_ms": null,
+    "first_video_request_median_ms": null,
+    "first_video_response_median_ms": null,
+    "video_bytes_median": 130500,
+    "lcp_median_ms": 1216,
+    "tbt_median_ms": 0,
+    "cls_median": 0,
+    "timeouts": 0
+  },
+  "results": [
+    {
+      "run": 1,
+      "scenario": "passive",
+      "target": "slow-steps",
+      "lead_ms": 0,
+      "network": {
+        "offline": false,
+        "latency": 150,
+        "downloadThroughput": 209715,
+        "uploadThroughput": 96000,
+        "connectionType": "cellular4g"
+      },
+      "activation_start": null,
+      "play_call_ms": null,
+      "playing_ms": null,
+      "first_video_request_ms": null,
+      "first_video_response_ms": null,
+      "video_bytes": 129807,
+      "waiting_events": 0,
+      "pause_events": 0,
+      "video_events": [
+        {
+          "type": "abort",
+          "at": 1708.9000000357628,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "emptied",
+          "at": 1709.1000000238419,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "stalled",
+          "at": 4938.800000011921,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "loadedmetadata",
+          "at": 7038,
+          "currentTime": 0,
+          "readyState": 3
+        },
+        {
+          "type": "loadeddata",
+          "at": 7038,
+          "currentTime": 0,
+          "readyState": 3
+        },
+        {
+          "type": "canplay",
+          "at": 7038,
+          "currentTime": 0,
+          "readyState": 3
+        }
+      ],
+      "current_time": 0,
+      "hero_response_end": 391.60000002384186,
+      "lcp": 1200,
+      "tbt": 0,
+      "cls": 0,
+      "timed_out": false,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "request_at": 1708.4,
+          "response_at": null,
+          "bytes": 0,
+          "status": null,
+          "mime": null,
+          "from_disk_cache": false
+        },
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "request_at": 1709.4,
+          "response_at": 5743.3,
+          "bytes": 129807,
+          "status": 206,
+          "mime": "video/mp4",
+          "from_disk_cache": false
+        }
+      ],
+      "console_errors": [],
+      "page_errors": []
+    },
+    {
+      "run": 2,
+      "scenario": "passive",
+      "target": "slow-steps",
+      "lead_ms": 0,
+      "network": {
+        "offline": false,
+        "latency": 150,
+        "downloadThroughput": 209715,
+        "uploadThroughput": 96000,
+        "connectionType": "cellular4g"
+      },
+      "activation_start": null,
+      "play_call_ms": null,
+      "playing_ms": null,
+      "first_video_request_ms": null,
+      "first_video_response_ms": null,
+      "video_bytes": 130500,
+      "waiting_events": 0,
+      "pause_events": 0,
+      "video_events": [
+        {
+          "type": "abort",
+          "at": 1714.1000000238419,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "emptied",
+          "at": 1714.1000000238419,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "stalled",
+          "at": 4949.5,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "loadedmetadata",
+          "at": 7063.199999988079,
+          "currentTime": 0,
+          "readyState": 3
+        },
+        {
+          "type": "loadeddata",
+          "at": 7063.199999988079,
+          "currentTime": 0,
+          "readyState": 3
+        },
+        {
+          "type": "canplay",
+          "at": 7063.300000011921,
+          "currentTime": 0,
+          "readyState": 3
+        }
+      ],
+      "current_time": 0,
+      "hero_response_end": 394.10000002384186,
+      "lcp": 1216,
+      "tbt": 0,
+      "cls": 0,
+      "timed_out": false,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "request_at": 1713.5,
+          "response_at": null,
+          "bytes": 0,
+          "status": null,
+          "mime": null,
+          "from_disk_cache": false
+        },
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "request_at": 1714.4,
+          "response_at": 5759.4,
+          "bytes": 130500,
+          "status": 206,
+          "mime": "video/mp4",
+          "from_disk_cache": false
+        }
+      ],
+      "console_errors": [],
+      "page_errors": []
+    },
+    {
+      "run": 3,
+      "scenario": "passive",
+      "target": "slow-steps",
+      "lead_ms": 0,
+      "network": {
+        "offline": false,
+        "latency": 150,
+        "downloadThroughput": 209715,
+        "uploadThroughput": 96000,
+        "connectionType": "cellular4g"
+      },
+      "activation_start": null,
+      "play_call_ms": null,
+      "playing_ms": null,
+      "first_video_request_ms": null,
+      "first_video_response_ms": null,
+      "video_bytes": 130500,
+      "waiting_events": 0,
+      "pause_events": 0,
+      "video_events": [
+        {
+          "type": "abort",
+          "at": 1738.199999988079,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "emptied",
+          "at": 1738.3999999761581,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "stalled",
+          "at": 4972.5,
+          "currentTime": 0,
+          "readyState": 0
+        },
+        {
+          "type": "loadedmetadata",
+          "at": 7061.799999952316,
+          "currentTime": 0,
+          "readyState": 3
+        },
+        {
+          "type": "loadeddata",
+          "at": 7061.899999976158,
+          "currentTime": 0,
+          "readyState": 3
+        },
+        {
+          "type": "canplay",
+          "at": 7061.899999976158,
+          "currentTime": 0,
+          "readyState": 3
+        }
+      ],
+      "current_time": 0,
+      "hero_response_end": 401,
+      "lcp": 1256,
+      "tbt": 0,
+      "cls": 0,
+      "timed_out": false,
+      "requests": [
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "request_at": 1737.6,
+          "response_at": null,
+          "bytes": 0,
+          "status": null,
+          "mime": null,
+          "from_disk_cache": false
+        },
+        {
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "request_at": 1738.6,
+          "response_at": 5750.7,
+          "bytes": 130500,
+          "status": 206,
+          "mime": "video/mp4",
+          "from_disk_cache": false
+        }
+      ],
+      "console_errors": [],
+      "page_errors": []
+    }
+  ]
+}

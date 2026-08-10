@@ -88,8 +88,28 @@
   rejected promise does not schedule a retry, and a stale rejection must not
   reset a newer activation. A persisted BFCache restore must safely rebind
   observation.
+- Explicit intent bypasses only the passive hold and still obeys one-owner and
+  lifecycle guards. Desktop pointer hover over a Featured panel and keyboard
+  focus within it request that reel immediately; pointer/focus exit releases
+  it. On mobile linked media, the first stationary tap previews and suppresses
+  only that click, while a second tap opens the canonical official destination.
+  A movement over 12px stays a scroll gesture and cannot accidentally navigate.
+  If the explicit preview rejects or errors, the next tap must still reach the
+  official destination. Reduced-motion and no-JavaScript keep normal static
+  link behavior.
+- A Screening Strip pointerdown may metadata-prime only the exact reel named by
+  its canonical `#<featured-slug>` target. Arrival at that Featured panel
+  bypasses the passive hold; an interrupted jump releases its offscreen prime
+  after three seconds. The small card remains an internal jump, never an
+  external watch link.
 - Featured reel markup stays muted, looped, inline, `preload="none"`, pointer-transparent, and non-interactive. `data/media-manifest.json` is the single source/recipe ledger: builds emit its verified 960×540 mobile H.264 source before the existing 720p fallback; the existing wrapper still owns navigation.
-- Only after page `load`, mobile may metadata-warm one settled proximity candidate at a time; cancel on ownership/lifecycle change, never warm beside active playback, and skip desktop, reduced motion, no JavaScript, Save-Data, slow-2G, and 2G. Static posters and the cold fallback remain valid.
+- Initial HTML never eagerly preloads video. After the canonical Hero image has
+  loaded, mobile may metadata-warm one settled proximity candidate within a
+  two-viewport margin; cancel on ownership/lifecycle change, never warm beside
+  active playback, and skip desktop, reduced motion, no JavaScript, Save-Data,
+  slow-2G, and 2G. A late initial `pageshow` must yield once scroll, pointer, or
+  keyboard navigation has begun. Static posters and the cold fallback remain
+  valid.
 - Existing Featured posters and external watch destinations are canonical.
   Slow Steps has no public destination and stays unlinked; do not invent one.
 - A deliberate exception is allowed for a user-curated full-series playlist that gathers fragmented episodes or a substantial body of related work. Mark it with `watchMode: "series"` and `showWatchCta: true`, use "Watch the full series" / "觀看完整系列", and protect the exact count and destinations with regression tests. Do not enable this exception for a single episode, trailer, representative segment, or ordinary program page.

@@ -15,12 +15,30 @@ function clearInitialHash() {
 }
 
 const hadInitialHash = clearInitialHash();
+let hasNavigatedBeforeInitialPageShow = false;
+function markNavigationBeforeInitialPageShow() {
+  hasNavigatedBeforeInitialPageShow = true;
+}
+window.addEventListener("scroll", markNavigationBeforeInitialPageShow, {
+  passive: true,
+  once: true,
+});
+document.addEventListener("pointerdown", markNavigationBeforeInitialPageShow, {
+  capture: true,
+  once: true,
+});
+document.addEventListener("keydown", markNavigationBeforeInitialPageShow, {
+  capture: true,
+  once: true,
+});
 
 window.addEventListener("pageshow", (event) => {
-  if (!event.persisted) {
+  if (!event.persisted && !hasNavigatedBeforeInitialPageShow) {
     scrollToTopInstant();
     if (hadInitialHash) {
-      window.requestAnimationFrame(scrollToTopInstant);
+      window.requestAnimationFrame(() => {
+        if (!hasNavigatedBeforeInitialPageShow) scrollToTopInstant();
+      });
     }
   }
 });
@@ -215,8 +233,10 @@ if (!prefersReducedMotion) {
   const FEATURED_REEL_DESKTOP_HOLD_MS = 1400;
   const FEATURED_REEL_MOBILE_HOLD_MS = 700;
   const FEATURED_REEL_WARM_SETTLE_MS = 180;
+  const FEATURED_REEL_TOUCH_MOVE_PX = 12;
   const featuredReelMobileMedia = window.matchMedia("(max-width: 820px)");
   const featuredReelConnection = window.navigator?.connection;
+  const featuredReelHeroImage = document.querySelector(".hero-media-image");
   const featuredReelVideos = Array.from(
     document.querySelectorAll("[data-featured-reel-video]"),
   );
@@ -225,12 +245,21 @@ if (!prefersReducedMotion) {
   const featuredReelTimers = new Map();
   const featuredReelActivationGenerations = new WeakMap();
   const featuredReelPlayGenerations = new WeakMap();
+  const featuredReelTouchGestures = new WeakMap();
+  const featuredReelIntentFailures = new WeakSet();
+  const featuredReelSuppressedClicks = new WeakSet();
+  const featuredReelSuppressedClickTimers = new WeakMap();
   let activeFeaturedReel = null;
+  let explicitFeaturedReel = null;
+  let pendingScreeningFeaturedReel = null;
   let warmedFeaturedReel = null;
   let featuredReelLifecycleBound = false;
   let featuredReelViewportFrame = 0;
   let featuredReelWarmTimer = 0;
-  let featuredReelWarmReady = document.readyState === "complete";
+  let featuredReelScreeningPrimeTimer = 0;
+  let featuredReelWarmReady = Boolean(
+    featuredReelHeroImage?.complete && featuredReelHeroImage.naturalWidth,
+  );
 
   function getFeaturedReelHoldMs() {
     return featuredReelMobileMedia.matches
@@ -252,8 +281,18 @@ if (!prefersReducedMotion) {
   function isCurrentFeaturedReelActivation(video, generation) {
     return getFeaturedReelGeneration(video) === generation
       && activeFeaturedReel === video
-      && visibleFeaturedReels.has(video)
+      && (explicitFeaturedReel === video
+        ? isFeaturedReelInViewport(video)
+        : visibleFeaturedReels.has(video))
       && document.visibilityState === "visible";
+  }
+
+  function isFeaturedReelInViewport(video) {
+    const rect = video.getBoundingClientRect();
+    return rect.bottom > 0
+      && rect.right > 0
+      && rect.top < window.innerHeight
+      && rect.left < window.innerWidth;
   }
 
   function clearFeaturedReelTimer(video) {
@@ -267,6 +306,11 @@ if (!prefersReducedMotion) {
     featuredReelWarmTimer = 0;
   }
 
+  function clearFeaturedReelScreeningPrimeTimer() {
+    if (featuredReelScreeningPrimeTimer) clearTimeout(featuredReelScreeningPrimeTimer);
+    featuredReelScreeningPrimeTimer = 0;
+  }
+
   function restoreFeaturedReelPreload(video) {
     if (video.preload === "none") return;
     video.preload = "none";
@@ -278,6 +322,14 @@ if (!prefersReducedMotion) {
     const video = warmedFeaturedReel;
     warmedFeaturedReel = null;
     if (video && !preserveBuffer) restoreFeaturedReelPreload(video);
+  }
+
+  function primeFeaturedReel(video) {
+    if (!video?.paused || warmedFeaturedReel === video) return;
+    releaseWarmedFeaturedReel();
+    video.preload = "metadata";
+    video.load();
+    warmedFeaturedReel = video;
   }
 
   function canWarmFeaturedReel() {
@@ -330,6 +382,7 @@ if (!prefersReducedMotion) {
     const shouldRestorePreload = warmedFeaturedReel !== video && video.preload !== "none";
     clearFeaturedReelTimer(video);
     invalidateFeaturedReelGeneration(video);
+    if (explicitFeaturedReel === video) explicitFeaturedReel = null;
     video.classList.remove("is-playing");
     video.pause();
     try {
@@ -351,9 +404,37 @@ if (!prefersReducedMotion) {
     video.play().catch(() => {
       if (isCurrentFeaturedReelActivation(video, generation)
         && featuredReelPlayGenerations.get(video) === generation) {
+        if (explicitFeaturedReel === video) featuredReelIntentFailures.add(video);
         resetFeaturedReel(video);
       }
     });
+  }
+
+  function activateFeaturedReelIntent(video) {
+    if (!video
+      || !video.paused
+      || !isFeaturedReelInViewport(video)
+      || document.visibilityState !== "visible") return false;
+    featuredReelIntentFailures.delete(video);
+    explicitFeaturedReel = video;
+    activeFeaturedReel = video;
+    featuredReelVideos.forEach((candidate) => {
+      if (candidate !== video) resetFeaturedReel(candidate);
+    });
+    clearFeaturedReelTimer(video);
+    primeFeaturedReel(video);
+    const generation = invalidateFeaturedReelGeneration(video);
+    playFeaturedReel(video, generation);
+    scheduleFeaturedReelWarm();
+    return true;
+  }
+
+  function releaseFeaturedReelIntent(video) {
+    if (explicitFeaturedReel !== video) return;
+    explicitFeaturedReel = null;
+    activeFeaturedReel = null;
+    resetFeaturedReel(video);
+    syncActiveFeaturedReel();
   }
 
   function scheduleFeaturedReel(video) {
@@ -382,11 +463,29 @@ if (!prefersReducedMotion) {
         video.classList.add("is-playing");
       }
     });
-    video.addEventListener("error", () => resetFeaturedReel(video));
+    video.addEventListener("error", () => {
+      if (pendingScreeningFeaturedReel === video) {
+        pendingScreeningFeaturedReel = null;
+        clearFeaturedReelScreeningPrimeTimer();
+      }
+      if (explicitFeaturedReel === video) featuredReelIntentFailures.add(video);
+      resetFeaturedReel(video);
+    });
   });
 
   function syncActiveFeaturedReel() {
-    const nextActiveFeaturedReel = !visibleFeaturedReels.size
+    if (explicitFeaturedReel && !isFeaturedReelInViewport(explicitFeaturedReel)) {
+      explicitFeaturedReel = null;
+    }
+    if (pendingScreeningFeaturedReel
+      && visibleFeaturedReels.has(pendingScreeningFeaturedReel)) {
+      const target = pendingScreeningFeaturedReel;
+      pendingScreeningFeaturedReel = null;
+      clearFeaturedReelScreeningPrimeTimer();
+      activateFeaturedReelIntent(target);
+      return;
+    }
+    const nextActiveFeaturedReel = explicitFeaturedReel || (!visibleFeaturedReels.size
       ? null
       : featuredReelMobileMedia.matches
         ? selectClosestVisibleReel(
@@ -394,12 +493,16 @@ if (!prefersReducedMotion) {
             visibleFeaturedReels,
             { width: window.innerWidth, height: window.innerHeight },
           )
-        : featuredReelVideos.filter((video) => visibleFeaturedReels.has(video)).at(-1);
+        : featuredReelVideos.filter((video) => visibleFeaturedReels.has(video)).at(-1));
     activeFeaturedReel = nextActiveFeaturedReel;
 
     featuredReelVideos.forEach((video) => {
       if (video === activeFeaturedReel) {
-        scheduleFeaturedReel(video);
+        if (video === explicitFeaturedReel) {
+          if (video.paused) activateFeaturedReelIntent(video);
+        } else {
+          scheduleFeaturedReel(video);
+        }
       } else {
         resetFeaturedReel(video);
       }
@@ -437,7 +540,7 @@ if (!prefersReducedMotion) {
             });
             scheduleFeaturedReelWarm();
           },
-          { rootMargin: "100% 0px", threshold: 0.01 },
+          { rootMargin: "200% 0px", threshold: 0.01 },
         )
       : null;
 
@@ -459,7 +562,10 @@ if (!prefersReducedMotion) {
   }
 
   function handleFeaturedReelModeChange() {
+    clearFeaturedReelScreeningPrimeTimer();
     activeFeaturedReel = null;
+    explicitFeaturedReel = null;
+    pendingScreeningFeaturedReel = null;
     featuredReelVideos.forEach(resetFeaturedReel);
     syncActiveFeaturedReel();
   }
@@ -471,6 +577,126 @@ if (!prefersReducedMotion) {
 
   function handleFeaturedReelConnectionChange() {
     scheduleFeaturedReelWarm();
+  }
+
+  function suppressNextFeaturedReelClick(mediaFrame) {
+    featuredReelSuppressedClicks.add(mediaFrame);
+    const oldTimer = featuredReelSuppressedClickTimers.get(mediaFrame);
+    if (oldTimer) clearTimeout(oldTimer);
+    const timer = setTimeout(() => {
+      featuredReelSuppressedClicks.delete(mediaFrame);
+      featuredReelSuppressedClickTimers.delete(mediaFrame);
+    }, 0);
+    featuredReelSuppressedClickTimers.set(mediaFrame, timer);
+  }
+
+  function getScreeningFeaturedReel(event) {
+    const card = event.target?.closest?.('.watch-loop-card[href^="#"]');
+    const href = card?.getAttribute("href") || "";
+    if (!href.startsWith("#") || href.length < 2) return null;
+    return document.getElementById(href.slice(1))
+      ?.querySelector("[data-featured-reel-video]") || null;
+  }
+
+  function handleScreeningFeaturedReelPointerDown(event) {
+    const video = getScreeningFeaturedReel(event);
+    if (!video) return;
+    clearFeaturedReelScreeningPrimeTimer();
+    primeFeaturedReel(video);
+    featuredReelScreeningPrimeTimer = setTimeout(() => {
+      featuredReelScreeningPrimeTimer = 0;
+      if (pendingScreeningFeaturedReel !== video && warmedFeaturedReel === video) {
+        releaseWarmedFeaturedReel();
+      }
+    }, 500);
+  }
+
+  function handleScreeningFeaturedReelClick(event) {
+    const video = getScreeningFeaturedReel(event);
+    if (!video) return;
+    clearFeaturedReelScreeningPrimeTimer();
+    primeFeaturedReel(video);
+    pendingScreeningFeaturedReel = video;
+    if (visibleFeaturedReels.has(video)) {
+      syncActiveFeaturedReel();
+      return;
+    }
+    featuredReelScreeningPrimeTimer = setTimeout(() => {
+      featuredReelScreeningPrimeTimer = 0;
+      if (pendingScreeningFeaturedReel === video) pendingScreeningFeaturedReel = null;
+      if (warmedFeaturedReel === video) releaseWarmedFeaturedReel();
+    }, 3000);
+  }
+
+  function bindFeaturedReelIntent(video) {
+    const panel = video.closest(".work-panel");
+    const mediaFrame = video.closest(".media-frame");
+    if (!panel || !mediaFrame) return;
+
+    panel.addEventListener("pointerenter", (event) => {
+      if (featuredReelMobileMedia.matches || event.pointerType === "touch") return;
+      activateFeaturedReelIntent(video);
+    });
+    panel.addEventListener("pointerleave", (event) => {
+      if (featuredReelMobileMedia.matches || event.pointerType === "touch") return;
+      releaseFeaturedReelIntent(video);
+    });
+    panel.addEventListener("focusin", () => activateFeaturedReelIntent(video));
+    panel.addEventListener("focusout", (event) => {
+      if (!panel.contains(event.relatedTarget)) releaseFeaturedReelIntent(video);
+    });
+
+    mediaFrame.addEventListener("pointerdown", (event) => {
+      if (!featuredReelMobileMedia.matches || event.pointerType !== "touch") return;
+      featuredReelTouchGestures.set(mediaFrame, {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        moved: false,
+      });
+    });
+    mediaFrame.addEventListener("pointermove", (event) => {
+      const gesture = featuredReelTouchGestures.get(mediaFrame);
+      if (!gesture || gesture.pointerId !== event.pointerId) return;
+      if (Math.hypot(event.clientX - gesture.startX, event.clientY - gesture.startY)
+        > FEATURED_REEL_TOUCH_MOVE_PX) {
+        gesture.moved = true;
+      }
+    });
+    mediaFrame.addEventListener("pointerup", (event) => {
+      const gesture = featuredReelTouchGestures.get(mediaFrame);
+      if (!gesture || gesture.pointerId !== event.pointerId) return;
+      featuredReelTouchGestures.delete(mediaFrame);
+      if (gesture.moved) {
+        if (mediaFrame.matches(".media-frame-link")) {
+          suppressNextFeaturedReelClick(mediaFrame);
+        }
+        return;
+      }
+      if (featuredReelIntentFailures.has(video)) {
+        featuredReelIntentFailures.delete(video);
+        return;
+      }
+      const alreadyPreviewing = explicitFeaturedReel === video
+        || video.classList.contains("is-playing")
+        || !video.paused;
+      if (alreadyPreviewing) return;
+      activateFeaturedReelIntent(video);
+      if (mediaFrame.matches(".media-frame-link")) {
+        suppressNextFeaturedReelClick(mediaFrame);
+      }
+    });
+    mediaFrame.addEventListener("pointercancel", () => {
+      featuredReelTouchGestures.delete(mediaFrame);
+    });
+    mediaFrame.addEventListener("click", (event) => {
+      if (!featuredReelSuppressedClicks.has(mediaFrame)) return;
+      event.preventDefault();
+      featuredReelSuppressedClicks.delete(mediaFrame);
+      const timer = featuredReelSuppressedClickTimers.get(mediaFrame);
+      if (timer) clearTimeout(timer);
+      featuredReelSuppressedClickTimers.delete(mediaFrame);
+    });
   }
 
   function bindFeaturedReelLifecycle() {
@@ -491,8 +717,11 @@ if (!prefersReducedMotion) {
     if (featuredReelViewportFrame) window.cancelAnimationFrame(featuredReelViewportFrame);
     featuredReelViewportFrame = 0;
     activeFeaturedReel = null;
+    explicitFeaturedReel = null;
+    pendingScreeningFeaturedReel = null;
     visibleFeaturedReels.clear();
     nearbyFeaturedReels.clear();
+    clearFeaturedReelScreeningPrimeTimer();
     releaseWarmedFeaturedReel();
     featuredReelVideos.forEach(resetFeaturedReel);
     featuredReelObserver?.disconnect();
@@ -519,13 +748,16 @@ if (!prefersReducedMotion) {
     if (!event.persisted) {
       window.removeEventListener("pagehide", handleFeaturedReelPageHide);
       window.removeEventListener("pageshow", handleFeaturedReelPageShow);
-      window.removeEventListener("load", handleFeaturedReelWarmReady);
+      featuredReelHeroImage?.removeEventListener("load", handleFeaturedReelWarmReady);
     }
   }
 
   bindFeaturedReelLifecycle();
+  featuredReelVideos.forEach(bindFeaturedReelIntent);
+  document.addEventListener("pointerdown", handleScreeningFeaturedReelPointerDown);
+  document.addEventListener("click", handleScreeningFeaturedReelClick);
   if (!featuredReelWarmReady) {
-    window.addEventListener("load", handleFeaturedReelWarmReady, { once: true });
+    featuredReelHeroImage?.addEventListener("load", handleFeaturedReelWarmReady, { once: true });
   }
   window.addEventListener("pagehide", handleFeaturedReelPageHide);
   window.addEventListener("pageshow", handleFeaturedReelPageShow);

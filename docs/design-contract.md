@@ -182,6 +182,15 @@ Films and Nothing by Bus.
   reel in DOM order is active.
 - The canonical poster holds for 700ms at `820px` and below and 1.4 seconds
   above `820px`, then remains visible until the video actually emits `playing`.
+- Explicit intent bypasses the passive hold without bypassing one-owner or
+  lifecycle guards. Desktop panel hover and focus-within request that reel
+  immediately and release it on exit. On mobile linked media, the first
+  stationary tap previews and suppresses only that click; a second tap opens
+  the canonical official destination. Movement over 12px remains scrolling,
+  and a rejected or errored preview leaves the next tap available to navigate.
+- Screening Strip pointerdown/click may metadata-prime only its canonical
+  `#<featured-slug>` reel. The matching visible panel bypasses the passive
+  hold; an interrupted offscreen prime expires after three seconds.
 - Leaving eligibility, hiding the page, a media error, a rejected current
   `video.play()` promise, or `pagehide` safely resets the reel: cancel its hold,
   pause it, seek it to time zero, and restore its poster. A rejected promise
@@ -195,11 +204,13 @@ Films and Nothing by Bus.
   six 960×540 silent H.264 BT.709 faststart mobile paths; generated hashes and
   source fingerprints must pass `npm run featured-reels:check`. Mobile HTML
   places that media-qualified source before the existing 720p fallback.
-- Initial HTML never eagerly preloads video. After page `load`, mobile may warm
-  only the settled nearest reel within a one-viewport margin using native
-  metadata preload. Concurrency is one; ownership/lifecycle changes cancel the
-  old warm, active playback blocks another, and desktop, reduced motion,
-  no-JavaScript, Save-Data, slow-2G, and 2G remain conservative.
+- Initial HTML never eagerly preloads video. Once the canonical Hero image has
+  loaded, mobile may warm only the settled nearest reel within a two-viewport
+  margin using native metadata preload. Concurrency is one;
+  ownership/lifecycle changes cancel the old warm, active playback blocks
+  another, and desktop, reduced motion, no-JavaScript, Save-Data, slow-2G, and
+  2G remain conservative. A late initial `pageshow` cannot restore the top
+  position after scroll, pointer, or keyboard navigation begins.
 - Delivery changes must preserve the poster, crop/focal point, card and text
   geometry, 700ms/1.4s holds, 260ms reveal, navigation, copy, and Figma output.
 - Existing posters and external watch destinations remain canonical. Slow

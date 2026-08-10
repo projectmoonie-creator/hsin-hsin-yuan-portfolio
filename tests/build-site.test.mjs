@@ -1812,7 +1812,7 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(js, /navigator\?\.connection/);
   assert.match(js, /saveData/);
   assert.match(js, /slow-2g|2g/);
-  assert.match(js, /rootMargin: "100% 0px"/);
+  assert.match(js, /rootMargin: "200% 0px"/);
   assert.match(js, /let activeFeaturedReel = null;/);
   assert.match(js, /function clearFeaturedReelTimer\(video\)/);
   assert.match(

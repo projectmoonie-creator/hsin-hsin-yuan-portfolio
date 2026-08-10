@@ -27,10 +27,20 @@ class EventHub {
   }
 
   dispatch(type, detail = {}) {
-    const event = { type, ...detail };
+    const event = {
+      type,
+      currentTarget: this,
+      target: this,
+      defaultPrevented: false,
+      preventDefault() {
+        this.defaultPrevented = true;
+      },
+      ...detail,
+    };
     for (const listener of [...(this.listeners.get(type) || [])]) {
       listener(event);
     }
+    return event;
   }
 
   listenerCount(type) {
@@ -79,6 +89,8 @@ class FakeVideo extends EventHub {
     this.preload = "none";
     this.loadCalls = 0;
     this.rect = { left: 0, right: 100, top: 0, bottom: 100 };
+    this.panel = null;
+    this.media = null;
   }
 
   getBoundingClientRect() {
@@ -103,6 +115,66 @@ class FakeVideo extends EventHub {
 
   load() {
     this.loadCalls += 1;
+  }
+
+  closest(selector) {
+    if (selector === ".work-panel") return this.panel;
+    if (selector === ".media-frame") return this.media;
+    return null;
+  }
+}
+
+class FakePanel extends EventHub {
+  constructor(id, video) {
+    super();
+    this.id = id;
+    this.video = video;
+  }
+
+  contains(target) {
+    return target === this || target === this.video || target === this.video.media;
+  }
+
+  querySelector(selector) {
+    return selector === "[data-featured-reel-video]" ? this.video : null;
+  }
+}
+
+class FakeMediaFrame extends EventHub {
+  constructor(video, linked = true) {
+    super();
+    this.video = video;
+    this.linked = linked;
+  }
+
+  matches(selector) {
+    return selector === ".media-frame-link" && this.linked;
+  }
+
+  querySelector(selector) {
+    return selector === "[data-featured-reel-video]" ? this.video : null;
+  }
+}
+
+class FakeScreeningCard {
+  constructor(targetId) {
+    this.targetId = targetId;
+  }
+
+  closest(selector) {
+    return selector === '.watch-loop-card[href^="#"]' ? this : null;
+  }
+
+  getAttribute(name) {
+    return name === "href" ? `#${this.targetId}` : null;
+  }
+}
+
+class FakeImage extends EventHub {
+  constructor(complete = false) {
+    super();
+    this.complete = complete;
+    this.naturalWidth = complete ? 1200 : 0;
   }
 }
 
@@ -146,6 +218,17 @@ class FakeClock {
 
 function createRuntime(videoCount = 1, options = {}) {
   const videos = Array.from({ length: videoCount }, (_, index) => new FakeVideo(`video-${index + 1}`));
+  const panels = videos.map((video, index) => new FakePanel(`work-${index + 1}`, video));
+  const mediaFrames = videos.map((video, index) => new FakeMediaFrame(
+    video,
+    options.linkedVideos?.[index] ?? true,
+  ));
+  const screeningCards = panels.map((panel) => new FakeScreeningCard(panel.id));
+  const heroImage = new FakeImage(Boolean(options.heroComplete));
+  videos.forEach((video, index) => {
+    video.panel = panels[index];
+    video.media = mediaFrames[index];
+  });
   const clock = new FakeClock();
   const observers = [];
   const animationFrames = new Map();
@@ -182,7 +265,9 @@ function createRuntime(videoCount = 1, options = {}) {
   document.activeElement = null;
   document.readyState = options.readyState || "loading";
   document.visibilityState = "visible";
-  document.querySelector = () => null;
+  document.querySelector = (selector) =>
+    selector === ".hero-media-image" ? heroImage : null;
+  document.getElementById = (id) => panels.find((panel) => panel.id === id) || null;
   document.querySelectorAll = (selector) =>
     selector === "[data-featured-reel-video]" ? videos : [];
 
@@ -218,7 +303,10 @@ function createRuntime(videoCount = 1, options = {}) {
     return id;
   };
   window.cancelAnimationFrame = (id) => animationFrames.delete(id);
-  window.scrollTo = () => {};
+  window.scrollToCalls = 0;
+  window.scrollTo = () => {
+    window.scrollToCalls += 1;
+  };
 
   vm.runInNewContext(mainSource, {
     clearTimeout: (id) => clock.clearTimeout(id),
@@ -236,7 +324,7 @@ function createRuntime(videoCount = 1, options = {}) {
     Array.isArray(observer.options.threshold)
       && videos.some((video) => observer.targets.has(video)));
   const warmObserver = observers.find((observer) =>
-    observer.options.rootMargin === "100% 0px");
+    observer.options.rootMargin === "200% 0px");
   if (!options.reducedMotion) {
     assert.ok(featuredObserver, "the real Featured controller observes its videos");
   }
@@ -271,8 +359,12 @@ function createRuntime(videoCount = 1, options = {}) {
     document,
     featuredObserver,
     flushAnimationFrames,
+    heroImage,
     intersect,
+    mediaFrames,
     mediaQueries,
+    panels,
+    screeningCards,
     videos,
     warmIntersect,
     warmObserver,
@@ -330,7 +422,7 @@ test("mobile gives the viewport-center Featured video a 700ms poster hold", () =
   assert.equal(second.playRequests.length, 0);
 });
 
-test("mobile proximity warm waits for page load and a settled nearest candidate", () => {
+test("mobile proximity warm waits for the Hero image rather than the full page load", () => {
   const runtime = createRuntime(2, { mobile: true, width: 390, height: 844 });
   const [first, second] = runtime.videos;
   first.setRect({ left: 20, right: 370, top: 900, bottom: 1100 });
@@ -342,6 +434,12 @@ test("mobile proximity warm waits for page load and a settled nearest candidate"
   assert.equal(second.loadCalls, 0);
 
   runtime.window.dispatch("load");
+  runtime.clock.advance(1000);
+  assert.equal(first.loadCalls, 0);
+
+  runtime.heroImage.complete = true;
+  runtime.heroImage.naturalWidth = 1200;
+  runtime.heroImage.dispatch("load");
   runtime.clock.advance(179);
   assert.equal(first.loadCalls, 0);
   runtime.clock.advance(1);
@@ -351,12 +449,30 @@ test("mobile proximity warm waits for page load and a settled nearest candidate"
   assert.equal(second.loadCalls, 0);
 });
 
+test("late pageshow never yanks an already navigated mobile page back to the top", () => {
+  const untouched = createRuntime(1, { mobile: true });
+  untouched.window.dispatch("pageshow", { persisted: false });
+  assert.equal(untouched.window.scrollToCalls, 1);
+
+  const navigated = createRuntime(1, { mobile: true });
+  navigated.window.dispatch("scroll");
+  navigated.window.dispatch("pageshow", { persisted: false });
+  assert.equal(navigated.window.scrollToCalls, 0);
+
+  const engaged = createRuntime(1, { mobile: true });
+  engaged.document.dispatch("pointerdown", { pointerType: "touch" });
+  engaged.window.dispatch("pageshow", { persisted: false });
+  assert.equal(engaged.window.scrollToCalls, 0);
+});
+
 test("mobile warm handoff cancels the old request before warming one new candidate", () => {
   const runtime = createRuntime(2, { mobile: true, width: 390, height: 844 });
   const [first, second] = runtime.videos;
   first.setRect({ left: 20, right: 370, top: 900, bottom: 1100 });
   second.setRect({ left: 20, right: 370, top: 1180, bottom: 1380 });
-  runtime.window.dispatch("load");
+  runtime.heroImage.complete = true;
+  runtime.heroImage.naturalWidth = 1200;
+  runtime.heroImage.dispatch("load");
   runtime.warmIntersect([[first, true], [second, true]]);
   runtime.clock.advance(180);
 
@@ -378,7 +494,9 @@ test("desktop, data saver, 2G, and reduced motion never warm Featured media", ()
     createRuntime(1, { mobile: true, effectiveType: "2g" }),
   ];
   for (const runtime of cases) {
-    runtime.window.dispatch("load");
+    runtime.heroImage.complete = true;
+    runtime.heroImage.naturalWidth = 1200;
+    runtime.heroImage.dispatch("load");
     runtime.warmIntersect([[runtime.videos[0], true]]);
     runtime.clock.advance(1000);
     assert.equal(runtime.videos[0].loadCalls, 0);
@@ -386,7 +504,9 @@ test("desktop, data saver, 2G, and reduced motion never warm Featured media", ()
   }
 
   const reduced = createRuntime(1, { mobile: true, reducedMotion: true });
-  reduced.window.dispatch("load");
+  reduced.heroImage.complete = true;
+  reduced.heroImage.naturalWidth = 1200;
+  reduced.heroImage.dispatch("load");
   reduced.clock.advance(1000);
   assert.equal(reduced.warmObserver, undefined);
   assert.equal(reduced.videos[0].loadCalls, 0);
@@ -397,7 +517,9 @@ test("active Featured playback blocks a second proximity warm", () => {
   const [first, second] = runtime.videos;
   first.setRect({ left: 20, right: 370, top: 300, bottom: 500 });
   second.setRect({ left: 20, right: 370, top: 560, bottom: 760 });
-  runtime.window.dispatch("load");
+  runtime.heroImage.complete = true;
+  runtime.heroImage.naturalWidth = 1200;
+  runtime.heroImage.dispatch("load");
   runtime.warmIntersect([[first, true], [second, true]]);
   runtime.intersect([[first, 0.8], [second, 0.8]]);
   runtime.clock.advance(700);
@@ -444,6 +566,175 @@ test("crossing into mobile policy replaces an in-flight desktop hold", () => {
   assert.equal(video.playRequests.length, 0);
   runtime.clock.advance(1);
   assert.equal(video.playRequests.length, 1);
+});
+
+test("desktop pointer hover and keyboard focus bypass the passive hold", () => {
+  const runtime = createRuntime();
+  const [video] = runtime.videos;
+  const [panel] = runtime.panels;
+
+  runtime.intersect([[video, 0.1]]);
+  panel.dispatch("pointerenter", { pointerType: "mouse" });
+  assert.equal(video.playRequests.length, 1);
+  assert.equal(video.preload, "metadata");
+  assert.equal(video.loadCalls, 1);
+
+  panel.dispatch("pointerleave", { pointerType: "mouse" });
+  assert.equal(video.paused, true);
+  assert.equal(video.currentTime, 0);
+
+  panel.dispatch("focusin", { target: panel });
+  assert.equal(video.playRequests.length, 2);
+  panel.dispatch("focusout", { target: panel, relatedTarget: null });
+  assert.equal(video.paused, true);
+});
+
+test("mobile first stationary media tap previews and suppresses only that click", () => {
+  const runtime = createRuntime(1, { mobile: true });
+  const [video] = runtime.videos;
+  const [media] = runtime.mediaFrames;
+
+  runtime.intersect([[video, 0.8]]);
+  media.dispatch("pointerdown", {
+    pointerType: "touch",
+    pointerId: 7,
+    clientX: 120,
+    clientY: 300,
+  });
+  media.dispatch("pointerup", {
+    pointerType: "touch",
+    pointerId: 7,
+    clientX: 121,
+    clientY: 302,
+  });
+  const firstClick = media.dispatch("click");
+
+  assert.equal(firstClick.defaultPrevented, true);
+  assert.equal(video.playRequests.length, 1);
+  assert.equal(video.preload, "metadata");
+  assert.equal(video.loadCalls, 1);
+
+  video.dispatch("playing");
+  media.dispatch("pointerdown", {
+    pointerType: "touch",
+    pointerId: 8,
+    clientX: 120,
+    clientY: 300,
+  });
+  media.dispatch("pointerup", {
+    pointerType: "touch",
+    pointerId: 8,
+    clientX: 120,
+    clientY: 300,
+  });
+  const secondClick = media.dispatch("click");
+
+  assert.equal(secondClick.defaultPrevented, false);
+  assert.equal(video.playRequests.length, 1);
+});
+
+test("a failed mobile preview still lets the next tap open the official destination", async () => {
+  const runtime = createRuntime(1, { mobile: true });
+  const [video] = runtime.videos;
+  const [media] = runtime.mediaFrames;
+
+  runtime.intersect([[video, 0.8]]);
+  media.dispatch("pointerdown", {
+    pointerType: "touch", pointerId: 81, clientX: 120, clientY: 300,
+  });
+  media.dispatch("pointerup", {
+    pointerType: "touch", pointerId: 81, clientX: 120, clientY: 300,
+  });
+  assert.equal(media.dispatch("click").defaultPrevented, true);
+
+  video.playRequests[0].reject(new Error("preview unavailable"));
+  await flushPromises();
+  assert.equal(video.paused, true);
+
+  media.dispatch("pointerdown", {
+    pointerType: "touch", pointerId: 82, clientX: 120, clientY: 300,
+  });
+  media.dispatch("pointerup", {
+    pointerType: "touch", pointerId: 82, clientX: 120, clientY: 300,
+  });
+  assert.equal(media.dispatch("click").defaultPrevented, false);
+  assert.equal(video.playRequests.length, 1);
+});
+
+test("mobile touch movement preserves scrolling without playback or navigation", () => {
+  const runtime = createRuntime(1, { mobile: true });
+  const [video] = runtime.videos;
+  const [media] = runtime.mediaFrames;
+
+  runtime.intersect([[video, 0.8]]);
+  media.dispatch("pointerdown", {
+    pointerType: "touch",
+    pointerId: 9,
+    clientX: 120,
+    clientY: 300,
+  });
+  media.dispatch("pointermove", {
+    pointerType: "touch",
+    pointerId: 9,
+    clientX: 122,
+    clientY: 326,
+  });
+  media.dispatch("pointerup", {
+    pointerType: "touch",
+    pointerId: 9,
+    clientX: 122,
+    clientY: 326,
+  });
+  const syntheticClick = media.dispatch("click");
+
+  assert.equal(syntheticClick.defaultPrevented, true);
+  assert.equal(video.playRequests.length, 0);
+  assert.equal(video.preload, "none");
+  assert.equal(video.loadCalls, 0);
+});
+
+test("Screening Strip activation primes its exact reel and bypasses hold on arrival", () => {
+  const runtime = createRuntime(2, { mobile: true });
+  const [first, second] = runtime.videos;
+  const [, secondCard] = runtime.screeningCards;
+  first.setRect({ left: 0, right: 100, top: 1200, bottom: 1300 });
+  second.setRect({ left: 0, right: 100, top: 1400, bottom: 1500 });
+
+  runtime.document.dispatch("pointerdown", {
+    target: secondCard,
+    pointerType: "touch",
+  });
+  assert.equal(first.loadCalls, 0);
+  assert.equal(second.preload, "metadata");
+  assert.equal(second.loadCalls, 1);
+  assert.equal(second.playRequests.length, 0);
+
+  runtime.document.dispatch("click", { target: secondCard });
+  assert.equal(second.currentTime, 9, "the offscreen primed request must not be reset before arrival");
+  second.setRect({ left: 20, right: 370, top: 300, bottom: 500 });
+  runtime.intersect([[second, 0.8]]);
+
+  assert.equal(first.playRequests.length, 0);
+  assert.equal(second.playRequests.length, 1);
+  assert.equal(runtime.clock.pendingCount(), 0);
+});
+
+test("an interrupted Screening Strip jump releases its offscreen prime", () => {
+  const runtime = createRuntime(1, { mobile: true });
+  const [video] = runtime.videos;
+  const [card] = runtime.screeningCards;
+  video.setRect({ left: 0, right: 100, top: 1400, bottom: 1500 });
+
+  runtime.document.dispatch("pointerdown", { target: card, pointerType: "touch" });
+  runtime.document.dispatch("click", { target: card });
+  assert.equal(video.preload, "metadata");
+  assert.equal(video.loadCalls, 1);
+
+  runtime.clock.advance(2999);
+  assert.equal(video.preload, "metadata");
+  runtime.clock.advance(1);
+  assert.equal(video.preload, "none");
+  assert.equal(video.loadCalls, 2);
 });
 
 test("an old play rejection cannot reset a rapid exit and re-entry activation", async () => {
