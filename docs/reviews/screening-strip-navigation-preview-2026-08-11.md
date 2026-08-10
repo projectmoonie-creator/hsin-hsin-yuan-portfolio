@@ -67,6 +67,21 @@ The share operation did not change deployment files, source, Production,
 canonical alias, Contact, `main`, or the protected document. The access URL was
 not fetched after creation.
 
+## Reusable Workflow Extraction
+
+The cross-project lesson is recorded in the outer workspace's
+`website-production-builder/references/preview-access-and-review-links.md` at
+local skill commit `a1033f4` on `codex/website-production-skills`. It separates
+deployment readiness, reviewer accessibility, and Production identity; maps a
+request for a directly openable phone link to the reviewer-access layer; keeps
+access-bearing URLs out of repositories; and requires one concise confirmation
+when a provider warns that replacing the link revokes an existing one.
+
+No second project runbook was created. This dated report remains the exact
+project evidence, `STATUS.md` remains the only mutable cold-start entry, and the
+skill reference owns the reusable procedure. The skill extraction changes no
+website output, deployment, access token, or Production state.
+
 ## Exact Next Action
 
 The producer opens the delivered Shareable Link and confirms that selecting the

@@ -45,6 +45,11 @@ State: `PASS_WITH_OPEN_ITEMS`
   login is required only to comment. The access-bearing URL stays outside Git
   at SHA-256
   `9a29fc38348ef93ec9a72ad9eeb26d973d2bac07c2b089354729775eac2b83b1`.
+- The reusable lesson is extracted into outer-workspace
+  `website-production-builder/references/preview-access-and-review-links.md` at
+  local skill commit `a1033f4` on `codex/website-production-skills`. It defines
+  deployment identity, reviewer-access identity, and Production identity as
+  separate gates; this extraction changes no portfolio output or deployment.
 - Exact next action: producer opens the delivered Shareable Link and confirms
   the Tech Dreamers small card scrolls to its large Featured card while both
   large-card official links still open TaiwanPlus. Production, alias, Contact,

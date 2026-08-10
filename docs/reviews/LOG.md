@@ -12,7 +12,7 @@ packages.
 - TDD/validation: five expected RED assertions, focused 62/62, full 156/156, build, design audit, Figma/no-diff, reel integrity, privacy, protected hash, and diff pass.
 - Browser: desktop pointer, mobile touch, and mobile no-JS keyboard pass; `#tech-dreamers` is visible, no new window, no errors, zero Contact POST, and two official external links retained.
 - Review: Gemini requested/observed/completed `gemini-3.6-flash`, PASS/no P0/P1/P2.
-- Preview/access/open: authorized dist-only 61 files / 96,933,972 bytes / path-list `267394e…78b0`; `dpl_3zjGj…Tq9iZ` reads Ready/Preview, static/no functions/unfetched. Producer-authorized Hobby Shareable Link replacement now grants anyone-with-link view access; access URL remains outside Git at `9a29fc3…83b1`. Producer verifies the small-to-large Tech Dreamers jump; Production, alias, Contact, push, and integration remain separately gated.
+- Preview/access/open: authorized dist-only 61 files / 96,933,972 bytes / path-list `267394e…78b0`; `dpl_3zjGj…Tq9iZ` reads Ready/Preview, static/no functions/unfetched. Producer-authorized Hobby Shareable Link replacement grants anyone-with-link view access; URL stays outside Git at `9a29fc3…83b1`. Lesson generalized in website skill `a1033f4`; producer mobile inspection remains before closeout, while Production/alias/Contact/push/integration stay gated.
 
 ## 2026-08-10 — Featured Reel mobile performance Option B
 - Branch/base: local-only `codex/featured-reel-mobile-performance` from `bb08d51`; Production/`origin/main` stays `eb444a6`; no push, Preview, deploy, alias, Contact, `main`, or tag action.
