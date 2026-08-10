@@ -4,7 +4,40 @@ Updated: 2026-08-10
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — P0 Hero LCP / Image Component Originalization
+## Current Work Package — Featured Reel Mobile Performance Decision Gate
+
+- Local-only branch `codex/featured-reel-mobile-performance` starts at P0
+  documentation correction head `ecec92c`; no remote push, Preview,
+  Production, alias, Contact, `main`, or deployment action has occurred.
+- Formal Production still serves `origin/main` baseline `eb444a6`. Its Featured
+  videos use approved 35% eligibility, one mobile center owner, 700ms hold,
+  `preload="none"`, and reveal only on `playing`; P0 does not alter this code.
+- Three fresh 390×844 Chromium cold runs at 150ms / 1.6Mbps / cache disabled
+  reproduce a `play()` median of 724.8ms but a `playing` median of 7535.2ms.
+  All MP4s are fast-start and Vercel Range/cache behavior is healthy.
+- A six-second page-idle control without video request improves visible startup
+  to 2244.5ms; a single-reel six-second metadata warm improves it to 727.8ms.
+  Thus page contention is primary and bounded warming still hides about 1.52s
+  after eligibility; neither result supports all-reel or full-file preload.
+- Runtime files are 2.4–32.7MB at 1.44–2.61Mbps; five of six exceed the tested
+  1.6Mbps link. A temporary uncommitted 640×360 / ~446Kbps Slow Steps spike is
+  1.67MB (-77.5%) and reduces the three-run local first-frame median to
+  5641.3ms, but does not solve cold startup by itself.
+- Frozen brainstorm packet `92256a…bf9d1` completed independent Codex, Gemini
+  (`gemini-3.6-flash`), and Claude (`claude-opus-5`) lanes. All reject full or
+  all-reel preload; synthesis recommends canonical mobile derivatives first,
+  then a post-Hero, single-reel bounded warm only if the measured residual
+  delay remains.
+- Evidence and provider provenance are in
+  `docs/reviews/featured-reel-mobile-performance-brainstorm-2026-08-10/`.
+  The producer must choose Option A (derivatives only), Option B (two-stage,
+  recommended), or Option C (warm only) before any implementation.
+- Exact next action: producer chooses the option. After Option B approval,
+  write RED contracts for canonical derivatives, responsive sources, unchanged
+  visual/runtime invariants, and matched performance gates before production
+  code. Preview and every integration/deployment action remain separately gated.
+
+## Prior Open Work Package — P0 Hero LCP / Image Component Originalization
 
 - Local package branch `codex/hero-lcp-optimization` starts from docs-only
   checkpoint `5483bfa02d2586d981e241d7903b8a857aace530`; the closed phase tag

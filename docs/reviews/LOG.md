@@ -4,6 +4,15 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-10 — Featured Reel mobile performance decision gate
+- Branch/base: local-only `codex/featured-reel-mobile-performance` at `ecec92c`; no remote push, Preview, Production, alias, Contact, or `main` action.
+- Root cause: `play()` is on time (~724.8ms), but cold `playing` is ~7535.2ms under 150ms/1.6Mbps; MP4s are fast-start and Vercel Range/cache is healthy.
+- Control: six-second page wait without video lowers visible startup to 2244.5ms; single-reel metadata warm lowers it to 727.8ms, so page contention is primary and bounded warm has a residual ~1.52s benefit.
+- Media: existing reels are 2.4–32.7MB / 1.44–2.61Mbps; temporary uncommitted 640×360 spike is 1.67MB / ~446Kbps and lowers local first-frame median to 5641.3ms but is not an approved recipe.
+- Brainstorm: packet `92256a…bf9d1`; Codex, Gemini `gemini-3.6-flash`, and Claude `claude-opus-5` complete independently. All reject all-reel/full preload; ordering differs.
+- Recommendation/open: Option B = canonical mobile derivatives first, then post-Hero one-reel bounded warm if residual delay remains. Producer choice is required before TDD implementation; real iPhone/Safari remains a gate.
+- Protected file remains outside Git at `945d4df9…d28fc`; lighting, desktop, Archive, copy, Figma, and Contact are unchanged.
+
 ## 2026-08-10 — P0 Hero LCP / image component originalization
 - Branch/commit/base: `codex/hero-lcp-optimization`, implementation `e45a596`, handoff `2b25f3d`, from docs-only `5483bfa`; both dated backups read back exactly, closed tag/backup stay at `8289389`, and `origin/main` stays at public `eb444a6`.
 - Change: canonical HeroMedia now derives semantic responsive AVIF/WebP/JPEG picture/preloads and transform-only motion; reduced motion is static and Figma retains the same source/crop.
