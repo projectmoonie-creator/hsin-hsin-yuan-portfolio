@@ -4,7 +4,55 @@ Updated: 2026-08-11
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Screening Strip Navigation Repair
+## Current Work Package — Featured Reel Intent Playback
+
+- Local branch `codex/featured-reel-intent-playback` starts from screened
+  handoff `6b7ffdd4da038512bae7b210832015539c92817b`; implementation commit is
+  `d890c58`. Formal Production/`origin/main` remains `eb444a6`, and the closed
+  phase tag remains peeled to `8289389`. No push, Preview, Production, alias,
+  Contact, `main`, deployment, protected-file, or tag action occurred.
+- Producer-selected hybrid B preserves the passive 35% plus 700ms mobile /
+  1.4s desktop fallback. Desktop panel hover and focus-within immediately
+  request that reel. On mobile linked media, the first stationary tap previews
+  and suppresses only that click; a second tap opens the canonical official
+  destination. Movement over 12px stays scrolling, and rejection/error leaves
+  the next tap available to navigate.
+- Screening Strip pointerdown/click primes only its canonical matching reel;
+  arrival bypasses the passive hold, while an interrupted offscreen prime
+  expires after three seconds. The late-`pageshow` race is fixed: once scroll,
+  pointer, or keyboard navigation starts, startup restoration cannot yank the
+  page to the top or reset the selected reel.
+- Initial HTML stays `preload="none"`. After the canonical Hero image loads,
+  mobile may metadata-warm one settled candidate within two viewports. It
+  cancels on ownership/lifecycle changes and skips desktop, reduced motion,
+  no-JavaScript, Save-Data, slow-2G, 2G, hidden pages, and active playback.
+- Three matched 390×844/DPR3 cold runs at 150ms/1.6Mbps show direct Slow Steps
+  `play()` request 656.4→2.9ms but visible `playing` only 6049.8→5905.7ms. With
+  1500ms page-top lead, the single warm starts 1403.1ms before touch and visible
+  `playing` reaches 4389.9ms, a 1659.9ms median improvement. Lab data is not
+  CrUX and does not remove physical cold-network delay.
+- The retained MP4 warm starts near 1.71s, after measured Hero LCP near 1.22s.
+  Passive LCP medians are 1172→1216ms with overlapping runs; the later request
+  provides no causal Hero-contention signal. TBT and CLS remain zero. The
+  rejected one-viewport variant requested zero bytes and supplied no benefit.
+- Final TDD/full validation passes 163/163, build, design-contract audit, Figma
+  export with no tracked drift, six-reel integrity, privacy, and diff checks.
+  Local browser QA passes 9/9: Tech Dreamers first/second tap, touch movement,
+  exact small-card target, desktop hover/focus, 35%+700ms (710.9ms observed),
+  reduced motion, Save-Data, 2G, no-JS, overflow, and zero Contact POST/error.
+- Gemini requested `gemini-3.6-flash` but returned empty candidates; Claude
+  requested dynamic `opus` through the subscription wrapper but its helper
+  failed with request state unknown. Both observed/completed models are null;
+  no external finding or completed independent review is claimed. Local
+  adjudication has no current P0/P1 finding.
+- Visuals, HTML/CSS geometry, posters, crops, copy, languages, canonical data,
+  URLs, encodes, Figma, Archive, and Contact remain unchanged. Real iPhone
+  Safari, Low Power Mode, and network switching remain pre-Production checks.
+- Exact next action: producer inspects this local commit on a phone. A new
+  Preview/share link, push, integration, Production, alias, or Contact action
+  requires separate explicit authorization for this package.
+
+## Prior Open Work Package — Screening Strip Navigation Repair
 
 - Local branch `codex/screening-strip-navigation` starts from Featured Reel
   handoff `cad590e`; formal Production/`origin/main` remains `eb444a6`. No

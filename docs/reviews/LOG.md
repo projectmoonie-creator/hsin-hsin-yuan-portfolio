@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-11 — Featured Reel intent playback
+- Branch/base/commit: `codex/featured-reel-intent-playback` from `6b7ffdd`; implementation `d890c58`; Production/`origin/main` stays `eb444a6`, with no push, Preview, deployment, alias, Contact, `main`, or tag action.
+- Interaction: hybrid B makes desktop panel hover/focus immediate; mobile first stationary linked-media tap previews, second tap navigates, movement remains scroll, and failed preview leaves the next tap reachable.
+- Screening: every small card primes only its canonical reel, bypasses the passive hold on arrival, and releases an interrupted offscreen prime after three seconds; late `pageshow` cannot override scroll/pointer/keyboard navigation.
+- Warm/performance: one two-viewport candidate may metadata-warm only after Hero load; with 1500ms lead, matched cold median visible `playing` is 6049.8→4389.9ms. MP4 starts after measured LCP; TBT/CLS stay zero. Lab data is not CrUX.
+- Preservation: passive 35% + 700ms/1.4s, one owner, posters, geometry, copy, canonical data/URLs, encodes, Figma, Archive, reduced/no-JS, conservative network gates, and Contact remain.
+- Validation: TDD/full 163/163, build, design audit, Figma/no tracked drift, reel integrity, privacy/diff, and final browser 9/9 pass; observed fallback 710.9ms, zero Contact POST/error/overflow.
+- Review: Gemini requested `gemini-3.6-flash` but returned empty candidates; Claude requested dynamic `opus` but helper failed with request state unknown. No observed/completed model or completed external review; local adjudication has no P0/P1.
+- Open: producer inspects local mobile behavior; real iPhone Safari, Low Power Mode, and network switching precede any separately authorized Preview/Production decision. Protected file remains `945d4df9…d28fc`.
+
 ## 2026-08-11 — Screening Strip navigation repair
 - Branch/base: `codex/screening-strip-navigation` from `cad590e`; source handoff `66a40cd`; Production/`origin/main` stays `eb444a6`; no push, Production, alias, Contact, `main`, or tag action.
 - Root cause: Tech Dreamers alone carried `watchLoopTarget: "watch"`; the shared renderer and old tests turned that data exception into an external small-card action.
