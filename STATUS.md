@@ -49,6 +49,15 @@ State: `PASS_WITH_OPEN_ITEMS`
   back `Ready`, target `preview`, with a static root and no functions:
   `https://hsin-hsin-yuan-portfolio-5v98ywoxl.vercel.app`. The URL was not
   fetched under the active deployment policy, and no Contact request ran.
+- Vercel build logs later proved that GitHub backup pushes also auto-deployed
+  three Ready Git-integrated Previews with the full repo build and Contact
+  function: `e45a596` → `dpl_9mPj5S2ShHoo2V3qydXgTfVcwAz4`, `2b25f3d` →
+  `dpl_ADzMGirbpbPP1UD6xV6sjw3nijpo`, and `bfe7df0` →
+  `dpl_y6jjYWwhcC1aZbbiG1NXeowZ63b7`. The first two occurred before the
+  producer's Preview authorization, correcting the earlier false claim that
+  no Preview occurred; the third followed the authorized Preview record.
+  None targeted Production or received a Contact request. They remain intact
+  because deployment deletion was not authorized.
 - Preview-time metadata inspection found a pre-existing Production identity
   drift: the canonical alias resolves to Ready/Production
   `dpl_14E9G3amzXj2iL6xKvQZQWadypXq`, created three minutes after the recorded
@@ -58,8 +67,10 @@ State: `PASS_WITH_OPEN_ITEMS`
   Production or its aliases, and `origin/main` remains `eb444a6`.
 - Open items: producer inspection of the direct Preview and any later
   accessible online/PageSpeed measurement. Optional lighting/button work
-  remains deferred. No shareable-link replacement, Production deployment,
-  alias change, Contact, `main` merge, or `main` push occurred.
+  remains deferred. The producer must also decide whether to retain/delete the
+  three Git-integrated Previews and how future backup pushes avoid deployment.
+  No shareable-link replacement, Production deployment, alias change, Contact,
+  `main` merge, or `main` push occurred.
 
 ## Prior Work Package — Portfolio Phase Closeout
 
@@ -864,7 +875,9 @@ requires separate explicit authorization. Production, alias, merge, and
    later resolved the alias to `dpl_14E9G3amzXj2iL6xKvQZQWadypXq`. Both are
    Ready/Production, but source/content equivalence remains unproven.
 5. Treat Hero Preview `dpl_7syJAsyC85BncuAh9JD2WLw48jx2` as Ready and awaiting
-   producer inspection. Do not replace the shareable link, push `main`, create
-   another Preview, deploy Production, change an alias, or submit Contact
-   without the corresponding explicit producer authorization.
+   producer inspection. Treat every `origin` branch push as a potential Vercel
+   Preview; do not push even a backup ref while Preview is unauthorized. Do not
+   replace the shareable link, push `main`, create/delete another Preview,
+   deploy Production, change an alias, or submit Contact without the
+   corresponding explicit producer authorization.
    `main` pushes are now known to trigger Production automatically.
