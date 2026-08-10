@@ -11,8 +11,9 @@ State: `PASS_WITH_OPEN_ITEMS`
   remains peeled to `82893899dad3e4f393720e2efd71b1e1cb02a350`, its remote
   backup remains aligned, and public `origin/main` remains `eb444a6`.
 - Reviewed implementation commit `e45a5969f22b6300206e85ea3bd90374ce4c5b10`
-  is read back exactly at remote durability ref
-  `backup/2026-08-10/hero-lcp-e45a596`; this ref is backup only, not `main`.
+  and final local handoff head `2b25f3de9db0884f626a92bf32c2676d9a3205ca`
+  are read back exactly at `backup/2026-08-10/hero-lcp-e45a596` and
+  `backup/2026-08-10/hero-lcp-2b25f3d`; both refs are backup only, not `main`.
 - `data/site.json.heroMedia` remains the sole authored Hero truth. Its source,
   bilingual alt, dimensions, focal points, motion recipe, responsive profiles,
   encoder settings, and source hash now derive website candidates/preloads and
@@ -38,9 +39,27 @@ State: `PASS_WITH_OPEN_ITEMS`
   checks. Formal Gemini (`gemini-3.6-flash`) and Claude (`opus`) attempts both
   remained incomplete with no observed/completed model; local adjudication
   found no current P0/P1/P2 implementation finding.
-- Open items: producer inspection and any later authorized Preview/Production
-  measurement. Optional lighting/button work remains deferred. No Preview,
-  deployment, alias, Contact, `main` merge, or `main` push occurred.
+- The producer separately authorized a Preview from final handoff head
+  `2b25f3d`. A fresh allowlisted dist-only package contains 47 public files /
+  78,555,125 bytes; sorted path-list SHA-256 is
+  `f7da8543915f997eb951dd8ad05e7075d50960e433ea03562d64525515aa8262`.
+  It excludes nine unreferenced copied assets, repo source, tests, internal
+  documents, environments, the Contact API, and the protected document.
+- Vercel deployment `dpl_7syJAsyC85BncuAh9JD2WLw48jx2` independently reads
+  back `Ready`, target `preview`, with a static root and no functions:
+  `https://hsin-hsin-yuan-portfolio-5v98ywoxl.vercel.app`. The URL was not
+  fetched under the active deployment policy, and no Contact request ran.
+- Preview-time metadata inspection found a pre-existing Production identity
+  drift: the canonical alias resolves to Ready/Production
+  `dpl_14E9G3amzXj2iL6xKvQZQWadypXq`, created three minutes after the recorded
+  `dpl_4i1jTqt3Qq9FjchMnMXEGKrEYwkv`. Both expose the same build configuration
+  and Contact-function digest; Vercel inspect does not expose their source
+  commit, so no content-equivalence claim is made. This Preview did not change
+  Production or its aliases, and `origin/main` remains `eb444a6`.
+- Open items: producer inspection of the direct Preview and any later
+  accessible online/PageSpeed measurement. Optional lighting/button work
+  remains deferred. No shareable-link replacement, Production deployment,
+  alias change, Contact, `main` merge, or `main` push occurred.
 
 ## Prior Work Package — Portfolio Phase Closeout
 
@@ -60,10 +79,11 @@ State: `PASS_WITH_OPEN_ITEMS`
   truth, privacy, rights, accessibility, functional, or deployment blocker.
   An earlier Chinese-package Claude timeout remains historical incomplete
   evidence and is not counted as review coverage.
-- Production deployment `dpl_4i1jTqt3Qq9FjchMnMXEGKrEYwkv` remains recorded
-  `Ready`, target `production`, with `api/contact` and canonical alias
-  `https://hsin-hsin-yuan-portfolio.vercel.app`. This closeout package creates
-  no Preview or Production deployment and submits no Contact request.
+- Production deployment `dpl_4i1jTqt3Qq9FjchMnMXEGKrEYwkv` remains the
+  closeout's recorded release identity. Later Preview-time metadata readback
+  found the canonical alias on `dpl_14E9G3amzXj2iL6xKvQZQWadypXq`; see the
+  current-package section above. The historical closeout itself created no
+  Preview or Production deployment and submitted no Contact request.
 - Formal recovery names are
   `backup/2026-08-10/portfolio-phase-closeout` and annotated tag
   `portfolio-phase-2026-08-10-closed`, both pointing to the final docs-only
@@ -793,8 +813,8 @@ Current design/Figma rules are aligned and Figma output is unchanged.
 
 ## Accepted Open Items
 
-- P0 Hero LCP/originalization is locally implemented and validated on its
-  bounded branch. Producer inspection and a separately authorized online
+- P0 Hero LCP/originalization is locally implemented, validated, and available
+  in a Ready Preview. Producer inspection and an accessible online/PageSpeed
   measurement remain open; local evidence cannot establish production or CrUX
   behavior.
 - One restrained lighting treatment and/or one button microinteraction remains
@@ -821,10 +841,12 @@ SHA-256:
 
 ## Exact Next Action
 
-Producer inspects `codex/hero-lcp-optimization` and its frozen evidence under
-`docs/reviews/evidence/hero-lcp-optimization/`. Only a later explicit approval
-may authorize Preview/Production measurement, deployment, merge, alias, or
-`main` action; otherwise the producer names the bounded remediation.
+Producer opens the Ready Preview
+`https://hsin-hsin-yuan-portfolio-5v98ywoxl.vercel.app` while logged in to
+Vercel and inspects Hero desktop/mobile behavior. If direct Preview protection
+blocks the intended review device, replacing the account's shareable link
+requires separate explicit authorization. Production, alias, merge, and
+`main` actions remain separately gated.
 
 ## Cold Resume
 
@@ -837,12 +859,12 @@ may authorize Preview/Production measurement, deployment, merge, alias, or
    Production package records otherwise.
 3. Verify the protected file above remains untracked and matches its exact
    SHA-256 before changing anything.
-4. Treat the recorded Production deployment as the current public baseline:
-   `dpl_4i1jTqt3Qq9FjchMnMXEGKrEYwkv`, canonical alias
-   `https://hsin-hsin-yuan-portfolio.vercel.app`, validation 144/144.
-5. Treat the local Hero LCP package as awaiting producer inspection. Use the
-   post-publish PageSpeed workflow only after a later separately authorized
-   deployment is Ready. Do not push `main`, create a Preview, deploy, change an
-   alias, or submit Contact without the corresponding explicit producer
-   authorization.
+4. Treat the canonical public alias as Production and leave it unchanged. The
+   closeout recorded `dpl_4i1jTqt3Qq9FjchMnMXEGKrEYwkv`; Preview-time metadata
+   later resolved the alias to `dpl_14E9G3amzXj2iL6xKvQZQWadypXq`. Both are
+   Ready/Production, but source/content equivalence remains unproven.
+5. Treat Hero Preview `dpl_7syJAsyC85BncuAh9JD2WLw48jx2` as Ready and awaiting
+   producer inspection. Do not replace the shareable link, push `main`, create
+   another Preview, deploy Production, change an alias, or submit Contact
+   without the corresponding explicit producer authorization.
    `main` pushes are now known to trigger Production automatically.

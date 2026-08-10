@@ -5,14 +5,14 @@ Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
 ## 2026-08-10 — P0 Hero LCP / image component originalization
-- Branch/commit/base: `codex/hero-lcp-optimization` at `e45a596` from docs-only `5483bfa`; backup `backup/2026-08-10/hero-lcp-e45a596` reads back exactly, closed tag/backup stay at `8289389`, and `origin/main` stays at public `eb444a6`.
+- Branch/commit/base: `codex/hero-lcp-optimization`, implementation `e45a596`, handoff `2b25f3d`, from docs-only `5483bfa`; both dated backups read back exactly, closed tag/backup stay at `8289389`, and `origin/main` stays at public `eb444a6`.
 - Change: canonical HeroMedia now derives semantic responsive AVIF/WebP/JPEG picture/preloads and transform-only motion; reduced motion is static and Figma retains the same source/crop.
 - Pipeline: repeatable prepare validates source/codec/dimensions/metadata and a non-public manifest binds recipe plus 12 derivative hashes; build fails closed on drift.
 - TDD/validation: RED contracts then 148/148, build, prepare check, design audit, byte-identical Figma SVGs, diff/privacy/protected-file checks, and 7/7 bilingual/device/fallback browser cases pass.
 - Visual: five frozen comparisons pass at 0px geometry drift and RGB MAE 0.442–0.717/255; no copy, Contact, other work, Archive, or decorative-light change.
 - Performance: matching three-run direct-throttled median LCP 6733.564→2017.077ms and Hero 195225→4410 bytes; Low→High, non-composited 1→0, TBT/CLS 0; simulated LCP is transparently flat.
 - Review/open: Gemini requested `gemini-3.6-flash` and Claude requested dynamic `opus`; both incomplete with no observed/completed model, while local adjudication has no current finding. Producer inspection and any authorized online measurement remain open.
-- Boundary: no Preview, deployment, Production, alias, Contact POST, `main` merge/push, closed-tag move, or protected-file mutation.
+- Preview: producer-authorized 47-file / 78,555,125-byte dist-only package (`f7da854…8262`) is Ready/Preview as `dpl_7syJAs…48jx2`; URL not fetched, no functions/Contact/share-link/Production/alias/`main`/tag/protected-file action. Metadata readback found pre-existing canonical Production-ID drift from recorded `dpl_4i1…` to current `dpl_14E…`; both are Ready and share config/function digest, but content equivalence is unclaimed.
 
 ## 2026-08-10 — Post-publish PageSpeed review workflow
 - Scope: docs/governance-only; records one reusable read-only performance check after an explicitly authorized Preview or Production deployment is read back as Ready, with no public-output or deployment change.
