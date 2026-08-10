@@ -5,7 +5,7 @@ Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
 ## 2026-08-10 — P0 Hero LCP / image component originalization
-- Branch/base: `codex/hero-lcp-optimization` from docs-only `5483bfa`; closed tag/backup stay at `8289389`, and `origin/main` stays at public `eb444a6`.
+- Branch/commit/base: `codex/hero-lcp-optimization` at `e45a596` from docs-only `5483bfa`; backup `backup/2026-08-10/hero-lcp-e45a596` reads back exactly, closed tag/backup stay at `8289389`, and `origin/main` stays at public `eb444a6`.
 - Change: canonical HeroMedia now derives semantic responsive AVIF/WebP/JPEG picture/preloads and transform-only motion; reduced motion is static and Figma retains the same source/crop.
 - Pipeline: repeatable prepare validates source/codec/dimensions/metadata and a non-public manifest binds recipe plus 12 derivative hashes; build fails closed on drift.
 - TDD/validation: RED contracts then 148/148, build, prepare check, design audit, byte-identical Figma SVGs, diff/privacy/protected-file checks, and 7/7 bilingual/device/fallback browser cases pass.

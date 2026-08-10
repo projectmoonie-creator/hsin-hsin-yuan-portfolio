@@ -10,6 +10,9 @@ State: `PASS_WITH_OPEN_ITEMS`
   checkpoint `5483bfa02d2586d981e241d7903b8a857aace530`; the closed phase tag
   remains peeled to `82893899dad3e4f393720e2efd71b1e1cb02a350`, its remote
   backup remains aligned, and public `origin/main` remains `eb444a6`.
+- Reviewed implementation commit `e45a5969f22b6300206e85ea3bd90374ce4c5b10`
+  is read back exactly at remote durability ref
+  `backup/2026-08-10/hero-lcp-e45a596`; this ref is backup only, not `main`.
 - `data/site.json.heroMedia` remains the sole authored Hero truth. Its source,
   bilingual alt, dimensions, focal points, motion recipe, responsive profiles,
   encoder settings, and source hash now derive website candidates/preloads and
