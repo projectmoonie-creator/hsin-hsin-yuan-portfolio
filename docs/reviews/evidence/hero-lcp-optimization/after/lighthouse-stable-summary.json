@@ -1,0 +1,348 @@
+{
+  "phase": "after-stable",
+  "url": "http://127.0.0.1:4196/en/",
+  "conditions": {
+    "lighthouse": "13.4.1",
+    "category": "performance",
+    "formFactor": "mobile",
+    "throttlingMethod": "simulate",
+    "chromeBinary": "chrome-headless-shell",
+    "chromeFlags": "--headless --no-sandbox --enable-unsafe-swiftshader --disable-backgrounding-occluded-windows --disable-renderer-backgrounding",
+    "runCount": 3
+  },
+  "medians": {
+    "performanceScore": 0.82,
+    "fcpMs": 1278.1012500000002,
+    "lcpMs": 4952.33,
+    "tbtMs": 0,
+    "cls": 0,
+    "speedIndexMs": 1278.1012500000002,
+    "transferBytes": 3237354,
+    "heroTransferBytes": 4410,
+    "heroResourceBytes": 4223
+  },
+  "invalidAttempts": [],
+  "runs": [
+    {
+      "run": 1,
+      "fetchTime": "2026-08-10T01:35:23.775Z",
+      "lighthouseVersion": "13.4.1",
+      "finalDisplayedUrl": "http://127.0.0.1:4196/en/",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "environment": {
+        "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+        "benchmarkIndex": 3906,
+        "credits": {}
+      },
+      "configSettings": {
+        "output": [
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "cli",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance"
+        ],
+        "skipAudits": null
+      },
+      "performanceScore": 0.82,
+      "fcpMs": 1277.5700000000002,
+      "lcpMs": 4952.0560000000005,
+      "tbtMs": 0,
+      "cls": 0,
+      "speedIndexMs": 1277.5700000000002,
+      "transferBytes": 3237354,
+      "heroRequest": {
+        "url": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-960.avif",
+        "priority": "High",
+        "transferSize": 4410,
+        "resourceSize": 4223
+      },
+      "nonCompositedAnimations": {
+        "score": null,
+        "title": "Avoid non-composited animations",
+        "detailType": "table",
+        "itemCount": 0
+      },
+      "lcpAudits": {
+        "largest-contentful-paint": {
+          "score": 0.28,
+          "numericValue": 4952.0560000000005,
+          "displayValue": "5.0 s",
+          "title": "Largest Contentful Paint"
+        },
+        "lcp-breakdown-insight": {
+          "score": 1,
+          "title": "LCP breakdown",
+          "detailType": "list",
+          "itemCount": 2
+        },
+        "lcp-discovery-insight": {
+          "score": 1,
+          "title": "LCP request discovery",
+          "detailType": "list",
+          "itemCount": 2
+        }
+      }
+    },
+    {
+      "run": 2,
+      "fetchTime": "2026-08-10T01:35:33.814Z",
+      "lighthouseVersion": "13.4.1",
+      "finalDisplayedUrl": "http://127.0.0.1:4196/en/",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "environment": {
+        "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+        "benchmarkIndex": 3900,
+        "credits": {}
+      },
+      "configSettings": {
+        "output": [
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "cli",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance"
+        ],
+        "skipAudits": null
+      },
+      "performanceScore": 0.82,
+      "fcpMs": 1278.1012500000002,
+      "lcpMs": 4952.481,
+      "tbtMs": 0,
+      "cls": 0,
+      "speedIndexMs": 1278.1012500000002,
+      "transferBytes": 3237355,
+      "heroRequest": {
+        "url": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-960.avif",
+        "priority": "High",
+        "transferSize": 4410,
+        "resourceSize": 4223
+      },
+      "nonCompositedAnimations": {
+        "score": null,
+        "title": "Avoid non-composited animations",
+        "detailType": "table",
+        "itemCount": 0
+      },
+      "lcpAudits": {
+        "largest-contentful-paint": {
+          "score": 0.28,
+          "numericValue": 4952.481,
+          "displayValue": "5.0 s",
+          "title": "Largest Contentful Paint"
+        },
+        "lcp-breakdown-insight": {
+          "score": 1,
+          "title": "LCP breakdown",
+          "detailType": "list",
+          "itemCount": 2
+        },
+        "lcp-discovery-insight": {
+          "score": 1,
+          "title": "LCP request discovery",
+          "detailType": "list",
+          "itemCount": 2
+        }
+      }
+    },
+    {
+      "run": 3,
+      "fetchTime": "2026-08-10T01:35:43.919Z",
+      "lighthouseVersion": "13.4.1",
+      "finalDisplayedUrl": "http://127.0.0.1:4196/en/",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+      "environment": {
+        "networkUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36",
+        "hostUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.7778.96 Safari/537.36",
+        "benchmarkIndex": 3915.5,
+        "credits": {}
+      },
+      "configSettings": {
+        "output": [
+          "json"
+        ],
+        "maxWaitForFcp": 30000,
+        "maxWaitForLoad": 45000,
+        "pauseAfterFcpMs": 1000,
+        "pauseAfterLoadMs": 1000,
+        "networkQuietThresholdMs": 1000,
+        "cpuQuietThresholdMs": 1000,
+        "formFactor": "mobile",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        },
+        "throttlingMethod": "simulate",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 412,
+          "height": 823,
+          "deviceScaleFactor": 1.75,
+          "disabled": false
+        },
+        "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+        "auditMode": false,
+        "gatherMode": false,
+        "clearStorageTypes": [
+          "file_systems",
+          "shader_cache",
+          "service_workers",
+          "cache_storage"
+        ],
+        "disableStorageReset": false,
+        "debugNavigation": false,
+        "channel": "cli",
+        "usePassiveGathering": false,
+        "disableFullPageScreenshot": false,
+        "skipAboutBlank": false,
+        "blankPage": "about:blank",
+        "ignoreStatusCode": false,
+        "locale": "en-US",
+        "blockedUrlPatterns": null,
+        "additionalTraceCategories": null,
+        "extraHeaders": null,
+        "precomputedLanternData": null,
+        "onlyAudits": null,
+        "onlyCategories": [
+          "performance"
+        ],
+        "skipAudits": null
+      },
+      "performanceScore": 0.82,
+      "fcpMs": 1301.9125,
+      "lcpMs": 4952.33,
+      "tbtMs": 0,
+      "cls": 0,
+      "speedIndexMs": 1301.9125,
+      "transferBytes": 3237317,
+      "heroRequest": {
+        "url": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-960.avif",
+        "priority": "High",
+        "transferSize": 4410,
+        "resourceSize": 4223
+      },
+      "nonCompositedAnimations": {
+        "score": null,
+        "title": "Avoid non-composited animations",
+        "detailType": "table",
+        "itemCount": 0
+      },
+      "lcpAudits": {
+        "largest-contentful-paint": {
+          "score": 0.28,
+          "numericValue": 4952.33,
+          "displayValue": "5.0 s",
+          "title": "Largest Contentful Paint"
+        },
+        "lcp-breakdown-insight": {
+          "score": 1,
+          "title": "LCP breakdown",
+          "detailType": "list",
+          "itemCount": 2
+        },
+        "lcp-discovery-insight": {
+          "score": 1,
+          "title": "LCP request discovery",
+          "detailType": "list",
+          "itemCount": 2
+        }
+      }
+    }
+  ]
+}

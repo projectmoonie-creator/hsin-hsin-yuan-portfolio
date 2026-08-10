@@ -1139,14 +1139,20 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Arts <span class="role-slash">\/<\/span> Culture <span class="role-slash">\/<\/span> Technology/);
   assert.doesNotMatch(html, /<div class="hero-roles">.*AI-Language Creative.*<\/div>/s);
   assert.equal(site.site.heroMedia.contract.kind, "hero-media");
-  assert.match(html, /<link rel="preload" as="image" href="\/assets\/portfolio\/hsin-working-white-space\.jpg">/);
-  assert.match(html, /<div class="hero-media hero-media--slow-push"[^>]*data-hero-media-id="site\.hero"[^>]*role="img"/);
+  assert.match(html, /<link rel="preload" as="image" type="image\/avif" href="\/assets\/portfolio\/hero\/hsin-working-white-space-960\.avif" imagesrcset="[^"]*640\.avif 640w, [^"]*960\.avif 960w" imagesizes="90vw" media="\(max-width: 820px\)" fetchpriority="high">/);
+  assert.match(html, /<link rel="preload" as="image" type="image\/avif" href="\/assets\/portfolio\/hero\/hsin-working-white-space-1920\.avif" imagesrcset="[^"]*960\.avif 960w, [^"]*1440\.avif 1440w, [^"]*1920\.avif 1920w" imagesizes="\(min-width: 1281px\) 47vw, 90vw" media="\(min-width: 821px\)" fetchpriority="high">/);
+  assert.match(html, /<div class="hero-media hero-media--slow-push"[^>]*data-hero-media-id="site\.hero"/);
+  assert.match(html, /<picture class="hero-media-picture">/);
+  assert.match(html, /<source type="image\/avif" media="\(max-width: 820px\)" srcset="[^"]*640\.avif 640w, [^"]*960\.avif 960w" sizes="90vw">/);
+  assert.match(html, /<source type="image\/webp" media="\(min-width: 821px\)" srcset="[^"]*960\.webp 960w, [^"]*1440\.webp 1440w, [^"]*1920\.webp 1920w" sizes="\(min-width: 1281px\) 47vw, 90vw">/);
+  assert.match(html, /<source type="image\/jpeg" media="\(max-width: 820px\)" srcset="[^"]*640\.jpg 640w, [^"]*960\.jpg 960w" sizes="90vw">/);
+  assert.match(html, /<img class="hero-media-image" src="\/assets\/portfolio\/hsin-working-white-space\.jpg" width="1920" height="1440" alt="Hsin-Hsin Yuan working on a laptop in a bright white studio" loading="eager" decoding="sync" fetchpriority="high">/);
   assert.doesNotMatch(html, /id="showreel"/);
-  assert.match(html, /aria-label="Hsin-Hsin Yuan working on a laptop in a bright white studio"/);
-  assert.match(zhHtml, /aria-label="袁欣欣坐在明亮的白色工作室裡使用筆記型電腦"/);
+  assert.match(zhHtml, /alt="袁欣欣坐在明亮的白色工作室裡使用筆記型電腦"/);
+  assert.doesNotMatch(html, /class="hero-media[^>]*role="img"|class="hero-media[^>]*aria-label=/);
   assert.match(html, /data-hero-width="1920" data-hero-height="1440"/);
   assert.match(html, /data-hero-motion="slow-push"/);
-  assert.match(html, /--hero-image: url\(&quot;\/assets\/portfolio\/hsin-working-white-space\.jpg&quot;\)/);
+  assert.doesNotMatch(html, /--hero-image:/);
   assert.match(html, /--hero-wide-x: 38%; --hero-wide-y: 78%/);
   assert.match(html, /--hero-stacked-x: 38%; --hero-stacked-y: 77%/);
   assert.match(html, /--hero-mobile-x: 38%; --hero-mobile-y: 78%/);
@@ -1530,6 +1536,9 @@ test("Figma handoff keeps the canonical Gorgeous Space collaboration identity", 
 });
 
 test("build generates English, Chinese, CSS, and JS assets", () => {
+  const generator = readFileSync(join(root, "scripts/build-site.mjs"), "utf8");
+  assert.match(generator, /verifyHeroDerivativeManifest\(\{ root, heroMedia: rawSite\.heroMedia \}\)/);
+
   execFileSync("node", ["scripts/build-site.mjs"], { cwd: root, stdio: "pipe" });
 
   assert.equal(existsSync(join(root, "dist/en/index.html")), true);
@@ -1651,13 +1660,13 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.doesNotMatch(css, /\.impact-grid/);
   assert.doesNotMatch(css, /\.impact-item/);
   assert.doesNotMatch(css, /url\(\"\/assets\/portfolio\/hsin-working-white-space\.jpg\"\)/);
-  assert.match(css, /var\(--hero-image\)/);
+  assert.doesNotMatch(css, /var\(--hero-image\)/);
+  assert.match(css, /\.hero-media-picture \{[^}]*inset: 0;[^}]*position: absolute;[^}]*\}/);
+  assert.match(css, /\.hero-media-image \{[^}]*height: var\(--hero-static-scale\);[^}]*left: var\(--hero-active-x\);[^}]*max-width: none;[^}]*position: absolute;[^}]*top: var\(--hero-active-y\);[^}]*width: auto;[^}]*\}/);
   assert.match(css, /--hero-active-x: var\(--hero-wide-x\);/);
   assert.match(css, /--hero-active-y: var\(--hero-wide-y\);/);
-  assert.match(css, /var\(--hero-stacked-x\) var\(--hero-stacked-y\)/);
-  assert.match(css, /var\(--hero-mobile-x\) var\(--hero-mobile-y\)/);
-  assert.match(css, /@media \(max-width: 1280px\) \{[\s\S]*?\.hero-media \{[^}]*--hero-active-x: var\(--hero-stacked-x\);[^}]*--hero-active-y: var\(--hero-stacked-y\);/);
-  assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*?\.hero-media \{[^}]*--hero-active-x: var\(--hero-mobile-x\);[^}]*--hero-active-y: var\(--hero-mobile-y\);/);
+  assert.match(css, /@media \(max-width: 1280px\) \{[\s\S]*?\.hero-media \{[^}]*--hero-active-x: var\(--hero-stacked-x\);[^}]*--hero-active-y: var\(--hero-stacked-y\);[^}]*--hero-static-scale: 132%;/);
+  assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*?\.hero-media \{[^}]*--hero-active-x: var\(--hero-mobile-x\);[^}]*--hero-active-y: var\(--hero-mobile-y\);[^}]*--hero-static-scale: 136%;/);
   assert.doesNotMatch(css, /\.hero-play-button|\.hero-play-icon|\.hero-showreel-video|\.hero-media\.is-playing|\.hero-media:focus-visible/);
   assert.doesNotMatch(css, /\.hero-actions/);
   assert.doesNotMatch(css, /\.hero-media-caption/);
@@ -1696,13 +1705,11 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.collab-item \{\n  align-items: center;\n  background: transparent;\n  border: 0;/);
   assert.doesNotMatch(css, /\.partner-name/);
   assert.match(css, /\.hero h1 span \{\n  display: block;\n  white-space: nowrap;/);
-  assert.match(css, /@keyframes heroStillPush/);
-  assert.match(css, /\.hero-media--slow-push \{\n    animation: heroStillPush/);
-  assert.match(css, /calc\(var\(--hero-active-x\) \+ 4%\)/);
-  assert.match(css, /calc\(var\(--hero-active-y\) - 4%\)/);
-  assert.match(css, /auto var\(--hero-motion-start-scale\)/);
-  assert.match(css, /auto var\(--hero-motion-end-scale\)/);
-  assert.doesNotMatch(css, /@keyframes heroStillPush[\s\S]*?var\(--hero-wide-[xy]\)/);
+  const heroKeyframes = css.match(/@keyframes heroStillPush \{[\s\S]*?\n  \}/)?.[0] || "";
+  assert.match(heroKeyframes, /transform:/);
+  assert.doesNotMatch(heroKeyframes, /background-position|background-size/);
+  assert.match(css, /\.hero-media--slow-push \.hero-media-image \{[^}]*animation: heroStillPush 18s ease-in-out infinite alternate;/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*?\.hero-media--slow-push \.hero-media-image \{[^}]*animation: none;[^}]*transform:/);
   assert.match(css, /\.hero-roles \.role-slash \{\n  color: var\(--acid\);/);
   assert.match(css, /\.media-frame-link \{/);
   assert.match(css, /\.work-media-play \{/);

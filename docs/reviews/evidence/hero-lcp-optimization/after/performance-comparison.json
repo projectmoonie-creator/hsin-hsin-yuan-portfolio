@@ -1,0 +1,244 @@
+{
+  "methodology": {
+    "localOnly": true,
+    "validRunsPerSide": 3,
+    "primaryOutcome": "Lighthouse 13.4.1 mobile with direct DevTools throttling; median of three frozen-before and three after runs",
+    "corroboratingOutcome": "Lighthouse 13.4.1 mobile simulate; median of three, disclosed even though overall modeled LCP is effectively flat",
+    "frozenBeforeCommit": "5483bfa02d2586d981e241d7903b8a857aace530",
+    "noCruxClaim": true
+  },
+  "thresholds": {
+    "validRunsPerSide": 3,
+    "directLcpImprovementPercentMin": 20,
+    "heroTransferReductionPercentMin": 80,
+    "nonCompositedAnimationItemsAfterMax": 0,
+    "tbtRegressionMsMax": 0,
+    "clsRegressionMax": 0
+  },
+  "directDevtools": {
+    "beforeConditions": {
+      "lighthouse": "13.4.1",
+      "category": "performance",
+      "formFactor": "mobile",
+      "throttlingMethod": "devtools",
+      "chromeBinary": "chrome-headless-shell",
+      "chromeFlags": "--headless --no-sandbox --enable-unsafe-swiftshader --disable-backgrounding-occluded-windows --disable-renderer-backgrounding",
+      "runCount": 3
+    },
+    "afterConditions": {
+      "lighthouse": "13.4.1",
+      "category": "performance",
+      "formFactor": "mobile",
+      "throttlingMethod": "devtools",
+      "chromeBinary": "chrome-headless-shell",
+      "chromeFlags": "--headless --no-sandbox --enable-unsafe-swiftshader --disable-backgrounding-occluded-windows --disable-renderer-backgrounding",
+      "runCount": 3
+    },
+    "metrics": {
+      "performanceScore": {
+        "before": 0.73,
+        "after": 0.97,
+        "delta": 0.24,
+        "percent": 32.877
+      },
+      "fcpMs": {
+        "before": 2143.462,
+        "after": 2017.077,
+        "delta": -126.385,
+        "percent": -5.896
+      },
+      "lcpMs": {
+        "before": 6733.564,
+        "after": 2017.077,
+        "delta": -4716.487,
+        "percent": -70.044
+      },
+      "tbtMs": {
+        "before": 0,
+        "after": 0,
+        "delta": 0,
+        "percent": null
+      },
+      "cls": {
+        "before": 0,
+        "after": 0,
+        "delta": 0,
+        "percent": null
+      },
+      "speedIndexMs": {
+        "before": 4013,
+        "after": 2966,
+        "delta": -1047,
+        "percent": -26.09
+      },
+      "transferBytes": {
+        "before": 1735202,
+        "after": 1547539,
+        "delta": -187663,
+        "percent": -10.815
+      },
+      "heroTransferBytes": {
+        "before": 195225,
+        "after": 4410,
+        "delta": -190815,
+        "percent": -97.741
+      },
+      "heroResourceBytes": {
+        "before": 195036,
+        "after": 4223,
+        "delta": -190813,
+        "percent": -97.835
+      }
+    }
+  },
+  "simulated": {
+    "beforeConditions": {
+      "lighthouse": "13.4.1",
+      "category": "performance",
+      "formFactor": "mobile",
+      "throttlingMethod": "simulate",
+      "chromeBinary": "chrome-headless-shell",
+      "chromeFlags": "--headless --no-sandbox --enable-unsafe-swiftshader --disable-backgrounding-occluded-windows --disable-renderer-backgrounding",
+      "runCount": 3
+    },
+    "afterConditions": {
+      "lighthouse": "13.4.1",
+      "category": "performance",
+      "formFactor": "mobile",
+      "throttlingMethod": "simulate",
+      "chromeBinary": "chrome-headless-shell",
+      "chromeFlags": "--headless --no-sandbox --enable-unsafe-swiftshader --disable-backgrounding-occluded-windows --disable-renderer-backgrounding",
+      "runCount": 3
+    },
+    "metrics": {
+      "performanceScore": {
+        "before": 0.82,
+        "after": 0.82,
+        "delta": 0,
+        "percent": 0
+      },
+      "fcpMs": {
+        "before": 1277.84875,
+        "after": 1277.645,
+        "delta": -0.20375,
+        "percent": -0.016
+      },
+      "lcpMs": {
+        "before": 4878.116,
+        "after": 4877.3150000000005,
+        "delta": -0.801,
+        "percent": -0.016
+      },
+      "tbtMs": {
+        "before": 0,
+        "after": 0,
+        "delta": 0,
+        "percent": null
+      },
+      "cls": {
+        "before": 0,
+        "after": 0,
+        "delta": 0,
+        "percent": null
+      },
+      "speedIndexMs": {
+        "before": 1277.84875,
+        "after": 1277.645,
+        "delta": -0.20375,
+        "percent": -0.016
+      },
+      "transferBytes": {
+        "before": 3424979,
+        "after": 3237316,
+        "delta": -187663,
+        "percent": -5.479
+      },
+      "heroTransferBytes": {
+        "before": 195225,
+        "after": 4410,
+        "delta": -190815,
+        "percent": -97.741
+      },
+      "heroResourceBytes": {
+        "before": 195036,
+        "after": 4223,
+        "delta": -190813,
+        "percent": -97.835
+      }
+    },
+    "note": "Modeled total LCP is effectively flat; LCP load duration improves and direct throttling captures the transfer benefit."
+  },
+  "diagnostics": {
+    "before": {
+      "lcpLoadDelayMs": 809,
+      "lcpLoadDurationMs": 1379,
+      "observedLcpMs": 44,
+      "nonCompositedAnimationItems": 1,
+      "lcpDiscoveryScore": 0,
+      "requestPriorities": [
+        "Low",
+        "Low",
+        "Low",
+        "Low",
+        "Low"
+      ]
+    },
+    "after": {
+      "lcpLoadDelayMs": 762,
+      "lcpLoadDurationMs": 1018,
+      "observedLcpMs": 40,
+      "nonCompositedAnimationItems": 0,
+      "lcpDiscoveryScore": 1,
+      "requestPriorities": [
+        "High",
+        "High",
+        "High",
+        "High",
+        "High"
+      ]
+    },
+    "delta": {
+      "lcpLoadDelayMs": {
+        "before": 809,
+        "after": 762,
+        "delta": -47,
+        "percent": -5.81
+      },
+      "lcpLoadDurationMs": {
+        "before": 1379,
+        "after": 1018,
+        "delta": -361,
+        "percent": -26.178
+      },
+      "observedLcpMs": {
+        "before": 44,
+        "after": 40,
+        "delta": -4,
+        "percent": -9.091
+      },
+      "nonCompositedAnimationItems": {
+        "before": 1,
+        "after": 0,
+        "delta": -1,
+        "percent": -100
+      },
+      "lcpDiscoveryScore": {
+        "before": 0,
+        "after": 1,
+        "delta": 1,
+        "percent": null
+      }
+    }
+  },
+  "checks": {
+    "validRuns": true,
+    "directLcpImprovement": true,
+    "heroTransferReduction": true,
+    "priorityImproved": true,
+    "nonCompositedAnimationRemoved": true,
+    "discoveryImproved": true,
+    "tbtNoRegression": true,
+    "clsNoRegression": true
+  },
+  "passes": true
+}

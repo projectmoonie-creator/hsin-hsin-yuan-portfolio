@@ -10,6 +10,7 @@
     "collabs:prepare": "node scripts/prepare-collaboration-logos.mjs",
     "copy:apply": "node scripts/apply-copy-work-order.mjs",
     "figma:export": "node scripts/build-figma-export.mjs",
+    "hero:prepare": "node scripts/prepare-hero-images.mjs",
     "hero:sanitize": "node scripts/sanitize-public-hero-image.mjs",
     "media:plan": "node scripts/plan-archive-media-package.mjs",
     "media:slideshow": "node scripts/build-archive-still-slideshow.mjs",

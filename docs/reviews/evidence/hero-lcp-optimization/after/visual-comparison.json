@@ -1,0 +1,90 @@
+{
+  "thresholds": {
+    "rgbMae255Max": 5,
+    "channelSamplesWithinAbs16Min": 0.98,
+    "geometryMaxDeltaCssPxMax": 0.5
+  },
+  "cases": [
+    {
+      "name": "desktop-start",
+      "size": [
+        1440,
+        846
+      ],
+      "rgbMae255": 0.44226,
+      "channelSamplesWithinAbs16": 0.999701,
+      "geometryMaxDeltaCssPx": 0,
+      "geometryByRegionCssPx": {
+        "hero": 0,
+        "media": 0,
+        "content": 0.0
+      },
+      "passes": true
+    },
+    {
+      "name": "desktop-end",
+      "size": [
+        1440,
+        846
+      ],
+      "rgbMae255": 0.44806,
+      "channelSamplesWithinAbs16": 0.999691,
+      "geometryMaxDeltaCssPx": 0,
+      "geometryByRegionCssPx": {
+        "hero": 0,
+        "media": 0,
+        "content": 0.0
+      },
+      "passes": true
+    },
+    {
+      "name": "mobile-start",
+      "size": [
+        390,
+        826
+      ],
+      "rgbMae255": 0.704574,
+      "channelSamplesWithinAbs16": 0.998815,
+      "geometryMaxDeltaCssPx": 0,
+      "geometryByRegionCssPx": {
+        "hero": 0,
+        "media": 0.0,
+        "content": 0.0
+      },
+      "passes": true
+    },
+    {
+      "name": "mobile-end",
+      "size": [
+        390,
+        826
+      ],
+      "rgbMae255": 0.716704,
+      "channelSamplesWithinAbs16": 0.99902,
+      "geometryMaxDeltaCssPx": 0,
+      "geometryByRegionCssPx": {
+        "hero": 0,
+        "media": 0.0,
+        "content": 0.0
+      },
+      "passes": true
+    },
+    {
+      "name": "mobile-reduced",
+      "size": [
+        390,
+        826
+      ],
+      "rgbMae255": 0.537517,
+      "channelSamplesWithinAbs16": 0.998828,
+      "geometryMaxDeltaCssPx": 0,
+      "geometryByRegionCssPx": {
+        "hero": 0,
+        "media": 0.0,
+        "content": 0.0
+      },
+      "passes": true
+    }
+  ],
+  "passes": true
+}

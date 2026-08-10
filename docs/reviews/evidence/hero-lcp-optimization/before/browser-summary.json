@@ -1,0 +1,344 @@
+{
+  "url": "http://127.0.0.1:4196/en/",
+  "cases": [
+    {
+      "name": "desktop-start",
+      "width": 1440,
+      "height": 900,
+      "motion": "no-preference",
+      "phase": "start",
+      "hero": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 846,
+        "top": 0,
+        "right": 1440,
+        "bottom": 846,
+        "left": 0
+      },
+      "media": {
+        "x": 64,
+        "y": 154.859,
+        "width": 676.531,
+        "height": 568.281,
+        "top": 154.859,
+        "right": 740.531,
+        "bottom": 723.141,
+        "left": 64
+      },
+      "content": {
+        "x": 798.125,
+        "y": 214.391,
+        "width": 577.859,
+        "height": 449.219,
+        "top": 214.391,
+        "right": 1375.984,
+        "bottom": 663.609,
+        "left": 798.125
+      },
+      "mediaTag": "DIV",
+      "pictureCount": 0,
+      "imageCount": 0,
+      "mediaStyle": {
+        "backgroundImage": "linear-gradient(rgba(11, 11, 12, 0.02), rgba(11, 11, 12, 0.45)), url(\"http://127.0.0.1:4196/assets/portfolio/hsin-working-white-space.jpg\")",
+        "backgroundPosition": "50% 50%, 38.0061% 77.9939%",
+        "backgroundSize": "cover, auto 140.012%",
+        "animationName": "heroStillPush",
+        "animationPlayState": "paused",
+        "transform": "none"
+      },
+      "overlay": {
+        "backgroundImage": "linear-gradient(rgba(0, 0, 0, 0) 40%, rgba(11, 11, 12, 0.68))"
+      },
+      "horizontalOverflow": false,
+      "heroRequests": [
+        {
+          "url": "http://127.0.0.1:4196/assets/portfolio/hsin-working-white-space.jpg",
+          "initialPriority": "Low",
+          "type": "Image"
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: net::ERR_FAILED"
+      ],
+      "pageErrors": [],
+      "failedRequests": [],
+      "contactPosts": []
+    },
+    {
+      "name": "desktop-end",
+      "width": 1440,
+      "height": 900,
+      "motion": "no-preference",
+      "phase": "end",
+      "hero": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 846,
+        "top": 0,
+        "right": 1440,
+        "bottom": 846,
+        "left": 0
+      },
+      "media": {
+        "x": 64,
+        "y": 154.859,
+        "width": 676.531,
+        "height": 568.281,
+        "top": 154.859,
+        "right": 740.531,
+        "bottom": 723.141,
+        "left": 64
+      },
+      "content": {
+        "x": 798.125,
+        "y": 214.391,
+        "width": 577.859,
+        "height": 449.219,
+        "top": 214.391,
+        "right": 1375.984,
+        "bottom": 663.609,
+        "left": 798.125
+      },
+      "mediaTag": "DIV",
+      "pictureCount": 0,
+      "imageCount": 0,
+      "mediaStyle": {
+        "backgroundImage": "linear-gradient(rgba(11, 11, 12, 0.02), rgba(11, 11, 12, 0.45)), url(\"http://127.0.0.1:4196/assets/portfolio/hsin-working-white-space.jpg\")",
+        "backgroundPosition": "50% 50%, 41.9937% 74.0063%",
+        "backgroundSize": "cover, auto 147.987%",
+        "animationName": "heroStillPush",
+        "animationPlayState": "paused",
+        "transform": "none"
+      },
+      "overlay": {
+        "backgroundImage": "linear-gradient(rgba(0, 0, 0, 0) 40%, rgba(11, 11, 12, 0.68))"
+      },
+      "horizontalOverflow": false,
+      "heroRequests": [
+        {
+          "url": "http://127.0.0.1:4196/assets/portfolio/hsin-working-white-space.jpg",
+          "initialPriority": "Low",
+          "type": "Image"
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: net::ERR_FAILED"
+      ],
+      "pageErrors": [],
+      "failedRequests": [],
+      "contactPosts": []
+    },
+    {
+      "name": "mobile-start",
+      "width": 390,
+      "height": 844,
+      "motion": "no-preference",
+      "phase": "start",
+      "hero": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 825.609,
+        "top": 0,
+        "right": 390,
+        "bottom": 825.609,
+        "left": 0
+      },
+      "media": {
+        "x": 19.5,
+        "y": 88,
+        "width": 351,
+        "height": 329.938,
+        "top": 88,
+        "right": 370.5,
+        "bottom": 417.938,
+        "left": 19.5
+      },
+      "content": {
+        "x": 19.5,
+        "y": 441.938,
+        "width": 351,
+        "height": 343.672,
+        "top": 441.938,
+        "right": 370.5,
+        "bottom": 785.609,
+        "left": 19.5
+      },
+      "mediaTag": "DIV",
+      "pictureCount": 0,
+      "imageCount": 0,
+      "mediaStyle": {
+        "backgroundImage": "linear-gradient(rgba(11, 11, 12, 0.02), rgba(11, 11, 12, 0.45)), url(\"http://127.0.0.1:4196/assets/portfolio/hsin-working-white-space.jpg\")",
+        "backgroundPosition": "50% 50%, 38.0063% 77.9937%",
+        "backgroundSize": "cover, auto 140.013%",
+        "animationName": "heroStillPush",
+        "animationPlayState": "paused",
+        "transform": "none"
+      },
+      "overlay": {
+        "backgroundImage": "linear-gradient(rgba(0, 0, 0, 0) 40%, rgba(11, 11, 12, 0.68))"
+      },
+      "horizontalOverflow": false,
+      "heroRequests": [
+        {
+          "url": "http://127.0.0.1:4196/assets/portfolio/hsin-working-white-space.jpg",
+          "initialPriority": "Low",
+          "type": "Image"
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: net::ERR_FAILED"
+      ],
+      "pageErrors": [],
+      "failedRequests": [],
+      "contactPosts": []
+    },
+    {
+      "name": "mobile-end",
+      "width": 390,
+      "height": 844,
+      "motion": "no-preference",
+      "phase": "end",
+      "hero": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 825.609,
+        "top": 0,
+        "right": 390,
+        "bottom": 825.609,
+        "left": 0
+      },
+      "media": {
+        "x": 19.5,
+        "y": 88,
+        "width": 351,
+        "height": 329.938,
+        "top": 88,
+        "right": 370.5,
+        "bottom": 417.938,
+        "left": 19.5
+      },
+      "content": {
+        "x": 19.5,
+        "y": 441.938,
+        "width": 351,
+        "height": 343.672,
+        "top": 441.938,
+        "right": 370.5,
+        "bottom": 785.609,
+        "left": 19.5
+      },
+      "mediaTag": "DIV",
+      "pictureCount": 0,
+      "imageCount": 0,
+      "mediaStyle": {
+        "backgroundImage": "linear-gradient(rgba(11, 11, 12, 0.02), rgba(11, 11, 12, 0.45)), url(\"http://127.0.0.1:4196/assets/portfolio/hsin-working-white-space.jpg\")",
+        "backgroundPosition": "50% 50%, 41.9937% 74.0063%",
+        "backgroundSize": "cover, auto 147.987%",
+        "animationName": "heroStillPush",
+        "animationPlayState": "paused",
+        "transform": "none"
+      },
+      "overlay": {
+        "backgroundImage": "linear-gradient(rgba(0, 0, 0, 0) 40%, rgba(11, 11, 12, 0.68))"
+      },
+      "horizontalOverflow": false,
+      "heroRequests": [
+        {
+          "url": "http://127.0.0.1:4196/assets/portfolio/hsin-working-white-space.jpg",
+          "initialPriority": "Low",
+          "type": "Image"
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: net::ERR_FAILED"
+      ],
+      "pageErrors": [],
+      "failedRequests": [],
+      "contactPosts": []
+    },
+    {
+      "name": "mobile-reduced",
+      "width": 390,
+      "height": 844,
+      "motion": "reduce",
+      "phase": "static",
+      "hero": {
+        "x": 0,
+        "y": 0,
+        "width": 390,
+        "height": 825.609,
+        "top": 0,
+        "right": 390,
+        "bottom": 825.609,
+        "left": 0
+      },
+      "media": {
+        "x": 19.5,
+        "y": 88,
+        "width": 351,
+        "height": 329.938,
+        "top": 88,
+        "right": 370.5,
+        "bottom": 417.938,
+        "left": 19.5
+      },
+      "content": {
+        "x": 19.5,
+        "y": 441.938,
+        "width": 351,
+        "height": 343.672,
+        "top": 441.938,
+        "right": 370.5,
+        "bottom": 785.609,
+        "left": 19.5
+      },
+      "mediaTag": "DIV",
+      "pictureCount": 0,
+      "imageCount": 0,
+      "mediaStyle": {
+        "backgroundImage": "linear-gradient(rgba(11, 11, 12, 0.02), rgba(11, 11, 12, 0.45)), url(\"http://127.0.0.1:4196/assets/portfolio/hsin-working-white-space.jpg\")",
+        "backgroundPosition": "50% 50%, 38% 78%",
+        "backgroundSize": "cover, auto 136%",
+        "animationName": "none",
+        "animationPlayState": "running",
+        "transform": "none"
+      },
+      "overlay": {
+        "backgroundImage": "linear-gradient(rgba(0, 0, 0, 0) 40%, rgba(11, 11, 12, 0.68))"
+      },
+      "horizontalOverflow": false,
+      "heroRequests": [
+        {
+          "url": "http://127.0.0.1:4196/assets/portfolio/hsin-working-white-space.jpg",
+          "initialPriority": "Low",
+          "type": "Image"
+        }
+      ],
+      "consoleErrors": [
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: net::ERR_FAILED"
+      ],
+      "pageErrors": [],
+      "failedRequests": [],
+      "contactPosts": []
+    }
+  ]
+}

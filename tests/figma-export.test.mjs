@@ -240,12 +240,12 @@ test("Figma SVG export keeps portfolio layers editable and named", () => {
 test("one HeroMedia source mutation reaches website and both Figma frames", () => {
   const loaded = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
-  const current = loaded.site.heroMedia;
-  const replacementSrc = "/assets/portfolio/slow-steps-poster.webp";
+  const rawSite = JSON.parse(readFileSync(join(root, "data/site.json"), "utf8"));
+  const replacementSrc = "/assets/portfolio/my-art-my-voice-interview.jpg";
   const replacement = normalizeHeroMedia({
-    ...current.contract.public,
+    ...rawSite.heroMedia,
     src: replacementSrc,
-    rightsStatus: current.contract.evidence.rightsStatus,
+    sourceSha256: "a".repeat(64),
   });
   const mutatedSite = { ...loaded.site, heroMedia: replacement };
   const loadedWithMutation = { ...loaded, site: mutatedSite };
@@ -253,8 +253,9 @@ test("one HeroMedia source mutation reaches website and both Figma frames", () =
   const desktop = buildDesktopHome(mutatedSite, works, loaded.collaborations);
   const mobile = buildMobileHome(mutatedSite, works, loaded.collaborations);
 
+  assert.match(website, /my-art-my-voice-interview-640\.avif/);
   for (const output of [website, desktop, mobile]) {
-    assert.match(output, /slow-steps-poster\.webp/);
+    assert.match(output, /my-art-my-voice-interview\.jpg/);
     assert.doesNotMatch(output, /hsin-working-white-space\.jpg/);
   }
 });

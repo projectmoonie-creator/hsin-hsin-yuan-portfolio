@@ -11,6 +11,7 @@ import {
   normalizeHeroMedia,
   validateSiteCopy,
 } from "./lib/portfolio-contract.mjs";
+import { verifyHeroDerivativeManifest } from "./lib/hero-image-delivery.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
@@ -112,11 +113,49 @@ function focalPercent(value) {
   return `${Number((value * 100).toFixed(4))}%`;
 }
 
+const HERO_FRAME_ASPECTS = Object.freeze({
+  wide: 5 / 4.2,
+  stacked: 16 / 10.4,
+  mobile: 1 / 0.94,
+});
+
+function transformNumber(value) {
+  return Number(value.toFixed(6));
+}
+
+function heroMotionTransforms({ focal, frameAspect, sourceAspect, startScale, endScale }) {
+  const endFocal = { x: focal.x + 0.04, y: focal.y - 0.04 };
+  const endScaleRatio = endScale / startScale;
+  const widthRatio = frameAspect / (sourceAspect * startScale);
+  const heightRatio = 1 / startScale;
+  const endTranslateX = ((endFocal.x - focal.x) * widthRatio) - (endFocal.x * endScaleRatio);
+  const endTranslateY = ((endFocal.y - focal.y) * heightRatio) - (endFocal.y * endScaleRatio);
+  return {
+    start: `translate3d(${focalPercent(-focal.x)}, ${focalPercent(-focal.y)}, 0) scale(1)`,
+    end: `translate3d(${focalPercent(endTranslateX)}, ${focalPercent(endTranslateY)}, 0) scale(${transformNumber(endScaleRatio)})`,
+  };
+}
+
+function renderHeroPreloads(heroMedia) {
+  return Object.values(heroMedia.delivery.profiles).map(({ preload }) =>
+    `<link rel="preload" as="image" type="${escapeHtml(preload.type)}" href="${escapeHtml(preload.href)}" imagesrcset="${escapeHtml(preload.srcset)}" imagesizes="${escapeHtml(preload.sizes)}" media="${escapeHtml(preload.media)}" fetchpriority="${escapeHtml(preload.fetchPriority)}">`,
+  ).join("\n    ");
+}
+
 export function renderHeroMedia({ heroMedia, lang }) {
   const media = heroMedia.contract.public;
   const focal = media.focalPoint;
+  const sourceAspect = media.dimensions.width / media.dimensions.height;
+  const transforms = Object.fromEntries(
+    Object.entries(focal).map(([layout, point]) => [layout, heroMotionTransforms({
+      focal: point,
+      frameAspect: HERO_FRAME_ASPECTS[layout],
+      sourceAspect,
+      startScale: media.motionProfile.startScale,
+      endScale: media.motionProfile.endScale,
+    })]),
+  );
   const style = [
-    `--hero-image: ${cssUrl(media.src)}`,
     `--hero-wide-x: ${focalPercent(focal.wide.x)}`,
     `--hero-wide-y: ${focalPercent(focal.wide.y)}`,
     `--hero-stacked-x: ${focalPercent(focal.stacked.x)}`,
@@ -125,9 +164,21 @@ export function renderHeroMedia({ heroMedia, lang }) {
     `--hero-mobile-y: ${focalPercent(focal.mobile.y)}`,
     `--hero-motion-start-scale: ${focalPercent(media.motionProfile.startScale)}`,
     `--hero-motion-end-scale: ${focalPercent(media.motionProfile.endScale)}`,
+    `--hero-wide-start-transform: ${transforms.wide.start}`,
+    `--hero-wide-end-transform: ${transforms.wide.end}`,
+    `--hero-stacked-start-transform: ${transforms.stacked.start}`,
+    `--hero-stacked-end-transform: ${transforms.stacked.end}`,
+    `--hero-mobile-start-transform: ${transforms.mobile.start}`,
+    `--hero-mobile-end-transform: ${transforms.mobile.end}`,
   ].join("; ");
 
-  return `<div class="hero-media hero-media--${escapeHtml(media.motion)}" data-hero-media-id="${escapeHtml(media.id)}" data-hero-width="${media.dimensions.width}" data-hero-height="${media.dimensions.height}" data-hero-motion="${escapeHtml(media.motion)}" role="img" aria-label="${escapeHtml(media.alt[lang])}" style="${style}"></div>`;
+  const sources = Object.values(media.delivery.profiles).flatMap((profile) =>
+    Object.values(profile.sources).map((source) =>
+      `<source type="${escapeHtml(source.type)}" media="${escapeHtml(profile.media)}" srcset="${escapeHtml(source.srcset)}" sizes="${escapeHtml(profile.sizes)}">`,
+    )
+  ).join("");
+
+  return `<div class="hero-media hero-media--${escapeHtml(media.motion)}" data-hero-media-id="${escapeHtml(media.id)}" data-hero-width="${media.dimensions.width}" data-hero-height="${media.dimensions.height}" data-hero-motion="${escapeHtml(media.motion)}" style="${style}"><picture class="hero-media-picture">${sources}<img class="hero-media-image" src="${escapeHtml(media.src)}" width="${media.dimensions.width}" height="${media.dimensions.height}" alt="${escapeHtml(media.alt[lang])}" loading="eager" decoding="sync" fetchpriority="high"></picture></div>`;
 }
 
 function otherLang(lang) {
@@ -703,7 +754,7 @@ export function renderPage({ lang, site, works }) {
     <meta name="twitter:card" content="summary_large_image">
     <script type="application/ld+json">${escapeJsonForHtml(renderPersonJsonLd(site))}</script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="preload" as="image" href="${escapeHtml(heroMedia.src)}">
+    ${renderHeroPreloads(heroMedia)}
     <link rel="stylesheet" href="/styles.css?v=${ASSET_VERSION}">
     <script type="module" src="/main.js?v=${ASSET_VERSION}"></script>
   </head>
@@ -783,6 +834,10 @@ export function renderPage({ lang, site, works }) {
 }
 
 function build() {
+  const rawSite = JSON.parse(readFileSync(join(root, "data/site.json"), "utf8"));
+  normalizeHeroMedia(rawSite.heroMedia);
+  verifyHeroDerivativeManifest({ root, heroMedia: rawSite.heroMedia });
+
   const dist = join(root, "dist");
   rmSync(dist, { force: true, recursive: true });
   mkdirSync(join(dist, "en"), { recursive: true });

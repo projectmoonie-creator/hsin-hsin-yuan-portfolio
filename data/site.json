@@ -13,6 +13,29 @@
       "mobile": {"x": 0.38, "y": 0.78}
     },
     "motion": "slow-push",
+    "sourceSha256": "756c072edb8f760718d903b8bd5cfc9e53a343efec69bc2821b78e3043f67bac",
+    "delivery": {
+      "directory": "/assets/portfolio/hero",
+      "formats": {
+        "avif": {"quality": 45},
+        "webp": {"quality": 82},
+        "jpeg": {"quality": 88}
+      },
+      "profiles": {
+        "mobile": {
+          "media": "(max-width: 820px)",
+          "sizes": "90vw",
+          "widths": [640, 960],
+          "preloadWidth": 960
+        },
+        "desktop": {
+          "media": "(min-width: 821px)",
+          "sizes": "(min-width: 1281px) 47vw, 90vw",
+          "widths": [960, 1440, 1920],
+          "preloadWidth": 1920
+        }
+      }
+    },
     "rightsStatus": "user-supplied-local-source"
   },
   "en": {

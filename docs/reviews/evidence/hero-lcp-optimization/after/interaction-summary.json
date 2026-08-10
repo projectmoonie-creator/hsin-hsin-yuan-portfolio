@@ -1,0 +1,488 @@
+{
+  "baseUrl": "http://127.0.0.1:4196",
+  "cases": [
+    {
+      "name": "en-desktop",
+      "lang": "en",
+      "width": 1440,
+      "height": 900,
+      "motion": "no-preference",
+      "js": true,
+      "details": {
+        "lang": "en",
+        "pictureCount": 1,
+        "sourceCount": 6,
+        "imageCount": 1,
+        "preloadCount": 2,
+        "frameRole": null,
+        "frameAriaLabel": null,
+        "heroInteractiveCount": 0,
+        "image": {
+          "alt": "Hsin-Hsin Yuan working on a laptop in a bright white studio",
+          "complete": true,
+          "currentSrc": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-960.avif",
+          "naturalWidth": 676,
+          "naturalHeight": 507,
+          "fetchPriority": "high",
+          "loading": "eager",
+          "animationName": "heroStillPush",
+          "transform": "matrix(1.0001, 0, 0, 1.0001, -403.167, -620.605)",
+          "willChange": "transform"
+        },
+        "heroVisible": true,
+        "horizontalOverflow": false
+      },
+      "heroRequests": [
+        {
+          "url": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-960.avif",
+          "initialPriority": "High",
+          "type": "Image"
+        }
+      ],
+      "keyboardFocus": [
+        {
+          "tag": "A",
+          "text": "Ways to Work Together",
+          "href": "#available"
+        },
+        {
+          "tag": "A",
+          "text": "Works",
+          "href": "#works"
+        },
+        {
+          "tag": "A",
+          "text": "Contact",
+          "href": "#contact"
+        },
+        {
+          "tag": "A",
+          "text": "中",
+          "href": "/zh/"
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "href": "https://www.taiwanplus.com/"
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "href": "https://www.pts.org.tw/"
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "href": "https://www.dragontv.cn/"
+        },
+        {
+          "tag": "A",
+          "text": "WMW",
+          "href": "https://www.wmw.org.tw/"
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "href": "https://www.ticff.org.tw/"
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "href": "https://www.screenhouse.co.uk/"
+        },
+        {
+          "tag": "A",
+          "text": "",
+          "href": "https://www.hhh.com.tw/"
+        },
+        {
+          "tag": "A",
+          "text": "TaiwanPlus / Travel / 2026\n      Slow Steps\n      Director / Editor / Producer\n ",
+          "href": "#slow-steps"
+        }
+      ],
+      "pageErrors": [],
+      "failedLocalRequests": [],
+      "contactPosts": [],
+      "checks": {
+        "language": true,
+        "semanticStructure": true,
+        "preloads": true,
+        "alt": true,
+        "loaded": true,
+        "priorityContract": true,
+        "singleSelectedRequest": true,
+        "selectedResponsiveCandidate": true,
+        "noFrameAriaShim": true,
+        "heroNotInteractive": true,
+        "motion": true,
+        "noOverflow": true,
+        "noPageErrors": true,
+        "noContactPost": true,
+        "keyboard": true
+      },
+      "passes": true
+    },
+    {
+      "name": "zh-desktop-no-js",
+      "lang": "zh",
+      "width": 1440,
+      "height": 900,
+      "motion": "no-preference",
+      "js": false,
+      "details": {
+        "lang": "zh",
+        "pictureCount": 1,
+        "sourceCount": 6,
+        "imageCount": 1,
+        "preloadCount": 2,
+        "frameRole": null,
+        "frameAriaLabel": null,
+        "heroInteractiveCount": 0,
+        "image": {
+          "alt": "袁欣欣坐在明亮的白色工作室裡使用筆記型電腦",
+          "complete": true,
+          "currentSrc": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-960.avif",
+          "naturalWidth": 676,
+          "naturalHeight": 507,
+          "fetchPriority": "high",
+          "loading": "eager",
+          "animationName": "heroStillPush",
+          "transform": "matrix(1.00009, 0, 0, 1.00009, -403.159, -620.6)",
+          "willChange": "transform"
+        },
+        "heroVisible": true,
+        "horizontalOverflow": false
+      },
+      "heroRequests": [
+        {
+          "url": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-960.avif",
+          "initialPriority": "High",
+          "type": "Image"
+        }
+      ],
+      "keyboardFocus": [],
+      "pageErrors": [],
+      "failedLocalRequests": [],
+      "contactPosts": [],
+      "checks": {
+        "language": true,
+        "semanticStructure": true,
+        "preloads": true,
+        "alt": true,
+        "loaded": true,
+        "priorityContract": true,
+        "singleSelectedRequest": true,
+        "selectedResponsiveCandidate": true,
+        "noFrameAriaShim": true,
+        "heroNotInteractive": true,
+        "motion": true,
+        "noOverflow": true,
+        "noPageErrors": true,
+        "noContactPost": true
+      },
+      "passes": true
+    },
+    {
+      "name": "en-compact",
+      "lang": "en",
+      "width": 1200,
+      "height": 900,
+      "motion": "no-preference",
+      "js": true,
+      "details": {
+        "lang": "en",
+        "pictureCount": 1,
+        "sourceCount": 6,
+        "imageCount": 1,
+        "preloadCount": 2,
+        "frameRole": null,
+        "frameAriaLabel": null,
+        "heroInteractiveCount": 0,
+        "image": {
+          "alt": "Hsin-Hsin Yuan working on a laptop in a bright white studio",
+          "complete": true,
+          "currentSrc": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-1440.avif",
+          "naturalWidth": 1080,
+          "naturalHeight": 810,
+          "fetchPriority": "high",
+          "loading": "eager",
+          "animationName": "heroStillPush",
+          "transform": "matrix(1.00008, 0, 0, 1.00008, -498.006, -756.796)",
+          "willChange": "transform"
+        },
+        "heroVisible": true,
+        "horizontalOverflow": false
+      },
+      "heroRequests": [
+        {
+          "url": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-1440.avif",
+          "initialPriority": "High",
+          "type": "Image"
+        }
+      ],
+      "keyboardFocus": [],
+      "pageErrors": [],
+      "failedLocalRequests": [],
+      "contactPosts": [],
+      "checks": {
+        "language": true,
+        "semanticStructure": true,
+        "preloads": true,
+        "alt": true,
+        "loaded": true,
+        "priorityContract": true,
+        "singleSelectedRequest": true,
+        "selectedResponsiveCandidate": true,
+        "noFrameAriaShim": true,
+        "heroNotInteractive": true,
+        "motion": true,
+        "noOverflow": true,
+        "noPageErrors": true,
+        "noContactPost": true
+      },
+      "passes": true
+    },
+    {
+      "name": "zh-tablet",
+      "lang": "zh",
+      "width": 834,
+      "height": 1112,
+      "motion": "no-preference",
+      "js": true,
+      "details": {
+        "lang": "zh",
+        "pictureCount": 1,
+        "sourceCount": 6,
+        "imageCount": 1,
+        "preloadCount": 2,
+        "frameRole": null,
+        "frameAriaLabel": null,
+        "heroInteractiveCount": 0,
+        "image": {
+          "alt": "袁欣欣坐在明亮的白色工作室裡使用筆記型電腦",
+          "complete": true,
+          "currentSrc": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-960.avif",
+          "naturalWidth": 750,
+          "naturalHeight": 562,
+          "fetchPriority": "high",
+          "loading": "eager",
+          "animationName": "heroStillPush",
+          "transform": "matrix(1.00009, 0, 0, 1.00009, -346.128, -525.99)",
+          "willChange": "transform"
+        },
+        "heroVisible": true,
+        "horizontalOverflow": false
+      },
+      "heroRequests": [
+        {
+          "url": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-960.avif",
+          "initialPriority": "High",
+          "type": "Image"
+        }
+      ],
+      "keyboardFocus": [],
+      "pageErrors": [],
+      "failedLocalRequests": [],
+      "contactPosts": [],
+      "checks": {
+        "language": true,
+        "semanticStructure": true,
+        "preloads": true,
+        "alt": true,
+        "loaded": true,
+        "priorityContract": true,
+        "singleSelectedRequest": true,
+        "selectedResponsiveCandidate": true,
+        "noFrameAriaShim": true,
+        "heroNotInteractive": true,
+        "motion": true,
+        "noOverflow": true,
+        "noPageErrors": true,
+        "noContactPost": true
+      },
+      "passes": true
+    },
+    {
+      "name": "en-mobile-no-js",
+      "lang": "en",
+      "width": 390,
+      "height": 844,
+      "motion": "no-preference",
+      "js": false,
+      "details": {
+        "lang": "en",
+        "pictureCount": 1,
+        "sourceCount": 6,
+        "imageCount": 1,
+        "preloadCount": 2,
+        "frameRole": null,
+        "frameAriaLabel": null,
+        "heroInteractiveCount": 0,
+        "image": {
+          "alt": "Hsin-Hsin Yuan working on a laptop in a bright white studio",
+          "complete": true,
+          "currentSrc": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-640.avif",
+          "naturalWidth": 351,
+          "naturalHeight": 263,
+          "fetchPriority": "high",
+          "loading": "eager",
+          "animationName": "heroStillPush",
+          "transform": "matrix(1.00008, 0, 0, 1.00008, -234.068, -360.307)",
+          "willChange": "transform"
+        },
+        "heroVisible": true,
+        "horizontalOverflow": false
+      },
+      "heroRequests": [
+        {
+          "url": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-640.avif",
+          "initialPriority": "High",
+          "type": "Image"
+        }
+      ],
+      "keyboardFocus": [],
+      "pageErrors": [],
+      "failedLocalRequests": [],
+      "contactPosts": [],
+      "checks": {
+        "language": true,
+        "semanticStructure": true,
+        "preloads": true,
+        "alt": true,
+        "loaded": true,
+        "priorityContract": true,
+        "singleSelectedRequest": true,
+        "selectedResponsiveCandidate": true,
+        "noFrameAriaShim": true,
+        "heroNotInteractive": true,
+        "motion": true,
+        "noOverflow": true,
+        "noPageErrors": true,
+        "noContactPost": true
+      },
+      "passes": true
+    },
+    {
+      "name": "zh-narrow",
+      "lang": "zh",
+      "width": 360,
+      "height": 800,
+      "motion": "no-preference",
+      "js": true,
+      "details": {
+        "lang": "zh",
+        "pictureCount": 1,
+        "sourceCount": 6,
+        "imageCount": 1,
+        "preloadCount": 2,
+        "frameRole": null,
+        "frameAriaLabel": null,
+        "heroInteractiveCount": 0,
+        "image": {
+          "alt": "袁欣欣坐在明亮的白色工作室裡使用筆記型電腦",
+          "complete": true,
+          "currentSrc": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-640.avif",
+          "naturalWidth": 324,
+          "naturalHeight": 243,
+          "fetchPriority": "high",
+          "loading": "eager",
+          "animationName": "heroStillPush",
+          "transform": "matrix(1.00009, 0, 0, 1.00009, -216.055, -332.581)",
+          "willChange": "transform"
+        },
+        "heroVisible": true,
+        "horizontalOverflow": false
+      },
+      "heroRequests": [
+        {
+          "url": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-640.avif",
+          "initialPriority": "High",
+          "type": "Image"
+        }
+      ],
+      "keyboardFocus": [],
+      "pageErrors": [],
+      "failedLocalRequests": [],
+      "contactPosts": [],
+      "checks": {
+        "language": true,
+        "semanticStructure": true,
+        "preloads": true,
+        "alt": true,
+        "loaded": true,
+        "priorityContract": true,
+        "singleSelectedRequest": true,
+        "selectedResponsiveCandidate": true,
+        "noFrameAriaShim": true,
+        "heroNotInteractive": true,
+        "motion": true,
+        "noOverflow": true,
+        "noPageErrors": true,
+        "noContactPost": true
+      },
+      "passes": true
+    },
+    {
+      "name": "en-mobile-reduced",
+      "lang": "en",
+      "width": 390,
+      "height": 844,
+      "motion": "reduce",
+      "js": true,
+      "details": {
+        "lang": "en",
+        "pictureCount": 1,
+        "sourceCount": 6,
+        "imageCount": 1,
+        "preloadCount": 2,
+        "frameRole": null,
+        "frameAriaLabel": null,
+        "heroInteractiveCount": 0,
+        "image": {
+          "alt": "Hsin-Hsin Yuan working on a laptop in a bright white studio",
+          "complete": true,
+          "currentSrc": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-640.avif",
+          "naturalWidth": 351,
+          "naturalHeight": 263,
+          "fetchPriority": "high",
+          "loading": "eager",
+          "animationName": "none",
+          "transform": "matrix(1, 0, 0, 1, -227.341, -349.988)",
+          "willChange": "auto"
+        },
+        "heroVisible": true,
+        "horizontalOverflow": false
+      },
+      "heroRequests": [
+        {
+          "url": "http://127.0.0.1:4196/assets/portfolio/hero/hsin-working-white-space-640.avif",
+          "initialPriority": "High",
+          "type": "Image"
+        }
+      ],
+      "keyboardFocus": [],
+      "pageErrors": [],
+      "failedLocalRequests": [],
+      "contactPosts": [],
+      "checks": {
+        "language": true,
+        "semanticStructure": true,
+        "preloads": true,
+        "alt": true,
+        "loaded": true,
+        "priorityContract": true,
+        "singleSelectedRequest": true,
+        "selectedResponsiveCandidate": true,
+        "noFrameAriaShim": true,
+        "heroNotInteractive": true,
+        "motion": true,
+        "noOverflow": true,
+        "noPageErrors": true,
+        "noContactPost": true
+      },
+      "passes": true
+    }
+  ],
+  "passes": true
+}

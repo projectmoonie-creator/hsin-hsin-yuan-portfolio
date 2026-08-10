@@ -433,7 +433,7 @@ This folder is a free Figma import package for the Hsin-Hsin Yuan portfolio desi
 ## Notes
 
 - The SVGs are generated from current site content, so re-run \`npm run figma:export\` after major content changes.
-- Hero imagery comes from the same normalized \`data/site.json.heroMedia\` record as the website. Replace its asset, localized alt, intrinsic dimensions, and focal points there, sanitize the public JPEG, then regenerate this package.
+- Hero imagery comes from the same normalized \`data/site.json.heroMedia\` record as the website. Replace its source asset, source SHA-256, localized alt, intrinsic dimensions, and focal points there; sanitize the public JPEG, run \`npm run hero:prepare\`, then regenerate this package.
 - Photos are embedded as image layers to keep the package portable.
 - Text, rectangles, collaboration marks, cards, and color token swatches remain editable SVG layers, including editable text layers for fallbacks after import.
 - This is a design control layer, not the production source of truth.

@@ -95,11 +95,15 @@ test("canonical public Hero JPEG contains no private metadata payload", () => {
   assert.doesNotThrow(() => assertPublicJpegMetadataSafe(hero));
 });
 
-test("package exposes the repeatable Hero sanitizer command", () => {
+test("package exposes repeatable Hero source and derivative commands", () => {
   const packageJson = JSON.parse(readFileSync(join(root, "package.json"), "utf8"));
   assert.equal(
     packageJson.scripts["hero:sanitize"],
     "node scripts/sanitize-public-hero-image.mjs",
+  );
+  assert.equal(
+    packageJson.scripts["hero:prepare"],
+    "node scripts/prepare-hero-images.mjs",
   );
 });
 

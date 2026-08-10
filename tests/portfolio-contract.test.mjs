@@ -164,6 +164,29 @@ function heroMedia(overrides = {}) {
       mobile: { x: 0.38, y: 0.78 },
     },
     motion: "slow-push",
+    sourceSha256: "756c072edb8f760718d903b8bd5cfc9e53a343efec69bc2821b78e3043f67bac",
+    delivery: {
+      directory: "/assets/portfolio/hero",
+      formats: {
+        avif: { quality: 45 },
+        webp: { quality: 82 },
+        jpeg: { quality: 88 },
+      },
+      profiles: {
+        mobile: {
+          media: "(max-width: 820px)",
+          sizes: "90vw",
+          widths: [640, 960],
+          preloadWidth: 960,
+        },
+        desktop: {
+          media: "(min-width: 821px)",
+          sizes: "(min-width: 1281px) 47vw, 90vw",
+          widths: [960, 1440, 1920],
+          preloadWidth: 1920,
+        },
+      },
+    },
     rightsStatus: "user-supplied-local-source",
     ...overrides,
   };
@@ -173,7 +196,8 @@ test("HeroMedia normalization freezes one public contract and keeps rights evide
   const normalized = normalizeHeroMedia(heroMedia());
 
   assert.equal(normalized.contract.kind, "hero-media");
-  assert.deepEqual(normalized.contract.public, {
+  const { delivery, ...publicWithoutDelivery } = normalized.contract.public;
+  assert.deepEqual(publicWithoutDelivery, {
     id: "site.hero",
     src: "/assets/portfolio/hsin-working-white-space.jpg",
     alt: localized(
@@ -189,8 +213,18 @@ test("HeroMedia normalization freezes one public contract and keeps rights evide
     motion: "slow-push",
     motionProfile: { startScale: 1.4, endScale: 1.48 },
   });
+  assert.equal(delivery.profiles.mobile.preload.fetchPriority, "high");
+  assert.equal(delivery.profiles.desktop.preload.type, "image/avif");
   assert.deepEqual(normalized.contract.evidence, {
     rightsStatus: "user-supplied-local-source",
+    delivery: {
+      sourceSha256: "756c072edb8f760718d903b8bd5cfc9e53a343efec69bc2821b78e3043f67bac",
+      formats: {
+        avif: { quality: 45 },
+        webp: { quality: 82 },
+        jpeg: { quality: 88 },
+      },
+    },
   });
   assert.equal(Object.hasOwn(normalized.contract.public, "rightsStatus"), false);
   assert.equal(Object.isFrozen(normalized), true);
@@ -201,6 +235,53 @@ test("HeroMedia normalization freezes one public contract and keeps rights evide
   assert.equal(Object.isFrozen(normalized.contract.public.motionProfile), true);
   assert.equal(Object.isFrozen(normalized.contract.public), true);
   assert.equal(Object.isFrozen(normalized.contract.evidence), true);
+});
+
+test("HeroMedia derives one immutable responsive delivery contract from the canonical source", () => {
+  const normalized = normalizeHeroMedia(heroMedia({
+    sourceSha256: "756c072edb8f760718d903b8bd5cfc9e53a343efec69bc2821b78e3043f67bac",
+    delivery: {
+      directory: "/assets/portfolio/hero",
+      formats: {
+        avif: { quality: 45 },
+        webp: { quality: 82 },
+        jpeg: { quality: 88 },
+      },
+      profiles: {
+        mobile: {
+          media: "(max-width: 820px)",
+          sizes: "90vw",
+          widths: [640, 960],
+          preloadWidth: 960,
+        },
+        desktop: {
+          media: "(min-width: 821px)",
+          sizes: "(min-width: 1281px) 47vw, 90vw",
+          widths: [960, 1440, 1920],
+          preloadWidth: 1920,
+        },
+      },
+    },
+  }));
+
+  assert.equal(normalized.contract.public.delivery.profiles.mobile.sources.avif.srcset,
+    "/assets/portfolio/hero/hsin-working-white-space-640.avif 640w, /assets/portfolio/hero/hsin-working-white-space-960.avif 960w");
+  assert.equal(normalized.contract.public.delivery.profiles.desktop.sources.webp.srcset,
+    "/assets/portfolio/hero/hsin-working-white-space-960.webp 960w, /assets/portfolio/hero/hsin-working-white-space-1440.webp 1440w, /assets/portfolio/hero/hsin-working-white-space-1920.webp 1920w");
+  assert.equal(normalized.contract.public.delivery.profiles.mobile.preload.href,
+    "/assets/portfolio/hero/hsin-working-white-space-960.avif");
+  assert.equal(normalized.contract.public.delivery.profiles.desktop.preload.href,
+    "/assets/portfolio/hero/hsin-working-white-space-1920.avif");
+  assert.deepEqual(normalized.contract.evidence.delivery, {
+    sourceSha256: "756c072edb8f760718d903b8bd5cfc9e53a343efec69bc2821b78e3043f67bac",
+    formats: {
+      avif: { quality: 45 },
+      webp: { quality: 82 },
+      jpeg: { quality: 88 },
+    },
+  });
+  assert.equal(Object.hasOwn(normalized.contract.public, "sourceSha256"), false);
+  assert.equal(Object.isFrozen(normalized.contract.public.delivery.profiles.mobile.sources.avif), true);
 });
 
 test("HeroMedia normalization rejects unknown, missing, unsafe, and unsupported values", () => {
@@ -218,6 +299,8 @@ test("HeroMedia normalization rejects unknown, missing, unsafe, and unsupported 
     [heroMedia({ focalPoint: { wide: { x: 0.38, y: 0.78, z: 1 }, stacked: { x: 0.38, y: 0.77 }, mobile: { x: 0.38, y: 0.78 } } }), /focalPoint wide has unknown field z/],
     [heroMedia({ motion: "pan-and-zoom" }), /motion must be one of: slow-push/],
     [heroMedia({ motionProfile: { startScale: 1.41, endScale: 1.48 } }), /motionProfile must match motion slow-push/],
+    [heroMedia({ sourceSha256: "bad" }), /sourceSha256 must be a lowercase SHA-256/],
+    [heroMedia({ delivery: { surprise: true } }), /delivery has unknown field surprise/],
     [heroMedia({ rightsStatus: "" }), /rightsStatus must be one of: user-supplied-local-source/],
   ];
 
@@ -228,6 +311,9 @@ test("HeroMedia normalization rejects unknown, missing, unsafe, and unsupported 
   const missing = heroMedia();
   delete missing.src;
   assert.throws(() => normalizeHeroMedia(missing), /is missing src/);
+  const missingDelivery = heroMedia();
+  delete missingDelivery.delivery;
+  assert.throws(() => normalizeHeroMedia(missingDelivery), /is missing delivery/);
 });
 
 test("featured normalization requires public anatomy and explicit presentation", () => {

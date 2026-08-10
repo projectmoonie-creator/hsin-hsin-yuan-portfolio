@@ -1,3 +1,5 @@
+import { deriveHeroDelivery } from "./hero-image-delivery.mjs";
+
 export const PRESENTATION_VARIANTS = Object.freeze({
   featured: Object.freeze({
     desktopMediaVariant: Object.freeze(["fill-card", "centered-16x9"]),
@@ -418,10 +420,10 @@ export function normalizeHeroMedia(source) {
   requireObject(source, kind);
   rejectUnknownFields(
     source,
-    ["id", "src", "alt", "dimensions", "focalPoint", "motion", "motionProfile", "rightsStatus"],
+    ["id", "src", "alt", "dimensions", "focalPoint", "motion", "motionProfile", "sourceSha256", "delivery", "rightsStatus"],
     kind,
   );
-  for (const field of ["id", "src", "alt", "dimensions", "focalPoint", "motion"]) {
+  for (const field of ["id", "src", "alt", "dimensions", "focalPoint", "motion", "sourceSha256", "delivery"]) {
     requireField(source, field, kind);
   }
   if (source.id !== "site.hero") {
@@ -430,6 +432,7 @@ export function normalizeHeroMedia(source) {
 
   const srcSegments = String(source.src).split("/");
   if (!/^\/assets\/portfolio\/[^?#]+$/.test(source.src)
+    || !/\.jpe?g$/i.test(source.src)
     || source.src.includes("\\")
     || source.src.includes("//")
     || srcSegments.some((segment) => segment === "." || segment === "..")) {
@@ -476,6 +479,59 @@ export function normalizeHeroMedia(source) {
       throw new Error(`${kind} motionProfile must match motion ${source.motion}`);
     }
   }
+  if (!/^[0-9a-f]{64}$/.test(source.sourceSha256)) {
+    throw new Error(`${kind} sourceSha256 must be a lowercase SHA-256`);
+  }
+
+  requireObject(source.delivery, `${kind} delivery`);
+  rejectUnknownFields(source.delivery, ["directory", "formats", "profiles"], `${kind} delivery`);
+  for (const field of ["directory", "formats", "profiles"]) {
+    requireField(source.delivery, field, `${kind} delivery`);
+  }
+  const deliverySegments = String(source.delivery.directory).split("/");
+  if (!/^\/assets\/portfolio\/[a-z0-9/-]+$/.test(source.delivery.directory)
+    || source.delivery.directory.endsWith("/")
+    || source.delivery.directory.includes("//")
+    || deliverySegments.some((segment) => segment === "." || segment === "..")) {
+    throw new Error(`${kind} delivery directory must be a normalized local portfolio directory`);
+  }
+  requireObject(source.delivery.formats, `${kind} delivery formats`);
+  rejectUnknownFields(source.delivery.formats, ["avif", "webp", "jpeg"], `${kind} delivery formats`);
+  for (const format of ["avif", "webp", "jpeg"]) {
+    requireField(source.delivery.formats, format, `${kind} delivery formats`);
+    requireObject(source.delivery.formats[format], `${kind} delivery formats ${format}`);
+    rejectUnknownFields(source.delivery.formats[format], ["quality"], `${kind} delivery formats ${format}`);
+    const quality = source.delivery.formats[format].quality;
+    if (!Number.isInteger(quality) || quality < 1 || quality > 100) {
+      throw new Error(`${kind} delivery formats ${format} quality must be an integer between 1 and 100`);
+    }
+  }
+  requireObject(source.delivery.profiles, `${kind} delivery profiles`);
+  rejectUnknownFields(source.delivery.profiles, ["mobile", "desktop"], `${kind} delivery profiles`);
+  for (const profileName of ["mobile", "desktop"]) {
+    requireField(source.delivery.profiles, profileName, `${kind} delivery profiles`);
+    const profile = source.delivery.profiles[profileName];
+    requireObject(profile, `${kind} delivery profiles ${profileName}`);
+    rejectUnknownFields(profile, ["media", "sizes", "widths", "preloadWidth"], `${kind} delivery profiles ${profileName}`);
+    for (const field of ["media", "sizes", "widths", "preloadWidth"]) {
+      requireField(profile, field, `${kind} delivery profiles ${profileName}`);
+    }
+    if (typeof profile.media !== "string" || !/^\((?:min|max)-width: \d+px\)$/.test(profile.media)) {
+      throw new Error(`${kind} delivery profiles ${profileName} media must be one simple width query`);
+    }
+    if (typeof profile.sizes !== "string" || !profile.sizes.trim() || /[<>"']/.test(profile.sizes)) {
+      throw new Error(`${kind} delivery profiles ${profileName} sizes must be a safe non-empty string`);
+    }
+    if (!Array.isArray(profile.widths) || profile.widths.length === 0
+      || profile.widths.some((width) => !Number.isInteger(width) || width <= 0 || width > source.dimensions.width)
+      || new Set(profile.widths).size !== profile.widths.length
+      || profile.widths.some((width, index) => index > 0 && width <= profile.widths[index - 1])) {
+      throw new Error(`${kind} delivery profiles ${profileName} widths must be unique increasing positive integers within source width`);
+    }
+    if (!profile.widths.includes(profile.preloadWidth)) {
+      throw new Error(`${kind} delivery profiles ${profileName} preloadWidth must occur in widths`);
+    }
+  }
   if (!HERO_MEDIA_RIGHTS_STATUSES.includes(source.rightsStatus)) {
     throw new Error(`${kind} rightsStatus must be one of: ${HERO_MEDIA_RIGHTS_STATUSES.join(", ")}`);
   }
@@ -490,6 +546,7 @@ export function normalizeHeroMedia(source) {
     ),
     motion: source.motion,
     motionProfile: { ...motionProfile },
+    delivery: deriveHeroDelivery({ src: source.src, delivery: source.delivery }),
   };
   return freezeDeep({
     ...publicFields,
@@ -497,7 +554,15 @@ export function normalizeHeroMedia(source) {
     contract: {
       kind: "hero-media",
       public: publicFields,
-      evidence: { rightsStatus: source.rightsStatus },
+      evidence: {
+        rightsStatus: source.rightsStatus,
+        delivery: {
+          sourceSha256: source.sourceSha256,
+          formats: Object.fromEntries(
+            Object.entries(source.delivery.formats).map(([format, settings]) => [format, { ...settings }]),
+          ),
+        },
+      },
     },
   });
 }

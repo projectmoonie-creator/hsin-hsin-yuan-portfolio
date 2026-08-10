@@ -136,21 +136,40 @@ a {
 .hero-media {
   --hero-active-x: var(--hero-wide-x);
   --hero-active-y: var(--hero-wide-y);
-  background-image:
-    linear-gradient(180deg, rgba(11, 11, 12, 0.02), rgba(11, 11, 12, 0.45)),
-    var(--hero-image);
-  background-position:
-    center,
-    var(--hero-active-x) var(--hero-active-y);
-  background-repeat: no-repeat;
-  background-size:
-    cover,
-    auto 142%;
-  border-radius: 8px;
+  --hero-motion-end-transform: var(--hero-wide-end-transform);
+  --hero-motion-start-transform: var(--hero-wide-start-transform);
+  --hero-static-scale: 142%;
   aspect-ratio: 5 / 4.2;
+  border-radius: 8px;
   min-height: auto;
   overflow: hidden;
   position: relative;
+}
+
+.hero-media-picture {
+  inset: 0;
+  position: absolute;
+}
+
+.hero-media-image {
+  display: block;
+  height: var(--hero-static-scale);
+  left: var(--hero-active-x);
+  max-width: none;
+  position: absolute;
+  top: var(--hero-active-y);
+  width: auto;
+  transform: translate3d(calc(-1 * var(--hero-active-x)), calc(-1 * var(--hero-active-y)), 0);
+  transform-origin: 0 0;
+}
+
+.hero-media-picture::after {
+  background: linear-gradient(180deg, rgba(11, 11, 12, 0.02), rgba(11, 11, 12, 0.45));
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
 }
 
 .hero-media::after {
@@ -159,6 +178,7 @@ a {
   inset: 0;
   pointer-events: none;
   position: absolute;
+  z-index: 2;
 }
 
 .hero::after {
@@ -1262,13 +1282,10 @@ a.archive-card-media-link:focus-visible {
   .hero-media {
     --hero-active-x: var(--hero-stacked-x);
     --hero-active-y: var(--hero-stacked-y);
+    --hero-static-scale: 132%;
+    --hero-motion-start-transform: var(--hero-stacked-start-transform);
+    --hero-motion-end-transform: var(--hero-stacked-end-transform);
     aspect-ratio: 16 / 10.4;
-    background-position:
-      center,
-      var(--hero-stacked-x) var(--hero-stacked-y);
-    background-size:
-      cover,
-      auto 132%;
     min-height: auto;
   }
 }
@@ -1339,13 +1356,10 @@ a.archive-card-media-link:focus-visible {
   .hero-media {
     --hero-active-x: var(--hero-mobile-x);
     --hero-active-y: var(--hero-mobile-y);
+    --hero-static-scale: 136%;
+    --hero-motion-start-transform: var(--hero-mobile-start-transform);
+    --hero-motion-end-transform: var(--hero-mobile-end-transform);
     aspect-ratio: 1 / 0.94;
-    background-position:
-      center,
-      var(--hero-mobile-x) var(--hero-mobile-y);
-    background-size:
-      cover,
-      auto 136%;
     min-height: auto;
   }
 
@@ -1459,8 +1473,10 @@ a.archive-card-media-link:focus-visible {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero-media--slow-push {
+  .hero-media--slow-push .hero-media-image {
     animation: heroStillPush 18s ease-in-out infinite alternate;
+    height: var(--hero-motion-start-scale);
+    will-change: transform;
   }
 
   .hero-content,
@@ -1484,28 +1500,19 @@ a.archive-card-media-link:focus-visible {
 
   @keyframes heroStillPush {
     from {
-      background-position:
-        center,
-        var(--hero-active-x) var(--hero-active-y);
-      background-size:
-        cover,
-        auto var(--hero-motion-start-scale);
+      transform: var(--hero-motion-start-transform);
     }
     to {
-      background-position:
-        center,
-        calc(var(--hero-active-x) + 4%) calc(var(--hero-active-y) - 4%);
-      background-size:
-        cover,
-        auto var(--hero-motion-end-scale);
+      transform: var(--hero-motion-end-transform);
     }
   }
 
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-media--slow-push {
+  .hero-media--slow-push .hero-media-image {
     animation: none;
+    transform: translate3d(calc(-1 * var(--hero-active-x)), calc(-1 * var(--hero-active-y)), 0);
   }
 
   .featured-reel-video {

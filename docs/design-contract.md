@@ -251,17 +251,28 @@ Work Press and global Press are different schemas.
 
 - `data/site.json.heroMedia` is the single current-reference Hero image record.
   Its required-rendered fields are `id`, `src`, bilingual `alt`, intrinsic
-  `dimensions`, named `focalPoint` values, and `motion`; `rightsStatus` is
+  `dimensions`, named `focalPoint` values, `motion`, and one delivery recipe.
+  Candidate filenames, `srcset`, and preload records are derived from that
+  recipe and the canonical `src`; no parallel candidate array is allowed.
+  `rightsStatus`, the canonical source SHA-256, and encoder qualities are
   mandatory evidence-only data and must not enter public HTML.
 - The website and `npm run figma:export` consume the same normalized HeroMedia
-  contract. The website keeps the approved `slow-push` background treatment;
-  the Figma SVG shows its static starting crop. Hero has no Play control,
-  video, hover action, or keyboard target.
+  contract. The website renders a discoverable `<picture>/<img>` with explicit
+  dimensions, localized alt, responsive AVIF/WebP/JPEG sources, media-matched
+  high-priority AVIF preloads, and a `transform`-only slow push. Reduced-motion
+  output is completely static. The Figma SVG continues to consume the same
+  canonical source and shows its static starting crop. Hero has no Play
+  control, video, hover action, or keyboard target.
 - To replace the Hero, first prepare a local JPEG, then run
   `npm run hero:sanitize -- --input SOURCE_JPEG --output public/assets/portfolio/OUTPUT.jpg`.
-  Update only the HeroMedia asset path, localized alt, intrinsic dimensions,
-  and focal points, then run the website and Figma verification suites. Public
-  JPEGs must contain no APP1, APP13, or COM metadata segments.
+  Update the one HeroMedia source path, source SHA-256, localized alt, intrinsic
+  dimensions, and focal points, then run `npm run hero:prepare` before the
+  website and Figma verification suites. The prepare command stages and
+  validates every derivative's source hash, decoded dimensions, actual codec,
+  metadata safety, and SHA-256/byte manifest. `npm run build` verifies that the
+  checked-in source, recipe, manifest, and all derivative hashes still agree
+  before replacing `dist`. Public JPEGs must contain no APP1, APP13, or COM
+  metadata segments.
 - Above `1280px`, Hero uses the approved two-column composition.
 - At `1280px` and below, Hero stacks to one column.
 - At `980px` and below, Archive becomes one column.
