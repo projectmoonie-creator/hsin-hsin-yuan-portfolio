@@ -441,9 +441,6 @@ function renderWatchLoopItem(work, lang, copy) {
   const role = localize(work.role, lang);
   const tagline = localize(work.tagline, lang);
   const platform = localize(work.platform, lang);
-  const opensWatchUrl = work.watchLoopTarget === "watch" && work.watchUrl;
-  const href = opensWatchUrl ? work.watchUrl : `#${work.slug}`;
-  const linkAttrs = opensWatchUrl ? ' target="_blank" rel="noreferrer"' : "";
   const poster = work.posterImage;
   const image = poster
     ? `style="background-image: ${cssUrl(poster)}"`
@@ -453,7 +450,7 @@ function renderWatchLoopItem(work, lang, copy) {
     : "watch-loop-card watch-loop-card-plain";
 
   return `
-    <a class="${cardClass}" href="${escapeHtml(href)}"${linkAttrs} ${image}>
+    <a class="${cardClass}" href="#${escapeHtml(work.slug)}" ${image}>
       <span class="watch-loop-scrim" aria-hidden="true"></span>
       <span class="watch-loop-meta">${escapeHtml(platform)} / ${escapeHtml(work.year)}</span>
       <strong>${escapeHtml(title)}</strong>

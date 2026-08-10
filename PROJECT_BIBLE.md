@@ -60,9 +60,9 @@
 
 ## Work Navigation
 
-- The screening strip is a visual index. It should stay lightweight: no explanatory heading unless needed and no duplicate action labels. Cards jump to the matching Featured Work by default. Use `watchLoopTarget: "watch"` only when the user explicitly wants that small card to open the public work page directly.
+- The screening strip is a visual index. It should stay lightweight: no explanatory heading unless needed and no duplicate action labels. Every card jumps to its matching Featured Work; external watch destinations remain inside the large work card or its audited Press entry, never on the small screening card.
 - Works enter the screening strip when they have a public `watchUrl`, an approved local `cardReelUrl`, or an explicitly supported external-only state.
-- Keep one canonical public `watchUrl` per work whenever the small card, Featured Work image, and text CTA should share a destination. Add a separate media URL only when the destinations are intentionally different and that difference is covered by a regression test.
+- Keep one canonical public `watchUrl` per work whenever the Featured Work image, text CTA, or audited Press entry should share an external destination. The small screening card owns only the matching Featured anchor. Add a separate media URL only when the large-card destinations are intentionally different and that difference is covered by a regression test.
 - Use `cardReelUrl` only for a silent, work-specific moving thumbnail, `cardReelPoster` for its static fallback, and `cardReelMode: "after-hold"` for explicit motion approval. A reel URL without the approved mode fails closed to the static poster. Approved reels begin only after the shared poster hold, play only while visible, and reset to the poster when they leave view. Cloned loop cards use `preload="none"`, and reduced-motion or no-JavaScript states remain usable as static cards.
 - Keep each work-specific reel separate. Do not combine unrelated credits or program identities inside one thumbnail. The retained `showreel/interior-pts-reel/` assembly is an editorial spine for a future homepage showreel, not a source for either work card.
 - Featured Works carries detail. The strip should preview; Featured Works should explain.

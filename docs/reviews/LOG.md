@@ -4,6 +4,15 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-11 — Screening Strip navigation repair
+- Branch/base: local-only `codex/screening-strip-navigation` from `cad590e`; Production/`origin/main` stays `eb444a6`; no push, Preview, deploy, alias, Contact, `main`, or tag action.
+- Root cause: Tech Dreamers alone carried `watchLoopTarget: "watch"`; the shared renderer and old tests turned that data exception into an external small-card action.
+- Fix: the common card renderer now always derives `#<featured-slug>`; the source field is removed and retired/stripped by normalization, with no visual or media change.
+- Preservation: the large Tech Dreamers media action and audited Official page still use the same TaiwanPlus URL; English/Chinese generated output differs only at the small-card anchor line.
+- TDD/validation: five expected RED assertions, focused 62/62, full 156/156, build, design audit, Figma/no-diff, reel integrity, privacy, protected hash, and diff pass.
+- Browser: desktop pointer, mobile touch, and mobile no-JS keyboard pass; `#tech-dreamers` is visible, no new window, no errors, zero Contact POST, and two official external links retained.
+- Review/open: Gemini requested/observed/completed `gemini-3.6-flash`, PASS/no P0/P1/P2; producer reviews the local handoff before any external action.
+
 ## 2026-08-10 — Featured Reel mobile performance Option B
 - Branch/base: local-only `codex/featured-reel-mobile-performance` from `bb08d51`; Production/`origin/main` stays `eb444a6`; no push, Preview, deploy, alias, Contact, `main`, or tag action.
 - Delivery: one canonical recipe derives six verified 960×540 H.264 mobile reels (16,708,502 bytes vs 60,135,762; -72.2%) and retains 720p fallback; two prepares are hash-identical.

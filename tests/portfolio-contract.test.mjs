@@ -743,9 +743,11 @@ test("field classes and allowed presentation variants are explicit", () => {
   ]);
   assert.ok(FIELD_CLASSIFICATION.featured.requiredRendered.includes("presentation"));
   assert.ok(FIELD_CLASSIFICATION.featured.evidenceOnly.includes("sourceNote"));
+  assert.equal(FIELD_CLASSIFICATION.featured.optionalRendered.includes("watchLoopTarget"), false);
   assert.deepEqual(FIELD_CLASSIFICATION.featured.retired, [
     "hideMediaLabel",
     "featuredMediaAspect",
+    "watchLoopTarget",
   ]);
   assert.ok(FIELD_CLASSIFICATION.archive.evidenceOnly.includes("metrics"));
 });
@@ -772,6 +774,7 @@ test("Featured source records declare approved variants without legacy inference
     }, work.slug);
     assert.equal(Object.hasOwn(work, "hideMediaLabel"), false, work.slug);
     assert.equal(Object.hasOwn(work, "featuredMediaAspect"), false, work.slug);
+    assert.equal(Object.hasOwn(work, "watchLoopTarget"), false, work.slug);
   }
 });
 

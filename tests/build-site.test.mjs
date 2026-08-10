@@ -190,7 +190,7 @@ test("loadWorks returns ordered bilingual portfolio works", () => {
     works[1].posterImage,
     "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
   );
-  assert.equal(works[1].watchLoopTarget, "watch");
+  assert.equal(Object.hasOwn(works[1], "watchLoopTarget"), false);
   assert.equal(Object.hasOwn(works[1], "mediaWatchUrl"), false);
   const techOfficialEntry = works[1].press[0];
   assert.deepEqual(techOfficialEntry.type, { en: "Official page", zh: "官方頁面" });
@@ -462,6 +462,23 @@ test("screening strip stays static while approved reels render in featured panel
     html,
     /<article class="work-panel work-panel-wide-media" id="pts-taigi-bus">[\s\S]*?class="media-frame media-frame-wide media-frame-unlabeled media-frame-link"[\s\S]*?data-featured-reel-video[\s\S]*?src="\/assets\/showreel\/nothing-by-bus-card-reel\.mp4"/,
   );
+});
+
+test("every screening-strip card navigates to its matching Featured panel", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const html = renderPage({ lang: "en", site, works });
+  const links = [...html.matchAll(
+    /<a class="watch-loop-card(?: watch-loop-card-plain)?" href="([^"]+)"([^>]*)>/g,
+  )];
+
+  assert.deepEqual(
+    links.map(([, href]) => href),
+    works.map((work) => `#${work.slug}`),
+  );
+  for (const [, , attributes] of links) {
+    assert.doesNotMatch(attributes, /target=|rel=/);
+  }
 });
 
 test("all approved Featured reels hold their existing poster before muted playback", () => {
@@ -1267,14 +1284,11 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   );
   assert.ok(
     html.indexOf('href="#slow-steps"') <
-      html.indexOf(
-        'href="https://www.taiwanplus.com/shows/documentary/business-and-tech/590/tech-dreamers"',
-      ),
+      html.indexOf('href="#tech-dreamers"'),
   );
-  assert.doesNotMatch(html, /href="#tech-dreamers"/);
   assert.match(
     html,
-    /class="watch-loop-card" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers" target="_blank" rel="noreferrer"/,
+    /class="watch-loop-card" href="#tech-dreamers"/,
   );
   assert.match(html, /href="#my-art-my-voice"/);
   assert.doesNotMatch(html, /View in featured works/);

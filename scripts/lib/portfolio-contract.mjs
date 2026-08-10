@@ -58,7 +58,7 @@ export const FIELD_CLASSIFICATION = Object.freeze({
       "accent", ...FEATURED_REEL_PUBLIC_FIELDS,
       "figmaPosterImage", "metrics", "metricsContext", "posterAlt", "posterFit",
       "posterImage", "press", "showWatchCta", "statusLabel", "tags",
-      "videoEmbedUrl", "watchLabel", "watchLoopTarget", "watchMode", "watchUrl",
+      "videoEmbedUrl", "watchLabel", "watchMode", "watchUrl",
       "mediaWatchUrl", "mediaTitleLines",
     ]),
     evidenceOnly: Object.freeze([
@@ -67,7 +67,7 @@ export const FIELD_CLASSIFICATION = Object.freeze({
       "posterFocalPoint", "posterRightsStatus", "posterSourceSha256",
       "posterSourceTimecode", "posterSourceUrl", "posterVariant", "sourceNote",
     ]),
-    retired: Object.freeze(["hideMediaLabel", "featuredMediaAspect"]),
+    retired: Object.freeze(["hideMediaLabel", "featuredMediaAspect", "watchLoopTarget"]),
   }),
   archive: Object.freeze({
     requiredRendered: Object.freeze(["slug", "order", "year", "title", "role"]),
@@ -633,6 +633,7 @@ export function normalizeFeaturedWork(source) {
   // contract.public directly and the frozen public-output hashes still match.
   delete normalized.hideMediaLabel;
   delete normalized.featuredMediaAspect;
+  delete normalized.watchLoopTarget;
   normalized.hideMediaLabel = presentation.siteTitleOverlay === "none";
   if (presentation.desktopMediaVariant === "centered-16x9") {
     normalized.featuredMediaAspect = "16:9";

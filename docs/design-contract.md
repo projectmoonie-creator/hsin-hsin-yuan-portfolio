@@ -106,14 +106,14 @@ Purpose: a lightweight visual index, not a duplicate case study.
 | Class | Fields |
 | --- | --- |
 | Required rendered | canonical work target, platform/year, title, role, tagline, static poster or explicit supported fallback |
-| Optional rendered | approved direct public destination through `watchLoopTarget: "watch"` |
+| Optional rendered | none; external destinations belong to the matching Featured card |
 | Evidence only | media rights/source/provenance |
 
 - Cards are 16:10 with fixed outer edge fades.
 - The strip contains no moving video.
-- Default action jumps to the matching Featured Work.
-- A direct external action is an explicit exception, never inferred from the
-  presence of a URL.
+- Every card action jumps to the matching Featured Work.
+- External destinations never replace the small card's canonical Featured
+  anchor; they remain available inside the matching large card.
 
 ## Featured Work
 

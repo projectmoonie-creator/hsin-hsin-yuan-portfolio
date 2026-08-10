@@ -1,10 +1,38 @@
 # Portfolio Status
 
-Updated: 2026-08-10
+Updated: 2026-08-11
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Featured Reel Mobile Performance Option B
+## Current Work Package — Screening Strip Navigation Repair
+
+- Local branch `codex/screening-strip-navigation` starts from Featured Reel
+  handoff `cad590e`; formal Production/`origin/main` remains `eb444a6`. No
+  push, Preview, deployment, alias, Contact, `main`, or tag action occurred.
+- Root cause: Tech Dreamers alone declared `watchLoopTarget: "watch"`, and the
+  already-shared `renderWatchLoopItem()` honored it as an external link while
+  existing tests explicitly protected that exception.
+- The source exception and renderer branch are removed. Every small Screening
+  Strip card now derives the same `#<featured-slug>` target from the shared
+  component; `watchLoopTarget` is retired and stripped during normalization.
+- Tech Dreamers still owns the same canonical TaiwanPlus `watchUrl`. Its large
+  Featured media action and audited Official page remain external; copy,
+  visuals, media, reel lifecycle, CSS, Figma geometry, and Contact are unchanged.
+- TDD reproduced five expected contract/render failures, then focused suites
+  passed 62/62. Full `npm test` passes 156/156 plus build, design audit, Figma
+  export/no-diff, mobile reel integrity, privacy, and `git diff --check`.
+- Generated English and Chinese HTML each change exactly one line: the Tech
+  Dreamers small-card href becomes `#tech-dreamers` and loses small-card
+  `target`/`rel`; no other generated-page difference exists.
+- Browser QA passes English desktop pointer, Chinese 390×844 touch, and English
+  360×800 no-JavaScript keyboard. All six hrefs are internal, Tech Dreamers is
+  visible after activation, new windows and Contact POSTs are zero, and both
+  intended large-card external links remain.
+- Independent review requested/observed/completed `gemini-3.6-flash`: `PASS`,
+  no P0/P1/P2. Exact next action: producer inspects this local handoff; any
+  Preview, push, integration, or deployment requires a separate decision.
+
+## Prior Open Work Package — Featured Reel Mobile Performance Option B
 
 - Local-only branch `codex/featured-reel-mobile-performance` starts at reviewed
   decision head `bb08d51`; formal Production/`origin/main` remains `eb444a6`.

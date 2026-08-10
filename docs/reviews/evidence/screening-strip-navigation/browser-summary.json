@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "case": "en-desktop-pointer",
+      "language": "en",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "javaScript": true,
+      "activation": "pointer",
+      "screeningHrefs": [
+        "#slow-steps",
+        "#tech-dreamers",
+        "#my-art-my-voice",
+        "#interior-spatial-brand-films",
+        "#pts-taigi-bus",
+        "#top-gear-china-uk-special"
+      ],
+      "finalUrl": "http://127.0.0.1:4173/en/#tech-dreamers",
+      "targetVisible": true,
+      "newWindowCount": 0,
+      "retainedOfficialLinks": 2,
+      "contactPosts": 0,
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "case": "zh-mobile-touch",
+      "language": "zh",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "javaScript": true,
+      "activation": "pointer",
+      "screeningHrefs": [
+        "#slow-steps",
+        "#tech-dreamers",
+        "#my-art-my-voice",
+        "#interior-spatial-brand-films",
+        "#pts-taigi-bus",
+        "#top-gear-china-uk-special"
+      ],
+      "finalUrl": "http://127.0.0.1:4173/zh/#tech-dreamers",
+      "targetVisible": true,
+      "newWindowCount": 0,
+      "retainedOfficialLinks": 2,
+      "contactPosts": 0,
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "case": "en-mobile-no-js-keyboard",
+      "language": "en",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "javaScript": false,
+      "activation": "keyboard",
+      "screeningHrefs": [
+        "#slow-steps",
+        "#tech-dreamers",
+        "#my-art-my-voice",
+        "#interior-spatial-brand-films",
+        "#pts-taigi-bus",
+        "#top-gear-china-uk-special"
+      ],
+      "finalUrl": "http://127.0.0.1:4173/en/#tech-dreamers",
+      "targetVisible": true,
+      "newWindowCount": 0,
+      "retainedOfficialLinks": 2,
+      "contactPosts": 0,
+      "pageErrors": [],
+      "consoleErrors": []
+    }
+  ]
+}
