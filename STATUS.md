@@ -4,7 +4,31 @@ Updated: 2026-08-12
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Hero Portrait Refresh (Producer-selected F)
+## Current Work Package — Studio Cue Lo-fi Specification
+
+- Hero portrait F is safely closed locally at
+  `f0c2f9cd48bad123dedc78e27820fa6c0987d0bc` on
+  `codex/hero-portrait-refresh`; that commit remains unpushed by explicit
+  boundary. `origin/main` remains `7d76b891240d2a0850b14d4159052ef5bbca3273`.
+- The producer approved the `Studio Cue + Contact tally` direction: a
+  three-beat Hero fade/rise, then a Hero-bounded softbox-light cue, plus one
+  compact tally interaction on the existing header Contact pill.
+- The written lo-fi contract is
+  `docs/superpowers/specs/2026-08-12-studio-cue-light-button-microinteraction-design.md`.
+  It fixes desktop, tablet, mobile, reduced-motion, no-JavaScript, repeat-visit,
+  performance, focus, contrast, retired-fingerprint, timebox, and rollback
+  rules before any interface edit.
+- The package is docs-only. No HTML, CSS, JavaScript, Figma current reference,
+  media, copy, Contact, Preview, Production, alias, Git push, `main`, or tag
+  change is authorized or performed.
+- Docs-only validation passes 177/177 tests and `git diff --check`; the runtime
+  path diff from `f0c2f9c` is empty. The protected untracked document remains
+  byte-safe at its required SHA-256.
+- Exact next action: producer reviews the written specification. Approval
+  permits a bounded implementation plan only; implementation and deployment
+  remain separately gated.
+
+## Prior Local Work Package — Hero Portrait Refresh (Producer-selected F)
 
 - Branch `codex/hero-portrait-refresh` was created from the accepted
   Production-aligned `origin/main` baseline
@@ -35,10 +59,10 @@ State: `PASS_WITH_OPEN_ITEMS`
 - No Preview, Production, alias, Git push, `main`, Contact, light effect, copy,
   or unrelated media change occurred. The protected file remains the only
   protected untracked item at its exact expected hash.
-- Package verdict is `PASS_WITH_OPEN_ITEMS` only for producer visual approval
-  of F in the live composition. Exact next action: inspect the local evidence;
-  create a fresh static `dist/`-only Preview only when the producer asks to see
-  it on a phone. Production and Git integration remain separately gated.
+- Producer-selected F, the implementation, local browser evidence, and
+  independent review are accepted and closed in local commit `f0c2f9c`.
+  Package verdict is `PASS`; no Preview was required for local closeout.
+  Production and Git integration remain separately gated.
 
 ## Prior Accepted Work Package — Production Durability And Portable Vercel Builds
 
@@ -1233,11 +1257,12 @@ SHA-256:
 
 ## Exact Next Action
 
-Producer inspects portrait F in the local responsive Hero evidence. If phone
-inspection is desired, create one fresh static `dist/`-only Preview under the
-standing authorization; do not push Git to obtain it. Production, alias,
-`main`, any Git push, Contact/functions, and destructive Vercel actions remain
-separately gated.
+Producer reviews
+`docs/superpowers/specs/2026-08-12-studio-cue-light-button-microinteraction-design.md`.
+If approved, write a bounded implementation plan; do not implement or deploy
+the Studio Cue until the producer separately authorizes that next step.
+Production, alias, `main`, any Git push, Contact/functions, and destructive
+Vercel actions remain separately gated.
 
 ## Cold Resume
 
@@ -1250,9 +1275,9 @@ separately gated.
    integration records otherwise.
 3. Verify the protected file above remains untracked and matches its exact
    SHA-256 before changing anything.
-4. Resume local branch `codex/hero-portrait-refresh` at base `7d76b891…3273`
-   with the selected-F worktree changes; no Preview or remote ref exists for
-   this package yet.
+4. Resume local branch `codex/hero-portrait-refresh`. Hero F is closed in local
+   commit `f0c2f9c`; the subsequent docs-only Studio Cue package also remains
+   unpushed. No Preview or remote ref exists for either local package.
 5. One fresh static `dist/`-only Preview is standing-authorized after gates
    pass, but this does not authorize any Git push. Every branch push can trigger
    Vercel; `main` pushes are now known to trigger Production automatically.
