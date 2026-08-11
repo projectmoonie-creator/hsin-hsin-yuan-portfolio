@@ -4,15 +4,15 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
-## 2026-08-12 — Studio Cue light/button lo-fi specification
+## 2026-08-12 — Studio Cue light/button specification and plan
 - Branch/baseline: local `codex/hero-portrait-refresh` from Hero F closeout `f0c2f9c`; `origin/main` remains `7d76b89`, and no Git push or external action is authorized.
 - Direction: producer approved `Studio Cue + Contact tally`—three bounded Hero entrance beats, then one delayed Hero-only softbox cue, plus a compact tally state on the existing header Contact pill.
 - Visual preservation: current type, palette, spacing, Hero F crop/slow push, layout, button geometry, bilingual copy, media, and Figma current-reference output remain unchanged.
 - Responsive/fallback: paired desktop/tablet light, one neutral mobile spill, immediate static reduced-motion/no-JS fallback, first-view-only replay rule, and unchanged visible keyboard focus.
 - Safety/validation: zero new request/asset/dependency; opacity/transform only; no global beam, Canvas/WebGL, blur, pointer/scroll tracking, infinite ambient motion, or retired light fingerprint. Docs-only gates pass 177/177 tests and diff checks with an empty runtime-path diff; the protected hash is exact.
-- Contract: `docs/superpowers/specs/2026-08-12-studio-cue-light-button-microinteraction-design.md`; baseline/owned paths, timing, validation, 90-minute implementation timebox, and rollback are explicit.
-- Review/boundary: docs-only proposal awaiting producer written-spec review; external review skipped because it changes no current rule or public output. No implementation, Preview, Production, alias, Contact, `main`, tag, or protected-file action occurred.
-- Exact next: producer reviews the written spec; approval permits a bounded implementation plan only, not implementation or deployment.
+- Contract/plan: the producer's instruction to continue approves `docs/superpowers/specs/2026-08-12-studio-cue-light-button-microinteraction-design.md` for planning only; `docs/superpowers/plans/2026-08-12-studio-cue-light-button-microinteraction.md` locks exact RED→GREEN code, 8-case browser/visual gates, 90-minute timebox, rollback, and static Preview sequence.
+- Review/boundary: docs-only package awaiting plan review and separate implementation authorization; external review skipped because no active interface or public output changed. No implementation, Preview, Production, alias, Contact, `main`, tag, or protected-file action occurred.
+- Exact next: producer reviews the plan and explicitly chooses an execution mode; implementation and deployment remain gated until then.
 
 ## 2026-08-12 — Hero portrait refresh (selected F)
 - Branch/base: local-only `codex/hero-portrait-refresh` from Production-aligned `origin/main` `7d76b891…3273`; no Preview, push, Production, alias, `main`, Contact, or tag action.

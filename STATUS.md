@@ -4,7 +4,7 @@ Updated: 2026-08-12
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Studio Cue Lo-fi Specification
+## Current Work Package — Studio Cue Implementation Plan
 
 - Hero portrait F is safely closed locally at
   `f0c2f9cd48bad123dedc78e27820fa6c0987d0bc` on
@@ -13,20 +13,28 @@ State: `PASS_WITH_OPEN_ITEMS`
 - The producer approved the `Studio Cue + Contact tally` direction: a
   three-beat Hero fade/rise, then a Hero-bounded softbox-light cue, plus one
   compact tally interaction on the existing header Contact pill.
+- The producer's 2026-08-12 instruction to continue approves the written lo-fi
+  specification and advances the package to planning only. It does not
+  authorize interface implementation.
 - The written lo-fi contract is
   `docs/superpowers/specs/2026-08-12-studio-cue-light-button-microinteraction-design.md`.
   It fixes desktop, tablet, mobile, reduced-motion, no-JavaScript, repeat-visit,
   performance, focus, contrast, retired-fingerprint, timebox, and rollback
   rules before any interface edit.
+- The bounded executable plan is
+  `docs/superpowers/plans/2026-08-12-studio-cue-light-button-microinteraction.md`.
+  It locks TDD RED→GREEN, the synchronous fail-open bootstrap, exact CSS
+  choreography, an 8-case Playwright matrix, full gates, local records,
+  rollback, and the final standing-authorized static Preview sequence.
 - The package is docs-only. No HTML, CSS, JavaScript, Figma current reference,
   media, copy, Contact, Preview, Production, alias, Git push, `main`, or tag
   change is authorized or performed.
 - Docs-only validation passes 177/177 tests and `git diff --check`; the runtime
   path diff from `f0c2f9c` is empty. The protected untracked document remains
   byte-safe at its required SHA-256.
-- Exact next action: producer reviews the written specification. Approval
-  permits a bounded implementation plan only; implementation and deployment
-  remain separately gated.
+- Exact next action: producer reviews the implementation plan and separately
+  authorizes one execution mode. Until then, implementation and deployment
+  remain gated.
 
 ## Prior Local Work Package — Hero Portrait Refresh (Producer-selected F)
 
@@ -1258,9 +1266,9 @@ SHA-256:
 ## Exact Next Action
 
 Producer reviews
-`docs/superpowers/specs/2026-08-12-studio-cue-light-button-microinteraction-design.md`.
-If approved, write a bounded implementation plan; do not implement or deploy
-the Studio Cue until the producer separately authorizes that next step.
+`docs/superpowers/plans/2026-08-12-studio-cue-light-button-microinteraction.md`.
+If approved, separately authorize implementation and select the execution
+mode; do not implement or deploy the Studio Cue before that authorization.
 Production, alias, `main`, any Git push, Contact/functions, and destructive
 Vercel actions remain separately gated.
 
@@ -1276,8 +1284,8 @@ Vercel actions remain separately gated.
 3. Verify the protected file above remains untracked and matches its exact
    SHA-256 before changing anything.
 4. Resume local branch `codex/hero-portrait-refresh`. Hero F is closed in local
-   commit `f0c2f9c`; the subsequent docs-only Studio Cue package also remains
-   unpushed. No Preview or remote ref exists for either local package.
+   commit `f0c2f9c`; the subsequent docs-only Studio Cue specification and plan
+   packages also remain unpushed. No Preview or remote ref exists for them.
 5. One fresh static `dist/`-only Preview is standing-authorized after gates
    pass, but this does not authorize any Git push. Every branch push can trigger
    Vercel; `main` pushes are now known to trigger Production automatically.
