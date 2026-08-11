@@ -513,21 +513,44 @@ test("all approved Featured reels hold their existing poster before muted playba
 
   assert.match(
     html,
-    /<article class="work-panel" id="tech-dreamers">[\s\S]*?<a class="media-frame media-frame-unlabeled media-frame-link" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers" target="_blank" rel="noreferrer" aria-label="Play video: Tech Dreamers"[\s\S]*?data-featured-reel-video/,
+    /<article class="work-panel work-panel-wide-media" id="tech-dreamers">[\s\S]*?<a class="media-frame media-frame-wide media-frame-unlabeled media-frame-link" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers" target="_blank" rel="noreferrer" aria-label="Play video: Tech Dreamers"[\s\S]*?data-featured-reel-video/,
   );
   assert.match(
     html,
-    /<article class="work-panel" id="my-art-my-voice">[\s\S]*?<a class="media-frame media-frame-unlabeled media-frame-link" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/arts\/410\/my-art-my-voice\/250220001\/whats-the-vibe-in-taiwan-my-art-my-voice" target="_blank" rel="noreferrer" aria-label="Play video: My Art, My Voice"[\s\S]*?data-featured-reel-video/,
+    /<article class="work-panel work-panel-wide-media" id="my-art-my-voice">[\s\S]*?<a class="media-frame media-frame-wide media-frame-unlabeled media-frame-link" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/arts\/410\/my-art-my-voice\/250220001\/whats-the-vibe-in-taiwan-my-art-my-voice" target="_blank" rel="noreferrer" aria-label="Play video: My Art, My Voice"[\s\S]*?data-featured-reel-video/,
   );
 
   const slowStepsPanel = html.match(
-    /<article class="work-panel" id="slow-steps">([\s\S]*?)<\/article>/,
+    /<article class="work-panel work-panel-wide-media" id="slow-steps">([\s\S]*?)<\/article>/,
   )?.[1] || "";
-  assert.match(slowStepsPanel, /<div class="media-frame media-frame-unlabeled"/);
+  assert.match(slowStepsPanel, /<div class="media-frame media-frame-wide media-frame-unlabeled"/);
   assert.match(slowStepsPanel, /data-featured-reel-video/);
   assert.doesNotMatch(slowStepsPanel, /<a class="media-frame/);
   assert.doesNotMatch(slowStepsPanel, /aria-label="Play video:/);
   assert.doesNotMatch(slowStepsPanel, /class="work-media-play"/);
+});
+
+test("every approved Featured reel uses the shared 16:9 desktop media frame", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const html = renderPage({ lang: "en", site, works });
+  const approved = works.filter(
+    (work) => work.featuredReelMode === "after-hold" && work.featuredReelUrl,
+  );
+
+  assert.equal(approved.length, 6);
+  for (const work of approved) {
+    assert.equal(
+      work.presentation.desktopMediaVariant,
+      "centered-16x9",
+      `${work.slug} must use the canonical desktop 16:9 variant`,
+    );
+    const panel = html.match(
+      new RegExp(`<article class="work-panel work-panel-wide-media" id="${work.slug}">[\\s\\S]*?<\\/article>`),
+    )?.[0] || "";
+    assert.match(panel, /class="media-frame media-frame-wide(?: [^"]*)?"/);
+    assert.match(panel, /data-featured-reel-video/);
+  }
 });
 
 test("wide media semantics apply to embedded work frames", () => {
@@ -1310,19 +1333,19 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /aria-label="Play video: Slow Steps"/);
   assert.match(
     html,
-    /<article class="work-panel" id="slow-steps">[\s\S]*?class="media-frame media-frame-unlabeled" style="background-image:[\s\S]*?slow-steps-poster\.webp[\s\S]*?<\/div>[\s\S]*?<div class="work-copy">/,
+    /<article class="work-panel work-panel-wide-media" id="slow-steps">[\s\S]*?class="media-frame media-frame-wide media-frame-unlabeled" style="background-image:[\s\S]*?slow-steps-poster\.webp[\s\S]*?<\/div>[\s\S]*?<div class="work-copy">/,
   );
   assert.doesNotMatch(
     html,
-    /<article class="work-panel" id="slow-steps">[\s\S]*?<div class="media-label">Slow Steps<\/div>[\s\S]*?<div class="work-copy">/,
+    /<article class="work-panel work-panel-wide-media" id="slow-steps">[\s\S]*?<div class="media-label">Slow Steps<\/div>[\s\S]*?<div class="work-copy">/,
   );
   assert.match(
     html,
-    /class="media-frame media-frame-unlabeled media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers"[\s\S]*?aria-label="Play video: Tech Dreamers"[\s\S]*?background-image:[\s\S]*?224be7ed-057b-400f-af63-a8582cd80cfb\.webp/,
+    /class="media-frame media-frame-wide media-frame-unlabeled media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers"[\s\S]*?aria-label="Play video: Tech Dreamers"[\s\S]*?background-image:[\s\S]*?224be7ed-057b-400f-af63-a8582cd80cfb\.webp/,
   );
   assert.match(
     html,
-    /class="media-frame media-frame-unlabeled media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/arts\/410\/my-art-my-voice\/250220001\/whats-the-vibe-in-taiwan-my-art-my-voice"[\s\S]*?aria-label="Play video: My Art, My Voice"/,
+    /class="media-frame media-frame-wide media-frame-unlabeled media-frame-link"[\s\S]*?href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/arts\/410\/my-art-my-voice\/250220001\/whats-the-vibe-in-taiwan-my-art-my-voice"[\s\S]*?aria-label="Play video: My Art, My Voice"/,
   );
   assert.match(html, /class="work-media-play" aria-hidden="true"><span><\/span><\/span>/);
   assert.match(html, /Design &amp; Brand Films/);
@@ -1347,7 +1370,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.doesNotMatch(html, /Oriental Satellite TV/);
   assert.doesNotMatch(
     html,
-    /<article class="work-panel" id="top-gear-china-uk-special">[\s\S]*?<div class="media-label/,
+    /<article class="work-panel work-panel-wide-media" id="top-gear-china-uk-special">[\s\S]*?<div class="media-label/,
   );
   assert.doesNotMatch(html, /<span>Top Gear<\/span><span>China: UK<\/span><span>Special<\/span>/);
   assert.doesNotMatch(html, />car show</i);
@@ -1486,13 +1509,13 @@ test("Tech Dreamers repeats its canonical TaiwanPlus destination as an audited o
   const en = renderPage({ lang: "en", site, works });
   const zh = renderPage({ lang: "zh", site, works });
   const techPanel = en.match(
-    /<article class="work-panel" id="tech-dreamers">[\s\S]*?<\/article>/,
+    /<article class="work-panel work-panel-wide-media" id="tech-dreamers">[\s\S]*?<\/article>/,
   )?.[0];
   const techOfficialCard = techPanel?.match(
     /<a class="press-preview-card" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers"[^>]*data-metadata-checked-at="2026-08-03"[^>]*>[\s\S]*?Official program page[\s\S]*?<\/a>/,
   )?.[0];
   const techPanelZh = zh.match(
-    /<article class="work-panel" id="tech-dreamers">[\s\S]*?<\/article>/,
+    /<article class="work-panel work-panel-wide-media" id="tech-dreamers">[\s\S]*?<\/article>/,
   )?.[0];
   const techOfficialCardZh = techPanelZh?.match(
     /<a class="press-preview-card" href="https:\/\/www\.taiwanplus\.com\/shows\/documentary\/business-and-tech\/590\/tech-dreamers"[^>]*>[\s\S]*?官方頁面[\s\S]*?<\/a>/,

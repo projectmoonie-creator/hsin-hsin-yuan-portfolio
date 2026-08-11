@@ -755,12 +755,12 @@ test("field classes and allowed presentation variants are explicit", () => {
 test("Featured source records declare approved variants without legacy inference fields", () => {
   const works = readWorkSources();
   const expected = new Map([
-    ["slow-steps", ["fill-card", "absent"]],
-    ["tech-dreamers", ["fill-card", "present"]],
-    ["my-art-my-voice", ["fill-card", "present"]],
+    ["slow-steps", ["centered-16x9", "absent"]],
+    ["tech-dreamers", ["centered-16x9", "present"]],
+    ["my-art-my-voice", ["centered-16x9", "present"]],
     ["interior-spatial-brand-films", ["centered-16x9", "absent"]],
     ["pts-taigi-bus", ["centered-16x9", "present"]],
-    ["top-gear-china-uk-special", ["fill-card", "present"]],
+    ["top-gear-china-uk-special", ["centered-16x9", "present"]],
   ]);
 
   assert.equal(works.length, expected.size);

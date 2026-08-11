@@ -139,18 +139,20 @@ One public anatomy is used in this order:
 
 | Variant | Works | Wider-screen behavior |
 | --- | --- | --- |
-| `fill-card` | Slow Steps; Tech Dreamers; My Art, My Voice; Top Gear China: UK Special | Media fills the approved Featured card media area. |
-| `centered-16x9` | Design & Brand Films; Nothing by Bus | A 16:9 image/reel is vertically centered in its side of the card. |
+| `fill-card` | None currently | Retained as an allowed non-reel presentation variant; media fills the approved Featured card media area. |
+| `centered-16x9` | All six current Featured Works | A 16:9 poster/reel is vertically centered in its side of the card. |
 
-At `820px` and below, every Featured media surface becomes 16:9. The mobile
-rule is invariant; it is not a third per-work exception.
+Every approved Featured reel uses `centered-16x9` on wider screens so poster
+and playback geometry stay identical. At `820px` and below, every Featured
+media surface remains 16:9. The mobile rule is invariant; it is not a third
+per-work exception.
 
 Every work declares:
 
 ```json
 {
   "presentation": {
-    "desktopMediaVariant": "fill-card",
+    "desktopMediaVariant": "centered-16x9",
     "mobileMediaAspect": "16:9",
     "siteTitleOverlay": "none",
     "sourceArtworkTitle": "present"
@@ -328,9 +330,10 @@ Work Press and global Press are different schemas.
 Current-reference exports must use canonical site copy and normalized
 HeroMedia, CollaborationMark, and Featured records. Their map includes global
 Press. They show the current Hero photograph and role treatment, the complete
-collaboration wall, the two named Featured variants, one equal Archive family,
-and the same optional-module rules. Experimental Figma frames must be labeled
-as experiments and cannot be mistaken for the current reference.
+collaboration wall, the current shared Featured 16:9 family and allowed
+presentation variants, one equal Archive family, and the same optional-module
+rules. Experimental Figma frames must be labeled as experiments and cannot be
+mistaken for the current reference.
 
 The hardcoded plugin under `figma/hsin-portfolio-importer/` is a retained
 legacy experiment, not an active current-reference consumer and not a

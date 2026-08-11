@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "provider": "OpenAI Codex CLI",
+  "routingPolicy": "highest-capability-generally-released-at-execution",
+  "requestedModel": "gpt-5.6-sol",
+  "observedModel": "gpt-5.6-sol",
+  "completedModel": "gpt-5.6-sol",
+  "reasoningEffort": "xhigh",
+  "lane": "Codex CLI read-only ephemeral review",
+  "result": "completed",
+  "failureClass": null,
+  "modelRequestSent": true,
+  "prompt": "docs/reviews/evidence/featured-reel-desktop-16x9/review/packet.md",
+  "intendedOutput": "docs/reviews/evidence/featured-reel-desktop-16x9/review/codex.md",
+  "outputPresent": true,
+  "outputSha256": "fa5b9b29bb87830ca52a0e68cce123e780d1212690f49a84e27c355d2058ff19",
+  "usage": null,
+  "note": "The read-only reviewer returned VERDICT: PASS with no BLOCKER, MAJOR, or MINOR findings and confirmed the smallest coherent fix plus sufficient validation."
+}

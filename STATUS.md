@@ -4,7 +4,46 @@ Updated: 2026-08-11
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Archive Reel Intent Playback
+## Current Work Package — Featured Reel Desktop 16:9
+
+- Local branch `codex/featured-reel-16x9` starts from accepted Archive intent
+  handoff `059cc8cc67472aac3c43b9783b1e9c112149a6a7`. Formal
+  Production/`origin/main` remains `eb444a6`, and the closed phase tag remains
+  peeled to `8289389`. No push, Production, alias, Contact, `main`, protected-
+  file, or tag action occurred.
+- Root cause is canonical presentation data, not video encoding: Slow Steps,
+  Tech Dreamers, My Art, My Voice, and Top Gear used `fill-card`, producing a
+  533.75×690.81 (0.7726:1) desktop media surface, while Design & Brand Films
+  and Nothing by Bus already used the shared `centered-16x9` path.
+- The four records now declare the existing `centered-16x9` variant. All six
+  approved Featured poster/reel surfaces therefore use one normalized data →
+  renderer → `media-frame-wide` CSS path with no slug exception or second
+  truth. No renderer, CSS, JavaScript, media, or Figma generator changed.
+- At 1440px, English and Chinese now measure 533.75×300.23 (1.7778:1) for all
+  six media frames while every outer panel remains 1180×720. Direct visual
+  inspection passes all six posters; copy, columns, order, links, and card
+  geometry remain unchanged. Mobile retains its existing 16:9 rule.
+- TDD RED failed on Slow Steps `fill-card`; focused GREEN passes 6/6. Full
+  validation passes 174/174, build, six-reel derivative check, design-contract
+  audit, Figma export with no tracked drift, and `git diff --check`.
+- Local Chromium passes 8/8 English/Chinese desktop/tablet/mobile,
+  reduced-motion/no-JavaScript geometry cases and 9/9 existing interaction
+  regressions. Every media frame is 16:9, poster/video boxes are coextensive,
+  fallback timing is 709.7ms, and there is zero overflow, Contact POST,
+  console error, or page error.
+- Independent Codex review requested/observed/completed `gpt-5.6-sol` at
+  `xhigh`: `PASS`, no BLOCKER/MAJOR/MINOR, smallest coherent fix, validation
+  sufficient. Gemini requested `gemini-3.6-flash` but returned empty
+  candidates; Claude requested dynamic `opus` through the subscription wrapper
+  but exited 90 after preflight. Neither failed lane is represented as
+  completed or as a finding.
+- Local verdict is `PASS_WITH_OPEN_ITEMS`. Exact next action: create the
+  standing-authorized fresh static `dist/`-only Preview after privacy,
+  protected-file, and package-manifest gates, then give the producer a direct
+  phone/desktop inspection link. Production, alias, Contact, push, integration,
+  and real-device closeout remain separately gated.
+
+## Prior Accepted Work Package — Archive Reel Intent Playback
 
 - Local branch `codex/archive-reel-intent-playback` starts from accepted
   Featured handoff `02fee43edb5cdc200483a277b28353301d3de4ff`.

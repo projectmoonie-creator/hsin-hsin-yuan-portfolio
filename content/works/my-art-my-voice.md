@@ -35,7 +35,7 @@
   "featuredReelSourceDimensions": {"width": 1920, "height": 1080},
   "featuredReelRightsStatus": "user-supplied-local-source",
   "presentation": {
-    "desktopMediaVariant": "fill-card",
+    "desktopMediaVariant": "centered-16x9",
     "mobileMediaAspect": "16:9",
     "siteTitleOverlay": "none",
     "sourceArtworkTitle": "present"

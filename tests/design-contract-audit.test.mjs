@@ -43,15 +43,14 @@ test("design contract audit inventories an aligned project without writing", () 
   assert.equal(report.fieldInventory.featured.focalPoint, undefined);
   assert.equal(report.fieldInventory.featured.posterFocalPoint, 3);
   assert.deepEqual(report.variants.featured, {
-    "fill-card": [
+    "fill-card": [],
+    "centered-16x9": [
       "slow-steps",
       "tech-dreamers",
       "my-art-my-voice",
-      "top-gear-china-uk-special",
-    ],
-    "centered-16x9": [
       "interior-spatial-brand-films",
       "pts-taigi-bus",
+      "top-gear-china-uk-special",
     ],
     source: "explicit",
   });
