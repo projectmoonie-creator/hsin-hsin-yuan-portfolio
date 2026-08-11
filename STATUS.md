@@ -10,7 +10,8 @@ State: `PASS_WITH_OPEN_ITEMS`
   handoff `059cc8cc67472aac3c43b9783b1e9c112149a6a7`. Formal
   Production/`origin/main` remains `eb444a6`, and the closed phase tag remains
   peeled to `8289389`. No push, Production, alias, Contact, `main`, protected-
-  file, or tag action occurred.
+  file, or tag action occurred. Local implementation/review handoff is
+  `09c1d78`.
 - Root cause is canonical presentation data, not video encoding: Slow Steps,
   Tech Dreamers, My Art, My Voice, and Top Gear used `fill-card`, producing a
   533.75×690.81 (0.7726:1) desktop media surface, while Design & Brand Films
@@ -37,11 +38,26 @@ State: `PASS_WITH_OPEN_ITEMS`
   candidates; Claude requested dynamic `opus` through the subscription wrapper
   but exited 90 after preflight. Neither failed lane is represented as
   completed or as a finding.
-- Local verdict is `PASS_WITH_OPEN_ITEMS`. Exact next action: create the
-  standing-authorized fresh static `dist/`-only Preview after privacy,
-  protected-file, and package-manifest gates, then give the producer a direct
-  phone/desktop inspection link. Production, alias, Contact, push, integration,
-  and real-device closeout remain separately gated.
+- Standing-authorized Preview `dpl_7LpcyJSqLfM1QmbFNh2H9rHoi8jC`
+  independently reads `Ready`, target `preview`, at the protected deployment
+  origin `https://hsin-hsin-yuan-portfolio-j1aqc6zk4.vercel.app`. The fresh
+  static `dist/`-only package contains 61 public files / 96,949,164 bytes; its
+  sorted path-list SHA-256 is
+  `75b92a3e9c33a1884da282f0a5235f358d5acce16f59445c13b4b525df981533`.
+  It contains no source, tests, reviews, environment files, Contact function,
+  or protected document and was not fetched after deployment.
+- Vercel's authoritative Share control reads `Anyone with the link can view
+  and comment`; visitors must log in only to comment. The access-bearing URL
+  stays outside Git at SHA-256
+  `4df9dc34110193a4a51638f37ac224ab7c8abefdaa378a9d4ade0676f3e88a81`.
+  Creating it revoked the prior Archive Preview share link under the Hobby
+  account's one-link limit.
+- Local verdict is `PASS_WITH_OPEN_ITEMS`. Exact next action: producer opens
+  the delivered Shareable Link on desktop and phone and confirms all six large
+  Featured poster/reel surfaces are 16:9 while panel geometry, crops, playback,
+  taps, scrolling, and destination behavior remain acceptable. Production,
+  alias, Contact, push, integration, and real-device closeout remain separately
+  gated.
 
 ## Prior Accepted Work Package — Archive Reel Intent Playback
 

@@ -15,7 +15,7 @@ this packet.
 
 ## Repository and frozen target
 
-- Repository: `/Users/hsin-hsinyuan/Documents/Claude/Projects/Moonie V/hsin-hsin-yuan-portfolio-remove-lights`
+- Repository: current portfolio repository root
 - Branch: `codex/featured-reel-16x9`
 - Base HEAD: `059cc8cc67472aac3c43b9783b1e9c112149a6a7`
 - Review the current unstaged tracked diff plus the new design spec.

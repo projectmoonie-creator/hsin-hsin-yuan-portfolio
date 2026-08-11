@@ -13,5 +13,11 @@ Local verdict: `PASS_WITH_OPEN_ITEMS`.
 - No reviewer edit was applied. Local TDD, full validation, geometry probes,
   interaction regression, and visual inspection remain passing. The completed
   independent review resolves the reviewer gate.
+- After review, the privacy regression test found the packet's local repository
+  absolute path. That one metadata line was replaced by a repo-relative label;
+  packet SHA-256 changed from `d1089520…c24e` to `14120d7f…978e`, with no
+  technical scope, diff, evidence, or validation claim changed. The reviewed
+  hash and current hash remain explicit rather than misrepresenting an exact
+  cryptographic match.
 - The standing-authorized static Preview may be used for producer inspection;
   real-device visual acceptance remains the only package closeout item.

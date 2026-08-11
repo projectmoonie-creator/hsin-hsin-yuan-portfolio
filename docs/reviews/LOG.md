@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-11 — Featured Reel desktop 16:9
+- Branch/base/commit: `codex/featured-reel-16x9` from accepted `059cc8c`; implementation/review handoff `09c1d78`; Production/`origin/main` stays `eb444a6`, with no push, Production, alias, Contact, `main`, or tag action.
+- Root/fix: four canonical records used `fill-card`; all six approved Featured reels now share `centered-16x9` through the existing normalized data → renderer → CSS path, with no slug exception or second truth.
+- Preservation: outer panels remain 1180×720; copy, columns, order, links, interaction/loading behavior, source videos, mobile 16:9, Archive, Figma compact cards, Hero, and Contact are unchanged.
+- Geometry: English/Chinese desktop changes the four tall media surfaces from 533.75×690.81 to 533.75×300.23; all six now measure 1.7778:1, posters/videos are coextensive, and screenshots pass visual inspection.
+- Validation: TDD RED→GREEN, full 174/174, build, six-reel check, design audit, Figma/no tracked drift, privacy/diff, browser geometry 8/8, and existing interactions 9/9 pass with zero Contact POST/error/overflow.
+- Review: Codex requested/observed/completed `gpt-5.6-sol` at `xhigh`, PASS/no findings; Gemini `gemini-3.6-flash` and Claude dynamic `opus` attempts produced no usable result and are not claimed complete.
+- Preview/access: static dist-only 61 files / 96,949,164 bytes / path-list `75b92a3…1533`; `dpl_7Lpcy…i8jC` reads Ready/Preview. Vercel Share reads anyone-with-link view, comment login only; URL stays outside Git at `4df9dc3…8a81`, and the old Archive share is revoked.
+- Open: producer checks all six large Featured surfaces on desktop/phone for 16:9 composition, playback, taps, scroll, and destinations; protected file remains `945d4df9…d28fc`.
+
 ## 2026-08-11 — Archive Reel intent playback
 - Branch/base/commits: `codex/archive-reel-intent-playback` from `02fee43`; spec/plan/RED/implementation/remediation are `486a7f2`/`e4dafff`/`0b6a153`/`e328ea8`/`1042461`; Production/`origin/main` stays `eb444a6`, with no push, Production, alias, Contact, `main`, or tag action.
 - Interaction: the shared intent binder gives all three Archive videos desktop hover/focus and mobile first stationary tap preview; a second linked tap navigates, Mechanic stays unlinked, and >12px movement/pointer cancellation remains scroll.
