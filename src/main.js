@@ -230,10 +230,92 @@ if (!prefersReducedMotion) {
     if (isVisible) startLoop();
   });
 
+  const REEL_TOUCH_MOVE_PX = 12;
+
+  function bindReelIntentSurface({
+    video,
+    surface,
+    hoverTarget,
+    mobileMedia,
+    hasDestination,
+    activate,
+    release,
+    isPreviewing,
+    consumeFailure,
+  }) {
+    let touchGesture = null;
+    let suppressClick = false;
+    let suppressClickTimer = 0;
+
+    function suppressNextClick() {
+      suppressClick = true;
+      if (suppressClickTimer) clearTimeout(suppressClickTimer);
+      suppressClickTimer = setTimeout(() => {
+        suppressClick = false;
+        suppressClickTimer = 0;
+      }, 0);
+    }
+
+    hoverTarget.addEventListener("pointerenter", (event) => {
+      if (mobileMedia.matches || event.pointerType === "touch") return;
+      activate(video);
+    });
+    hoverTarget.addEventListener("pointerleave", (event) => {
+      if (mobileMedia.matches || event.pointerType === "touch") return;
+      release(video);
+    });
+    hoverTarget.addEventListener("focusin", () => activate(video));
+    hoverTarget.addEventListener("focusout", (event) => {
+      if (!hoverTarget.contains(event.relatedTarget)) release(video);
+    });
+
+    surface.addEventListener("pointerdown", (event) => {
+      if (!mobileMedia.matches || event.pointerType !== "touch") return;
+      touchGesture = {
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        moved: false,
+      };
+    });
+    surface.addEventListener("pointermove", (event) => {
+      if (!touchGesture || touchGesture.pointerId !== event.pointerId) return;
+      if (Math.hypot(
+        event.clientX - touchGesture.startX,
+        event.clientY - touchGesture.startY,
+      ) > REEL_TOUCH_MOVE_PX) {
+        touchGesture.moved = true;
+      }
+    });
+    surface.addEventListener("pointerup", (event) => {
+      if (!touchGesture || touchGesture.pointerId !== event.pointerId) return;
+      const gesture = touchGesture;
+      touchGesture = null;
+      if (gesture.moved) {
+        if (hasDestination) suppressNextClick();
+        return;
+      }
+      const hadFailure = consumeFailure();
+      if (hadFailure && hasDestination) return;
+      if (isPreviewing(video)) return;
+      if (activate(video) && hasDestination) suppressNextClick();
+    });
+    surface.addEventListener("pointercancel", () => {
+      if (touchGesture && hasDestination) suppressNextClick();
+      touchGesture = null;
+    });
+    surface.addEventListener("click", (event) => {
+      if (!suppressClick) return;
+      event.preventDefault();
+      suppressClick = false;
+      if (suppressClickTimer) clearTimeout(suppressClickTimer);
+      suppressClickTimer = 0;
+    });
+  }
+
   const FEATURED_REEL_DESKTOP_HOLD_MS = 1400;
   const FEATURED_REEL_MOBILE_HOLD_MS = 700;
   const FEATURED_REEL_WARM_SETTLE_MS = 180;
-  const FEATURED_REEL_TOUCH_MOVE_PX = 12;
   const featuredReelMobileMedia = window.matchMedia("(max-width: 820px)");
   const featuredReelConnection = window.navigator?.connection;
   const featuredReelHeroImage = document.querySelector(".hero-media-image");
@@ -245,10 +327,7 @@ if (!prefersReducedMotion) {
   const featuredReelTimers = new Map();
   const featuredReelActivationGenerations = new WeakMap();
   const featuredReelPlayGenerations = new WeakMap();
-  const featuredReelTouchGestures = new WeakMap();
   const featuredReelIntentFailures = new WeakSet();
-  const featuredReelSuppressedClicks = new WeakSet();
-  const featuredReelSuppressedClickTimers = new WeakMap();
   let activeFeaturedReel = null;
   let explicitFeaturedReel = null;
   let pendingScreeningFeaturedReel = null;
@@ -579,17 +658,6 @@ if (!prefersReducedMotion) {
     scheduleFeaturedReelWarm();
   }
 
-  function suppressNextFeaturedReelClick(mediaFrame) {
-    featuredReelSuppressedClicks.add(mediaFrame);
-    const oldTimer = featuredReelSuppressedClickTimers.get(mediaFrame);
-    if (oldTimer) clearTimeout(oldTimer);
-    const timer = setTimeout(() => {
-      featuredReelSuppressedClicks.delete(mediaFrame);
-      featuredReelSuppressedClickTimers.delete(mediaFrame);
-    }, 0);
-    featuredReelSuppressedClickTimers.set(mediaFrame, timer);
-  }
-
   function getScreeningFeaturedReel(event) {
     const card = event.target?.closest?.('.watch-loop-card[href^="#"]');
     const href = card?.getAttribute("href") || "";
@@ -633,69 +701,22 @@ if (!prefersReducedMotion) {
     const mediaFrame = video.closest(".media-frame");
     if (!panel || !mediaFrame) return;
 
-    panel.addEventListener("pointerenter", (event) => {
-      if (featuredReelMobileMedia.matches || event.pointerType === "touch") return;
-      activateFeaturedReelIntent(video);
-    });
-    panel.addEventListener("pointerleave", (event) => {
-      if (featuredReelMobileMedia.matches || event.pointerType === "touch") return;
-      releaseFeaturedReelIntent(video);
-    });
-    panel.addEventListener("focusin", () => activateFeaturedReelIntent(video));
-    panel.addEventListener("focusout", (event) => {
-      if (!panel.contains(event.relatedTarget)) releaseFeaturedReelIntent(video);
-    });
-
-    mediaFrame.addEventListener("pointerdown", (event) => {
-      if (!featuredReelMobileMedia.matches || event.pointerType !== "touch") return;
-      featuredReelTouchGestures.set(mediaFrame, {
-        pointerId: event.pointerId,
-        startX: event.clientX,
-        startY: event.clientY,
-        moved: false,
-      });
-    });
-    mediaFrame.addEventListener("pointermove", (event) => {
-      const gesture = featuredReelTouchGestures.get(mediaFrame);
-      if (!gesture || gesture.pointerId !== event.pointerId) return;
-      if (Math.hypot(event.clientX - gesture.startX, event.clientY - gesture.startY)
-        > FEATURED_REEL_TOUCH_MOVE_PX) {
-        gesture.moved = true;
-      }
-    });
-    mediaFrame.addEventListener("pointerup", (event) => {
-      const gesture = featuredReelTouchGestures.get(mediaFrame);
-      if (!gesture || gesture.pointerId !== event.pointerId) return;
-      featuredReelTouchGestures.delete(mediaFrame);
-      if (gesture.moved) {
-        if (mediaFrame.matches(".media-frame-link")) {
-          suppressNextFeaturedReelClick(mediaFrame);
-        }
-        return;
-      }
-      if (featuredReelIntentFailures.has(video)) {
+    bindReelIntentSurface({
+      video,
+      surface: mediaFrame,
+      hoverTarget: panel,
+      mobileMedia: featuredReelMobileMedia,
+      hasDestination: mediaFrame.matches(".media-frame-link"),
+      activate: activateFeaturedReelIntent,
+      release: releaseFeaturedReelIntent,
+      isPreviewing: (candidate) => explicitFeaturedReel === candidate
+        || candidate.classList.contains("is-playing")
+        || !candidate.paused,
+      consumeFailure: () => {
+        if (!featuredReelIntentFailures.has(video)) return false;
         featuredReelIntentFailures.delete(video);
-        return;
-      }
-      const alreadyPreviewing = explicitFeaturedReel === video
-        || video.classList.contains("is-playing")
-        || !video.paused;
-      if (alreadyPreviewing) return;
-      activateFeaturedReelIntent(video);
-      if (mediaFrame.matches(".media-frame-link")) {
-        suppressNextFeaturedReelClick(mediaFrame);
-      }
-    });
-    mediaFrame.addEventListener("pointercancel", () => {
-      featuredReelTouchGestures.delete(mediaFrame);
-    });
-    mediaFrame.addEventListener("click", (event) => {
-      if (!featuredReelSuppressedClicks.has(mediaFrame)) return;
-      event.preventDefault();
-      featuredReelSuppressedClicks.delete(mediaFrame);
-      const timer = featuredReelSuppressedClickTimers.get(mediaFrame);
-      if (timer) clearTimeout(timer);
-      featuredReelSuppressedClickTimers.delete(mediaFrame);
+        return true;
+      },
     });
   }
 
@@ -763,11 +784,47 @@ if (!prefersReducedMotion) {
   window.addEventListener("pageshow", handleFeaturedReelPageShow);
 
   const ARCHIVE_REEL_HOLD_MS = 1400;
+  const archiveReelMobileMedia = window.matchMedia("(max-width: 820px)");
   const archiveReelVideos = Array.from(
     document.querySelectorAll("[data-archive-reel-video]"),
   );
   const visibleArchiveReels = new Set();
   const archiveReelTimers = new Map();
+  const archiveReelActivationGenerations = new WeakMap();
+  const archiveReelPlayGenerations = new WeakMap();
+  const archiveReelIntentFailures = new WeakSet();
+  let activeArchiveReel = null;
+  let explicitArchiveReel = null;
+  let archiveReelLifecycleBound = false;
+  let archiveReelViewportFrame = 0;
+
+  function getArchiveReelGeneration(video) {
+    return archiveReelActivationGenerations.get(video) || 0;
+  }
+
+  function invalidateArchiveReelGeneration(video) {
+    const generation = getArchiveReelGeneration(video) + 1;
+    archiveReelActivationGenerations.set(video, generation);
+    archiveReelPlayGenerations.delete(video);
+    return generation;
+  }
+
+  function isArchiveReelInViewport(video) {
+    const rect = video.getBoundingClientRect();
+    return rect.bottom > 0
+      && rect.right > 0
+      && rect.top < window.innerHeight
+      && rect.left < window.innerWidth;
+  }
+
+  function isCurrentArchiveReelActivation(video, generation) {
+    return getArchiveReelGeneration(video) === generation
+      && activeArchiveReel === video
+      && (explicitArchiveReel === video
+        ? isArchiveReelInViewport(video)
+        : visibleArchiveReels.has(video))
+      && document.visibilityState === "visible";
+  }
 
   function clearArchiveReelTimer(video) {
     const timer = archiveReelTimers.get(video);
@@ -775,8 +832,22 @@ if (!prefersReducedMotion) {
     archiveReelTimers.delete(video);
   }
 
+  function restoreArchiveReelPreload(video) {
+    if (video.preload === "none") return;
+    video.preload = "none";
+    if (video.paused) video.load();
+  }
+
+  function primeArchiveReel(video) {
+    if (!video?.paused || video.preload === "metadata") return;
+    video.preload = "metadata";
+    video.load();
+  }
+
   function resetArchiveReel(video) {
     clearArchiveReelTimer(video);
+    invalidateArchiveReelGeneration(video);
+    if (explicitArchiveReel === video) explicitArchiveReel = null;
     video.classList.remove("is-playing");
     video.pause();
     try {
@@ -784,35 +855,87 @@ if (!prefersReducedMotion) {
     } catch {
       // The poster remains visible if media metadata is not ready.
     }
+    restoreArchiveReelPreload(video);
   }
 
-  function playArchiveReel(video) {
+  function playArchiveReel(video, generation) {
     clearArchiveReelTimer(video);
-    if (document.visibilityState !== "visible") {
-      resetArchiveReel(video);
-      return;
-    }
+    if (!isCurrentArchiveReelActivation(video, generation) || !video.paused) return;
+    archiveReelPlayGenerations.set(video, generation);
     video.muted = true;
-    video.play().catch(() => resetArchiveReel(video));
+    video.play().catch(() => {
+      if (isCurrentArchiveReelActivation(video, generation)
+        && archiveReelPlayGenerations.get(video) === generation) {
+        if (explicitArchiveReel === video) archiveReelIntentFailures.add(video);
+        activeArchiveReel = null;
+        resetArchiveReel(video);
+      }
+    });
   }
 
   function scheduleArchiveReel(video) {
     if (archiveReelTimers.has(video) || !video.paused) return;
-    if (document.visibilityState !== "visible") {
+    if (activeArchiveReel !== video
+      || !visibleArchiveReels.has(video)
+      || document.visibilityState !== "visible") {
       resetArchiveReel(video);
       return;
     }
-    const timer = setTimeout(() => playArchiveReel(video), ARCHIVE_REEL_HOLD_MS);
+    const generation = invalidateArchiveReelGeneration(video);
+    const timer = setTimeout(() => {
+      archiveReelTimers.delete(video);
+      playArchiveReel(video, generation);
+    }, ARCHIVE_REEL_HOLD_MS);
     archiveReelTimers.set(video, timer);
   }
 
+  function activateArchiveReelIntent(video) {
+    if (!video
+      || !video.paused
+      || !isArchiveReelInViewport(video)
+      || document.visibilityState !== "visible") return false;
+    archiveReelIntentFailures.delete(video);
+    explicitArchiveReel = video;
+    activeArchiveReel = video;
+    archiveReelVideos.forEach((candidate) => {
+      if (candidate !== video) resetArchiveReel(candidate);
+    });
+    clearArchiveReelTimer(video);
+    primeArchiveReel(video);
+    const generation = invalidateArchiveReelGeneration(video);
+    playArchiveReel(video, generation);
+    return true;
+  }
+
+  function releaseArchiveReelIntent(video) {
+    if (explicitArchiveReel !== video) return;
+    explicitArchiveReel = null;
+    activeArchiveReel = null;
+    resetArchiveReel(video);
+    syncActiveArchiveReel();
+  }
+
   archiveReelVideos.forEach((video) => {
-    video.addEventListener("playing", () => video.classList.add("is-playing"));
-    video.addEventListener("error", () => resetArchiveReel(video));
+    video.addEventListener("playing", () => {
+      const generation = archiveReelPlayGenerations.get(video);
+      if (generation != null
+        && isCurrentArchiveReelActivation(video, generation)
+        && !video.paused) {
+        video.classList.add("is-playing");
+      }
+    });
+    video.addEventListener("error", () => {
+      if (explicitArchiveReel === video) archiveReelIntentFailures.add(video);
+      activeArchiveReel = null;
+      resetArchiveReel(video);
+    });
   });
 
   function syncActiveArchiveReel() {
-    const activeArchiveReel = selectClosestVisibleReel(
+    if (explicitArchiveReel && !isArchiveReelInViewport(explicitArchiveReel)) {
+      explicitArchiveReel = null;
+    }
+    activeArchiveReel = explicitArchiveReel || selectClosestVisibleReel(
       archiveReelVideos,
       visibleArchiveReels,
       { width: window.innerWidth, height: window.innerHeight },
@@ -820,7 +943,11 @@ if (!prefersReducedMotion) {
 
     archiveReelVideos.forEach((video) => {
       if (video === activeArchiveReel) {
-        scheduleArchiveReel(video);
+        if (video === explicitArchiveReel) {
+          if (video.paused) activateArchiveReelIntent(video);
+        } else {
+          scheduleArchiveReel(video);
+        }
       } else {
         resetArchiveReel(video);
       }
@@ -844,9 +971,6 @@ if (!prefersReducedMotion) {
         )
       : null;
 
-  archiveReelVideos.forEach((video) => archiveReelObserver?.observe(video));
-
-  let archiveReelViewportFrame = 0;
   function handleArchiveReelViewportChange() {
     if (archiveReelViewportFrame) return;
     archiveReelViewportFrame = window.requestAnimationFrame(() => {
@@ -855,28 +979,92 @@ if (!prefersReducedMotion) {
     });
   }
 
-  window.addEventListener("scroll", handleArchiveReelViewportChange, { passive: true });
-  window.addEventListener("resize", handleArchiveReelViewportChange);
-
   function handleArchiveReelVisibility() {
     if (document.visibilityState !== "visible") {
+      activeArchiveReel = null;
+      explicitArchiveReel = null;
       archiveReelVideos.forEach(resetArchiveReel);
     } else {
       syncActiveArchiveReel();
     }
   }
 
-  document.addEventListener("visibilitychange", handleArchiveReelVisibility);
-  window.addEventListener("pagehide", () => {
+  function handleArchiveReelModeChange() {
+    activeArchiveReel = null;
+    explicitArchiveReel = null;
+    archiveReelVideos.forEach(resetArchiveReel);
+    syncActiveArchiveReel();
+  }
+
+  function bindArchiveReelIntent(video) {
+    const card = video.closest(".archive-card");
+    const media = video.closest(".archive-card-media");
+    if (!card || !media) return;
+
+    bindReelIntentSurface({
+      video,
+      surface: media,
+      hoverTarget: card,
+      mobileMedia: archiveReelMobileMedia,
+      hasDestination: Boolean(media.closest("a[href]")),
+      activate: activateArchiveReelIntent,
+      release: releaseArchiveReelIntent,
+      isPreviewing: (candidate) => explicitArchiveReel === candidate
+        || candidate.classList.contains("is-playing")
+        || !candidate.paused,
+      consumeFailure: () => {
+        if (!archiveReelIntentFailures.has(video)) return false;
+        archiveReelIntentFailures.delete(video);
+        return true;
+      },
+    });
+  }
+
+  function bindArchiveReelLifecycle() {
+    if (!archiveReelVideos.length || archiveReelLifecycleBound) return;
+    archiveReelLifecycleBound = true;
+    document.addEventListener("visibilitychange", handleArchiveReelVisibility);
+    window.addEventListener("scroll", handleArchiveReelViewportChange, { passive: true });
+    window.addEventListener("resize", handleArchiveReelViewportChange);
+    archiveReelMobileMedia.addEventListener?.("change", handleArchiveReelModeChange);
+    archiveReelVideos.forEach((video) => archiveReelObserver?.observe(video));
+  }
+
+  function suspendArchiveReelLifecycle() {
     visibleArchiveReels.clear();
+    activeArchiveReel = null;
+    explicitArchiveReel = null;
     archiveReelVideos.forEach(resetArchiveReel);
     archiveReelObserver?.disconnect();
     if (archiveReelViewportFrame) window.cancelAnimationFrame(archiveReelViewportFrame);
     archiveReelViewportFrame = 0;
-    window.removeEventListener("scroll", handleArchiveReelViewportChange);
-    window.removeEventListener("resize", handleArchiveReelViewportChange);
-    document.removeEventListener("visibilitychange", handleArchiveReelVisibility);
-  });
+    if (archiveReelLifecycleBound) {
+      window.removeEventListener("scroll", handleArchiveReelViewportChange);
+      window.removeEventListener("resize", handleArchiveReelViewportChange);
+      document.removeEventListener("visibilitychange", handleArchiveReelVisibility);
+      archiveReelMobileMedia.removeEventListener?.("change", handleArchiveReelModeChange);
+      archiveReelLifecycleBound = false;
+    }
+  }
+
+  function handleArchiveReelPageShow(event) {
+    if (event.persisted) bindArchiveReelLifecycle();
+  }
+
+  function handleArchiveReelPageHide(event) {
+    suspendArchiveReelLifecycle();
+    if (!event.persisted) {
+      window.removeEventListener("pagehide", handleArchiveReelPageHide);
+      window.removeEventListener("pageshow", handleArchiveReelPageShow);
+    }
+  }
+
+  if (archiveReelVideos.length) {
+    archiveReelVideos.forEach(bindArchiveReelIntent);
+    bindArchiveReelLifecycle();
+    window.addEventListener("pagehide", handleArchiveReelPageHide);
+    window.addEventListener("pageshow", handleArchiveReelPageShow);
+  }
 }
 
 document.querySelectorAll("[data-contact-form]").forEach((form) => {

@@ -1111,8 +1111,13 @@ test("archive reels wait on the poster and reset when playback is no longer allo
   assert.match(mainSource, /archiveReelTimers = new Map\(\)/);
   assert.match(
     mainSource,
-    /setTimeout\(\(\) => playArchiveReel\(video\), ARCHIVE_REEL_HOLD_MS\)/,
+    /const timer = setTimeout\(\(\) => \{[\s\S]*?playArchiveReel\(video, generation\);[\s\S]*?\}, ARCHIVE_REEL_HOLD_MS\)/,
   );
+  assert.match(mainSource, /function bindReelIntentSurface\(\{/);
+  assert.match(mainSource, /const REEL_TOUCH_MOVE_PX = 12;/);
+  assert.match(mainSource, /surface: media,[\s\S]*?hoverTarget: card,[\s\S]*?hasDestination: Boolean\(media\.closest\("a\[href\]"\)\)/);
+  assert.match(mainSource, /function restoreArchiveReelPreload\(video\)[\s\S]*?video\.preload = "none"/);
+  assert.doesNotMatch(mainSource, /archiveReelWarm/);
   assert.match(mainSource, /video\.classList\.remove\("is-playing"\)/);
   assert.match(mainSource, /video\.pause\(\)/);
   assert.match(mainSource, /video\.currentTime = 0/);

@@ -502,6 +502,13 @@ test("Archive linked media touch movement remains scrolling without navigation",
   assert.equal(video.playRequests.length, 0);
   assert.equal(video.preload, "none");
   assert.equal(video.loadCalls, 0);
+
+  media.dispatch("pointerdown", {
+    pointerType: "touch", pointerId: 110, clientX: 120, clientY: 300,
+  });
+  media.dispatch("pointercancel", { pointerType: "touch", pointerId: 110 });
+  assert.equal(media.dispatch("click").defaultPrevented, true);
+  assert.equal(video.playRequests.length, 0);
 });
 
 test("Archive unlinked media can preview and retry after a play rejection", async () => {
