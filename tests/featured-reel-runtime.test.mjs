@@ -91,6 +91,8 @@ class FakeVideo extends EventHub {
     this.rect = { left: 0, right: 100, top: 0, bottom: 100 };
     this.panel = null;
     this.media = null;
+    this.archiveCard = null;
+    this.archiveMedia = null;
   }
 
   getBoundingClientRect() {
@@ -120,6 +122,8 @@ class FakeVideo extends EventHub {
   closest(selector) {
     if (selector === ".work-panel") return this.panel;
     if (selector === ".media-frame") return this.media;
+    if (selector === ".archive-card") return this.archiveCard;
+    if (selector === ".archive-card-media") return this.archiveMedia;
     return null;
   }
 }
@@ -153,6 +157,31 @@ class FakeMediaFrame extends EventHub {
 
   querySelector(selector) {
     return selector === "[data-featured-reel-video]" ? this.video : null;
+  }
+}
+
+class FakeArchiveCard extends EventHub {
+  constructor(video, linked = true) {
+    super();
+    this.video = video;
+    this.linked = linked;
+    this.media = null;
+  }
+
+  contains(target) {
+    return target === this || target === this.video || target === this.media;
+  }
+}
+
+class FakeArchiveMedia extends EventHub {
+  constructor(video, card) {
+    super();
+    this.video = video;
+    this.card = card;
+  }
+
+  closest(selector) {
+    return selector === "a[href]" && this.card.linked ? this.card : null;
   }
 }
 
@@ -229,6 +258,21 @@ function createRuntime(videoCount = 1, options = {}) {
     video.panel = panels[index];
     video.media = mediaFrames[index];
   });
+  const archiveVideos = Array.from(
+    { length: options.archiveCount || 0 },
+    (_, index) => new FakeVideo(`archive-video-${index + 1}`),
+  );
+  const archiveCards = archiveVideos.map((video, index) => new FakeArchiveCard(
+    video,
+    options.archiveLinked?.[index] ?? true,
+  ));
+  const archiveMedia = archiveVideos.map((video, index) => {
+    const media = new FakeArchiveMedia(video, archiveCards[index]);
+    archiveCards[index].media = media;
+    video.archiveCard = archiveCards[index];
+    video.archiveMedia = media;
+    return media;
+  });
   const clock = new FakeClock();
   const observers = [];
   const animationFrames = new Map();
@@ -268,8 +312,11 @@ function createRuntime(videoCount = 1, options = {}) {
   document.querySelector = (selector) =>
     selector === ".hero-media-image" ? heroImage : null;
   document.getElementById = (id) => panels.find((panel) => panel.id === id) || null;
-  document.querySelectorAll = (selector) =>
-    selector === "[data-featured-reel-video]" ? videos : [];
+  document.querySelectorAll = (selector) => {
+    if (selector === "[data-featured-reel-video]") return videos;
+    if (selector === "[data-archive-reel-video]") return archiveVideos;
+    return [];
+  };
 
   const window = new EventHub();
   window.history = {
@@ -325,8 +372,14 @@ function createRuntime(videoCount = 1, options = {}) {
       && videos.some((video) => observer.targets.has(video)));
   const warmObserver = observers.find((observer) =>
     observer.options.rootMargin === "200% 0px");
-  if (!options.reducedMotion) {
+  const archiveObserver = observers.find((observer) =>
+    Array.isArray(observer.options.threshold)
+      && archiveVideos.some((video) => observer.targets.has(video)));
+  if (!options.reducedMotion && videos.length) {
     assert.ok(featuredObserver, "the real Featured controller observes its videos");
+  }
+  if (!options.reducedMotion && archiveVideos.length) {
+    assert.ok(archiveObserver, "the real Archive controller observes its videos");
   }
 
   function intersect(entries) {
@@ -347,6 +400,15 @@ function createRuntime(videoCount = 1, options = {}) {
     })));
   }
 
+  function archiveIntersect(entries) {
+    assert.ok(archiveObserver, "Archive playback observer is available");
+    archiveObserver.emit(entries.map(([target, ratio]) => ({
+      target,
+      isIntersecting: ratio > 0,
+      intersectionRatio: ratio,
+    })));
+  }
+
   function flushAnimationFrames() {
     const callbacks = [...animationFrames.values()];
     animationFrames.clear();
@@ -354,6 +416,11 @@ function createRuntime(videoCount = 1, options = {}) {
   }
 
   return {
+    archiveCards,
+    archiveIntersect,
+    archiveMedia,
+    archiveObserver,
+    archiveVideos,
     clock,
     connection,
     document,
@@ -372,10 +439,163 @@ function createRuntime(videoCount = 1, options = {}) {
   };
 }
 
+function dispatchTouch(surface, pointerId, points = {}) {
+  const startX = points.startX ?? 120;
+  const startY = points.startY ?? 300;
+  const endX = points.endX ?? startX;
+  const endY = points.endY ?? startY;
+  surface.dispatch("pointerdown", {
+    pointerType: "touch", pointerId, clientX: startX, clientY: startY,
+  });
+  if (points.move) {
+    surface.dispatch("pointermove", {
+      pointerType: "touch", pointerId, clientX: endX, clientY: endY,
+    });
+  }
+  surface.dispatch("pointerup", {
+    pointerType: "touch", pointerId, clientX: endX, clientY: endY,
+  });
+  return surface.dispatch("click");
+}
+
 async function flushPromises() {
   await Promise.resolve();
   await Promise.resolve();
 }
+
+test("Archive linked media uses first mobile tap for preview and second for destination", () => {
+  const runtime = createRuntime(0, {
+    mobile: true,
+    archiveCount: 1,
+    archiveLinked: [true],
+  });
+  const [video] = runtime.archiveVideos;
+  const [media] = runtime.archiveMedia;
+
+  const firstClick = dispatchTouch(media, 101);
+  assert.equal(firstClick.defaultPrevented, true);
+  assert.equal(video.playRequests.length, 1);
+  assert.equal(video.preload, "metadata");
+  assert.equal(video.loadCalls, 1);
+
+  video.dispatch("playing");
+  const secondClick = dispatchTouch(media, 102);
+  assert.equal(secondClick.defaultPrevented, false);
+  assert.equal(video.playRequests.length, 1);
+});
+
+test("Archive linked media touch movement remains scrolling without navigation", () => {
+  const runtime = createRuntime(0, {
+    mobile: true,
+    archiveCount: 1,
+    archiveLinked: [true],
+  });
+  const [video] = runtime.archiveVideos;
+  const [media] = runtime.archiveMedia;
+
+  const click = dispatchTouch(media, 103, {
+    move: true,
+    endX: 122,
+    endY: 326,
+  });
+  assert.equal(click.defaultPrevented, true);
+  assert.equal(video.playRequests.length, 0);
+  assert.equal(video.preload, "none");
+  assert.equal(video.loadCalls, 0);
+});
+
+test("Archive unlinked media can preview and retry after a play rejection", async () => {
+  const runtime = createRuntime(0, {
+    mobile: true,
+    archiveCount: 1,
+    archiveLinked: [false],
+  });
+  const [video] = runtime.archiveVideos;
+  const [media] = runtime.archiveMedia;
+
+  assert.equal(dispatchTouch(media, 104).defaultPrevented, false);
+  assert.equal(video.playRequests.length, 1);
+  video.playRequests[0].reject(new Error("archive preview unavailable"));
+  await flushPromises();
+  assert.equal(video.paused, true);
+
+  assert.equal(dispatchTouch(media, 105).defaultPrevented, false);
+  assert.equal(video.playRequests.length, 2);
+});
+
+test("Archive desktop hover and existing link focus bypass the passive hold", () => {
+  const runtime = createRuntime(0, { archiveCount: 1, archiveLinked: [true] });
+  const [video] = runtime.archiveVideos;
+  const [card] = runtime.archiveCards;
+
+  card.dispatch("pointerenter", { pointerType: "mouse" });
+  assert.equal(video.playRequests.length, 1);
+  assert.equal(video.preload, "metadata");
+  assert.equal(video.loadCalls, 1);
+  card.dispatch("pointerleave", { pointerType: "mouse" });
+  assert.equal(video.paused, true);
+  assert.equal(video.currentTime, 0);
+
+  card.dispatch("focusin", { target: card });
+  assert.equal(video.playRequests.length, 2);
+  card.dispatch("focusout", { target: card, relatedTarget: null });
+  assert.equal(video.paused, true);
+});
+
+test("Archive keeps its 35% plus 1400ms passive fallback", () => {
+  const runtime = createRuntime(0, { archiveCount: 1 });
+  const [video] = runtime.archiveVideos;
+
+  runtime.archiveIntersect([[video, 0.35]]);
+  runtime.clock.advance(1399);
+  assert.equal(video.playRequests.length, 0);
+  runtime.clock.advance(1);
+  assert.equal(video.playRequests.length, 1);
+});
+
+test("Archive intent owns one reel and stale events cannot reveal or reset it", async () => {
+  const runtime = createRuntime(0, {
+    mobile: true,
+    archiveCount: 2,
+    archiveLinked: [true, true],
+  });
+  const [first, second] = runtime.archiveVideos;
+  const [firstMedia, secondMedia] = runtime.archiveMedia;
+
+  dispatchTouch(firstMedia, 106);
+  const staleRequest = first.playRequests[0];
+  dispatchTouch(secondMedia, 107);
+  assert.equal(first.paused, true);
+  assert.equal(second.playRequests.length, 1);
+
+  first.dispatch("playing");
+  assert.equal(first.classList.contains("is-playing"), false);
+  second.dispatch("playing");
+  assert.equal(second.classList.contains("is-playing"), true);
+
+  second.currentTime = 6;
+  staleRequest.reject(new Error("stale Archive playback rejection"));
+  await flushPromises();
+  assert.equal(second.paused, false);
+  assert.equal(second.currentTime, 6);
+});
+
+test("Archive linked failure releases the next stationary tap to its destination", async () => {
+  const runtime = createRuntime(0, {
+    mobile: true,
+    archiveCount: 1,
+    archiveLinked: [true],
+  });
+  const [video] = runtime.archiveVideos;
+  const [media] = runtime.archiveMedia;
+
+  assert.equal(dispatchTouch(media, 108).defaultPrevented, true);
+  video.playRequests[0].reject(new Error("archive preview unavailable"));
+  await flushPromises();
+
+  assert.equal(dispatchTouch(media, 109).defaultPrevented, false);
+  assert.equal(video.playRequests.length, 1);
+});
 
 test("desktop 35% entry holds for 1400ms and an early exit cancels playback", () => {
   const runtime = createRuntime();
