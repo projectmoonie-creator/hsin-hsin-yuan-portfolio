@@ -14,6 +14,7 @@ import {
   verifyMediaAsset,
   verifyManifestContentLinks,
 } from "../scripts/lib/media-manifest.mjs";
+import { parseFfmpegInputDiagnostics } from "../scripts/lib/media-inspector.mjs";
 
 const root = process.cwd();
 
@@ -190,6 +191,19 @@ test("media probing and verification enforce exact manifest integrity", () => {
     () => verifyMediaAsset({ entry: { ...entry, size: entry.size + 1 }, profile, filePath }),
     /exact size/,
   );
+});
+
+test("FFmpeg stream mapping lines are not counted as Linux input streams", () => {
+  const parsed = parseFfmpegInputDiagnostics(`
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'sample.mp4':
+  Duration: 00:00:10.00, start: 0.000000, bitrate: 1000 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, bt709, progressive), 1280x720
+Stream mapping:
+  Stream #0:0 -> #0:0 (copy)
+`);
+  assert.equal(parsed.streamCount, 1);
+  assert.equal(parsed.audioStreamCount, 0);
+  assert.equal(parsed.video.codecName, "h264");
 });
 
 function runMediaProbeWithoutSystemPath({ mismatch = false } = {}) {

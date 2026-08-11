@@ -85,6 +85,21 @@ function parseVideoStream(line) {
   };
 }
 
+export function parseFfmpegInputDiagnostics(inputDiagnostics) {
+  const streamLines = (inputDiagnostics.match(/^\s*Stream #0:[^\n]+$/gm) || [])
+    .filter((line) => /: (?:Video|Audio|Subtitle|Data|Attachment):/.test(line));
+  const videoLine = streamLines.find((line) => line.includes(": Video:"));
+  if (!videoLine) throw new Error("No decodable image or video stream in FFmpeg diagnostics");
+  const metadataKeys = [...inputDiagnostics.matchAll(/^\s+([\w -]+)\s*:/gm)]
+    .map((match) => match[1].trim().toLowerCase());
+  return {
+    streamCount: streamLines.length,
+    audioStreamCount: streamLines.filter((line) => line.includes(": Audio:")).length,
+    video: parseVideoStream(videoLine),
+    metadataKeys,
+  };
+}
+
 export function inspectMediaSync(filePath, bytes) {
   const result = spawnSync(ffmpegPath, [
     "-hide_banner",
@@ -100,17 +115,15 @@ export function inspectMediaSync(filePath, bytes) {
   }
 
   const inputDiagnostics = result.stderr.split(/^Output #0/m)[0];
-  const streamLines = inputDiagnostics.match(/^\s*Stream #0:[^\n]+$/gm) || [];
-  const videoLine = streamLines.find((line) => line.includes(": Video:"));
-  if (!videoLine) throw new Error(`No decodable image or video stream: ${filePath}`);
-  const metadataKeys = [...inputDiagnostics.matchAll(/^\s+([\w -]+)\s*:/gm)]
-    .map((match) => match[1].trim().toLowerCase());
+  let parsed;
+  try {
+    parsed = parseFfmpegInputDiagnostics(inputDiagnostics);
+  } catch (error) {
+    throw new Error(`${error.message}: ${filePath}`);
+  }
 
   return {
     duration: mediaDuration(bytes),
-    streamCount: streamLines.length,
-    audioStreamCount: streamLines.filter((line) => line.includes(": Audio:")).length,
-    video: parseVideoStream(videoLine),
-    metadataKeys,
+    ...parsed,
   };
 }
