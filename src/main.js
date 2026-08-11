@@ -246,6 +246,8 @@ if (!prefersReducedMotion) {
     let touchGesture = null;
     let suppressClick = false;
     let suppressClickTimer = 0;
+    let pointerIntent = false;
+    let focusIntent = false;
 
     function suppressNextClick() {
       suppressClick = true;
@@ -258,15 +260,22 @@ if (!prefersReducedMotion) {
 
     hoverTarget.addEventListener("pointerenter", (event) => {
       if (mobileMedia.matches || event.pointerType === "touch") return;
+      pointerIntent = true;
       activate(video);
     });
     hoverTarget.addEventListener("pointerleave", (event) => {
-      if (mobileMedia.matches || event.pointerType === "touch") return;
-      release(video);
+      if (event.pointerType === "touch") return;
+      pointerIntent = false;
+      if (!mobileMedia.matches && !focusIntent) release(video);
     });
-    hoverTarget.addEventListener("focusin", () => activate(video));
+    hoverTarget.addEventListener("focusin", () => {
+      focusIntent = true;
+      activate(video);
+    });
     hoverTarget.addEventListener("focusout", (event) => {
-      if (!hoverTarget.contains(event.relatedTarget)) release(video);
+      if (hoverTarget.contains(event.relatedTarget)) return;
+      focusIntent = false;
+      if (!pointerIntent) release(video);
     });
 
     surface.addEventListener("pointerdown", (event) => {
@@ -863,14 +872,23 @@ if (!prefersReducedMotion) {
     if (!isCurrentArchiveReelActivation(video, generation) || !video.paused) return;
     archiveReelPlayGenerations.set(video, generation);
     video.muted = true;
-    video.play().catch(() => {
-      if (isCurrentArchiveReelActivation(video, generation)
-        && archiveReelPlayGenerations.get(video) === generation) {
-        if (explicitArchiveReel === video) archiveReelIntentFailures.add(video);
-        activeArchiveReel = null;
-        resetArchiveReel(video);
-      }
-    });
+    video.play().then(
+      () => {
+        if (isCurrentArchiveReelActivation(video, generation)
+          && archiveReelPlayGenerations.get(video) === generation
+          && !video.paused) {
+          video.classList.add("is-playing");
+        }
+      },
+      () => {
+        if (isCurrentArchiveReelActivation(video, generation)
+          && archiveReelPlayGenerations.get(video) === generation) {
+          if (explicitArchiveReel === video) archiveReelIntentFailures.add(video);
+          activeArchiveReel = null;
+          resetArchiveReel(video);
+        }
+      },
+    );
   }
 
   function scheduleArchiveReel(video) {
@@ -916,17 +934,12 @@ if (!prefersReducedMotion) {
   }
 
   archiveReelVideos.forEach((video) => {
-    video.addEventListener("playing", () => {
-      const generation = archiveReelPlayGenerations.get(video);
-      if (generation != null
-        && isCurrentArchiveReelActivation(video, generation)
-        && !video.paused) {
-        video.classList.add("is-playing");
-      }
-    });
     video.addEventListener("error", () => {
-      if (explicitArchiveReel === video) archiveReelIntentFailures.add(video);
-      activeArchiveReel = null;
+      const ownsPlayback = activeArchiveReel === video;
+      if (ownsPlayback && explicitArchiveReel === video) {
+        archiveReelIntentFailures.add(video);
+      }
+      if (ownsPlayback) activeArchiveReel = null;
       resetArchiveReel(video);
     });
   });

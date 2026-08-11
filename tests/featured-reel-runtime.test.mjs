@@ -549,6 +549,26 @@ test("Archive desktop hover and existing link focus bypass the passive hold", ()
   assert.equal(video.paused, true);
 });
 
+test("Archive desktop hover and focus keep previewing until both intents leave", () => {
+  const runtime = createRuntime(0, { archiveCount: 1, archiveLinked: [true] });
+  const [video] = runtime.archiveVideos;
+  const [card] = runtime.archiveCards;
+
+  card.dispatch("focusin", { target: card });
+  card.dispatch("pointerenter", { pointerType: "mouse" });
+  card.dispatch("pointerleave", { pointerType: "mouse" });
+  assert.equal(video.paused, false, "focus must retain playback after pointer exit");
+  card.dispatch("focusout", { target: card, relatedTarget: null });
+  assert.equal(video.paused, true);
+
+  card.dispatch("pointerenter", { pointerType: "mouse" });
+  card.dispatch("focusin", { target: card });
+  card.dispatch("focusout", { target: card, relatedTarget: null });
+  assert.equal(video.paused, false, "hover must retain playback after focus exit");
+  card.dispatch("pointerleave", { pointerType: "mouse" });
+  assert.equal(video.paused, true);
+});
+
 test("Archive keeps its 35% plus 1400ms passive fallback", () => {
   const runtime = createRuntime(0, { archiveCount: 1 });
   const [video] = runtime.archiveVideos;
@@ -577,7 +597,8 @@ test("Archive intent owns one reel and stale events cannot reveal or reset it", 
 
   first.dispatch("playing");
   assert.equal(first.classList.contains("is-playing"), false);
-  second.dispatch("playing");
+  second.playRequests[0].resolve();
+  await flushPromises();
   assert.equal(second.classList.contains("is-playing"), true);
 
   second.currentTime = 6;
@@ -585,6 +606,47 @@ test("Archive intent owns one reel and stale events cannot reveal or reset it", 
   await flushPromises();
   assert.equal(second.paused, false);
   assert.equal(second.currentTime, 6);
+});
+
+test("a stale Archive error cannot clear a newer reel owner", async () => {
+  const runtime = createRuntime(0, {
+    mobile: true,
+    archiveCount: 2,
+    archiveLinked: [true, true],
+  });
+  const [first, second] = runtime.archiveVideos;
+  const [firstMedia, secondMedia] = runtime.archiveMedia;
+
+  dispatchTouch(firstMedia, 111);
+  dispatchTouch(secondMedia, 112);
+  first.dispatch("error");
+  second.playRequests[0].resolve();
+  await flushPromises();
+
+  assert.equal(second.paused, false);
+  assert.equal(second.classList.contains("is-playing"), true);
+});
+
+test("a stale same-reel playing event cannot reveal a newer activation", async () => {
+  const runtime = createRuntime(0, { archiveCount: 1, archiveLinked: [true] });
+  const [video] = runtime.archiveVideos;
+  const [card] = runtime.archiveCards;
+
+  card.dispatch("pointerenter", { pointerType: "mouse" });
+  const staleRequest = video.playRequests[0];
+  card.dispatch("pointerleave", { pointerType: "mouse" });
+  card.dispatch("pointerenter", { pointerType: "mouse" });
+  const currentRequest = video.playRequests[1];
+
+  video.dispatch("playing");
+  assert.equal(video.classList.contains("is-playing"), false);
+  staleRequest.resolve();
+  await flushPromises();
+  assert.equal(video.classList.contains("is-playing"), false);
+
+  currentRequest.resolve();
+  await flushPromises();
+  assert.equal(video.classList.contains("is-playing"), true);
 });
 
 test("Archive linked failure releases the next stationary tap to its destination", async () => {

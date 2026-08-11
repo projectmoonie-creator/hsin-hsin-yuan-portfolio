@@ -1,6 +1,6 @@
 # Archive Reel Intent Playback Design
 
-Date/status: 2026-08-11 / producer-approved behavior, awaiting written-spec review  
+Date/status: 2026-08-11 / producer-approved behavior, implemented and under review
 Branch/base: `codex/archive-reel-intent-playback` / `02fee43`
 
 ## Goal
