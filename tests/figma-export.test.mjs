@@ -30,8 +30,8 @@ function heroImageBlock(svg, id) {
 
 test("Figma Hero geometry matches the live motion start crop", () => {
   const desktop = objectCoverGeometry({
-    sourceWidth: 1920,
-    sourceHeight: 1440,
+    sourceWidth: 1448,
+    sourceHeight: 1086,
     frameX: 72,
     frameY: 104,
     frameWidth: 610,
@@ -40,8 +40,8 @@ test("Figma Hero geometry matches the live motion start crop", () => {
     heightScale: 1.4,
   });
   const mobile = objectCoverGeometry({
-    sourceWidth: 1920,
-    sourceHeight: 1440,
+    sourceWidth: 1448,
+    sourceHeight: 1086,
     frameX: 24,
     frameY: 76,
     frameWidth: 342,

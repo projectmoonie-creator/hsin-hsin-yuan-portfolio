@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-12 — Hero portrait refresh (selected F)
+- Branch/base: local-only `codex/hero-portrait-refresh` from Production-aligned `origin/main` `7d76b891…3273`; no Preview, push, Production, alias, `main`, Contact, or tag action.
+- Source: producer-selected F becomes the metadata-safe 1448×1086 canonical JPEG at the stable path, SHA `d775b50d…7ee`; raw selected PNG SHA is `e5d87d13…7eb3`.
+- Contract: `heroMedia` remains the only truth; bilingual alt, focal points, 4:3 crop, typography/layout, and transform-only slow push/reduced-motion behavior are unchanged.
+- Delivery: repeatable prepare produces nine 640/960/1440 AVIF/WebP/JPEG derivatives; obsolete 1920 upscales are removed, with 960 mobile and 1440 desktop preloads.
+- Figma: desktop/mobile Hero payloads regenerate from the canonical source; geometry, labels, and non-payload bytes remain identical.
+- Validation: TDD RED→GREEN, focused 54/54, full 177/177, build, design audit, Figma, six-reel integrity, diff, and browser 6/6 pass with zero Contact POST/error/overflow.
+- Review: Codex requested/observed/completed `gpt-5.6-sol`/`xhigh`, PASS/no P0/P1/P2; Gemini requested `gemini-3.6-flash` but returned empty candidates and is not claimed complete.
+- Open/next: producer visually approves F locally or requests the standing-authorized static Preview; protected file remains the only protected untracked item at `945d4df9…d28fc`.
+
 ## 2026-08-11 — Git durability and portable Vercel build remediation
 - Authorization: producer approved both a non-force dated backup and `main`; `790f834` was first read back on both intended refs, and Git integration auto-triggered Preview/Production builds as documented.
 - Discovery: both initial source builds failed `spawnSync ffprobe ENOENT`; their errors never replaced the existing Ready canonical Production alias.

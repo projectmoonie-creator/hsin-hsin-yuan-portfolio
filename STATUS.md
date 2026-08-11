@@ -1,10 +1,46 @@
 # Portfolio Status
 
-Updated: 2026-08-11
+Updated: 2026-08-12
 
-State: `PASS`
+State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Production Durability And Portable Vercel Builds
+## Current Work Package — Hero Portrait Refresh (Producer-selected F)
+
+- Branch `codex/hero-portrait-refresh` was created from the accepted
+  Production-aligned `origin/main` baseline
+  `7d76b891240d2a0850b14d4159052ef5bbca3273`; it has no upstream and remains
+  local-only. The closed tag still peels to `82893899dad3e4f393720e2efd71b1e1cb02a350`.
+- The producer selected candidate F. Its raw 1448×1086 PNG SHA-256 is
+  `e5d87d13191ab8f69d86a9181decf0d4fddb850ce4422d85a4014b516b707eb3`.
+  The metadata-safe canonical JPEG is 83,727 bytes at the stable public path,
+  SHA-256 `d775b50dfe3efb9e675e923600043f69b8fab547bf2b2acd1c852f7c029ea7ee`.
+- `data/site.json.heroMedia` remains the only authored Hero truth. Existing
+  bilingual alt, focal points, 4:3 geometry, text/layout, and 18-second
+  transform-only slow push are unchanged; reduced motion remains static.
+- The repeatable Hero prepare pipeline now emits nine AVIF/WebP/JPEG files at
+  640, 960, and 1440 widths. Obsolete 1920 derivatives are removed rather than
+  upscaling the 1448-wide source; mobile preloads 960 and desktop preloads 1440.
+- Website and Figma still consume the same canonical record. Regeneration
+  changed only the embedded Hero payload in desktop/mobile home SVGs; source
+  label, crop, focal coordinates, and all non-payload bytes remain identical.
+- TDD RED failed on the prior SHA/dimensions/1920 candidates/12-file manifest;
+  focused GREEN passed 54/54. Final gates pass 177/177 tests, build,
+  design-contract audit, Figma export, six-reel integrity, and diff checks.
+- Local Chromium passes 6/6 English/Chinese desktop, tablet, mobile, narrow,
+  reduced-motion, and no-JavaScript cases with responsive AVIF, high-priority
+  discovery, zero overflow/error/Contact POST, and preserved crop geometry.
+- Independent Codex requested/observed/completed `gpt-5.6-sol` at `xhigh` and
+  returned `PASS` with no P0/P1/P2. Gemini requested `gemini-3.6-flash` but
+  returned empty candidates, so no observed/completed Gemini model is claimed.
+- No Preview, Production, alias, Git push, `main`, Contact, light effect, copy,
+  or unrelated media change occurred. The protected file remains the only
+  protected untracked item at its exact expected hash.
+- Package verdict is `PASS_WITH_OPEN_ITEMS` only for producer visual approval
+  of F in the live composition. Exact next action: inspect the local evidence;
+  create a fresh static `dist/`-only Preview only when the producer asks to see
+  it on a phone. Production and Git integration remain separately gated.
+
+## Prior Accepted Work Package — Production Durability And Portable Vercel Builds
 
 - Producer authorized both the non-force dated backup and `main` integration.
   The original release record `790f834` was first read back at
@@ -1169,10 +1205,10 @@ Current design/Figma rules are aligned and Figma output is unchanged.
 
 ## Accepted Open Items
 
-- P0 Hero LCP/originalization is locally implemented, validated, and available
-  in a Ready Preview. Producer inspection and an accessible online/PageSpeed
-  measurement remain open; local evidence cannot establish production or CrUX
-  behavior.
+- Producer inspection of selected portrait F in the real responsive Hero is
+  the only open item in the current package. The prior Hero LCP package is
+  already part of the accepted Production baseline; a fresh PageSpeed retry is
+  optional observational evidence and not a release claim or blocker.
 - One restrained lighting treatment and/or one button microinteraction remains
   deferred until after the Hero performance package. It is optional refinement,
   not missing behavior in the closed public baseline.
@@ -1197,34 +1233,28 @@ SHA-256:
 
 ## Exact Next Action
 
-Producer opens the newly delivered Featured Reel Shareable Link on the target
-phone and inspects playback start time plus the first-tap preview/second-tap
-navigation. The access-bearing URL remains outside Git at SHA-256
-`1d3876c6370a0c6672933b12714035c3b774e9b9db0c8b369dd76984ce84c0e1`.
-Production, alias, Git push, `main`, Contact/functions, and destructive Vercel
-actions remain separately gated.
+Producer inspects portrait F in the local responsive Hero evidence. If phone
+inspection is desired, create one fresh static `dist/`-only Preview under the
+standing authorization; do not push Git to obtain it. Production, alias,
+`main`, any Git push, Contact/functions, and destructive Vercel actions remain
+separately gated.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and
-   `docs/reviews/portfolio-phase-closeout-2026-08-10.md`.
+   `docs/reviews/LOG.md` plus the two 2026-08-10 closeout reports.
 2. Verify annotated tag `portfolio-phase-2026-08-10-closed` and remote backup
    `backup/2026-08-10/portfolio-phase-closeout` resolve to the same docs-only
-   closeout commit; verify `origin/main` remains at public baseline
-   `eb444a6dade9a721d97adf239468bf22d3360bf8` unless a later producer-approved
-   Production package records otherwise.
+   closeout commit. Verify `origin/main` remains
+   `7d76b891240d2a0850b14d4159052ef5bbca3273` unless a later producer-approved
+   integration records otherwise.
 3. Verify the protected file above remains untracked and matches its exact
    SHA-256 before changing anything.
-4. Treat the canonical public alias as Production and leave it unchanged. The
-   closeout recorded `dpl_4i1jTqt3Qq9FjchMnMXEGKrEYwkv`; Preview-time metadata
-   later resolved the alias to `dpl_14E9G3amzXj2iL6xKvQZQWadypXq`. Both are
-   Ready/Production, but source/content equivalence remains unproven.
-5. Treat Featured Reel Preview `dpl_8VzU9VCYyhJAHmgz2PLdmPC1bxM3` as Ready and
-   awaiting producer phone inspection through the separately delivered
-   Shareable Link. One fresh static `dist/`-only Preview per completed bounded
-   package, plus a disclosed sole-link refresh when protection blocks requested
-   phone review, is standing-authorized after safety gates pass. This does not
-   authorize any `origin` push: every branch push can trigger Vercel. `main`
-   pushes are now known to trigger Production automatically. Production,
-   alias, `main`, Git push, Contact/functions, destructive actions, and broader
-   access changes remain separately gated.
+4. Resume local branch `codex/hero-portrait-refresh` at base `7d76b891…3273`
+   with the selected-F worktree changes; no Preview or remote ref exists for
+   this package yet.
+5. One fresh static `dist/`-only Preview is standing-authorized after gates
+   pass, but this does not authorize any Git push. Every branch push can trigger
+   Vercel; `main` pushes are now known to trigger Production automatically.
+   Production, alias, `main`, Git push, Contact/functions, destructive actions,
+   and broader access changes remain separately gated.

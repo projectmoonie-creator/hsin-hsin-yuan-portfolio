@@ -22,7 +22,7 @@ test("Hero delivery helper derives responsive candidates from the canonical sour
   assert.equal(delivery.profiles.mobile.sources.avif.srcset,
     "/assets/portfolio/hero/hsin-working-white-space-640.avif 640w, /assets/portfolio/hero/hsin-working-white-space-960.avif 960w");
   assert.equal(delivery.profiles.desktop.sources.jpeg.srcset,
-    "/assets/portfolio/hero/hsin-working-white-space-960.jpg 960w, /assets/portfolio/hero/hsin-working-white-space-1440.jpg 1440w, /assets/portfolio/hero/hsin-working-white-space-1920.jpg 1920w");
+    "/assets/portfolio/hero/hsin-working-white-space-960.jpg 960w, /assets/portfolio/hero/hsin-working-white-space-1440.jpg 1440w");
   assert.deepEqual(delivery.profiles.mobile.preload, {
     href: "/assets/portfolio/hero/hsin-working-white-space-960.avif",
     srcset: "/assets/portfolio/hero/hsin-working-white-space-640.avif 640w, /assets/portfolio/hero/hsin-working-white-space-960.avif 960w",
@@ -38,6 +38,9 @@ test("canonical Hero source hash and generated derivative formats are verified",
   assert.equal(typeof deliveryModule.verifyHeroDerivativeSet, "function");
   const sourcePath = join(root, "public", rawSite.heroMedia.src.slice(1));
   const sourceHash = createHash("sha256").update(readFileSync(sourcePath)).digest("hex");
+  assert.equal(rawSite.heroMedia.sourceSha256,
+    "d775b50dfe3efb9e675e923600043f69b8fab547bf2b2acd1c852f7c029ea7ee");
+  assert.deepEqual(rawSite.heroMedia.dimensions, { width: 1448, height: 1086 });
   assert.equal(sourceHash, rawSite.heroMedia.sourceSha256);
 
   const expected = deliveryModule.buildHeroDerivativeInventory({
@@ -45,18 +48,18 @@ test("canonical Hero source hash and generated derivative formats are verified",
     dimensions: rawSite.heroMedia.dimensions,
     delivery: rawSite.heroMedia.delivery,
   });
-  assert.equal(expected.length, 12);
-  assert.deepEqual([...new Set(expected.map((item) => item.width))], [640, 960, 1440, 1920]);
+  assert.equal(expected.length, 9);
+  assert.deepEqual([...new Set(expected.map((item) => item.width))], [640, 960, 1440]);
   assert.deepEqual([...new Set(expected.map((item) => item.format))], ["avif", "webp", "jpeg"]);
 
   const verified = deliveryModule.verifyHeroDerivativeSet({
     root,
     heroMedia: rawSite.heroMedia,
   });
-  assert.equal(verified.length, 12);
+  assert.equal(verified.length, 9);
   assert.deepEqual(
     [...new Set(verified.map((item) => `${item.width}x${item.height}`))],
-    ["640x480", "960x720", "1440x1080", "1920x1440"],
+    ["640x480", "960x720", "1440x1080"],
   );
   assert.deepEqual([...new Set(verified.map((item) => item.codecName))], ["av1", "webp", "mjpeg"]);
   assert.ok(verified.every((item) => item.bytes > 0));
@@ -74,7 +77,7 @@ test("generated Hero manifest binds every derivative to the canonical source and
     manifest.recipeSha256,
     deliveryModule.heroDeliveryRecipeSha256(rawSite.heroMedia),
   );
-  assert.equal(manifest.derivatives.length, 12);
+  assert.equal(manifest.derivatives.length, 9);
 
   for (const derivative of manifest.derivatives) {
     const bytes = readFileSync(join(root, "public", derivative.src.slice(1)));
