@@ -2,9 +2,56 @@
 
 Updated: 2026-08-11
 
-State: `PASS_WITH_OPEN_ITEMS`
+State: `PASS`
 
-## Current Work Package — Featured Reel Desktop 16:9
+## Current Work Package — Production Durability And Portable Vercel Builds
+
+- Producer authorized both the non-force dated backup and `main` integration.
+  The original release record `790f834` was first read back at
+  `backup/2026-08-11/790f834` and `main`; no force push, merge commit, tag
+  change, Contact POST, or protected-file action occurred.
+- Those Git pushes correctly triggered Vercel through the repository
+  integration. Both source builds failed before deployment because Vercel's
+  Node 24 image had no system `ffprobe` (`spawnSync ffprobe ENOENT`). The
+  canonical alias remained on the already-Ready isolated Production throughout
+  the failure and therefore had no outage or rollback.
+- The build now pins project-owned `ffmpeg-static@5.3.0`. One shared inspector
+  validates Hero AVIF/WebP/JPEG and all registered MP4s without a machine-wide
+  executable, preserves exact hashes/sizes/codecs/dimensions/color/stream
+  counts/faststart, and reads exact video duration from the ISO-BMFF media
+  header. No runtime HTML, CSS, JavaScript, copy, image, video, Figma, Contact,
+  or interaction contract changed.
+- TDD first reproduced the empty-system-`PATH` failure and fail-closed mismatch
+  path. A real Linux Vercel build then exposed platform-specific stream-mapping
+  ordering; a second RED→GREEN fixture proves mapping lines cannot be counted
+  as media streams.
+- Final local validation passes 177/177 tests, `npm run build`, six-reel
+  integrity, design-contract audit, Figma export with no tracked drift,
+  dependency install audit at zero vulnerabilities, and `git diff --check`.
+- Runtime remediation checkpoint `7c2d8b62c72a4786914948cadf995226190d2343`
+  is read back exactly at `backup/2026-08-11/7c2d8b6` and `origin/main`.
+  Historical closed tag `portfolio-phase-2026-08-10-closed` remains peeled to
+  `82893899dad3e4f393720e2efd71b1e1cb02a350`.
+- Backup Git Preview `dpl_8RBrgmGb4fzs1ZG6YXHoXmEQXXUv` and Git Production
+  `dpl_Gbgq19daqHoafQKHGW8najWGc863` both read `READY`. Production logs prove
+  the Linux checkout installed dependencies, ran `npm run build`, completed
+  the build, and deployed output successfully.
+- Canonical alias `https://hsin-hsin-yuan-portfolio.vercel.app` now resolves to
+  `dpl_Gbgq19daqHoafQKHGW8najWGc863`, direct deployment
+  `https://hsin-hsin-yuan-portfolio-et8wq5yku.vercel.app`, target
+  `production`, state `READY`, with `api/contact` on Node 24. No deployed page
+  or Contact endpoint was fetched or submitted.
+- The protected review document remains the only protected untracked file and
+  stays outside Git and deployment output at SHA-256
+  `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+  The incomplete post-publish PageSpeed observation remains an optional
+  read-only retry, not a release or durability blocker.
+- Package verdict is `PASS`. Exact next action: open a new bounded package for
+  the lo-fi light/button microinteraction specification from this accepted
+  Production baseline. Do not implement or deploy the light effect until the
+  producer approves that proposal.
+
+## Prior Accepted Work Package — Featured Reel Desktop 16:9
 
 - Local branch `codex/featured-reel-16x9` starts from accepted Archive intent
   handoff `059cc8cc67472aac3c43b9783b1e9c112149a6a7`. Formal
@@ -72,16 +119,11 @@ State: `PASS_WITH_OPEN_ITEMS`
   report UI remained loading through the final wait window. No new score,
   metric, CrUX claim, or baseline comparison is represented as complete; this
   external observation failure does not contradict the Ready deployment.
-- Release verdict remains `PASS_WITH_OPEN_ITEMS`, not formal phase `PASS`:
-  the pre-record release checkpoint returned 18 from
-  `git rev-list --count HEAD --not --remotes=origin`; this release-record commit
-  adds one, so final post-record verification must read 19. The Hero, Featured
-  performance/intent, Screening navigation, Archive intent, 16:9, and release
-  record are not yet durably reachable from an origin ref. Exact next action:
-  obtain explicit producer authorization for a non-force dated backup push and
-  optional `main` integration, read back the remote tip, then begin the bounded
-  lo-fi light/button microinteraction specification from this accepted
-  checkpoint. No light implementation starts before that proposal is approved.
+- At this historical handoff the release verdict was `PASS_WITH_OPEN_ITEMS`
+  because 19 commits were not reachable from an origin ref. The current
+  durability package above supersedes and closes that open item by preserving
+  the chain on dated backup refs and `main` and proving the Git source build in
+  Vercel Linux.
 
 ## Prior Accepted Work Package — Archive Reel Intent Playback
 

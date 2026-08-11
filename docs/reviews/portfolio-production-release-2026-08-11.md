@@ -96,3 +96,52 @@ Outcome: `PASS_WITH_OPEN_ITEMS`
   package as a lo-fi light/button microinteraction specification from the
   accepted checkpoint. Do not implement the visual effect before its proposal
   receives producer approval.
+
+## Post-Release Durability And Git-Build Addendum
+
+The producer subsequently approved both pending Git actions. Release record
+`790f83418d0e00a174cd88fc2399be7db27b71c0` was read back exactly at
+`backup/2026-08-11/790f834` and `main`. As documented in the project deployment
+contract, each push triggered Vercel through Git integration.
+
+Both first source builds failed before deployment with
+`spawnSync ffprobe ENOENT`: the Vercel Node 24 build image did not contain the
+system executable used by the repository's strict media verification. The
+failed Preview and Production candidates did not replace the existing Ready
+canonical Production alias, so the formal site remained available.
+
+The fail-closed remediation pins `ffmpeg-static@5.3.0` and routes Hero image
+and video verification through one project-owned inspector. It preserves exact
+size and SHA-256 checks, codecs, dimensions, pixel and color profiles, stream
+counts, faststart, metadata rejection, and exact ISO-BMFF video duration. A
+second platform fixture excludes FFmpeg's Linux stream-mapping line from true
+media-stream counts. Runtime output, copy, visuals, media, Figma, interaction,
+and Contact behavior are unchanged.
+
+Final local evidence is 177/177 tests plus successful build, six-reel
+integrity, design-contract audit, Figma export without tracked drift, dependency
+install audit with zero vulnerabilities, and `git diff --check`. Runtime
+checkpoint `7c2d8b62c72a4786914948cadf995226190d2343` is read back exactly from
+`backup/2026-08-11/7c2d8b6` and `main`; the historical closed tag remains at
+`82893899dad3e4f393720e2efd71b1e1cb02a350`.
+
+Vercel read-back records:
+
+- Backup Preview `dpl_8RBrgmGb4fzs1ZG6YXHoXmEQXXUv`: `READY`.
+- Git Production `dpl_Gbgq19daqHoafQKHGW8najWGc863`: `READY`.
+- Direct Production:
+  `https://hsin-hsin-yuan-portfolio-et8wq5yku.vercel.app`.
+- Canonical alias:
+  `https://hsin-hsin-yuan-portfolio.vercel.app`, resolving to that exact
+  Production ID with `api/contact` on Node 24.
+
+Production logs prove that the Linux checkout installed the pinned dependency,
+ran `npm run build`, completed the build, and deployed its output. No deployed
+page or Contact endpoint was fetched or submitted. The protected document
+remains outside Git and deployment output at
+`945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+
+This addendum closes the prior durability open item. Final package verdict is
+`PASS`; the optional PageSpeed retry remains a read-only observation rather
+than a release blocker. Exact next action is a new bounded lo-fi light/button
+microinteraction specification before any implementation or deployment.

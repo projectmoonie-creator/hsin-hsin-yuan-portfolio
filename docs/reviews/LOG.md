@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-11 — Git durability and portable Vercel build remediation
+- Authorization: producer approved both a non-force dated backup and `main`; `790f834` was first read back on both intended refs, and Git integration auto-triggered Preview/Production builds as documented.
+- Discovery: both initial source builds failed `spawnSync ffprobe ENOENT`; their errors never replaced the existing Ready canonical Production alias.
+- Fix: pin project-owned `ffmpeg-static@5.3.0`, share one Hero/video inspector, preserve exact ISO-BMFF duration plus existing hash/format/color/faststart validation, and ignore Linux stream-mapping lines.
+- TDD/validation: empty-PATH and Linux-order RED→GREEN contracts; final 177/177, build, reel integrity, design audit, Figma/no drift, zero install vulnerabilities, and diff checks pass.
+- Durability: runtime `7c2d8b6…d2343` reads back exactly at `backup/2026-08-11/7c2d8b6` and `main`; no force, tag move, Contact POST, or protected-file action.
+- Deployments: backup Preview `dpl_8RBr…XXUv` and Production `dpl_Gbgq…c863` are Ready; Linux logs show dependency install, build completion, and deployment.
+- Canonical: `https://hsin-hsin-yuan-portfolio.vercel.app` resolves to Ready Production `dpl_Gbgq…c863`; prior manual Production stayed live until the successful replacement.
+- Verdict/next: `PASS`; protected file remains `945d4df9…d28fc`. Next bounded package is the approved-baseline lo-fi light/button specification, before implementation.
+
 ## 2026-08-11 — Production release through Featured Reel desktop 16:9
 - Producer ruling: Preview modifications accepted as `OK`; Production and canonical alias explicitly authorized. Git push/`main` remained outside the stated action and no Contact POST was authorized or made.
 - Gates: 174/174, build, six-reel integrity, design audit, Figma/no drift, privacy/diff, prior browser geometry 8/8 and interactions 9/9, plus producer device acceptance pass.
