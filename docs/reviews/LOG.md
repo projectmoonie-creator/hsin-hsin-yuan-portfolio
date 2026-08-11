@@ -11,7 +11,7 @@ packages.
 - TDD/validation: empty-PATH and Linux-order RED→GREEN contracts; final 177/177, build, reel integrity, design audit, Figma/no drift, zero install vulnerabilities, and diff checks pass.
 - Durability: runtime `7c2d8b6…d2343` reads back exactly at `backup/2026-08-11/7c2d8b6` and `main`; no force, tag move, Contact POST, or protected-file action.
 - Deployments: backup Preview `dpl_8RBr…XXUv` and Production `dpl_Gbgq…c863` are Ready; Linux logs show dependency install, build completion, and deployment.
-- Canonical: `https://hsin-hsin-yuan-portfolio.vercel.app` resolves to Ready Production `dpl_Gbgq…c863`; prior manual Production stayed live until the successful replacement.
+- Canonical: runtime checkpoint Production `dpl_Gbgq…c863` is Ready; later docs-only Git builds keep the alias on the newest Ready deployment with identical runtime bytes. Prior manual Production stayed live until the first successful replacement.
 - Verdict/next: `PASS`; protected file remains `945d4df9…d28fc`. Next bounded package is the approved-baseline lo-fi light/button specification, before implementation.
 
 ## 2026-08-11 — Production release through Featured Reel desktop 16:9

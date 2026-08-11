@@ -29,18 +29,21 @@ State: `PASS`
   integrity, design-contract audit, Figma export with no tracked drift,
   dependency install audit at zero vulnerabilities, and `git diff --check`.
 - Runtime remediation checkpoint `7c2d8b62c72a4786914948cadf995226190d2343`
-  is read back exactly at `backup/2026-08-11/7c2d8b6` and `origin/main`.
+  was read back exactly at `backup/2026-08-11/7c2d8b6` and `origin/main` and
+  remains an ancestor of the later docs-inclusive `origin/main` tip.
   Historical closed tag `portfolio-phase-2026-08-10-closed` remains peeled to
   `82893899dad3e4f393720e2efd71b1e1cb02a350`.
 - Backup Git Preview `dpl_8RBrgmGb4fzs1ZG6YXHoXmEQXXUv` and Git Production
   `dpl_Gbgq19daqHoafQKHGW8najWGc863` both read `READY`. Production logs prove
   the Linux checkout installed dependencies, ran `npm run build`, completed
   the build, and deployed output successfully.
-- Canonical alias `https://hsin-hsin-yuan-portfolio.vercel.app` now resolves to
-  `dpl_Gbgq19daqHoafQKHGW8najWGc863`, direct deployment
-  `https://hsin-hsin-yuan-portfolio-et8wq5yku.vercel.app`, target
-  `production`, state `READY`, with `api/contact` on Node 24. No deployed page
-  or Contact endpoint was fetched or submitted.
+- Runtime checkpoint Production `dpl_Gbgq19daqHoafQKHGW8najWGc863` and direct
+  deployment `https://hsin-hsin-yuan-portfolio-et8wq5yku.vercel.app` read
+  `READY`. Later docs-only closeout pushes repeat the same source build and move
+  `https://hsin-hsin-yuan-portfolio.vercel.app` to the newest Ready
+  docs-inclusive Git deployment without changing runtime bytes; use Vercel
+  alias inspection for its self-changing deployment ID. `api/contact` remains
+  on Node 24. No deployed page or Contact endpoint was fetched or submitted.
 - The protected review document remains the only protected untracked file and
   stays outside Git and deployment output at SHA-256
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.

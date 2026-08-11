@@ -132,8 +132,13 @@ Vercel read-back records:
 - Direct Production:
   `https://hsin-hsin-yuan-portfolio-et8wq5yku.vercel.app`.
 - Canonical alias:
-  `https://hsin-hsin-yuan-portfolio.vercel.app`, resolving to that exact
-  Production ID with `api/contact` on Node 24.
+  `https://hsin-hsin-yuan-portfolio.vercel.app`, which resolved to that exact
+  Production ID at runtime-checkpoint validation with `api/contact` on Node 24.
+
+Subsequent docs-only closeout commits trigger the same Git source build and
+move the canonical alias to the newest Ready docs-inclusive deployment. They
+do not change the verified runtime bytes; the alias must therefore be inspected
+for its current self-changing deployment ID rather than freezing that ID here.
 
 Production logs prove that the Linux checkout installed the pinned dependency,
 ran `npm run build`, completed the build, and deployed its output. No deployed
