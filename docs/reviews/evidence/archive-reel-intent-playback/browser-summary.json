@@ -1,0 +1,41 @@
+{
+  "package": "archive-reel-intent-playback",
+  "baselineCommit": "02fee43edb5cdc200483a277b28353301d3de4ff",
+  "implementationCommit": "e328ea8b23ee5bb813b2b7c0217aefccbd043f08",
+  "result": "PASS",
+  "passed": 13,
+  "total": 13,
+  "passivePlaybackObservedMs": 1405.6,
+  "coverage": [
+    "English 390px linked first-tap preview and second-tap canonical navigation",
+    "Chinese 360px linked first-tap preview and second-tap canonical navigation",
+    "unlinked Mechanic touch preview without navigation",
+    "touch movement and pointer cancellation without playback or navigation",
+    "desktop pointer hover and existing-link keyboard focus",
+    "35 percent plus 1400ms passive fallback",
+    "reduced-motion static poster",
+    "no-JavaScript static poster with intact links",
+    "English and Chinese desktop, tablet, mobile, and narrow static layout"
+  ],
+  "allCases": {
+    "contactPosts": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "horizontalOverflow": 0
+  },
+  "baselineVisualEquivalence": [
+    {
+      "viewport": "1440x900",
+      "mode": "reduced-motion",
+      "geometryDriftPx": 0,
+      "screenshotSha256": "4b8f8895f1063326f30dc844f6bb033e6eac9d1f3389a35cfa6822aaa0b8a8c2"
+    },
+    {
+      "viewport": "390x844",
+      "mode": "reduced-motion",
+      "geometryDriftPx": 0,
+      "screenshotSha256": "61de5352cccdd4ba6b0df738047bf523e7496071b5e85bb968ebc1ce793d48de"
+    }
+  ],
+  "limits": "Post-remediation local Chromium evidence only; producer inspection on a real phone remains open. Normal-motion Featured warming may request Featured MP4s and is intentionally outside the Archive no-warm assertion."
+}

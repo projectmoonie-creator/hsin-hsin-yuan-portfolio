@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-11 — Archive Reel intent playback
+- Branch/base/commits: `codex/archive-reel-intent-playback` from `02fee43`; spec/plan/RED/implementation/remediation are `486a7f2`/`e4dafff`/`0b6a153`/`e328ea8`/`1042461`; Production/`origin/main` stays `eb444a6`, with no push, Production, alias, Contact, `main`, or tag action.
+- Interaction: the shared intent binder gives all three Archive videos desktop hover/focus and mobile first stationary tap preview; a second linked tap navigates, Mechanic stays unlinked, and >12px movement/pointer cancellation remains scroll.
+- Loading/safety: Archive keeps its separate one-owner, lifecycle, nearest-center 35% + 1.4s passive system; only selected media metadata-primes, stale play/error generations cannot affect the active owner, and reduced-motion/no-JS stay static.
+- Preservation: posters, crops, copy, geometry, canonical URLs/data, Featured warm/screening behavior, Hero, Figma, and Contact do not change; frozen reduced-motion desktop/mobile geometry and screenshot hashes are exact.
+- Validation: focused 74/74 and full 173/173, build, six-reel check, design audit, Figma/no tracked drift, privacy/diff, and browser 13/13 pass; passive observed 1405.6ms with zero Contact POST/error/overflow.
+- Review: Codex requested/observed/completed `gpt-5.6-sol` at `xhigh`; its initial BLOCK findings were all fixed in `1042461`. Gemini `gemini-3.6-flash` and Claude dynamic `opus` attempts produced no usable result; final local verdict is `PASS_WITH_OPEN_ITEMS` for real-phone checks.
+- Preview/access: static dist-only 60 files / 96,948,359 bytes / path-list `0c55a541…861f`; `dpl_5Jtano…zsU2V` reads Ready/Preview. Official API recovered from the dashboard's stuck Loading state; logged-out browser access passes, the new URL stays outside Git at `c9930cba…cb86`, and the old Featured link is revoked.
+- Open: producer checks the three Archive reels on real iPhone/Safari, including linked second tap, Mechanic retry, scroll handoff, first-load wait, Low Power Mode, and network switching; protected file remains `945d4df9…d28fc`.
+
 ## 2026-08-11 — Featured Reel intent playback
 - Branch/base/commit: `codex/featured-reel-intent-playback` from `6b7ffdd`; implementation `d890c58`; Production/`origin/main` stays `eb444a6`, with no push, Production, alias, Contact, `main`, or tag action.
 - Interaction: hybrid B makes desktop panel hover/focus immediate; mobile first stationary linked-media tap previews, second tap navigates, movement remains scroll, and failed preview leaves the next tap reachable.

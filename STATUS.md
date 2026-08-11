@@ -4,7 +4,70 @@ Updated: 2026-08-11
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Featured Reel Intent Playback
+## Current Work Package — Archive Reel Intent Playback
+
+- Local branch `codex/archive-reel-intent-playback` starts from accepted
+  Featured handoff `02fee43edb5cdc200483a277b28353301d3de4ff`.
+  Specification/plan/RED/implementation/remediation commits are `486a7f2`,
+  `e4dafff`, `0b6a153`, `e328ea8`, and `1042461`. Formal
+  Production/`origin/main` remains `eb444a6`, and the closed phase tag remains
+  peeled to `8289389`. No push, Production, alias, Contact, `main`, protected-
+  file, or tag action occurred.
+- The shared `bindReelIntentSurface()` interaction contract now serves
+  Featured and the three Archive video cards without merging their loading or
+  ownership systems. Desktop pointer hover and keyboard focus request an
+  immediate preview. On mobile linked Archive media, the first stationary tap
+  previews and suppresses only that click; the second opens the canonical
+  destination. The unlinked Mechanic card previews/retries without navigation,
+  and movement over 12px or pointer cancellation remains scrolling.
+- Archive retains one owner, nearest-center 35% visibility, and the 1.4-second
+  passive fallback (1405.6ms observed). Only the explicitly selected Archive
+  reel metadata-primes; there is no proactive Archive warm. Lifecycle and
+  generation guards prevent a stale play/error event from revealing or
+  clearing the wrong reel, while hover and focus release independently.
+- Posters, crops, copy, card geometry, URLs, canonical media data, Featured
+  warm/screening behavior, Hero, Figma, and Contact remain unchanged.
+  Reduced-motion and no-JavaScript stay fully static and request no Archive
+  MP4. The visual baseline is exact at 1440×900 and 390×844: zero-pixel
+  geometry drift and byte-stable screenshot hashes.
+- TDD reproduced the missing interaction contract, then focused tests passed
+  74/74. Final validation passes 173/173, production build, six-reel integrity,
+  design-contract audit, Figma export with no tracked drift, privacy, and diff
+  checks. Local Chromium QA passes 13/13 across English/Chinese desktop,
+  tablet, mobile, reduced-motion, no-JavaScript, keyboard, touch movement,
+  pointer cancellation, overflow, and canonical navigation, with zero Contact
+  POST, console error, or page error.
+- Codex review requested/observed/completed `gpt-5.6-sol` at `xhigh` and
+  initially returned `BLOCK`; all three findings were remediated in `1042461`
+  and covered by new RED→GREEN race/composition tests. Gemini requested
+  `gemini-3.6-flash` but returned empty candidates. Claude requested dynamic
+  `opus` through the subscription wrapper but its helper failed before a usable
+  result. Neither failed lane is represented as completed; final local verdict
+  is `PASS_WITH_OPEN_ITEMS` pending real-phone inspection.
+- Standing-authorized Preview `dpl_5JtanoCS9TYrzxjQTMNCAKDzsU2V`
+  independently reads `Ready`, target `preview`, at
+  `https://hsin-hsin-yuan-portfolio-iciywpf2j.vercel.app`. The fresh static
+  `dist/`-only upload contains 60 public files / 96,948,359 bytes; its sorted
+  path-list SHA-256 is
+  `0c55a54186906fe4859b7c6524aeb61668169d24b2c08649b18ccdc0f28b861f`.
+  It contains no source, tests, reviews, environments, Contact function, or
+  protected document.
+- The Vercel dashboard's permission control remained visually stuck on
+  `Loading`, so the same standing-authorized share refresh was completed with
+  Vercel's authenticated official API. An independent logged-out browser then
+  loaded the complete portfolio without an access gate. The access-bearing URL
+  stays outside Git at SHA-256
+  `c9930cba6fa9af805072c7cba5a274c5c43b5f8c3ec8fd7ee42fec5664adcb86`;
+  the prior Featured Preview link was tested and is revoked. Post-publish
+  PageSpeed remains access-blocked because that token was not disclosed to
+  Google.
+- Exact next action: producer opens the delivered Shareable Link on the target
+  iPhone and checks all three Archive reels for first-tap preview, second-tap
+  navigation where linked, Mechanic preview/retry, scroll handoff, initial
+  wait, Low Power Mode, and Wi-Fi/cellular switching. Production, alias,
+  Contact, push, or integration remains separately gated.
+
+## Prior Accepted Work Package — Featured Reel Intent Playback
 
 - Local branch `codex/featured-reel-intent-playback` starts from screened
   handoff `6b7ffdd4da038512bae7b210832015539c92817b`; implementation commit is

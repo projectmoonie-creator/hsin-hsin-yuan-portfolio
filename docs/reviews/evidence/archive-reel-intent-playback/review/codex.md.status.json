@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "provider": "OpenAI Codex CLI",
+  "routingPolicy": "highest-capability-generally-released-at-execution",
+  "exactPin": false,
+  "requestedModel": "gpt-5.6-sol",
+  "observedModel": "gpt-5.6-sol",
+  "completedModel": "gpt-5.6-sol",
+  "reasoningEffort": "xhigh",
+  "sessionId": "019fef37-91cf-7bf0-9400-0f40788a08cf",
+  "status": "complete",
+  "initialVerdict": "BLOCK",
+  "tokenUsage": 220571,
+  "packetSha256": "84ce5716212b4d88527b378ddd488490a4b0fd695a50623015f78e4d62443980",
+  "rawOriginalSha256": "e8ecaaeb7dbc63cab3c265e171a6fcef6b30bf48d8efe537475da2fcf4378f14",
+  "normalizedForPrivacy": true,
+  "normalization": "Absolute local Markdown link targets were replaced with repository-relative path references; review wording and findings are otherwise unchanged.",
+  "provenanceNote": "The authoritative CLI header reported gpt-5.6-sol. The review body's generic self-report did not expose that exact ID."
+}
