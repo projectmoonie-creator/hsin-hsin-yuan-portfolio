@@ -9,8 +9,8 @@ State: `PASS_WITH_OPEN_ITEMS`
 - Local branch `codex/featured-reel-intent-playback` starts from screened
   handoff `6b7ffdd4da038512bae7b210832015539c92817b`; implementation commit is
   `d890c58`. Formal Production/`origin/main` remains `eb444a6`, and the closed
-  phase tag remains peeled to `8289389`. No push, Preview, Production, alias,
-  Contact, `main`, deployment, protected-file, or tag action occurred.
+  phase tag remains peeled to `8289389`. No push, Production, alias, Contact,
+  `main`, protected-file, or tag action occurred.
 - Producer-selected hybrid B preserves the passive 35% plus 700ms mobile /
   1.4s desktop fallback. Desktop panel hover and focus-within immediately
   request that reel. On mobile linked media, the first stationary tap previews
@@ -48,9 +48,31 @@ State: `PASS_WITH_OPEN_ITEMS`
 - Visuals, HTML/CSS geometry, posters, crops, copy, languages, canonical data,
   URLs, encodes, Figma, Archive, and Contact remain unchanged. Real iPhone
   Safari, Low Power Mode, and network switching remain pre-Production checks.
-- Exact next action: producer inspects this local commit on a phone. A new
-  Preview/share link, push, integration, Production, alias, or Contact action
-  requires separate explicit authorization for this package.
+- Producer-authorized Preview `dpl_8VzU9VCYyhJAHmgz2PLdmPC1bxM3` independently
+  reads `Ready`, target `preview`, at
+  `https://hsin-hsin-yuan-portfolio-aapbryi8b.vercel.app`. The fresh static
+  `dist/`-only upload contains 61 public files / 96,942,772 bytes; its sorted
+  path-list SHA-256 is
+  `75b92a3e9c33a1884da282f0a5235f358d5acce16f59445c13b4b525df981533`.
+  It contains no repo source, tests, reviews, environments, Contact function,
+  or protected document; no deployed page or Contact endpoint was requested.
+  Post-publish PageSpeed is access-blocked because the direct URL requires
+  login and the access-bearing Shareable Link was not disclosed to Google.
+- Vercel replaced the Hobby account's sole prior Shareable Link and confirms
+  `Anyone with the link can view and comment`; login is required only to
+  comment. The new access-bearing URL stays outside Git at SHA-256
+  `1d3876c6370a0c6672933b12714035c3b774e9b9db0c8b369dd76984ce84c0e1`;
+  the previous Screening Strip review link is revoked.
+- Producer ruling: one static `dist/`-only Preview per completed bounded
+  package is now a standing-authorized review handoff after the normal safety
+  gates pass. When direct protection blocks requested phone review, refreshing
+  the sole Shareable Link for that Preview is included after revocation is
+  disclosed. Production, alias, Git push, `main`, Contact/functions, broader
+  access changes, and destructive Vercel actions remain separately gated.
+- Exact next action: producer opens the delivered Shareable Link on the target
+  phone and checks first-play delay, first-tap preview/second-tap navigation,
+  Screening Strip priming, and scroll handoff. Real iPhone Safari, Low Power
+  Mode, and network switching remain open before any Production decision.
 
 ## Prior Open Work Package — Screening Strip Navigation Repair
 
@@ -988,12 +1010,12 @@ SHA-256:
 
 ## Exact Next Action
 
-Producer opens the Ready Preview
-`https://hsin-hsin-yuan-portfolio-5v98ywoxl.vercel.app` while logged in to
-Vercel and inspects Hero desktop/mobile behavior. If direct Preview protection
-blocks the intended review device, replacing the account's shareable link
-requires separate explicit authorization. Production, alias, merge, and
-`main` actions remain separately gated.
+Producer opens the newly delivered Featured Reel Shareable Link on the target
+phone and inspects playback start time plus the first-tap preview/second-tap
+navigation. The access-bearing URL remains outside Git at SHA-256
+`1d3876c6370a0c6672933b12714035c3b774e9b9db0c8b369dd76984ce84c0e1`.
+Production, alias, Git push, `main`, Contact/functions, and destructive Vercel
+actions remain separately gated.
 
 ## Cold Resume
 
@@ -1010,10 +1032,12 @@ requires separate explicit authorization. Production, alias, merge, and
    closeout recorded `dpl_4i1jTqt3Qq9FjchMnMXEGKrEYwkv`; Preview-time metadata
    later resolved the alias to `dpl_14E9G3amzXj2iL6xKvQZQWadypXq`. Both are
    Ready/Production, but source/content equivalence remains unproven.
-5. Treat Hero Preview `dpl_7syJAsyC85BncuAh9JD2WLw48jx2` as Ready and awaiting
-   producer inspection. Treat every `origin` branch push as a potential Vercel
-   Preview; do not push even a backup ref while Preview is unauthorized. Do not
-   replace the shareable link, push `main`, create/delete another Preview,
-   deploy Production, change an alias, or submit Contact without the
-   corresponding explicit producer authorization.
-   `main` pushes are now known to trigger Production automatically.
+5. Treat Featured Reel Preview `dpl_8VzU9VCYyhJAHmgz2PLdmPC1bxM3` as Ready and
+   awaiting producer phone inspection through the separately delivered
+   Shareable Link. One fresh static `dist/`-only Preview per completed bounded
+   package, plus a disclosed sole-link refresh when protection blocks requested
+   phone review, is standing-authorized after safety gates pass. This does not
+   authorize any `origin` push: every branch push can trigger Vercel. `main`
+   pushes are now known to trigger Production automatically. Production,
+   alias, `main`, Git push, Contact/functions, destructive actions, and broader
+   access changes remain separately gated.

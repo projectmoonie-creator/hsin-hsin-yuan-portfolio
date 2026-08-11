@@ -5,14 +5,22 @@ Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
 ## 2026-08-11 — Featured Reel intent playback
-- Branch/base/commit: `codex/featured-reel-intent-playback` from `6b7ffdd`; implementation `d890c58`; Production/`origin/main` stays `eb444a6`, with no push, Preview, deployment, alias, Contact, `main`, or tag action.
+- Branch/base/commit: `codex/featured-reel-intent-playback` from `6b7ffdd`; implementation `d890c58`; Production/`origin/main` stays `eb444a6`, with no push, Production, alias, Contact, `main`, or tag action.
 - Interaction: hybrid B makes desktop panel hover/focus immediate; mobile first stationary linked-media tap previews, second tap navigates, movement remains scroll, and failed preview leaves the next tap reachable.
 - Screening: every small card primes only its canonical reel, bypasses the passive hold on arrival, and releases an interrupted offscreen prime after three seconds; late `pageshow` cannot override scroll/pointer/keyboard navigation.
 - Warm/performance: one two-viewport candidate may metadata-warm only after Hero load; with 1500ms lead, matched cold median visible `playing` is 6049.8→4389.9ms. MP4 starts after measured LCP; TBT/CLS stay zero. Lab data is not CrUX.
 - Preservation: passive 35% + 700ms/1.4s, one owner, posters, geometry, copy, canonical data/URLs, encodes, Figma, Archive, reduced/no-JS, conservative network gates, and Contact remain.
 - Validation: TDD/full 163/163, build, design audit, Figma/no tracked drift, reel integrity, privacy/diff, and final browser 9/9 pass; observed fallback 710.9ms, zero Contact POST/error/overflow.
 - Review: Gemini requested `gemini-3.6-flash` but returned empty candidates; Claude requested dynamic `opus` but helper failed with request state unknown. No observed/completed model or completed external review; local adjudication has no P0/P1.
-- Open: producer inspects local mobile behavior; real iPhone Safari, Low Power Mode, and network switching precede any separately authorized Preview/Production decision. Protected file remains `945d4df9…d28fc`.
+- Preview/open: static dist-only 61 files / 96,942,772 bytes / path-list `75b92a3…1533`; `dpl_8VzU9…1bxM3` reads Ready/Preview, no functions/unfetched. Sole Shareable Link refresh grants anyone-with-link view access, revokes the prior review link, and keeps the URL outside Git at `1d3876c…c0e1`; PageSpeed is access-blocked because that token was not disclosed to Google. Producer phone inspection, real Safari, Low Power Mode, and network switching remain before Production; protected file stays `945d4df9…d28fc`.
+
+## 2026-08-11 — Routine Preview standing authorization
+- Ruling: one fresh static `dist/`-only Preview per completed bounded package is now the normal standing-authorized producer-review handoff after build, tests, privacy, protected-file, and manifest gates pass; no repeated package-specific approval is required.
+- Access: when protection blocks requested phone review, refreshing the Hobby account's sole Shareable Link for that exact Preview is included after disclosing that the previous review link will be revoked; access URLs remain outside Git.
+- Boundary: Git pushes, source/full-repo deploys, functions/Contact, Production, aliases/domains, `main`, destructive Vercel actions, broader access changes, and failed privacy/rights/security gates still require a stop or explicit producer authorization.
+- PageSpeed: access-bearing Shareable Links are never sent to the measurement service; a protected direct URL is recorded as access-blocked unless the producer separately approves that disclosure.
+- Rule verdict: **merge/supersede** repeated per-package Preview/share approvals into the deployment-cadence rule; **keep** separate Production/alias/`main`/Contact gates because they affect public state, code integration, or user data.
+- Review: external review skipped by direct producer ruling for a docs/governance clarification; the same turn's Preview is independently read back Ready and changes no Production content.
 
 ## 2026-08-11 — Screening Strip navigation repair
 - Branch/base: `codex/screening-strip-navigation` from `cad590e`; source handoff `66a40cd`; Production/`origin/main` stays `eb444a6`; no push, Production, alias, Contact, `main`, or tag action.

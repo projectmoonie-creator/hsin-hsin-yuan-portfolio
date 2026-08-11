@@ -155,8 +155,8 @@
 - Mobile navigation must keep a path to Contact visible at 820px and below. The portfolio is a hiring supplement, so the conversion route cannot disappear on phones.
 - Canonical URLs, Open Graph URLs, `robots.txt`, and `sitemap.xml` must come from the same `SITE_ORIGIN` build value. Do not keep a second hardcoded sitemap or robots file in `public/`.
 - `dist/` is generated build output for Vercel and must stay ignored by git. Commit source files, not generated pages or copied assets.
-- Deployment cadence: when a changed `main` HEAD is releasable under the applicable QA and review gates, surface a Production decision to the producer within seven calendar days; every Production deployment still requires separate explicit producer authorization, and a missed target or silence is never authorization. Unfinished or unapproved work stays off the release candidate (an existing tested default-off flag may be used). In this project, every GitHub `origin` branch push—including `backup/*`—can trigger a Vercel Preview through Git integration; never describe a backup push as non-deploying, and when Preview is unauthorized stop for producer resolution or a proven non-deploying backup lane. After 14 days without a recorded decision, raise a closeout open item to the producer; calendar age alone is not `BLOCKED`.
-- After an explicitly authorized Preview or Production deployment is read back as
+- Deployment cadence: when a changed `main` HEAD is releasable under the applicable QA and review gates, surface a Production decision to the producer within seven calendar days; every Production deployment still requires separate explicit producer authorization, and a missed target or silence is never authorization. Unfinished or unapproved work stays off the release candidate (an existing tested default-off flag may be used). One fresh, static `dist/`-only Preview per completed bounded package is standing-authorized as the normal producer-review handoff after its build, tests, privacy scan, protected-file check, and deployment-manifest inspection pass; it requires no new package-specific approval. If project protection blocks the producer's requested phone review, replacing the Hobby account's sole Shareable Link for that exact Preview is also standing-authorized after disclosing that the previous review link will be revoked; the access-bearing URL stays outside Git. This standing authorization does not include any Git push, source/full-repo deployment, function or Contact activation/submission, Production deployment, alias/custom-domain change, `main` merge/push, destructive Vercel action, or a different access model; stop when a privacy, rights, or security gate fails. In this project, every GitHub `origin` branch push—including `backup/*`—can trigger a Vercel Preview through Git integration, so never describe a backup push as non-deploying. After 14 days without a recorded Production decision, raise a closeout open item to the producer; calendar age alone is not `BLOCKED`.
+- After a standing-authorized Preview or explicitly authorized Production deployment is read back as
   Ready, run the read-only post-publish PageSpeed review in
   `docs/performance/README.md` against the exact accessible URL. Record the
   deployment identity, tested URL, report time/link, CrUX availability, mobile
@@ -164,7 +164,10 @@
   release uses one diagnostic run; a performance package compares the median
   of three fresh runs under matching conditions. One fluctuating lab score is
   neither a release blocker nor permission to change code, deploy, bypass
-  Preview protection, or submit Contact.
+  Preview protection, or submit Contact. Never send an access-bearing Shareable
+  Link to PageSpeed; when protection makes the direct URL untestable, record the
+  online measurement as access-blocked unless the producer separately approves
+  disclosing that link to the measurement service.
 
 ## Roadmap Discipline
 
