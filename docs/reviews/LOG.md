@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-11 — Production release through Featured Reel desktop 16:9
+- Producer ruling: Preview modifications accepted as `OK`; Production and canonical alias explicitly authorized. Git push/`main` remained outside the stated action and no Contact POST was authorized or made.
+- Gates: 174/174, build, six-reel integrity, design audit, Figma/no drift, privacy/diff, prior browser geometry 8/8 and interactions 9/9, plus producer device acceptance pass.
+- Package: isolated 60-file `dist/` + unchanged Contact function + config; 62 files / 96,953,254 bytes / path-list `d6d28e0…ecb9`; protected untracked document excluded.
+- Production: `dpl_Dkver…bLLw` reads Ready/production by ID and canonical alias; `https://hsin-hsin-yuan-portfolio.vercel.app` now resolves to it, replacing `dpl_14E9…ypXq`; Vercel lists `api/contact` on Node 24.
+- Review: Codex `gpt-5.6-sol`/`xhigh` PASS/no findings; Gemini/Claude attempts remained unusable, and the producer's inspected-Preview acceptance is the explicit release ruling rather than a false dual-review claim.
+- PageSpeed: new mobile-English report `euy5bzixwx` was created, but API quota 429 and a persistently loading UI yielded no completed scores/CrUX/baseline comparison; record as external observation incomplete, not as a deployment failure.
+- Durability/open: 18 pre-record commits plus this release record make an expected final 19 unreachable from every origin ref; verdict `PASS_WITH_OPEN_ITEMS` until a separately authorized non-force backup push and optional `main` integration are read back.
+- Next: after durability authorization, open the lo-fi-first light/button microinteraction specification from `df77f1c`; protected file remains `945d4df9…d28fc`.
+
 ## 2026-08-11 — Featured Reel desktop 16:9
 - Branch/base/commit: `codex/featured-reel-16x9` from accepted `059cc8c`; implementation/review handoff `09c1d78`; Production/`origin/main` stays `eb444a6`, with no push, Production, alias, Contact, `main`, or tag action.
 - Root/fix: four canonical records used `fill-card`; all six approved Featured reels now share `centered-16x9` through the existing normalized data → renderer → CSS path, with no slug exception or second truth.

@@ -8,10 +8,9 @@ State: `PASS_WITH_OPEN_ITEMS`
 
 - Local branch `codex/featured-reel-16x9` starts from accepted Archive intent
   handoff `059cc8cc67472aac3c43b9783b1e9c112149a6a7`. Formal
-  Production/`origin/main` remains `eb444a6`, and the closed phase tag remains
-  peeled to `8289389`. No push, Production, alias, Contact, `main`, protected-
-  file, or tag action occurred. Local implementation/review handoff is
-  `09c1d78`.
+  `origin/main` remains `eb444a6`, and the closed phase tag remains peeled to
+  `8289389`. No Git push, Contact POST, `main`, protected-file, or tag action
+  occurred. Local implementation/review handoffs are `09c1d78` and `df77f1c`.
 - Root cause is canonical presentation data, not video encoding: Slow Steps,
   Tech Dreamers, My Art, My Voice, and Top Gear used `fill-card`, producing a
   533.75×690.81 (0.7726:1) desktop media surface, while Design & Brand Films
@@ -52,12 +51,37 @@ State: `PASS_WITH_OPEN_ITEMS`
   `4df9dc34110193a4a51638f37ac224ab7c8abefdaa378a9d4ade0676f3e88a81`.
   Creating it revoked the prior Archive Preview share link under the Hobby
   account's one-link limit.
-- Local verdict is `PASS_WITH_OPEN_ITEMS`. Exact next action: producer opens
-  the delivered Shareable Link on desktop and phone and confirms all six large
-  Featured poster/reel surfaces are 16:9 while panel geometry, crops, playback,
-  taps, scrolling, and destination behavior remain acceptable. Production,
-  alias, Contact, push, integration, and real-device closeout remain separately
-  gated.
+- The producer inspected the Shareable Link on the target device, accepted the
+  modifications as `OK`, and explicitly authorized Production plus the formal
+  alias on 2026-08-11. This closes the real-device visual/interaction open item
+  and is the producer ruling for release despite the already-recorded Gemini
+  and Claude lane unavailability.
+- Production deployment `dpl_DkverSo4XRigmsw9ksJCHKUCbLLw` reads back
+  `READY`, target `production`; both deployment-ID and canonical-alias lookup
+  resolve to it. The formal site is
+  `https://hsin-hsin-yuan-portfolio.vercel.app`, replacing prior Production
+  `dpl_14E9G3amzXj2iL6xKvQZQWadypXq`. The isolated package contained 60 exact
+  `dist/` files plus the unchanged Contact function and deployment config: 62
+  files / 96,953,254 bytes, sorted path-list SHA-256
+  `d6d28e0912470d98514abe6a236992b735f4f5c199d87837215b4145c94decb9`.
+  Vercel lists `api/contact` on Node 24; no Contact POST occurred, and the
+  protected document never entered the deployment package.
+- Post-publish PageSpeed mobile English attempt created report
+  `https://pagespeed.web.dev/analysis/https-hsin-hsin-yuan-portfolio-vercel-app-en/euy5bzixwx?form_factor=mobile`
+  at 2026-08-11 23:17:54 +08:00, but the public API returned quota 429 and the
+  report UI remained loading through the final wait window. No new score,
+  metric, CrUX claim, or baseline comparison is represented as complete; this
+  external observation failure does not contradict the Ready deployment.
+- Release verdict remains `PASS_WITH_OPEN_ITEMS`, not formal phase `PASS`:
+  the pre-record release checkpoint returned 18 from
+  `git rev-list --count HEAD --not --remotes=origin`; this release-record commit
+  adds one, so final post-record verification must read 19. The Hero, Featured
+  performance/intent, Screening navigation, Archive intent, 16:9, and release
+  record are not yet durably reachable from an origin ref. Exact next action:
+  obtain explicit producer authorization for a non-force dated backup push and
+  optional `main` integration, read back the remote tip, then begin the bounded
+  lo-fi light/button microinteraction specification from this accepted
+  checkpoint. No light implementation starts before that proposal is approved.
 
 ## Prior Accepted Work Package — Archive Reel Intent Playback
 
