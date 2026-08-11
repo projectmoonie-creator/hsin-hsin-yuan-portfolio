@@ -1,7 +1,8 @@
-import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readFileSync, statSync } from "node:fs";
 import { join, posix } from "node:path";
+
+import { inspectMediaSync } from "./media-inspector.mjs";
 
 const COLLECTION_FIELDS = Object.freeze({
   featured: Object.freeze(["featuredReelUrl"]),
@@ -182,34 +183,17 @@ function topLevelAtomOffsets(bytes) {
 
 export function probeMediaAsset(filePath) {
   const bytes = readFileSync(filePath);
-  const ffprobe = JSON.parse(execFileSync("ffprobe", [
-    "-v", "error",
-    "-show_entries",
-    "format=duration:stream=codec_name,codec_type,width,height,pix_fmt,color_space,color_transfer,color_primaries",
-    "-of", "json",
-    filePath,
-  ], { encoding: "utf8" }));
-  const streams = ffprobe.streams || [];
-  const video = streams.find((stream) => stream.codec_type === "video") || {};
+  const inspected = inspectMediaSync(filePath, bytes);
   const atomOffsets = topLevelAtomOffsets(bytes);
   const moovOffset = atomOffsets.get("moov");
   const mdatOffset = atomOffsets.get("mdat");
-  const duration = Number(ffprobe.format?.duration);
   return {
     size: statSync(filePath).size,
     sha256: createHash("sha256").update(bytes).digest("hex"),
-    duration: Number.isFinite(duration) ? duration : null,
-    streamCount: streams.length,
-    audioStreamCount: streams.filter((stream) => stream.codec_type === "audio").length,
-    video: {
-      codecName: video.codec_name,
-      width: video.width,
-      height: video.height,
-      pixelFormat: video.pix_fmt,
-      colorSpace: video.color_space,
-      colorTransfer: video.color_transfer,
-      colorPrimaries: video.color_primaries,
-    },
+    duration: inspected.duration,
+    streamCount: inspected.streamCount,
+    audioStreamCount: inspected.audioStreamCount,
+    video: inspected.video,
     faststart: moovOffset !== undefined && mdatOffset !== undefined
       ? moovOffset < mdatOffset
       : null,

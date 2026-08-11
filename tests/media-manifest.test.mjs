@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
@@ -189,6 +190,53 @@ test("media probing and verification enforce exact manifest integrity", () => {
     () => verifyMediaAsset({ entry: { ...entry, size: entry.size + 1 }, profile, filePath }),
     /exact size/,
   );
+});
+
+function runMediaProbeWithoutSystemPath({ mismatch = false } = {}) {
+  const moduleUrl = new URL("../scripts/lib/media-manifest.mjs", import.meta.url).href;
+  const filePath = join(root, "public/assets/showreel/overclocking-card-reel.mp4");
+  const script = `
+    import { probeMediaAsset, verifyMediaAsset } from ${JSON.stringify(moduleUrl)};
+    const filePath = ${JSON.stringify(filePath)};
+    const entry = {
+      id: "archive.overclocking.reel",
+      size: ${mismatch ? 4085026 : 4085025},
+      sha256: "c5b4a2d83454b00edcd24e5ab14f29056f1586d12b79d9aa8a9e58cf51f75a1f",
+      duration: 10
+    };
+    const profile = {
+      kind: "video",
+      codecName: "h264",
+      width: 1280,
+      height: 720,
+      pixelFormat: "yuv420p",
+      colorSpace: "bt709",
+      colorTransfer: "bt709",
+      colorPrimaries: "bt709",
+      streamCount: 1,
+      audioStreamCount: 0,
+      faststart: true
+    };
+    if (${mismatch}) verifyMediaAsset({ entry, profile, filePath });
+    else process.stdout.write(JSON.stringify(probeMediaAsset(filePath)));
+  `;
+  return spawnSync(process.execPath, ["--input-type=module", "-e", script], {
+    cwd: root,
+    encoding: "utf8",
+    env: { ...process.env, PATH: "" },
+  });
+}
+
+test("media probing uses a project-owned inspector when the system PATH has no FFmpeg tools", () => {
+  const result = runMediaProbeWithoutSystemPath();
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(JSON.parse(result.stdout).video.codecName, "h264");
+});
+
+test("project-owned media inspection keeps exact mismatches fail-closed", () => {
+  const result = runMediaProbeWithoutSystemPath({ mismatch: true });
+  assert.notEqual(result.status, 0);
+  assert.match(result.stderr, /archive\.overclocking\.reel exact size mismatch/);
 });
 
 test("repository media manifest stays linked to every registered content owner", () => {

@@ -1,9 +1,9 @@
-import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { basename, extname, join, posix, relative, resolve } from "node:path";
 
 import { assertPublicJpegMetadataSafe } from "./jpeg-metadata.mjs";
+import { inspectMediaSync } from "./media-inspector.mjs";
 
 export const HERO_DELIVERY_FORMATS = Object.freeze({
   avif: Object.freeze({ extension: "avif", type: "image/avif", codecName: "av1" }),
@@ -123,22 +123,16 @@ function publicFilePath(root, src) {
 }
 
 function probeImage(filePath) {
-  const result = JSON.parse(execFileSync("ffprobe", [
-    "-v", "error",
-    "-select_streams", "v:0",
-    "-show_entries", "stream=codec_name,width,height:stream_tags:format_tags",
-    "-of", "json",
-    filePath,
-  ], { encoding: "utf8" }));
-  const stream = result.streams?.[0];
-  if (!stream) throw new Error(`No decodable image stream: ${filePath}`);
-  const tagKeys = [
-    ...Object.keys(stream.tags || {}),
-    ...Object.keys(result.format?.tags || {}),
-  ].map((key) => key.toLowerCase());
-  const privateTag = tagKeys.find((key) => /gps|location|author|artist|comment|description|copyright|creation/.test(key));
+  const bytes = readFileSync(filePath);
+  const inspected = inspectMediaSync(filePath, bytes);
+  const privateTag = inspected.metadataKeys
+    .find((key) => /gps|location|author|artist|comment|description|copyright|creation/.test(key));
   if (privateTag) throw new Error(`Hero derivative contains private metadata tag ${privateTag}: ${filePath}`);
-  return stream;
+  return {
+    codec_name: inspected.video.codecName,
+    width: inspected.video.width,
+    height: inspected.video.height,
+  };
 }
 
 export function verifyHeroSource({ root, heroMedia }) {
