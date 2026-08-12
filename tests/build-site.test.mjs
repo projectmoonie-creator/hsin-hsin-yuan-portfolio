@@ -1184,6 +1184,117 @@ test("archive reel styling keeps the poster visible until playback is confirmed"
   );
 });
 
+test("Studio Cue opts in once per tab before CSS and fails open", () => {
+  const site = loadSiteData(root);
+  const works = loadWorks(join(root, "content/works"));
+  const html = renderPage({ lang: "en", site, works });
+  const zhHtml = renderPage({ lang: "zh", site, works });
+  const bootstrapMatch = html.match(
+    /<script data-studio-cue-bootstrap>([\s\S]*?)<\/script>/,
+  );
+
+  assert.ok(bootstrapMatch, "the synchronous head bootstrap must be present");
+  const bootstrap = bootstrapMatch[1];
+  assert.ok(
+    html.indexOf("data-studio-cue-bootstrap")
+      < html.indexOf('rel="stylesheet"'),
+    "the opt-in must run before CSS can hide an eligible Hero",
+  );
+  assert.match(bootstrap, /portfolio:studio-cue:v1/);
+  assert.match(bootstrap, /matchMedia\("\(prefers-reduced-motion: reduce\)"\)\.matches/);
+  assert.match(bootstrap, /window\.sessionStorage\.getItem\(key\)/);
+  assert.match(bootstrap, /window\.sessionStorage\.setItem\(key, "played"\)/);
+  assert.match(bootstrap, /root\.classList\.add\("studio-cue"\)/);
+  assert.match(bootstrap, /catch \{/);
+  assert.match(bootstrap, /root\.classList\.remove\("studio-cue"\)/);
+  assert.ok(
+    bootstrap.indexOf('setItem(key, "played")')
+      < bootstrap.indexOf('classList.add("studio-cue")'),
+    "storage must succeed before any content may enter an animated state",
+  );
+  assert.doesNotMatch(
+    bootstrap,
+    /addEventListener|requestAnimationFrame|pointer|scroll|resize/,
+  );
+  assert.doesNotMatch(html, /<html[^>]*class="[^"]*studio-cue/);
+  assert.match(html, /class="nav-contact contact-tally" href="#contact"/);
+  assert.match(zhHtml, /class="nav-contact contact-tally" href="#contact"/);
+  assert.equal(html.match(/contact-tally/g)?.length, 1);
+  assert.equal(zhHtml.match(/contact-tally/g)?.length, 1);
+});
+
+test("Studio Cue and Contact tally keep motion bounded and accessible", () => {
+  const css = readFileSync(join(root, "src/styles.css"), "utf8");
+  const rise = css.match(
+    /@keyframes studioCueRise \{[\s\S]*?\n  \}/,
+  )?.[0] || "";
+  const light = css.match(
+    /@keyframes studioCueLight \{[\s\S]*?\n  \}/,
+  )?.[0] || "";
+
+  assert.match(
+    css,
+    /\.hero::before \{[\s\S]*?rgba\(247, 242, 232, 0\.07\)[\s\S]*?at 100% 0%[\s\S]*?opacity: 0;[\s\S]*?pointer-events: none;[\s\S]*?position: absolute;/,
+  );
+  assert.match(
+    css,
+    /html\.studio-cue \.hero-media \{[^}]*animation: studioCueRise 320ms cubic-bezier\(0\.22, 1, 0\.36, 1\) 0ms both;/,
+  );
+  assert.match(
+    css,
+    /html\.studio-cue \.hero-content > \.eyebrow,\s*html\.studio-cue \.hero-content > h1 \{[^}]*animation: studioCueRise 320ms cubic-bezier\(0\.22, 1, 0\.36, 1\) 60ms both;/,
+  );
+  assert.match(
+    css,
+    /html\.studio-cue \.hero-roles,\s*html\.studio-cue \.hero-subcopy \{[^}]*animation: studioCueRise 320ms cubic-bezier\(0\.22, 1, 0\.36, 1\) 120ms both;/,
+  );
+  assert.match(
+    css,
+    /html\.studio-cue \.hero::before \{[^}]*animation: studioCueLight 480ms ease-out 940ms both;/,
+  );
+  assert.match(rise, /opacity: 0;/);
+  assert.match(rise, /transform: translateY\(8px\);/);
+  assert.match(rise, /opacity: 1;/);
+  assert.match(rise, /transform: translateY\(0\);/);
+  assert.match(light, /opacity: 0;/);
+  assert.match(light, /opacity: 1;/);
+  assert.doesNotMatch(rise + light, /filter|background|box-shadow|infinite/);
+  assert.doesNotMatch(css, /\.hero-content,\s*\.work-panel/);
+  assert.match(
+    css,
+    /\.work-panel,\s*\.archive-card,\s*\.collab-item,\s*\.contact-content \{[^}]*animation: rise 700ms ease both;/,
+  );
+  assert.match(
+    css,
+    /@media \(max-width: 820px\) \{[\s\S]*?\.hero::before \{[\s\S]*?at 0% 0%[\s\S]*?rgba\(247, 242, 232, 0\.045\)[\s\S]*?\}/,
+  );
+  assert.match(
+    css,
+    /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*?html\.studio-cue \.hero-media,[\s\S]*?animation: none;[\s\S]*?opacity: 1;[\s\S]*?transform: none;[\s\S]*?html\.studio-cue \.hero::before \{[^}]*animation: none;[^}]*opacity: 0;/,
+  );
+  assert.match(
+    css,
+    /\.contact-tally::before \{[^}]*transform-origin: center;[^}]*transition: transform 180ms/,
+  );
+  assert.match(
+    css,
+    /\.contact-tally:focus-visible::before \{[^}]*transform: scaleX\(1\.9\);[^}]*transition-duration: 160ms;/,
+  );
+  assert.match(
+    css,
+    /@media \(hover: hover\) and \(pointer: fine\) \{[\s\S]*?\.contact-tally:hover::before \{[^}]*transform: scaleX\(1\.9\);[^}]*transition-duration: 160ms;/,
+  );
+  assert.match(
+    css,
+    /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*?\.contact-tally::before \{[^}]*transition: none;/,
+  );
+  assert.doesNotMatch(
+    css,
+    /\.light-beam-layer|\.light-beam|\.ambient-canvas|\.edge-glow-card|\.edge-light|is-lit|is-guided|mix-blend-mode/,
+  );
+  assert.doesNotMatch(css, /animation: studioCue[^;]*infinite/);
+});
+
 test("renderPage creates bilingual page with scroll-stack works and video fallbacks", () => {
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
@@ -1262,7 +1373,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /Watch official trailer/);
   assert.match(html, /Watch official promo/);
   assert.doesNotMatch(html, /Short-form web drama work across food/);
-  assert.match(html, /class="nav-contact" href="#contact"/);
+  assert.match(html, /class="nav-contact contact-tally" href="#contact"/);
   assert.match(html, /<h2 class="contact-title"><span class="contact-title-line">Let’s build<\/span><span class="contact-title-line"><span class="contact-title-bridge">a story <\/span><span class="contact-title-accent">together\.<\/span><\/span><\/h2>/);
   assert.match(html, /<form class="contact-form" action="\/api\/contact" method="post" data-contact-form>/);
   assert.match(html, /name="startedAt"/);
