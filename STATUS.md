@@ -2,7 +2,29 @@
 
 Updated: 2026-08-12
 
-State: `PASS`
+State: `PASS_WITH_OPEN_ITEMS`
+
+## Current Bounded Package — Mobile Preview Network Budget
+
+- The producer accepted the proposed next package with `好` and requested a
+  durable cold-start handoff. Local branch
+  `codex/mobile-preview-network-budget` starts from the closed Production
+  commit `4193498208d74c01a4876f7550642c4cc8c7c3b4`.
+- Matching English mobile PageSpeed reports moved Performance 75→78 and Speed
+  Index 4.1→1.7s while LCP remains 6.7→6.3s, TBT remains 0ms, CLS remains 0,
+  and Accessibility/Best Practices/SEO remain 100. CrUX still has
+  insufficient real-user data.
+- The current report also accounts for 12,510 KiB rather than 3,197 KiB and
+  contains HTTP 206 requests for both Slow Steps MP4 sources (about 7.43 MB
+  desktop fallback plus 2.29 MB mobile derivative). This is a reproducible-
+  diagnosis target, not yet a claim about exact normal-visitor bytes.
+- The authoritative scope, frozen experience contract, three-run method,
+  implementation authority, acceptance gates, and stop conditions are in
+  `docs/performance/mobile-preview-network-budget-handoff-2026-08-12.md`.
+  Diagnosis is authorized now; only a reproduced and classified finding may
+  proceed to the smallest test-first local fix. Git push, `main`, Production,
+  aliases, Contact, destructive Vercel actions, and protected-file changes
+  remain unauthorized.
 
 ## Current Baseline — 2026-08-12 Phase Closed And Production-Authorized
 
@@ -1406,6 +1428,10 @@ Current design/Figma rules are aligned and Figma output is unchanged.
 
 ## Accepted Open Items
 
+- A bounded mobile preview network-budget package is open. Its first action is
+  three matched cold-cache runs to determine whether both Slow Steps MP4
+  sources load before user intent and whether the cause is runtime behavior or
+  the measurement harness. Do not optimize toward an arbitrary PageSpeed 100.
 - PageSpeed report `0gzingp9bc` measured Vercel's login page and is retired as
   invalid portfolio evidence. A future PageSpeed retry is optional only
   against an independently public URL; the Shareable Link token must not be
@@ -1428,18 +1454,19 @@ SHA-256:
 
 ## Exact Next Action
 
-After the authorized remote and Production readback completes, start no new
-implementation implicitly. The next session verifies that
-`portfolio-phase-2026-08-12-closed`, the dated backup, active branch, and
-`origin/main` resolve to the same closeout commit and that the canonical
-Production alias remains Ready. Then wait for the producer to name the next
-bounded package. Contact submissions, protected-file actions, force pushes,
-and destructive Vercel actions remain unauthorized.
+On `codex/mobile-preview-network-budget`, run three matched cold-cache mobile
+diagnostic runs against the exact closed baseline and classify the apparent
+dual-source/premature Slow Steps transfer before editing runtime. Follow
+`docs/performance/mobile-preview-network-budget-handoff-2026-08-12.md`.
+If the finding is not reproducible, record and stop without a runtime change;
+if it is reproducible, proceed test-first with only the smallest local fix.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and
-   `docs/reviews/LOG.md` plus the two 2026-08-10 closeout reports.
+   `docs/reviews/LOG.md`, the two 2026-08-10 closeout reports,
+   `docs/reviews/portfolio-phase-closeout-2026-08-12.md`, and
+   `docs/performance/mobile-preview-network-budget-handoff-2026-08-12.md`.
 2. Verify annotated tag `portfolio-phase-2026-08-12-closed`, its recorded dated
    backup, `origin/codex/hero-portrait-refresh`, and `origin/main` all resolve
    to the same final closeout commit. The earlier
@@ -1451,10 +1478,9 @@ and destructive Vercel actions remain unauthorized.
    geometry. Its dated report is
    `docs/reviews/portfolio-phase-closeout-2026-08-12.md`; the accepted Preview
    is `dpl_Diifu1JzTyjjuAydEKPLJxFwg76t`.
-5. Read back the canonical Production alias and compare its Git source to the
-   closeout tag. The exact deployment ID is external post-commit evidence by
-   design, because committing it would trigger another docs-only Production.
-   Start no new package until the producer supplies scope. Future static
+5. The current local work branch is `codex/mobile-preview-network-budget`.
+   Report branch, HEAD, `origin/main`, closed tag, worktree, and protected-file
+   status, then execute the handoff's three-run diagnosis. Future static
    Previews still require proactive Shareable-Link replacement without another
-   question, while Contact submissions, destructive actions, and protected-
-   file changes remain separately unauthorized.
+   question, while Git push, `main`, Production, Contact, destructive actions,
+   and protected-file changes remain separately unauthorized.
