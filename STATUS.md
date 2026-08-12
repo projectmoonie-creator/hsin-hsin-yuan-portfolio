@@ -4,37 +4,55 @@ Updated: 2026-08-12
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Studio Cue Implementation Plan
+## Current Work Package — Studio Cue + Contact Tally Implementation
 
-- Hero portrait F is safely closed locally at
-  `f0c2f9cd48bad123dedc78e27820fa6c0987d0bc` on
-  `codex/hero-portrait-refresh`; that commit remains unpushed by explicit
-  boundary. `origin/main` remains `7d76b891240d2a0850b14d4159052ef5bbca3273`.
-- The producer approved the `Studio Cue + Contact tally` direction: a
-  three-beat Hero fade/rise, then a Hero-bounded softbox-light cue, plus one
-  compact tally interaction on the existing header Contact pill.
-- The producer's 2026-08-12 instruction to continue approves the written lo-fi
-  specification and advances the package to planning only. It does not
-  authorize interface implementation.
-- The written lo-fi contract is
-  `docs/superpowers/specs/2026-08-12-studio-cue-light-button-microinteraction-design.md`.
-  It fixes desktop, tablet, mobile, reduced-motion, no-JavaScript, repeat-visit,
-  performance, focus, contrast, retired-fingerprint, timebox, and rollback
-  rules before any interface edit.
-- The bounded executable plan is
-  `docs/superpowers/plans/2026-08-12-studio-cue-light-button-microinteraction.md`.
-  It locks TDD RED→GREEN, the synchronous fail-open bootstrap, exact CSS
-  choreography, an 8-case Playwright matrix, full gates, local records,
-  rollback, and the final standing-authorized static Preview sequence.
-- The package is docs-only. No HTML, CSS, JavaScript, Figma current reference,
-  media, copy, Contact, Preview, Production, alias, Git push, `main`, or tag
-  change is authorized or performed.
-- Docs-only validation passes 177/177 tests and `git diff --check`; the runtime
-  path diff from `f0c2f9c` is empty. The protected untracked document remains
-  byte-safe at its required SHA-256.
-- Exact next action: producer reviews the implementation plan and separately
-  authorizes one execution mode. Until then, implementation and deployment
-  remain gated.
+- Producer authorization is the exact instruction `核准實作，選 2`, received
+  2026-08-12 08:02:37 +08:00. It authorizes inline execution of the bounded
+  plan only. It does not authorize Git push, `main`, Production, alias, Contact,
+  tag, protected-file, or other external changes.
+- The package remains on local `codex/hero-portrait-refresh` above Hero F
+  closeout `f0c2f9cd48bad123dedc78e27820fa6c0987d0bc`; `origin/main` remains
+  `7d76b891240d2a0850b14d4159052ef5bbca3273`. The plan-portability remediation
+  is `4fba180b10b8e59d84d22d06d61ce50cb31ea59c`.
+- TDD RED is reproducible at
+  `c6d85ac2bdf1391ac4acb03f87fcb18afb5eb7a1`; both new Studio Cue contract
+  tests fail there for the absent bootstrap/light/tally contract. The smallest
+  GREEN implementation is
+  `57acb905ab8bd9bb2662fab4c7064c1312bf8b10` and changes only
+  `scripts/build-site.mjs` plus `src/styles.css`.
+- Runtime behavior is first-view-only per tab: a synchronous, fail-open head
+  bootstrap opts eligible sessions into three 320ms opacity/8px entrance
+  beats; a neutral Hero-bounded softbox surface begins after 940ms for 480ms.
+  Repeat, reduced-motion, no-JavaScript, and storage-failure paths are static.
+  The existing Contact dot uses a transform-only 1.9× tally on keyboard focus
+  and fine-pointer hover without changing pill geometry.
+- Focused GREEN passes 2/2. Fresh full validation passes 179/179 tests,
+  `npm run build`, `npm run audit:design-contract`, `npm run figma:export`,
+  `npm run featured-reels:check`, Hero delivery/media 7/7,
+  `git diff --check`, generated-output privacy scans, and
+  `npm audit --omit=dev` with zero vulnerabilities. Figma export creates no
+  tracked drift; runtime scope from Hero F is exactly build renderer, CSS, and
+  their contract test.
+- Native Chromium passes 8/8 English/Chinese desktop, tablet, mobile, narrow,
+  reduced-motion, no-JavaScript, and storage-failure cases at 0/440/940/1420ms.
+  First view runs six bounded Studio Cue animations; anchor navigation does not
+  restart them; reload and language navigation do not opt in. Headless history
+  return used a fresh document rather than BFCache (counter reset to 0), but
+  remained unopted with `animation-name: none`, proving no replay. All cases
+  have zero Contact requests, console/page errors, overflow, or light-specific
+  resource requests.
+- Matched 3× desktop/mobile performance passes: median LCP 88→84ms and
+  84→80ms; median long-task duration 63→62ms and 62→64ms; resource counts stay
+  exactly 20/21. Visual inspection accepts quiet paired desktop/tablet spill,
+  one upper-left mobile spill, natural portrait-F skin tone and contrast,
+  seamless bottom fade, stable Contact geometry, and no neon-beam reading.
+- The protected untracked document remains outside the index and byte-identical
+  at SHA-256
+  `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+  Local verdict is `PASS_WITH_OPEN_ITEMS`: the single standing-authorized
+  static `dist/`-only Preview still needs construction/readback, followed by
+  producer visual inspection. Exact next action is that Preview only; do not
+  touch Production or any other gated boundary.
 
 ## Prior Local Work Package — Hero Portrait Refresh (Producer-selected F)
 
@@ -1237,17 +1255,15 @@ Current design/Figma rules are aligned and Figma output is unchanged.
 
 ## Accepted Open Items
 
-- Producer inspection of selected portrait F in the real responsive Hero is
-  the only open item in the current package. The prior Hero LCP package is
-  already part of the accepted Production baseline; a fresh PageSpeed retry is
-  optional observational evidence and not a release claim or blocker.
-- One restrained lighting treatment and/or one button microinteraction remains
-  deferred until after the Hero performance package. It is optional refinement,
-  not missing behavior in the closed public baseline.
-- Any visual experiment begins lo-fi-first and separately defines desktop,
-  mobile performance, focus visibility, contrast, and reduced-motion behavior.
-  It remains off the website until the producer approves implementation and a
-  later Preview/Production decision.
+- Construct and read back the one standing-authorized static `dist/`-only
+  Studio Cue Preview, then hand its access URL to the producer without fetching
+  the deployed site or changing Production, alias, Git refs, or Contact.
+- Producer inspects the Studio Cue sequence, portrait F, mobile single spill,
+  and Contact tally on the target device. Production remains a later explicit
+  decision even if the Preview is accepted.
+- The prior Hero LCP package is already part of the accepted Production
+  baseline; a fresh PageSpeed retry is optional observational evidence and not
+  a release claim or blocker.
 - The offline Chinese manager directory contains a Numbers file and a recovered
   XLSX rather than the originally recorded XLSX path. Before any future
   Chinese-copy import, the producer selects one authority and exports a fresh
@@ -1265,12 +1281,13 @@ SHA-256:
 
 ## Exact Next Action
 
-Producer reviews
-`docs/superpowers/plans/2026-08-12-studio-cue-light-button-microinteraction.md`.
-If approved, separately authorize implementation and select the execution
-mode; do not implement or deploy the Studio Cue before that authorization.
-Production, alias, `main`, any Git push, Contact/functions, and destructive
-Vercel actions remain separately gated.
+Construct an isolated static package from fresh `dist/`, verify that it contains
+no function, Contact, source, review, environment, or protected-file payload,
+deploy exactly one standing-authorized Vercel Preview, and read back its Preview
+identity without fetching the deployed URL. Then provide its access URL to the
+producer for visual inspection. Production, alias, `main`, any Git push,
+Contact/functions, tag, protected-file, and destructive Vercel actions remain
+separately gated.
 
 ## Cold Resume
 
@@ -1283,11 +1300,12 @@ Vercel actions remain separately gated.
    integration records otherwise.
 3. Verify the protected file above remains untracked and matches its exact
    SHA-256 before changing anything.
-4. Resume local branch `codex/hero-portrait-refresh`. Hero F is closed in local
-   commit `f0c2f9c`; the subsequent docs-only Studio Cue specification and plan
-   packages also remain unpushed. No Preview or remote ref exists for them.
-5. One fresh static `dist/`-only Preview is standing-authorized after gates
-   pass, but this does not authorize any Git push. Every branch push can trigger
-   Vercel; `main` pushes are now known to trigger Production automatically.
-   Production, alias, `main`, Git push, Contact/functions, destructive actions,
-   and broader access changes remain separately gated.
+4. Resume local branch `codex/hero-portrait-refresh`. Hero F is closed at
+   `f0c2f9c`; Studio Cue RED/GREEN are `c6d85ac`/`57acb90`. Local implementation
+   gates pass and the branch remains unpushed.
+5. One fresh static `dist/`-only Studio Cue Preview is the exact next action
+   under standing authorization. This does not authorize any Git push. Every
+   branch push can trigger Vercel; `main` pushes are now known to trigger Production automatically.
+   Production, alias, `main`, Git push,
+   Contact/functions, destructive actions, and broader access changes remain
+   separately gated.

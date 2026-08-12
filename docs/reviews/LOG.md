@@ -4,15 +4,14 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
-## 2026-08-12 — Studio Cue light/button specification and plan
-- Branch/baseline: local `codex/hero-portrait-refresh` from Hero F closeout `f0c2f9c`; `origin/main` remains `7d76b89`, and no Git push or external action is authorized.
-- Direction: producer approved `Studio Cue + Contact tally`—three bounded Hero entrance beats, then one delayed Hero-only softbox cue, plus a compact tally state on the existing header Contact pill.
-- Visual preservation: current type, palette, spacing, Hero F crop/slow push, layout, button geometry, bilingual copy, media, and Figma current-reference output remain unchanged.
-- Responsive/fallback: paired desktop/tablet light, one neutral mobile spill, immediate static reduced-motion/no-JS fallback, first-view-only replay rule, and unchanged visible keyboard focus.
-- Safety/validation: zero new request/asset/dependency; opacity/transform only; no global beam, Canvas/WebGL, blur, pointer/scroll tracking, infinite ambient motion, or retired light fingerprint. Docs-only gates pass 177/177 tests and diff checks with an empty runtime-path diff; the protected hash is exact.
-- Contract/plan: the producer's instruction to continue approves `docs/superpowers/specs/2026-08-12-studio-cue-light-button-microinteraction-design.md` for planning only; `docs/superpowers/plans/2026-08-12-studio-cue-light-button-microinteraction.md` locks exact RED→GREEN code, 8-case browser/visual gates, 90-minute timebox, rollback, and static Preview sequence.
-- Review/boundary: docs-only package awaiting plan review and separate implementation authorization; external review skipped because no active interface or public output changed. No implementation, Preview, Production, alias, Contact, `main`, tag, or protected-file action occurred.
-- Exact next: producer reviews the plan and explicitly chooses an execution mode; implementation and deployment remain gated until then.
+## 2026-08-12 — Studio Cue + Contact tally implementation
+- Authorization/boundary: producer said `核准實作，選 2` at 2026-08-12 08:02:37 +08:00, authorizing inline execution only; local branch stays `codex/hero-portrait-refresh`, `origin/main` stays `7d76b89`, and push/`main`/Production/alias/Contact/tag/protected-file actions remain gated.
+- TDD/commits: RED `c6d85ac2bdf1391ac4acb03f87fcb18afb5eb7a1`; smallest GREEN `57acb905ab8bd9bb2662fab4c7064c1312bf8b10`; plan portability fix `4fba180`. Runtime scope is exactly renderer + CSS, with one contract-test file from Hero F.
+- Interaction: first eligible tab visit runs three 320ms opacity/8px Hero beats, then a neutral Hero-only 480ms softbox cue after 940ms; Contact's existing dot becomes a transform-only 1.9× tally on focus/fine hover without geometry change. Repeat/reduced/no-JS/storage-failure states stay static.
+- Gates: focused 2/2, full 179/179, build, design audit, Figma/no drift, six-reel integrity, Hero 7/7, diff/privacy, and zero-vulnerability dependency audit pass. Protected untracked hash remains exact at `945d4df9…d28fc`.
+- Browser: 8/8 EN/ZH desktop/tablet/mobile/narrow/reduced/no-JS/storage-failure cases and four phase captures pass with zero Contact requests, errors, overflow, or light resources. Reload/language/history return do not replay; headless history used fresh-document restore and remained unopted/static.
+- Performance/visual: matched 3× LCP desktop 88→84ms, mobile 84→80ms; long task 63→62ms and 62→64ms; resources remain 20/21. Visual inspection accepts quiet neutral paired spill, single mobile spill, natural portrait F, seamless fade, stable tally, and no neon beam.
+- Verdict/next: local `PASS_WITH_OPEN_ITEMS`; construct/read back the one standing-authorized isolated static `dist/`-only Preview and hand it to the producer. No deployed URL fetch, Production, alias, Git push, `main`, Contact, tag, or protected-file action.
 
 ## 2026-08-12 — Hero portrait refresh (selected F)
 - Branch/base: local-only `codex/hero-portrait-refresh` from Production-aligned `origin/main` `7d76b891…3273`; no Preview, push, Production, alias, `main`, Contact, or tag action.
