@@ -36,7 +36,7 @@
   "featuredReelRightsStatus": "user-supplied-local-source",
   "figmaPosterImage": "/assets/portfolio/tech-dreamers-official.webp",
   "presentation": {
-    "desktopMediaVariant": "centered-16x9",
+    "desktopMediaVariant": "fill-poster-16x9-reel",
     "mobileMediaAspect": "16:9",
     "siteTitleOverlay": "none",
     "sourceArtworkTitle": "present"

@@ -420,6 +420,17 @@ test("featured normalization preserves evidence and renderer compatibility", () 
   }));
   assert.equal(centered.featuredMediaAspect, "16:9");
   assert.equal(centered.hideMediaLabel, true);
+
+  const switching = normalizeFeaturedWork(featured({
+    presentation: {
+      desktopMediaVariant: "fill-poster-16x9-reel",
+      mobileMediaAspect: "16:9",
+      siteTitleOverlay: "none",
+      sourceArtworkTitle: "present",
+    },
+  }));
+  assert.equal(Object.hasOwn(switching, "featuredMediaAspect"), false);
+  assert.equal(switching.presentation.desktopMediaVariant, "fill-poster-16x9-reel");
 });
 
 test("featured reel contracts require one complete approved triplet and keep provenance private", () => {
@@ -736,6 +747,7 @@ test("field classes and allowed presentation variants are explicit", () => {
   assert.deepEqual(PRESENTATION_VARIANTS.featured.desktopMediaVariant, [
     "fill-card",
     "centered-16x9",
+    "fill-poster-16x9-reel",
   ]);
   assert.deepEqual(PRESENTATION_VARIANTS.featured.sourceArtworkTitle, [
     "present",
@@ -755,12 +767,12 @@ test("field classes and allowed presentation variants are explicit", () => {
 test("Featured source records declare approved variants without legacy inference fields", () => {
   const works = readWorkSources();
   const expected = new Map([
-    ["slow-steps", ["centered-16x9", "absent"]],
-    ["tech-dreamers", ["centered-16x9", "present"]],
-    ["my-art-my-voice", ["centered-16x9", "present"]],
+    ["slow-steps", ["fill-poster-16x9-reel", "absent"]],
+    ["tech-dreamers", ["fill-poster-16x9-reel", "present"]],
+    ["my-art-my-voice", ["fill-poster-16x9-reel", "present"]],
     ["interior-spatial-brand-films", ["centered-16x9", "absent"]],
     ["pts-taigi-bus", ["centered-16x9", "present"]],
-    ["top-gear-china-uk-special", ["centered-16x9", "present"]],
+    ["top-gear-china-uk-special", ["fill-poster-16x9-reel", "present"]],
   ]);
 
   assert.equal(works.length, expected.size);

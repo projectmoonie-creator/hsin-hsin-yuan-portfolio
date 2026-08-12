@@ -2,7 +2,11 @@ import { deriveHeroDelivery } from "./hero-image-delivery.mjs";
 
 export const PRESENTATION_VARIANTS = Object.freeze({
   featured: Object.freeze({
-    desktopMediaVariant: Object.freeze(["fill-card", "centered-16x9"]),
+    desktopMediaVariant: Object.freeze([
+      "fill-card",
+      "centered-16x9",
+      "fill-poster-16x9-reel",
+    ]),
     mobileMediaAspect: Object.freeze(["16:9"]),
     siteTitleOverlay: Object.freeze(["none"]),
     sourceArtworkTitle: Object.freeze(["present", "absent"]),
