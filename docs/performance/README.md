@@ -62,3 +62,13 @@ Ready. It does not authorize deployment or remediation.
 - Primary diagnosis: Hero still is the LCP element; image priority, responsive
   delivery, and the non-composited background-position/background-size slow
   push are the first-party P0 path.
+
+## Closed Diagnosis — 2026-08-12 Mobile Preview Network Budget
+
+The bounded follow-up to the later 12,510 KiB PageSpeed signal is closed with
+`NO_RUNTIME_CHANGE`. Nine valid matched local runs did not reproduce a Slow
+Steps desktop-fallback request or dual-source transfer. They observed only the
+existing one-candidate mobile metadata warm. Exact machine evidence and the
+stop decision are recorded in
+`mobile-preview-network-budget-diagnosis-2026-08-12.md` and
+`../reviews/evidence/mobile-preview-network-budget/summary.md`.

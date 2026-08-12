@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-12 — Mobile preview network-budget diagnosis
+- Scope: producer-approved diagnosis only on `codex/mobile-preview-network-budget`; exact runtime stays at closed `4193498`, with no public-output, media, manifest, interaction, Contact, or deployment change.
+- Method: nine retained matched cold mobile runs at 390×844/DPR3, 150ms/1.6Mbps, 4× CPU, new context/storage clear/cache disabled; direct ledgers record every MP4 request, media event, reveal, LCP/TBT/CLS, and user intent.
+- Finding: all nine select the mobile derivative; desktop-fallback and dual-source runs are 0, pre-intent `play()` is 0, and the only early behavior is the approved one-candidate proximity metadata warm.
+- Budget/feel: pre-intent body median is 0B at 3s and 130,500B at 12s; cold intent→`playing`/reveal is 5.49s, 3s lead is 2.07s, settled metadata is 20.7ms; Hero LCP 1.38s, TBT 36–38ms, CLS 0.
+- Decision: PageSpeed's ~7.43MB fallback + ~2.29MB derivative signal is not reproducible in the required median; handoff stop rule applies, so no runtime RED/test/fix or after-run phase is opened.
+- Evidence: raw valid/invalidated ledgers, range server, probe, generator, build fingerprints, and machine summary live under `docs/reviews/evidence/mobile-preview-network-budget/`; dated diagnosis is under `docs/performance/`.
+- Review: external review skipped because this closeout is diagnostic/docs-only, changes no rule/public output, and executes the producer-approved mandatory stop; package verdict `PASS` / `NO_RUNTIME_CHANGE`.
+- External state/next: no Preview, Shareable-Link replacement, Git push, `main`, Production, alias, Contact, destructive action, or protected-file change; wait for new public/CrUX evidence or a separately producer-approved package.
+
 ## 2026-08-12 — Hero F / Studio Cue / Featured geometry phase closeout
 - Producer ruling: accessible cumulative Preview accepted as `預覽 OK`; producer explicitly authorized non-force backup, closeout, active-branch push, `main`, annotated tag, and Production.
 - Scope: closes the linear phase above `origin/main` `7d76b89` containing Hero F, bounded first-view Studio Cue + Contact-dot tally, proactive Shareable-Link governance, and four-card full-poster/16:9-playing geometry; no Contact logic/submission, copy, unrelated media, or protected-file change.

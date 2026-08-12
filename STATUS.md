@@ -4,27 +4,38 @@ Updated: 2026-08-12
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Bounded Package — Mobile Preview Network Budget
+## Current Bounded Package — Mobile Preview Network Budget Closed
 
-- The producer accepted the proposed next package with `好` and requested a
-  durable cold-start handoff. Local branch
-  `codex/mobile-preview-network-budget` starts from the closed Production
-  commit `4193498208d74c01a4876f7550642c4cc8c7c3b4`.
-- Matching English mobile PageSpeed reports moved Performance 75→78 and Speed
-  Index 4.1→1.7s while LCP remains 6.7→6.3s, TBT remains 0ms, CLS remains 0,
-  and Accessibility/Best Practices/SEO remain 100. CrUX still has
-  insufficient real-user data.
-- The current report also accounts for 12,510 KiB rather than 3,197 KiB and
-  contains HTTP 206 requests for both Slow Steps MP4 sources (about 7.43 MB
-  desktop fallback plus 2.29 MB mobile derivative). This is a reproducible-
-  diagnosis target, not yet a claim about exact normal-visitor bytes.
-- The authoritative scope, frozen experience contract, three-run method,
-  implementation authority, acceptance gates, and stop conditions are in
-  `docs/performance/mobile-preview-network-budget-handoff-2026-08-12.md`.
-  Diagnosis is authorized now; only a reproduced and classified finding may
-  proceed to the smallest test-first local fix. Git push, `main`, Production,
-  aliases, Contact, destructive Vercel actions, and protected-file changes
-  remain unauthorized.
+- The producer-approved diagnosis ran on
+  `codex/mobile-preview-network-budget` from the exact closed runtime commit
+  `4193498208d74c01a4876f7550642c4cc8c7c3b4`; its preflight began at the
+  required docs-only handoff child
+  `3a97171913801149550543274b5370eda767276f` with only the protected untracked
+  document in the worktree.
+- Nine valid matched cold mobile runs cover immediate intent, three seconds of
+  no interaction, and twelve seconds of no interaction. Every run selected
+  the manifest-derived mobile Slow Steps derivative. Desktop-fallback requests
+  and dual-source runs are both zero; no pre-intent Slow Steps `play()` occurs.
+- The existing proximity warm starts one mobile metadata request after Hero
+  readiness. At the three-second checkpoint its transferred-body median is
+  zero; at twelve seconds it is 130,500 bytes. The same-URL zero-byte abort and
+  HTTP 206 transition are not two responsive sources.
+- Immediate no-lead cold intent reaches `playing`/poster reveal in a 5.49s
+  median. Three-second lead reaches 2.07s, and a settled twelve-second metadata
+  warm reaches 20.7ms. Hero LCP remains 1.38s, synthetic long-task blocking is
+  36–38ms, and CLS is zero under the matched local harness.
+- The PageSpeed observation of both Slow Steps sources and multi-megabyte
+  initial video transfer is therefore not reproducible in the required median.
+  Per the handoff stop rule, no runtime test or implementation phase opened;
+  website source, media, manifest, tests, generated public output, interactions,
+  and visual geometry are unchanged.
+- Durable raw ledgers, machine summary, harness audit trail, and the decision
+  are in `docs/reviews/evidence/mobile-preview-network-budget/` and
+  `docs/performance/mobile-preview-network-budget-diagnosis-2026-08-12.md`.
+  Package verdict: `PASS` / `NO_RUNTIME_CHANGE`. No Preview is needed because
+  there is no public-output candidate. Git push, `main`, Production, aliases,
+  Contact, destructive Vercel actions, and protected-file changes remain
+  unauthorized.
 
 ## Current Baseline — 2026-08-12 Phase Closed And Production-Authorized
 
@@ -1428,10 +1439,6 @@ Current design/Figma rules are aligned and Figma output is unchanged.
 
 ## Accepted Open Items
 
-- A bounded mobile preview network-budget package is open. Its first action is
-  three matched cold-cache runs to determine whether both Slow Steps MP4
-  sources load before user intent and whether the cause is runtime behavior or
-  the measurement harness. Do not optimize toward an arbitrary PageSpeed 100.
 - PageSpeed report `0gzingp9bc` measured Vercel's login page and is retired as
   invalid portfolio evidence. A future PageSpeed retry is optional only
   against an independently public URL; the Shareable Link token must not be
@@ -1454,19 +1461,18 @@ SHA-256:
 
 ## Exact Next Action
 
-On `codex/mobile-preview-network-budget`, run three matched cold-cache mobile
-diagnostic runs against the exact closed baseline and classify the apparent
-dual-source/premature Slow Steps transfer before editing runtime. Follow
-`docs/performance/mobile-preview-network-budget-handoff-2026-08-12.md`.
-If the finding is not reproducible, record and stop without a runtime change;
-if it is reproducible, proceed test-first with only the smallest local fix.
+The mobile preview network-budget finding is closed without a runtime change.
+Wait for the producer to name a separate bounded package or for new public/CrUX
+evidence; do not reopen this retired PageSpeed signal, change preview runtime,
+or deploy implicitly.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and
    `docs/reviews/LOG.md`, the two 2026-08-10 closeout reports,
    `docs/reviews/portfolio-phase-closeout-2026-08-12.md`, and
-   `docs/performance/mobile-preview-network-budget-handoff-2026-08-12.md`.
+   both `docs/performance/mobile-preview-network-budget-handoff-2026-08-12.md`
+   and `docs/performance/mobile-preview-network-budget-diagnosis-2026-08-12.md`.
 2. Verify annotated tag `portfolio-phase-2026-08-12-closed`, its recorded dated
    backup, `origin/codex/hero-portrait-refresh`, and `origin/main` all resolve
    to the same final closeout commit. The earlier
@@ -1478,9 +1484,11 @@ if it is reproducible, proceed test-first with only the smallest local fix.
    geometry. Its dated report is
    `docs/reviews/portfolio-phase-closeout-2026-08-12.md`; the accepted Preview
    is `dpl_Diifu1JzTyjjuAydEKPLJxFwg76t`.
-5. The current local work branch is `codex/mobile-preview-network-budget`.
-   Report branch, HEAD, `origin/main`, closed tag, worktree, and protected-file
-   status, then execute the handoff's three-run diagnosis. Future static
-   Previews still require proactive Shareable-Link replacement without another
-   question, while Git push, `main`, Production, Contact, destructive actions,
-   and protected-file changes remain separately unauthorized.
+5. The current local work branch is `codex/mobile-preview-network-budget` and
+   retains the docs-only handoff plus the local diagnostic closeout above the
+   closed remote baseline. Report branch, HEAD, origin reachability, worktree,
+   and protected-file status, then wait for a new producer-named package.
+   Future static Previews still require proactive Shareable-Link replacement
+   without another question, while Git push, `main`, Production, Contact,
+   destructive actions, and protected-file changes remain separately
+   unauthorized.

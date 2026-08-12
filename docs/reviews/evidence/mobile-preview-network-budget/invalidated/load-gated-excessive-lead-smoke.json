@@ -1,0 +1,3896 @@
+{
+  "schema_version": 1,
+  "provenance": {
+    "head": "3a97171913801149550543274b5370eda767276f",
+    "head_parent": "4193498208d74c01a4876f7550642c4cc8c7c3b4",
+    "branch": "codex/mobile-preview-network-budget",
+    "origin_main": "4193498208d74c01a4876f7550642c4cc8c7c3b4",
+    "closed_tag": "4193498208d74c01a4876f7550642c4cc8c7c3b4",
+    "build_files": {
+      "dist/en/index.html": {
+        "bytes": 39714,
+        "sha256": "6b03758c5210c71c44083f1b77d2789d28317c1d3162798880d3cf9bb7a98c10"
+      },
+      "dist/main.js": {
+        "bytes": 37602,
+        "sha256": "bda9d81140a0836e543efdd153302bc1470b801503e73f2023900ab2e48b6212"
+      },
+      "dist/styles.css": {
+        "bytes": 29888,
+        "sha256": "23d2be96f16ce1afcf90a1f72a413987bc7ace56e6cd4b428da85f8924437288"
+      },
+      "dist/assets/showreel/slow-steps-card-reel.mp4": {
+        "bytes": 7427742,
+        "sha256": "6061dceb6e583a5fc20d695b6cb555f4e02a80970b41bda8ec787acb3f3f1174"
+      },
+      "dist/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4": {
+        "bytes": 2293379,
+        "sha256": "a88d19f1f076dcacb81bab606bc7f828f2dd72e7c5f7311afc9f206c6c4beaea"
+      }
+    },
+    "protected_file_sha256": "945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc"
+  },
+  "conditions": {
+    "browser": "Playwright Chromium 148.0.7778.96",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "device_scale_factor": 3,
+    "is_mobile": true,
+    "has_touch": true,
+    "cache_disabled": true,
+    "new_context_and_storage_clear_per_run": true,
+    "network": {
+      "offline": false,
+      "latency": 150,
+      "downloadThroughput": 209715,
+      "uploadThroughput": 96000,
+      "connectionType": "cellular4g"
+    },
+    "network_enforcement": "Chrome DevTools Protocol Network.emulateNetworkConditions",
+    "cpu_throttle_rate": 4,
+    "pre_intent_ms_after_load": 3000,
+    "intent": "programmatic instant scroll followed 50ms later by trusted stationary touchscreen tap",
+    "after_playing_ms": 1200
+  },
+  "summary": {
+    "runs": 3,
+    "all_conditions_matched": true,
+    "dual_source_before_intent_runs": 0,
+    "fallback_before_intent_runs": 0,
+    "mobile_before_intent_runs": 3,
+    "any_mp4_before_intent_runs": 3,
+    "classifications": [
+      "single-source-proximity-warm-before-intent",
+      "single-source-proximity-warm-before-intent",
+      "single-source-proximity-warm-before-intent"
+    ],
+    "target_bytes_before_intent_median": 130500,
+    "target_bytes_at_playing_median": 130500,
+    "tap_to_playing_median_ms": 22.8,
+    "tap_to_reveal_median_ms": 22.9,
+    "poster_to_reveal_median_ms": 24.1,
+    "first_target_request_to_playing_median_ms": 8467.6,
+    "post_intent_request_to_playing_median_ms": null,
+    "lcp_median_ms": 1348,
+    "tbt_median_ms": 37,
+    "cls_median": 0,
+    "timeouts": 0
+  },
+  "results": [
+    {
+      "run": 1,
+      "load_complete_at": 8413.5,
+      "pre_intent_at": 11420.3,
+      "tap_at": 11483.6,
+      "poster_visible_at": 11481.8,
+      "loadedmetadata_at": 7144,
+      "canplay_at": 7144,
+      "playing_at": 11510.9,
+      "reveal_at": 11510.9,
+      "tap_to_playing_ms": 27.3,
+      "tap_to_reveal_ms": 27.3,
+      "poster_to_reveal_ms": 29.1,
+      "first_target_request_to_playing_ms": 8475.7,
+      "post_intent_request_to_playing_ms": null,
+      "lcp_ms": 1348,
+      "tbt_ms": 35,
+      "cls": 0,
+      "timed_out": false,
+      "classification": "single-source-proximity-warm-before-intent",
+      "dual_source_before_intent": false,
+      "fallback_requested_before_intent": false,
+      "mobile_requested_before_intent": true,
+      "any_mp4_requested_before_intent": true,
+      "play_calls_before_intent": 0,
+      "load_calls_before_intent": 1,
+      "all_mp4_bytes_before_intent": 129807,
+      "target_bytes_before_intent": 129807,
+      "target_bytes_at_playing": 129807,
+      "target_bytes_final": 188307,
+      "initial_state": {
+        "at": 8414.900000000373,
+        "scrollY": 0,
+        "frameVisible": false,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 2032.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "0",
+        "videoClass": "featured-reel-video",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": true,
+        "readyState": 4,
+        "networkState": 1,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "pre_intent_state": {
+        "at": 11422.5,
+        "scrollY": 0,
+        "frameVisible": false,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 2032.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "0",
+        "videoClass": "featured-reel-video",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": true,
+        "readyState": 4,
+        "networkState": 1,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "poster_state": {
+        "at": 11481.799999998882,
+        "scrollY": 1840,
+        "frameVisible": true,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 192.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "0",
+        "videoClass": "featured-reel-video",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": true,
+        "readyState": 4,
+        "networkState": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "state_at_playing": {
+        "at": 11522.599999999627,
+        "scrollY": 1840,
+        "frameVisible": true,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 192.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "0",
+        "videoClass": "featured-reel-video is-playing",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled is-reel-playing",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": false,
+        "readyState": 4,
+        "networkState": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "final_state": {
+        "at": 12726.400000000373,
+        "scrollY": 1840,
+        "frameVisible": true,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 192.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "1",
+        "videoClass": "featured-reel-video is-playing",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled is-reel-playing",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": false,
+        "readyState": 3,
+        "networkState": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "requests_before_intent": [
+        {
+          "request_id": "11677.42",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3035.2,
+          "response_headers_at": null,
+          "first_data_at": null,
+          "request_to_first_data_ms": null,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": null,
+          "content_range": null,
+          "content_length": null,
+          "data_received_bytes": 0,
+          "encoded_data_received_bytes": 0,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "script",
+            "stack": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "6",
+                  "url": "http://127.0.0.1:4194/main.js?v=3e87534b8a14",
+                  "lineNumber": 462,
+                  "columnNumber": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "request_id": "11677.43",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3039.5,
+          "response_headers_at": 5891.2,
+          "first_data_at": 5932.0,
+          "request_to_first_data_ms": 2892.5,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": 206,
+          "content_range": "bytes 0-2293378/2293379",
+          "content_length": "2293379",
+          "data_received_bytes": 131307,
+          "encoded_data_received_bytes": 129807,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "parser",
+            "url": "http://127.0.0.1:4194/en/",
+            "lineNumber": 605,
+            "columnNumber": 8
+          }
+        }
+      ],
+      "requests_at_playing": [
+        {
+          "request_id": "11677.42",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3035.2,
+          "response_headers_at": null,
+          "first_data_at": null,
+          "request_to_first_data_ms": null,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": null,
+          "content_range": null,
+          "content_length": null,
+          "data_received_bytes": 0,
+          "encoded_data_received_bytes": 0,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "script",
+            "stack": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "6",
+                  "url": "http://127.0.0.1:4194/main.js?v=3e87534b8a14",
+                  "lineNumber": 462,
+                  "columnNumber": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "request_id": "11677.43",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3039.5,
+          "response_headers_at": 5891.2,
+          "first_data_at": 5932.0,
+          "request_to_first_data_ms": 2892.5,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": 206,
+          "content_range": "bytes 0-2293378/2293379",
+          "content_length": "2293379",
+          "data_received_bytes": 131307,
+          "encoded_data_received_bytes": 129807,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "parser",
+            "url": "http://127.0.0.1:4194/en/",
+            "lineNumber": 605,
+            "columnNumber": 8
+          }
+        },
+        {
+          "request_id": "11677.53",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 11444.6,
+          "response_headers_at": null,
+          "first_data_at": null,
+          "request_to_first_data_ms": null,
+          "loading_finished_at": null,
+          "request_range": "bytes=131072-",
+          "status": null,
+          "content_range": null,
+          "content_length": null,
+          "data_received_bytes": 0,
+          "encoded_data_received_bytes": 0,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": null,
+          "canceled": false,
+          "initiator": {
+            "type": "other"
+          }
+        }
+      ],
+      "requests_final": [
+        {
+          "request_id": "11677.42",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3035.2,
+          "response_headers_at": null,
+          "first_data_at": null,
+          "request_to_first_data_ms": null,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": null,
+          "content_range": null,
+          "content_length": null,
+          "data_received_bytes": 0,
+          "encoded_data_received_bytes": 0,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "script",
+            "stack": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "6",
+                  "url": "http://127.0.0.1:4194/main.js?v=3e87534b8a14",
+                  "lineNumber": 462,
+                  "columnNumber": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "request_id": "11677.43",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3039.5,
+          "response_headers_at": 5891.2,
+          "first_data_at": 5932.0,
+          "request_to_first_data_ms": 2892.5,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": 206,
+          "content_range": "bytes 0-2293378/2293379",
+          "content_length": "2293379",
+          "data_received_bytes": 131307,
+          "encoded_data_received_bytes": 129807,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "parser",
+            "url": "http://127.0.0.1:4194/en/",
+            "lineNumber": 605,
+            "columnNumber": 8
+          }
+        },
+        {
+          "request_id": "11677.53",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 11444.6,
+          "response_headers_at": 11611.7,
+          "first_data_at": 11632.7,
+          "request_to_first_data_ms": 188.0,
+          "loading_finished_at": null,
+          "request_range": "bytes=131072-",
+          "status": 206,
+          "content_range": "bytes 131072-2293378/2293379",
+          "content_length": "2162307",
+          "data_received_bytes": 60000,
+          "encoded_data_received_bytes": 58500,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": null,
+          "canceled": false,
+          "initiator": {
+            "type": "other"
+          }
+        }
+      ],
+      "probe": {
+        "lcp": 1348,
+        "cls": 0,
+        "longTaskBlocking": 35,
+        "loadCalls": [
+          {
+            "at": 3035.2999999988824,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 2,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.load (<anonymous>:32:58)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:464:17"
+          }
+        ],
+        "playCalls": [
+          {
+            "at": 11506.099999999627,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 4,
+            "networkState": 2,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.play (<anonymous>:39:58)\n    at playFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:493:11)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:516:5)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          }
+        ],
+        "pauseCalls": [
+          {
+            "at": 2850.7999999988824,
+            "id": "slow-steps",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2851.199999999255,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2851.199999999255,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2851.199999999255,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2851.2999999988824,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2851.2999999988824,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11434.5,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 4,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11434.699999999255,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11434.699999999255,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11434.699999999255,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11435.5,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11435.5,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11438.599999999627,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11438.599999999627,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11438.599999999627,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11438.599999999627,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11438.599999999627,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11506,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          },
+          {
+            "at": 11506.099999999627,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          },
+          {
+            "at": 11506.099999999627,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          },
+          {
+            "at": 11506.099999999627,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          },
+          {
+            "at": 11506.099999999627,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          }
+        ],
+        "videoEvents": [
+          {
+            "type": "abort",
+            "at": 3038.5,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 3,
+            "currentTime": 0
+          },
+          {
+            "type": "emptied",
+            "at": 3038.5,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 3,
+            "currentTime": 0
+          },
+          {
+            "type": "loadedmetadata",
+            "at": 7144,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0
+          },
+          {
+            "type": "loadeddata",
+            "at": 7144,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0
+          },
+          {
+            "type": "canplay",
+            "at": 7144,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0
+          },
+          {
+            "type": "canplay",
+            "at": 11444.599999999627,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 4,
+            "networkState": 2,
+            "currentTime": 0
+          },
+          {
+            "type": "playing",
+            "at": 11510.900000000373,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": false,
+            "readyState": 4,
+            "networkState": 2,
+            "currentTime": 0.004105
+          },
+          {
+            "type": "waiting",
+            "at": 11557.900000000373,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": false,
+            "readyState": 2,
+            "networkState": 2,
+            "currentTime": 0.050834
+          },
+          {
+            "type": "canplay",
+            "at": 11559.299999998882,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": false,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0.051596
+          },
+          {
+            "type": "playing",
+            "at": 11559.299999998882,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": false,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0.051612
+          }
+        ],
+        "attributeChanges": [
+          {
+            "at": 2852.0999999996275,
+            "id": "slow-steps",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2852.0999999996275,
+            "id": "tech-dreamers",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2852.0999999996275,
+            "id": "my-art-my-voice",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2852.0999999996275,
+            "id": "interior-spatial-brand-films",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2852.0999999996275,
+            "id": "pts-taigi-bus",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2852.0999999996275,
+            "id": "top-gear-china-uk-special",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4"
+          },
+          {
+            "at": 3036.5,
+            "id": "slow-steps",
+            "attribute": "preload",
+            "oldValue": "none",
+            "value": "metadata",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11435.5,
+            "id": "slow-steps",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11435.5,
+            "id": "tech-dreamers",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11435.5,
+            "id": "my-art-my-voice",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11435.5,
+            "id": "interior-spatial-brand-films",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11435.5,
+            "id": "pts-taigi-bus",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11435.5,
+            "id": "top-gear-china-uk-special",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11438.599999999627,
+            "id": "tech-dreamers",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11438.599999999627,
+            "id": "my-art-my-voice",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11438.599999999627,
+            "id": "interior-spatial-brand-films",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11438.599999999627,
+            "id": "pts-taigi-bus",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11438.599999999627,
+            "id": "top-gear-china-uk-special",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11506.799999998882,
+            "id": "tech-dreamers",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11506.799999998882,
+            "id": "my-art-my-voice",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11506.799999998882,
+            "id": "interior-spatial-brand-films",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11506.799999998882,
+            "id": "pts-taigi-bus",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11506.799999998882,
+            "id": "top-gear-china-uk-special",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11510.900000000373,
+            "id": "slow-steps",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video is-playing",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11560.099999999627,
+            "id": "slow-steps",
+            "attribute": "class",
+            "oldValue": "featured-reel-video is-playing",
+            "value": "featured-reel-video is-playing",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          }
+        ],
+        "revealEvents": [
+          {
+            "at": 11510.900000000373,
+            "id": "slow-steps",
+            "via": "frame-class"
+          },
+          {
+            "at": 11510.900000000373,
+            "id": "slow-steps",
+            "via": "video-class"
+          },
+          {
+            "at": 11560.099999999627,
+            "id": "slow-steps",
+            "via": "frame-class"
+          },
+          {
+            "at": 11560.099999999627,
+            "id": "slow-steps",
+            "via": "video-class"
+          }
+        ],
+        "inputEvents": [
+          {
+            "type": "scroll",
+            "at": 11434,
+            "trusted": true,
+            "pointerType": null,
+            "target": "",
+            "scrollY": 1840
+          },
+          {
+            "type": "pointerdown",
+            "at": 11504.299999998882,
+            "trusted": true,
+            "pointerType": "touch",
+            "target": "slow-steps",
+            "scrollY": 1840
+          },
+          {
+            "type": "touchstart",
+            "at": 11505.099999999627,
+            "trusted": true,
+            "pointerType": null,
+            "target": "slow-steps",
+            "scrollY": 1840
+          },
+          {
+            "type": "pointerup",
+            "at": 11505.199999999255,
+            "trusted": true,
+            "pointerType": "touch",
+            "target": "slow-steps",
+            "scrollY": 1840
+          }
+        ],
+        "harnessIntents": [
+          {
+            "type": "scroll-to-target",
+            "at": 11428.5
+          },
+          {
+            "type": "stationary-touch",
+            "at": 11483.599999999627
+          }
+        ],
+        "initialVideos": [
+          {
+            "at": 2842.9000000003725,
+            "id": "slow-steps",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/slow-steps-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2842.9000000003725,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/tech-dreamers-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2842.9000000003725,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "http://127.0.0.1:4194/assets/portfolio/my-art-my-voice-performance-2.jpg",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/my-art-my-voice-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2842.9000000003725,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "http://127.0.0.1:4194/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/interior-spatial-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2842.9000000003725,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/nothing-by-bus-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2842.9000000003725,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "http://127.0.0.1:4194/assets/portfolio/top-gear-uk-special-car.jpg",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/top-gear-china-uk-special-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          }
+        ]
+      },
+      "console_errors": [],
+      "page_errors": [],
+      "playing_observed_at": 11521.5
+    },
+    {
+      "run": 2,
+      "load_complete_at": 8412.7,
+      "pre_intent_at": 11419,
+      "tap_at": 11482.2,
+      "poster_visible_at": 11480.9,
+      "loadedmetadata_at": 7144.4,
+      "canplay_at": 7144.4,
+      "playing_at": 11501,
+      "reveal_at": 11501.1,
+      "tap_to_playing_ms": 18.8,
+      "tap_to_reveal_ms": 18.9,
+      "poster_to_reveal_ms": 20.2,
+      "first_target_request_to_playing_ms": 8457.7,
+      "post_intent_request_to_playing_ms": null,
+      "lcp_ms": 1340,
+      "tbt_ms": 40,
+      "cls": 0,
+      "timed_out": false,
+      "classification": "single-source-proximity-warm-before-intent",
+      "dual_source_before_intent": false,
+      "fallback_requested_before_intent": false,
+      "mobile_requested_before_intent": true,
+      "any_mp4_requested_before_intent": true,
+      "play_calls_before_intent": 0,
+      "load_calls_before_intent": 1,
+      "all_mp4_bytes_before_intent": 130500,
+      "target_bytes_before_intent": 130500,
+      "target_bytes_at_playing": 130500,
+      "target_bytes_final": 186000,
+      "initial_state": {
+        "at": 8414.300000000745,
+        "scrollY": 0,
+        "frameVisible": false,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 2032.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "0",
+        "videoClass": "featured-reel-video",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": true,
+        "readyState": 4,
+        "networkState": 1,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "pre_intent_state": {
+        "at": 11420.5,
+        "scrollY": 0,
+        "frameVisible": false,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 2032.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "0",
+        "videoClass": "featured-reel-video",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": true,
+        "readyState": 4,
+        "networkState": 1,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "poster_state": {
+        "at": 11480.900000000373,
+        "scrollY": 1840,
+        "frameVisible": true,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 192.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "0",
+        "videoClass": "featured-reel-video",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": true,
+        "readyState": 4,
+        "networkState": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "state_at_playing": {
+        "at": 11506,
+        "scrollY": 1840,
+        "frameVisible": true,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 192.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "0",
+        "videoClass": "featured-reel-video is-playing",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled is-reel-playing",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": false,
+        "readyState": 4,
+        "networkState": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "final_state": {
+        "at": 12708.599999999627,
+        "scrollY": 1840,
+        "frameVisible": true,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 192.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "1",
+        "videoClass": "featured-reel-video is-playing",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled is-reel-playing",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": false,
+        "readyState": 3,
+        "networkState": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "requests_before_intent": [
+        {
+          "request_id": "11680.42",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3043.3,
+          "response_headers_at": null,
+          "first_data_at": null,
+          "request_to_first_data_ms": null,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": null,
+          "content_range": null,
+          "content_length": null,
+          "data_received_bytes": 0,
+          "encoded_data_received_bytes": 0,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "script",
+            "stack": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "6",
+                  "url": "http://127.0.0.1:4194/main.js?v=3e87534b8a14",
+                  "lineNumber": 462,
+                  "columnNumber": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "request_id": "11680.43",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3047.5,
+          "response_headers_at": 5899.1,
+          "first_data_at": 5941.7,
+          "request_to_first_data_ms": 2894.2,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": 206,
+          "content_range": "bytes 0-2293378/2293379",
+          "content_length": "2293379",
+          "data_received_bytes": 132000,
+          "encoded_data_received_bytes": 130500,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "parser",
+            "url": "http://127.0.0.1:4194/en/",
+            "lineNumber": 605,
+            "columnNumber": 8
+          }
+        }
+      ],
+      "requests_at_playing": [
+        {
+          "request_id": "11680.42",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3043.3,
+          "response_headers_at": null,
+          "first_data_at": null,
+          "request_to_first_data_ms": null,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": null,
+          "content_range": null,
+          "content_length": null,
+          "data_received_bytes": 0,
+          "encoded_data_received_bytes": 0,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "script",
+            "stack": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "6",
+                  "url": "http://127.0.0.1:4194/main.js?v=3e87534b8a14",
+                  "lineNumber": 462,
+                  "columnNumber": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "request_id": "11680.43",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3047.5,
+          "response_headers_at": 5899.1,
+          "first_data_at": 5941.7,
+          "request_to_first_data_ms": 2894.2,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": 206,
+          "content_range": "bytes 0-2293378/2293379",
+          "content_length": "2293379",
+          "data_received_bytes": 132000,
+          "encoded_data_received_bytes": 130500,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "parser",
+            "url": "http://127.0.0.1:4194/en/",
+            "lineNumber": 605,
+            "columnNumber": 8
+          }
+        },
+        {
+          "request_id": "11680.53",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 11446.3,
+          "response_headers_at": null,
+          "first_data_at": null,
+          "request_to_first_data_ms": null,
+          "loading_finished_at": null,
+          "request_range": "bytes=131072-",
+          "status": null,
+          "content_range": null,
+          "content_length": null,
+          "data_received_bytes": 0,
+          "encoded_data_received_bytes": 0,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": null,
+          "canceled": false,
+          "initiator": {
+            "type": "other"
+          }
+        }
+      ],
+      "requests_final": [
+        {
+          "request_id": "11680.42",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3043.3,
+          "response_headers_at": null,
+          "first_data_at": null,
+          "request_to_first_data_ms": null,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": null,
+          "content_range": null,
+          "content_length": null,
+          "data_received_bytes": 0,
+          "encoded_data_received_bytes": 0,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "script",
+            "stack": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "6",
+                  "url": "http://127.0.0.1:4194/main.js?v=3e87534b8a14",
+                  "lineNumber": 462,
+                  "columnNumber": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "request_id": "11680.43",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3047.5,
+          "response_headers_at": 5899.1,
+          "first_data_at": 5941.7,
+          "request_to_first_data_ms": 2894.2,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": 206,
+          "content_range": "bytes 0-2293378/2293379",
+          "content_length": "2293379",
+          "data_received_bytes": 132000,
+          "encoded_data_received_bytes": 130500,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "parser",
+            "url": "http://127.0.0.1:4194/en/",
+            "lineNumber": 605,
+            "columnNumber": 8
+          }
+        },
+        {
+          "request_id": "11680.53",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 11446.3,
+          "response_headers_at": 11612.3,
+          "first_data_at": 11633.3,
+          "request_to_first_data_ms": 187.1,
+          "loading_finished_at": null,
+          "request_range": "bytes=131072-",
+          "status": 206,
+          "content_range": "bytes 131072-2293378/2293379",
+          "content_length": "2162307",
+          "data_received_bytes": 57000,
+          "encoded_data_received_bytes": 55500,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": null,
+          "canceled": false,
+          "initiator": {
+            "type": "other"
+          }
+        }
+      ],
+      "probe": {
+        "lcp": 1340,
+        "cls": 0,
+        "longTaskBlocking": 40,
+        "loadCalls": [
+          {
+            "at": 3044.5,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 2,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.load (<anonymous>:32:58)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:464:17"
+          }
+        ],
+        "playCalls": [
+          {
+            "at": 11496.099999999627,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 4,
+            "networkState": 2,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.play (<anonymous>:39:58)\n    at playFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:493:11)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:516:5)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          }
+        ],
+        "pauseCalls": [
+          {
+            "at": 2858.5999999996275,
+            "id": "slow-steps",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2859.0999999996275,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2859.0999999996275,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2859.0999999996275,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2859.0999999996275,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2859.0999999996275,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11435.300000000745,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 4,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11436.199999999255,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11436.199999999255,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11436.199999999255,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11436.199999999255,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11436.199999999255,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11439.300000000745,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11439.599999999627,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11439.599999999627,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11439.599999999627,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11439.599999999627,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11495.300000000745,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          },
+          {
+            "at": 11495.400000000373,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          },
+          {
+            "at": 11495.400000000373,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          },
+          {
+            "at": 11495.400000000373,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          },
+          {
+            "at": 11495.400000000373,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          }
+        ],
+        "videoEvents": [
+          {
+            "type": "abort",
+            "at": 3046.699999999255,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 3,
+            "currentTime": 0
+          },
+          {
+            "type": "emptied",
+            "at": 3046.699999999255,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 3,
+            "currentTime": 0
+          },
+          {
+            "type": "loadedmetadata",
+            "at": 7144.4000000003725,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0
+          },
+          {
+            "type": "loadeddata",
+            "at": 7144.4000000003725,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0
+          },
+          {
+            "type": "canplay",
+            "at": 7144.4000000003725,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0
+          },
+          {
+            "type": "canplay",
+            "at": 11446.699999999255,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 4,
+            "networkState": 2,
+            "currentTime": 0
+          },
+          {
+            "type": "playing",
+            "at": 11501,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": false,
+            "readyState": 4,
+            "networkState": 2,
+            "currentTime": 0.0048
+          },
+          {
+            "type": "waiting",
+            "at": 11551.5,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": false,
+            "readyState": 2,
+            "networkState": 2,
+            "currentTime": 0.054552
+          },
+          {
+            "type": "canplay",
+            "at": 11551.599999999627,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": false,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0.054632
+          },
+          {
+            "type": "playing",
+            "at": 11551.599999999627,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": false,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0.05465
+          }
+        ],
+        "attributeChanges": [
+          {
+            "at": 2859.9000000003725,
+            "id": "slow-steps",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2859.9000000003725,
+            "id": "tech-dreamers",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2859.9000000003725,
+            "id": "my-art-my-voice",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2859.9000000003725,
+            "id": "interior-spatial-brand-films",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2859.9000000003725,
+            "id": "pts-taigi-bus",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2859.9000000003725,
+            "id": "top-gear-china-uk-special",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4"
+          },
+          {
+            "at": 3044.5999999996275,
+            "id": "slow-steps",
+            "attribute": "preload",
+            "oldValue": "none",
+            "value": "metadata",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11436.599999999627,
+            "id": "slow-steps",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11436.599999999627,
+            "id": "tech-dreamers",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11436.599999999627,
+            "id": "my-art-my-voice",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11436.599999999627,
+            "id": "interior-spatial-brand-films",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11436.599999999627,
+            "id": "pts-taigi-bus",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11436.599999999627,
+            "id": "top-gear-china-uk-special",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11439.599999999627,
+            "id": "tech-dreamers",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11439.599999999627,
+            "id": "my-art-my-voice",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11439.599999999627,
+            "id": "interior-spatial-brand-films",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11439.599999999627,
+            "id": "pts-taigi-bus",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11439.599999999627,
+            "id": "top-gear-china-uk-special",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11496.300000000745,
+            "id": "tech-dreamers",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11496.300000000745,
+            "id": "my-art-my-voice",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11496.300000000745,
+            "id": "interior-spatial-brand-films",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11496.300000000745,
+            "id": "pts-taigi-bus",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11496.300000000745,
+            "id": "top-gear-china-uk-special",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11501.099999999627,
+            "id": "slow-steps",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video is-playing",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11551.800000000745,
+            "id": "slow-steps",
+            "attribute": "class",
+            "oldValue": "featured-reel-video is-playing",
+            "value": "featured-reel-video is-playing",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          }
+        ],
+        "revealEvents": [
+          {
+            "at": 11501.099999999627,
+            "id": "slow-steps",
+            "via": "frame-class"
+          },
+          {
+            "at": 11501.099999999627,
+            "id": "slow-steps",
+            "via": "video-class"
+          },
+          {
+            "at": 11551.800000000745,
+            "id": "slow-steps",
+            "via": "frame-class"
+          },
+          {
+            "at": 11551.800000000745,
+            "id": "slow-steps",
+            "via": "video-class"
+          }
+        ],
+        "inputEvents": [
+          {
+            "type": "scroll",
+            "at": 11435.099999999627,
+            "trusted": true,
+            "pointerType": null,
+            "target": "",
+            "scrollY": 1840
+          },
+          {
+            "type": "pointerdown",
+            "at": 11494,
+            "trusted": true,
+            "pointerType": "touch",
+            "target": "slow-steps",
+            "scrollY": 1840
+          },
+          {
+            "type": "touchstart",
+            "at": 11495,
+            "trusted": true,
+            "pointerType": null,
+            "target": "slow-steps",
+            "scrollY": 1840
+          },
+          {
+            "type": "pointerup",
+            "at": 11495.199999999255,
+            "trusted": true,
+            "pointerType": "touch",
+            "target": "slow-steps",
+            "scrollY": 1840
+          }
+        ],
+        "harnessIntents": [
+          {
+            "type": "scroll-to-target",
+            "at": 11427.199999999255
+          },
+          {
+            "type": "stationary-touch",
+            "at": 11482.199999999255
+          }
+        ],
+        "initialVideos": [
+          {
+            "at": 2851.9000000003725,
+            "id": "slow-steps",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/slow-steps-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2851.9000000003725,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/tech-dreamers-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2852.300000000745,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "http://127.0.0.1:4194/assets/portfolio/my-art-my-voice-performance-2.jpg",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/my-art-my-voice-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2852.300000000745,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "http://127.0.0.1:4194/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/interior-spatial-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2852.300000000745,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/nothing-by-bus-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2852.4000000003725,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "http://127.0.0.1:4194/assets/portfolio/top-gear-uk-special-car.jpg",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/top-gear-china-uk-special-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          }
+        ]
+      },
+      "console_errors": [],
+      "page_errors": [],
+      "playing_observed_at": 11504.1
+    },
+    {
+      "run": 3,
+      "load_complete_at": 8413.5,
+      "pre_intent_at": 11417.9,
+      "tap_at": 11483.6,
+      "poster_visible_at": 11482.4,
+      "loadedmetadata_at": 7165.3,
+      "canplay_at": 7165.6,
+      "playing_at": 11506.4,
+      "reveal_at": 11506.5,
+      "tap_to_playing_ms": 22.8,
+      "tap_to_reveal_ms": 22.9,
+      "poster_to_reveal_ms": 24.1,
+      "first_target_request_to_playing_ms": 8467.6,
+      "post_intent_request_to_playing_ms": null,
+      "lcp_ms": 1380,
+      "tbt_ms": 37,
+      "cls": 0,
+      "timed_out": false,
+      "classification": "single-source-proximity-warm-before-intent",
+      "dual_source_before_intent": false,
+      "fallback_requested_before_intent": false,
+      "mobile_requested_before_intent": true,
+      "any_mp4_requested_before_intent": true,
+      "play_calls_before_intent": 0,
+      "load_calls_before_intent": 1,
+      "all_mp4_bytes_before_intent": 130500,
+      "target_bytes_before_intent": 130500,
+      "target_bytes_at_playing": 130500,
+      "target_bytes_final": 188302,
+      "initial_state": {
+        "at": 8414.799999998882,
+        "scrollY": 0,
+        "frameVisible": false,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 2032.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "0",
+        "videoClass": "featured-reel-video",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": true,
+        "readyState": 4,
+        "networkState": 1,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "pre_intent_state": {
+        "at": 11419.5,
+        "scrollY": 0,
+        "frameVisible": false,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 2032.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "0",
+        "videoClass": "featured-reel-video",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": true,
+        "readyState": 4,
+        "networkState": 1,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "poster_state": {
+        "at": 11482.400000000373,
+        "scrollY": 1840,
+        "frameVisible": true,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 192.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "0",
+        "videoClass": "featured-reel-video",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": true,
+        "readyState": 4,
+        "networkState": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "state_at_playing": {
+        "at": 11511,
+        "scrollY": 1840,
+        "frameVisible": true,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 192.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "0",
+        "videoClass": "featured-reel-video is-playing",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled is-reel-playing",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": false,
+        "readyState": 4,
+        "networkState": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "final_state": {
+        "at": 12715,
+        "scrollY": 1840,
+        "frameVisible": true,
+        "frameRect": {
+          "x": 34.09375,
+          "y": 192.84375,
+          "width": 321.8125,
+          "height": 181.015625
+        },
+        "backgroundImage": "linear-gradient(rgba(9, 9, 10, 0.04), rgba(9, 9, 10, 0.26)), url(\"http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp\")",
+        "videoOpacity": "1",
+        "videoClass": "featured-reel-video is-playing",
+        "frameClass": "media-frame media-frame-reel-switch media-frame-unlabeled is-reel-playing",
+        "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+        "preload": "metadata",
+        "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+        "paused": false,
+        "readyState": 3,
+        "networkState": 2,
+        "sources": [
+          {
+            "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "media": "(max-width: 820px)",
+            "mediaMatches": true
+          },
+          {
+            "src": "/assets/showreel/slow-steps-card-reel.mp4",
+            "media": "",
+            "mediaMatches": true
+          }
+        ]
+      },
+      "requests_before_intent": [
+        {
+          "request_id": "11684.42",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3038.8,
+          "response_headers_at": null,
+          "first_data_at": null,
+          "request_to_first_data_ms": null,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": null,
+          "content_range": null,
+          "content_length": null,
+          "data_received_bytes": 0,
+          "encoded_data_received_bytes": 0,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "script",
+            "stack": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "6",
+                  "url": "http://127.0.0.1:4194/main.js?v=3e87534b8a14",
+                  "lineNumber": 462,
+                  "columnNumber": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "request_id": "11684.43",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3043.0,
+          "response_headers_at": 5897.5,
+          "first_data_at": 5940.6,
+          "request_to_first_data_ms": 2897.6,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": 206,
+          "content_range": "bytes 0-2293378/2293379",
+          "content_length": "2293379",
+          "data_received_bytes": 132000,
+          "encoded_data_received_bytes": 130500,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "parser",
+            "url": "http://127.0.0.1:4194/en/",
+            "lineNumber": 605,
+            "columnNumber": 8
+          }
+        }
+      ],
+      "requests_at_playing": [
+        {
+          "request_id": "11684.42",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3038.8,
+          "response_headers_at": null,
+          "first_data_at": null,
+          "request_to_first_data_ms": null,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": null,
+          "content_range": null,
+          "content_length": null,
+          "data_received_bytes": 0,
+          "encoded_data_received_bytes": 0,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "script",
+            "stack": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "6",
+                  "url": "http://127.0.0.1:4194/main.js?v=3e87534b8a14",
+                  "lineNumber": 462,
+                  "columnNumber": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "request_id": "11684.43",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3043.0,
+          "response_headers_at": 5897.5,
+          "first_data_at": 5940.6,
+          "request_to_first_data_ms": 2897.6,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": 206,
+          "content_range": "bytes 0-2293378/2293379",
+          "content_length": "2293379",
+          "data_received_bytes": 132000,
+          "encoded_data_received_bytes": 130500,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "parser",
+            "url": "http://127.0.0.1:4194/en/",
+            "lineNumber": 605,
+            "columnNumber": 8
+          }
+        },
+        {
+          "request_id": "11684.53",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 11442.7,
+          "response_headers_at": null,
+          "first_data_at": null,
+          "request_to_first_data_ms": null,
+          "loading_finished_at": null,
+          "request_range": "bytes=131072-",
+          "status": null,
+          "content_range": null,
+          "content_length": null,
+          "data_received_bytes": 0,
+          "encoded_data_received_bytes": 0,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": null,
+          "canceled": false,
+          "initiator": {
+            "type": "other"
+          }
+        }
+      ],
+      "requests_final": [
+        {
+          "request_id": "11684.42",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3038.8,
+          "response_headers_at": null,
+          "first_data_at": null,
+          "request_to_first_data_ms": null,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": null,
+          "content_range": null,
+          "content_length": null,
+          "data_received_bytes": 0,
+          "encoded_data_received_bytes": 0,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "script",
+            "stack": {
+              "callFrames": [
+                {
+                  "functionName": "",
+                  "scriptId": "6",
+                  "url": "http://127.0.0.1:4194/main.js?v=3e87534b8a14",
+                  "lineNumber": 462,
+                  "columnNumber": 24
+                }
+              ]
+            }
+          }
+        },
+        {
+          "request_id": "11684.43",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 3043.0,
+          "response_headers_at": 5897.5,
+          "first_data_at": 5940.6,
+          "request_to_first_data_ms": 2897.6,
+          "loading_finished_at": null,
+          "request_range": "bytes=0-",
+          "status": 206,
+          "content_range": "bytes 0-2293378/2293379",
+          "content_length": "2293379",
+          "data_received_bytes": 132000,
+          "encoded_data_received_bytes": 130500,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": "net::ERR_ABORTED",
+          "canceled": true,
+          "initiator": {
+            "type": "parser",
+            "url": "http://127.0.0.1:4194/en/",
+            "lineNumber": 605,
+            "columnNumber": 8
+          }
+        },
+        {
+          "request_id": "11684.53",
+          "url": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+          "resource_type": "Media",
+          "request_at": 11442.7,
+          "response_headers_at": 11614.1,
+          "first_data_at": 11634.8,
+          "request_to_first_data_ms": 192.1,
+          "loading_finished_at": null,
+          "request_range": "bytes=131072-",
+          "status": 206,
+          "content_range": "bytes 131072-2293378/2293379",
+          "content_length": "2162307",
+          "data_received_bytes": 59302,
+          "encoded_data_received_bytes": 57802,
+          "loading_finished_encoded_bytes": null,
+          "from_disk_cache": false,
+          "from_service_worker": false,
+          "failed": null,
+          "canceled": false,
+          "initiator": {
+            "type": "other"
+          }
+        }
+      ],
+      "probe": {
+        "lcp": 1380,
+        "cls": 0,
+        "longTaskBlocking": 37,
+        "loadCalls": [
+          {
+            "at": 3039.699999999255,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 2,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.load (<anonymous>:32:58)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:464:17"
+          }
+        ],
+        "playCalls": [
+          {
+            "at": 11502.099999999627,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 4,
+            "networkState": 2,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.play (<anonymous>:39:58)\n    at playFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:493:11)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:516:5)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          }
+        ],
+        "pauseCalls": [
+          {
+            "at": 2853,
+            "id": "slow-steps",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2854.2999999988824,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2854.2999999988824,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2854.4000000003725,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2854.4000000003725,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 2854.4000000003725,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11430.799999998882,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 4,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11431.599999999627,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11431.599999999627,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11431.599999999627,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11431.599999999627,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11431.599999999627,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:650:7"
+          },
+          {
+            "at": 11434.400000000373,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11434.400000000373,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11434.400000000373,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11434.5,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11434.5,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:597:9\n    at Array.forEach (<anonymous>)\n    at syncActiveFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:589:24)\n    at IntersectionObserver.threshold (http://127.0.0.1:4194/main.js?v=3e87534b8a14:614:13)"
+          },
+          {
+            "at": 11501,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          },
+          {
+            "at": 11501,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          },
+          {
+            "at": 11501.900000000373,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          },
+          {
+            "at": 11501.900000000373,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          },
+          {
+            "at": 11501.900000000373,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "stack": "Error\n    at HTMLMediaElement.pause (<anonymous>:46:59)\n    at resetFeaturedReel (http://127.0.0.1:4194/main.js?v=3e87534b8a14:476:11)\n    at http://127.0.0.1:4194/main.js?v=3e87534b8a14:511:32\n    at Array.forEach (<anonymous>)\n    at activateFeaturedReelIntent (http://127.0.0.1:4194/main.js?v=3e87534b8a14:510:24)\n    at HTMLDivElement.<anonymous> (http://127.0.0.1:4194/main.js?v=3e87534b8a14:310:11)"
+          }
+        ],
+        "videoEvents": [
+          {
+            "type": "abort",
+            "at": 3042,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 3,
+            "currentTime": 0
+          },
+          {
+            "type": "emptied",
+            "at": 3042,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 3,
+            "currentTime": 0
+          },
+          {
+            "type": "loadedmetadata",
+            "at": 7165.299999998882,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0
+          },
+          {
+            "type": "loadeddata",
+            "at": 7165.5999999996275,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0
+          },
+          {
+            "type": "canplay",
+            "at": 7165.5999999996275,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0
+          },
+          {
+            "type": "canplay",
+            "at": 11443.099999999627,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 4,
+            "networkState": 2,
+            "currentTime": 0
+          },
+          {
+            "type": "playing",
+            "at": 11506.400000000373,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": false,
+            "readyState": 4,
+            "networkState": 2,
+            "currentTime": 0.004209
+          },
+          {
+            "type": "waiting",
+            "at": 11556.400000000373,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": false,
+            "readyState": 2,
+            "networkState": 2,
+            "currentTime": 0.053403
+          },
+          {
+            "type": "canplay",
+            "at": 11556.900000000373,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": false,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0.053617
+          },
+          {
+            "type": "playing",
+            "at": 11556.900000000373,
+            "id": "slow-steps",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": false,
+            "readyState": 3,
+            "networkState": 2,
+            "currentTime": 0.053635
+          }
+        ],
+        "attributeChanges": [
+          {
+            "at": 2855,
+            "id": "slow-steps",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2855,
+            "id": "tech-dreamers",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2855,
+            "id": "my-art-my-voice",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2855,
+            "id": "interior-spatial-brand-films",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2855,
+            "id": "pts-taigi-bus",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4"
+          },
+          {
+            "at": 2855,
+            "id": "top-gear-china-uk-special",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4"
+          },
+          {
+            "at": 3039.9000000003725,
+            "id": "slow-steps",
+            "attribute": "preload",
+            "oldValue": "none",
+            "value": "metadata",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11431.699999999255,
+            "id": "slow-steps",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11432.199999999255,
+            "id": "tech-dreamers",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11432.199999999255,
+            "id": "my-art-my-voice",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11432.199999999255,
+            "id": "interior-spatial-brand-films",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11432.199999999255,
+            "id": "pts-taigi-bus",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11432.199999999255,
+            "id": "top-gear-china-uk-special",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11435.299999998882,
+            "id": "tech-dreamers",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11435.299999998882,
+            "id": "my-art-my-voice",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11435.299999998882,
+            "id": "interior-spatial-brand-films",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11435.299999998882,
+            "id": "pts-taigi-bus",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11435.299999998882,
+            "id": "top-gear-china-uk-special",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11502.199999999255,
+            "id": "tech-dreamers",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11502.199999999255,
+            "id": "my-art-my-voice",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11502.199999999255,
+            "id": "interior-spatial-brand-films",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11502.199999999255,
+            "id": "pts-taigi-bus",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11502.199999999255,
+            "id": "top-gear-china-uk-special",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11506.5,
+            "id": "slow-steps",
+            "attribute": "class",
+            "oldValue": "featured-reel-video",
+            "value": "featured-reel-video is-playing",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          },
+          {
+            "at": 11557.099999999627,
+            "id": "slow-steps",
+            "attribute": "class",
+            "oldValue": "featured-reel-video is-playing",
+            "value": "featured-reel-video is-playing",
+            "preload": "metadata",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4"
+          }
+        ],
+        "revealEvents": [
+          {
+            "at": 11506.5,
+            "id": "slow-steps",
+            "via": "frame-class"
+          },
+          {
+            "at": 11506.5,
+            "id": "slow-steps",
+            "via": "video-class"
+          },
+          {
+            "at": 11557.099999999627,
+            "id": "slow-steps",
+            "via": "frame-class"
+          },
+          {
+            "at": 11557.099999999627,
+            "id": "slow-steps",
+            "via": "video-class"
+          }
+        ],
+        "inputEvents": [
+          {
+            "type": "scroll",
+            "at": 11430.599999999627,
+            "trusted": true,
+            "pointerType": null,
+            "target": "",
+            "scrollY": 1840
+          },
+          {
+            "type": "pointerdown",
+            "at": 11500.099999999627,
+            "trusted": true,
+            "pointerType": "touch",
+            "target": "slow-steps",
+            "scrollY": 1840
+          },
+          {
+            "type": "touchstart",
+            "at": 11500.799999998882,
+            "trusted": true,
+            "pointerType": null,
+            "target": "slow-steps",
+            "scrollY": 1840
+          },
+          {
+            "type": "pointerup",
+            "at": 11500.799999998882,
+            "trusted": true,
+            "pointerType": "touch",
+            "target": "slow-steps",
+            "scrollY": 1840
+          }
+        ],
+        "harnessIntents": [
+          {
+            "type": "scroll-to-target",
+            "at": 11425.799999998882
+          },
+          {
+            "type": "stationary-touch",
+            "at": 11483.599999999627
+          }
+        ],
+        "initialVideos": [
+          {
+            "at": 2845.699999999255,
+            "id": "slow-steps",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "http://127.0.0.1:4194/assets/portfolio/slow-steps-poster.webp",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/slow-steps-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/slow-steps-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2845.699999999255,
+            "id": "tech-dreamers",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "https://prod-img.taiwanplus.com/program/224be7ed-057b-400f-af63-a8582cd80cfb.webp",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/tech-dreamers-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/tech-dreamers-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2845.699999999255,
+            "id": "my-art-my-voice",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "http://127.0.0.1:4194/assets/portfolio/my-art-my-voice-performance-2.jpg",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/my-art-my-voice-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/my-art-my-voice-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2845.699999999255,
+            "id": "interior-spatial-brand-films",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "http://127.0.0.1:4194/assets/portfolio/gorgeous-space-sunny-wang-frontal.webp",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/interior-spatial-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/interior-spatial-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2845.699999999255,
+            "id": "pts-taigi-bus",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "https://i.ytimg.com/vi/q4TMcoOpzKA/hqdefault.jpg",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/nothing-by-bus-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/nothing-by-bus-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          },
+          {
+            "at": 2845.7999999988824,
+            "id": "top-gear-china-uk-special",
+            "preload": "none",
+            "currentSrc": "http://127.0.0.1:4194/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+            "paused": true,
+            "readyState": 0,
+            "networkState": 1,
+            "currentTime": 0,
+            "poster": "http://127.0.0.1:4194/assets/portfolio/top-gear-uk-special-car.jpg",
+            "sources": [
+              {
+                "src": "/assets/showreel/mobile/top-gear-china-uk-special-card-reel-mobile.mp4",
+                "media": "(max-width: 820px)",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              },
+              {
+                "src": "/assets/showreel/top-gear-china-uk-special-card-reel.mp4",
+                "media": "",
+                "mediaMatches": true,
+                "type": "video/mp4"
+              }
+            ]
+          }
+        ]
+      },
+      "console_errors": [],
+      "page_errors": [],
+      "playing_observed_at": 11509.2
+    }
+  ]
+}
