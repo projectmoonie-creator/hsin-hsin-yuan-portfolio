@@ -11,7 +11,8 @@ packages.
 - Gates: focused 2/2, full 179/179, build, design audit, Figma/no drift, six-reel integrity, Hero 7/7, diff/privacy, and zero-vulnerability dependency audit pass. Protected untracked hash remains exact at `945d4df9…d28fc`.
 - Browser: 8/8 EN/ZH desktop/tablet/mobile/narrow/reduced/no-JS/storage-failure cases and four phase captures pass with zero Contact requests, errors, overflow, or light resources. Reload/language/history return do not replay; headless history used fresh-document restore and remained unopted/static.
 - Performance/visual: matched 3× LCP desktop 88→84ms, mobile 84→80ms; long task 63→62ms and 62→64ms; resources remain 20/21. Visual inspection accepts quiet neutral paired spill, single mobile spill, natural portrait F, seamless fade, stable tally, and no neon beam.
-- Verdict/next: local `PASS_WITH_OPEN_ITEMS`; construct/read back the one standing-authorized isolated static `dist/`-only Preview and hand it to the producer. No deployed URL fetch, Production, alias, Git push, `main`, Contact, tag, or protected-file action.
+- Preview: static `dist/`-only package = 58 files / 96,765,625 bytes / path-list `2654e4dc…cc23`; `dpl_4554G…HNbr` independently reads Ready/Preview at `https://hsin-hsin-yuan-portfolio-mm791x16s.vercel.app`, static `.` root/no functions. It contains no `api/`, source, review, environment, or protected file; the deployed URL and Contact were not fetched/submitted, and no Shareable Link changed.
+- Verdict/next: `PASS_WITH_OPEN_ITEMS` only for producer visual inspection. No Production, alias, Git push, `main`, Contact/function, share-link, tag, or protected-file authorization/action.
 
 ## 2026-08-12 — Hero portrait refresh (selected F)
 - Branch/base: local-only `codex/hero-portrait-refresh` from Production-aligned `origin/main` `7d76b891…3273`; no Preview, push, Production, alias, `main`, Contact, or tag action.

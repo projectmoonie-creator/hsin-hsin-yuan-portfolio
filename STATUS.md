@@ -49,10 +49,17 @@ State: `PASS_WITH_OPEN_ITEMS`
 - The protected untracked document remains outside the index and byte-identical
   at SHA-256
   `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
-  Local verdict is `PASS_WITH_OPEN_ITEMS`: the single standing-authorized
-  static `dist/`-only Preview still needs construction/readback, followed by
-  producer visual inspection. Exact next action is that Preview only; do not
-  touch Production or any other gated boundary.
+  Standing-authorized static `dist/`-only deployment
+  `dpl_4554GhqKKSytQ478ryqZdJurHNbr` independently reads `Ready`, target
+  `preview`, at
+  `https://hsin-hsin-yuan-portfolio-mm791x16s.vercel.app`. Its 58 public files
+  total 96,765,625 bytes with sorted path-list SHA-256
+  `2654e4dcca190f43397d41bdc2058fa8dc4b704e66e9e07a89c5225fe5c0cc23`.
+  Inspect shows one static `.` build and no functions; there is no `api/`,
+  environment, source, review, or protected-file payload. The origin and
+  Contact endpoint were not fetched or submitted; no Shareable Link changed.
+  Package verdict remains `PASS_WITH_OPEN_ITEMS` only for producer visual
+  inspection. Do not touch Production or any other gated boundary.
 
 ## Prior Local Work Package — Hero Portrait Refresh (Producer-selected F)
 
@@ -1255,12 +1262,9 @@ Current design/Figma rules are aligned and Figma output is unchanged.
 
 ## Accepted Open Items
 
-- Construct and read back the one standing-authorized static `dist/`-only
-  Studio Cue Preview, then hand its access URL to the producer without fetching
-  the deployed site or changing Production, alias, Git refs, or Contact.
 - Producer inspects the Studio Cue sequence, portrait F, mobile single spill,
-  and Contact tally on the target device. Production remains a later explicit
-  decision even if the Preview is accepted.
+  and Contact tally at the Ready Preview origin on the target device.
+  Production remains a later explicit decision even if the Preview is accepted.
 - The prior Hero LCP package is already part of the accepted Production
   baseline; a fresh PageSpeed retry is optional observational evidence and not
   a release claim or blocker.
@@ -1281,13 +1285,13 @@ SHA-256:
 
 ## Exact Next Action
 
-Construct an isolated static package from fresh `dist/`, verify that it contains
-no function, Contact, source, review, environment, or protected-file payload,
-deploy exactly one standing-authorized Vercel Preview, and read back its Preview
-identity without fetching the deployed URL. Then provide its access URL to the
-producer for visual inspection. Production, alias, `main`, any Git push,
-Contact/functions, tag, protected-file, and destructive Vercel actions remain
-separately gated.
+Producer visually inspects the Ready Studio Cue Preview at
+`https://hsin-hsin-yuan-portfolio-mm791x16s.vercel.app`, covering first-load
+sequence, portrait F, paired desktop/tablet spill, single mobile spill,
+reduced motion, and Contact tally. After that inspection, the producer either
+requests remediation or separately decides whether to authorize Production.
+Alias, `main`, any Git push, Contact/functions, Shareable Link replacement,
+tag, protected-file, and destructive Vercel actions remain separately gated.
 
 ## Cold Resume
 
@@ -1303,9 +1307,10 @@ separately gated.
 4. Resume local branch `codex/hero-portrait-refresh`. Hero F is closed at
    `f0c2f9c`; Studio Cue RED/GREEN are `c6d85ac`/`57acb90`. Local implementation
    gates pass and the branch remains unpushed.
-5. One fresh static `dist/`-only Studio Cue Preview is the exact next action
-   under standing authorization. This does not authorize any Git push. Every
-   branch push can trigger Vercel; `main` pushes are now known to trigger Production automatically.
+5. Studio Cue static `dist/`-only Preview
+   `dpl_4554GhqKKSytQ478ryqZdJurHNbr` is Ready/Preview and unfetched; exact next
+   action is producer visual inspection. This does not authorize any Git push.
+   Every branch push can trigger Vercel; `main` pushes are now known to trigger Production automatically.
    Production, alias, `main`, Git push,
    Contact/functions, destructive actions, and broader access changes remain
    separately gated.
