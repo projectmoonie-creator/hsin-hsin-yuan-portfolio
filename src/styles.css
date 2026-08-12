@@ -589,6 +589,13 @@ a {
   width: 100%;
 }
 
+.media-frame-reel-switch.is-reel-playing {
+  align-self: center;
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  width: 100%;
+}
+
 .media-frame-link:focus-visible {
   outline: 2px solid var(--acid);
   outline-offset: 4px;

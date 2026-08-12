@@ -471,6 +471,7 @@ if (!prefersReducedMotion) {
     clearFeaturedReelTimer(video);
     invalidateFeaturedReelGeneration(video);
     if (explicitFeaturedReel === video) explicitFeaturedReel = null;
+    video.closest(".media-frame")?.classList.remove("is-reel-playing");
     video.classList.remove("is-playing");
     video.pause();
     try {
@@ -548,6 +549,7 @@ if (!prefersReducedMotion) {
       if (generation != null
         && isCurrentFeaturedReelActivation(video, generation)
         && !video.paused) {
+        video.closest(".media-frame")?.classList.add("is-reel-playing");
         video.classList.add("is-playing");
       }
     });

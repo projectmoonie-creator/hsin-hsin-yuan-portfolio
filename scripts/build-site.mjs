@@ -368,6 +368,9 @@ function mediaFrame(work, lang, copy) {
   if (work.featuredMediaAspect === "16:9") {
     mediaClasses.push("media-frame-wide");
   }
+  if (work.presentation?.desktopMediaVariant === "fill-poster-16x9-reel") {
+    mediaClasses.push("media-frame-reel-switch");
+  }
   if (work.hideMediaLabel) {
     mediaClasses.push("media-frame-unlabeled");
   }
