@@ -57,16 +57,20 @@ State: `PASS_WITH_OPEN_ITEMS`
   `2654e4dcca190f43397d41bdc2058fa8dc4b704e66e9e07a89c5225fe5c0cc23`.
   Inspect shows one static `.` build and no functions; there is no `api/`,
   environment, source, review, or protected-file payload. The origin and
-  Contact endpoint were not fetched or submitted. Because the direct origin
-  blocked producer review, Vercel's authoritative Share control was changed to
+  Contact endpoint were not fetched or submitted. Vercel's authoritative Share
+  control was changed to
   `Anyone with the link can view and comment`; visitors need login only to
   comment. The prior Hobby Shareable Link was revoked and replaced. The new
   access-bearing URL was delivered outside Git and is recorded only by SHA-256
   `303e978be164c7885dd72ff3394467e0f0828cebce5c06f017e16bc972b850ed`;
   it was not fetched or sent to PageSpeed.
-  The producer's 2026-08-12 standing instruction makes this reviewer-access
-  repair automatic for future otherwise-approved portfolio Previews: do not
-  ask again, but report after replacement that the old sole link is invalid.
+  The producer's clarified 2026-08-12 standing instruction makes Shareable-Link
+  creation/replacement a proactive completion step for every future
+  standing-authorized portfolio Preview. Do not first try or deliver the
+  login-protected direct Preview origin, do not wait for an access failure, and
+  do not ask again. Deliver the Shareable Link outside Git, then report that
+  the old sole link is invalid. The direct origin remains deployment identity
+  and inspection evidence only.
   Package verdict remains `PASS_WITH_OPEN_ITEMS` only for producer visual
   inspection. Do not touch Production or any other gated boundary.
 
@@ -1300,8 +1304,10 @@ spill, single mobile spill, reduced motion, and Contact tally. After that
 inspection, the producer either requests remediation or separately decides
 whether to authorize Production. Alias, `main`, any Git push,
 Contact/functions, tag, protected-file, and destructive Vercel actions remain
-separately gated. Automatic replacement is limited to the sole Shareable Link
-needed to make an otherwise standing-authorized portfolio Preview reviewable.
+separately gated. For every future standing-authorized portfolio Preview,
+proactive generation/replacement of the sole Shareable Link is part of Preview
+completion and needs no separate question; the protected direct origin is not
+the producer-review handoff.
 
 ## Cold Resume
 
@@ -1320,10 +1326,11 @@ needed to make an otherwise standing-authorized portfolio Preview reviewable.
 5. Studio Cue static `dist/`-only Preview
    `dpl_4554GhqKKSytQ478ryqZdJurHNbr` is Ready/Preview and unfetched; exact next
    action is producer visual inspection through the access-bearing Shareable
-   Link delivered outside Git. The direct origin is protection-blocked. Future
-   blocked portfolio Previews may replace the sole Hobby Shareable Link without
-   another question under the producer's standing authorization; report the
-   revocation after replacement. This does not authorize any Git push.
+   Link delivered outside Git. The direct origin is protection-blocked. Every
+   future standing-authorized portfolio Preview must proactively generate or
+   replace the sole Hobby Shareable Link before handoff, without trying the
+   protected direct origin first and without another question; report the old
+   link's revocation afterward. This does not authorize any Git push.
    Every branch push can trigger Vercel; `main` pushes are now known to trigger Production automatically.
    Production, alias, `main`, Git push,
    Contact/functions, destructive actions, and broader access changes remain
