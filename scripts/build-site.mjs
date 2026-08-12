@@ -148,6 +148,21 @@ function renderHeroPreloads(heroMedia) {
   ).join("\n    ");
 }
 
+function renderStudioCueBootstrap() {
+  return `<script data-studio-cue-bootstrap>(() => {
+      const root = document.documentElement;
+      try {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        const key = "portfolio:studio-cue:v1";
+        if (window.sessionStorage.getItem(key) === "played") return;
+        window.sessionStorage.setItem(key, "played");
+        root.classList.add("studio-cue");
+      } catch {
+        root.classList.remove("studio-cue");
+      }
+    })();</script>`;
+}
+
 export function renderHeroMedia({ heroMedia, lang }) {
   const media = heroMedia.contract.public;
   const focal = media.focalPoint;
@@ -738,7 +753,7 @@ export function renderPage({ lang, site, works }) {
   const navItems = [
     { href: "#available", label: copy.availabilityLabel },
     { href: "#works", label: lang === "en" ? "Works" : "作品" },
-    { href: "#contact", label: lang === "en" ? "Contact" : "聯絡", className: "nav-contact" },
+    { href: "#contact", label: lang === "en" ? "Contact" : "聯絡", className: "nav-contact contact-tally" },
   ];
   const collaborations = renderCollaborations(site.collaborations, lang);
 
@@ -764,6 +779,7 @@ export function renderPage({ lang, site, works }) {
     <script type="application/ld+json">${escapeJsonForHtml(renderPersonJsonLd(site))}</script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     ${renderHeroPreloads(heroMedia)}
+    ${renderStudioCueBootstrap()}
     <link rel="stylesheet" href="/styles.css?v=${ASSET_VERSION}">
     <script type="module" src="/main.js?v=${ASSET_VERSION}"></script>
   </head>
