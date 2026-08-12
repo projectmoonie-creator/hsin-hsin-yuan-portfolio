@@ -147,6 +147,7 @@ class FakePanel extends EventHub {
 class FakeMediaFrame extends EventHub {
   constructor(video, linked = true) {
     super();
+    this.classList = new FakeClassList();
     this.video = video;
     this.linked = linked;
   }
@@ -1050,37 +1051,45 @@ test("an old play rejection cannot reset a rapid exit and re-entry activation", 
 test("only a current active playing event may reveal a Featured reel", () => {
   const runtime = createRuntime();
   const [video] = runtime.videos;
+  const [media] = runtime.mediaFrames;
 
   runtime.intersect([[video, 0.8]]);
   video.dispatch("playing");
   assert.equal(video.classList.contains("is-playing"), false);
+  assert.equal(media.classList.contains("is-reel-playing"), false);
 
   runtime.clock.advance(1400);
   runtime.intersect([[video, 0]]);
   video.dispatch("playing");
   assert.equal(video.classList.contains("is-playing"), false);
+  assert.equal(media.classList.contains("is-reel-playing"), false);
 
   runtime.intersect([[video, 0.8]]);
   video.dispatch("playing");
   assert.equal(video.classList.contains("is-playing"), false);
+  assert.equal(media.classList.contains("is-reel-playing"), false);
 
   runtime.clock.advance(1400);
   video.dispatch("playing");
   assert.equal(video.classList.contains("is-playing"), true);
+  assert.equal(media.classList.contains("is-reel-playing"), true);
 });
 
 test("media errors and hidden visibility reset while visible re-entry can replay", () => {
   const runtime = createRuntime();
   const [video] = runtime.videos;
+  const [media] = runtime.mediaFrames;
 
   runtime.intersect([[video, 0.8]]);
   runtime.clock.advance(1400);
   video.currentTime = 4;
   video.dispatch("playing");
+  assert.equal(media.classList.contains("is-reel-playing"), true);
   video.dispatch("error");
   assert.equal(video.paused, true);
   assert.equal(video.currentTime, 0);
   assert.equal(video.classList.contains("is-playing"), false);
+  assert.equal(media.classList.contains("is-reel-playing"), false);
 
   runtime.intersect([[video, 0.8]]);
   runtime.clock.advance(1400);
