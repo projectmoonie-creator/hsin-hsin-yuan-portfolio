@@ -4,6 +4,15 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-12 — Hero F / Studio Cue / Featured geometry phase closeout
+- Producer ruling: accessible cumulative Preview accepted as `預覽 OK`; producer explicitly authorized non-force backup, closeout, active-branch push, `main`, annotated tag, and Production.
+- Scope: closes the linear phase above `origin/main` `7d76b89` containing Hero F, bounded first-view Studio Cue + Contact-dot tally, proactive Shareable-Link governance, and four-card full-poster/16:9-playing geometry; no Contact logic/submission, copy, unrelated media, or protected-file change.
+- Gates: final 179/179, fresh build, six-reel integrity, design audit, privacy/diff/protected checks, and production dependency audit with zero vulnerabilities pass; prior full bilingual/device/fallback/browser and matched performance evidence remains current because only closeout docs changed afterward.
+- Review: Hero F and Featured geometry independently requested/observed/completed Codex `gpt-5.6-sol` `xhigh`, both PASS/no actionable finding; Studio Cue has deterministic, 8-case visual, matched performance, cumulative Preview, and explicit producer acceptance. Failed Claude/Gemini lanes remain incomplete, not findings.
+- Preview: cumulative static `dpl_Diifu…g76t` is Ready/Preview, 57 files / path-list `739aa47d…a5af`, no functions/private payload; its Shareable URL remains outside Git and PageSpeed report `0gzingp9bc` remains invalid because it measured Vercel login.
+- Durability/release: final commit is pushed non-force to unique dated backup, `codex/hero-portrait-refresh`, `main`, and annotated `portfolio-phase-2026-08-12-closed`; exact remote SHAs and Git Production ID are post-commit readback evidence reported externally to avoid another docs-only Production cycle.
+- Verdict/next: `PASS`; optional public PageSpeed and future Chinese-source authority selection are non-blocking. After readback, wait for the producer to name the next bounded package; no implicit implementation or Contact action.
+
 ## 2026-08-12 — Featured poster-to-reel geometry
 - Authorization/scope: producer approved Option 1, its written spec, implementation plan, and test-first execution; local branch remains `codex/hero-portrait-refresh` over `origin/main` `7d76b89`, while push/`main`/Production/alias/Contact/tag/protected-file actions remain gated.
 - TDD/commits: spec `35b87a6`, plan `dfeb66e`, data contract `77d0a65`, runtime/CSS `f74696f`, design truth `caff12b`, lifecycle coverage `3fd7fa4`, and frozen review record `ded2d6c`; expected contract and renderer/runtime REDs preceded GREEN.

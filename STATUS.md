@@ -2,9 +2,61 @@
 
 Updated: 2026-08-12
 
-State: `PASS_WITH_OPEN_ITEMS`
+State: `PASS`
 
-## Current Work Package — Featured Poster-to-Reel Geometry
+## Current Baseline — 2026-08-12 Phase Closed And Production-Authorized
+
+- The producer inspected the accessible Featured geometry Shareable Preview
+  and ruled `預覽 OK，核准備份推送與收官；核准 main／Production` on
+  2026-08-12. This closes the target-device visual open item and explicitly
+  authorizes the final closeout commit, non-force remote backup, active-branch
+  push, `main` fast-forward, annotated closeout tag, and Production release.
+- The closed phase spans the linear `origin/main` baseline
+  `7d76b891240d2a0850b14d4159052ef5bbca3273` through the final closeout commit.
+  It includes producer-selected Hero portrait F, the bounded first-view Studio
+  Cue plus Contact-dot tally, the proactive Shareable-Link handoff rule, and
+  the four-card full-height-poster/16:9-playing geometry. It does not change
+  Contact logic or submit Contact, add copy, alter work links, replace unrelated
+  media, disclose a Shareable token, or modify the protected document.
+- Final source validation passes 179/179 tests, fresh build, six-reel integrity,
+  design-contract audit, zero-vulnerability production dependency audit,
+  generated-output privacy scan, and `git diff --check`. The already-frozen
+  phase-closeout browser evidence covers English/Chinese desktop, compact
+  desktop/tablet, mobile/narrow mobile, reduced motion, no JavaScript,
+  keyboard/intent/lifecycle/reset states, overflow, and zero Contact POST,
+  console error, or page error. Matched Lighthouse medians show no material
+  regression.
+- Independent review is complete at the risk tier applied to each public
+  package. Hero F and Featured geometry each received Codex
+  requested/observed/completed `gpt-5.6-sol` at `xhigh` with `PASS` and no
+  actionable finding. The Studio Cue package was a bounded renderer/CSS change
+  covered by its 8-case visual matrix, performance comparison, producer
+  inspection in the final cumulative Preview, and the producer's explicit
+  closeout ruling. Incomplete Claude/Gemini attempts remain recorded honestly
+  and are not represented as completed reviews.
+- The accepted cumulative Preview is
+  `dpl_Diifu1JzTyjjuAydEKPLJxFwg76t`, `READY`/`preview`, with 57 exact static
+  `dist/` files and no functions or private/source payload. Its Shareable Link
+  stays outside Git and was not sent to PageSpeed. Report `0gzingp9bc` measured
+  Vercel's login page rather than the portfolio and remains retired as invalid
+  product evidence.
+- The final committed checkpoint is named by annotated tag
+  `portfolio-phase-2026-08-12-closed`. Closeout requires that exact commit to
+  be read back at the non-force dated backup, active branch,
+  `origin/main`, and tag. The `main` push is the authorized Git-integrated
+  Production release; the canonical alias is
+  `https://hsin-hsin-yuan-portfolio.vercel.app`. The exact resulting Git
+  Production deployment ID is read back after the self-referential closeout
+  commit and reported in the external handoff rather than causing another
+  docs-only Production cycle. In this project, `main`
+  pushes are now known to trigger Production automatically.
+- The protected untracked document remains outside Git, deployment, and every
+  push at SHA-256
+  `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+  No remaining change in this closed phase exists only in chat or temporary
+  storage. Outcome: `PASS`.
+
+## Prior Accepted Work Package — Featured Poster-to-Reel Geometry
 
 - Producer approved written Option 1 with the exact instructions
   `依方案 1 寫入規格並進入實作` and
@@ -1354,21 +1406,15 @@ Current design/Figma rules are aligned and Figma output is unchanged.
 
 ## Accepted Open Items
 
-- Producer opens the new Shareable Link on the target device and inspects the
-  four full-height wider-screen posters, their playing 16:9 transition and
-  reset, the unchanged reference pair, and all-six mobile 16:9 geometry. The
-  same Preview retains the prior Studio Cue, portrait F, mobile spill, and
-  Contact tally for any remaining visual inspection. Production remains a
-  later explicit decision even if the Preview is accepted.
 - PageSpeed report `0gzingp9bc` measured Vercel's login page and is retired as
   invalid portfolio evidence. A future PageSpeed retry is optional only
   against an independently public URL; the Shareable Link token must not be
-  disclosed to the measurement service. This does not block the current local
-  matched-performance result or producer inspection.
+  disclosed to the measurement service. This does not affect the accepted
+  matched-performance evidence or the closed release.
 - The offline Chinese manager directory contains a Numbers file and a recovered
   XLSX rather than the originally recorded XLSX path. Before any future
   Chinese-copy import, the producer selects one authority and exports a fresh
-  explicit XLSX; this does not block the current public baseline.
+  explicit XLSX; this does not block the closed public baseline.
 
 ## Protected Worktree Item
 
@@ -1382,44 +1428,33 @@ SHA-256:
 
 ## Exact Next Action
 
-Producer opens the newly delivered Shareable Link and inspects the Ready
-Featured geometry Preview. Above 820px, confirm that Slow Steps, Tech Dreamers,
-My Art, My Voice, and Top Gear begin as full-height posters, switch to centered
-16:9 only when their reels play, and return to full-height after reset; confirm
-Design & Brand Films and Nothing by Bus stay 16:9, and confirm all six remain
-16:9 on mobile. After inspection, the producer either requests remediation or
-separately decides whether to authorize Production. Alias, `main`, any Git
-push, Contact/functions, tag, protected-file, and destructive Vercel actions
-remain separately gated. Future standing-authorized portfolio Previews keep
-the same proactive Shareable-Link replacement rule without another question;
-the protected direct origin is deployment identity only, not the producer
-handoff.
+After the authorized remote and Production readback completes, start no new
+implementation implicitly. The next session verifies that
+`portfolio-phase-2026-08-12-closed`, the dated backup, active branch, and
+`origin/main` resolve to the same closeout commit and that the canonical
+Production alias remains Ready. Then wait for the producer to name the next
+bounded package. Contact submissions, protected-file actions, force pushes,
+and destructive Vercel actions remain unauthorized.
 
 ## Cold Resume
 
 1. Read `AGENTS.md`, `PROJECT_BIBLE.md`, this file, and
    `docs/reviews/LOG.md` plus the two 2026-08-10 closeout reports.
-2. Verify annotated tag `portfolio-phase-2026-08-10-closed` and remote backup
-   `backup/2026-08-10/portfolio-phase-closeout` resolve to the same docs-only
-   closeout commit. Verify `origin/main` remains
-   `7d76b891240d2a0850b14d4159052ef5bbca3273` unless a later producer-approved
-   integration records otherwise.
+2. Verify annotated tag `portfolio-phase-2026-08-12-closed`, its recorded dated
+   backup, `origin/codex/hero-portrait-refresh`, and `origin/main` all resolve
+   to the same final closeout commit. The earlier
+   `portfolio-phase-2026-08-10-closed` tag remains historical evidence at
+   `82893899dad3e4f393720e2efd71b1e1cb02a350`.
 3. Verify the protected file above remains untracked and matches its exact
    SHA-256 before changing anything.
-4. Resume local branch `codex/hero-portrait-refresh`. Featured geometry spec,
-   plan, implementation head, and frozen review record are `35b87a6`,
-   `dfeb66e`, `3fd7fa4`, and `ded2d6c`. Local deterministic, browser,
-   performance, privacy, and independent-review gates pass; the branch remains
-   unpushed.
-5. Featured geometry static `dist/`-only Preview
-   `dpl_Diifu1JzTyjjuAydEKPLJxFwg76t` is Ready/Preview and unfetched; exact next
-   action is producer inspection through the access-bearing Shareable Link
-   delivered outside Git. The previous Studio Cue share link is invalid. Every
-   future standing-authorized portfolio Preview must proactively generate or
-   replace the sole Hobby Shareable Link before handoff, without trying the
-   protected direct origin first and without another question; report the old
-   link's revocation afterward. This does not authorize any Git push.
-   Every branch push can trigger Vercel; `main` pushes are now known to trigger Production automatically.
-   Production, alias, `main`, Git push,
-   Contact/functions, destructive actions, and broader access changes remain
-   separately gated.
+4. The closed phase includes Hero F, Studio Cue, and Featured poster-to-reel
+   geometry. Its dated report is
+   `docs/reviews/portfolio-phase-closeout-2026-08-12.md`; the accepted Preview
+   is `dpl_Diifu1JzTyjjuAydEKPLJxFwg76t`.
+5. Read back the canonical Production alias and compare its Git source to the
+   closeout tag. The exact deployment ID is external post-commit evidence by
+   design, because committing it would trigger another docs-only Production.
+   Start no new package until the producer supplies scope. Future static
+   Previews still require proactive Shareable-Link replacement without another
+   question, while Contact submissions, destructive actions, and protected-
+   file changes remain separately unauthorized.
