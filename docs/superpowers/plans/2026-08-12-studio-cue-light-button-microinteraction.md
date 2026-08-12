@@ -968,12 +968,16 @@ Run these commands in the same shell that owns `$preview_stage`:
 
 ```bash
 find "$preview_stage" -type f -print
-rg -n '/(Users|home)/[^/[:space:]]+/|screening-strip-media-contract|945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc|RESEND_API_KEY|api/contact|\.env' "$preview_stage"
+test ! -e "$preview_stage/api"
+rg -n '/(Users|home)/[^/[:space:]]+/|screening-strip-media-contract|945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc|RESEND_API_KEY|\.env' "$preview_stage"
 python3 -c 'import hashlib,pathlib,sys; root=pathlib.Path(sys.argv[1]); files=sorted(p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file() and ".vercel" not in p.parts); print(len(files)); print(sum((root/p).stat().st_size for p in files)); print(hashlib.sha256("\n".join(files).encode()).hexdigest())' "$preview_stage"
 ```
 
 Expected: the privacy scan exits 1; the inventory contains generated public
-files plus the minimal static config, and contains no function.
+files plus the minimal static config, and contains no `api/` path or function.
+The generated English and Chinese HTML intentionally retain the existing
+`action="/api/contact"` form markup; that public UI string is not a deployed
+Contact function and must not be mistaken for one.
 
 - [ ] **Step 3: Link only to the existing portfolio project**
 
