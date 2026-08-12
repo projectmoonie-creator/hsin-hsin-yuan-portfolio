@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-12 — Featured poster-to-reel geometry
+- Authorization/scope: producer approved Option 1, its written spec, implementation plan, and test-first execution; local branch remains `codex/hero-portrait-refresh` over `origin/main` `7d76b89`, while push/`main`/Production/alias/Contact/tag/protected-file actions remain gated.
+- TDD/commits: spec `35b87a6`, plan `dfeb66e`, data contract `77d0a65`, runtime/CSS `f74696f`, design truth `caff12b`, lifecycle coverage `3fd7fa4`, and frozen review record `ded2d6c`; expected contract and renderer/runtime REDs preceded GREEN.
+- Geometry: four named works use one data-derived `fill-poster-16x9-reel` variant—full-height poster above 820px, centered 16:9 only after current valid `playing`, reset/error back to poster. The reference pair stays 16:9; mobile keeps all six 16:9; panels/copy/links/media remain unchanged.
+- Gates/browser: 179/179, build, reel integrity, design audit, Figma/no tracked drift, diff/privacy/protected checks pass. Ten EN/ZH viewport cases plus reduced/no-JS pass; desktop switching frames measure 533.75×618.81 poster → 533.75×300.23 playing inside unchanged 1180×648 panels, with zero Contact/error/overflow.
+- Performance: matched 3× local medians remain mobile 0.81 / LCP 5027.10→5027.59ms and desktop 0.99 / 922.32→922.21ms, with TBT/CLS zero. PageSpeed `0gzingp9bc` measured `vercel.com/login`, so its 59/85 scores are invalid portfolio evidence; no share token was disclosed to PageSpeed.
+- Review: frozen packet `fdafc6d…cc2a`; Codex requested/observed/completed `gpt-5.6-sol` `xhigh`, PASS/no findings. Claude dynamic `opus` timed out after preflight and Gemini `gemini-3.6-flash` returned empty candidates; neither incomplete lane is claimed complete.
+- Preview/access: `dpl_Diifu…g76t` reads Ready/Preview; exact static package is 57 files / 96,765,750 bytes / matching local+remote path-list `739aa47d…a5af`, with no functions or private/source payload. New API-created Shareable Link replaces the prior sole Hobby link; its URL stays outside Git at `aaaa9f3e…c85de` and was not fetched.
+- Verdict/next: `PASS_WITH_OPEN_ITEMS` only for producer target-device inspection of the new Shareable Link. Protected hash remains `945d4df9…d28fc`; Production, alias, push, `main`, Contact, and every other external boundary remain untouched.
+
 ## 2026-08-12 — Studio Cue + Contact tally implementation
 - Authorization/boundary: producer said `核准實作，選 2` at 2026-08-12 08:02:37 +08:00, authorizing inline execution only; local branch stays `codex/hero-portrait-refresh`, `origin/main` stays `7d76b89`, and push/`main`/Production/alias/Contact/tag/protected-file actions remain gated.
 - TDD/commits: RED `c6d85ac2bdf1391ac4acb03f87fcb18afb5eb7a1`; smallest GREEN `57acb905ab8bd9bb2662fab4c7064c1312bf8b10`; plan portability fix `4fba180`. Runtime scope is exactly renderer + CSS, with one contract-test file from Hero F.

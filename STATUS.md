@@ -4,7 +4,86 @@ Updated: 2026-08-12
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Work Package — Studio Cue + Contact Tally Implementation
+## Current Work Package — Featured Poster-to-Reel Geometry
+
+- Producer approved written Option 1 with the exact instructions
+  `依方案 1 寫入規格並進入實作` and
+  `書面規格OK，建立實作計畫並進入 test-first 實作`. This authorizes the
+  bounded local implementation and the standing-authorized static Preview only;
+  it does not authorize Git push, `main`, Production, alias, Contact, tag, or
+  protected-file changes.
+- Work remains on local `codex/hero-portrait-refresh` above accepted
+  `origin/main` baseline `7d76b891240d2a0850b14d4159052ef5bbca3273`.
+  Specification and plan are `35b87a6` and `dfeb66e`; canonical data,
+  runtime/CSS, design-contract, lifecycle-test, and frozen-review commits are
+  `77d0a65`, `f74696f`, `caff12b`, `3fd7fa4`, and `ded2d6c`.
+- TDD first failed 3/3 canonical variant assertions, then passed 3/3 after the
+  smallest data/contract change. Renderer/runtime RED then failed the two
+  expected absent class/state assertions; the minimal implementation passed
+  both. The first full run exposed that the runtime test fake lacked a frame
+  `classList`; the test harness was completed and the final full suite passes
+  179/179.
+- Slow Steps, Tech Dreamers, My Art, My Voice, and Top Gear now declare one
+  canonical `fill-poster-16x9-reel` variant. Above 820px their static, waiting,
+  rejected, errored, and reset posters fill the approved media side; only a
+  current valid `playing` event switches that frame to centered 16:9. Design &
+  Brand Films and Nothing by Bus remain centered 16:9 in both states. At 820px
+  and below all six remain 16:9 in both states. There are no slug selectors,
+  `:has()` rules, extra controllers, copy/link/media changes, or panel-geometry
+  changes.
+- Deterministic gates pass: 179/179 tests, fresh build, six-reel integrity,
+  design-contract audit, Figma export, `git diff --check`, generated-output
+  privacy scan, and protected-file checks. The one disposable collision file
+  emitted by the Figma export was removed; no tracked Figma drift remains.
+- Native Chromium passes English and Chinese at 1440×900, 1024×768, 834×1112,
+  390×844, and 360×800, plus reduced-motion and no-JavaScript fallback checks.
+  At 1440px each switching poster measures 533.75×618.81 and its playing frame
+  533.75×300.23, centered within the unchanged 1180×648 panel; the reference
+  pair remains 533.75×300.23 in both states. Mobile keeps all six at 16:9.
+  Reset/error restoration, zero overflow, zero Contact POST, and zero
+  console/page errors pass.
+- Three matched cold Lighthouse runs show no material performance regression.
+  Mobile median remains score 0.81, TBT 0, CLS 0, and LCP
+  5027.10→5027.59ms; desktop remains score 0.99, TBT 0, CLS 0, and LCP
+  922.32→922.21ms. Transfer changes only 3,259,982→3,260,201 bytes on mobile
+  and 1,570,015→1,570,224 bytes on desktop. These are local lab results, not
+  CrUX.
+- PageSpeed report `0gzingp9bc` is not a valid portfolio regression
+  comparison: its tested navigation resolved to `vercel.com/login`, so the
+  observed mobile 59 and desktop 85 describe Vercel's login gate rather than
+  this site. The access-bearing Shareable Link is not sent to PageSpeed.
+- Frozen packet SHA-256
+  `fdafc6d3ede72f822e2539058c2b3553af63306e19a9b3fded4c3b807cf0cc2a`
+  received independent Codex `gpt-5.6-sol` requested/observed/completed at
+  `xhigh`: `PASS`, with no BLOCKER/MAJOR/MINOR. Its only residual note is a
+  non-finding test-granularity gap because several lifecycle tests assert video
+  state while sharing the same directly tested reset function. Claude dynamic
+  `opus` attempt `e3b9082b-fe33-40d8-bcfc-ddacca4254c5` timed out after
+  preflight, and Gemini requested `gemini-3.6-flash` but returned
+  `empty-candidates`; neither has an observed/completed model or usable result.
+- The protected untracked document remains outside Git and byte-identical at
+  SHA-256
+  `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+  Standing-authorized deployment `dpl_Diifu1JzTyjjuAydEKPLJxFwg76t` reads
+  `READY`, target `preview`, at deployment identity
+  `https://hsin-hsin-yuan-portfolio-7eim96sea.vercel.app`. Its exact static
+  `dist/` package is 57 files / 96,765,750 bytes. Vercel's uploaded relative
+  path list matches the local list at SHA-256
+  `739aa47d64b95c5408dc11fd311f0c6841118fea3fc7e3a69c6025a974c1a5af`;
+  inspect shows one Ready root build and no functions or middleware, and the
+  package has no API, environment, source, review, test, or protected payload.
+  The origin and Contact endpoint were not fetched or submitted.
+- A new Vercel `shareable-link` bypass was proactively created for the exact
+  Preview through the authenticated official API. Under the Hobby account's
+  one-link limit it replaces and invalidates the prior Studio Cue Shareable
+  Link. The new access-bearing URL stays outside Git and is recorded only by
+  SHA-256
+  `aaaa9f3e31451d3f74ee6021dd6b30d5f8ff7bc1fd92efd575ebdfa5a27c85de`;
+  it was not fetched or sent to PageSpeed. Package verdict is
+  `PASS_WITH_OPEN_ITEMS` only for producer inspection through that Shareable
+  Link. Production and every other gated boundary remain untouched.
+
+## Prior Local Work Package — Studio Cue + Contact Tally Implementation
 
 - Producer authorization is the exact instruction `核准實作，選 2`, received
   2026-08-12 08:02:37 +08:00. It authorizes inline execution of the bounded
@@ -1275,12 +1354,17 @@ Current design/Figma rules are aligned and Figma output is unchanged.
 
 ## Accepted Open Items
 
-- Producer inspects the Studio Cue sequence, portrait F, mobile single spill,
-  and Contact tally at the Ready Preview origin on the target device.
-  Production remains a later explicit decision even if the Preview is accepted.
-- The prior Hero LCP package is already part of the accepted Production
-  baseline; a fresh PageSpeed retry is optional observational evidence and not
-  a release claim or blocker.
+- Producer opens the new Shareable Link on the target device and inspects the
+  four full-height wider-screen posters, their playing 16:9 transition and
+  reset, the unchanged reference pair, and all-six mobile 16:9 geometry. The
+  same Preview retains the prior Studio Cue, portrait F, mobile spill, and
+  Contact tally for any remaining visual inspection. Production remains a
+  later explicit decision even if the Preview is accepted.
+- PageSpeed report `0gzingp9bc` measured Vercel's login page and is retired as
+  invalid portfolio evidence. A future PageSpeed retry is optional only
+  against an independently public URL; the Shareable Link token must not be
+  disclosed to the measurement service. This does not block the current local
+  matched-performance result or producer inspection.
 - The offline Chinese manager directory contains a Numbers file and a recovered
   XLSX rather than the originally recorded XLSX path. Before any future
   Chinese-copy import, the producer selects one authority and exports a fresh
@@ -1298,16 +1382,18 @@ SHA-256:
 
 ## Exact Next Action
 
-Producer opens the newly delivered Shareable Link and inspects the Ready Studio
-Cue Preview, covering first-load sequence, portrait F, paired desktop/tablet
-spill, single mobile spill, reduced motion, and Contact tally. After that
-inspection, the producer either requests remediation or separately decides
-whether to authorize Production. Alias, `main`, any Git push,
-Contact/functions, tag, protected-file, and destructive Vercel actions remain
-separately gated. For every future standing-authorized portfolio Preview,
-proactive generation/replacement of the sole Shareable Link is part of Preview
-completion and needs no separate question; the protected direct origin is not
-the producer-review handoff.
+Producer opens the newly delivered Shareable Link and inspects the Ready
+Featured geometry Preview. Above 820px, confirm that Slow Steps, Tech Dreamers,
+My Art, My Voice, and Top Gear begin as full-height posters, switch to centered
+16:9 only when their reels play, and return to full-height after reset; confirm
+Design & Brand Films and Nothing by Bus stay 16:9, and confirm all six remain
+16:9 on mobile. After inspection, the producer either requests remediation or
+separately decides whether to authorize Production. Alias, `main`, any Git
+push, Contact/functions, tag, protected-file, and destructive Vercel actions
+remain separately gated. Future standing-authorized portfolio Previews keep
+the same proactive Shareable-Link replacement rule without another question;
+the protected direct origin is deployment identity only, not the producer
+handoff.
 
 ## Cold Resume
 
@@ -1320,13 +1406,15 @@ the producer-review handoff.
    integration records otherwise.
 3. Verify the protected file above remains untracked and matches its exact
    SHA-256 before changing anything.
-4. Resume local branch `codex/hero-portrait-refresh`. Hero F is closed at
-   `f0c2f9c`; Studio Cue RED/GREEN are `c6d85ac`/`57acb90`. Local implementation
-   gates pass and the branch remains unpushed.
-5. Studio Cue static `dist/`-only Preview
-   `dpl_4554GhqKKSytQ478ryqZdJurHNbr` is Ready/Preview and unfetched; exact next
-   action is producer visual inspection through the access-bearing Shareable
-   Link delivered outside Git. The direct origin is protection-blocked. Every
+4. Resume local branch `codex/hero-portrait-refresh`. Featured geometry spec,
+   plan, implementation head, and frozen review record are `35b87a6`,
+   `dfeb66e`, `3fd7fa4`, and `ded2d6c`. Local deterministic, browser,
+   performance, privacy, and independent-review gates pass; the branch remains
+   unpushed.
+5. Featured geometry static `dist/`-only Preview
+   `dpl_Diifu1JzTyjjuAydEKPLJxFwg76t` is Ready/Preview and unfetched; exact next
+   action is producer inspection through the access-bearing Shareable Link
+   delivered outside Git. The previous Studio Cue share link is invalid. Every
    future standing-authorized portfolio Preview must proactively generate or
    replace the sole Hobby Shareable Link before handoff, without trying the
    protected direct origin first and without another question; report the old
