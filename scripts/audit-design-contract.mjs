@@ -69,10 +69,12 @@ export function auditDesignContract({ rootDir = process.cwd() } = {}) {
   const explicitPresentation = featured.every((work) => work.presentation);
   const fillCard = [];
   const centered16x9 = [];
+  const fillPoster16x9Reel = [];
   for (const work of featured) {
     const variant = work.presentation?.desktopMediaVariant
       || (work.featuredMediaAspect === "16:9" ? "centered-16x9" : "fill-card");
     if (variant === "centered-16x9") centered16x9.push(work.slug);
+    else if (variant === "fill-poster-16x9-reel") fillPoster16x9Reel.push(work.slug);
     else fillCard.push(work.slug);
   }
 
@@ -185,6 +187,7 @@ export function auditDesignContract({ rootDir = process.cwd() } = {}) {
       featured: {
         "fill-card": fillCard,
         "centered-16x9": centered16x9,
+        "fill-poster-16x9-reel": fillPoster16x9Reel,
         source: explicitPresentation ? "explicit" : "legacy-inference",
       },
       archive: {

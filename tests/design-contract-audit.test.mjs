@@ -45,11 +45,13 @@ test("design contract audit inventories an aligned project without writing", () 
   assert.deepEqual(report.variants.featured, {
     "fill-card": [],
     "centered-16x9": [
+      "interior-spatial-brand-films",
+      "pts-taigi-bus",
+    ],
+    "fill-poster-16x9-reel": [
       "slow-steps",
       "tech-dreamers",
       "my-art-my-voice",
-      "interior-spatial-brand-films",
-      "pts-taigi-bus",
       "top-gear-china-uk-special",
     ],
     source: "explicit",

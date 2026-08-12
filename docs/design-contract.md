@@ -140,19 +140,20 @@ One public anatomy is used in this order:
 | Variant | Works | Wider-screen behavior |
 | --- | --- | --- |
 | `fill-card` | None currently | Retained as an allowed non-reel presentation variant; media fills the approved Featured card media area. |
-| `centered-16x9` | All six current Featured Works | A 16:9 poster/reel is vertically centered in its side of the card. |
+| `centered-16x9` | Design & Brand Films; Nothing by Bus | The poster and playing reel both remain 16:9 and vertically centered in their side of the card. |
+| `fill-poster-16x9-reel` | Slow Steps; Tech Dreamers; My Art, My Voice; Top Gear China–UK Special | The static, waiting, rejected, and errored poster fills the approved media side. Only a valid `playing` event centers the reel at 16:9; reset restores the full-height poster. |
 
-Every approved Featured reel uses `centered-16x9` on wider screens so poster
-and playback geometry stay identical. At `820px` and below, every Featured
-media surface remains 16:9. The mobile rule is invariant; it is not a third
-per-work exception.
+The variant is declared by the work record rather than inferred from its slug.
+At `820px` and below, every Featured media surface remains 16:9 in both poster
+and playing states. The mobile rule is invariant; it is not a third per-work
+exception.
 
 Every work declares:
 
 ```json
 {
   "presentation": {
-    "desktopMediaVariant": "centered-16x9",
+    "desktopMediaVariant": "fill-poster-16x9-reel",
     "mobileMediaAspect": "16:9",
     "siteTitleOverlay": "none",
     "sourceArtworkTitle": "present"
@@ -160,8 +161,8 @@ Every work declares:
 }
 ```
 
-Allowed values are `fill-card | centered-16x9`, `16:9`, `none`, and
-`present | absent` respectively.
+Allowed values are `fill-card | centered-16x9 | fill-poster-16x9-reel`,
+`16:9`, `none`, and `present | absent` respectively.
 
 ### Media identity
 
@@ -184,6 +185,10 @@ Films and Nothing by Bus.
   reel in DOM order is active.
 - The canonical poster holds for 700ms at `820px` and below and 1.4 seconds
   above `820px`, then remains visible until the video actually emits `playing`.
+- On wider screens, `fill-poster-16x9-reel` changes its media surface from the
+  full-height poster to centered 16:9 only after that valid `playing` event.
+  Every normal reset path removes the playing geometry before restoring the
+  poster. `centered-16x9` does not change geometry between those states.
 - Explicit intent bypasses the passive hold without bypassing one-owner or
   lifecycle guards. Desktop panel hover and focus-within request that reel
   immediately and release it on exit. On mobile linked media, the first
@@ -213,8 +218,9 @@ Films and Nothing by Bus.
   another, and desktop, reduced motion, no-JavaScript, Save-Data, slow-2G, and
   2G remain conservative. A late initial `pageshow` cannot restore the top
   position after scroll, pointer, or keyboard navigation begins.
-- Delivery changes must preserve the poster, crop/focal point, card and text
-  geometry, 700ms/1.4s holds, 260ms reveal, navigation, copy, and Figma output.
+- Delivery changes must preserve each variant's approved poster and playback
+  geometry, crop/focal point, card and text geometry, 700ms/1.4s holds, 260ms
+  reveal, navigation, copy, and Figma output.
 - Existing posters and external watch destinations remain canonical. Slow
   Steps has no public destination and stays unlinked; no destination is
   invented for it.
