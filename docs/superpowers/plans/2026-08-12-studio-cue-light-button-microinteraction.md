@@ -153,9 +153,13 @@ print(json.dumps({"label": LABEL, "output": str(OUTPUT), "results": results}, in
 
 Build and run the baseline from the still-runtime-identical plan checkout:
 
+Resolve `PORTFOLIO_WEBAPP_TESTING_SKILL` to the directory containing the
+currently selected `webapp-testing/SKILL.md` from the active skill catalog.
+Keep that machine-local value outside Git.
+
 ```bash
 npm run build
-python3 /Users/hsin-hsinyuan/.codex/skills/webapp-testing/scripts/with_server.py --server 'npm run serve' --port 4173 -- python3 /private/tmp/portfolio-studio-cue-perf.py baseline
+python3 "$PORTFOLIO_WEBAPP_TESTING_SKILL/scripts/with_server.py" --server 'npm run serve' --port 4173 -- python3 /private/tmp/portfolio-studio-cue-perf.py baseline
 ```
 
 Expected: three usable desktop runs and three usable mobile runs are written to
@@ -566,7 +570,7 @@ commit.
 - [ ] **Step 1: Check the server helper contract and rebuild**
 
 ```bash
-python3 /Users/hsin-hsinyuan/.codex/skills/webapp-testing/scripts/with_server.py --help
+python3 "$PORTFOLIO_WEBAPP_TESTING_SKILL/scripts/with_server.py" --help
 npm run build
 ```
 
@@ -786,7 +790,7 @@ print(json.dumps({"cases": len(results), "result": "PASS", "output": str(OUT)}, 
 - [ ] **Step 3: Run the managed local browser matrix**
 
 ```bash
-python3 /Users/hsin-hsinyuan/.codex/skills/webapp-testing/scripts/with_server.py --server 'npm run serve' --port 4173 -- python3 /private/tmp/portfolio-studio-cue-qa.py
+python3 "$PORTFOLIO_WEBAPP_TESTING_SKILL/scripts/with_server.py" --server 'npm run serve' --port 4173 -- python3 /private/tmp/portfolio-studio-cue-qa.py
 ```
 
 Expected: `8` cases and `PASS`; English/Chinese desktop, tablet, mobile,
@@ -802,7 +806,7 @@ tally transform. Every case records the four requested phase captures near
 Run the identical three-run probe against the implementation:
 
 ```bash
-python3 /Users/hsin-hsinyuan/.codex/skills/webapp-testing/scripts/with_server.py --server 'npm run serve' --port 4173 -- python3 /private/tmp/portfolio-studio-cue-perf.py implementation
+python3 "$PORTFOLIO_WEBAPP_TESTING_SKILL/scripts/with_server.py" --server 'npm run serve' --port 4173 -- python3 /private/tmp/portfolio-studio-cue-perf.py implementation
 ```
 
 Create `/private/tmp/portfolio-studio-cue-perf-compare.py` with `apply_patch`
@@ -887,7 +891,7 @@ drift; Hero delivery remains exact; the protected hash is unchanged.
 
 ```bash
 git diff --name-only f0c2f9cd48bad123dedc78e27820fa6c0987d0bc -- scripts src tests data public api package.json package-lock.json vercel.json
-rg -n '/Users/|screening-strip-media-contract|945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc' dist
+rg -n '/(Users|home)/[^/[:space:]]+/|screening-strip-media-contract|945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc' dist
 npm audit --omit=dev
 git status --short --branch --untracked-files=all
 ```
@@ -964,7 +968,7 @@ Run these commands in the same shell that owns `$preview_stage`:
 
 ```bash
 find "$preview_stage" -type f -print
-rg -n '/Users/|screening-strip-media-contract|945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc|RESEND_API_KEY|api/contact|\.env' "$preview_stage"
+rg -n '/(Users|home)/[^/[:space:]]+/|screening-strip-media-contract|945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc|RESEND_API_KEY|api/contact|\.env' "$preview_stage"
 python3 -c 'import hashlib,pathlib,sys; root=pathlib.Path(sys.argv[1]); files=sorted(p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file() and ".vercel" not in p.parts); print(len(files)); print(sum((root/p).stat().st_size for p in files)); print(hashlib.sha256("\n".join(files).encode()).hexdigest())' "$preview_stage"
 ```
 
