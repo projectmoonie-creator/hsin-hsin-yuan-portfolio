@@ -4,16 +4,12 @@ Updated: 2026-08-13
 
 State: `BLOCKED`
 
-## Current Launch Blocker — Domain And Contact Routing
+## Current Launch Blocker — Contact Routing
 
-- The producer correctly identified that the portfolio has neither an own
-  domain nor an approved professional contact-address/forwarding design. These
-  were not surfaced clearly before Production and are now recorded in
-  `PRODUCT-WISHES.md`.
-- The own domain is a brand-completion item rather than a current availability
-  blocker: the Bible explicitly permits the Vercel project domain until a
-  custom domain is confirmed. Domain selection, purchase, DNS, alias migration,
-  and canonical-origin updates require a separate producer-approved package.
+- The custom-domain package is complete. `https://hsinhsinyuan.com` is the
+  verified canonical Production origin, `https://www.hsinhsinyuan.com` is a
+  Vercel-configured 308 redirect to the apex, and the prior Vercel project
+  alias remains available as a rollback/reachability path.
 - Contact is a functional launch blocker. The deployed `api/contact.js`
   requires `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EMAIL`.
   Read-only Vercel Production environment inspection on 2026-08-13 returned
@@ -25,11 +21,64 @@ State: `BLOCKED`
   release ruling and is corrected here. The live Hero/site release remains
   `READY`, but the portfolio must not be called launch-complete while its main
   inquiry route cannot deliver.
-- No emergency runtime, Production, DNS, domain-purchase, mail-provider,
-  environment, or alias change is authorized by this finding. The next bounded
-  package must first decide the domain candidate, public contact alias, private
-  forwarding destination, authenticated sender, provider/DNS ownership, and
-  safe end-to-end receive/reply test.
+- The next bounded package must decide the public contact alias, private
+  forwarding destination, authenticated sender, mail provider/DNS ownership,
+  Vercel environment configuration, failure fallback, and a consented
+  end-to-end receive/reply test. No Contact submission or mail configuration
+  was included in the domain cutover.
+
+## Current Bounded Package — Custom Domain Production Cutover Completed
+
+- The producer purchased `hsinhsinyuan.com`, approved connecting it to the
+  formal portfolio, and separately approved transmitting the frozen review
+  packet to the official Gemini API. Work stayed on
+  `codex/hero-cover-refresh`; no reset, stash, clean, checkout, Git push,
+  `main`, tag, Contact, or destructive Vercel action occurred.
+- Test-first canonical-origin assertions failed against the former project
+  URL, then passed after the smallest source change. The candidate changes only
+  the website origin and active Figma consumer allowlist/URL. Focused 49/49
+  and full 179/179 tests, fresh build, Figma export, design audit, six-reel
+  integrity, zero-vulnerability production dependency audit, privacy scan,
+  and `git diff --check` pass.
+- Clean old-origin/new-origin builds have identical file lists and byte content
+  except exactly `en/index.html`, `zh/index.html`, `robots.txt`, and
+  `sitemap.xml`. A 12-case English/Chinese desktop/mobile normal,
+  reduced-motion, and no-JavaScript matrix passed with expected canonical/OG
+  URLs, zero overflow, zero Contact POST, and no page or console errors.
+- Packet SHA-256 at review
+  `6c3b0fa0e8128f52a335a78f5263de9a560b54e7805d883f394241ffebc0aaf5`
+  received requested/observed/completed `gemini-3.6-flash`, `PASS`, with no
+  findings and explicit cutover approval. The Claude subscription-only attempt
+  `45ef1139-941e-4b3b-abec-2b01990e6500` failed after preflight with no
+  observed/completed model, so no dual-review consensus is claimed. A separate
+  local adjudication records two post-review metadata corrections: the private
+  checkout path was replaced by a repo-relative label, and the provisional
+  full candidate SHA was replaced by the actual content-equivalent local
+  commit. Current tracked packet SHA-256 is
+  `b1fa4f1afa275d4ac0cba74e2a4509996344509fecbc4adad731397cc02d902e`;
+  no technical scope, diff, evidence, or validation claim changed.
+- Isolated Production package: 59 files / 96,783,418 bytes / sorted path-list
+  SHA-256
+  `4a35f046c94f524bba31eb39be2526791922ea0860b95126cd7dcbf48a6dd8c7`.
+  It contains exact fresh `dist/`, unchanged `api/contact.js`, and minimal
+  equivalent Vercel configuration, with no source, tests, internal docs,
+  environment payload, Shareable token, or protected document.
+- Production `dpl_BZJ7LdJZ9a3xXXku48KvdPu1Fz9y` reads `READY` / `production`
+  and includes `api/contact`. The old Vercel alias and both custom domains
+  resolve through Vercel metadata to that deployment. Apex and `www` both read
+  verified/configured correctly with no issues; the Dashboard confirms `www`
+  uses 308 to the apex. Auto-renewing TLS certificate
+  `cert_bJmcugPGdiM9e6DYlBRGURwO` covers `hsinhsinyuan.com` and
+  `*.hsinhsinyuan.com`.
+- The required post-publish PageSpeed mobile-English attempt reached Google's
+  official API but returned HTTP 429 because its consumer had zero available
+  daily queries. No score was produced and no performance failure is inferred.
+  Full record:
+  `docs/reviews/custom-domain-production-cutover-2026-08-13.md`.
+- Package verdict: `PASS`. The public site has its canonical own domain, but
+  overall state remains `BLOCKED` solely by the known non-operational Contact
+  route. Exact next action is a separately approved Contact-routing package;
+  make no further Production or domain change in this package.
 
 ## Current Bounded Package — Hero Cover Refresh Released To Production
 

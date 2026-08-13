@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "provider": "google-gemini-api",
+  "routingPolicy": "highest-capability-generally-released-at-execution",
+  "exactPin": null,
+  "eligibleModels": [
+    "gemini-3.6-flash",
+    "gemini-3.5-flash",
+    "gemini-2.5-pro",
+    "gemini-2.5-flash"
+  ],
+  "requestedModel": "gemini-3.6-flash",
+  "observedModel": "gemini-3.6-flash",
+  "completedModel": "gemini-3.6-flash",
+  "status": "completed",
+  "packetSha256AtReview": "6c3b0fa0e8128f52a335a78f5263de9a560b54e7805d883f394241ffebc0aaf5",
+  "packetSha256Current": "b1fa4f1afa275d4ac0cba74e2a4509996344509fecbc4adad731397cc02d902e",
+  "postReviewCorrection": "The private checkout path was replaced by a repo-relative label and the provisional full candidate SHA by the actual content-equivalent commit after the privacy gate failed; no technical scope, diff, evidence, or validation claim changed.",
+  "resolvedAt": "2026-08-13T13:12:06.658Z",
+  "completedAt": "2026-08-13T13:12:15.975Z"
+}
