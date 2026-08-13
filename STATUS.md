@@ -22,6 +22,29 @@ State: `BLOCKED`
   email, Git push, `main`, Production, alias/domain changes, purchases,
   destructive actions, or protected-file changes.
 
+## Current Governance Closeout — BLOCKED On Durability
+
+- Local implementation correctness passes for the project envelope, reusable
+  portfolio skill, and `Provisional — Portfolio 1/2` startup experiment. Both
+  skills validate; Work Charter main text and website runtime remain unchanged.
+- The closeout found and corrected two record defects before external review:
+  the work-charter skill is tracked by `$HOME/.mirasim/skills`, not unversioned,
+  and current Production is domain-cutover deployment `dpl_BZJ7…Fz9y`, not the
+  earlier Hero deployment.
+- Frozen official-Gemini review completed with requested/observed/completed
+  `gemini-3.6-flash`, no content findings, and a recommended `PASS`. Claude was
+  not dispatched by producer quota prioritization; no dual consensus is claimed.
+- Maintainer adjudication upgrades Gemini's durability NIT to **BLOCKER** under
+  the portfolio closeout rule: the portfolio implementation candidate
+  `e0dfe60`, shared portfolio-skill candidate `eb1c812`, and user-skill
+  candidate `0ae7b6a` are coherent local commits but no origin ref contains
+  them. The closeout record itself will make the final portfolio HEAD newer.
+- Push remains outside the authorization envelope. In this portfolio repo any
+  origin push may create a Vercel Preview; do not call it a non-deploying backup
+  or push any candidate without one consolidated producer decision.
+- Dated closeout:
+  `docs/reviews/authorization-friction-governance-closeout-2026-08-13.md`.
+
 ## Current Launch Blocker — Contact Routing
 
 - The custom-domain package is complete. `https://hsinhsinyuan.com` is the
@@ -1635,17 +1658,23 @@ SHA-256:
 
 ## Exact Next Action
 
-Open one bounded Contact-routing package for the already-connected
-`hsinhsinyuan.com`. Before implementation, choose the public contact alias and
-identify the private forwarding destination through a secret-safe channel.
-Then present one consolidated authorization envelope covering the intended
-DNS/provider ownership, authenticated sending, Vercel environment setup,
-failure fallback, required deployment/Git actions, and a consented end-to-end
-receive/reply test. Once that envelope is authorized, execute every covered
-step without asking action by action. Keep purchases, private address
-disclosure, secrets, destructive actions, and the protected file outside the
-envelope unless they are explicitly named with exact safe targets. The single
-PageSpeed result does not reopen the retired mobile network-budget finding.
+Resolve the governance closeout's off-device durability gate with one
+consolidated producer decision covering non-force pushes and exact remote-tip
+readback for the final portfolio `codex/hero-cover-refresh` HEAD, shared
+portfolio-skill `eb1c812`, and user-skill `0ae7b6a`. The decision must account
+for the portfolio push's possible Git-integrated Vercel Preview side effect and
+must exclude `main`, Production, alias/domain, Contact/email, force push,
+destructive actions, unrelated dirty paths, and the protected file. If that
+durability envelope is declined, record the decision and leave the governance
+closeout `BLOCKED`.
+
+After the durability gate resolves or is explicitly declined, the next product
+package remains one bounded Contact-routing package for `hsinhsinyuan.com`:
+choose the public alias and private forwarding destination through a secret-safe
+channel, then define authenticated sending, provider/DNS ownership, Vercel
+environment setup, failure fallback, required deployment/Git actions, and a
+consented receive/reply test. The PageSpeed result does not reopen the retired
+mobile network-budget finding.
 
 ## Cold Resume
 
@@ -1685,3 +1714,9 @@ PageSpeed result does not reopen the retired mobile network-budget finding.
    action; do not turn the covered sequence into separate approval prompts.
    Destructive actions and protected-file changes remain excluded unless the
    producer explicitly names their exact targets.
+7. The authorization-governance implementation is locally accepted but its
+   formal closeout is durability-blocked. Read
+   `docs/reviews/authorization-friction-governance-closeout-2026-08-13.md`,
+   verify the three recorded candidate commits and origin relationships, and do
+   not reopen design findings or claim `PASS` before the consolidated durability
+   decision and exact remote-tip readback.

@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-13 — Authorization-friction governance closeout review
+- Scope: formal closeout of project envelope rules, reusable portfolio method, and `Provisional — Portfolio 1/2`; no runtime, public output, Contact, Production, domain, or Work Charter main-text change.
+- Candidates: portfolio `e0dfe60`, shared portfolio skill `eb1c812`, user skill `0ae7b6a`; deterministic checks, both skill validators, privacy scan, and protected-file check pass.
+- Corrections: false no-Git skill claim and stale Cold Resume Production identity were corrected before freezing review.
+- Gemini: packet `c4b25f23…55b0b`, requested/observed/completed `gemini-3.6-flash`, zero content findings, one durability NIT, recommended `PASS`.
+- Adjudication: agree on consent/scope/layering/cold-start; **upgrade** durability NIT to BLOCKER and **reject** formal PASS because three retained candidate tips have no containing origin ref.
+- Outcome: **BLOCKED** on off-device durability only; implementation correctness is accepted and must not be reopened by the durability follow-up.
+- Claude: not dispatched by producer quota prioritization; no dual-review consensus claimed.
+- Next: one consolidated decision for three non-force pushes plus exact remote readback, explicitly accounting for the portfolio's possible Git-integrated Preview; all other external/destructive boundaries remain excluded.
+
 ## 2026-08-13 — Skill Git-root claim corrected during closeout
 - Correction: the prior implementation entry's statement that the runtime skill directory had no Git is false; the probe was run one directory above the real repository.
 - Actual root: `$HOME/.mirasim/skills`; `work-charter/SKILL.md` was already tracked there.
