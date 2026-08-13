@@ -1772,14 +1772,20 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   );
 
   const zh = readFileSync(join(root, "dist/zh/index.html"), "utf8");
+  const en = readFileSync(join(root, "dist/en/index.html"), "utf8");
   const robots = readFileSync(join(root, "dist/robots.txt"), "utf8");
   const sitemap = readFileSync(join(root, "dist/sitemap.xml"), "utf8");
   const css = readFileSync(join(root, "dist/styles.css"), "utf8");
   const js = readFileSync(join(root, "dist/main.js"), "utf8");
   const gitignore = readFileSync(join(root, ".gitignore"), "utf8");
   assert.match(gitignore, /^dist\/$/m);
-  assert.match(robots, /Sitemap: https:\/\/hsin-hsin-yuan-portfolio\.vercel\.app\/sitemap\.xml/);
-  assert.match(sitemap, /<loc>https:\/\/hsin-hsin-yuan-portfolio\.vercel\.app\/en\/<\/loc>/);
+  assert.match(robots, /Sitemap: https:\/\/hsinhsinyuan\.com\/sitemap\.xml/);
+  assert.match(sitemap, /<loc>https:\/\/hsinhsinyuan\.com\/en\/<\/loc>/);
+  assert.match(en, /<link rel="canonical" href="https:\/\/hsinhsinyuan\.com\/en\/">/);
+  assert.match(zh, /<meta property="og:url" content="https:\/\/hsinhsinyuan\.com\/zh\/">/);
+  for (const artifact of [en, zh, robots, sitemap]) {
+    assert.doesNotMatch(artifact, /hsin-hsin-yuan-portfolio\.vercel\.app/);
+  }
   assert.match(sitemap, /<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);
   assert.match(zh, /紀錄片導演/);
   assert.match(zh, /<span class="brand-desktop">袁欣欣 \/ HSIN-HSIN YUAN<\/span>/);

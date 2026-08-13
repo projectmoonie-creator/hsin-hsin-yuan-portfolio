@@ -19,7 +19,7 @@ test("Figma importer plugin files are present and configured", () => {
   assert.equal(manifest.name, "Hsin Portfolio Importer");
   assert.equal(manifest.main, "code.js");
   assert.equal(manifest.editorType.includes("figma"), true);
-  assert.equal(manifest.networkAccess.allowedDomains.includes("https://hsin-hsin-yuan-portfolio.vercel.app"), true);
+  assert.deepEqual(manifest.networkAccess.allowedDomains, ["https://hsinhsinyuan.com"]);
 
   const readme = readFileSync(readmePath, "utf8");
   assert.match(readme, /Status: `LEGACY_REFERENCE_DO_NOT_USE`/);
@@ -30,6 +30,8 @@ test("Figma importer plugin files are present and configured", () => {
 test("Figma importer creates editable portfolio layers", () => {
   const code = readFileSync(join(pluginDir, "code.js"), "utf8");
 
+  assert.match(code, /const SITE_URL = "https:\/\/hsinhsinyuan\.com";/);
+  assert.doesNotMatch(code, /hsin-hsin-yuan-portfolio\.vercel\.app/);
   assert.match(code, /figma\.createFrame\(\)/);
   assert.match(code, /figma\.createText\(\)/);
   assert.match(code, /figma\.createRectangle\(\)/);

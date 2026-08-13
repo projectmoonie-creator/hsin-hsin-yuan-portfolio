@@ -6,7 +6,7 @@
   "editorType": ["figma"],
   "documentAccess": "dynamic-page",
   "networkAccess": {
-    "allowedDomains": ["https://hsin-hsin-yuan-portfolio.vercel.app"],
+    "allowedDomains": ["https://hsinhsinyuan.com"],
     "reasoning": "The importer loads the current production portfolio images and SVG logos as editable Figma image fills."
   }
 }

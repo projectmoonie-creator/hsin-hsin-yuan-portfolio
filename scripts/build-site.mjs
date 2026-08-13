@@ -22,7 +22,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 const MEDIA_MANIFEST = loadMediaManifest(root);
 
-const SITE_ORIGIN = (process.env.SITE_ORIGIN || "https://hsin-hsin-yuan-portfolio.vercel.app").replace(/\/+$/, "");
+const SITE_ORIGIN = (process.env.SITE_ORIGIN || "https://hsinhsinyuan.com").replace(/\/+$/, "");
 const ASSET_VERSION = createHash("sha256")
   .update(readFileSync(join(root, "src/styles.css")))
   .update(readFileSync(join(root, "src/main.js")))

@@ -1,4 +1,4 @@
-const SITE_URL = "https://hsin-hsin-yuan-portfolio.vercel.app";
+const SITE_URL = "https://hsinhsinyuan.com";
 
 const TOKENS = {
   bg: { name: "color/bg", value: "#0B0B0C" },
