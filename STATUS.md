@@ -1,8 +1,38 @@
 # Portfolio Status
 
-Updated: 2026-08-12
+Updated: 2026-08-13
 
 State: `PASS_WITH_OPEN_ITEMS`
+
+## Current Bounded Package — Hero Cover Refresh
+
+- The producer supplied a retouched version of the existing top Hero photo and
+  requested a direct cover replacement. Work is isolated on
+  `codex/hero-cover-refresh` above the two retained local docs-only commits on
+  `codex/mobile-preview-network-budget`; no prior commit was reset, stashed,
+  overwritten, or discarded.
+- The metadata-safe canonical JPEG remains at the stable public path and is now
+  1280×960, 85,752 bytes, SHA-256
+  `dadc009a2a204581bdecd9b4ea90c18c054adeef03be33e6e9fabce7619f5ba2`.
+  Its 4:3 ratio, bilingual alt, focal points, frame geometry, copy, links, and
+  existing slow-push/reduced-motion/no-JavaScript behavior are unchanged.
+- Responsive Hero derivatives were regenerated from the canonical source at
+  640, 960, and native 1280 widths in AVIF/WebP/JPEG. The obsolete 1440
+  derivatives are retired so the 1280 source is never upscaled. Website and
+  Figma exports continue to consume the same canonical Hero record.
+- Test-first evidence first failed the old source/hash/1440 expectations, then
+  passed focused 50/50 and full 179/179 tests. Fresh build, Figma export, Hero
+  9/9 and Featured 6/6 integrity, design audit, privacy/path scan, and
+  `git diff --check` pass.
+- Local Chromium passes English desktop, Chinese mobile, mobile reduced-motion,
+  and desktop no-JavaScript Hero checks with the new image visible, expected
+  responsive source, zero overflow, and no relevant image/page/console errors.
+  Existing intentional mobile MP4 warm cancellation remains outside this
+  image-only package.
+- Independent reviewer requested/observed/completed `gpt-5.6-sol` at `xhigh`
+  and returned `PASS` with no P0/P1/P2 finding. No runtime layout, interaction,
+  video, Contact, Production, alias, `main`, Git push, or protected-file action
+  is authorized or included.
 
 ## Current Bounded Package — Mobile Preview Network Budget Closed
 
@@ -1461,10 +1491,11 @@ SHA-256:
 
 ## Exact Next Action
 
-The mobile preview network-budget finding is closed without a runtime change.
-Wait for the producer to name a separate bounded package or for new public/CrUX
-evidence; do not reopen this retired PageSpeed signal, change preview runtime,
-or deploy implicitly.
+Create one standing-authorized static `dist/`-only Preview for the Hero cover
+refresh, proactively replace the sole Shareable Link, and hand the openable
+link to the producer for visual inspection. Do not push Git, merge or push
+`main`, deploy Production, change an alias, submit Contact, modify the protected
+file, or reopen the retired mobile network-budget finding.
 
 ## Cold Resume
 

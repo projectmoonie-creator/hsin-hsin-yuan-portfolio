@@ -6,14 +6,14 @@
       "en": "Hsin-Hsin Yuan working on a laptop in a bright white studio",
       "zh": "袁欣欣坐在明亮的白色工作室裡使用筆記型電腦"
     },
-    "dimensions": {"width": 1448, "height": 1086},
+    "dimensions": {"width": 1280, "height": 960},
     "focalPoint": {
       "wide": {"x": 0.38, "y": 0.78},
       "stacked": {"x": 0.38, "y": 0.77},
       "mobile": {"x": 0.38, "y": 0.78}
     },
     "motion": "slow-push",
-    "sourceSha256": "d775b50dfe3efb9e675e923600043f69b8fab547bf2b2acd1c852f7c029ea7ee",
+    "sourceSha256": "dadc009a2a204581bdecd9b4ea90c18c054adeef03be33e6e9fabce7619f5ba2",
     "delivery": {
       "directory": "/assets/portfolio/hero",
       "formats": {
@@ -31,8 +31,8 @@
         "desktop": {
           "media": "(min-width: 821px)",
           "sizes": "(min-width: 1281px) 47vw, 90vw",
-          "widths": [960, 1440],
-          "preloadWidth": 1440
+          "widths": [960, 1280],
+          "preloadWidth": 1280
         }
       }
     },

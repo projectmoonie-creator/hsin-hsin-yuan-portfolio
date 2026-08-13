@@ -2,13 +2,13 @@
   "schemaVersion": 1,
   "source": {
     "src": "/assets/portfolio/hsin-working-white-space.jpg",
-    "sha256": "d775b50dfe3efb9e675e923600043f69b8fab547bf2b2acd1c852f7c029ea7ee",
+    "sha256": "dadc009a2a204581bdecd9b4ea90c18c054adeef03be33e6e9fabce7619f5ba2",
     "dimensions": {
-      "width": 1448,
-      "height": 1086
+      "width": 1280,
+      "height": 960
     }
   },
-  "recipeSha256": "88ef915ef88b7d5615ceb393cdaa0e0e5de699bfddc11f03c451969b0b2b5688",
+  "recipeSha256": "783bfa6be3d50d35b84f5d1bde82657ea525b3271a02db414084fa75468d80ce",
   "derivatives": [
     {
       "src": "/assets/portfolio/hero/hsin-working-white-space-640.avif",
@@ -16,8 +16,8 @@
       "height": 480,
       "format": "avif",
       "codecName": "av1",
-      "bytes": 2747,
-      "sha256": "878818bcc1ee1ee6c8ce97e60e1eb413748e3f97b07fca8164005174809bf149"
+      "bytes": 3293,
+      "sha256": "6760b5ac33c2c07e14f404241ddcd07cc2042f38c2e5a12f3b1e45d001f42632"
     },
     {
       "src": "/assets/portfolio/hero/hsin-working-white-space-640.webp",
@@ -25,8 +25,8 @@
       "height": 480,
       "format": "webp",
       "codecName": "webp",
-      "bytes": 6624,
-      "sha256": "b986a2b85171bd9e7c1dbfd987c354852730528ee60771e1df7f6f5c181b785e"
+      "bytes": 7622,
+      "sha256": "ed2841858ce5d70704f2d6b2602af3381e62cbaa0e3b5d046705c53502299886"
     },
     {
       "src": "/assets/portfolio/hero/hsin-working-white-space-640.jpg",
@@ -34,8 +34,8 @@
       "height": 480,
       "format": "jpeg",
       "codecName": "mjpeg",
-      "bytes": 9512,
-      "sha256": "b07680c25b82092a89f5e93be0f6259f35f01fdc7cb6e5872123eb25ec7ee377"
+      "bytes": 11195,
+      "sha256": "4488f8192f6782c00f92a2026f7d0f65a13ce64c2838b0e403873b5e6695a185"
     },
     {
       "src": "/assets/portfolio/hero/hsin-working-white-space-960.avif",
@@ -43,8 +43,8 @@
       "height": 720,
       "format": "avif",
       "codecName": "av1",
-      "bytes": 4740,
-      "sha256": "39ec28f89a7e17447b992b8df0c4a5f58a99705d89e9c25ada42d093705882c9"
+      "bytes": 5867,
+      "sha256": "eb755ccc21e56ab3daeb14881132cd2ed5437d45010a68c96cada16a0f55a0d5"
     },
     {
       "src": "/assets/portfolio/hero/hsin-working-white-space-960.webp",
@@ -52,8 +52,8 @@
       "height": 720,
       "format": "webp",
       "codecName": "webp",
-      "bytes": 12914,
-      "sha256": "dcf7b2f78153bba9de474f06a6ef0b5e1b5be76aab7d027bc485d1b7e7d2199a"
+      "bytes": 14830,
+      "sha256": "e7d3eed63d9270108e27af6ef33a9e423bbb01ab4ff16cea4dd620c9d79c34e1"
     },
     {
       "src": "/assets/portfolio/hero/hsin-working-white-space-960.jpg",
@@ -61,35 +61,35 @@
       "height": 720,
       "format": "jpeg",
       "codecName": "mjpeg",
-      "bytes": 18080,
-      "sha256": "9eef0353a3ffd69dbd940df7220b4eaeb8fa48052275ab87b588c39ede13b772"
+      "bytes": 21726,
+      "sha256": "916024ba6f145b0bb74da2497d467fcaad979be56a418f829c623d6fc3bf5891"
     },
     {
-      "src": "/assets/portfolio/hero/hsin-working-white-space-1440.avif",
-      "width": 1440,
-      "height": 1080,
+      "src": "/assets/portfolio/hero/hsin-working-white-space-1280.avif",
+      "width": 1280,
+      "height": 960,
       "format": "avif",
       "codecName": "av1",
-      "bytes": 7864,
-      "sha256": "a245fdfacf85a8ecdc55ef1eec01df2f21bc74b7d1ecbb80594d728993fa583e"
+      "bytes": 9112,
+      "sha256": "62cf891369bb4db03a4d4d71ecfdb80b17b21d49b6304b18cb40ddbf06269e08"
     },
     {
-      "src": "/assets/portfolio/hero/hsin-working-white-space-1440.webp",
-      "width": 1440,
-      "height": 1080,
+      "src": "/assets/portfolio/hero/hsin-working-white-space-1280.webp",
+      "width": 1280,
+      "height": 960,
       "format": "webp",
       "codecName": "webp",
-      "bytes": 24412,
-      "sha256": "0d5a8267304ef02c0773e919a2f16fcdfc671b1f038158000a98eb6b1b6660c5"
+      "bytes": 24390,
+      "sha256": "eb3d1b9c834133d0d51f9e3ecafe53c206c3244b3eb6598f1d95c622c6b8b753"
     },
     {
-      "src": "/assets/portfolio/hero/hsin-working-white-space-1440.jpg",
-      "width": 1440,
-      "height": 1080,
+      "src": "/assets/portfolio/hero/hsin-working-white-space-1280.jpg",
+      "width": 1280,
+      "height": 960,
       "format": "jpeg",
       "codecName": "mjpeg",
-      "bytes": 34240,
-      "sha256": "1065932f38911c9ca275a4f26a2f018cc486215eae3403a7298af0dd78e08b78"
+      "bytes": 34673,
+      "sha256": "73b040542f1ca4412e4d366c54af8e6e6b1c3ea05f3b3a26e8c0f7dc299456e0"
     }
   ]
 }

@@ -305,3 +305,11 @@ packages.
 - External review: Codex read-only audit (`2026-08-04-process-diet-codex-audit.md`), verdict "修文後定版" applied.
 - Rule-retirement verdict (per new retire/downgrade rule): **downgrade** — per-package dated closeout reports → LOG entries; **retire** — duplicate removed-section bullets in Content Rules merged into one.
 - Open items: R3 charter amendment recorded in WORK-CHARTER v1.17; next subtractive task doubles as Charter §3-9 live test.
+# 2026-08-13 — Hero cover refresh
+- Branch/base: `codex/hero-cover-refresh` from local docs-only checkpoint `bf09433`; producer supplied a retouched replacement of the same Hero photo.
+- Change: stable-path canonical JPEG is now metadata-safe 1280×960 / 85,752 bytes / `dadc009a…f5ba2`; 640/960/1280 AVIF/WebP/JPEG derivatives replace 640/960/1440 so the source is not upscaled.
+- Preserved: 4:3 ratio, bilingual alt, focal points, frame/crop, copy, links, slow push, reduced motion, no-JS, and all non-Hero behavior; website and Figma share the same canonical record.
+- TDD/validation: old source/hash/1440 expectations failed first; focused 50/50 and full 179/179 pass, plus build, Figma export, Hero 9/9, Featured 6/6, design audit, privacy/path and diff checks.
+- Browser: English desktop, Chinese mobile, mobile reduced-motion, and desktop no-JS pass with new Hero visible, zero overflow, and no relevant image/page/console failures; existing intentional MP4 warm aborts were classified separately.
+- Review: independent requested/observed/completed `gpt-5.6-sol` at `xhigh` returned `PASS`, no P0/P1/P2; reviewer confirmed Figma non-payload bytes unchanged.
+- Boundary: protected document remains untracked at `945d4df9…d28fc`; no push, `main`, Production, alias, Contact, video, copy, layout, or unrelated media change.
