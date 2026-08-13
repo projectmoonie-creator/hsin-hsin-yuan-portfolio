@@ -4,6 +4,15 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-13 — Cross-project authorization-friction consultation
+- Scope: diagnose why this portfolio accumulated repeated typed approvals and propose the minimum cross-project prevention; no runtime, Work Charter, external deployment, Contact, Git push, or protected-file change.
+- Evidence: the 2026-08-04 cadence changed an explicit Production boundary into per-deployment authorization; line-count gating, Vercel/Git coupling, narrow technical packages, and historical `STATUS.md` exclusions amplified it.
+- Gemini: one frozen official-API review completed with requested/observed/completed `gemini-3.6-flash`; Claude was not dispatched by producer quota prioritization, so this is not dual-review consensus.
+- Verdict: accept Option B as provisional; keep Work Charter unchanged until a second project validates the mechanism.
+- Correction to reviewer: `work-charter` skill may host the 1/2 experiment but cannot replace Work Charter as formal canonical source; interruption count is a diagnostic flag, not a hard KPI.
+- Proposal: `docs/reviews/2026-08-13-authorization-friction-governance-proposal.md`; frozen packet and provenance live under `docs/reviews/evidence/authorization-friction-governance/round-1/`.
+- Next governance decision: producer may approve a four-line provisional new-project dry-run in `work-charter` skill; keep project `STATUS.md` compaction separate from the Contact runtime package.
+
 ## 2026-08-13 — Package authorization envelope
 - Producer ruling: retire repeated typed approvals; one explicit bounded package authorization covers every enumerated action and natural language never has to match a prescribed phrase.
 - Contract: `STATUS.md` records scope, covered action classes, conditions, exclusions, and end point; a standing authorization must name its classes and stays revocable.
