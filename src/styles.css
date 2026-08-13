@@ -155,7 +155,7 @@ a {
   --hero-active-y: var(--hero-wide-y);
   --hero-motion-end-transform: var(--hero-wide-end-transform);
   --hero-motion-start-transform: var(--hero-wide-start-transform);
-  --hero-static-scale: 142%;
+  --hero-static-scale: var(--hero-motion-start-scale);
   aspect-ratio: 5 / 4.2;
   border-radius: 8px;
   min-height: auto;
@@ -1317,7 +1317,6 @@ a.archive-card-media-link:focus-visible {
   .hero-media {
     --hero-active-x: var(--hero-stacked-x);
     --hero-active-y: var(--hero-stacked-y);
-    --hero-static-scale: 132%;
     --hero-motion-start-transform: var(--hero-stacked-start-transform);
     --hero-motion-end-transform: var(--hero-stacked-end-transform);
     aspect-ratio: 16 / 10.4;
@@ -1399,7 +1398,6 @@ a.archive-card-media-link:focus-visible {
   .hero-media {
     --hero-active-x: var(--hero-mobile-x);
     --hero-active-y: var(--hero-mobile-y);
-    --hero-static-scale: 136%;
     --hero-motion-start-transform: var(--hero-mobile-start-transform);
     --hero-motion-end-transform: var(--hero-mobile-end-transform);
     aspect-ratio: 1 / 0.94;

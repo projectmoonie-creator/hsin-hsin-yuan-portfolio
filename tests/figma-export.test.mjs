@@ -144,9 +144,9 @@ test("Figma SVG export keeps portfolio layers editable and named", () => {
   assert.match(desktopHeroImage, /data-source="hsin-working-white-space\.jpg"/);
   assert.match(desktopHeroImage, /data-focal-x="0\.38" data-focal-y="0\.78"/);
   assert.match(desktopHeroImage, /<clipPath id="layer-hero-image-clip">/);
-  assert.match(desktopHeroImage, /<image[^>]*x="-65\.0533" y="-58\.24" width="970\.6667" height="728"[^>]*clip-path="url\(#layer-hero-image-clip\)"/);
+  assert.match(desktopHeroImage, /<image[^>]*x="-12\.36" y="22\.88" width="832" height="624"[^>]*clip-path="url\(#layer-hero-image-clip\)"/);
   assert.match(mobileHeroImage, /data-source="hsin-working-white-space\.jpg"/);
-  assert.match(mobileHeroImage, /<image[^>]*x="-24\.792" y="-2\.624" width="470\.4" height="352\.8"/);
+  assert.match(mobileHeroImage, /<image[^>]*x="0\.744" y="36\.688" width="403\.2" height="302\.4"/);
   assert.doesNotMatch(desktopHeroImage, /slow-steps-poster\.webp/);
   assert.doesNotMatch(mobileHeroImage, /slow-steps-poster\.webp/);
   assert.doesNotMatch(desktopHome, /paris-cultural-olympiad-team\.jpg/);

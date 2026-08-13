@@ -37,7 +37,7 @@ export const FEATURED_REEL_EVIDENCE_FIELDS = Object.freeze([
 
 export const HERO_MEDIA_MOTIONS = Object.freeze(["slow-push"]);
 export const HERO_MEDIA_MOTION_PROFILES = Object.freeze({
-  "slow-push": Object.freeze({ startScale: 1.4, endScale: 1.48 }),
+  "slow-push": Object.freeze({ startScale: 1.2, endScale: 1.26 }),
 });
 export const HERO_MEDIA_RIGHTS_STATUSES = Object.freeze([
   "user-supplied-local-source",

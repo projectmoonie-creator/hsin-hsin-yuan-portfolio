@@ -211,7 +211,7 @@ test("HeroMedia normalization freezes one public contract and keeps rights evide
       mobile: { x: 0.38, y: 0.78 },
     },
     motion: "slow-push",
-    motionProfile: { startScale: 1.4, endScale: 1.48 },
+    motionProfile: { startScale: 1.2, endScale: 1.26 },
   });
   assert.equal(delivery.profiles.mobile.preload.fetchPriority, "high");
   assert.equal(delivery.profiles.desktop.preload.type, "image/avif");
@@ -298,7 +298,7 @@ test("HeroMedia normalization rejects unknown, missing, unsafe, and unsupported 
     [heroMedia({ focalPoint: { wide: { x: -0.1, y: 0.78 }, stacked: { x: 0.38, y: 0.77 }, mobile: { x: 0.38, y: 0.78 } } }), /focalPoint wide x must be between 0 and 1/],
     [heroMedia({ focalPoint: { wide: { x: 0.38, y: 0.78, z: 1 }, stacked: { x: 0.38, y: 0.77 }, mobile: { x: 0.38, y: 0.78 } } }), /focalPoint wide has unknown field z/],
     [heroMedia({ motion: "pan-and-zoom" }), /motion must be one of: slow-push/],
-    [heroMedia({ motionProfile: { startScale: 1.41, endScale: 1.48 } }), /motionProfile must match motion slow-push/],
+    [heroMedia({ motionProfile: { startScale: 1.21, endScale: 1.26 } }), /motionProfile must match motion slow-push/],
     [heroMedia({ sourceSha256: "bad" }), /sourceSha256 must be a lowercase SHA-256/],
     [heroMedia({ delivery: { surprise: true } }), /delivery has unknown field surprise/],
     [heroMedia({ rightsStatus: "" }), /rightsStatus must be one of: user-supplied-local-source/],

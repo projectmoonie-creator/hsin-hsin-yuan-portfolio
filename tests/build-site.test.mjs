@@ -1356,7 +1356,7 @@ test("renderPage creates bilingual page with scroll-stack works and video fallba
   assert.match(html, /--hero-wide-x: 38%; --hero-wide-y: 78%/);
   assert.match(html, /--hero-stacked-x: 38%; --hero-stacked-y: 77%/);
   assert.match(html, /--hero-mobile-x: 38%; --hero-mobile-y: 78%/);
-  assert.match(html, /--hero-motion-start-scale: 140%; --hero-motion-end-scale: 148%/);
+  assert.match(html, /--hero-motion-start-scale: 120%; --hero-motion-end-scale: 126%/);
   assert.doesNotMatch(html, /light-beam-layer|light-beam-right|ambient-canvas/);
   assert.doesNotMatch(html, /hero-showreel-video|data-showreel-video|data-showreel-play/);
   assert.doesNotMatch(html, /aria-label="Watch reel"/);
@@ -1862,8 +1862,10 @@ test("build generates English, Chinese, CSS, and JS assets", () => {
   assert.match(css, /\.hero-media-image \{[^}]*height: var\(--hero-static-scale\);[^}]*left: var\(--hero-active-x\);[^}]*max-width: none;[^}]*position: absolute;[^}]*top: var\(--hero-active-y\);[^}]*width: auto;[^}]*\}/);
   assert.match(css, /--hero-active-x: var\(--hero-wide-x\);/);
   assert.match(css, /--hero-active-y: var\(--hero-wide-y\);/);
-  assert.match(css, /@media \(max-width: 1280px\) \{[\s\S]*?\.hero-media \{[^}]*--hero-active-x: var\(--hero-stacked-x\);[^}]*--hero-active-y: var\(--hero-stacked-y\);[^}]*--hero-static-scale: 132%;/);
-  assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*?\.hero-media \{[^}]*--hero-active-x: var\(--hero-mobile-x\);[^}]*--hero-active-y: var\(--hero-mobile-y\);[^}]*--hero-static-scale: 136%;/);
+  assert.match(css, /\.hero-media \{[^}]*--hero-static-scale: var\(--hero-motion-start-scale\);/);
+  assert.equal(css.match(/--hero-static-scale:/g)?.length, 1);
+  assert.match(css, /@media \(max-width: 1280px\) \{[\s\S]*?\.hero-media \{[^}]*--hero-active-x: var\(--hero-stacked-x\);[^}]*--hero-active-y: var\(--hero-stacked-y\);/);
+  assert.match(css, /@media \(max-width: 820px\) \{[\s\S]*?\.hero-media \{[^}]*--hero-active-x: var\(--hero-mobile-x\);[^}]*--hero-active-y: var\(--hero-mobile-y\);/);
   assert.doesNotMatch(css, /\.hero-play-button|\.hero-play-icon|\.hero-showreel-video|\.hero-media\.is-playing|\.hero-media:focus-visible/);
   assert.doesNotMatch(css, /\.hero-actions/);
   assert.doesNotMatch(css, /\.hero-media-caption/);
