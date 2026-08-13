@@ -140,3 +140,20 @@ Exact next action: make no further Production change. Remain in maintenance
 mode and wait for separate producer authorization before any non-force backup
 push, active-branch push, `main` fast-forward/push, tag, new performance
 package, Contact action, or protected-file action.
+
+## Post-release correction — Contact is not operational
+
+After the producer asked about the missing own domain and forwarding inbox, a
+read-only Vercel Production environment inspection returned
+`No Environment Variables found`. The deployed function requires
+`RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EMAIL`; a real form
+submission would therefore return the handler's HTTP 503 configuration error.
+No Contact request or email was sent during this check.
+
+The original release evidence correctly proved the function was built and
+present, but incorrectly stopped short of proving its mail route was configured.
+The Hero/site deployment remains `READY`; the portfolio's overall launch status
+is corrected to `BLOCKED` until a producer-approved domain/contact-routing
+package configures and verifies end-to-end delivery. This addendum supersedes
+the earlier overall `PASS_WITH_OPEN_ITEMS` conclusion without rewriting its
+historical evidence.

@@ -2,7 +2,34 @@
 
 Updated: 2026-08-13
 
-State: `PASS_WITH_OPEN_ITEMS`
+State: `BLOCKED`
+
+## Current Launch Blocker — Domain And Contact Routing
+
+- The producer correctly identified that the portfolio has neither an own
+  domain nor an approved professional contact-address/forwarding design. These
+  were not surfaced clearly before Production and are now recorded in
+  `PRODUCT-WISHES.md`.
+- The own domain is a brand-completion item rather than a current availability
+  blocker: the Bible explicitly permits the Vercel project domain until a
+  custom domain is confirmed. Domain selection, purchase, DNS, alias migration,
+  and canonical-origin updates require a separate producer-approved package.
+- Contact is a functional launch blocker. The deployed `api/contact.js`
+  requires `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EMAIL`.
+  Read-only Vercel Production environment inspection on 2026-08-13 returned
+  `No Environment Variables found`; therefore a real form submission would
+  return HTTP 503 / `Contact email is not configured.` The inspection did not
+  read a secret, submit Contact, or send an email.
+- The prior Production check proved that the serverless function exists, not
+  that its mail route was operational. That distinction was missed in the
+  release ruling and is corrected here. The live Hero/site release remains
+  `READY`, but the portfolio must not be called launch-complete while its main
+  inquiry route cannot deliver.
+- No emergency runtime, Production, DNS, domain-purchase, mail-provider,
+  environment, or alias change is authorized by this finding. The next bounded
+  package must first decide the domain candidate, public contact alias, private
+  forwarding destination, authenticated sender, provider/DNS ownership, and
+  safe end-to-end receive/reply test.
 
 ## Current Bounded Package — Hero Cover Refresh Released To Production
 
@@ -80,9 +107,9 @@ State: `PASS_WITH_OPEN_ITEMS`
   unified token ownership without opening a broad pre-Production rewrite.
 - Full Production record:
   `docs/reviews/hero-cover-production-release-2026-08-13.md`. The overall state
-  remains `PASS_WITH_OPEN_ITEMS` only because the release source's six local
-  commits plus this release record are not present on any `origin` ref; the
-  live Production release itself is Ready.
+  is now `BLOCKED` by the later-discovered non-operational Contact route; the
+  release source's six local commits plus its release record also remain absent
+  from every `origin` ref. The live Hero/site deployment itself is Ready.
 
 ## Current Bounded Package — Mobile Preview Network Budget Closed
 
@@ -1541,12 +1568,16 @@ SHA-256:
 
 ## Exact Next Action
 
-Make no further Production change. The Hero release is live and the portfolio
-is in maintenance mode. Wait for separate producer authorization before any
-non-force backup or active-branch push, `main` fast-forward/push, tag, new
-performance package, Contact action, destructive Vercel action, or protected-
-file change. The single post-publish PageSpeed result does not authorize
-reopening the retired mobile network-budget finding.
+Open one bounded own-domain and Contact-routing decision package. Before any
+implementation, the producer chooses the domain candidate and public contact
+alias and identifies the private forwarding destination through a secret-safe
+channel. Then define purchase/DNS/provider ownership, authenticated sending,
+Vercel environment setup, failure fallback, and a consented end-to-end
+receive/reply test. Do not purchase, change DNS/aliases/Production, expose a
+private address, add environment values, submit Contact, send mail, push Git,
+change `main` or tags, or modify the protected file without the corresponding
+authorization. The single PageSpeed result does not reopen the retired mobile
+network-budget finding.
 
 ## Cold Resume
 
@@ -1575,6 +1606,10 @@ reopening the retired mobile network-budget finding.
    rollback identity. Report branch, HEAD, origin reachability, worktree,
    protected-file status, and Production read-back, then wait for the next
    producer decision.
+6. Vercel Production currently has no environment variables. Treat the visible
+   Contact form as non-operational until all three required names are configured
+   through an approved secret-safe package and an end-to-end receive/reply test
+   passes. Read `PRODUCT-WISHES.md` before planning that package.
    Future static Previews still require proactive Shareable-Link replacement
    without another question, while Git push, `main`, Production, Contact,
    destructive actions, and protected-file changes remain separately
