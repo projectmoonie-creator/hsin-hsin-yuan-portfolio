@@ -7,44 +7,61 @@ State: `PASS_WITH_OPEN_ITEMS`
 ## Current Bounded Package — Hero Cover Refresh
 
 - The producer supplied a retouched version of the existing top Hero photo and
-  requested a direct cover replacement. Work is isolated on
+  then requested a wider working-space composition with a less face-forward
+  crop. Work is isolated on
   `codex/hero-cover-refresh` above the two retained local docs-only commits on
   `codex/mobile-preview-network-budget`; no prior commit was reset, stashed,
   overwritten, or discarded.
 - The metadata-safe canonical JPEG remains at the stable public path and is now
   1280×960, 85,752 bytes, SHA-256
   `dadc009a2a204581bdecd9b4ea90c18c054adeef03be33e6e9fabce7619f5ba2`.
-  Its 4:3 ratio, bilingual alt, focal points, frame geometry, copy, links, and
-  existing slow-push/reduced-motion/no-JavaScript behavior are unchanged.
+  Its pixels, 4:3 ratio, bilingual alt, focal points, frame geometry, copy,
+  links, and reduced-motion/no-JavaScript behavior are unchanged.
 - Responsive Hero derivatives were regenerated from the canonical source at
   640, 960, and native 1280 widths in AVIF/WebP/JPEG. The obsolete 1440
   derivatives are retired so the 1280 source is never upscaled. Website and
   Figma exports continue to consume the same canonical Hero record.
-- Test-first evidence first failed the old source/hash/1440 expectations, then
-  passed focused 50/50 and full 179/179 tests. Fresh build, Figma export, Hero
-  9/9 and Featured 6/6 integrity, design audit, privacy/path scan, and
+- Composition diagnosis found separate Hero magnification owners: the canonical
+  slow-push began at 1.40 while static breakpoint CSS declared 142%, 132%, and
+  136%. Test-first evidence failed those old values before the canonical range
+  changed to 1.20–1.26 and static output began consuming the same 1.20 start
+  value. The subject is approximately 14–15% smaller linearly while all frame
+  variants remain fully covered. A diagnostic AI outpainting candidate was
+  rejected before integration and never entered the repository or Preview.
+- Focused and full 179/179 tests pass. Fresh build, Figma export, Hero 9/9 and
+  Featured 6/6 integrity, design audit, privacy/path scan, and
   `git diff --check` pass.
 - Local Chromium passes English desktop, Chinese mobile, mobile reduced-motion,
-  and desktop no-JavaScript Hero checks with the new image visible, expected
+  and desktop no-JavaScript checks with the wider composition visible, expected
   responsive source, zero overflow, and no relevant image/page/console errors.
   Existing intentional mobile MP4 warm cancellation remains outside this
-  image-only package.
-- Independent reviewer requested/observed/completed `gpt-5.6-sol` at `xhigh`
-  and returned `PASS` with no P0/P1/P2 finding. No runtime layout, interaction,
-  video, Contact, Production, alias, `main`, Git push, or protected-file action
-  is authorized or included.
-- Fresh static `dist/`-only Preview `dpl_25nwugfbWknZCZhdveozasGSeG79`
-  reads `READY`/`preview`: 57 files, 96,779,346 bytes, sorted path-list
-  SHA-256 `a209fb128842584f14d74cdfe218eaf49d95d487b0e9039d3a5e5d32c7c16ef1`,
+  Hero-composition package.
+- The asset replacement received independent requested/observed/completed
+  `gpt-5.6-sol` at `xhigh`, `PASS`, no P0/P1/P2. A separate incremental
+  read-only review requested/observed/completed `gpt-5.6-sol` and also returned
+  `PASS`, no P0/P1/P2. It confirmed full frame coverage, one scale truth across
+  animation/static/reduced-motion/no-JS/Figma output, identical Figma JPEG
+  payloads, and geometry-only SVG change. No interaction, video, Contact,
+  Production, alias, `main`, Git push, or protected-file action is authorized
+  or included.
+- Fresh static `dist/`-only Preview `dpl_9M17tfzn6wdF9WnPAguCpKfAFECH`
+  reads `READY`/`preview`: 57 files, 96,779,288 bytes, sorted path-list
+  SHA-256 `27c6f05298168d82827ce2ff130211dd16ec96174ab77b35aa6c3656a31e30a9`,
   static `.` build root, and no functions, source, docs, tests, environment
   payload, or protected document.
 - The Vercel Dashboard confirms anyone-with-link viewing for the new Preview.
   Its access-bearing URL remains outside Git at SHA-256
-  `f2ffaa528efd7704bd29818e1259d35a8ad26c27095941b93c1b787d19d6147a`
+  `11e1684bfd75ef295e4fae5235a1cbf2d87a97b5806b2f802c75703e7b15b0d5`
   and was not fetched or sent to PageSpeed. Creating it revoked the previous
-  sole Hobby Shareable Link. Production, canonical alias, and Git remotes are
-  unchanged; package verdict remains `PASS_WITH_OPEN_ITEMS` only for producer
-  visual inspection.
+  sole Hero-cover Hobby Shareable Link. Production, canonical alias, and Git
+  remotes are unchanged; package verdict remains `PASS_WITH_OPEN_ITEMS` only
+  for producer visual inspection.
+- The build-process retrospective is
+  `docs/reviews/portfolio-build-process-review-2026-08-13.md`. Its redacted
+  independent Gemini review requested/observed/completed `gemini-3.6-flash`
+  and returned `PASS_WITH_REVISIONS`; local adjudication adopts maintenance
+  mode, one explicit contract-promotion action, a five-way change router, and
+  unified token ownership without opening a broad pre-Production rewrite.
 
 ## Current Bounded Package — Mobile Preview Network Budget Closed
 
@@ -1503,12 +1520,12 @@ SHA-256:
 
 ## Exact Next Action
 
-Hand the access-bearing Hero cover Preview link to the producer for target-device
-visual inspection. If the producer accepts it and explicitly authorizes release,
-open the separately gated Production package; otherwise make only the exact
-Hero-cover adjustment requested. Do not push Git, merge or push `main`, deploy
-Production, change an alias, submit Contact, modify the protected file, or
-reopen the retired mobile network-budget finding.
+Hand the access-bearing wider-composition Hero Preview link and process review
+to the producer for target-device inspection. If the producer accepts it and
+explicitly authorizes release, open the separately gated Production package;
+otherwise make only the exact Hero-cover adjustment requested. Do not push Git,
+merge or push `main`, deploy Production, change an alias, submit Contact, modify
+the protected file, or reopen the retired mobile network-budget finding.
 
 ## Cold Resume
 
@@ -1529,10 +1546,10 @@ reopen the retired mobile network-budget finding.
    `docs/reviews/portfolio-phase-closeout-2026-08-12.md`; the accepted Preview
    is `dpl_Diifu1JzTyjjuAydEKPLJxFwg76t`.
 5. The current local work branch is `codex/hero-cover-refresh` and retains the
-   two mobile-network-budget docs commits plus the Hero replacement and Preview
-   record above the closed remote baseline. Report branch, HEAD, origin
-   reachability, worktree, and protected-file status, then wait for the
-   producer's visual ruling.
+   two mobile-network-budget docs commits plus the Hero replacement,
+   wider-composition refinement, process review, and Preview records above the
+   closed remote baseline. Report branch, HEAD, origin reachability, worktree,
+   and protected-file status, then wait for the producer's visual ruling.
    Future static Previews still require proactive Shareable-Link replacement
    without another question, while Git push, `main`, Production, Contact,
    destructive actions, and protected-file changes remain separately

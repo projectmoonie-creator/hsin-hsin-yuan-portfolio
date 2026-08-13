@@ -305,13 +305,14 @@ packages.
 - External review: Codex read-only audit (`2026-08-04-process-diet-codex-audit.md`), verdict "修文後定版" applied.
 - Rule-retirement verdict (per new retire/downgrade rule): **downgrade** — per-package dated closeout reports → LOG entries; **retire** — duplicate removed-section bullets in Content Rules merged into one.
 - Open items: R3 charter amendment recorded in WORK-CHARTER v1.17; next subtractive task doubles as Charter §3-9 live test.
-# 2026-08-13 — Hero cover refresh
+
+## 2026-08-13 — Hero cover refresh
 - Branch/base: `codex/hero-cover-refresh` from local docs-only checkpoint `bf09433`; producer supplied a retouched replacement of the same Hero photo.
 - Change: stable-path canonical JPEG is now metadata-safe 1280×960 / 85,752 bytes / `dadc009a…f5ba2`; 640/960/1280 AVIF/WebP/JPEG derivatives replace 640/960/1440 so the source is not upscaled.
-- Preserved: 4:3 ratio, bilingual alt, focal points, frame/crop, copy, links, slow push, reduced motion, no-JS, and all non-Hero behavior; website and Figma share the same canonical record.
-- TDD/validation: old source/hash/1440 expectations failed first; focused 50/50 and full 179/179 pass, plus build, Figma export, Hero 9/9, Featured 6/6, design audit, privacy/path and diff checks.
-- Browser: English desktop, Chinese mobile, mobile reduced-motion, and desktop no-JS pass with new Hero visible, zero overflow, and no relevant image/page/console failures; existing intentional MP4 warm aborts were classified separately.
-- Review: independent requested/observed/completed `gpt-5.6-sol` at `xhigh` returned `PASS`, no P0/P1/P2; reviewer confirmed Figma non-payload bytes unchanged.
+- Composition: diagnosed duplicate scale owners (canonical 1.40 versus static 142%/132%/136%); TDD consolidated the slow push to 1.20–1.26 with static output consuming the same start value. The subject is ~14–15% smaller, every frame remains covered, and the user-edited source pixels are unchanged. A diagnostic AI outpaint was rejected and never integrated.
+- Preserved: 4:3 ratio, bilingual alt, focal points, frame geometry, copy, links, reduced motion, no-JS, and all non-Hero behavior; website and Figma share the canonical record.
+- Validation: focused and full 179/179 pass, plus build, Figma export, Hero 9/9, Featured 6/6, design audit, privacy/path and diff checks. Four English/Chinese desktop/mobile/reduced-motion/no-JS browser cases pass with zero overflow or relevant image/page/console failures.
+- Review: asset replacement independently requested/observed/completed `gpt-5.6-sol` at `xhigh`, `PASS`, no P0/P1/P2; separate incremental composition review requested/observed/completed `gpt-5.6-sol`, also `PASS`, no P0/P1/P2, with full coverage and one scale truth confirmed. Process retrospective requested/observed/completed `gemini-3.6-flash`, `PASS_WITH_REVISIONS`, and was locally adjudicated into maintenance-mode rules.
 - Boundary: protected document remains untracked at `945d4df9…d28fc`; no push, `main`, Production, alias, Contact, video, copy, layout, or unrelated media change.
-- Preview: static `dpl_25nw…eG79` is Ready/Preview, 57 files / 96,779,346 bytes / path-list `a209fb12…6ef1`, static root and no functions/private payload; anyone-with-link access replaced and revoked the prior sole Hobby link, while the new URL stays outside Git at `f2ffaa52…147a` and was not fetched.
+- Preview: current static `dpl_9M17…AFECH` is Ready/Preview, 57 files / 96,779,288 bytes / path-list `27c6f052…0a9`, static root and no functions/private payload; anyone-with-link access revoked and replaced the immediately preceding Hero link, while the current URL stays outside Git at `11e1684b…b0d5` and was not fetched.
 - Verdict/next: `PASS_WITH_OPEN_ITEMS` only for producer target-device inspection; Production, canonical alias, remotes, Contact, and the protected file remain unchanged and separately gated.
