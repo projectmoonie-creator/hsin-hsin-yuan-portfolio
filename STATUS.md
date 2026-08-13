@@ -4,6 +4,24 @@ Updated: 2026-08-13
 
 State: `BLOCKED`
 
+## Current Operating Rule — One Authorization Envelope Per Package
+
+- The producer retired repeated action-by-action approval prompts on
+  2026-08-13. Each bounded package now records one authorization envelope:
+  goal, covered action classes, conditions, exclusions, and end point.
+- Clear natural language is sufficient. When all enumerated package actions are
+  authorized once, do not ask separately for review dispatch, Git push,
+  `main`, Preview/Shareable Link, Production, alias/domain, or Contact actions
+  already inside that envelope, and never require a prescribed approval phrase.
+- Stop once only for scope expansion, a failed gate, or an unresolved material
+  cost, recipient, private/secret destination, or destructive target. Bundle
+  all foreseeable uncovered decisions into that one request. Silence remains
+  non-authorization, and standing authorization remains revocable.
+- This governance-only correction authorizes its local documentation and skill
+  edits only. It does not itself authorize Contact configuration/submission,
+  email, Git push, `main`, Production, alias/domain changes, purchases,
+  destructive actions, or protected-file changes.
+
 ## Current Launch Blocker — Contact Routing
 
 - The custom-domain package is complete. `https://hsinhsinyuan.com` is the
@@ -1617,16 +1635,17 @@ SHA-256:
 
 ## Exact Next Action
 
-Open one bounded own-domain and Contact-routing decision package. Before any
-implementation, the producer chooses the domain candidate and public contact
-alias and identifies the private forwarding destination through a secret-safe
-channel. Then define purchase/DNS/provider ownership, authenticated sending,
-Vercel environment setup, failure fallback, and a consented end-to-end
-receive/reply test. Do not purchase, change DNS/aliases/Production, expose a
-private address, add environment values, submit Contact, send mail, push Git,
-change `main` or tags, or modify the protected file without the corresponding
-authorization. The single PageSpeed result does not reopen the retired mobile
-network-budget finding.
+Open one bounded Contact-routing package for the already-connected
+`hsinhsinyuan.com`. Before implementation, choose the public contact alias and
+identify the private forwarding destination through a secret-safe channel.
+Then present one consolidated authorization envelope covering the intended
+DNS/provider ownership, authenticated sending, Vercel environment setup,
+failure fallback, required deployment/Git actions, and a consented end-to-end
+receive/reply test. Once that envelope is authorized, execute every covered
+step without asking action by action. Keep purchases, private address
+disclosure, secrets, destructive actions, and the protected file outside the
+envelope unless they are explicitly named with exact safe targets. The single
+PageSpeed result does not reopen the retired mobile network-budget finding.
 
 ## Cold Resume
 
@@ -1660,6 +1679,8 @@ network-budget finding.
    through an approved secret-safe package and an end-to-end receive/reply test
    passes. Read `PRODUCT-WISHES.md` before planning that package.
    Future static Previews still require proactive Shareable-Link replacement
-   without another question, while Git push, `main`, Production, Contact,
-   destructive actions, and protected-file changes remain separately
-   unauthorized.
+   without another question. For every new package, record one authorization
+   envelope for any Git push, `main`, Production, Contact, or other external
+   action; do not turn the covered sequence into separate approval prompts.
+   Destructive actions and protected-file changes remain excluded unless the
+   producer explicitly names their exact targets.

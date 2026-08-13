@@ -149,13 +149,32 @@
 
 ## Contact And Deployment
 
+- Each bounded package has one authorization envelope recorded in `STATUS.md`:
+  its goal, covered action classes, gate conditions, hard exclusions, and end
+  condition. The producer may authorize all actions already enumerated in that
+  package with one clear natural-language decision. That authorization covers
+  the whole sequence; do not divide Git push, `main`, external review dispatch,
+  Preview, Shareable Link, Production, alias/domain, Contact configuration, or
+  consented testing into separate approval phrases when they are included.
+- Explicit authorization does not require prescribed wording. A contextual
+  `好`, `做吧`, or equivalent is sufficient when only one bounded decision is
+  pending. Use structured choices when the interface provides them, but
+  interface mode must never create extra approval gates. If a product or tool
+  supplies its own mandatory confirmation, do not add a second conversational
+  approval for the same covered action.
+- Ask again only if the action is outside the envelope, a required gate fails,
+  or a material target remains unresolved, such as a purchase amount, external
+  recipient, private/secret destination, or destructive target. Consolidate all
+  foreseeable uncovered decisions into one request. Silence is never
+  authorization, and a standing authorization must name its covered action
+  classes and remains revocable.
 - Contact form secrets, email provider keys, Vercel tokens, and domain verification values must stay in environment variables, never in source files.
 - Until a custom domain is confirmed, Vercel's project domain is acceptable. Do not assume a domain purchase is required.
 - Contact copy should invite real work inquiries without exposing a direct email address by default.
 - Mobile navigation must keep a path to Contact visible at 820px and below. The portfolio is a hiring supplement, so the conversion route cannot disappear on phones.
 - Canonical URLs, Open Graph URLs, `robots.txt`, and `sitemap.xml` must come from the same `SITE_ORIGIN` build value. Do not keep a second hardcoded sitemap or robots file in `public/`.
 - `dist/` is generated build output for Vercel and must stay ignored by git. Commit source files, not generated pages or copied assets.
-- Deployment cadence: when a changed `main` HEAD is releasable under the applicable QA and review gates, surface a Production decision to the producer within seven calendar days; every Production deployment still requires separate explicit producer authorization, and a missed target or silence is never authorization. Unfinished or unapproved work stays off the release candidate (an existing tested default-off flag may be used). One fresh, static `dist/`-only Preview per completed bounded package is standing-authorized as the normal producer-review handoff after its build, tests, privacy scan, protected-file check, and deployment-manifest inspection pass; it requires no new package-specific approval. Every such Vercel Preview must proactively generate or replace the Hobby account's sole Shareable Link before handoff, without first trying or delivering the login-protected direct Preview origin and without asking the producer for another authorization. The direct origin remains deployment identity and inspection evidence only. The Preview is incomplete until the producer receives an actually openable Shareable Link. After replacement, promptly disclose that the previous sole Shareable Link was revoked. The access-bearing URL stays outside Git. This standing authorization does not include any Git push, source/full-repo deployment, function or Contact activation/submission, Production deployment, alias/custom-domain change, `main` merge/push, destructive Vercel action, or a different access model; stop when a privacy, rights, or security gate fails. In this project, every GitHub `origin` branch push—including `backup/*`—can trigger a Vercel Preview through Git integration, so never describe a backup push as non-deploying. After 14 days without a recorded Production decision, raise a closeout open item to the producer; calendar age alone is not `BLOCKED`.
+- Deployment cadence: when a changed `main` HEAD is releasable under the applicable QA and review gates, either execute the Production step already covered by the current authorization envelope or surface one Production decision to the producer within seven calendar days. Do not ask again for covered push, `main`, deployment, or alias steps; a missed target or silence is never authorization. Unfinished or unapproved work stays off the release candidate (an existing tested default-off flag may be used). One fresh, static `dist/`-only Preview per completed bounded package is standing-authorized as the normal producer-review handoff after its build, tests, privacy scan, protected-file check, and deployment-manifest inspection pass; it requires no new package-specific approval. Every such Vercel Preview must proactively generate or replace the Hobby account's sole Shareable Link before handoff, without first trying or delivering the login-protected direct Preview origin and without asking the producer for another authorization. The direct origin remains deployment identity and inspection evidence only. The Preview is incomplete until the producer receives an actually openable Shareable Link. After replacement, promptly disclose that the previous sole Shareable Link was revoked. The access-bearing URL stays outside Git. This Preview-only standing authorization does not by itself include Git push, source/full-repo deployment, function or Contact activation/submission, Production deployment, alias/custom-domain change, `main` merge/push, destructive Vercel action, or a different access model; any of them may instead be included in the current explicit package envelope. Stop when a privacy, rights, or security gate fails. In this project, every GitHub `origin` branch push—including `backup/*`—can trigger a Vercel Preview through Git integration, so never describe a backup push as non-deploying. After 14 days without recorded Production authorization or a decision, raise a closeout open item to the producer; calendar age alone is not `BLOCKED`.
 - After a standing-authorized Preview or explicitly authorized Production deployment is read back as
   Ready, run the read-only post-publish PageSpeed review in
   `docs/performance/README.md` against the exact accessible URL. Record the

@@ -4,6 +4,15 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-13 — Package authorization envelope
+- Producer ruling: retire repeated typed approvals; one explicit bounded package authorization covers every enumerated action and natural language never has to match a prescribed phrase.
+- Contract: `STATUS.md` records scope, covered action classes, conditions, exclusions, and end point; a standing authorization must name its classes and stays revocable.
+- Execution: covered review dispatch, Git, Preview/Shareable, Production, domain/alias, and Contact steps proceed without action-by-action prompts.
+- Re-gate: ask once only for scope expansion, a failed condition, or an unresolved material cost, recipient, secret destination, or destructive target; bundle foreseeable decisions.
+- Rule verdict: **retire** the Bible's per-Production reauthorization sentence; **merge** deployment gates into the package envelope; **keep** silence-as-non-authorization, privacy/rights/security stops, and protected-file exclusion.
+- Skill: `portfolio-narrative-builder` and its deployment/validation/closeout references now use the same envelope instead of requiring post-Preview approval in every case.
+- Review: external review skipped by direct producer ruling on this governance-only correction; no runtime, public output, secret, external dispatch, Git push, deployment, Contact, or protected-file action.
+
 ## 2026-08-12 — Mobile preview network-budget diagnosis
 - Scope: producer-approved diagnosis only on `codex/mobile-preview-network-budget`; exact runtime stays at closed `4193498`, with no public-output, media, manifest, interaction, Contact, or deployment change.
 - Method: nine retained matched cold mobile runs at 390×844/DPR3, 150ms/1.6Mbps, 4× CPU, new context/storage clear/cache disabled; direct ledgers record every MP4 request, media event, reveal, LCP/TBT/CLS, and user intent.
