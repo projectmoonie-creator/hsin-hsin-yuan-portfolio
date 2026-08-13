@@ -4,7 +4,7 @@ Updated: 2026-08-13
 
 State: `PASS_WITH_OPEN_ITEMS`
 
-## Current Bounded Package — Hero Cover Refresh
+## Current Bounded Package — Hero Cover Refresh Released To Production
 
 - The producer supplied a retouched version of the existing top Hero photo and
   then requested a wider working-space composition with a less face-forward
@@ -41,9 +41,7 @@ State: `PASS_WITH_OPEN_ITEMS`
   read-only review requested/observed/completed `gpt-5.6-sol` and also returned
   `PASS`, no P0/P1/P2. It confirmed full frame coverage, one scale truth across
   animation/static/reduced-motion/no-JS/Figma output, identical Figma JPEG
-  payloads, and geometry-only SVG change. No interaction, video, Contact,
-  Production, alias, `main`, Git push, or protected-file action is authorized
-  or included.
+  payloads, and geometry-only SVG change.
 - Fresh static `dist/`-only Preview `dpl_9M17tfzn6wdF9WnPAguCpKfAFECH`
   reads `READY`/`preview`: 57 files, 96,779,288 bytes, sorted path-list
   SHA-256 `27c6f05298168d82827ce2ff130211dd16ec96174ab77b35aa6c3656a31e30a9`,
@@ -53,15 +51,38 @@ State: `PASS_WITH_OPEN_ITEMS`
   Its access-bearing URL remains outside Git at SHA-256
   `11e1684bfd75ef295e4fae5235a1cbf2d87a97b5806b2f802c75703e7b15b0d5`
   and was not fetched or sent to PageSpeed. Creating it revoked the previous
-  sole Hero-cover Hobby Shareable Link. Production, canonical alias, and Git
-  remotes are unchanged; package verdict remains `PASS_WITH_OPEN_ITEMS` only
-  for producer visual inspection.
+  sole Hero-cover Hobby Shareable Link.
+- The producer accepted that wider-composition Preview and explicitly ruled
+  `核准 Production、變更正式網站` on 2026-08-13. The isolated Production package
+  contains 57 exact `dist/` files, unchanged `api/contact.js`, and minimal
+  equivalent Vercel routing/cache config: 59 files / 96,783,855 bytes / sorted
+  path-list SHA-256
+  `a39d6d3a19105ac481688592d1bd0f7546c9fae5730a9f45a70ba302d66d6a40`.
+  It contains no repository source, tests, internal docs, environment file,
+  Preview access URL, or protected document.
+- Production `dpl_5h1nsgGwCB5nDqFgkFEDHvYmG4XQ` reads `READY`/`production` at
+  the canonical alias `https://hsin-hsin-yuan-portfolio.vercel.app`; read-back
+  by deployment ID and alias agrees and includes `api/contact`. Previous
+  Production `dpl_7qt7gWyC42yTqStMZtHTKRSpu3vn` remains the rollback identity.
+  No Contact request, Git push, `main`, tag, force push, destructive Vercel, or
+  protected-file action occurred.
+- One post-publish PageSpeed mobile-English diagnostic reports Performance 73,
+  Accessibility/Best Practices/SEO 100, FCP 1.0s, LCP 9.4s, TBT 0ms, CLS 0,
+  Speed Index 4.3s, 12,511 KiB transfer, and no CrUX data. It again reports both
+  Slow Steps desktop and mobile sources, while the closed nine-run matched
+  local diagnosis observed zero dual-source runs. This single remote lab signal
+  is recorded without reopening or changing runtime.
 - The build-process retrospective is
   `docs/reviews/portfolio-build-process-review-2026-08-13.md`. Its redacted
   independent Gemini review requested/observed/completed `gemini-3.6-flash`
   and returned `PASS_WITH_REVISIONS`; local adjudication adopts maintenance
   mode, one explicit contract-promotion action, a five-way change router, and
   unified token ownership without opening a broad pre-Production rewrite.
+- Full Production record:
+  `docs/reviews/hero-cover-production-release-2026-08-13.md`. The overall state
+  remains `PASS_WITH_OPEN_ITEMS` only because the release source's six local
+  commits plus this release record are not present on any `origin` ref; the
+  live Production release itself is Ready.
 
 ## Current Bounded Package — Mobile Preview Network Budget Closed
 
@@ -1520,12 +1541,12 @@ SHA-256:
 
 ## Exact Next Action
 
-Hand the access-bearing wider-composition Hero Preview link and process review
-to the producer for target-device inspection. If the producer accepts it and
-explicitly authorizes release, open the separately gated Production package;
-otherwise make only the exact Hero-cover adjustment requested. Do not push Git,
-merge or push `main`, deploy Production, change an alias, submit Contact, modify
-the protected file, or reopen the retired mobile network-budget finding.
+Make no further Production change. The Hero release is live and the portfolio
+is in maintenance mode. Wait for separate producer authorization before any
+non-force backup or active-branch push, `main` fast-forward/push, tag, new
+performance package, Contact action, destructive Vercel action, or protected-
+file change. The single post-publish PageSpeed result does not authorize
+reopening the retired mobile network-budget finding.
 
 ## Cold Resume
 
@@ -1547,9 +1568,13 @@ the protected file, or reopen the retired mobile network-budget finding.
    is `dpl_Diifu1JzTyjjuAydEKPLJxFwg76t`.
 5. The current local work branch is `codex/hero-cover-refresh` and retains the
    two mobile-network-budget docs commits plus the Hero replacement,
-   wider-composition refinement, process review, and Preview records above the
-   closed remote baseline. Report branch, HEAD, origin reachability, worktree,
-   and protected-file status, then wait for the producer's visual ruling.
+   wider-composition refinement, process review, Production release record, and
+   Preview records above the closed remote baseline. Current Production is
+   `dpl_5h1nsgGwCB5nDqFgkFEDHvYmG4XQ` at the canonical alias and includes
+   `api/contact`; previous Production `dpl_7qt7gWyC42yTqStMZtHTKRSpu3vn` is the
+   rollback identity. Report branch, HEAD, origin reachability, worktree,
+   protected-file status, and Production read-back, then wait for the next
+   producer decision.
    Future static Previews still require proactive Shareable-Link replacement
    without another question, while Git push, `main`, Production, Contact,
    destructive actions, and protected-file changes remain separately
