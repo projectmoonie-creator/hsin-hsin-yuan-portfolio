@@ -4,6 +4,15 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-13 — Skill Git-root claim corrected during closeout
+- Correction: the prior implementation entry's statement that the runtime skill directory had no Git is false; the probe was run one directory above the real repository.
+- Actual root: `$HOME/.mirasim/skills`; `work-charter/SKILL.md` was already tracked there.
+- Isolation: created `codex/work-charter-authorization-envelope` from `9800316`; unrelated pre-existing modified/untracked skill paths remain untouched.
+- Commit: `0ae7b6a` contains only the approved 6-insertion/1-deletion `work-charter/SKILL.md` diff.
+- Validation: `quick_validate.py` passes, post-image SHA-256 remains `d6d85d12…55b74e85`, and Work Charter main text remains unchanged.
+- Durability: the skill now has a coherent local commit but no origin ref contains it; no push was authorized or performed.
+- Status repair: the current Cold Resume Production identity was corrected from the pre-domain Hero deployment to domain-cutover deployment `dpl_BZJ7…Fz9y`.
+
 ## 2026-08-13 — Provisional cross-project startup check implemented
 - Producer decision: approved Option B with a contextual `好`; this authorizes the proposed four-line `work-charter` skill experiment only.
 - Implementation: new-project first sessions now run one outcome-level dry-run under `Provisional — Portfolio 1/2`; existing projects do not reopen their authorization design.

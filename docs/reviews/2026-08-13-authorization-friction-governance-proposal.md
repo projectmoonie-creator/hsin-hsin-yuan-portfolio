@@ -29,8 +29,10 @@ Charter 的兩專案入典門檻。因此現在不應立刻增加一條永久憲
   `d6d85d12570f39de624430bb5f0ba6af6e2223a7c32ed9c3164f7a4455b74e85`
 - `skill-creator` 的 `quick_validate.py` 回報 `Skill is valid!`；目標文字只在
   skill 出現，沒有進入 Work Charter 主文。
-- 該 skill 目錄本身沒有 Git；本報告與下方 LOG 是可回溯帳目，但 runtime skill
-  仍只有本機副本。未獲授權的 Git push、Production 或其他外部動作均未發生。
+- 收官檢查更正先前從錯誤父層執行 Git 探針所得的「skill 沒有 Git」判斷：真正
+  Git root 是 `$HOME/.mirasim/skills`。目標檔已獨立提交為
+  `0ae7b6a`（`codex/work-charter-authorization-envelope`），其他既有 dirty paths
+  均未納入；此 commit 尚未 push。Production 與其他外部動作均未發生。
 
 ## 已確認的根因
 
@@ -90,7 +92,7 @@ Charter 的兩專案入典門檻。因此現在不應立刻增加一條永久憲
 > 先以第一個端到端成果演練一次：列出可預見動作、硬排除與製作人中斷點。
 > 同一成果內、已知且有條件的步驟，合併為一個可撤銷 authorization envelope。
 > 只有 scope 改變、gate 失敗，或新費用／收件人／秘密／破壞目標才重新詢問。
-> 若預計詢問超過一次，記錄每次為何是不同的實質決策；不得用工具步驟本身作理由。
+> 若預計詢問超過一次，記錄每次為何是不同的實質決策；不得以工具步驟本身作理由。
 
 這四行不是跨專案正式規則，只是下一個新專案的實驗指令。Work Charter 主文與
 第六節目前保持不變；作品集 skill 保留已落地的完整實作，不再複製這四行。

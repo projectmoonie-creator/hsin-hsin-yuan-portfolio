@@ -1667,13 +1667,14 @@ PageSpeed result does not reopen the retired mobile network-budget finding.
    is `dpl_Diifu1JzTyjjuAydEKPLJxFwg76t`.
 5. The current local work branch is `codex/hero-cover-refresh` and retains the
    two mobile-network-budget docs commits plus the Hero replacement,
-   wider-composition refinement, process review, Production release record, and
-   Preview records above the closed remote baseline. Current Production is
-   `dpl_5h1nsgGwCB5nDqFgkFEDHvYmG4XQ` at the canonical alias and includes
-   `api/contact`; previous Production `dpl_7qt7gWyC42yTqStMZtHTKRSpu3vn` is the
-   rollback identity. Report branch, HEAD, origin reachability, worktree,
-   protected-file status, and Production read-back, then wait for the next
-   producer decision.
+   wider-composition refinement, process review, Hero Production release,
+   custom-domain cutover, and authorization-governance records above the closed
+   remote baseline. Current Production is
+   `dpl_BZJ7LdJZ9a3xXXku48KvdPu1Fz9y` at `hsinhsinyuan.com` and includes
+   `api/contact`; previous Hero Production `dpl_5h1nsgGwCB5nDqFgkFEDHvYmG4XQ`
+   is the rollback identity. Report branch, HEAD, origin reachability,
+   worktree, protected-file status, and Production read-back, then wait for the
+   next producer decision.
 6. Vercel Production currently has no environment variables. Treat the visible
    Contact form as non-operational until all three required names are configured
    through an approved secret-safe package and an end-to-end receive/reply test
