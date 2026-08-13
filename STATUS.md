@@ -22,7 +22,7 @@ State: `BLOCKED`
   email, Git push, `main`, Production, alias/domain changes, purchases,
   destructive actions, or protected-file changes.
 
-## Current Governance Closeout — BLOCKED On Durability
+## Current Governance Closeout — PASS; Durability Resolved
 
 - Local implementation correctness passes for the project envelope, reusable
   portfolio skill, and `Provisional — Portfolio 1/2` startup experiment. Both
@@ -34,16 +34,22 @@ State: `BLOCKED`
 - Frozen official-Gemini review completed with requested/observed/completed
   `gemini-3.6-flash`, no content findings, and a recommended `PASS`. Claude was
   not dispatched by producer quota prioritization; no dual consensus is claimed.
-- Maintainer adjudication upgrades Gemini's durability NIT to **BLOCKER** under
-  the portfolio closeout rule: the portfolio implementation candidate
-  `e0dfe60`, shared portfolio-skill candidate `eb1c812`, and user-skill
-  candidate `0ae7b6a` are coherent local commits but no origin ref contains
-  them. The closeout record itself will make the final portfolio HEAD newer.
-- Push remains outside the authorization envelope. In this portfolio repo any
-  origin push may create a Vercel Preview; do not call it a non-deploying backup
-  or push any candidate without one consolidated producer decision.
-- Dated closeout:
-  `docs/reviews/authorization-friction-governance-closeout-2026-08-13.md`.
+- The producer then approved one consolidated durability envelope with a
+  contextual `好`: non-force push the three named branches, accept the
+  portfolio branch's possible Git-integrated Preview, and read back every
+  exact remote tip. `main`, Production, alias/domain, Contact/email, force
+  push, destructive actions, unrelated dirty paths, and the protected file
+  remained excluded.
+- Exact readback matched: portfolio `cb83c91` at
+  `origin/codex/hero-cover-refresh`, shared portfolio skill `eb1c812` at
+  `origin/codex/web-video-preview-skill`, and user work-charter skill `0ae7b6a`
+  at `origin/codex/work-charter-authorization-envelope`.
+- The expected Vercel Preview side effect occurred for portfolio commit
+  `cb83c91`; GitHub's Vercel status reported `success` / `Deployment has
+  completed`. No Production operation was sent.
+- The initial dated closeout remains append-only evidence of the former
+  durability BLOCKER. Its outcome is superseded only on durability by
+  `docs/reviews/authorization-friction-governance-durability-resolution-2026-08-13.md`.
 
 ## Current Launch Blocker — Contact Routing
 
@@ -1658,18 +1664,7 @@ SHA-256:
 
 ## Exact Next Action
 
-Resolve the governance closeout's off-device durability gate with one
-consolidated producer decision covering non-force pushes and exact remote-tip
-readback for the final portfolio `codex/hero-cover-refresh` HEAD, shared
-portfolio-skill `eb1c812`, and user-skill `0ae7b6a`. The decision must account
-for the portfolio push's possible Git-integrated Vercel Preview side effect and
-must exclude `main`, Production, alias/domain, Contact/email, force push,
-destructive actions, unrelated dirty paths, and the protected file. If that
-durability envelope is declined, record the decision and leave the governance
-closeout `BLOCKED`.
-
-After the durability gate resolves or is explicitly declined, the next product
-package remains one bounded Contact-routing package for `hsinhsinyuan.com`:
+Open one bounded Contact-routing package for `hsinhsinyuan.com`:
 choose the public alias and private forwarding destination through a secret-safe
 channel, then define authenticated sending, provider/DNS ownership, Vercel
 environment setup, failure fallback, required deployment/Git actions, and a
@@ -1714,9 +1709,9 @@ mobile network-budget finding.
    action; do not turn the covered sequence into separate approval prompts.
    Destructive actions and protected-file changes remain excluded unless the
    producer explicitly names their exact targets.
-7. The authorization-governance implementation is locally accepted but its
-   formal closeout is durability-blocked. Read
-   `docs/reviews/authorization-friction-governance-closeout-2026-08-13.md`,
-   verify the three recorded candidate commits and origin relationships, and do
-   not reopen design findings or claim `PASS` before the consolidated durability
-   decision and exact remote-tip readback.
+7. The authorization-governance package is `PASS`; its former durability
+   BLOCKER was resolved by the producer-approved three-branch non-force push
+   and exact remote-tip readback. Read both the initial closeout and
+   `docs/reviews/authorization-friction-governance-durability-resolution-2026-08-13.md`,
+   verify the current portfolio branch against its origin tip, and do not
+   reopen the accepted governance design during the Contact package.

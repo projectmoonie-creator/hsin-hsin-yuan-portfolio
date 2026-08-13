@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-13 — Authorization-governance durability resolved
+- Authorization: the producer's contextual `好` approved one envelope for three non-force branch pushes, exact remote-tip readback, and the portfolio's possible Git-integrated Preview; all named exclusions remained in force.
+- Portfolio: local `cb83c91` = `origin/codex/hero-cover-refresh` after readback.
+- Shared portfolio skill: local `eb1c812` = `origin/codex/web-video-preview-skill` after readback.
+- User work-charter skill: local `0ae7b6a` = `origin/codex/work-charter-authorization-envelope` after readback.
+- Preview side effect: GitHub's Vercel status for `cb83c91` completed `success`; no Production operation was sent.
+- Outcome: governance package **PASS**; the initial BLOCKED report remains append-only evidence and is superseded only on durability by the dated resolution report.
+- Review: no new external review; this was a mechanical resolution of the sole adjudicated blocker using exact remote evidence.
+- Overall portfolio state remains **BLOCKED** by Contact routing; next action is the bounded Contact package.
+
 ## 2026-08-13 — Authorization-friction governance closeout review
 - Scope: formal closeout of project envelope rules, reusable portfolio method, and `Provisional — Portfolio 1/2`; no runtime, public output, Contact, Production, domain, or Work Charter main-text change.
 - Candidates: portfolio `e0dfe60`, shared portfolio skill `eb1c812`, user skill `0ae7b6a`; deterministic checks, both skill validators, privacy scan, and protected-file check pass.
