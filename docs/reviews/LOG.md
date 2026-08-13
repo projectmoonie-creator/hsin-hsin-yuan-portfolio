@@ -313,3 +313,5 @@ packages.
 - Browser: English desktop, Chinese mobile, mobile reduced-motion, and desktop no-JS pass with new Hero visible, zero overflow, and no relevant image/page/console failures; existing intentional MP4 warm aborts were classified separately.
 - Review: independent requested/observed/completed `gpt-5.6-sol` at `xhigh` returned `PASS`, no P0/P1/P2; reviewer confirmed Figma non-payload bytes unchanged.
 - Boundary: protected document remains untracked at `945d4df9…d28fc`; no push, `main`, Production, alias, Contact, video, copy, layout, or unrelated media change.
+- Preview: static `dpl_25nw…eG79` is Ready/Preview, 57 files / 96,779,346 bytes / path-list `a209fb12…6ef1`, static root and no functions/private payload; anyone-with-link access replaced and revoked the prior sole Hobby link, while the new URL stays outside Git at `f2ffaa52…147a` and was not fetched.
+- Verdict/next: `PASS_WITH_OPEN_ITEMS` only for producer target-device inspection; Production, canonical alias, remotes, Contact, and the protected file remain unchanged and separately gated.

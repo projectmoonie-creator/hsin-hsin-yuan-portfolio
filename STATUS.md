@@ -33,6 +33,18 @@ State: `PASS_WITH_OPEN_ITEMS`
   and returned `PASS` with no P0/P1/P2 finding. No runtime layout, interaction,
   video, Contact, Production, alias, `main`, Git push, or protected-file action
   is authorized or included.
+- Fresh static `dist/`-only Preview `dpl_25nwugfbWknZCZhdveozasGSeG79`
+  reads `READY`/`preview`: 57 files, 96,779,346 bytes, sorted path-list
+  SHA-256 `a209fb128842584f14d74cdfe218eaf49d95d487b0e9039d3a5e5d32c7c16ef1`,
+  static `.` build root, and no functions, source, docs, tests, environment
+  payload, or protected document.
+- The Vercel Dashboard confirms anyone-with-link viewing for the new Preview.
+  Its access-bearing URL remains outside Git at SHA-256
+  `f2ffaa528efd7704bd29818e1259d35a8ad26c27095941b93c1b787d19d6147a`
+  and was not fetched or sent to PageSpeed. Creating it revoked the previous
+  sole Hobby Shareable Link. Production, canonical alias, and Git remotes are
+  unchanged; package verdict remains `PASS_WITH_OPEN_ITEMS` only for producer
+  visual inspection.
 
 ## Current Bounded Package — Mobile Preview Network Budget Closed
 
@@ -1491,11 +1503,12 @@ SHA-256:
 
 ## Exact Next Action
 
-Create one standing-authorized static `dist/`-only Preview for the Hero cover
-refresh, proactively replace the sole Shareable Link, and hand the openable
-link to the producer for visual inspection. Do not push Git, merge or push
-`main`, deploy Production, change an alias, submit Contact, modify the protected
-file, or reopen the retired mobile network-budget finding.
+Hand the access-bearing Hero cover Preview link to the producer for target-device
+visual inspection. If the producer accepts it and explicitly authorizes release,
+open the separately gated Production package; otherwise make only the exact
+Hero-cover adjustment requested. Do not push Git, merge or push `main`, deploy
+Production, change an alias, submit Contact, modify the protected file, or
+reopen the retired mobile network-budget finding.
 
 ## Cold Resume
 
@@ -1515,10 +1528,11 @@ file, or reopen the retired mobile network-budget finding.
    geometry. Its dated report is
    `docs/reviews/portfolio-phase-closeout-2026-08-12.md`; the accepted Preview
    is `dpl_Diifu1JzTyjjuAydEKPLJxFwg76t`.
-5. The current local work branch is `codex/mobile-preview-network-budget` and
-   retains the docs-only handoff plus the local diagnostic closeout above the
-   closed remote baseline. Report branch, HEAD, origin reachability, worktree,
-   and protected-file status, then wait for a new producer-named package.
+5. The current local work branch is `codex/hero-cover-refresh` and retains the
+   two mobile-network-budget docs commits plus the Hero replacement and Preview
+   record above the closed remote baseline. Report branch, HEAD, origin
+   reachability, worktree, and protected-file status, then wait for the
+   producer's visual ruling.
    Future static Previews still require proactive Shareable-Link replacement
    without another question, while Git push, `main`, Production, Contact,
    destructive actions, and protected-file changes remain separately
