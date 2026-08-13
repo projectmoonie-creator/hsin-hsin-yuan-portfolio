@@ -1,7 +1,7 @@
 # 授權摩擦治理修改方案
 
 日期：2026-08-13
-狀態：**建議採用 Option B；跨專案正式條文尚未修改，等待製作人拍板**
+狀態：**Option B 已由製作人核准並暫定實作；跨專案正式條文未修改**
 
 ## 結論
 
@@ -16,6 +16,21 @@ Charter 的兩專案入典門檻。因此現在不應立刻增加一條永久憲
 
 「警告」只有在它是可執行檢查時才會更清楚。單純寫一段「小心不要問太多」會增加
 噪音；具名觸發點、一次演練、明確晉升/退役條件，才不會變成另一層規則膨脹。
+
+## 實作結果 — 2026-08-13
+
+- 製作人以當下唯一待決選項的「好」核准 Option B。
+- 已在 `$HOME/.mirasim/skills/work-charter/SKILL.md` 的新計劃第一個 session
+  流程加入四行 `Provisional — Portfolio 1/2` 開案演練。
+- Work Charter 主文保持不變；既有專案不觸發這個新計劃演練。
+- skill 修改前 SHA-256：
+  `a0d2b067d6960cafbca0b871eec75dd19aafea50fe59da952774956bc9904bc4`
+- skill 修改後 SHA-256：
+  `d6d85d12570f39de624430bb5f0ba6af6e2223a7c32ed9c3164f7a4455b74e85`
+- `skill-creator` 的 `quick_validate.py` 回報 `Skill is valid!`；目標文字只在
+  skill 出現，沒有進入 Work Charter 主文。
+- 該 skill 目錄本身沒有 Git；本報告與下方 LOG 是可回溯帳目，但 runtime skill
+  仍只有本機副本。未獲授權的 Git push、Production 或其他外部動作均未發生。
 
 ## 已確認的根因
 
@@ -69,8 +84,8 @@ Charter 的兩專案入典門檻。因此現在不應立刻增加一條永久憲
 
 ### 現在：一個暫定開案檢查，不修 Work Charter 主文
 
-若製作人拍板，在 `work-charter` skill 的「新計劃第一個 session」執行流程加入下面
-四行，並標記 `Provisional — Portfolio 1/2`：
+製作人拍板後，已在 `work-charter` skill 的「新計劃第一個 session」執行流程加入
+下面四行，並標記 `Provisional — Portfolio 1/2`：
 
 > 先以第一個端到端成果演練一次：列出可預見動作、硬排除與製作人中斷點。
 > 同一成果內、已知且有條件的步驟，合併為一個可撤銷 authorization envelope。
@@ -129,6 +144,6 @@ Charter 的兩專案入典門檻。因此現在不應立刻增加一條永久憲
 
 ## 建議拍板
 
-採 **Option B（暫定）**：允許下一步只修改 `work-charter` skill，加入上述四行
+已採 **Option B（暫定）**：只修改 `work-charter` skill，加入上述四行
 `Portfolio 1/2` 開案實驗；不改 Work Charter 主文、不擴寫所有 AGENTS/Bible，
 不把中斷比變成硬 KPI。第二個適合的專案完成後，再回來決定晉升或退役。

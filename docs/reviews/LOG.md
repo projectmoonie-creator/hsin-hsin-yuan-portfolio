@@ -4,6 +4,15 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-13 — Provisional cross-project startup check implemented
+- Producer decision: approved Option B with a contextual `好`; this authorizes the proposed four-line `work-charter` skill experiment only.
+- Implementation: new-project first sessions now run one outcome-level dry-run under `Provisional — Portfolio 1/2`; existing projects do not reopen their authorization design.
+- Boundary: Work Charter remains unchanged pending a representative second-project validation; no rule was copied into other AGENTS/Bibles.
+- Hard stops retained: scope change, failed gate, new cost, recipient, secret, or destructive target; an envelope is not carte blanche.
+- Validation: `skill-creator` `quick_validate.py` returned `Skill is valid!`; target wording appears in the skill and not Work Charter.
+- Provenance: skill SHA-256 changed from `a0d2b067…9904bc4` to `d6d85d12…55b74e85`; full hashes and exact wording are in the dated proposal.
+- Durability: the runtime skill directory has no Git; this repo records the audit trail, but no Git push, deployment, Contact, external message, or protected-file action occurred.
+
 ## 2026-08-13 — Cross-project authorization-friction consultation
 - Scope: diagnose why this portfolio accumulated repeated typed approvals and propose the minimum cross-project prevention; no runtime, Work Charter, external deployment, Contact, Git push, or protected-file change.
 - Evidence: the 2026-08-04 cadence changed an explicit Production boundary into per-deployment authorization; line-count gating, Vercel/Git coupling, narrow technical packages, and historical `STATUS.md` exclusions amplified it.
