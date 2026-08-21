@@ -389,3 +389,13 @@ packages.
 - Production/domain: `dpl_BZJ7LdJZ9a3xXXku48KvdPu1Fz9y` is Ready/Production; apex `hsinhsinyuan.com` is verified canonical, `www` is verified 308 to apex, old Vercel alias is preserved, and auto-renewing TLS covers apex/wildcard.
 - PageSpeed: one mobile-English official API attempt returned 429 daily-quota exhaustion and produced no metrics; recorded as service unavailability, not a performance failure.
 - Verdict/next: domain package PASS. Overall remains BLOCKED only by non-operational Contact; next work is a separately approved contact alias/forwarding/sender/DNS/environment/receive-reply package. No push or further Production action.
+
+## 2026-08-22 — Google Search discovery Production closeout
+- Scope/runtime: authorized Search Console/DNS/indexing package; test-first `9f2473f` changes only apex redirect semantics from temporary to permanent and is durable on active branch, `main`, and Ready Production `6dAEBc…RHCib`.
+- Google: Domain property verified, one token-redacted TXT retained, sitemap Success/two pages, English indexed, Chinese eligibility passed and `Indexing requested`; the pending Google crawl is external, not a product blocker.
+- Live/local: apex 308, both languages/robots/sitemap 200, reciprocal canonical/hreflang, normal/Googlebot and local/live hashes exact for both pages; desktop/mobile redirect has zero overflow/error.
+- Gates: focused 1/1, full 180/180, fresh build, design audit, six-reel integrity, privacy, protected hash, and diff checks pass.
+- Review: frozen packet `c6337892…adacc6`; Gemini requested/observed/completed `gemini-3.7-flash`, PASS/no findings; Claude requested dynamic `opus`, observed/completed `claude-opus-5`, PASS with six minor/two nit, all adjudicated.
+- Docs: canonical PageSpeed target and baseline semantics corrected; build-date sitemap `lastmod` and Chinese `lang` specificity remain out-of-scope candidates with no runtime expansion.
+- PageSpeed: required apex attempt returned Google 429 / daily quota 0, so no score is claimed; retry read-only on/after 2026-08-29 only when official service can complete.
+- Outcome: **PASS** after docs-only closeout commit is read back on the active branch; no second `main` push/Production, DNS/Search Console mutation, Contact, LinkedIn-path inclusion, or protected-file action.

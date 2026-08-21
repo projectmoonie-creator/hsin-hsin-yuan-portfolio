@@ -9,7 +9,12 @@ Ready. It does not authorize deployment or remediation.
 - Production: use the current canonical alias recorded in `STATUS.md` and
   generated from `SITE_ORIGIN`.
 - Current Production alias:
+  `https://hsinhsinyuan.com`
+- Preserved Vercel project alias:
   `https://hsin-hsin-yuan-portfolio.vercel.app`
+- The 2026-08-10 reference baseline below was captured on that preserved
+  Vercel alias. The first successful run on the canonical apex establishes a
+  new baseline; do not represent it as a matching-URL before/after comparison.
 - Preview: use the exact accessible deployment or producer-approved share URL.
 - Never bypass Vercel protection. Record the check as inaccessible when the
   public PageSpeed service cannot reach the Preview.

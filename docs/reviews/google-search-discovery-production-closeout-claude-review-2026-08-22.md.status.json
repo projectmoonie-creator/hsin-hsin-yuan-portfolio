@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 2,
+  "attemptId": "37320354-a8fc-409d-9faf-11204061d382",
+  "startedAt": "2026-08-21T16:24:02.593Z",
+  "provider": "Claude Code",
+  "routingPolicy": "highest-capability-generally-released-at-execution",
+  "requestedModel": "opus",
+  "requestedModelKind": "dynamic-capability-alias",
+  "exactModelPinned": false,
+  "observedModel": "claude-opus-5",
+  "completedModel": "claude-opus-5",
+  "lane": "Claude Code subscription token via ask-claude.sh",
+  "helperProtocolVersion": "claude-subscription-review/3",
+  "result": "completed",
+  "failureClass": null,
+  "modelRequestSent": true,
+  "billingFallbackAllowed": false,
+  "paidCredentialEnvironmentDetected": false,
+  "packetSha256": "c6337892100f716412cfaae6141c9c2cd0ead54b9096eb46b9cf325961adacc6",
+  "prompt": "docs/reviews/google-search-discovery-production-closeout-review-packet-2026-08-22.md",
+  "intendedOutput": "docs/reviews/google-search-discovery-production-closeout-claude-review-2026-08-22.md",
+  "rawOutput": "docs/reviews/google-search-discovery-production-closeout-claude-review-2026-08-22.md.raw.json",
+  "rawSha256": "d653e143625b6ad86e91943dc2a072e0eb52c3544780f7ad05c6443c85ace21b",
+  "repo": ".",
+  "apiEquivalentCostUsd": 0.6749685000000001,
+  "actualSpendUsd": null,
+  "usage": {
+    "input_tokens": 12,
+    "cache_creation_input_tokens": 23443,
+    "cache_read_input_tokens": 97005,
+    "output_tokens": 15527,
+    "output_tokens_details": {
+      "thinking_tokens": 10350
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 23443,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "not_available",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 5893,
+        "cache_read_input_tokens": 24836,
+        "cache_creation_input_tokens": 1407,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1407
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard"
+  },
+  "completedAt": "2026-08-21T16:27:29.640Z",
+  "observedModels": [
+    "claude-haiku-4-5-20251001",
+    "claude-opus-5"
+  ],
+  "auxiliaryModels": [
+    "claude-haiku-4-5-20251001"
+  ],
+  "modelUsage": {
+    "claude-haiku-4-5-20251001": {
+      "inputTokens": 3726,
+      "outputTokens": 15,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 0,
+      "costUSD": 0.003801,
+      "contextWindow": 200000,
+      "maxOutputTokens": 32000,
+      "canonicalModel": "claude-haiku-4-5",
+      "provider": "firstParty"
+    },
+    "claude-opus-5": {
+      "inputTokens": 12,
+      "outputTokens": 15527,
+      "cacheReadInputTokens": 97005,
+      "cacheCreationInputTokens": 23443,
+      "webSearchRequests": 0,
+      "costUSD": 0.6711675,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 64000,
+      "canonicalModel": "claude-opus-5",
+      "provider": "firstParty"
+    }
+  },
+  "reconciledFromRaw": false
+}

@@ -75,7 +75,29 @@ State: `BLOCKED`
   deployment `6dAEBc8Dm4pv15Kjy6SYQYZRHCib` / source `9f2473f` as `Ready`,
   with `hsinhsinyuan.com` attached to that Production deployment. No second
   manual deployment or unrelated domain, Contact, content, media, layout, or
-  interaction change was made. This bounded package is complete.
+  interaction change was made.
+- Formal closeout froze packet SHA-256
+  `c6337892100f716412cfaae6141c9c2cd0ead54b9096eb46b9cf325961adacc6`.
+  Gemini requested/observed/completed `gemini-3.7-flash` and returned
+  `PASS` with no findings. Claude requested dynamic `opus`,
+  observed/completed `claude-opus-5`, and returned `PASS` with no blocker
+  or major; all six minor and two nit findings are resolved, corrected in
+  active docs, accepted out of scope, or rejected with evidence in the dated
+  adjudication.
+- Fresh closeout read-back matches local build bytes for both language pages,
+  robots, and sitemap; browser and Googlebot HTML also match for both
+  languages. The apex remains HTTP 308 and desktop/mobile apex navigation
+  reaches the English canonical with zero overflow or browser errors.
+- The required PageSpeed attempt against the canonical English apex returned
+  HTTP 429 because Google's official service reported zero available daily
+  queries. No metric or regression is claimed. On or after 2026-08-29, retry
+  once read-only only if official quota is nonzero or the official UI can
+  produce a completed report; this authorizes no runtime or deployment work.
+- Package verdict: `PASS`. The Chinese crawl and PageSpeed availability are
+  external open items, not product blockers. The docs-only closeout commit is
+  preserved on the active branch rather than `main`, so it creates no second
+  Production. Full record:
+  `docs/reviews/google-search-discovery-production-closeout-2026-08-22.md`.
 
 ## Current Governance Closeout — PASS; Durability Resolved
 
