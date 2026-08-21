@@ -14,6 +14,17 @@ import {
 
 const root = process.cwd();
 
+test("root permanently redirects to the canonical English homepage", () => {
+  const vercel = JSON.parse(readFileSync(join(root, "vercel.json"), "utf8"));
+  const rootRedirect = vercel.redirects.find((redirect) => redirect.source === "/");
+
+  assert.deepEqual(rootRedirect, {
+    source: "/",
+    destination: "/en/",
+    permanent: true,
+  });
+});
+
 test("parseFrontmatter reads JSON frontmatter and body", () => {
   const parsed = parseFrontmatter(`---\n{"title":{"en":"A","zh":"甲"},"order":1}\n---\nBody text`);
 

@@ -22,6 +22,45 @@ State: `BLOCKED`
   email, Git push, `main`, Production, alias/domain changes, purchases,
   destructive actions, or protected-file changes.
 
+## Current Bounded Package — Google Search Discovery And Indexing
+
+- Authorization: on 2026-08-21 the producer asked Codex to perform the
+  previously described Search Console and technical-indexing work. This one
+  envelope covers local tests/source/docs, creation and DNS verification of
+  the `hsinhsinyuan.com` Search Console Domain property, one Vercel DNS TXT
+  addition, sitemap submission, live inspection and indexing requests for
+  `/en/` and `/zh/`, coherent local commits, non-force active-branch and
+  `main` pushes, and one Production update after all gates pass.
+- Goal: make both canonical language pages discoverable and observable in
+  Google without changing approved copy or visual/interaction behavior.
+- Gate conditions: focused RED/GREEN, full tests, build, exact SEO artifact
+  checks, live desktop/mobile equivalence, independent low-risk review,
+  privacy/protected-file checks, and post-action readback of DNS, Search
+  Console, sitemap, both canonical pages, and the apex redirect.
+- Hard exclusions: Contact/email configuration or submission, copy, media,
+  layout, interaction, purchases, secrets in Git/output, force push,
+  destructive DNS/Vercel actions, aliases beyond the existing canonical
+  routing, and the protected untracked document.
+- End condition: Search Console ownership, sitemap acceptance, both indexing
+  requests, and the live permanent apex-to-English redirect are verified; or
+  a named gate fails and the package stops without Production.
+- Public diagnosis before implementation: `/en/`, `/zh/`, `robots.txt`, and
+  `sitemap.xml` return 200; no `noindex` or `X-Robots-Tag` exists; canonical
+  and reciprocal hreflang are correct; Googlebot receives byte-identical
+  English HTML. Public DNS exposes no Google verification TXT. The sole local
+  technical refinement is the root redirect's temporary `307` semantics.
+- Local implementation: a focused test first failed on `permanent: false`,
+  then passed after the one-line `true` correction. Full `npm test` passes
+  180/180; fresh build, design-contract audit, six Featured derivatives,
+  `git diff --check`, privacy scan, and protected-file hash all pass.
+- Independent low-risk review returned `PASS` with no findings. The reviewer
+  changed nothing and confirmed the real Vercel config, focused test, bounded
+  envelope, dirty-path isolation, and protected-file integrity.
+- External status: blocked only on browser connectivity. No controllable
+  Chrome or in-app browser is currently exposed, so Search Console cannot yet
+  issue its DNS value and no DNS, sitemap submission, indexing request,
+  Preview, `main`, or Production action has been performed.
+
 ## Current Governance Closeout — PASS; Durability Resolved
 
 - Local implementation correctness passes for the project envelope, reusable

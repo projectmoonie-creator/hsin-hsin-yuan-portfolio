@@ -3,7 +3,7 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "redirects": [
-    { "source": "/", "destination": "/en/", "permanent": false }
+    { "source": "/", "destination": "/en/", "permanent": true }
   ],
   "headers": [
     {
