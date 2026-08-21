@@ -1,6 +1,6 @@
 # Portfolio Status
 
-Updated: 2026-08-13
+Updated: 2026-08-22
 
 State: `BLOCKED`
 
@@ -56,10 +56,26 @@ State: `BLOCKED`
 - Independent low-risk review returned `PASS` with no findings. The reviewer
   changed nothing and confirmed the real Vercel config, focused test, bounded
   envelope, dirty-path isolation, and protected-file integrity.
-- External status: blocked only on browser connectivity. No controllable
-  Chrome or in-app browser is currently exposed, so Search Console cannot yet
-  issue its DNS value and no DNS, sitemap submission, indexing request,
-  Preview, `main`, or Production action has been performed.
+- External closeout: `hsinhsinyuan.com` ownership is verified in Google Search
+  Console through one apex Vercel TXT record. The submitted
+  `https://hsinhsinyuan.com/sitemap.xml` returned `Success`, was read on
+  2026-08-22, and reports two discovered pages.
+- URL Inspection found `/en/` already `URL is on Google`, indexed from the
+  submitted sitemap, last crawled by Googlebot smartphone on 2026-08-16 with
+  fetch, crawl permission, indexing permission, and inspected canonical all
+  passing. A duplicate indexing request was intentionally not sent because
+  Search Console already offered only `Request again`.
+- URL Inspection found `/zh/` as `Discovered - currently not indexed`; its
+  live eligibility check passed and Search Console accepted the request with
+  `Indexing requested` / priority crawl queue confirmation. This is a crawl
+  request, not a guarantee of immediate appearance in search results.
+- Commit `9f2473f` was non-force pushed to both
+  `codex/hero-cover-refresh` and `main`. Git integration created the expected
+  branch Preview and exactly one Production deployment. Vercel reports
+  deployment `6dAEBc8Dm4pv15Kjy6SYQYZRHCib` / source `9f2473f` as `Ready`,
+  with `hsinhsinyuan.com` attached to that Production deployment. No second
+  manual deployment or unrelated domain, Contact, content, media, layout, or
+  interaction change was made. This bounded package is complete.
 
 ## Current Governance Closeout — PASS; Durability Resolved
 
