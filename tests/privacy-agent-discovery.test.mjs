@@ -27,6 +27,7 @@ test("build publishes bilingual privacy and concise agent discovery surfaces", (
   const zhHome = readDist("zh/index.html");
   const enPrivacy = readDist("en/privacy/index.html");
   const zhPrivacy = readDist("zh/privacy/index.html");
+  const robots = readDist("robots.txt");
   const sitemap = readDist("sitemap.xml");
   const llms = readDist("llms.txt");
 
@@ -73,7 +74,12 @@ test("build publishes bilingual privacy and concise agent discovery surfaces", (
   assert.match(llms, /https:\/\/hsinhsinyuan\.com\/en\/privacy\//);
   assert.match(llms, /Do not infer unlisted credits, rights, or private contact information\./);
 
-  for (const artifact of [enPrivacy, zhPrivacy, llms, sitemap]) {
+  assert.match(
+    robots,
+    /^User-agent: \*\nContent-Signal: search=yes, ai-input=yes, ai-train=no\nAllow: \/$/m,
+  );
+
+  for (const artifact of [enPrivacy, zhPrivacy, robots, llms, sitemap]) {
     assert.doesNotMatch(artifact, /RESEND_API_KEY|CONTACT_TO_EMAIL|CONTACT_FROM_EMAIL/);
     assert.doesNotMatch(artifact, /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
     assert.doesNotMatch(artifact, /\/Users\/|screening-strip-media-contract-v1/);

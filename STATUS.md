@@ -22,6 +22,52 @@ State: `READY`
   email, Git push, `main`, Production, alias/domain changes, purchases,
   destructive actions, or protected-file changes.
 
+## Current Release Package — 8/24 Candidate To Main And Production
+
+- Authorization: on 2026-08-24 the producer approved one integrated envelope
+  to fast-forward the completed 8/24 candidate through `main` and Git-integrated
+  Production, then perform public sitemap and Search Console readback plus one
+  canonical-public Is Agentic scan. The completed bilingual Privacy pages and
+  concise root `llms.txt` are the release priority.
+- The same envelope permits the machine-readable `robots.txt` directive
+  `Content-Signal: search=yes, ai-input=yes, ai-train=no`, implemented test-first
+  and reviewed with the release. Content Signals are preference declarations,
+  not technical crawler enforcement or a substitute for copyright terms.
+- Covered actions: bounded local tests/source/docs, necessary read-only official
+  research, full release gates, frozen Claude and Gemini review packets, coherent
+  commits, non-force active-branch push, fast-forward-only `main` update,
+  Git-integrated Production, exact remote/deployment readback, authenticated
+  Search Console read-only inspection, and an anonymous canonical-public Is
+  Agentic observation.
+- Gates: focused RED/GREEN, full suite and build, design/media/privacy/protected-
+  file checks, independent review and local adjudication, a Ready Production
+  sourced from the intended commit, and public verification of Privacy,
+  `llms.txt`, sitemap, robots/Content-Signal, and canonical response identity.
+- Local pre-release gates are green: valid focused RED then 1/1 GREEN, full
+  181/181, fresh build, design-contract audit, six Featured derivatives, zero
+  production dependency vulnerabilities, generated-output privacy scan,
+  protected-file baseline, and all 12 English/Chinese × desktop/mobile ×
+  normal/reduced-motion/no-JavaScript browser cases. The two mobile-normal MP4
+  aborts per locale are the existing tested warm-handoff cancellation, not a
+  new runtime failure; no video code changed.
+- Frozen packet SHA-256 is
+  `e1c662651829639effc5a2738b3661e9a63c02c4e5e07fdcb79b5b4cc9f33915`.
+  Gemini requested/observed/completed `gemini-3.7-flash`, returned `PASS`, and
+  reported zero findings. Claude dynamic-`opus` attempt
+  `4b1aa2df-9f1a-4cf5-abdb-d39538e623de` ended `claude-process-failed` with
+  ambiguous dispatch and no observed/completed model or usable review; it was
+  not retried or rerouted, so no dual-review consensus is claimed. Local
+  adjudication is `PASS` for the bounded release.
+- Hard exclusions: Contact or email submission/configuration/reset; duplicate
+  sitemap submission or a new indexing request; domain/alias changes; purchases;
+  analytics; homepage copy, works, media, or interaction changes; force/history
+  rewrite; destructive actions; the protected untracked document; and sending a
+  Preview token or private URL to Is Agentic.
+- End point: record the public readbacks, Search Console state, canonical Is
+  Agentic result and adjudication, exact Git/deployment identities, and the next
+  bounded action. A failed gate stops public mutation; an in-scope defect may be
+  corrected test-first and re-verified before continuing.
+
 ## Current Governance Closeout — Is Agentic Release Gate And Durability
 
 - On 2026-08-24 the producer authorized finishing the non-force push and

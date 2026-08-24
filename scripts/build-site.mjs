@@ -725,6 +725,7 @@ function renderPersonJsonLd(site) {
 
 function renderRobots() {
   return `User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 Sitemap: ${SITE_ORIGIN}/sitemap.xml
