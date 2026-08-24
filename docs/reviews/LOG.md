@@ -4,6 +4,16 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-24 — Privacy / llms.txt Production and Content Signals
+- Scope/commit: integrated envelope released `39e1821` by non-force active push and fast-forward-only `main`; no Contact, Search Console mutation, alias/domain, copy/media/interaction, protected-file, force, or destructive action.
+- Delta/gates: robots now declares `search=yes, ai-input=yes, ai-train=no`; valid RED→GREEN, 181/181, build/design/media/dependency/privacy/protected checks, and 12-case bilingual viewport/fallback browser matrix pass.
+- Review: packet `e1c66265…f33915`; Gemini `gemini-3.7-flash` PASS/zero findings; Claude dynamic-`opus` attempt `4b1aa2df…23de` incomplete/ambiguous, so no dual consensus; local adjudication PASS.
+- Production: Vercel `dpl_C4EN9CZj7kinLQGVyGkSQ9Y4mUtS` Ready/Production from exact `39e1821`; apex 308 and seven core public artifacts byte-match candidate; four HTML pages match Googlebot.
+- Search Console: 3 indexed/3 not; sitemap Success but last read 08-22 and still two discovered pages; no resubmit/request.
+- Is Agentic: canonical completed snapshot `2026-08-24T07-04-51-794Z` scores 82/100 (was 77); new `llms.txt` when-to-use and Privacy trust gaps cleared; 404 recovery body/brand search remain nonblocking, Markdown negotiation inapplicable.
+- PageSpeed/worktree: one required API call returned 429 daily quota zero; no metrics claimed. iCloud produced 108 additional untracked conflict copies during branch switch; all 109 conflict entries remain excluded and untouched.
+- Outcome: `PASS`; closeout docs push only to active branch, leaving `main`/Production at `39e1821`; next action is wait for Google sitemap reread or separately authorize 404/iCloud cleanup.
+
 ## 2026-08-24 — Durability and Is Agentic governance closeout
 - Scope: producer-authorized non-force active-branch push/readback, backup-completeness check, and reusable Is Agentic release rule; no repeat of already-green website gates and no `main`, Production, domain, Contact, Search Console, destructive, or protected-file action.
 - Placement: `portfolio-narrative-builder` owns the public-portfolio gate; Work Charter promotion is deferred because its two-project threshold is not met, and no premature generic website skill was created.

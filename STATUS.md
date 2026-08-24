@@ -67,6 +67,35 @@ State: `READY`
   Agentic result and adjudication, exact Git/deployment identities, and the next
   bounded action. A failed gate stops public mutation; an in-scope defect may be
   corrected test-first and re-verified before continuing.
+- Release completed at commit
+  `39e18219faaebff70a3e64daa12b1030a8e0d0d3`; `origin/main` and the active
+  branch read back at that exact SHA before closeout. Vercel Production
+  `dpl_C4EN9CZj7kinLQGVyGkSQ9Y4mUtS` is `READY`, target `production`, with the
+  same GitHub Production source and the canonical apex assigned.
+- Public readback is exact: apex 308 to `/en/`; both homepages and both Privacy
+  pages 200 and byte-identical for normal/Googlebot UAs; `robots.txt`,
+  `llms.txt`, sitemap, and all four HTML outputs match the fresh candidate
+  hashes. Sitemap exposes four canonical URLs and robots exposes the approved
+  Content Signal; no `X-Robots-Tag` is present.
+- Search Console read-only state is 3 indexed / 3 not indexed. The sole sitemap
+  remains `Success`, last read 2026-08-22, with two discovered pages, so Google
+  has not yet consumed the new four-URL bytes. No resubmission or indexing
+  request was made.
+- Canonical Is Agentic snapshot `2026-08-24T07-04-51-794Z` completed at 82/100
+  (previous snapshot 77): Essential 5/7, Recommended 7/8, nine bonus signals.
+  The prior when-to-use and Privacy trust-anchor gaps cleared. Remaining 404
+  recovery-body and brand-discovery findings are nonblocking future candidates;
+  Markdown negotiation is inapplicable because the site serves no such variant.
+- Routine PageSpeed mobile-English readback returned official HTTP 429
+  `RESOURCE_EXHAUSTED` / `RATE_LIMIT_EXCEEDED` with daily quota zero. No metric,
+  regression, or remediation authority is claimed.
+- Package verdict: `PASS`. The docs-only closeout stays off `main` to avoid a
+  second Production and is pushed only to the active branch, with final SHA
+  reported externally. During the branch switch iCloud created 108 additional
+  untracked ` 2` conflict copies; all 109 untracked conflict entries, including
+  the protected document, remain excluded and untouched. Exact next action is
+  to wait for Google's sitemap reread; any 404-body or iCloud cleanup requires a
+  separate explicit package.
 
 ## Current Governance Closeout — Is Agentic Release Gate And Durability
 
