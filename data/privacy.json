@@ -1,0 +1,157 @@
+{
+  "lastUpdated": "2026-08-24",
+  "en": {
+    "metaTitle": "Privacy Notice | Hsin-Hsin Yuan",
+    "metaDescription": "How Hsin-Hsin Yuan's portfolio handles information submitted through its contact form.",
+    "eyebrow": "Privacy",
+    "titleLead": "Privacy",
+    "titleAccent": "Notice",
+    "updatedLabel": "Last updated",
+    "intro": "This notice explains how information submitted through this portfolio is handled. The portfolio is operated by Hsin-Hsin Yuan in Taiwan.",
+    "homeLabel": "Portfolio",
+    "contactLabel": "Contact",
+    "privacyLinkLabel": "Privacy",
+    "sections": [
+      {
+        "heading": "Who handles your information",
+        "paragraphs": [
+          "Hsin-Hsin Yuan determines why information submitted through this portfolio is used. Privacy requests can be sent through the same portfolio Contact form."
+        ]
+      },
+      {
+        "heading": "What is collected",
+        "paragraphs": [
+          "If you use the Contact form, it collects the Name, email address, project type, optional link, and message that you choose to provide.",
+          "The hosting provider may also process technical request information, such as an IP address, browser or device information, timestamps, and request logs, to deliver and secure the site."
+        ]
+      },
+      {
+        "heading": "Why it is used",
+        "paragraphs": [
+          "Information is used only to respond to your inquiry, assess or discuss possible work, keep necessary professional correspondence, and protect the form from abuse.",
+          "It is not sold, rented, or used for advertising or mailing-list marketing."
+        ]
+      },
+      {
+        "heading": "Service providers and international processing",
+        "paragraphs": [
+          "The site is hosted by Vercel, and Contact-form messages are delivered through Resend to a private inbox. These providers may process information outside Taiwan under their own policies."
+        ],
+        "links": [
+          {
+            "label": "Vercel Privacy Notice",
+            "url": "https://vercel.com/legal/privacy-notice"
+          },
+          {
+            "label": "Resend Privacy Policy",
+            "url": "https://resend.com/legal/privacy-policy"
+          }
+        ]
+      },
+      {
+        "heading": "Retention",
+        "paragraphs": [
+          "Correspondence is kept only for as long as reasonably needed to respond, manage a possible or ongoing professional relationship, resolve disputes, protect the service, or meet applicable legal obligations.",
+          "When it is no longer needed, it is deleted or anonymized where reasonably possible."
+        ]
+      },
+      {
+        "heading": "Your choices and rights",
+        "paragraphs": [
+          "Subject to applicable law, you may ask to access or review personal information connected to your inquiry, obtain a copy, supplement or correct it, stop its collection, processing, or use, or delete it. Submit the request through the Contact form and include enough detail to identify the correspondence.",
+          "The optional link is optional. If the required fields are not provided, the form cannot send the inquiry; you may still browse the portfolio."
+        ]
+      },
+      {
+        "heading": "Security and site measurement",
+        "paragraphs": [
+          "The form uses HTTPS, restricted provider credentials, and basic abuse controls. No internet transmission or storage method is completely secure.",
+          "This portfolio does not include first-party advertising or analytics scripts. The hosting provider may still process technical request data needed to operate and secure the site."
+        ]
+      },
+      {
+        "heading": "Changes",
+        "paragraphs": [
+          "This notice may be updated when the portfolio's data practices or service providers change. The date above identifies the current version."
+        ]
+      }
+    ]
+  },
+  "zh": {
+    "metaTitle": "隱私權說明｜袁欣欣",
+    "metaDescription": "袁欣欣作品集如何處理透過聯絡表單提交的資料。",
+    "eyebrow": "隱私權",
+    "titleLead": "隱私權",
+    "titleAccent": "說明",
+    "updatedLabel": "最後更新",
+    "intro": "本說明介紹透過這個作品集提交的資料會如何處理。本作品集由袁欣欣於台灣營運。",
+    "homeLabel": "作品集",
+    "contactLabel": "聯絡",
+    "privacyLinkLabel": "隱私權",
+    "sections": [
+      {
+        "heading": "誰處理你的資料",
+        "paragraphs": [
+          "袁欣欣決定透過本作品集提交之資料的使用目的。若有隱私權相關請求，可使用同一個作品集聯絡表單提出。"
+        ]
+      },
+      {
+        "heading": "收集哪些資料",
+        "paragraphs": [
+          "若使用聯絡表單，會收集你主動提供的姓名、電子信箱、合作類型、選填連結與訊息。",
+          "為了傳送與保護網站安全，託管服務也可能處理 IP 位址、瀏覽器或裝置資訊、時間戳記及請求紀錄等技術資料。"
+        ]
+      },
+      {
+        "heading": "使用目的",
+        "paragraphs": [
+          "資料只用於回覆洽詢、評估或討論可能的合作、保留必要的專業往來，以及防止表單遭到濫用。",
+          "資料不會出售、出租，也不會用於廣告或郵寄名單行銷。"
+        ]
+      },
+      {
+        "heading": "服務供應商與跨境處理",
+        "paragraphs": [
+          "網站由 Vercel 託管，聯絡表單訊息則透過 Resend 傳送到私人收件匣。這些供應商可能依其政策在台灣以外處理資料。"
+        ],
+        "links": [
+          {
+            "label": "Vercel 隱私權聲明",
+            "url": "https://vercel.com/legal/privacy-notice"
+          },
+          {
+            "label": "Resend 隱私權政策",
+            "url": "https://resend.com/legal/privacy-policy"
+          }
+        ]
+      },
+      {
+        "heading": "保存期間",
+        "paragraphs": [
+          "往來資料只在回覆、管理可能或進行中的專業合作、處理爭議、保護服務，或履行適用法律義務所合理需要的期間內保留。",
+          "資料不再需要時，會在合理可行的範圍內刪除或匿名化。"
+        ]
+      },
+      {
+        "heading": "你的選擇與權利",
+        "paragraphs": [
+          "依適用法律，你可以請求查詢或閱覽與洽詢相關的個人資料、取得複製本、補充或更正資料、停止資料的蒐集、處理或利用，以及刪除資料。請透過聯絡表單提出，並提供足以辨識該筆往來的資訊。",
+          "參考連結是選填項目。若不提供必填欄位，表單便無法送出洽詢；你仍可瀏覽作品集。"
+        ]
+      },
+      {
+        "heading": "安全與網站量測",
+        "paragraphs": [
+          "表單使用 HTTPS、受限的供應商憑證及基本防濫用措施；但任何網路傳輸或儲存方式都無法保證絕對安全。",
+          "本作品集沒有加入第一方廣告或分析程式。託管供應商仍可能處理維持網站運作與安全所需的技術請求資料。"
+        ]
+      },
+      {
+        "heading": "更新",
+        "paragraphs": [
+          "作品集的資料處理方式或服務供應商若有變更，本說明可能隨之更新。頁首日期代表目前版本。"
+        ]
+      }
+    ]
+  }
+}

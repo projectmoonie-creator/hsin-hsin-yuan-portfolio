@@ -76,10 +76,12 @@ export function loadMarkdownCollection(dir) {
 
 export function loadSiteData(baseDir = root) {
   const site = JSON.parse(readFileSync(join(baseDir, "data/site.json"), "utf8"));
+  const privacy = JSON.parse(readFileSync(join(baseDir, "data/privacy.json"), "utf8"));
   validateSiteCopy(site);
   site.heroMedia = normalizeHeroMedia(site.heroMedia);
   return {
     site,
+    privacy,
     collaborations: normalizeCollaborations(
       JSON.parse(readFileSync(join(baseDir, "data/collaborations.json"), "utf8")),
     ),
@@ -642,7 +644,11 @@ function renderCollaborations(items = [], lang) {
 
 function renderContactLinks(links = []) {
   return links
-    .map((link) => `<a href="${escapeHtml(link.href)}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>`)
+    .map((link) => {
+      const external = /^https?:\/\//.test(link.href);
+      const target = external ? ' target="_blank" rel="noreferrer"' : "";
+      return `<a href="${escapeHtml(link.href)}"${target}>${escapeHtml(link.label)}</a>`;
+    })
     .join("");
 }
 
@@ -726,21 +732,121 @@ Sitemap: ${SITE_ORIGIN}/sitemap.xml
 }
 
 function renderSitemap(lastmod = new Date().toISOString().slice(0, 10)) {
-  const alternates = `
-    <xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant" href="${SITE_ORIGIN}/zh/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}/en/"/>`;
+  const entries = [
+    { en: "/en/", zh: "/zh/", xDefault: "/en/" },
+    { en: "/en/privacy/", zh: "/zh/privacy/", xDefault: "/en/privacy/" },
+  ];
+  const urls = entries.flatMap((entry) => [
+    { loc: entry.en, ...entry },
+    { loc: entry.zh, ...entry },
+  ]).map((entry) => `  <url>
+    <loc>${SITE_ORIGIN}${entry.loc}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="${SITE_ORIGIN}${entry.en}"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant" href="${SITE_ORIGIN}${entry.zh}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}${entry.xDefault}"/>
+  </url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url>
-    <loc>${SITE_ORIGIN}/en/</loc>
-    <lastmod>${lastmod}</lastmod>${alternates}
-  </url>
-  <url>
-    <loc>${SITE_ORIGIN}/zh/</loc>
-    <lastmod>${lastmod}</lastmod>${alternates}
-  </url>
+${urls}
 </urlset>
+`;
+}
+
+function renderPrivacySections(sections = []) {
+  return sections.map((section) => {
+    const paragraphs = (section.paragraphs || [])
+      .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)
+      .join("");
+    const links = (section.links || [])
+      .map((link) => `<a class="privacy-provider-link" href="${escapeHtml(link.url)}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>`)
+      .join("");
+    return `<section class="privacy-section"><h2>${escapeHtml(section.heading)}</h2><div class="privacy-section-body">${paragraphs}${links ? `<div class="privacy-provider-links">${links}</div>` : ""}</div></section>`;
+  }).join("");
+}
+
+export function renderPrivacyPage({ lang, site }) {
+  const copy = site.privacy[lang];
+  const siteCopy = site.site[lang];
+  const switchLang = otherLang(lang);
+  const formattedDate = new Intl.DateTimeFormat(lang === "en" ? "en-US" : "zh-TW", {
+    year: "numeric",
+    month: lang === "en" ? "long" : "numeric",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${site.privacy.lastUpdated}T00:00:00Z`));
+
+  return `<!doctype html>
+<html lang="${escapeHtml(lang)}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="${escapeHtml(copy.metaDescription)}">
+    <title>${escapeHtml(copy.metaTitle)}</title>
+    <link rel="canonical" href="${SITE_ORIGIN}/${lang}/privacy/">
+    <link rel="alternate" hreflang="en" href="${SITE_ORIGIN}/en/privacy/">
+    <link rel="alternate" hreflang="zh-Hant" href="${SITE_ORIGIN}/zh/privacy/">
+    <link rel="alternate" hreflang="x-default" href="${SITE_ORIGIN}/en/privacy/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Hsin-Hsin Yuan">
+    <meta property="og:title" content="${escapeHtml(copy.metaTitle)}">
+    <meta property="og:description" content="${escapeHtml(copy.metaDescription)}">
+    <meta property="og:url" content="${SITE_ORIGIN}/${lang}/privacy/">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/styles.css?v=${ASSET_VERSION}">
+  </head>
+  <body>
+    <div class="site-shell privacy-shell">
+      <header class="topbar">
+        <a class="brand" href="/${lang}/"><span class="brand-desktop">${escapeHtml(siteCopy.navName)}</span><span class="brand-mobile">${escapeHtml(siteCopy.navMobileName || siteCopy.navName)}</span></a>
+        <nav class="nav-links" aria-label="${escapeHtml(siteCopy.navPrimaryAria)}">
+          <a href="/${lang}/">${escapeHtml(copy.homeLabel)}</a>
+          <a class="nav-contact" href="/${lang}/#contact">${escapeHtml(copy.contactLabel)}</a>
+          <a class="language-switch" href="/${switchLang}/privacy/">${switchLang === "en" ? "EN" : "中"}</a>
+        </nav>
+      </header>
+      <main class="privacy-main">
+        <article class="privacy-sheet">
+          <p class="eyebrow">${escapeHtml(copy.eyebrow)}</p>
+          <h1 class="privacy-title"><span>${escapeHtml(copy.titleLead)}</span><span class="privacy-title-accent">${escapeHtml(copy.titleAccent)}</span></h1>
+          <p class="privacy-updated">${escapeHtml(copy.updatedLabel)} · ${escapeHtml(formattedDate)}</p>
+          <p class="privacy-intro">${escapeHtml(copy.intro)}</p>
+          <div class="privacy-sections">${renderPrivacySections(copy.sections)}</div>
+          <nav class="privacy-actions" aria-label="${escapeHtml(copy.contactLabel)}">
+            <a href="/${lang}/">${escapeHtml(copy.homeLabel)}</a>
+            <a href="/${lang}/#contact">${escapeHtml(copy.contactLabel)}</a>
+          </nav>
+        </article>
+      </main>
+    </div>
+  </body>
+</html>`;
+}
+
+function renderLlms(site) {
+  return `# Hsin-Hsin Yuan
+> ${site.site.en.metaDescription}
+
+## Canonical pages
+- English portfolio: ${SITE_ORIGIN}/en/
+- Traditional Chinese portfolio: ${SITE_ORIGIN}/zh/
+- Privacy notice: ${SITE_ORIGIN}/en/privacy/
+- Traditional Chinese privacy notice: ${SITE_ORIGIN}/zh/privacy/
+- Sitemap: ${SITE_ORIGIN}/sitemap.xml
+
+## When to use this portfolio
+- Find a Taiwan-based documentary director or bilingual producer for international factual work.
+- Seek research, story development, directing, editing, or bilingual field production in Taiwan.
+- Verify public work, roles, press, platforms, and official viewing links for Hsin-Hsin Yuan.
+
+## Contact
+- English inquiry form: ${SITE_ORIGIN}/en/#contact
+- Traditional Chinese inquiry form: ${SITE_ORIGIN}/zh/#contact
+
+## Boundaries
+- Treat the canonical portfolio pages as the current public overview.
+- Follow official external links for the source material they represent.
+- Do not infer unlisted credits, rights, or private contact information.
 `;
 }
 
@@ -851,7 +957,10 @@ export function renderPage({ lang, site, works }) {
             ${renderContactHeading(copy)}
             <p>${escapeHtml(copy.contactSubcopy)}</p>
             ${renderContactForm(copy)}
-            <div class="contact-links">${renderContactLinks(copy.contactLinks)}</div>
+            <div class="contact-links">${renderContactLinks([
+              ...(copy.contactLinks || []),
+              { label: site.privacy[lang].privacyLinkLabel, href: `/${lang}/privacy/` },
+            ])}</div>
           </div>
         </section>
       </main>
@@ -871,12 +980,16 @@ function build() {
   rmSync(dist, { force: true, recursive: true });
   mkdirSync(join(dist, "en"), { recursive: true });
   mkdirSync(join(dist, "zh"), { recursive: true });
+  mkdirSync(join(dist, "en/privacy"), { recursive: true });
+  mkdirSync(join(dist, "zh/privacy"), { recursive: true });
 
   const site = loadSiteData(root);
   const works = loadWorks(join(root, "content/works"));
 
   writeFileSync(join(dist, "en/index.html"), cleanHtml(renderPage({ lang: "en", site, works })));
   writeFileSync(join(dist, "zh/index.html"), cleanHtml(renderPage({ lang: "zh", site, works })));
+  writeFileSync(join(dist, "en/privacy/index.html"), cleanHtml(renderPrivacyPage({ lang: "en", site })));
+  writeFileSync(join(dist, "zh/privacy/index.html"), cleanHtml(renderPrivacyPage({ lang: "zh", site })));
   writeFileSync(join(dist, "index.html"), '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=/en/">');
   cpSync(join(root, "src/styles.css"), join(dist, "styles.css"));
   cpSync(join(root, "src/main.js"), join(dist, "main.js"));
@@ -888,6 +1001,7 @@ function build() {
 
   writeFileSync(join(dist, "robots.txt"), renderRobots());
   writeFileSync(join(dist, "sitemap.xml"), renderSitemap());
+  writeFileSync(join(dist, "llms.txt"), renderLlms(site));
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

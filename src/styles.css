@@ -1304,6 +1304,123 @@ a.archive-card-media-link:focus-visible {
   text-transform: uppercase;
 }
 
+.privacy-shell .brand {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.privacy-main {
+  min-height: 100svh;
+  padding: clamp(7.5rem, 12vw, 10rem) var(--page-pad) clamp(4rem, 8vw, 7rem);
+}
+
+.privacy-sheet {
+  margin: 0 auto;
+  max-width: 58rem;
+}
+
+.privacy-title {
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  letter-spacing: -0.055em;
+  line-height: 0.88;
+  margin: 1.25rem 0;
+}
+
+.privacy-title > span {
+  display: block;
+}
+
+.privacy-title-accent {
+  color: var(--acid);
+}
+
+.privacy-updated {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.privacy-intro {
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+  line-height: 1.55;
+  margin: clamp(2.25rem, 6vw, 4.5rem) 0 0;
+  max-width: 46rem;
+}
+
+.privacy-sections {
+  display: grid;
+  gap: clamp(2.25rem, 5vw, 4rem);
+  margin-top: clamp(3rem, 7vw, 6rem);
+}
+
+.privacy-section {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: clamp(1rem, 3vw, 3rem);
+  grid-template-columns: minmax(11rem, 0.36fr) minmax(0, 0.64fr);
+  padding-top: 1.25rem;
+}
+
+.privacy-section h2 {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.privacy-section-body {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.privacy-section-body p {
+  margin: 0;
+}
+
+.privacy-section-body p + p {
+  margin-top: 1rem;
+}
+
+.privacy-provider-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.2rem;
+  margin-top: 1.25rem;
+}
+
+.privacy-provider-link,
+.privacy-actions a {
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-decoration-color: var(--acid);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.35em;
+  text-transform: uppercase;
+}
+
+.privacy-provider-link:focus-visible,
+.privacy-actions a:focus-visible,
+.privacy-shell .brand:focus-visible {
+  outline: 2px solid var(--acid);
+  outline-offset: 4px;
+}
+
+.privacy-actions {
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: clamp(3.5rem, 8vw, 7rem);
+  padding-top: 1.25rem;
+}
+
 @media (max-width: 1280px) {
   .hero {
     grid-template-columns: 1fr;
@@ -1473,6 +1590,10 @@ a.archive-card-media-link:focus-visible {
 
   .available-pill-list {
     gap: 0.55rem;
+  }
+
+  .privacy-section {
+    grid-template-columns: 1fr;
   }
 
 }
