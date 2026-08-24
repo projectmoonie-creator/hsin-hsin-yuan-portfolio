@@ -4,6 +4,43 @@ One entry per normal work package, max 10 lines each (see Bible, Roadmap
 Discipline). Dated reports are reserved for phase closeouts and high-risk
 packages.
 
+## 2026-08-24 — Durability and Is Agentic governance closeout
+- Scope: producer-authorized non-force active-branch push/readback, backup-completeness check, and reusable Is Agentic release rule; no repeat of already-green website gates and no `main`, Production, domain, Contact, Search Console, destructive, or protected-file action.
+- Placement: `portfolio-narrative-builder` owns the public-portfolio gate; Work Charter promotion is deferred because its two-project threshold is not met, and no premature generic website skill was created.
+- Contract: scan one anonymous canonical public target or record safe deferral; never submit protected Preview access; require adjudication, not a score threshold; retain all Search Console/accessibility/privacy/security/performance/browser/Contact gates.
+- Review: packet `df5cb9d4…82c4`; Gemini requested/observed/completed `gemini-3.7-flash`, no BLOCKER/MAJOR/MINOR; Claude attempt `148148e7…1bfc` failed ambiguously with no observed/completed model, so no dual consensus.
+- Durability scope: previously completed Contact and LinkedIn review/closeout files are committed after a private-data scan instead of being re-executed; unrelated parent-worktree files stay untouched.
+- Protected document remains excluded and exact at `945d4df9…d28fc`; final active-branch SHAs and remote readback are reported externally after the commit to avoid another docs-only cycle.
+- Outcome: `PASS` once both active remote tips match; next decision is separate `main`/Production release, followed by a canonical public Is Agentic rescan rather than scanning the protected Preview.
+
+## 2026-08-24 — Search discovery, Privacy, concise llms.txt Preview
+- Scope/commit: bounded local package `9ccf75d`; bilingual static Privacy, matching Contact-row links, four-URL sitemap, and concise `llms.txt`; no homepage/Contact-runtime/media/interaction change and no push, `main`, Production, alias, or Search Console mutation.
+- Privacy: official PDPA readback found the reviewed rights sentence omitted supplementation and collection/processing cessation; focused RED then final bilingual Article 3 list GREEN, with Article 8 categories asserted in both locales.
+- Gates: focused 1/1, full 181/181, build, design audit, six Featured derivatives, zero dependency vulnerabilities, diff/privacy/protected checks, and English-desktop/Chinese-mobile browser QA pass.
+- Review: parent and narrow-r2 Gemini requested/observed/completed `gemini-3.7-flash`, no BLOCKER/MAJOR/MINOR; Claude dynamic `opus` attempt `73399628…37660` failed ambiguously with no observed/completed model and was not retried, so no dual consensus.
+- Search: prior Search Console English-indexed/Chinese-queued/sitemap-accepted state is unchanged; current public search still does not surface the portfolio, and no duplicate indexing request was sent because Google treats submissions as hints.
+- Preview: `dpl_C37Hjv1zWnhWT4vCKENpKUaC5hfu` is Ready/Preview/static/no-functions; 61 files / 96,794,779 bytes / path-list `34018a3c…35b6`, no forbidden payload; three iCloud conflict directories are empty records only.
+- Access: official API created the exact Preview's new sole Hobby `shareable-link`, replacing the prior link; URL stays outside Git at `30a77076…c9fa`, was not fetched or sent to PageSpeed.
+- Outcome: `PASS_WITH_OPEN_ITEMS` only for producer Preview inspection; next decision is one consolidated push/`main`/Production/post-release Search Console envelope, without broader SEO work.
+
+## 2026-08-22 — Production Contact routing activated
+- Scope: producer-authorized Resend/Vercel configuration and same-commit Production redeployment; no runtime, design, copy, media, Git ref, `main`, or protected-file change.
+- Production: deployment `BUuq3DqjdDxpgdwuE7NkciJdpdCG` is Ready from source `9f2473f`; all three Contact variables read back Sensitive and Production-only.
+- Delivery: restricted custom-domain v3 passed Resend's official sink, final live Contact returned 200, Resend reported delivered, and the producer confirmed receipt.
+- Reply/error/QA: Gmail reply targeted the public alias and sent; GET 405, invalid POST 400; English/Chinese desktop/mobile forms passed with no overflow or Console errors.
+- Privacy: v1/v2 revoked, only v3 retained; no secret/private destination in Git or review packet; protected hash unchanged.
+- Review: frozen packet SHA-256 `a5976a67e5262e74f6a1aeb259d2104fa7abc11b8fbfca2f6cbd8922cb745070`; Gemini `gemini-3.7-flash` PASS/no findings; Claude dynamic `opus` attempt incomplete with no observed model, so dual consensus is not claimed.
+- Outcome: operational `PASS` / site `READY`; exact next action is a new explicitly authorized Claude formal-review attempt after the subscription window resets, with no further Production work.
+
+## 2026-08-14 — LinkedIn profile cleanup applied
+- Scope: producer-authorized live cleanup of the existing English LinkedIn profile; no portfolio runtime, Contact route, Git release, deployment, or protected-file change.
+- Applied: concise search-oriented headline and About; all nine Experience entries normalized; Top Gear aggregate-viewer claim removed; Skills reduced from 19 to 10 non-duplicate, supported terms.
+- Preserved: identity, photograph, cover state, location, education, languages, dates/employers, public URL, Open to Work, Services, Featured portfolio link, contact details, and external links.
+- Verification: live readback confirms the intended headline and five About paragraphs, all Experience corrections, all ten retained Skills, and absence of the old headline, `SELECTED WORK`, 200M claim, resume-strip title, and removed Skills.
+- Review: frozen Gemini official-API review requested/observed/completed `gemini-3.7-flash` with `PASS_WITH_REVISIONS`; Claude subscription attempt timed out before an observed model and remains incomplete, so no dual-review consensus is claimed.
+- Adjudication: accepted the structural cleanup and factual correction; rejected unsupported additions and a generic third-party scoring extension because it added account/permission exposure without material diagnostic value.
+- Outcome: **PASS**; the live profile is coherent and verified. LinkedIn-controlled layout and the intentionally unchanged cover state remain outside this package.
+
 ## 2026-08-13 — Authorization-governance durability resolved
 - Authorization: the producer's contextual `好` approved one envelope for three non-force branch pushes, exact remote-tip readback, and the portfolio's possible Git-integrated Preview; all named exclusions remained in force.
 - Portfolio: local `cb83c91` = `origin/codex/hero-cover-refresh` after readback.

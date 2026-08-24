@@ -1,8 +1,8 @@
 # Portfolio Status
 
-Updated: 2026-08-22
+Updated: 2026-08-24
 
-State: `BLOCKED`
+State: `READY`
 
 ## Current Operating Rule — One Authorization Envelope Per Package
 
@@ -21,6 +21,141 @@ State: `BLOCKED`
   edits only. It does not itself authorize Contact configuration/submission,
   email, Git push, `main`, Production, alias/domain changes, purchases,
   destructive actions, or protected-file changes.
+
+## Current Governance Closeout — Is Agentic Release Gate And Durability
+
+- On 2026-08-24 the producer authorized finishing the non-force push and
+  closeout review, confirming backup completeness, and making Is Agentic a
+  required website-creation step at the appropriate reusable layer. This
+  covers the active portfolio and parent-skill branches, coherent docs/skill
+  commits, and exact remote-tip readback. It excludes `main`, Production,
+  aliases/domains, Contact/email, Search Console, force/history rewrite,
+  destructive actions, unrelated dirty paths, and the protected document.
+- The already-completed portfolio runtime package is not re-tested or
+  re-reviewed. Its 181/181 suite, build, browser QA, privacy/media gates, two
+  Gemini reviews, and static Preview remain the applicable evidence.
+- The reusable rule lives in `portfolio-narrative-builder`, which already owns
+  public portfolio validation and closeout. It was not added to the Work
+  Charter because that charter requires two-project proof, and no new generic
+  website skill was created before a second real consumer proves the boundary.
+- The rule requires one completed Is Agentic observation against an anonymous
+  canonical public target, or an explicit safe deferral. It forbids protected
+  Preview tokens/private URLs, score chasing, and using the scan as a
+  substitute for Search Console, accessibility, privacy/legal, security,
+  performance, browser, Contact, or deterministic gates.
+- Governance packet SHA-256 is
+  `df5cb9d4b8c20ab93837018a7319b76fef10e7c2e6a74cbf8f66c95ed38182c4`.
+  Gemini requested/observed/completed `gemini-3.7-flash` with no BLOCKER,
+  MAJOR, or MINOR. Claude dynamic-`opus` attempt
+  `148148e7-3550-42b1-8a58-cb3807c91bfc` failed ambiguously with no
+  observed/completed model and was not retried, so no dual consensus is
+  claimed.
+- Existing completed Contact and LinkedIn closeout records that were still
+  local-only are included in the durability docs commit after privacy review;
+  they are not re-executed. The protected document remains excluded at exact
+  SHA-256 `945d4df9a06f33b55d843afed34d65d4e42b527d07c7b64629712f3f251d28fc`.
+- The final exact active-branch SHAs and remote readback are post-commit
+  evidence reported externally to avoid a self-referential docs-only commit
+  cycle. After readback, the next action is to wait for a separate `main` and
+  Production decision; the next Is Agentic scan belongs after that anonymous
+  canonical public release, not against the protected Preview.
+
+## Current Bounded Package — Search Discovery, Privacy, Concise llms.txt
+
+- Authorization: the producer requested this bounded package on 2026-08-24.
+  It covers local investigation, TDD, source/data/style/docs changes, complete
+  local gates, independent review, one coherent local commit, and the existing
+  standing authorization for one fresh static `dist/`-only Preview plus direct
+  Shareable-Link replacement. The later durability closeout authorizes a
+  non-force active-branch push and exact remote readback. It still excludes
+  `main`, Production, aliases/domains, Contact configuration or submission,
+  Search Console mutation, paid promotion, analytics, and broader
+  SEO/performance work.
+- Implementation commit `9ccf75d` adds bilingual static Privacy pages at
+  `/en/privacy/` and `/zh/privacy/`, locale-matched Contact-row links, the two
+  page-family sitemap entries, and a concise root `llms.txt`. Existing homepage
+  copy, work/media content, geometry, interaction, Contact runtime, and
+  responsive-source behavior are unchanged.
+- Official-law readback found and corrected one post-review omission: the final
+  bilingual rights clause now covers inquiry/review, copy,
+  supplement/correction, cessation of collection/processing/use, and deletion.
+  The focused test first failed on the reviewed sentence and then passed.
+- Final gates pass: focused 1/1, full 181/181, fresh build, design-contract
+  audit, six Featured derivatives, zero-vulnerability production dependency
+  audit, diff/privacy/protected-file checks, and desktop-English/mobile-Chinese
+  browser QA with zero overflow, request, POST, console, or page failures.
+- Gemini parent and narrow r2 reviews both requested/observed/completed
+  `gemini-3.7-flash` with no BLOCKER, MAJOR, or MINOR; r2 confirms the final
+  Article 3 wording and static-Preview readiness. Claude's one dynamic-`opus`
+  attempt `73399628-2126-4e26-a061-0779f8e37660` ended
+  `claude-process-failed` after 382,584 ms with ambiguous dispatch and no
+  observed/completed model. It was not retried or rerouted, so no dual-review
+  consensus is claimed.
+- Preview `dpl_C37Hjv1zWnhWT4vCKENpKUaC5hfu` reads `Ready`, target `preview`,
+  one static root and no functions. The 61-file public package is 96,794,779
+  bytes with path-list SHA-256
+  `34018a3c0dfabe74f98e8cfe57d6c7c9e05a3fc11039bfce79e84125261d35b6`;
+  no API, source, test, internal document, environment value, or protected file
+  was uploaded. Three iCloud conflict directories exist remotely only as empty
+  directory records and contain no file or route payload.
+- The official Vercel API created the exact Preview's new `shareable-link`
+  bypass, replacing the prior sole Hobby link. The access URL stays outside Git
+  at SHA-256
+  `30a77076ad6854041408bfa532e56d9e376332d52c7d4ce533d9f11aa1fbc9fa`
+  and was not fetched or sent to PageSpeed.
+- Search status is unchanged: prior Search Console evidence has English indexed,
+  Chinese queued, and the sitemap accepted, while current public search still
+  does not surface the portfolio. No duplicate indexing request was sent; the
+  new Privacy URLs remain Preview-only until a separately authorized release.
+- Package verdict: `PASS`; the producer's closeout request accepts the already
+  reviewed Preview package and authorizes its active-branch durability push.
+  `main`, Production, and post-release sitemap/Search Console readback remain a
+  separate future decision; no further runtime or SEO expansion is implied.
+
+## Current Bounded Package — Contact Routing Production Activation
+
+- Authorization: the producer approved one complete Contact envelope covering
+  a restricted Resend key, the three required Vercel Production settings,
+  same-source Production redeployment, one live inquiry, receipt and Reply-To
+  testing, desktop/mobile/error QA, privacy checks, independent review, and
+  final read-back. A later confirmation covered the bounded v3 diagnosis,
+  Vercel replacement, v2 revocation, redeployment, and final real test as one
+  sequence.
+- No runtime, design, work, copy, media, Git ref, `main`, or public Contact
+  address changed. Production remains source commit `9f2473f`; final deployment
+  `BUuq3DqjdDxpgdwuE7NkciJdpdCG` is `Ready`, Production, and serves the custom
+  apex.
+- Resend v3 is limited to `Sending access` and `hsinhsinyuan.com`. Its official
+  test-sink diagnostic returned HTTP 200 and `delivered`. Superseded v1 and v2
+  are revoked; only v3 remains with activity.
+- Vercel final read-back shows `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and
+  `CONTACT_FROM_EMAIL` present exactly once as Sensitive, Production-only
+  settings. No secret or private recipient value was read back or recorded.
+- Final live `POST /api/contact` returned HTTP 200 / `{ "ok": true }`; Resend
+  reported the Contact email delivered, the producer confirmed actual receipt,
+  and authenticated Gmail located it in the configured inbox. Gmail's reply
+  composer targeted `hello@hsinhsinyuan.com` and reported `Message sent`.
+- Expected errors remain intact after the final deployment: GET 405 and invalid
+  POST 400. English/Chinese desktop/mobile form QA passed with visible usable
+  forms, no overflow, and zero Console errors.
+- Local gates remain green: 180/180 tests, build, design audit, six Featured
+  derivatives, diff check, privacy scan, and protected-file SHA-256. The
+  post-publish PageSpeed attempt returned official HTTP 429 daily-quota
+  exhaustion; no metric or regression is claimed.
+- Operational package verdict: `PASS`. Gemini requested/observed/completed
+  `gemini-3.7-flash` and returned `PASS` with no findings. Claude requested
+  dynamic `opus`, but observed/completed remained null; attempt
+  `dd28558c-131a-4481-ae0c-b33d472cea0a` ended
+  `claude-process-failed` with ambiguous dispatch and no usable findings. No
+  retry, downgrade, or provider fallback occurred, so dual-review consensus is
+  not claimed. Frozen packet, evidence, and adjudication live in
+  `docs/reviews/contact-routing-production-review-packet-2026-08-22.md` and
+  `docs/reviews/contact-routing-production-closeout-2026-08-22.md` and
+  `docs/reviews/contact-routing-production-adjudication-2026-08-22.md`.
+- Exact next action: after the producer's Claude subscription window resets,
+  start a new explicitly authorized formal-review attempt through the shared
+  wrapper. Do not automatically resend the ambiguous attempt or make further
+  runtime, Git, email, domain, or Production changes while waiting.
 
 ## Current Bounded Package — Google Search Discovery And Indexing
 
@@ -128,28 +263,20 @@ State: `BLOCKED`
   durability BLOCKER. Its outcome is superseded only on durability by
   `docs/reviews/authorization-friction-governance-durability-resolution-2026-08-13.md`.
 
-## Current Launch Blocker — Contact Routing
+## Former Launch Blocker — Contact Routing Resolved
 
 - The custom-domain package is complete. `https://hsinhsinyuan.com` is the
   verified canonical Production origin, `https://www.hsinhsinyuan.com` is a
   Vercel-configured 308 redirect to the apex, and the prior Vercel project
   alias remains available as a rollback/reachability path.
-- Contact is a functional launch blocker. The deployed `api/contact.js`
-  requires `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EMAIL`.
-  Read-only Vercel Production environment inspection on 2026-08-13 returned
-  `No Environment Variables found`; therefore a real form submission would
-  return HTTP 503 / `Contact email is not configured.` The inspection did not
-  read a secret, submit Contact, or send an email.
-- The prior Production check proved that the serverless function exists, not
-  that its mail route was operational. That distinction was missed in the
-  release ruling and is corrected here. The live Hero/site release remains
-  `READY`, but the portfolio must not be called launch-complete while its main
-  inquiry route cannot deliver.
-- The next bounded package must decide the public contact alias, private
-  forwarding destination, authenticated sender, mail provider/DNS ownership,
-  Vercel environment configuration, failure fallback, and a consented
-  end-to-end receive/reply test. No Contact submission or mail configuration
-  was included in the domain cutover.
+- Contact was a functional launch blocker because the deployed `api/contact.js`
+  required `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EMAIL` while
+  Vercel had none. The 2026-08-22 activation package above resolves that
+  condition with restricted credentials, a same-source deployment, real
+  delivery, receipt, and Reply-To evidence.
+- The prior Production check proved only that the serverless function existed.
+  Current evidence now proves the route is operational. The site is `READY`;
+  Contact no longer blocks launch.
 
 ## Current Bounded Package — Custom Domain Production Cutover Completed
 

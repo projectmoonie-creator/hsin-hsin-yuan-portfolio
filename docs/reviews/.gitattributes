@@ -1,0 +1,2 @@
+# Preserve provider-generated review bytes without normalizing Markdown spaces.
+linkedin-profile-cleanup-gemini-review-2026-08-14.md -diff
